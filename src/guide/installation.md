@@ -2,7 +2,7 @@
 
 ## リリースノート
 
-最新のベータバージョン: 3.0.0-rc.5
+最新のベータバージョン: ![beta](https://img.shields.io/npm/v/vue/next.svg)
 
 各バージョンの詳細なリリースノートは、 [GitHub](https://github.com/vuejs/vue-next/releases) で入手できます。
 
