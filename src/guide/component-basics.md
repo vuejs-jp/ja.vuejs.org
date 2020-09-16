@@ -1,32 +1,32 @@
-# Components Basics
+# コンポーネントの基本
 
-## Base Example
+## 基本例
 
-Here's an example of a Vue component:
+Vue コンポーネントの例を次に示します:
 
 ```js
-// Create a Vue application
+// Vue アプリケーションを作成します
 const app = Vue.createApp({})
 
-// Define a new global component called button-counter
+// global な button-counter というコンポーネントを定義します
 app.component('button-counter', {
   data() {
     return {
-      count: 0
+      count: 0,
     }
   },
   template: `
     <button @click="count++">
       You clicked me {{ count }} times.
-    </button>`
+    </button>`,
 })
 ```
 
 ::: info
-We're showing you a simple example here, but in a typical Vue application we use Single File Components instead of a string template. You can find more information about them [in this section](single-file-component.html).
+ここでは単純な例を示していますが, 典型的な Vue アプリケーションでは文字列テンプレートではなく単一ファイルコンポーネントを使用します。 詳しくは[こちら](single-file-component.html)で解説されています。
 :::
 
-Components are reusable instances with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root instance:
+コンポーネントは名前付きの再利用可能なインスタンスです。この例の場合は`<button-counter>`です。このコンポーネントをルートインスタンスの中でカスタム要素として使用することができます。
 
 ```html
 <div id="components-demo">
@@ -45,11 +45,12 @@ app.mount('#components-demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Since components are reusable instances, they accept the same options as a root instance, such as `data`, `computed`, `watch`, `methods`, and lifecycle hooks. The only exceptions are a few root-specific options like `el`.
+コンポーネントは再利用可能なインスタンスなので、`data`、 `computed`、 `watch`、 `methods`、そしてライフサイクルフック のようなルートインスタンスと同様のオプションが利用可能です。唯一の例外は `el` のようなルート固有のオプションです。
 
-## Reusing Components
+## コンポーネントの再利用
 
 Components can be reused as many times as you want:
+コンポーネントは必要なだけ何度でも再利用できます:
 
 ```html
 <div id="components-demo">
@@ -66,7 +67,7 @@ Components can be reused as many times as you want:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Notice that when clicking on the buttons, each one maintains its own, separate `count`. That's because each time you use a component, a new **instance** of it is created.
+ボタンをクリックすると、それぞれが独自の `count` を保持することに注意してください。 これはコンポーネントを使用する度に新しいコンポーネントの**インスタンス**が作成されるためです。
 
 ## Organizing Components
 
@@ -101,7 +102,7 @@ const app = Vue.createApp({})
 
 app.component('blog-post', {
   props: ['title'],
-  template: `<h4>{{ title }}</h4>`
+  template: `<h4>{{ title }}</h4>`,
 })
 
 app.mount('#blog-post-demo')
@@ -135,17 +136,17 @@ const App = {
       posts: [
         { id: 1, title: 'My journey with Vue' },
         { id: 2, title: 'Blogging with Vue' },
-        { id: 3, title: 'Why Vue is so fun' }
-      ]
+        { id: 3, title: 'Why Vue is so fun' },
+      ],
     }
-  }
+  },
 }
 
 const app = Vue.createApp(App)
 
 app.component('blog-post', {
   props: ['title'],
-  template: `<h4>{{ title }}</h4>`
+  template: `<h4>{{ title }}</h4>`,
 })
 
 app.mount('#blog-posts-demo')
@@ -180,9 +181,9 @@ const App = {
       posts: [
         /* ... */
       ],
-      postFontSize: 1
+      postFontSize: 1,
     }
-  }
+  },
 }
 ```
 
@@ -208,16 +209,14 @@ app.component('blog-post', {
         Enlarge text
       </button>
     </div>
-  `
+  `,
 })
 ```
 
 The problem is, this button doesn't do anything:
 
 ```html
-<button>
-  Enlarge text
-</button>
+<button>Enlarge text</button>
 ```
 
 When we click on the button, we need to communicate to the parent that it should enlarge the text of all posts. Fortunately, component instances provide a custom events system to solve this problem. The parent can choose to listen to any event on the child component instance with `v-on` or `@`, just as we would with a native DOM event:
@@ -229,9 +228,7 @@ When we click on the button, we need to communicate to the parent that it should
 Then the child component can emit an event on itself by calling the built-in [**`$emit`** method](../api/instance-methods.html#emit), passing the name of the event:
 
 ```html
-<button @click="$emit('enlarge-text')">
-  Enlarge text
-</button>
+<button @click="$emit('enlarge-text')">Enlarge text</button>
 ```
 
 Thanks to the `v-on:enlarge-text="postFontSize += 0.1"` listener, the parent will receive the event and update `postFontSize` value.
@@ -248,7 +245,7 @@ We can list emitted events in the component's `emits` option.
 ```js
 app.component('blog-post', {
   props: ['title'],
-  emits: ['enlarge-text']
+  emits: ['enlarge-text'],
 })
 ```
 
@@ -259,9 +256,7 @@ This will allow you to check all the events component emits and optionally [vali
 It's sometimes useful to emit a specific value with an event. For example, we may want the `<blog-post>` component to be in charge of how much to enlarge the text by. In those cases, we can use `$emit`'s 2nd parameter to provide this value:
 
 ```html
-<button @click="$emit('enlarge-text', 0.1)">
-  Enlarge text
-</button>
+<button @click="$emit('enlarge-text', 0.1)">Enlarge text</button>
 ```
 
 Then when we listen to the event in the parent, we can access the emitted event's value with `$event`:
@@ -328,7 +323,7 @@ app.component('custom-input', {
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
     >
-  `
+  `,
 })
 ```
 
@@ -357,9 +352,9 @@ app.component('custom-input', {
       },
       set(value) {
         this.$emit('update:modelValue', value)
-      }
-    }
-  }
+      },
+    },
+  },
 })
 ```
 
@@ -370,9 +365,7 @@ That's all you need to know about custom component events for now, but once you'
 Just like with HTML elements, it's often useful to be able to pass content to a component, like this:
 
 ```html
-<alert-box>
-  Something bad happened.
-</alert-box>
+<alert-box> Something bad happened. </alert-box>
 ```
 
 Which might render something like:
@@ -393,7 +386,7 @@ app.component('alert-box', {
       <strong>Error!</strong>
       <slot></slot>
     </div>
-  `
+  `,
 })
 ```
 
@@ -472,7 +465,7 @@ app.component('blog-post', {
   props: ['postTitle'],
   template: `
     <h3>{{ postTitle }}</h3>
-  `
+  `,
 })
 ```
 
