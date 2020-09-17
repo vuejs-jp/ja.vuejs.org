@@ -1,40 +1,40 @@
-# Setup
+# セットアップ
 
-> This section uses [single-file component](single-file-component.html) syntax for code examples
+> このセクションではコード例に[単一ファイルコンポーネント](single-file-component.html)のシンタックスを使います。
 
-> This guide assumes that you have already read the [Composition API Introduction](composition-api-introduction.html) and [Reactivity Fundamentals](reactivity-fundamentals.html). Read that first if you are new to Composition API.
+> このガイドは[コンポジション API の導入](composition-api-introduction.html)と[リアクティブの基礎](reactivity-fundamentals.html)を既に読んでいることを想定しています。 コンポジション API に初めて触れる方は、まずそちらを読んでみてください。
 
-## Arguments
+## 引数
 
-When using the `setup` function, it will take two arguments:
+`setup` 関数を使う時、2 つの引数を取ります:
 
 1. `props`
 2. `context`
 
-Let's dive deeper into how each argument can be used.
+それぞれの引数がどのように使われるのか、深く掘り下げてみましょう。
 
 ### Props
 
-The first argument in the `setup` function is the `props` argument. Just as you would expect in a standard component, `props` inside of a `setup` function are reactive and will be updated when new props are passed in.
+`setup` 関数の 1 番目の引数は `props` 引数です。 標準コンポーネントで期待するように、`setup` 関数内の `props` はリアクティブで、新しい props が渡されたら更新されます。
 
 ```js
 // MyBook.vue
 
 export default {
   props: {
-    title: String
+    title: String,
   },
   setup(props) {
     console.log(props.title)
-  }
+  },
 }
 ```
 
 :::warning
-However, because `props` are reactive, you **cannot use ES6 destructuring** because it will remove props reactivity.
+しかし、`props` はリアクティブなので、props のリアクティブを削除してしまうため、**ES6 の分割代入を使うことができません。**
 :::
 
-If you need to destructure your props, you can do this safely by utilizing the [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) inside of the `setup` function.
+もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって安全に分割代入を行うことができます。
 
 ```js
 // MyBook.vue
@@ -50,7 +50,7 @@ setup(props) {
 
 ### Context
 
-The second argument passed to the `setup` function is the `context`. The `context` is a normal JavaScript object that exposes three component properties:
+`setup` 関数に渡される 2 番目の引数は `context` です。`context` は 3 つのコンポーネントプロパティを公開する一般的な JavaScript オブジェクトです。:
 
 ```js
 // MyBook.vue
@@ -65,11 +65,11 @@ export default {
 
     // Emit Events (Method)
     console.log(context.emit)
-  }
+  },
 }
 ```
 
-The `context` object is a normal JavaScript object, i.e., it is not reactive, this means you can safely use ES6 destructuring on `context`.
+`context` オブジェクトは一般的な JavaScript オブジェクトです。 すなわち、リアクティブではありません。これは `context` で ES6 分割代入を安全に使用できることを意味します。
 
 ```js
 // MyBook.vue
@@ -80,26 +80,26 @@ export default {
 }
 ```
 
-`attrs` and `slots` are stateful objects that are always updated when the component itself is updated. This means you should avoid destructuring them and always reference properties as `attrs.x` or `slots.x`. Also note that unlike `props`, `attrs` and `slots` are **not** reactive. If you intend to apply side effects based on `attrs` or `slots` changes, you should do so inside an `onUpdated` lifecycle hook.
+`attrs` と `slots` はステートフルなオブジェクトです。コンポーネント自身が更新されたとき、常に更新されます。 つまり、分割代入の使用を避け、`attrs.x` や `slots.x` のようにプロパティを常に参照する必要があります。 また、`props`とは異なり、 `attrs` と `slots` はリアクティブ**ではない**ということに注意してください。 もし、`attrs` か `slots` の変更による副作用を適用したいのなら、`onUpdated` ライフサイクルフックの中で行うべきです。
 
-## Accessing Component Properties
+## コンポーネントプロパティへのアクセス
 
-When `setup` is executed, the component instance has not been created yet. As a result, you will only be able to access the following properties:
+`setup` が実行されるとき、 コンポーネントインスタンスはまだ作成されていません。そのため、以下のプロパティにのみアクセスすることができます。:
 
 - `props`
 - `attrs`
 - `slots`
 - `emit`
 
-In other words, you **will not have access** to the following component options:
+言い換えると、以下のコンポーネントオプションには**アクセスできません**。:
 
 - `data`
 - `computed`
 - `methods`
 
-## Usage with Templates
+## テンプレートでの使用
 
-If `setup` returns an object, the properties on the object can be accessed in the component's template:
+`setup` がオブジェクトを返す場合、コンポーネントのテンプレート内でオブジェクトのプロパティにアクセスすることができます。:
 
 ```vue-html
 <!-- MyBook.vue -->
@@ -125,11 +125,11 @@ If `setup` returns an object, the properties on the object can be accessed in th
 </script>
 ```
 
-Note that [refs](../api/refs-api.html#ref) returned from `setup` are [automatically unwrapped](../api/refs-api.html#access-in-templates) when accessed in the template so you shouldn't use `.value` in templates.
+`setup` から返された [refs](../api/refs-api.html#ref) は、テンプレート内でアクセスされたときに[自動的にアンラップ](../api/refs-api.html#access-in-templates)されるので、テンプレート内で `.value` を使用すべきではないことに注意してください。
 
-## Usage with Render Functions
+## 描画関数での使用
 
-`setup` can also return a render function which can directly make use of the reactive state declared in the same scope:
+`setup` は同じスコープで宣言されたリアクティブなステートを直接利用することができる描画関数を返すこともできます。:
 
 ```js
 // MyBook.vue
@@ -142,10 +142,10 @@ export default {
     const book = reactive({ title: 'Vue 3 Guide' })
     // Please note that we need to explicitly expose ref value here
     return () => h('div', [readersNumber.value, book.title])
-  }
+  },
 }
 ```
 
-## Usage of `this`
+## `this` の使用
 
-**Inside `setup()`, `this` won't be a reference to the current active instance** Since `setup()` is called before other component options are resolved, `this` inside `setup()` will behave quite differently from `this` in other options. This might cause confusions when using `setup()` along other Options API.
+**`setup()` 内では、`this` は現在のアクティブなインスタンスへの参照にはなりません。** `setup()` は他のコンポーネントオプションが解決される前に呼び出されるので、`setup()` 内の`this` は他のオプション内の `this`とは全く異なる振る舞いをします。 これは、`setup()` を他のオプション API と一緒に使った場合に混乱を引き起こす可能性があります。
