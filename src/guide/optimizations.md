@@ -1,10 +1,10 @@
-# Rendering Mechanisms and Optimizations
+# レンダリングのメカニズムと最適化
 
-> This page is not required reading in order to learn how to use Vue well, but it provides more information, should you be curious how rendering works under the hood.
+> このページは Vue の使い方を学ぶために読む必要はありませんが、内部でレンダリングがどのように機能するか興味がある方のために、より多くの情報を提供しています。
 
-## Virtual DOM
+## 仮想 DOM
 
-Now that we know how watchers are updating the components, you might ask how those changes eventually make it to the DOM! Perhaps you’ve heard of the Virtual DOM before, many frameworks including Vue use this paradigm to make sure our interfaces reflect the changes we’re updating in JavaScript effectively
+ウォッチャがコンポーネントを更新する方法がわかったので、その変更が最終的に DOM にどのように反映されるのか気になるかもしれません。 もしかすると以前に仮想 DOM について聞いたことがあるかもしれませんが、Vue を含む多くのフレームワークはこのパラダイムを使用して、JavaScript で更新している変更を効果的にインターフェイスに反映させるようにしています。
 
 <div class="reactivecontent">
   <iframe height="500" style="width: 100%;" scrolling="no" title="How does the Virtual DOM work?" src="https://codepen.io/sdras/embed/RwwQapa?height=500&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
@@ -13,8 +13,8 @@ Now that we know how watchers are updating the components, you might ask how tho
   </iframe>
 </div>
 
-We make a copy of the DOM in JavaScript called the Virtual DOM, we do this because touching the DOM with JavaScript is computationally expensive. While performing updates in JavaScript is cheap, finding the required DOM nodes and updating them with JS is expensive. So we batch calls, and change the DOM all at once.
+仮想 DOM と呼ばれる DOM のコピーを JavaScript で作成しています。これは、JavaScript で DOM を操作すると計算コストがかかるためです。JavaScript で更新を行うコストはあまりかかりませんが、必要な DOM ノードを見つけて更新するのはコストがかかります。そこで呼び出しをバッチ処理し、DOM を一度に変更します。
 
-The Virtual DOM in is a lightweight JavaScript object, created by a render function. It takes three arguments: the element, an object with data, props, attrs and more, and an array. The array is where we pass in the children, which have all these arguments too, and then they can have children and so on, until we build a full tree of elements.
+仮想 DOM は、描画 (render) 関数によって作成される軽量な JavaScript オブジェクトです。この関数は要素、データ・props・attrs などを含むオブジェクト、そして配列の 3 つの引数をとります。配列にはこれらすべての引数を持つ子要素が渡され、完全なツリーを構築するまで子要素を持つことができます。
 
-If we need to update the list items, we do so in JavaScript, using the reactivity we mentioned earlier. We then make all the changes to the JavaScript copy, the virtual DOM, and perform a diff between this and the actual DOM. Only then do we make our updates to just what has changed. The Virtual DOM allows us to make performant updates to our UIs!
+リストの項目を更新する必要がある場合は、先ほど説明したリアクティブを使用して JavaScript で更新します。次に JavaScript によるコピーである仮想 DOM にすべての変更を加え、これと実際の DOM と比較します。そして、変更された部分だけを更新します。仮想 DOM を使うことで、UI を効率的に更新できます！
