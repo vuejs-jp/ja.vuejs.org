@@ -6,6 +6,8 @@
 ドキュメントでここまで到達しているならば、[Vue の基本](introduction.md)と[コンポーネントの作成](component-basics.md)の両方にすでに精通しているはずです。
 :::
 
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api" title="Learn how Composition API works in depth with Vue Mastery">Watch a free video about the Composition API on Vue Mastery</VideoLesson>
+
 Vue コンポーネントを作成するとその機能と結合されたインターフェースの繰り返し可能な部分を再利用可能なコードとして抽出することができます。これだけでも保守性と柔軟性の点でアプリケーションをかなり良くすることができます。しかし、蓄積された経験から、特にアプリケーションが非常に大規模な場合は、これだけでは不十分であることがわかっています。数百のコンポーネントがある場合を想像してみてください。そのような大規模なアプリケーションを扱う場合は、コードを共通化して再利用することが非常に重要になります。
 
 このアプリには、特定のユーザーのリポジトリのリストを表示するビューがあると想像してみましょう。さらに、検索と絞り込みの機能を実装したいとします。このビューを処理するコンポーネントは次のようになります:
@@ -65,6 +67,8 @@ export default {
 これで**なぜこの方法**にたどり着くのかわかりました。コンポジション API の使用を開始するには、初めに実際に使用できる場所が必要です。Vue コンポーネントでは、この場所を `setup` と呼びます。
 
 ### `setup` コンポーネントオプション
+
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/setup-and-reactive-references" title="Learn how setup works with Vue Mastery">Watch a free video on setup on Vue Mastery</VideoLesson>
 
 新しい `setup` コンポーネントオプションは、コンポーネントが作成される前に `props` が解決されると実行され、コンポジション API のエントリポイントとして機能します。
 
