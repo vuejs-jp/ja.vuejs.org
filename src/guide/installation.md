@@ -2,15 +2,13 @@
 
 ## リリースノート
 
-最新のベータバージョン: ![beta](https://img.shields.io/npm/v/vue/next.svg)
+最新のバージョン: ![npm](https://img.shields.io/npm/v/vue/next.svg)
 
-各バージョンの詳細なリリースノートは、 [GitHub](https://github.com/vuejs/vue-next/releases) で入手できます。
+各バージョンの詳細なリリースノートは、 [GitHub](https://github.com/vuejs/vue-next/blob/master/CHANGELOG.md) で入手できます。
 
 ## Vue Devtools
 
-> 現在、ベータ版です。
-
-> Vue 3 向けの Vue Devtools の利用には、`vue@^3.0.0-rc.1` 以上が必要です。
+> Currently in Beta - Vuex and Router integration is still WIP
 
 Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
