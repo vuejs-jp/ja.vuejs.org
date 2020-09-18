@@ -1,5 +1,9 @@
 # はじめに
 
+::: tip NOTE
+Already know Vue 2 and just want to learn about what's new in Vue 3? Check out the [Migration Guide](/guide/migration/introduction.html)!
+:::
+
 ## Vue.js とは？
 
 Vue (発音は /vju:/、**view** と同様) は、ユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は少しずつ適用していけるように設計されています。中核となるライブラリはビュー層だけに焦点を当てており、使い始めるのも、他のライブラリや既存のプロジェクトに統合することも容易です。一方で、Vue を[モダンなツール](../guide/single-file-component.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#components--libraries)と組み合わせることで、洗練されたシングルページアプリケーションを開発することもできます。
