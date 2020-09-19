@@ -15,18 +15,18 @@
 
 ### Props
 
-`setup` 関数の 1 番目の引数は `props` 引数です。 標準コンポーネントで期待するように、`setup` 関数内の `props` はリアクティブで、新しい props が渡されたら更新されます。
+`setup` 関数の 第一引数は `props` 引数です。 標準コンポーネントで期待するように、`setup` 関数内の `props` はリアクティブで、新しい props が渡されたら更新されます。
 
 ```js
 // MyBook.vue
 
 export default {
   props: {
-    title: String,
+    title: String
   },
   setup(props) {
     console.log(props.title)
-  },
+  }
 }
 ```
 
@@ -50,7 +50,7 @@ setup(props) {
 
 ### Context
 
-`setup` 関数に渡される 2 番目の引数は `context` です。`context` は 3 つのコンポーネントプロパティを公開する一般的な JavaScript オブジェクトです。:
+`setup` 関数に渡される第二引数は `context` です。`context` は 3 つのコンポーネントプロパティを公開する一般的な JavaScript オブジェクトです。:
 
 ```js
 // MyBook.vue
@@ -65,7 +65,7 @@ export default {
 
     // Emit Events (Method)
     console.log(context.emit)
-  },
+  }
 }
 ```
 
@@ -140,9 +140,9 @@ export default {
   setup() {
     const readersNumber = ref(0)
     const book = reactive({ title: 'Vue 3 Guide' })
-    // Please note that we need to explicitly expose ref value here
+    // ここでは明示的に ref の値を公開する必要があることに注意してください。
     return () => h('div', [readersNumber.value, book.title])
-  },
+  }
 }
 ```
 
