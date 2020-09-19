@@ -8,9 +8,9 @@ Already know Vue 2 and just want to learn about what's new in Vue 3? Check out t
 
 Vue (発音は /vju:/、**view** と同様) は、ユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は少しずつ適用していけるように設計されています。中核となるライブラリはビュー層だけに焦点を当てており、使い始めるのも、他のライブラリや既存のプロジェクトに統合することも容易です。一方で、Vue を[モダンなツール](../guide/single-file-component.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#components--libraries)と組み合わせることで、洗練されたシングルページアプリケーションを開発することもできます。
 
-ここから先に進む前に Vue についてより深く知りたい方のために、基本理念やサンプルプロジェクトについて説明する<a id="modal-player" href="#">ビデオを作成しました</a>。
+ここから先に進む前に Vue についてより深く知りたい方のために、基本理念やサンプルプロジェクトについて説明する<a id="modal-player" class="vuemastery-trigger" href="#">ビデオを作成しました</a>。
 
-フロントエンド開発の経験があり、Vue が他のライブラリ/フレームワークとどう違うか知りたい方は、[他のフレームワークとの比較](TODO:comparison.html)を確認してください。
+<common-vuemastery-video-modal/>
 
 ## はじめに
 
