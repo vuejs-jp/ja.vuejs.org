@@ -1,8 +1,10 @@
-# Render Functions
+# Render 関数
 
-Vue recommends using templates to build applications in the vast majority of cases. However, there are situations where we need the full programmatic power of JavaScript. That's where we can use the **render function**.
+Vue では、大多数のケースにおいてテンプレートを使ってアプリケーションを構築することを推奨していますが、
+完全な JavaScript ログラミングの力が必要になるシチュエーションもあります。
+そこでは私たちは **render 関数** を使うことができます。
 
-Let's dive into an example where a `render()` function would be practical. Say we want to generate anchored headings:
+さあ、 `render()` 関数が実用的になる例に取りかかりましょう。例えば、アンカーつきの見出しを生成したいとします:
 
 ```html
 <h1>
@@ -12,13 +14,13 @@ Let's dive into an example where a `render()` function would be practical. Say w
 </h1>
 ```
 
-Anchored headings are used very frequently, we should create a component:
+アンカーつきの見出しはとても頻繁に使われますので、コンポーネントにするべきです:
 
 ```vue-html
 <anchored-heading :level="1">Hello world!</anchored-heading>
 ```
 
-The component must generate a heading based on the `level` prop, and we quickly arrive at this:
+コンポーネントは、`level` の値に応じた見出しを生成する必要があります。手っ取り早くこれで実現しましょう:
 
 ```js
 const app = Vue.createApp({})
@@ -53,9 +55,11 @@ app.component('anchored-heading', {
 })
 ```
 
-This template doesn't feel great. It's not only verbose, but we're duplicating `<slot></slot>` for every heading level. And when we add the anchor element, we have to again duplicate it in every `v-if/v-else-if` branch.
+このテンプレートは良いものには思えません。冗長なだけでなく、 `<slot></slot>` がすべての見出しのレベルにコピーされています。
+そして、アンカー要素を追加する時にはすべての `v-if/v-else-if` の分岐にまたコピーしなければなりません。
 
-While templates work great for most components, it's clear that this isn't one of them. So let's try rewriting it with a `render()` function:
+ほとんどのコンポーネントでテンプレートがうまく働くとはいえ、明らかにこれはそうではないものの一つです。
+そこで、 `render()` 関数を使ってこれを書き直してみましょう。
 
 ```js
 const app = Vue.createApp({})
@@ -65,9 +69,9 @@ app.component('anchored-heading', {
     const { h } = Vue
 
     return h(
-      'h' + this.level, // tag name
-      {}, // props/attributes
-      this.$slots.default() // array of children
+      'h' + this.level, // タグ名
+      {}, // props/属性
+      this.$slots.default() // 子供の配列
     )
   },
   props: {
@@ -79,11 +83,17 @@ app.component('anchored-heading', {
 })
 ```
 
-The `render()` function implementation is much simpler, but also requires greater familiarity with component instance properties. In this case, you have to know that when you pass children without a `v-slot` directive into a component, like the `Hello world!` inside of `anchored-heading`, those children are stored on the component instance at `$slots.default()`. If you haven't already, **it's recommended to read through the [instance properties API](../api/instance-properties.html) before diving into render functions.**
+<!-- TODO: 「instance properties API」を日本語版のタイトルに置き換える -->
 
-## The DOM tree
+`render()` 関数の実装はとても単純ですが、コンポーネントインスタンスのプロパティについてよく理解している必要があります。
+この場合では、 `anchored-heading` の内側の `Hello world!` のように `v-slot` ディレクティブなしで子供を渡した時には、
+その子供は `$slots.default()` のコンポーネントインスタンスに保持されるということを知っている必要があります。
+もしまだ知らないのであれば、 **render 関数に取り掛かる前に [instance properties API](../api/instance-properties.html) を通読することをお勧めします。**
 
-Before we dive into render functions, it’s important to know a little about how browsers work. Take this HTML for example:
+## DOM ツリー
+
+render 関数に取り掛かる前に、ブラウザがどのように動くのかについて少し知っておくことが重要です。
+この HTML を例にしましょう:
 
 ```html
 <div>
@@ -93,21 +103,29 @@ Before we dive into render functions, it’s important to know a little about ho
 </div>
 ```
 
-When a browser reads this code, it builds a [tree of "DOM nodes"](https://javascript.info/dom-nodes) to help it keep track of everything.
+ブラウザはこのコードを読むと、すべてを追跡する助けとなるように [「DOM ノード」のツリー](https://javascript.info/dom-nodes)を構築します。
 
-The tree of DOM nodes for the HTML above looks like this:
+<!-- TODO: 訳が微妙: to help it keep track of everything -> すべてを追跡する助けとなるように
+When a browser reads this code, it builds a [tree of "DOM nodes"](https://javascript.info/dom-nodes) to help it keep track of everything.
+-->
+
+上の HTML の DOM ノードツリーはこんな感じになります。
 
 ![DOM Tree Visualization](/images/dom-tree.png)
 
-Every element is a node. Every piece of text is a node. Even comments are nodes! Each node can have children (i.e. each node can contain other nodes).
+すべての要素はノードです。テキストのすべてのピースはノードです。コメントですらノードです！
+それぞれのノードは子供を持つことができます。 (つまり、それぞれのノードは他のノードを含むことができます)
 
-Updating all these nodes efficiently can be difficult, but thankfully, we never have to do it manually. Instead, we tell Vue what HTML we want on the page, in a template:
+これらすべてのノードを効率的に更新することは難しくなり得ますが、ありがたいことに、それを手動で行う必要はありません。
+代わりに、テンプレートや render 関数で、ページ上にどのような HTML が欲しいかを Vue に伝えるのです。
+
+テンプレート:
 
 ```html
 <h1>{{ blogTitle }}</h1>
 ```
 
-Or in a render function:
+render 関数:
 
 ```js
 render() {
@@ -115,45 +133,51 @@ render() {
 }
 ```
 
-And in both cases, Vue automatically keeps the page updated, even when `blogTitle` changes.
+そしてどちらの場合でも、 `blogTitle` が変更されたとしても Vue が自動的にページを最新の状態に保ちます。
 
-## The Virtual DOM tree
+## 仮想DOMツリー
 
-Vue keeps the page updated by building a **virtual DOM** to keep track of the changes it needs to make to the real DOM. Taking a closer look at this line:
+Vueは、実際のDOMに反映する必要のある変更を追跡するために **仮想DOM** を構築して、ページを最新の状態に保ちます。
+この行をよく見てみましょう:
 
 ```js
 return Vue.h('h1', {}, this.blogTitle)
 ```
 
-What is the `h()` function returning? It's not _exactly_ a real DOM element. It returns a plain object which contains information describing to Vue what kind of node it should render on the page, including descriptions of any child nodes. We call this node description a "virtual node", usually abbreviated to **VNode**. "Virtual DOM" is what we call the entire tree of VNodes, built by a tree of Vue components.
+`h()` 関数が返すものはなんでしょうか？これは、 _正確には_ 実際のDOM要素ではありません。
+それが返すのは、ページ上にどんな種類のノードをレンダリングするのかをVueに伝えるための情報をもったプレーンなオブジェクトです。
+この情報には子供のノードの記述も含まれます。
+私たちは、このノードの記述を *仮想ノード* と呼び、通常 **VNode** と省略します。
+「仮想DOM」というのは、Vueコンポーネントのツリーから構成されるVNodeのツリー全体のことなのです。
 
-## `h()` Arguments
+## `h()` の引数
 
-The `h()` function is a utility to create VNodes. It could perhaps more accurately be named `createVNode()`, but it's called `h()` due to frequent use and for brevity. It accepts three arguments:
+`h()` 関数はVNodeを作るためのユーティリティです。
+もっと正確に `createVNode()` と名づけられることもあるかもしれませんが、頻繁に使用されるので、簡潔さのために `h()` と呼ばれます。
+
+<!-- TODO: attributesとpropsに対する訳語を確認 -->
 
 ```js
 // @returns {VNode}
 h(
   // {String | Object | Function } tag
-  // An HTML tag name, a component or an async component.
-  // Using function returning null would render a comment.
+  // HTMLタグ名、コンポーネントまたは非同期コンポーネント
+  // nullを返す関数を使用した場合、コメントがレンダリングされます。
   //
-  // Required.
+  // 必須
   'div',
 
   // {Object} props
-  // An object corresponding to the attributes, props and events
-  // we would use in a template.
+  // テンプレート内で使うであろう属性(attributes)、プロパティ(props)、イベントに対応するオブジェクト
   //
-  // Optional.
+  // 省略可能
   {},
 
   // {String | Array | Object} children
-  // Children VNodes, built using `h()`,
-  // or using strings to get 'text VNodes' or
-  // an object with slots.
+  // `h()` で作られた子供のVNode、または文字列(テキストVNodeになる)、
+  // またはスロットをもつオブジェクト
   //
-  // Optional.
+  // 省略可能
   [
     'Some text comes first.',
     h('h1', 'A headline'),
@@ -164,14 +188,14 @@ h(
 )
 ```
 
-## Complete Example
+## 完全な例
 
-With this knowledge, we can now finish the component we started:
+この知識によって、書き始めたコンポーネントを今では完成させることができます:
 
 ```js
 const app = Vue.createApp({})
 
-/** Recursively get text from children nodes */
+/** 子供のノードから再帰的にテキストを取得する */
 function getChildrenTextContent(children) {
   return children
     .map(node => {
@@ -186,11 +210,11 @@ function getChildrenTextContent(children) {
 
 app.component('anchored-heading', {
   render() {
-    // create kebab-case id from the text contents of the children
+    // 子供のテキストからケバブケース(kebab-case)のIDを作成する
     const headingId = getChildrenTextContent(this.$slots.default())
       .toLowerCase()
-      .replace(/\W+/g, '-') // replace non-word characters with dash
-      .replace(/(^-|-$)/g, '') // remove leading and trailing dashes
+      .replace(/\W+/g, '-') // 英数字とアンダースコア以外の文字を-に置換する
+      .replace(/(^-|-$)/g, '') // 頭と末尾の-を取り除く
 
     return Vue.h('h' + this.level, [
       Vue.h(
@@ -212,23 +236,24 @@ app.component('anchored-heading', {
 })
 ```
 
-## Constraints
+## 制約
 
-### VNodes Must Be Unique
+### VNodeは一意でなければならない
 
-All VNodes in the component tree must be unique. That means the following render function is invalid:
+コンポーネント内のすべてのVNodeは一意でなければなりません。つまり、下のようなrender関数は無効だということです:
 
 ```js
 render() {
   const myParagraphVNode = Vue.h('p', 'hi')
   return Vue.h('div', [
-    // Yikes - duplicate VNodes!
+    // おっと - VNodeが重複しています!
     myParagraphVNode, myParagraphVNode
   ])
 }
 ```
 
-If you really want to duplicate the same element/component many times, you can do so with a factory function. For example, the following render function is a perfectly valid way of rendering 20 identical paragraphs:
+もしあなたが本当に同じ要素、コンポーネントを何回もコピーしたいなら、ファクトリー関数を使えばできます。
+例えば、次のrender関数は20個の同じ段落をレンダリングする完全に正しい方法です。
 
 ```js
 render() {
@@ -240,11 +265,12 @@ render() {
 }
 ```
 
-## Replacing Template Features with Plain JavaScript
+## テンプレートの機能をプレーンなJavaScriptで置き換える
 
-### `v-if` and `v-for`
+### `v-if` と `v-for`
 
-Wherever something can be easily accomplished in plain JavaScript, Vue render functions do not provide a proprietary alternative. For example, in a template using `v-if` and `v-for`:
+何であれ、プレーンなJavaScriptで簡単に実現できることについては、Vueのrender関数は固有の代替手段を提供していません。
+例えば、テンプレートでの `v-if` や `v-for` の使用:
 
 ```html
 <ul v-if="items.length">
@@ -253,7 +279,7 @@ Wherever something can be easily accomplished in plain JavaScript, Vue render fu
 <p v-else>No items found.</p>
 ```
 
-This could be rewritten with JavaScript's `if`/`else` and `map()` in a render function:
+これは、render関数ではJavaScriptの `if`/`else` と `map()` で書き換えることができます。
 
 ```js
 props: ['items'],
@@ -270,7 +296,7 @@ render() {
 
 ### `v-model`
 
-The `v-model` directive is expanded to `modelValue` and `onUpdate:modelValue` props during template compilation—we will have to provide these props ourselves:
+`v-model` ディレクティブは、テンプレートのコンパイル中に `modelValue` と `onUpdate:modelValue` プロパティに展開されます - 私たちはそれらのプロパティを自分自身で提供する必要があります:
 
 ```js
 props: ['modelValue'],
@@ -284,7 +310,8 @@ render() {
 
 ### `v-on`
 
-We have to provide a proper prop name for the event handler, e.g., to handle `click` events, the prop name would be `onClick`.
+私たちは適切なプロパティ名をイベントハンドラーに与える必要があります。
+例えば、 `click` イベントをハンドルする場合は、プロパティ名は `onClick` になります。
 
 ```js
 render() {
@@ -294,11 +321,11 @@ render() {
 }
 ```
 
-#### Event Modifiers
+#### イベント修飾子
 
-For the `.passive`, `.capture`, and `.once` event modifiers, Vue offers object syntax of the handler:
+`.passive` 、 `.capture` 、 `.once` イベント修飾子については、Vueはハンドラーのオブジェクトシンタックスを提供しています:
 
-For example:
+例えば:
 
 ```javascript
 render() {
@@ -320,32 +347,32 @@ render() {
 }
 ```
 
-For all other event and key modifiers, no special API is necessary, because we can use event methods in the handler:
+その他すべてのイベントおよびキー修飾子については、特別なAPIは必要ありません。
+なぜなら、ハンドラーの中でイベントのメソッドを使用することができるからです:
 
-| Modifier(s)                                           | Equivalent in Handler                                                                                                |
+| 修飾子                                                | ハンドラーでの同等の記述                                                                                              |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `.stop`                                               | `event.stopPropagation()`                                                                                            |
 | `.prevent`                                            | `event.preventDefault()`                                                                                             |
 | `.self`                                               | `if (event.target !== event.currentTarget) return`                                                                   |
-| Keys:<br>`.enter`, `.13`                              | `if (event.keyCode !== 13) return` (change `13` to [another key code](http://keycode.info/) for other key modifiers) |
-| Modifiers Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (change `ctrlKey` to `altKey`, `shiftKey`, or `metaKey`, respectively)                  |
+| Keys:<br>`.enter`, `.13`                              | `if (event.keyCode !== 13) return` (他のキー修飾子については、 `13` を [別のキーコード](http://keycode.info/) に変更する) |
+| Modifiers Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (`ctrlKey` をそれぞれ `altKey`、 `shiftKey`、 `metaKey` に変更する)                      |
 
-Here's an example with all of these modifiers used together:
+これらすべての修飾子を一緒に使った例がこちらです:
 
 ```js
 render() {
   return Vue.h('input', {
     onKeyUp: event => {
-      // Abort if the element emitting the event is not
-      // the element the event is bound to
+      // イベントを発行した要素がイベントが紐づけられた要素ではない場合は
+      // 中断する
       if (event.target !== event.currentTarget) return
-      // Abort if the key that went up is not the enter
-      // key (13) and the shift key was not held down
-      // at the same time
+      // 押されたキーがEnter(13)ではない場合、Shiftキーが同時に押されて
+      // いなかった場合は中断する
       if (!event.shiftKey || event.keyCode !== 13) return
-      // Stop event propagation
+      // イベントの伝播(propagation)を止める
       event.stopPropagation()
-      // Prevent the default keyup handler for this element
+      // この要素のデフォルトのkeyupハンドラが実行されないようにする
       event.preventDefault()
       // ...
     }
@@ -353,9 +380,9 @@ render() {
 }
 ```
 
-### Slots
+### スロット
 
-You can access slot contents as Arrays of VNodes from [`this.$slots`](../api/instance-properties.html#slots):
+[`this.$slots`](../api/instance-properties.html#slots) から取得したVNodeの配列でスロットの中身にアクセスすることができます:
 
 ```js
 render() {
@@ -374,15 +401,15 @@ render() {
 }
 ```
 
-To pass slots to a child component using render functions:
+render関数で子コンポーネントにスロットを渡す方法:
 
 ```js
 render() {
   // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
   return Vue.h('div', [
     Vue.h('child', {}, {
-      // pass `slots` as the children object
-      // in the form of { name: props => VNode | Array<VNode> }
+      // { name: props => VNode | Array<VNode> } の形で
+      // 子供のオブジェクトを `slots` として渡す
       default: (props) => Vue.h('span', props.text)
     })
   ])
@@ -391,7 +418,8 @@ render() {
 
 ## JSX
 
-If we're writing a lot of `render` functions, it might feel painful to write something like this:
+たくさんの `render` 関数を書いていると、こういう感じのものを書くのがつらく感じるかもしれません:
+
 
 ```js
 Vue.h(
@@ -403,13 +431,13 @@ Vue.h(
 )
 ```
 
-Especially when the template version is so concise in comparison:
+特に、テンプレート版がそれにくらべて簡潔な場合は:
 
 ```vue-html
 <anchored-heading :level="1"> <span>Hello</span> world! </anchored-heading>
 ```
 
-That's why there's a [Babel plugin](https://github.com/vuejs/jsx-next) to use JSX with Vue, getting us back to a syntax that's closer to templates:
+これが、VueでJSXを使い、テンプレートに近い構文に戻す [Babelプラグイン](https://github.com/vuejs/jsx-next) が存在する理由です。
 
 ```jsx
 import AnchoredHeading from './AnchoredHeading.vue'
@@ -427,10 +455,12 @@ const app = createApp({
 app.mount('#demo')
 ```
 
-For more on how JSX maps to JavaScript, see the [usage docs](https://github.com/vuejs/jsx-next#installation).
+JSXがどのようにJavaScriptに変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
 
-## Template Compilation
+## テンプレートのコンパイル
 
-You may be interested to know that Vue's templates actually compile to render functions. This is an implementation detail you usually don't need to know about, but if you'd like to see how specific template features are compiled, you may find it interesting. Below is a little demo using `Vue.compile` to live-compile a template string:
+あなたはVueのテンプレートが実際にrender関数にコンパイルされることに興味があるかもしれません。
+これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、
+これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
 
 <iframe src="https://vue-next-template-explorer.netlify.app/" width="100%" height="420"></iframe>
