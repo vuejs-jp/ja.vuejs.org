@@ -1,16 +1,16 @@
-# Basics
+# 基礎
 
-Web accessibility (also known as a11y) refers to the practice of creating websites that can be used by anyone — be that a person with a disability, a slow connection, outdated or broken hardware or simply someone in an unfavorable environment. For example, adding subtitles to a video would help both your deaf and hard-of-hearing users and your users who are in a loud environment and can't hear their phone. Similarly, making sure your text isn't too low contrast will help both your low-vision users and your users who are trying to use their phone in bright sunlight.
+ウェブアクセシビリティ(a11y とも呼ばれる)とは、障害のある人、回線速度が遅い人、古かったり壊れたハードウェアを使用している人、単に芳しくない環境にいる人など、誰もが利用できるウェブサイトを作ることを指します。たとえば、ビデオに字幕を追加すると、聴覚障害のあるユーザと、大きな音がして電話の音が聞こえないユーザの両方に役立ちます。同様に、テキストのコントラストを低くしないようにすることで、目の見えないユーザと、明るい日光の下で携帯電話を使おうとしているユーザの両方に役立ちます。
 
-Ready start but aren’t sure where?
+アクセシビリティを始めたいけど、どこを参照すれば良いかわかりませんか？
 
-Checkout the [Planning and managing web accessibility guide](https://www.w3.org/WAI/planning-and-managing/) provided by [World Wide Web Consortium (W3C)](https://www.w3.org/)
+[World Wide Web Consortium (W3C)](https://www.w3.org/) が提供する [Planning and Managing Web Accessibility](https://www.w3.org/WAI/planning-and-managing/) を参照してください。
 
-## Skip link
+## スキップリンク
 
-You should add a link at the top of each page that goes directly to the main content area so users can skip content that is repeated on multiple Web pages.
+ユーザが複数のウェブページで繰り返されるコンテンツをスキップできるように、各ページの上部にメインコンテンツエリアに直接行くリンクを追加する必要があります。
 
-Typically this is done on the top of `App.vue` as it will be the first focusable element on all your pages:
+すべてのページで最初にフォーカス可能な要素になるため、通常これは `App.vue` の上部で使われます:
 
 ``` html
 <ul class="skip-links">
@@ -20,7 +20,7 @@ Typically this is done on the top of `App.vue` as it will be the first focusable
 </ul>
 ```
 
-To hide the link unless it is focused, you can add the following style:
+フォーカスされていない時にリンクを非表示にするには、以下のスタイルを追加します:
 
 ``` css
 .skipLink {
@@ -40,7 +40,7 @@ To hide the link unless it is focused, you can add the following style:
 }
 ```
 
-Once a user changes route, bring focus back to the skip link. This can be achieved by calling focus to the `ref` provided below:
+ユーザがルートを変更したら、スキップリンクにフォーカスを戻します。これは以下のように `ref` にフォーカスを呼ぶことで実現できます:
 
 ``` vue
 <script>
@@ -61,21 +61,21 @@ export default {
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-[Read documentation on skip link to main content](https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html)
+[メインコンテンツへのスキップリンクについてのドキュメントを読む](https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html)
 
-## Structure Your Content
+## コンテンツの構造
 
-One of the most important pieces of accessibility is making sure that design can support accessible implementation. Design should consider not only color contrast, font selection, text sizing, and language, but also how the content is structured in the application.
+アクセシビリティの最も重要な部分の1つは、デザインがアクセシブルな実装をサポートできることを確認することです。デザインは、色のコントラスト、フォントの選択、テキストのサイズ、言語だけでなく、アプリケーション内でのコンテンツの構造も考慮する必要があります。
 
-### Headings
+### 見出し
 
-Users can navigate an application through headings. Having descriptive headings for every section of your application makes it easier for users to predict the content of each section. When it comes to headings, there are a couple of recommended accessibility practices:
+ユーザは見出しを使ってアプリケーションをナビゲートできます。アプリケーションの各セクションに説明的な見出しをつけると、ユーザが各セクションの内容を予測しやすくなります。見出しに関しては、いくつかの推奨されるアクセシビリティの実践方法があります:
 
-- Nest headings in their ranking order: `<h1>` - `<h6>`
-- Don’t skip headings within a section
-- Use actual heading tags instead of styling text to give the visual appearance of headings
+- 見出しを順番にネストする: `<h1>` - `<h6>`
+- セクション内の見出しをスキップしない
+- テキストのスタイル設定の代わりに実際の見出しタグを使用して、見出しの外観を設定する
 
-[Read more about headings](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html)
+[見出しについてもっと読む](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html)
 
 ```html
 <main role="main" aria-labelledby="main-title">
@@ -95,23 +95,23 @@ Users can navigate an application through headings. Having descriptive headings 
 </main>
 ```
 
-### Landmarks
+### ランドマーク
 
-Landmarks provide programmatic access to sections within an application. Users who rely on assistive technology can navigate to each section of the application and skip over content. You can use [ARIA roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) to help you achieve this.
+ランドマークを使用すると、アプリケーション内のセクションへプログラムによるアクセスができます。支援技術に依存しているユーザは、アプリケーションの各セクションに移動し、コンテンツをスキップすることができます。これを実現するために、[ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を使用することができます。
 
-| HTML            | ARIA Role                                                         | Landmark Purpose                                                                       |
+| HTML            | ARIA ロール                                                         | ランドマークの目的                                                                       |
 | --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| header          | role="banner"                                                     | Prime heading: title of the page                                                       |
-| nav             | role="navigation"                                                 | Collection of links suitable for use when navigating the document or related documents |
-| main            | role="main"                                                       | The main or central content of the document.                                           |
-| footer          | role="contentinfo"                                                | Information about the parent document: footnotes/copyrights/links to privacy statement |
-| aside           | role="complementary"                                              | Supports the main content, yet is separated and meaningful on its own content            |
-| _Not available_ | role="search"                                                     | This section contains the search functionality for the application                     |
-| form            | role="form"                                                       | Collection of form-associated elements                                                 |
-| section         | role="region"  | Content that is relevant and that users will likely want to navigate to. Label must be provided for this element                |
+| header          | role="banner"                                                     | 主な見出し：ページのタイトル                                                       |
+| nav             | role="navigation"                                                 | 文書や関連文書をナビゲートする際に使用するのに適したリンク集 |
+| main            | role="main"                                                       | 文書の主な内容または中心的な内容。                                           |
+| footer          | role="contentinfo"                                                | 親文書に関する情報:脚注/著作権/プライバシーポリシーへのリンク |
+| aside           | role="complementary"                                              | メインコンテンツをサポートしながらも、それ自身コンテンツとして分離され、意味のあるものになっています            |
+| _利用不可_ | role="search"                                                     | セクションに含まれるアプリケーションの検索機能                     |
+| form            | role="form"                                                       | フォーム関連の要素コレクション                                                 |
+| section         | role="region"  | 関連性があり、ユーザがナビゲートする可能性が高いコンテンツ。この要素にはラベルを指定する必要があります                |
 
 :::tip Tip:
-It is recommended to use landmark HTML elements with redundant landmark role attributes in order to maximize compatibility with legacy [browsers that don’t support HTML5 semantic elements](https://caniuse.com/#feat=html5semantic).
+レガシーな [HTML5 のセマンティック要素をサポートしていないブラウザ](https://caniuse.com/#feat=html5semantic)との互換性を最大限に高めるために、冗長なランドマークロール属性を持つランドマーク HTML 要素を使用することをお勧めします。
 :::
 
-[Read more about landmarks](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
+[ランドマークについてもっと読む](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
