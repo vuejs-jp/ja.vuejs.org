@@ -1,32 +1,33 @@
-# Standards
+# 標準
 
-The World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI) develops web accessibility standards for the different components:
+World Wide Web Consortium（W3C）の Web Accessibility Initiative（WAI）では、さまざまなコンポーネントにおけるウェブアクセシビリティの標準を定めて発展させています:
 
-- [User Agent Accessibility Guidelines (UAAG)](https://www.w3.org/WAI/standards-guidelines/uaag/)
-  - web browsers and media players, including some aspects of assistive technologies
-- [Authoring Tool Accessibility Guidelines (ATAG)](https://www.w3.org/WAI/standards-guidelines/atag/)
-  - authoring tools
-- [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/)
-  - web content - used by developers, authoring tools, and accessibility evaluation tools
 
-## Web Content Accessibility Guidelines (WCAG)
+- [ユーザーエージェントアクセシビリティガイドライン（UAAG）](https://www.w3.org/WAI/standards-guidelines/uaag/)
+  - ウェブブラウザおよびメディアプレーヤー、一部の支援技術を包む
+- [オーサリングツールアクセシビリティガイドライン (ATAG)](https://www.w3.org/WAI/standards-guidelines/atag/)
+  - オーサリングツール
+- [ウェブコンテンツアクセシビリティガイドライン (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+  - 開発者、オーサリングツール、およびアクセシビリティを評価するツールによって利用されるウェブコンテンツ
 
-[WCAG 2.1](https://www.w3.org/TR/WCAG21/) extends on [WCAG 2.0](https://www.w3.org/TR/WCAG20/) and allows implementation of new technologies by addressing changes to the web. The W3C encourages use of the most current version of WCAG when developing or updating Web accessibility policies.
+## ウェブコンテンツアクセシビリティガイドライン (WCAG)
 
-### WCAG 2.1 Four Main Guiding Principles (abbreviated as POUR):
+[WCAG 2.1](https://www.w3.org/TR/WCAG21/) は [WCAG 2.0](https://www.w3.org/TR/WCAG20/)を拡張し、ウェブへの変更に対処することによって新しいテクノロジーの実装を可能にします。W3Cではウェブアクセシビリティにおけるポリシーを改良または更新する時、最新版のWCAGの使用を推奨しています。
 
-- [Perceivable](https://www.w3.org/TR/WCAG21/#perceivable)
-  - Users must be able to perceive the information being presented
-- [Operable](https://www.w3.org/TR/WCAG21/#operable)
-  - Interface forms, controls, and navigation are operable
-- [Understandable](https://www.w3.org/TR/WCAG21/#understandable)
-  - Information and the operation of user interface must be understandable to all users
-- [Robust](https://www.w3.org/TR/WCAG21/#robust)
-  - Users must be able to access the content as technologies advance
+### WCAG 2.1における4つの主要な土台となる原則（略してPOUR）:
 
-### Web Accessibility Initiative – Accessible Rich Internet Applications (WAI-ARIA)
+- [知覚可能](https://www.w3.org/TR/WCAG21/#perceivable)
+  - ユーザは提示されている情報を認識できる必要があります
+- [操作可能](https://www.w3.org/TR/WCAG21/#operable)
+  - フォーム、コントロール、およびナビゲーションなどのインターフェースを操作できる必要があります
+- [理解可能](https://www.w3.org/TR/WCAG21/#understandable)
+  - ユーザインターフェイスの情報と操作方法は、すべてのユーザが理解できる必要があります
+- [堅牢](https://www.w3.org/TR/WCAG21/#robust)
+  - テクノロジーが進歩しても、ユーザはコンテンツにアクセスできる必要があります
 
-W3C's WAI-ARIA provides guidance on how to build dynamic content and advanced user interface controls.
+### Web Accessibility Initiative – アクセシビリティに優れたインターネットアプリケーション (WAI-ARIA)
 
-- [Accessible Rich Internet Applications (WAI-ARIA) 1.2](https://www.w3.org/TR/wai-aria-1.2/)
-- [WAI-ARIA Authoring Practices 1.2](https://www.w3.org/TR/wai-aria-practices-1.2/)
+W3CのWAI-ARIAでは、動的なコンテンツと高度なユーザインターフェイス制御を構築する方法について、ガイダンスを提供します。
+
+- [アクセシビリティに優れたインターネットアプリケーション (WAI-ARIA) 1.2](https://www.w3.org/TR/wai-aria-1.2/)
+- [WAI-ARIA オーサリング演習1.2](https://www.w3.org/TR/wai-aria-practices-1.2/)
