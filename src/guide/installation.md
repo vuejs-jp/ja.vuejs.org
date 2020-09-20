@@ -30,7 +30,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ## NPM
 
-Vue による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Browserify](http://browserify.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
+Vue による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
 
 ```bash
 # 最新安定版
