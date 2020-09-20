@@ -1,17 +1,17 @@
-# State Transitions
+# 状態のトランジション
 
-Vue's transition system offers many simple ways to animate entering, leaving, and lists, but what about animating your data itself? For example:
+Vue のトランジションシステムは entering、leaving、およびリストをアニメーションさせるための多くの単純な方法を提供しますが、あなたのデータ自体をアニメーションさせる場合はどうでしょうか？例えば:
 
-- numbers and calculations
-- colors displayed
-- the positions of SVG nodes
-- the sizes and other properties of elements
+- 数値と計算
+- 表示される色
+- SVG ノードの位置
+- 要素のサイズやその他のプロパティ
 
-All of these are either already stored as raw numbers or can be converted into numbers. Once we do that, we can animate these state changes using 3rd-party libraries to tween state, in combination with Vue's reactivity and component systems.
+これらはすべて、生の数値として保持されているか、あるいは数値に変換することが可能です。一度それをすれば、Vue のリアクティブな性質とコンポーネントシステムの組み合わせにより、状態から中間フレームを生成するためのサードパーティのライブラリを使ってアニメーションさせることができます。
 
-## Animating State with Watchers
+## ウォッチャによる状態のアニメーション
 
-Watchers allow us to animate changes of any numerical property into another property. That may sound complicated in the abstract, so let's dive into an example using [GreenSock](https://greensock.com/):
+ウォッチャは、任意の数値プロパティの変化によって他のプロパティをアニメーションさせることができるようにします。それは理論的には複雑に聞こえるかもしれませんが、[GreenSock](https://greensock.com/) を使った例に没頭してみましょう:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
@@ -52,11 +52,11 @@ Vue.createApp(Demo).mount('#animated-number-demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-When you update the number, the change is animated below the input.
+数値を更新すると、その変更が入力の下でアニメーションします。
 
-## Dynamic State Transitions
+## 動的な状態のトランジション
 
-As with Vue's transition components, the data backing state transitions can be updated in real time, which is especially useful for prototyping! Even using a simple SVG polygon, you can achieve many effects that would be difficult to conceive of until you've played with the variables a little.
+Vue のトランジションコンポーネントを使う場合と同様に、状態のトランジションの背後にあるデータはリタルタイムに更新でき、これは特にプロトタイピングにおいて便利です！単純な SVG のポリゴンに使用して、変数で少し遊ぶだけで、それまで思い付くのが難しかった多くの効果を得られます。
 
 <p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="a8e00648d4df6baa1b19fb6c31c8d17e" data-preview="true" style="height: 493px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Updating SVG">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/a8e00648d4df6baa1b19fb6c31c8d17e">
@@ -65,9 +65,9 @@ As with Vue's transition components, the data backing state transitions can be u
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Organizing Transitions into Components
+## コンポーネント内のトランジションの整理
 
-Managing many state transitions can quickly increase the complexity of a component instance. Fortunately, many animations can be extracted out into dedicated child components. Let's do this with the animated integer from our earlier example:
+多くの状態のトランジションを管理することで、コンポーネントの複雑さが急速に高まります。幸いにも、多くのアニメーションは専用の子コンポーネントに抽出できます。前の例のアニメーションする数値でこれをやってみましょう:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
@@ -145,17 +145,17 @@ app.mount('#app')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Now we can compose multiple states with these child components. It's exciting- we can use any combination of transition strategies that have been covered on this page, along with those offered by Vue's [built-in transition system](transitions.html). Together, there are very few limits to what can be accomplished.
+これらの子コンポーネントを使用した複数の状態を構成することができるようになりました。Vue の [組み込みのトランジションシステム](transitions.html) によるものと同時に、このページで取り扱ったあらゆるトランジション戦略の組み合わせを利用できます。同時に、達成できることにはごくわずかの制限があります。
 
-You can see how we could use this for data visualization, for physics effects, for character animations and interactions, the sky's the limit.
+データの可視化、物理効果、キャラクターのアニメーションやインタラクションにどのように使用できるのかが分かるでしょう。可能性は無限大です。
 
-## Bringing Designs to Life
+## デザインに命を吹き込む
 
-To animate, by one definition, means to bring to life. Unfortunately, when designers create icons, logos, and mascots, they're usually delivered as images or static SVGs. So although GitHub's octocat, Twitter's bird, and many other logos resemble living creatures, they don't really seem alive.
+1つの定義によってアニメーションすること、それは命を吹き込むことを意味します。残念なことに、デザイナーがアイコン、ロゴ、そしてマスコットを作成するとき、それらは一般的に画像や静的 SVG として配布されます。そのため GitHub のオクトキャットや Twitter の青い鳥、そして多くのその他ロゴは生き物に似ていますが、本当に生きているようには見えません。
 
-Vue can help. Since SVGs are just data, we only need examples of what these creatures look like when excited, thinking, or alarmed. Then Vue can help transition between these states, making your welcome pages, loading indicators, and notifications more emotionally compelling.
+Vue はそれを手助けできます。 SVG は単なるデータなので、これらの生き物が興奮したり、考えたり、または驚いたりしたときにどう見えるかの例が必要なだけです。そして Vue はこれらの状態間のトランジションを支援して、あなたのウェルカムページ、ローディングインジケータ、そして通知をより感情的で魅力的にします。
 
-Sarah Drasner demonstrates this in the demo below, using a combination of timed and interactivity-driven state changes:
+Sarah Drasner は以下のデモでタイマーとインタラクティブ駆動での状態変更の組合せを用いてこれを示しています:
 
 <p data-height="400" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
