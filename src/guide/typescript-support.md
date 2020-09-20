@@ -53,7 +53,7 @@ vue add typescript
 
 ### エディタによるサポート
 
-TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[シングルファイルコンポーネント](./single-file-components.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
+TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-components.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
 
 [WebStorm](https://www.jetbrains.com/webstorm/) もすぐに利用できる TypeScript と Vue のサポートを提供しています。
 
@@ -86,7 +86,7 @@ const Component = defineComponent({
 })
 ```
 
-複雑な型や推論の場合、[タイプアサーション](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) を使用してキャストすることができます:
+複雑な型や推論の場合、[タイプアサーション (type assertion)](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) を使用してキャストすることができます:
 
 ```ts
 interface Book {
@@ -140,7 +140,7 @@ const Component = defineComponent({
 })
 ```
 
-### プロパティにアノテーションをつける
+### Props にアノテーションをつける
 
 Vue は `type` が定義されたプロパティについてランタイムバリデーションを行います。これらの型を TypeScript に提供するため、`PropType` を伴うコンストラクタをキャストする必要があります:
 
@@ -190,7 +190,7 @@ const Component = defineComponent({
 
   setup(props) {
     const result = props.message.split('') // 正しいです, 'message' は文字列 (string) として型づけされます
-    const filtered = props.message.filter(p => p.value) // エラーが起こります: 'filter' プロパティは文字列 (string) 型には存在しません。
+    const filtered = props.message.filter(p => p.value) // エラーが起こります: Property 'filter' does not exist on type 'string'
   }
 })
 ```
@@ -208,7 +208,6 @@ const Component = defineComponent({
     const year = ref(2020)
 
     const result = year.value.split('') // => Property 'split' does not exist on type 'number'
-    const result = year.value.split('') // => 'split' プロパティは 'number' 型に存在しません
   }
 })
 ```
@@ -263,10 +262,10 @@ export default defineComponent({
   setup() {
     let count = ref(0)
 
-    // リードオンリー
+    // 読み取り専用
     const doubleCount = computed(() => count.value * 2)
 
-    const result = doubleCount.value.split('') // => 'split' プロパティは 'number' 型に存在しません。
+    const result = doubleCount.value.split('') // Property 'split' does not exist on type 'number'
   }
 })
 ```
