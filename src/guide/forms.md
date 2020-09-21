@@ -61,7 +61,7 @@ textarea への挿入は機能しません。代わりに`v-model`を用いて�
 
 ### チェックボックス
 
-単一のチェックボックスと boolean 値：
+単一のチェックボックスと boolean 値:
 
 ```html
 <input type="checkbox" id="checkbox" v-model="checked" />
@@ -75,7 +75,7 @@ textarea への挿入は機能しません。代わりに`v-model`を用いて�
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-同じ配列にバインドされた複数のチェックボックス：
+同じ配列にバインドされた複数のチェックボックス:
 
 ```html
 <div id="v-model-multiple-checkboxes">
@@ -140,7 +140,7 @@ Vue.createApp({
 
 ### セレクト
 
-単一のセレクト：
+単一のセレクト:
 
 ```html
 <div id="v-model-select" class="demo">
@@ -175,7 +175,7 @@ Vue.createApp({
 `v-model`の式の初期値がいずれのオプションとも一致しない場合、`<select>`要素は *未選択* の状態で描画されます。これにより iOS では最初のアイテムが選択できなくなります。なぜなら iOS はこのような場合に `change` イベントを発火させないためです。したがって、上記の例で示したように、`value`を持たない`disabled` なオプションを追加しておくことをおすすめします。
 :::
 
-複数個のセレクト（配列にバインド）：
+複数個のセレクト（配列にバインド）:
 
 ```html
 <select v-model="selected" multiple>
@@ -194,7 +194,7 @@ Vue.createApp({
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-動的なオプションを`v-for`により描画：
+動的なオプションを`v-for`により描画:
 
 ```html
 <div id="v-model-select-dynamic" class="demo">
@@ -231,7 +231,7 @@ Vue.createApp({
 
 ## 値のバインディング
 
-ラジオやチェックボックス、セレクトの option において、`v-model`でバインディングされる値は通常は静的な文字列（チェックボックスの場合はbooleanも）です：
+ラジオやチェックボックス、セレクトの option において、`v-model`でバインディングされる値は通常は静的な文字列（チェックボックスの場合はbooleanも）です:
 
 ```html
 <!-- チェックされているとき`picked` は文字列"a"になります -->
@@ -255,14 +255,14 @@ Vue.createApp({
 ```
 
 ```js
-// チェックされているとき：
+// チェックされているとき:
 vm.toggle === 'yes'
-// チェックされていないとき：
+// チェックされていないとき:
 vm.toggle === 'no'
 ```
 
 :::tip Tip
-`true-value` と `false-value` 属性は input の `value` 属性には影響を及ぼしません。なぜならブラウザはチェックされていないチェックボックスをフォーム送信内容には含めないためです。二つの値（例："yes" または "no"）のうち一つが必ず送信されることを保証するには、代わりにラジオを使用してください。
+`true-value` と `false-value` 属性は input の `value` 属性には影響を及ぼしません。なぜならブラウザはチェックされていないチェックボックスをフォーム送信内容には含めないためです。二つの値（例: "yes" または "no"）のうち一つが必ず送信されることを保証するには、代わりにラジオを使用してください。
 :::
 
 ### ラジオ
@@ -272,7 +272,7 @@ vm.toggle === 'no'
 ```
 
 ```js
-// チェックされているとき：
+// チェックされているとき:
 vm.pick === vm.a
 ```
 
