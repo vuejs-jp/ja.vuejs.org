@@ -222,7 +222,6 @@ year.value = 2020 // OKです!
 ```
 
 ::: tip ノート
-If the type of the generic is unknown, it's recommended to cast `ref` to `Ref<T>`.
 ジェネリックの型が不明の場合、`ref` を `Ref<T>` にキャストすることを推奨します。
 :::
 
