@@ -1,16 +1,16 @@
-# State Management
+# 状態管理
 
-## Official Flux-Like Implementation
+## 公式の Flux ライクな実装
 
-Large applications can often grow in complexity, due to multiple pieces of state scattered across many components and the interactions between them. To solve this problem, Vue offers [vuex](https://github.com/vuejs/vuex), our own Elm-inspired state management library. It even integrates into [vue-devtools](https://github.com/vuejs/vue-devtools), providing zero-setup access to [time travel debugging](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif).
+大規模なアプリケーションは、たくさんのコンポーネント上に複数の状態が散らばっていることや、それらのコンポーネント間の相互作用が原因となって、複雑になりがちです。この問題を解消するために、Vue は Elm に触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供しています。これは [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
 
-### Information for React Developers
+### React 開発者向けの情報
 
-If you're coming from React, you may be wondering how vuex compares to [redux](https://github.com/reactjs/redux), the most popular Flux implementation in that ecosystem. Redux is actually view-layer agnostic, so it can easily be used with Vue via [simple bindings](https://classic.yarnpkg.com/en/packages?q=redux%20vue&p=1). Vuex is different in that it _knows_ it's in a Vue app. This allows it to better integrate with Vue, offering a more intuitive API and improved development experience.
+もしあなたが React エコシステムから来たのであれば、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどのように比較されるか気になっているかもしれません。Redux は実際には view レイヤについての知識を持たないので、[シンプルなバインディング](https://classic.yarnpkg.com/en/packages?q=redux%20vue&p=1)を通して簡単に Vue と一緒に利用することができます。Vuex は、自らが Vue アプリケーションの内部にいることを _知っている_ という点で異なります。これによって Vue とのさらに優れた連携が可能になり、より直感的な API や向上した開発体験を提供することができます。
 
-## Simple State Management from Scratch
+## ゼロから作るシンプルな状態管理
 
-It is often overlooked that the source of truth in Vue applications is the reactive `data` object - a component instance only proxies access to it. Therefore, if you have a piece of state that should be shared by multiple instances, you can use a [reactive](/guide/reactivity-fundamentals.html#declaring-reactive-state) method to make an object reactive:
+Vue アプリケーションの情報源となっているのがリアクティブな `data` オブジェクト、すなわち、`data` オブジェクトへのアクセスのみをプロキシするコンポーネントインスタンスであることは見過ごされがちです。それゆえに、複数のインスタンスで共有されるべき状態がある場合、オブジェクトをリアクティブにするために [reactive](/guide/reactivity-fundamentals.html#declaring-reactive-state) 関数を利用できます:
 
 ```js
 const sourceOfTruth = Vue.reactive({
@@ -36,7 +36,7 @@ const appB = Vue.createApp({
 <div id="app-b">App B: {{ message }}</div>
 ```
 
-Now whenever `sourceOfTruth` is mutated, both `appA` and `appB` will update their views automatically. We have a single source of truth now, but debugging would be a nightmare. Any piece of data could be changed by any part of our app at any time, without leaving a trace.
+このようにすることで `sourceOfTruth` が変化するたびに、`appA` と `appB` の両方がそれぞれの view を自動的に更新します。いま、唯一の情報源を持っていることにはなりますが、デバッグは悪夢になるでしょう。あらゆるデータが、アプリケーションのどこからでも、そしていつでも、トレースを残すことなく変更できてしまうのです。
 
 ```js
 const appB = Vue.createApp({
@@ -44,12 +44,12 @@ const appB = Vue.createApp({
     return sourceOfTruth
   },
   mounted() {
-    sourceOfTruth.message = 'Goodbye' // both apps will render 'Goodbye' message now
+    sourceOfTruth.message = 'Goodbye' // appA と appB の両方が 'Goodbye' メッセージをレンダリングします
   }
 }).mount('#app-b')
 ```
 
-To help solve this problem, we can adopt a **store pattern**:
+この問題を解決するには、**store パターン** を適用することができます:
 
 ```js
 const store = {
@@ -77,9 +77,9 @@ const store = {
 }
 ```
 
-Notice all actions that mutate the store's state are put inside the store itself. This type of centralized state management makes it easier to understand what type of mutations could happen and how they are triggered. Now when something goes wrong, we'll also have a log of what happened leading up to the bug.
+Store の状態を変化させる action がすべて store 自身の中にあることに注目してください。このような中央集権的な状態管理によって、どのような種類の状態変化が起こりうるのか、またそれらがどのようにトリガーされるのか、といったことの理解が容易になります。
 
-In addition, each instance/component can still own and manage its own private state:
+さらに、それぞれのインスタンスやコンポーネントにプライベートな状態を持たせ、管理することも可能です:
 
 ```html
 <div id="app-a">{{sharedState.message}}</div>
@@ -113,9 +113,9 @@ const appB = Vue.createApp({
 ![State Management](/images/state.png)
 
 ::: tip
-You should never replace the original state object in your actions - the components and the store need to share reference to the same object in order for mutations to be observed.
+action によって、元の状態を保持するオブジェクトを置き換えてはいけないことに注意してください。なぜなら、状態変化が監視され続けるためには、コンポーネントと store が同じオブジェクトへの参照を共有している必要があるためです。
 :::
 
-As we continue developing the convention where components are never allowed to directly mutate state that belongs to a store, but should instead dispatch events that notify the store to perform actions, we eventually arrive at the [Flux](https://facebook.github.io/flux/) architecture. The benefit of this convention is we can record all state mutations happening to the store and implement advanced debugging helpers such as mutation logs, snapshots, and history re-rolls / time travel.
+store が保持する状態をコンポーネントが直接的に変更することを禁止し、代わりにコンポーネントが store に通知するイベントを送ることによってアクションを実行する、という規約を発展させていくに従って、最終的に [Flux](https://facebook.github.io/flux/) アーキテクチャに辿り着きました。この規約による利点としては、store に起こるすべての状態変化を記録することができたり、変更ログやスナップショット、履歴や時間の巻き戻しといった高度なデバッギングヘルパーを実装できることが挙げられます。
 
-This brings us full circle back to [Vuex](https://github.com/vuejs/vuex), so if you've read this far it's probably time to try it out!
+ここまで来ると一周まわって [Vuex](https://github.com/vuejs/vuex) に戻ってきました。ここまで読み進めてきたのなら、vuex を試してみるとよいでしょう！
