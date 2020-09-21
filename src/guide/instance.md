@@ -1,24 +1,24 @@
-# The Application Instance
+# アプリケーションインスタンス
 
-## Creating an Instance
+## インスタンスの作成
 
-Every Vue application starts by creating a new **application instance** with the `createApp` function:
+全ての Vue アプリケーションは `createApp` 関数で新しい **アプリケーションインスタンス (application instance)** を作成するところから始まります:
 
 ```js
 Vue.createApp(/* options */)
 ```
 
-After the instance is created, we can _mount_ it, passing a container to `mount` method. For example, if we want to mount a Vue application on `<div id="app"></div>`, we should pass `#app`:
+インスタンスが作成されたあと、コンテナを `mount` メソッドに渡すことで、これを _マウント_ できます。例えば、Vueアプリケーションを `<div id="app"></div>` にマウントしたいときは、`#app` を渡します:
 
 ```js
 Vue.createApp(/* options */).mount('#app')
 ```
 
-Although not strictly associated with the [MVVM pattern](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue's design was partly inspired by it. As a convention, we often use the variable `vm` (short for ViewModel) to refer to our instance.
+[MVVM パターン](https://ja.wikipedia.org/wiki/Model_View_ViewModel)に厳密に関連づけられているわけではないにもかかわらず、Vueの設計は部分的にその影響を受けています。慣例的に、私たちはインスタンスを参照するのに変数 `vm`（ViewModelの短縮形）を使用します。
 
-When you create an instance, you pass in an **options object**. The majority of this guide describes how you can use these options to create your desired behavior. For reference, you can also browse the full list of options in the [API reference](../api/options-data.html).
+インスタンスを作成する際には、 **オプションオブジェクト (options object)** を渡すことができます。このガイドの多くは、意図した挙動を作るためにこれらのオプションをどのように使うことができるかを解説します。全てのオプションのリストは [API リファレンス](../api/options-data.html)で読むこともできます。
 
-A Vue application consists of a **root instance** created with `createApp`, optionally organized into a tree of nested, reusable components. For example, a `todo` app's component tree might look like this:
+Vueアプリケーションは、`createApp` で作られたひとつの **ルートインスタンス (root instance)** と、入れ子になった再利用可能なコンポーネントのツリーから成ります。例えば、`todo` アプリケーションのコンポーネントツリーはこのようになるでしょう:
 
 ```
 Root Instance
@@ -31,40 +31,38 @@ Root Instance
       └─ TodoListStatistics
 ```
 
-We'll talk about [the component system](component-basics.html) in detail later. For now, just know that all Vue components are also instances, and so accept the same options object.
+[コンポーネントシステム](component-basics.html)の詳細は後ほど扱います。いまは、全てのVueコンポーネントもまたインスタンスであり、同じようなオプションオブジェクトを受け入れることだけを知っておいてください。
 
-## Data and Methods
+## データとメソッド
 
-When an instance is created, it adds all the properties found in its `data` to [Vue's **reactivity system**](reactivity.html). When the values of those properties change, the view will "react", updating to match the new values.
+インスタンスは作成時に、`data` で見つけられる全てのプロパティを [Vue の **リアクティブシステム (reactive system)**](reactivity.html)に追加します。これらのプロパティの値が変わると、ビューは"反応 (react)"し、新しい値に追従します。
 
 ```js
-// Our data object
+// データオブジェクト
 const data = { a: 1 }
 
-// The object is added to the root instance
+// オブジェクトがルートインスタンスに追加されます
 const vm = Vue.createApp({
   data() {
     return data
   }
 }).mount('#app')
 
-// Getting the property on the instance
-// returns the one from the original data
+// インスタンス上のプロパティを取得すると、元のデータのプロパティが返されます
 vm.a === data.a // => true
 
-// Setting the property on the instance
-// also affects the original data
+// インスタンス上のプロパティへの代入は、元のデータにも影響されます
 vm.a = 2
 data.a // => 2
 ```
 
-When this data changes, the view will re-render. It should be noted that properties in `data` are only **reactive** if they existed when the instance was created. That means if you add a new property, like:
+このデータが変更されると、ビューが再レンダリングされます。`data` のプロパティは、インスタンスが作成時に存在した場合にのみ **リアクティブ (reactive)** です。次のように新しいプロパティを代入すると:
 
 ```js
 vm.b = 'hi'
 ```
 
-Then changes to `b` will not trigger any view updates. If you know you'll need a property later, but it starts out empty or non-existent, you'll need to set some initial value. For example:
+`b` への変更はビューへの更新を引き起こしません。あるプロパティがのちに必要であることがわかっているが、最初は空または存在しない場合は、なんらかの初期値を設定する必要があります。例:
 
 ```js
 data() {
@@ -78,7 +76,7 @@ data() {
 }
 ```
 
-The only exception to this being the use of `Object.freeze()`, which prevents existing properties from being changed, which also means the reactivity system can't _track_ changes.
+これに対する唯一の例外は `Object.freeze()` を使用し既存のプロパティが変更されるのを防ぐことです。これはリアクティブシステムが変更を _追跡 (track)_ することができないことも意味します。
 
 ```js
 const obj = {
@@ -97,12 +95,12 @@ const vm = Vue.createApp({
 ```html
 <div id="app">
   <p>{{ foo }}</p>
-  <!-- this will no longer update `foo`! -->
+  <!-- これでは `foo` は更新されません！ -->
   <button v-on:click="foo = 'baz'">Change it</button>
 </div>
 ```
 
-In addition to data properties, instances expose a number of useful instance properties and methods. These are prefixed with `$` to differentiate them from user-defined properties. For example:
+dataプロパティに加えて、インスタンスはいくつかの便利なプロパティとメソッドを提供します。これらはユーザ定義のプロパティと区別するため、頭に `$` が付けられています。例:
 
 ```js
 const vm = Vue.createApp({
@@ -116,13 +114,13 @@ const vm = Vue.createApp({
 vm.$data.a // => 1
 ```
 
-In the future, you can consult the [API reference](../api/instance-properties.html) for a full list of instance properties and methods.
+今後、全てのインスタンスプロパティとメソッドのリストを調べるには [API リファレンス](../api/instance-properties.html) を利用できます。
 
-## Instance Lifecycle Hooks
+## インスタンスライフサイクルフック
 
-Each instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called **lifecycle hooks**, giving users the opportunity to add their own code at specific stages.
+それぞれのインスタンスは、作成時に一連の初期化の手順を踏みます。例えば、データの監視、テンプレートのコンパイル、インスタンスの DOM へのマウント、データ変更時の DOM の変更を準備する必要があります。この中でインスタンスは、特定の段階にコードを追加する機会をユーザに与えるために、**ライフサイクルフック (lifecycle hooks)** と呼ばれる関数を実行します。
 
-For example, the [created](../api/options-lifecycle-hooks.html#created) hook can be used to run code after an instance is created:
+例えば [created](../api/options-lifecycle-hooks.html#created) フックは、インスタンスの作成後にコードを実行するために使用できます:
 
 ```js
 Vue.createApp({
@@ -132,20 +130,20 @@ Vue.createApp({
     }
   },
   created() {
-    // `this` points to the vm instance
+    // `this` は vm インスタンスを指します
     console.log('a is: ' + this.a) // => "a is: 1"
   }
 })
 ```
 
-There are also other hooks which will be called at different stages of the instance's lifecycle, such as [mounted](../api/options-lifecycle-hooks.html#mounted), [updated](../api/options-lifecycle-hooks.html#updated), and [unmounted](../api/options-lifecycle-hooks.html#unmounted). All lifecycle hooks are called with their `this` context pointing to the current active instance invoking it.
+[mounted](../api/options-lifecycle-hooks.html#mounted)、[updated](../api/options-lifecycle-hooks.html#updated)、[unmounted](../api/options-lifecycle-hooks.html#unmounted) のように、インスタンスのライフサイクルの他の段階で呼ばれる他のフックもあります。全てのライフサイクルフックは、呼び出し元である現在アクティブなインスタンスを指す `this` コンテキストとともに呼ばれます。
 
 ::: tip
-Don't use [arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) on an options property or callback, such as `created: () => console.log(this.a)` or `vm.$watch('a', newValue => this.myMethod())`. Since an arrow function doesn't have a `this`, `this` will be treated as any other variable and lexically looked up through parent scopes until found, often resulting in errors such as `Uncaught TypeError: Cannot read property of undefined` or `Uncaught TypeError: this.myMethod is not a function`.
+[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions)をオプションのプロパティやコールバックに使用しないでください。これは例えば、`created: () => console.log(this.a)` や `vm.$watch('a', newValue => this.myMethod())` のようなことです。アロー関数は `this` を持たないため、`this` は他の変数のように親のスコープ内を辞書探索され、しばしば `Uncaught TypeError: Cannot read property of undefined` や `Uncaught TypeError: this.myMethod is not a function` のようなエラーを起こします。
 :::
 
-## Lifecycle Diagram
+## ライフサイクルダイアグラム
 
-Below is a diagram for the instance lifecycle. You don't need to fully understand everything going on right now, but as you learn and build more, it will be a useful reference.
+以下はインスタンスライフサイクルのダイアグラムです。これは今完全に理解する必要はありませんが、さらに学習し実践すれば、便利なリファレンスとなることでしょう。
 
 <img src="/images/lifecycle.png" width="840" height="auto" style="margin: 0px auto; display: block; max-width: 100%;" loading="lazy" alt="Instance lifecycle hooks">
