@@ -1,12 +1,16 @@
-# Non-Prop Attributes
+# プロパティでない属性
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページは [コンポーネントの基本](component-basics.md) が読まれていることが前提となっています。 コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
 A component non-prop attribute is an attribute or event listener that is passed to a component, but does not have a corresponding property defined in [props](component-props) or [emits](component-custom-events.html#defining-custom-events). Common examples of this include `class`, `style`, and `id` attributes.
 
-## Attribute Inheritance
+コンポーネントにおけるプロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。なお、共通の認識として `class` や `style`, `id` 属性はここに含まれません。
 
-When a component returns a single root node, non-prop attributes will automatically be added to the root node's attributes. For example, in the instance of a date-picker component:
+
+## 属性の継承
+
+ただ一つのルート要素をもつコンポーネントの場合、プロパティでない属性はルート要素にそのまま追加されます。例えば date-picker コンポーネントの場合は次のような形になります。
+
 
 ```js
 app.component('date-picker', {
@@ -18,19 +22,19 @@ app.component('date-picker', {
 })
 ```
 
-In the event we need to define the status of the date-picker component via a `data-status` property, it will be applied to the root node (i.e., `div.date-picker`).
+`data-status` プロパティを用いて　date-picker コンポーネントの状態を定義するような場合には、このプロパティはルート要素 (すなわち `div.date-picker`) に適用されます。
 
 ```html
-<!-- Date-picker component with a non-prop attribute -->
+<!-- 非プロパティ型の属性 とともに用いられる Date-picker コンポーネント -->
 <date-picker data-status="activated"></date-picker>
 
-<!-- Rendered date-picker component -->
+<!-- 実際には以下のような形で描画されます -->
 <div class="date-picker" data-status="activated">
   <input type="datetime" />
 </div>
 ```
 
-Same rule applies to the event listeners:
+イベントリスナについても同様のことが言えます。
 
 ```html
 <date-picker @change="submitChange"></date-picker>
@@ -44,7 +48,7 @@ app.component('date-picker', {
 })
 ```
 
-This might be helpful when we have an HTML element with `change` event as a root element of `date-picker`.
+このような実装は、`date-picker` のルート要素で `change` イベントを扱うケースなどで役に立つでしょう。
 
 ```js
 app.component('date-picker', {
@@ -58,7 +62,7 @@ app.component('date-picker', {
 })
 ```
 
-In this case, `change` event listener is passed from the parent component to the child and it will be triggered on native `<select>` `change` event. We won't need to emit an event from the `date-picker` explicitly:
+この場合、 `change` イベントリスナは、親から子へ渡され、`<select>` 要素本来の `change` イベントにより発火されます。特段、`date-picker` からの明示的なイベント処理を記述する必要はありません。
 
 ```html
 <div id="date-picker" class="demo">
@@ -70,7 +74,7 @@ In this case, `change` event listener is passed from the parent component to the
 const app = Vue.createApp({
   methods: {
     showChange(event) {
-      console.log(event.target.value) // will log a value of the selected option
+      console.log(event.target.value) // 選択された option の値が表示される
     }
   }
 })
@@ -78,13 +82,12 @@ const app = Vue.createApp({
 
 ## Disabling Attribute Inheritance
 
-If you do **not** want a component to automatically inherit attributes, you can set `inheritAttrs: false` in the component's options.
+属性の継承を望まない場合、コンポーネントのオプション内で、`inheritAttrs: false`を指定することができます。
 
-The common scenario for disabling an attribute inheritance is when attributes need to be applied to other elements besides the root node.
+一般的にこの継承を無効化したいケースというのは、ルート要素ではない別の要素に属性を適用したいようなケースでしょう。
 
-By setting the `inheritAttrs` option to `false`, this gives you access to the component's `$attrs` property, which includes all attributes not included to component `props` and `emits` properties (e.g., `class`, `style`, `v-on` listeners, etc.).
-
-Using our date-picker component example from the [previous section]('#attribute-inheritance), in the event we need to apply all non-prop attributes to the `input` element rather than the root `div` element, this can be accomplished by using the `v-bind` shortcut.
+`inheritAttrs` を `false` にセットすることで、コンポーネントの `$attrs` プロパティが利用可能になり、`props` や `emits` などのプロパティ(`class` や `style` 、 `v-on` といったもの)を除く全ての属性にアクセスできるようになります。
+[previous section]('#属性の継承) で利用した date-picker のコンポーネント例で、全てのプロパティでない属性を ルートの `div` 要素ではなく `input` 要素に適用する場合には、`v-bind` を用いると便利でしょう。
 
 ```js{5}
 app.component('date-picker', {
@@ -97,7 +100,7 @@ app.component('date-picker', {
 })
 ```
 
-With this new configuration, our `data-status` attribute will be applied to our `input` element!
+このように記述した場合、`data-status` 属性は、 `input` 要素に適用されます。
 
 ```html
 <!-- Date-picker component with a non-prop attribute -->
@@ -111,14 +114,14 @@ With this new configuration, our `data-status` attribute will be applied to our 
 
 ## Attribute Inheritance on Multiple Root Nodes
 
-Unlike single root node components, components with multiple root nodes do not have an automatic attribute fallthrough behavior. If `$attrs` are not bound explicitly, a runtime warning will be issued.
+ルート要素が一つでなく、複数のルート要素からなるコンポーネントには、自動的に属性の継承が行われることはありません。`$attrs` を用いた明示的なアサインを行わない場合、ランタイム上で warning が発行されます。
 
 ```html
 <custom-layout id="custom-layout" @click="changeValue"></custom-layout>
 ```
 
 ```js
-// This will raise a warning
+// これは warning を発行します
 app.component('custom-layout', {
   template: `
     <header>...</header>
@@ -127,7 +130,7 @@ app.component('custom-layout', {
   `
 })
 
-// No warnings, $attrs are passed to <main> element
+// <main> 要素に $attrs で属性を渡しているため、 warnings は発行されません
 app.component('custom-layout', {
   template: `
     <header>...</header>
