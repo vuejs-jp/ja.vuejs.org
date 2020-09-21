@@ -1,29 +1,29 @@
-# Custom Events
+# カスタムイベント
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページは [コンポーネントの基本](component-basics.md) が読まれていることが前提となっています。 コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-## Event Names
+## イベント名
 
-Unlike components and props, event names don't provide any automatic case transformation. Instead, the name of an emitted event must exactly match the name used to listen to that event. For example, if emitting a camelCased event name:
+コンポーネントやプロパティとは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり発火されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
 
 ```js
 this.$emit('myEvent')
 ```
 
-Listening to the kebab-cased version will have no effect:
+ケバブケース(kebab-case)でリスナ名を作っても何も起こりません:
 
 ```html
 <!-- Won't work -->
 <my-component @my-event="doSomething"></my-component>
 ```
 
-Since event names will never be used as variable or property names in JavaScript, there is no reason to use camelCase or PascalCase. Additionally, `v-on` event listeners inside DOM templates will be automatically transformed to lowercase (due to HTML's case-insensitivity), so `@myEvent` would become `@myevent` -- making `myEvent` impossible to listen to.
+イベント名は JavaScript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)またはパスカルケース(PascalCase)を使用する理由はありません。 さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます ( HTML が大文字と小文字を判別しないため)。このため `@myEvent` は `@myevent` になり `myEvent` にリスナが反応することができなくなります。
 
-For these reasons, we recommend you **always use kebab-case for event names**.
+こういった理由から **いつもケバブケース(kebab-case)を使うこと** をお薦めします。
 
-## Defining Custom Events
+## カスタムイベントの定義
 
-Emitted events can be defined on the component via the `emits` option.
+発行されたイベントは、 `emits` オプションを介して、コンポーネントで定義することが出来ます。
 
 ```js
 app.component('custom-form', {
@@ -31,17 +31,18 @@ app.component('custom-form', {
 })
 ```
 
-In the event a native event (e.g., `click`) is defined in the `emits` option, it will be overwritten by the event in the component instead of being treated as a native listener.
+
+ネイティブイベント（例、 `click` など）が `emits` オプションで定義されている場合、ネイティブリスナーとして扱われるのではなく、コンポーネントのイベントによって上書きされます。
 
 ::: tip
-It is recommended to define all emitted events in order to better document how a component should work.
+コンポーネントの動作を実証するために、全ての発行されたイベントを定義することをお勧めします。
 :::
 
-### Validate Emitted Events
+### 発行されたイベントを検証する
 
-Similar to prop type validation, an emitted event can be validated if it is defined with the Object syntax instead of the Array syntax.
+プロパティの型検証と同様に、発行されたイベントは、配列構文ではなくオブジェクト構文で定義されている場合に検証できます。
 
-To add validation, the event is assigned a function that receives the arguments passed to the `$emit` call and returns a boolean to indicate whether the event is valid or not.
+検証を追加するために、イベントには、 `$emit` 呼び出しに渡された引数を受け取る関数が割り当てられ、イベントが有効かどうかを示す真偽値を返します。
 
 ```js
 app.component('custom-form', {
@@ -67,15 +68,14 @@ app.component('custom-form', {
 })
 ```
 
-## `v-model` arguments
+## `v-model` の引数
 
-By default, `v-model` on a component uses `modelValue` as the prop and `update:modelValue` as the event. We can modify these names passing an argument to `v-model`:
+デフォルトでは、コンポーネントの `v-model` はプロパティとして `modelValue` を使用し、イベントとして `update:modelValue` を使用します。`v-model` 引数を渡してこれらの名前の変更が出来ます。
 
 ```html
 <my-component v-model:foo="bar"></my-component>
 ```
-
-In this case, child component will expect a `foo` prop and emits `update:foo` event to sync:
+この場合、子コンポーネントは `foo` プロパティを期待し、同期するために `update:foo` イベントを発行します。
 
 ```js
 const app = Vue.createApp({})
@@ -85,7 +85,7 @@ app.component('my-component', {
     foo: String
   },
   template: `
-    <input 
+    <input
       type="text"
       :value="foo"
       @input="$emit('update:foo', $event.target.value)">
@@ -97,11 +97,11 @@ app.component('my-component', {
 <my-component v-model:foo="bar"></my-component>
 ```
 
-## Multiple `v-model` bindings
+## 複数の `v-model` のバインディング
 
-By leveraging the ability to target a particular prop and event as we learned before with [`v-model` arguments](#v-model-arguments), we can now create multiple v-model bindings on a single component instance.
+以前 [`v-model` 引数](#v-model-arguments) で学習した特定のプロパティとイベントをターゲットにする機能を活用することで、単一のコンポーネントインスタンスに対して、複数の v-model バインディングを作成できるようになりました。
 
-Each v-model will sync to a different prop, without the need for extra options in the component:
+それぞれの v-model は、コンポーネントに追加オプションを必要とせず、異なるプロパティに同期します。
 
 ```html
 <user-name
@@ -119,7 +119,7 @@ app.component('user-name', {
     lastName: String
   },
   template: `
-    <input 
+    <input
       type="text"
       :value="firstName"
       @input="$emit('update:firstName', $event.target.value)">
@@ -139,15 +139,17 @@ app.component('user-name', {
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Handling `v-model` modifiers
+## `v-model` 修飾子の処理
 
 When we were learning about form input bindings, we saw that `v-model` has [built-in modifiers](/guide/forms.html#modifiers) - `.trim`, `.number` and `.lazy`. In some cases, however, you might also want to add your own custom modifiers.
 
-Let's create an example custom modifier, `capitalize`, that capitalizes the first letter of the string provided by the `v-model` binding.
+フォーム入力バインディングについて学習していたときに、 `v-model`に [組み込み修飾子](/guide/forms.html#modifiers) -`.trim` 、 `.number` 、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
 
-Modifiers added to a component `v-model` will be provided to the component via the `modelModifiers` prop. In the below example, we have created a component that contains a `modelModifiers` prop that defaults to an empty object.
+`v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize`を作成してみましょう。
 
-Notice that when the component's `created` lifecycle hook triggers, the `modelModifiers` prop contains `capitalize` and its value is `true` - due to it being set on the `v-model` binding `v-model.capitalize="bar"`.
+コンポーネント `v-model` に追加された修飾子は、`modelModifiers` プロパティを介してコンポーネントに提供されます。以下の例では、デフォルトで空のオブジェクトになる `modelModifiers` プロパティを含むコンポーネントを作成しました。
+
+コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
 
 ```html
 <my-component v-model.capitalize="bar"></my-component>
@@ -162,7 +164,7 @@ app.component('my-component', {
     }
   },
   template: `
-    <input type="text" 
+    <input type="text"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)">
   `,
@@ -172,7 +174,7 @@ app.component('my-component', {
 })
 ```
 
-Now that we have our prop set up, we can check the `modelModifiers` object keys and write a handler to change the emitted value. In the code below we will capitalize the string whenever the `<input />` element fires an `input` event.
+プロパティを設定したので、 `modelModifiers` オブジェクトのキーを確認し、発行された値を変更するハンドラーを記述できます。以下のコードでは、 `<input />` 要素が `input` イベントを発生させるたびに文字列を大文字にします。
 
 ```html
 <div id="app">
@@ -215,7 +217,7 @@ app.component('my-component', {
 app.mount('#app')
 ```
 
-For `v-model` bindings with arguments, the generated prop name will be `arg + "Modifiers"`:
+引数を持つ `v-model` バインディングの場合、生成されるプロパティ名は `arg + "Modifiers"` になります。
 
 ```html
 <my-component v-model:foo.capitalize="bar"></my-component>
@@ -225,7 +227,7 @@ For `v-model` bindings with arguments, the generated prop name will be `arg + "M
 app.component('my-component', {
   props: ['foo', 'fooModifiers'],
   template: `
-    <input type="text" 
+    <input type="text"
       :value="foo"
       @input="$emit('update:foo', $event.target.value)">
   `,
