@@ -221,7 +221,7 @@ const year = ref<string | number>('2020') // year の型: Ref<string | number>
 year.value = 2020 // OKです!
 ```
 
-::: tip ノート
+::: tip Note
 ジェネリックの型が不明の場合、`ref` を `Ref<T>` にキャストすることを推奨します。
 :::
 
