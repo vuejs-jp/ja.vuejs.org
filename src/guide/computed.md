@@ -1,8 +1,8 @@
-# Computed Properties and Watchers
+# 算出プロパティとウォッチャ
 
-## Computed Properties
+## 算出プロパティ
 
-In-template expressions are very convenient, but they are meant for simple operations. Putting too much logic in your templates can make them bloated and hard to maintain. For example, if we have an object with a nested array:
+テンプレート内の式は非常に便利ですが、シンプルな操作のためのものです。テンプレートにたくさんロジックを入れすぎると、テンプレートが肥大化してメンテナンスしづらくなる可能性があります。たとえば、配列が入っているオブジェクトがあり:
 
 ```js
 Vue.createApp({
@@ -21,7 +21,7 @@ Vue.createApp({
 })
 ```
 
-And we want to display different messages depending on if `author` already has some books or not
+`author` が本を持っているかどうかによって違うメッセージを表示しようとしています。
 
 ```html
 <div id="computed-basics">
@@ -30,11 +30,11 @@ And we want to display different messages depending on if `author` already has s
 </div>
 ```
 
-At this point, the template is no longer simple and declarative. You have to look at it for a second before realizing that it performs a calculation depending on `author.books`. The problem is made worse when you want to include this calculation in your template more than once.
+これだと、テンプレートはもうシンプルでも宣言的でもありません。`author.books` を元に計算していると分かるまで少し時間がかかります。この計算を何回もテンプレートに含めたい場合、問題はさらに悪化します。
 
-That's why for complex logic that includes reactive data, you should use a **computed property**.
+そのため、リアクティブなデータを含む複雑なロジックには**算出プロパティ**を使いましょう。
 
-### Basic Example
+### 基本的な例
 
 ```html
 <div id="computed-basics">
@@ -58,16 +58,16 @@ Vue.createApp({
     }
   },
   computed: {
-    // a computed getter
+    // 算出 getter 関数
     publishedBooksMessage() {
-      // `this` points to the vm instance
+      // `this` は vm インスタンスを指す
       return this.author.books.length > 0 ? 'Yes' : 'No'
     }
   }
 }).mount('#computed-basics')
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="NWqzrjr" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Computed basic example">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqzrjr">
@@ -76,22 +76,22 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Here we have declared a computed property `publishedBooksMessage`.
+ここでは `publishedBooksMessage` という算出プロパティを宣言しています。
 
-Try to change the value of `books` array in the application `data` and you will see how `publishedBooksMessage` is changing accordingly.
+このアプリケーションの `data` にある `books` 配列の値を変更してみると、それに応じて `publishedBooksMessage` がどのように変わるか分かるでしょう。
 
-You can data-bind to computed properties in templates just like a normal property. Vue is aware that `vm.publishedBooksMessage` depends on `vm.author.books`, so it will update any bindings that depend on `vm.publishedBooksMessage` when `vm.author.books` changes. And the best part is that we've created this dependency relationship declaratively: the computed getter function has no side effects, which makes it easier to test and understand.
+通常のプロパティと同じように、テンプレート内で算出プロパティにデータバインドできます。Vue は `vm.publishedBooksMessage` が `vm.author.books` に依存していると分かっているので、`vm.author.books` が変更されると `vm.publishedBooksMessage` に依存するバインディングを更新します。また、この依存関係を宣言的に作成しているのが最高です: 算出 getter 関数には副作用がないので、テストや理解するのが容易になります。
 
-### Computed Caching vs Methods
+### 算出プロパティ vs メソッド
 
-You may have noticed we can achieve the same result by invoking a method in the expression:
+式の中でメソッドを呼び出せば同じことができると気づいたかもしれません:
 
 ```html
 <p>{{ calculateBooksMessage() }}</p>
 ```
 
 ```js
-// in component
+// コンポーネントの中
 methods: {
   calculateBooksMessage() {
     return this.author.books.length > 0 ? 'Yes' : 'No'
@@ -99,9 +99,9 @@ methods: {
 }
 ```
 
-Instead of a computed property, we can define the same function as a method. For the end result, the two approaches are indeed exactly the same. However, the difference is that **computed properties are cached based on their reactive dependencies.** A computed property will only re-evaluate when some of its reactive dependencies have changed. This means as long as `author.books` has not changed, multiple access to the `publishedBooksMessage` computed property will immediately return the previously computed result without having to run the function again.
+同じ関数を算出プロパティではなくメソッドとして定義することもできます。結果だけ見れば、この2つのアプローチはまったく同じになりますが、**算出プロパティはリアクティブな依存関係に基づいてキャッシュされる**という違いがあります。算出プロパティはリアクティブな依存関係の一部が変更された場合にのみ再評価されるのです。つまり、`author.books`が変更されなければ、算出プロパティの `publishedBooksMessage` に複数回アクセスしても関数は再実行されず、前回計算した結果がすぐに返されます。
 
-This also means the following computed property will never update, because `Date.now()` is not a reactive dependency:
+下の算出プロパティは `Date.now()` がリアクティブな依存関係ではないので、一度も更新されないことになります:
 
 ```js
 computed: {
@@ -111,23 +111,23 @@ computed: {
 }
 ```
 
-In comparison, a method invocation will **always** run the function whenever a re-render happens.
+それに対してメソッドは、再レンダリングが起こるたびに**常に**関数を実行します。
 
-Why do we need caching? Imagine we have an expensive computed property `list`, which requires looping through a huge array and doing a lot of computations. Then we may have other computed properties that in turn depend on `list`. Without caching, we would be executing `list`’s getter many more times than necessary! In cases where you do not want caching, use a `method` instead.
+どうしてキャッシングが必要なのでしょうか？　巨大な配列をループして、たくさんの計算を必要とする算出プロパティ `list` があるとします。また、`list` に依存している別の算出プロパティがあるかも知れません。キャッシングがなければ、`list` の getter 関数を必要以上に何度も実行することになってしまいます。キャッシングをしたくない場合は、代わりに `method` を使用してください。
 
-### Computed Setter
+### 算出 Setter 関数
 
-Computed properties are by default getter-only, but you can also provide a setter when you need it:
+算出プロパティはデフォルトでは getter 関数のみですが、必要に応じて setter 関数を設定することもできます:
 
 ```js
 // ...
 computed: {
   fullName: {
-    // getter
+    // getter 関数
     get() {
       return this.firstName + ' ' + this.lastName
     },
-    // setter
+    // setter 関数
     set(newValue) {
       const names = newValue.split(' ')
       this.firstName = names[0]
@@ -138,13 +138,13 @@ computed: {
 // ...
 ```
 
-Now when you run `vm.fullName = 'John Doe'`, the setter will be invoked and `vm.firstName` and `vm.lastName` will be updated accordingly.
+この状態で `vm.fullName = 'John Doe'` を実行すると setter 関数が呼び出され、その結果 `vm.firstName` と `vm.lastName` が更新されます。
 
-## Watchers
+## ウォッチャ
 
-While computed properties are more appropriate in most cases, there are times when a custom watcher is necessary. That's why Vue provides a more generic way to react to data changes through the `watch` option. This is most useful when you want to perform asynchronous or expensive operations in response to changing data.
+ほとんどの場合、算出プロパティの方が適切ですが、カスタムウォッチャが必要な場合もあります。そのため Vue は、データの変更に反応するためのより汎用的な方法を、`watch` オプションによって提供しています。これはデータを変更するのに応じて非同期処理や重い処理を実行したい場合に最も便利です。
 
-For example:
+例:
 
 ```html
 <div id="watch-example">
@@ -157,10 +157,10 @@ For example:
 ```
 
 ```html
-<!-- Since there is already a rich ecosystem of ajax libraries    -->
-<!-- and collections of general-purpose utility methods, Vue core -->
-<!-- is able to remain small by not reinventing them. This also   -->
-<!-- gives you the freedom to use what you're familiar with.      -->
+<!-- ajax ライブラリや汎用ユーティリティメソッドのコレクションなどの      -->
+<!-- 豊富なエコシステムがすでに存在するため、それらを再発明しないことで -->
+<!-- Vue のコアは小規模なまま保たれています。これは、使い慣れたものを  -->
+<!-- 自由に使うことができる、ということでもあります。                  -->
 <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
 <script>
   const watchExampleVM = Vue.createApp({
@@ -171,7 +171,7 @@ For example:
       }
     },
     watch: {
-      // whenever question changes, this function will run
+      // question が変わるたびに、この関数が実行される
       question(newQuestion, oldQuestion) {
         if (newQuestion.indexOf('?') > -1) {
           this.getAnswer()
@@ -195,7 +195,7 @@ For example:
 </script>
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="GRJGqXp" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Watch basic example">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/GRJGqXp">
@@ -204,13 +204,13 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-In this case, using the `watch` option allows us to perform an asynchronous operation (accessing an API) and sets a condition for performing this operation. None of that would be possible with a computed property.
+このケースでは `watch` オプションを使用することで、非同期処理（API へのアクセス）の実行と、その処理を実行する条件を設定できています。このようなことは算出プロパティではできません。
 
-In addition to the `watch` option, you can also use the imperative [vm.\$watch API](../api/instance-methods.html#watch).
+`watch` オプションに加え、命令的な [vm.\$watch API](../api/instance-methods.html#watch) を使うこともできます。
 
-### Computed vs Watched Property
+### 算出プロパティ vs 監視プロパティ
 
-Vue does provide a more generic way to observe and react to data changes on a current active instance: **watch properties**. When you have some data that needs to change based on some other data, it is tempting to overuse `watch` - especially if you are coming from an AngularJS background. However, it is often a better idea to use a computed property rather than an imperative `watch` callback. Consider this example:
+Vue は現在のアクティブなインスタンスでのデータの変更を観察して反応するための、より汎用的な方法: **監視プロパティ(watched property)** を提供します。他のデータに基づいて変更しなければならないデータがある場合（AngularJS をやっていた人だとなおさら）、`watch` を使いすぎてしまいがちです。しかし、たいていの場合は命令的な `watch` のコールバックよりも算出プロパティを使うのがベターです。次の例を考えてみましょう:
 
 ```html
 <div id="demo">{{ fullName }}</div>
@@ -236,7 +236,7 @@ const vm = Vue.createApp({
 }).mount('#demo')
 ```
 
-The above code is imperative and repetitive. Compare it with a computed property version:
+上記のコードは命令的だし冗長ですね。算出プロパティで書き換えたものと比べてみましょう:
 
 ```js
 const vm = Vue.createApp({
@@ -254,4 +254,4 @@ const vm = Vue.createApp({
 }).mount('#demo')
 ```
 
-Much better, isn't it?
+ずっといいですよね？
