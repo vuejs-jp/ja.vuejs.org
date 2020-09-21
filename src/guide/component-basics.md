@@ -12,13 +12,13 @@ const app = Vue.createApp({})
 app.component('button-counter', {
   data() {
     return {
-      count: 0,
+      count: 0
     }
   },
   template: `
     <button @click="count++">
       You clicked me {{ count }} times.
-    </button>`,
+    </button>`
 })
 ```
 
@@ -69,48 +69,48 @@ Components can be reused as many times as you want:
 
 ボタンをクリックすると、それぞれが独自の `count` を保持することに注意してください。 これはコンポーネントを使用する度に新しいコンポーネントの**インスタンス**が作成されるためです。
 
-## Organizing Components
+## コンポーネントの構成
 
-It's common for an app to be organized into a tree of nested components:
+一般的にアプリケーションはネストされたコンポーネントのツリーに編成されます:
 
-![Component Tree](/images/components.png)
+![コンポーネントツリー](/images/components.png)
 
-For example, you might have components for a header, sidebar, and content area, each typically containing other components for navigation links, blog posts, etc.
+例えば、 ヘッダー、サイドバー、コンテンツエリアなどのコンポーネントがあり、それぞれには一般的にナビゲーションリンクやブログ投稿などのコンポーネントが含まれています。
 
-To use these components in templates, they must be registered so that Vue knows about them. There are two types of component registration: **global** and **local**. So far, we've only registered components globally, using `component` method of created app:
+これらのコンポーネントをテンプレートで使用するためには、 Vue がそれらを認識できるように登録する必要があります。 コンポーネントの登録には **グローバル** と **ローカル** の 2 種類があります。これまでは、アプリケーションの `component` メソッドを利用してグローバルに登録してきただけです:
 
 ```js
 const app = Vue.createApp({})
 
 app.component('my-component-name', {
-  // ... options ...
+  // ... オプション ...
 })
 ```
 
-Globally registered components can be used in the template of `app` instance created afterwards - and even inside all subcomponents of that root instance's component tree.
+グローバルに登録されたコンポーネントはその後作成された `app` インスタンスのテンプレートで使用することができます。さらに、ルートインスタンスのコンポーネントツリーの全てのサブコンポーネント内でも使用することが出来ます。
 
-That's all you need to know about registration for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Component Registration](component-registration.md).
+とりあえずコンポーネント登録についてはこれで以上ですが、このページを読み終えて十分に理解できたら、後から戻ってきて [コンポーネント登録](component-registration.md)の完全なガイドを読むことをお勧めします。
 
-## Passing Data to Child Components with Props
+## プロパティを用いた子コンポーネントへのデータの受け渡し
 
-Earlier, we mentioned creating a component for blog posts. The problem is, that component won't be useful unless you can pass data to it, such as the title and content of the specific post we want to display. That's where props come in.
+先ほど、 ブログ投稿用のコンポーネントの作成について触れました。問題は、 表示する特定の投稿のタイトルや内容のようなデータを作成したコンポーネントに渡せなければそのコンポーネントは役に立たないということです。プロパティはここで役立ちます。
 
-Props are custom attributes you can register on a component. When a value is passed to a prop attribute, it becomes a property on that component instance. To pass a title to our blog post component, we can include it in the list of props this component accepts, using a `props` option:
+プロパティはコンポーネントに登録できるカスタム属性です。値がプロパティ属性に渡されると、そのコンポーネントインスタンスのプロパティになります。先ほどのブログ投稿用のコンポーネントにタイトルを渡すためには、`props`オプションを用いてこのコンポーネントが受け取るプロパティのリストの中に含めることができます:
 
 ```js
 const app = Vue.createApp({})
 
 app.component('blog-post', {
   props: ['title'],
-  template: `<h4>{{ title }}</h4>`,
+  template: `<h4>{{ title }}</h4>`
 })
 
 app.mount('#blog-post-demo')
 ```
 
-A component can have as many props as you'd like and by default, any value can be passed to any prop. In the template above, you'll see that we can access this value on the component instance, just like with `data`.
+コンポーネントは必要に応じて多くのプロパティを持つことができ、デフォルトでは任意のプロパティに任意の値を渡すことができます。上記のテンプレートでは、`data` と同様に、コンポーネントインスタンスでこの値にアクセスできることが分かります。
 
-Once a prop is registered, you can pass data to it as a custom attribute, like this:
+プロパティが登録されたら、 次のようにカスタム属性としてデータをプロパティに渡すことができます:
 
 ```html
 <div id="blog-post-demo" class="demo">
@@ -127,7 +127,7 @@ Once a prop is registered, you can pass data to it as a custom attribute, like t
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-In a typical app, however, you'll likely have an array of posts in `data`:
+しかしながら、一般的なアプリケーションではおそらく `data` に投稿の配列を持っています:
 
 ```js
 const App = {
@@ -136,23 +136,23 @@ const App = {
       posts: [
         { id: 1, title: 'My journey with Vue' },
         { id: 2, title: 'Blogging with Vue' },
-        { id: 3, title: 'Why Vue is so fun' },
-      ],
+        { id: 3, title: 'Why Vue is so fun' }
+      ]
     }
-  },
+  }
 }
 
 const app = Vue.createApp(App)
 
 app.component('blog-post', {
   props: ['title'],
-  template: `<h4>{{ title }}</h4>`,
+  template: `<h4>{{ title }}</h4>`
 })
 
 app.mount('#blog-posts-demo')
 ```
 
-Then want to render a component for each one:
+そしてコンポーネントをそれぞれ描画します:
 
 ```html
 <div id="blog-posts-demo">
@@ -164,9 +164,9 @@ Then want to render a component for each one:
 </div>
 ```
 
-Above, you'll see that we can use `v-bind` to dynamically pass props. This is especially useful when you don't know the exact content you're going to render ahead of time.
+上記では、 `v-bind` を用いて動的にプロパティを渡すことができると分かります。これは描画する内容が事前に分からない場合に特に便利です。
 
-That's all you need to know about props for now, but once you've finished reading this page and feel comfortable with its content, we recommend coming back later to read the full guide on [Props](component-props.html).
+とりあえずプロパティについてはこれで以上ですが、 このページを読み終えて十分に理解できたら、後から戻ってきて [プロパティ](component-props.html) の完全なガイドを読むことをお勧めします。
 
 ## Listening to Child Components Events
 
@@ -181,9 +181,9 @@ const App = {
       posts: [
         /* ... */
       ],
-      postFontSize: 1,
+      postFontSize: 1
     }
-  },
+  }
 }
 ```
 
@@ -209,7 +209,7 @@ app.component('blog-post', {
         Enlarge text
       </button>
     </div>
-  `,
+  `
 })
 ```
 
@@ -245,7 +245,7 @@ We can list emitted events in the component's `emits` option.
 ```js
 app.component('blog-post', {
   props: ['title'],
-  emits: ['enlarge-text'],
+  emits: ['enlarge-text']
 })
 ```
 
@@ -323,7 +323,7 @@ app.component('custom-input', {
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
     >
-  `,
+  `
 })
 ```
 
@@ -352,9 +352,9 @@ app.component('custom-input', {
       },
       set(value) {
         this.$emit('update:modelValue', value)
-      },
-    },
-  },
+      }
+    }
+  }
 })
 ```
 
@@ -386,7 +386,7 @@ app.component('alert-box', {
       <strong>Error!</strong>
       <slot></slot>
     </div>
-  `,
+  `
 })
 ```
 
@@ -465,7 +465,7 @@ app.component('blog-post', {
   props: ['postTitle'],
   template: `
     <h3>{{ postTitle }}</h3>
-  `,
+  `
 })
 ```
 
