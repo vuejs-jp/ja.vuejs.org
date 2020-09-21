@@ -2,10 +2,7 @@
 
 > このページは [コンポーネントの基本](component-basics.md) が読まれていることが前提となっています。 コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-A component non-prop attribute is an attribute or event listener that is passed to a component, but does not have a corresponding property defined in [props](component-props) or [emits](component-custom-events.html#defining-custom-events). Common examples of this include `class`, `style`, and `id` attributes.
-
 コンポーネントにおけるプロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。なお、共通の認識として `class` や `style`, `id` 属性はここに含まれません。
-
 
 ## 属性の継承
 
