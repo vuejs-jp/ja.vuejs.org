@@ -10,7 +10,7 @@
 this.$emit('myEvent')
 ```
 
-ケバブケース(kebab-case)でリスナ名を作っても何も起こりません：
+ケバブケース(kebab-case)でリスナ名を作っても何も起こりません:
 
 ```html
 <!-- Won't work -->
@@ -32,15 +32,15 @@ app.component('custom-form', {
 ```
 
 
-ネイティブイベント（ `click` など）が `emits` オプションで定義されている場合、ネイティブリスナーとして扱われるのではなく、コンポーネントのイベントによって上書きされます。
+ネイティブイベント（例、 `click` など）が `emits` オプションで定義されている場合、ネイティブリスナーとして扱われるのではなく、コンポーネントのイベントによって上書きされます。
 
-::: ヒント
+::: tip
 コンポーネントの動作を実証するために、全ての発行されたイベントを定義することをお勧めします。
 :::
 
 ### 発行されたイベントを検証する
 
-プロップタイプの検証と同様に、発行されたイベントは、配列構文ではなくオブジェクト構文で定義されている場合に検証できます。
+プロパティの型検証と同様に、発行されたイベントは、配列構文ではなくオブジェクト構文で定義されている場合に検証できます。
 
 検証を追加するために、イベントには、 `$emit` 呼び出しに渡された引数を受け取る関数が割り当てられ、イベントが有効かどうかを示す真偽値を返します。
 
@@ -70,12 +70,12 @@ app.component('custom-form', {
 
 ## `v-model` の引数
 
-デフォルトでは、コンポーネントの `v-model` はプロップとして `modelValue` を使用し、イベントとして `update：modelValue` を使用します。`v-model` 引数を渡してこれらの名前の変更が出来ます。
+デフォルトでは、コンポーネントの `v-model` はプロパティとして `modelValue` を使用し、イベントとして `update:modelValue` を使用します。`v-model` 引数を渡してこれらの名前の変更が出来ます。
 
 ```html
 <my-component v-model:foo="bar"></my-component>
 ```
-この場合、子コンポーネントは `foo` プロップを期待し、同期するために `update：foo` イベントを発行します。
+この場合、子コンポーネントは `foo` プロパティを期待し、同期するために `update:foo` イベントを発行します。
 
 ```js
 const app = Vue.createApp({})
@@ -99,9 +99,9 @@ app.component('my-component', {
 
 ## 複数の `v-model` のバインディング
 
-以前 [`v-model` 引数](#v-model-arguments) で学習した特定のプロップとイベントをターゲットにする機能を活用することで、単一のコンポーネントインスタンスに対して、複数の v-model バインディングを作成できるようになりました。
+以前 [`v-model` 引数](#v-model-arguments) で学習した特定のプロパティとイベントをターゲットにする機能を活用することで、単一のコンポーネントインスタンスに対して、複数の v-model バインディングを作成できるようになりました。
 
-それぞれの v-model は、コンポーネントに追加オプションを必要とせず、異なるプロップに同期します。
+それぞれの v-model は、コンポーネントに追加オプションを必要とせず、異なるプロパティに同期します。
 
 ```html
 <user-name
@@ -147,9 +147,9 @@ When we were learning about form input bindings, we saw that `v-model` has [buil
 
 `v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize`を作成してみましょう。
 
-コンポーネント `v-model` に追加された修飾子は、`modelModifiers` プロップを介してコンポーネントに提供されます。以下の例では、デフォルトで空のオブジェクトになる `modelModifiers` プロップを含むコンポーネントを作成しました。
+コンポーネント `v-model` に追加された修飾子は、`modelModifiers` プロパティを介してコンポーネントに提供されます。以下の例では、デフォルトで空のオブジェクトになる `modelModifiers` プロパティを含むコンポーネントを作成しました。
 
-コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロップには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
+コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
 
 ```html
 <my-component v-model.capitalize="bar"></my-component>
@@ -174,7 +174,7 @@ app.component('my-component', {
 })
 ```
 
-プロップを設定したので、 `modelModifiers` オブジェクトのキーを確認し、発行された値を変更するハンドラーを記述できます。以下のコードでは、 `<input />` 要素が `input` イベントを発生させるたびに文字列を大文字にします。
+プロパティを設定したので、 `modelModifiers` オブジェクトのキーを確認し、発行された値を変更するハンドラーを記述できます。以下のコードでは、 `<input />` 要素が `input` イベントを発生させるたびに文字列を大文字にします。
 
 ```html
 <div id="app">
@@ -217,7 +217,7 @@ app.component('my-component', {
 app.mount('#app')
 ```
 
-引数を持つ `v-model` バインディングの場合、生成されるプロップ名は `arg + "Modifiers"` になります。
+引数を持つ `v-model` バインディングの場合、生成されるプロパティ名は `arg + "Modifiers"` になります。
 
 ```html
 <my-component v-model:foo.capitalize="bar"></my-component>
