@@ -18,10 +18,10 @@ app.component('date-picker', {
 })
 ```
 
-`data-status` プロパティを用いて　date-picker コンポーネントの状態を定義するような場合には、このプロパティはルート要素 (すなわち `div.date-picker`) に適用されます。
+`data-status` 属性を用いて　date-picker コンポーネントの状態を定義するような場合には、この属性はルート要素 (すなわち `div.date-picker`) に適用されます。
 
 ```html
-<!-- 非プロパティ型の属性 とともに用いられる Date-picker コンポーネント -->
+<!-- プロパティでない属性 とともに用いられる Date-picker コンポーネント -->
 <date-picker data-status="activated"></date-picker>
 
 <!-- 実際には以下のような形で描画されます -->
@@ -76,14 +76,15 @@ const app = Vue.createApp({
 })
 ```
 
-## Disabling Attribute Inheritance
+## 属性の継承の無効化
 
-属性の継承を望まない場合、コンポーネントのオプション内で、`inheritAttrs: false`を指定することができます。
+コンポーネントのオプション内で、`inheritAttrs: false`を指定することで、属性の継承を **無効化** することも可能です。
 
-一般的にこの継承を無効化したいケースというのは、ルート要素ではない別の要素に属性を適用したいようなケースでしょう。
+一般的に属性の無効化は、ルート要素ではない別の要素に属性を適用したいようなケースで利用される場面が考えられるでしょう。
 
-`inheritAttrs` を `false` にセットすることで、コンポーネントの `$attrs` プロパティが利用可能になり、`props` や `emits` などのプロパティ(`class` や `style` 、 `v-on` といったもの)を除く全ての属性にアクセスできるようになります。
-[previous section]('#属性の継承) で利用した date-picker のコンポーネント例で、全てのプロパティでない属性を ルートの `div` 要素ではなく `input` 要素に適用する場合には、`v-bind` を用いると便利でしょう。
+`inheritAttrs` を `false` にセットした場合、コンポーネントの `$attrs` プロパティを通じて、コンポーネントのプロパティ (`props` や `emits` それに `class` や `style` 、 `v-on` といったもの)を除く全ての属性にアクセスできるようになります。
+
+[previous section]('#属性の継承) で利用した date-picker のコンポーネント例を用いて、プロパティでない属性の全てを ルートの `div` 要素ではなく `input` 要素に適用する場合、`v-bind` を用いて簡略的に記述することも可能です。
 
 ```js{5}
 app.component('date-picker', {
@@ -96,7 +97,7 @@ app.component('date-picker', {
 })
 ```
 
-このように記述した場合、`data-status` 属性は、 `input` 要素に適用されます。
+このように記述することで、`data-status` 属性は、 `input` 要素に適用されるようになります。
 
 ```html
 <!-- Date-picker component with a non-prop attribute -->
@@ -108,9 +109,9 @@ app.component('date-picker', {
 </div>
 ```
 
-## Attribute Inheritance on Multiple Root Nodes
+## ルート要素が複数の場合の属性の継承
 
-ルート要素が一つでなく、複数のルート要素からなるコンポーネントには、自動的に属性の継承が行われることはありません。`$attrs` を用いた明示的なアサインを行わない場合、ランタイム上で warning が発行されます。
+コンポーネントのルート要素が一つでなく複数のルート要素からなる場合には、暗黙の属性の継承は行われません。`$attrs` を用いた明示的なアサインを行わない場合、ランタイム上で warning が発行されます。
 
 ```html
 <custom-layout id="custom-layout" @click="changeValue"></custom-layout>
