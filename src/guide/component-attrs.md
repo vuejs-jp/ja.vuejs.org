@@ -2,12 +2,11 @@
 
 > このページは [コンポーネントの基本](component-basics.md) が読まれていることが前提となっています。 コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-コンポーネントにおけるプロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。なお、共通の認識として `class` や `style`, `id` 属性はここに含まれません。
+プロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。なお、共通の認識として `class` や `style`, `id` 属性はここに含まれません。
 
 ## 属性の継承
 
 ただ一つのルート要素をもつコンポーネントの場合、プロパティでない属性はルート要素にそのまま追加されます。例えば date-picker コンポーネントの場合は次のような形になります。
-
 
 ```js
 app.component('date-picker', {
