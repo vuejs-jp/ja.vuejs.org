@@ -45,12 +45,12 @@ $ npm install vue@next
 CLI は Node.js と関連するビルドツールに関する予備知識を前提としています。もし、Vue またはフロントエンドビルドツールを初めて使用する場合は、CLI を使用する前に、ビルドツールなしで<a href="./">ガイド</a>を参照することを強くお勧めします。
 :::
 
-`npm` 上で `@vue/cli@next` として、Vue 3 向けの Vue CLI v4.5 が利用可能です。以前のバージョンからアップグレードする場合は、以下のように `@vue/cli` をグローバルに再インストールしてください:
+`npm` 上で `@vue/cli` として、Vue 3 向けの Vue CLI v4.5 が利用可能です。以前のバージョンからアップグレードする場合は、以下のように `@vue/cli` をグローバルに再インストールしてください:
 
 ```bash
-yarn global add @vue/cli@next
+yarn global add @vue/cli
 # または
-npm install -g @vue/cli@next
+npm install -g @vue/cli
 ```
 
 その後、Vue プロジェクト内で以下を実行します
