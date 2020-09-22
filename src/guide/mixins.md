@@ -1,13 +1,13 @@
-# Mixins
+# ミックスイン
 
-## Basics
+## 基本
 
-Mixins are a flexible way to distribute reusable functionalities for Vue components. A mixin object can contain any component options. When a component uses a mixin, all options in the mixin will be "mixed" into the component's own options.
+ミックスイン (mixin) は、Vue コンポーネントに再利用可能な機能を持たせるための柔軟な方法です。ミックスインオブジェクトは任意のコンポーネントオプションを含むことができます。コンポーネントがミックスインを使用するとき、ミックスインの全てのオプションはコンポーネント自身のオプションに"混ぜられ"ます。
 
-Example:
+例:
 
 ```js
-// define a mixin object
+// ミックスインオブジェクトを定義
 const myMixin = {
   created() {
     this.hello()
@@ -19,7 +19,7 @@ const myMixin = {
   }
 }
 
-// define an app that uses this mixin
+// このミックスインを使用する app を定義
 const app = Vue.createApp({
   mixins: [myMixin]
 })
@@ -27,11 +27,11 @@ const app = Vue.createApp({
 app.mount('#mixins-basic') // => "hello from mixin!"
 ```
 
-## Option Merging
+## オプションのマージ
 
-When a mixin and the component itself contain overlapping options, they will be "merged" using appropriate strategies.
+ミックスインとコンポーネントそれ自身が重複したオプションを含むとき、それらは適切なストラテジを使用して"マージ"されます。
 
-For example, data objects undergo a recursive merge, with the component's data taking priority in cases of conflicts.
+例えば、データオブジェクトは再帰的にマージされ、コンフリクトした場合にはコンポーネントのデータが優先されます。
 
 ```js
 const myMixin = {
@@ -57,7 +57,7 @@ const app = Vue.createApp({
 })
 ```
 
-Hook functions with the same name are merged into an array so that all of them will be called. Mixin hooks will be called **before** the component's own hooks.
+同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。ミックスインのフックはコンポーネント自身のフック**前**に呼び出されます。
 
 ```js
 const myMixin = {
@@ -77,7 +77,7 @@ const app = Vue.createApp({
 // => "component hook called"
 ```
 
-Options that expect object values, for example `methods`, `components` and `directives`, will be merged into the same object. The component's options will take priority when there are conflicting keys in these objects:
+オブジェクトの値を期待するオプション、例えば、`methods`、`components`、そして`directives` では同じオブジェクトにマージされます。これらのオブジェクトでキーのコンフリクトがあるときは、コンポーネントオプションが優先されます:
 
 ```js
 const myMixin = {
@@ -110,16 +110,16 @@ vm.bar() // => "bar"
 vm.conflicting() // => "from self"
 ```
 
-## Global Mixin
+## グローバルミックスイン
 
-You can also apply a mixin globally for a Vue application:
+Vue アプリケーションのためにグローバルにミックスインを適用することもできます:
 
 ```js
 const app = Vue.createApp({
   myOption: 'hello!'
 })
 
-// inject a handler for `myOption` custom option
+// `myOption` カスタムオプションにハンドラを注入する
 app.mixin({
   created() {
     const myOption = this.$options.myOption
@@ -132,14 +132,14 @@ app.mixin({
 app.mount('#mixins-global') // => "hello!"
 ```
 
-Use with caution! Once you apply a mixin globally, it will affect **every** component instance created afterwards in the given app (for example, child components):
+使用に注意してください！一度、グローバルにミックスインを適用すると、それはその後にアプリ内で作成される**全ての** Vue コンポーネントインスタンスに影響します。 (例えば、子コンポーネント):
 
 ```js
 const app = Vue.createApp({
   myOption: 'hello!'
 })
 
-// inject a handler for `myOption` custom option
+// `myOption` カスタムオプションにハンドラを注入する
 app.mixin({
   created() {
     const myOption = this.$options.myOption
@@ -149,7 +149,7 @@ app.mixin({
   }
 })
 
-// add myOption also to child component
+// myOption を子コンポーネントにも追加
 app.component('test-component', {
   myOption: 'hello from component!'
 })
@@ -160,21 +160,21 @@ app.mount('#mixins-global')
 // => "hello from component!"
 ```
 
-In most cases, you should only use it for custom option handling like demonstrated in the example above. It's also a good idea to ship them as [Plugins](plugins.html) to avoid duplicate application.
+ほとんどの場合、上記の例のようなカスタムオプションを処理するものだけに使用すべきです。重複適用を避けるために、それらを [プラグイン](plugins.html) として作成することも良い方法です。
 
-## Custom Option Merge Strategies
+## カスタムオプションのマージストラテジ
 
-When custom options are merged, they use the default strategy which overwrites the existing value. If you want a custom option to be merged using custom logic, you need to attach a function to `app.config.optionMergeStrategies`:
+カスタムオプションがマージされるとき、それらは既存の値を上書きするデフォルトのストラテジを使用します。カスタムロジックを使用してカスタムオプションをマージしたい場合は、`app.config.optionMergeStrategies` をアタッチする必要があります。
 
 ```js
 const app = Vue.createApp({})
 
 app.config.optionMergeStrategies.customOption = (toVal, fromVal) => {
-  // return mergedVal
+  // マージされた値を返す
 }
 ```
 
-The merge strategy receives the value of that option defined on the parent and child instances as the first and second arguments, respectively. Let's try to check what do we have in these parameters when we use a mixin:
+マージストラテジは、親・子インスタンスで定義されたオプションの値をそれぞれ 1 番目、2 番目の引数として受け取ります。ミックスインを使用するときに、これらのパラメータに何が入っているかを確認してみましょう:
 
 ```js
 const app = Vue.createApp({
@@ -196,7 +196,7 @@ app.mixin({
 })
 ```
 
-As you can see, in the console we have `toVal` and `fromVal` printed first from the mixin and then from the `app`. We always return `fromVal` if it exists, that's why `this.$options.custom` is set to `hello!` in the end. Let's try to change a strategy to _always return a value from the child instance_:
+ご覧の通り、コンソールには最初にミックスインから、次に `app` から出力された `toVal` と `fromVal` が表示されます。`fromVal` が存在する場合には常にそれが返されるため、最終的には `this.$options.custom` に `hello!` がセットされます。ストラテジを*常に子インスタンスの値を返す*ように変更してみましょう:
 
 ```js
 const app = Vue.createApp({
@@ -213,10 +213,10 @@ app.mixin({
 })
 ```
 
-In Vue 2, mixins were the primary tool to abstract parts of component logic into reusable chunks. However, they have a few issues:
+Vue 2 では、ミックスインはコンポーネントロジックの一部を再利用可能なチャンクに抽象化する主要なツールでした。ただし、いくつかの問題があります:
 
-- Mixins are conflict-prone: Since properties from each feature are merged into the same component, you still have to know about every other feature to avoid property name conflicts and for debugging.
+- ミックスインはコンフリクトしやすい: それぞれの機能のプロパティが同じコンポーネントにマージされるため、プロパティ名のコンフリクト回避とデバッグのために、全ての他の機能について知っておく必要があります。
 
-- Reusability is limited: we cannot pass any parameters to the mixin to change its logic which reduces their flexibility in terms of abstracting logic
+- 再利用性は制限されている: ロジックを変更するためのパラメータをミックスインに渡せないことは、抽象化ロジックに関する柔軟性を低下させます。
 
-To address these issues, we added a new way to organize code by logical concerns: the [Composition API](composition-api-introduction.html).
+これらの問題に対処するため、論理的な関心事によってコードを整理する新しい方法を追加しました: [Composition API](composition-api-introduction.html)
