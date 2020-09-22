@@ -1,39 +1,40 @@
-﻿# Plugins
+﻿# プラグイン
 
-Plugins are self-contained code that usually add global-level functionality to Vue. It is either an `object` that exposes an `install()` method, or a `function`.
+大抵の場合、プラグインはVueにグローバルレベルでの機能を追加するコードで、`install()` メソッドを公開する `object` または `function` です。
 
-There is no strictly defined scope for a plugin, but common scenarios where plugins are useful include:
+プラグインを厳密に定義するスコープはありませんが、プラグインが役立つ一般的なシナリオは以下の通りです。
 
-1. Add some global methods or properties, e.g. [vue-custom-element](https://github.com/karol-f/vue-custom-element).
+1. グローバルメソッドまたはグローパルプロパティの追加　例）[vue-custom-element](https://github.com/karol-f/vue-custom-element).
 
-2. Add one or more global assets: directives/filters/transitions etc. (e.g. [vue-touch](https://github.com/vuejs/vue-touch)).
+2. directives / filters / transitions のような1つ以上のグローバルアセットの追加　例) [vue-touch](https://github.com/vuejs/vue-touch)).
 
-3. Add some component options by global mixin (e.g. [vue-router](https://github.com/vuejs/vue-router)).
+3. グローバル mixin によるコンポーネントオプションの追加　例)  [vue-router](https://github.com/vuejs/vue-router)).
 
-4. Add some global instance methods by attaching them to `config.globalProperties`.
+4. `config.globalProperties` にグローバルインスタンスメソッドを追加する
 
-5. A library that provides an API of its own, while at the same time injecting some combination of the above (e.g. [vue-router](https://github.com/vuejs/vue-router)).
+5. 自身のAPIを提供すると同時に、上記のいくつかの組み合わせを導入するライブラリ 例） [vue-router](https://github.com/vuejs/vue-router)).
 
-## Writing a Plugin
+## プラグインを書く
 
-In order to better understand how to create your own Vue.js plugins, we will create a very simplified version of a plugin that displays `i18n` ready strings.
+独自のVue.jsプラグインの作り方をより理解しやすくするために、`i18n` に対応した文字列を表示するシンプルなバージョンのプラグインを用意しました。
 
-Whenever this plugin is added to an application, the `install` method will be called if it is an object. If it is a `function`, the function itself will be called. In both cases, it will receive two parameters - the `app` object resulting from Vue's `createApp`, and the options passed in by the user.
+このプラグインがアプリケーションに導入されると、プラグインがオブジェクトの場合、`install` メソッドが呼ばれます。もし `function` のときは `function` そのものが呼ばれます。
+いずれの場合においても、Vue の `createapp` から生じる `app` オブジェクトとユーザーから受け取るオプションの2つのパラメータを受け取るでしょう。
 
-Let's begin by setting up the plugin object. It is recommended to create it in a separate file and export it, as shown below to keep the logic contained and separate.
+それではプラグインオブジェクトの設定を始めましょう。プラグインオブジェクトは別のファイルに作成し、エクスポートすることを推奨します。下記のように、ロジックを含めたまま分離します。
 
 ```js
 // plugins/i18n.js
 export default {
   install: (app, options) => {
-    // Plugin code goes here
+    // プラグインのコードをここに書く
   }
 }
 ```
 
-We want to make a function to translate keys available to the whole application, so we will expose it using `app.config.globalProperties`.
+キーを変換する機能をアプリケーション全体で利用可能にするため、`app.config.globalProperties` を使って公開します。
 
-This function will receive a `key` string, which we will use to look up the translated string in the user-provided options.
+この機能は `key` 文字列を受け取り、ユーザーから与えられたオプションに従って翻訳された文字列を引き当てます。
 
 ```js
 // plugins/i18n.js
@@ -48,7 +49,8 @@ export default {
 }
 ```
 
-We will assume that our users will pass in an object containing the translated keys in the `options` parameter when they use the plugin. Our `$translate` function will take a string such as `greetings.hello`, look inside the user provided configuration and return the translated value - in this case, `Bonjour!`
+ユーザーがプラグインを利用するとき、`options` パラメーターに翻訳されたキーを含むオブジェクトを渡すと想定します。`$translate` 関数 は `grettings.hello` のような文字列を受け取り、ユーザーから与えられた設定を探し、翻訳された値を返します。- この場合は、`Bonjour!`
+
 
 Ex:
 
@@ -58,7 +60,7 @@ greetings: {
 }
 ```
 
-Plugins also allow us to use `inject` to provide a function or attribute to the plugin's users. For example, we can allow the application to have access to the `options` parameter to be able to use the translations object.
+また、プラグインのユーザーに関数や属性を提供するために、`inject` を使用することもできます。例えば、アプリケーションが翻訳オブジェクトを使用できるようにするための `options` パラメータへのアクセスを許可することができます。
 
 ```js
 // plugins/i18n.js
@@ -75,9 +77,9 @@ export default {
 }
 ```
 
-Plugin users will now be able to `inject['i18n']` into their components and access the object.
+プラグインの利用者は `[‘i18n’]` をコンポーネントに注入し、オブジェクトにアクセスすることができます。
 
-Additionally, since we have access to the `app` object, all other capabilities like using `mixin` and `directive` are available to the plugin. To learn more about `createApp` and the application instance, check out the [Application API documentation](/api/application-api.html).
+さらに、`app` オブジェクトにアクセスできるため、`mixin` や `directive` など、他のすべての機能をプラグインで利用できます。`createApp` とアプリケーションインスタンスについて更に詳しく学ぶには、[Application API documentation](/api/application-api.html) をチェックしてください。
 
 ```js
 // plugins/i18n.js
@@ -92,14 +94,14 @@ export default {
 
     app.directive('my-directive', {
       mounted (el, binding, vnode, oldVnode) {
-        // some logic ...
+        // 何らかのロジック ...
       }
       ...
     })
 
     app.mixin({
       created() {
-        // some logic ...
+        // 何らかのロジック ...
       }
       ...
     })
@@ -107,20 +109,20 @@ export default {
 }
 ```
 
-## Using a Plugin
+## プラグインを使う
 
-After a Vue app has been initialized with `createApp()`, you can add a plugin to your application by calling the `use()` method.
+Vue のアプリが `createApp()` で初期化されたあと、`use()` メソッドを使うことであなたのアプリケーションにプラグインを追加することができます。
 
-We will use the `i18nPlugin` we created in the [Writing a Plugin](#writing-a-plugin) section for demo purposes.
+ここでは[プラグインを書く](#writing-a-plugin)のセクションでデモ用に作成した `i18nPlugin` を使います。
 
-The `use()` method takes two parameters. The first one is the plugin to be installed, in this case `i18nPlugin`.
+`use()` メソッドは2つのパラメータを引数に取ります。まず、第1引数はインストールするプラグインですが、この場合は `i18nPlugin` です。
 
-It also automatically prevents you from using the same plugin more than once, so calling it multiple times on the same plugin will install the plugin only once.
+また、同じプラグインを複数回使用することを自動的に防止してくれるため、同じプラグインのインストールを複数回実行した場合でも一度だけインストールされます。
 
-The second parameter is optional, and depends on each particular plugin. In the case of the demo `i18nPlugin`, it is an object with the translated strings.
+第2引数はオプションで、それぞれのプラグインに依存します。デモの `i18nPlugin` の場合は、翻訳された文字列を持つオブジェクトです。
 
 :::info
-If you are using third party plugins such as `Vuex` or `Vue Router`, always check the documentation to know what that particular plugin expects to receive as a second parameter.
+`Vuex` や `Vue Router` などのサードパーティ製プラグインを使用している場合は、そのプラグインが2番目のパラメータとして何を受け取ることを期待しているのか、必ずドキュメントを確認してください。
 :::
 
 ```js
@@ -139,4 +141,5 @@ app.use(i18nPlugin, i18nStrings)
 app.mount('#app')
 ```
 
-Checkout [awesome-vue](https://github.com/vuejs/awesome-vue#components--libraries) for a huge collection of community-contributed plugins and libraries.
+コミュニティが貢献したプラグインやライブラリの膨大なコレクションについては [awesome-vue](https://github.com/vuejs/awesome-vue#components--libraries) をご覧ください。
+
