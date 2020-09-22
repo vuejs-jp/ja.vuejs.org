@@ -1,29 +1,29 @@
-# Reactivity Fundamentals
+# リアクティブの基礎
 
-## Declaring Reactive State
+## リアクティブな状態の宣言
 
-To create a reactive state from a JavaScript object, we can use a `reactive` method:
+JavaScript のオブジェクトからリアクティブな状態を作る目的で、`reactive` メソッドを用いることができます:
 
 ```js
 import { reactive } from 'vue'
 
-// reactive state
+// リアクティブな状態
 const state = reactive({
   count: 0
 })
 ```
 
-`reactive` is the equivalent of the `Vue.observable()` API in Vue 2.x, renamed to avoid confusion with RxJS observables. Here, the returned state is a reactive object. The reactive conversion is "deep" - it affects all nested properties of the passed object.
+`reactive` は Vue 2.x における `Vue.observable()` API に相当し、RxJS における observables との混同を避けるために改名されました。ここで、返される状態はリアクティブオブジェクトです。リアクティブの変換は "deep" であり、渡されたオブジェクトのすべての入れ子になっているプロパティに影響を与えます。
 
-The essential use case for reactive state in Vue is that we can use it during render. Thanks to dependency tracking, the view automatically updates when reactive state changes.
+Vue におけるリアクティブな状態の重要なユースケースは描画の際に用いることができることです。依存関係の追跡のおかげで、リアクティブな状態が変化するとビューが自動的に更新されます。
 
-This is the very essence of Vue's reactivity system. When you return an object from `data()` in a component, it is internally made reactive by `reactive()`. The template is compiled into a [render function](render-function.html) that makes use of these reactive properties.
+これがまさに Vue のリアクティブシステムの本質です。コンポーネント内の `data()` でオブジェクトを返す際に、内部的には `reactive()` によってリアクティブを実現しています。テンプレートはこれらのリアクティブなプロパティを利用する [render 関数](render-function.html)にコンパイルされます。
 
-You can learn more about `reactive` in the [Basic Reactivity API's](../api/basic-reactivity.html) section
+`reactive` についての詳細は [Basic Reactivity API](../api/basic-reactivity.html) セクションを参照してください
 
-## Creating Standalone Reactive Values as `refs`
+## 独立したリアクティブな値を `refs` として作成する
 
-Imagine the case where we have a standalone primitive value (for example, a string) and we want to make it reactive. Of course, we could make an object with a single property equal to our string, and pass it to `reactive`. Vue has a method that will do the same for us - it's a `ref`:
+独立したプリミティブ値(例えば文字列)があって、それをリアクティブにしたい場合を想像してみてください。もちろん、同じ値の文字列を単一のプロパティとして持つオブジェクトを作成して `reactive` に渡すこともできます。Vue にはこれと同じことをしてくれる `ref` メソッドがあります:
 
 ```js
 import { ref } from 'vue'
@@ -31,7 +31,7 @@ import { ref } from 'vue'
 const count = ref(0)
 ```
 
-`ref` will return a reactive and mutable object that serves as a reactive **ref**erence to the internal value it is holding - that's where the name comes from. This object contains the only one property named `value`:
+`ref` は、オブジェクト内部の値をリアクティブな参照(**ref**erence - メソッド名の由来)として機能させるミュータブルオブジェクトを返します。このオブジェクトには `value` という名前のプロパティが1つだけ含まれています:
 
 ```js
 import { ref } from 'vue'
@@ -43,9 +43,9 @@ count.value++
 console.log(count.value) // 1
 ```
 
-### Ref Unwrapping
+### ref のアンラップ
 
-When a ref is returned as a property on the render context (the object returned from [setup()](composition-api-setup.html)) and accessed in the template, it automatically unwraps to the inner value. There is no need to append `.value` in the template:
+ref がレンダーコンテキスト([setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値にアンラップされます。テンプレート内においては `.value` を付ける必要はありません:
 
 ```vue-html
 <template>
@@ -68,9 +68,9 @@ When a ref is returned as a property on the render context (the object returned 
 </script>
 ```
 
-### Access in Reactive Objects
+### リアクティブオブジェクト内でのアクセス
 
-When a `ref` is accessed or mutated as a property of a reactive object, it automatically unwraps to the inner value so it behaves like a normal property:
+`ref` がリアクティブオブジェクトのプロパティとしてアクセスまたは更新される際に、自動的に内部の値にアンラップされて通常のプロパティのように振る舞います:
 
 ```js
 const count = ref(0)
@@ -84,7 +84,7 @@ state.count = 1
 console.log(count.value) // 1
 ```
 
-If a new ref is assigned to a property linked to an existing ref, it will replace the old ref:
+既に ref とリンクしているプロパティに新しい ref が割り当てられた場合、古い ref に取って代わることになります:
 
 ```js
 const otherCount = ref(2)
@@ -94,21 +94,21 @@ console.log(state.count) // 2
 console.log(count.value) // 1
 ```
 
-Ref unwrapping only happens when nested inside a reactive `Object`. There is no unwrapping performed when the ref is accessed from an `Array` or a native collection type like [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map):
+ref のアンラップはリアクティブな `Object` の中の入れ子となっている場合にのみ発生します。ref が `Array` や [`Map`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Map) のようなネイティブのコレクション型からアクセスされた場合、アンラップは行われません:
 
 ```js
 const books = reactive([ref('Vue 3 Guide')])
-// need .value here
+// ここでは .value が必要です
 console.log(books[0].value)
 
 const map = reactive(new Map([['count', ref(0)]]))
-// need .value here
+// ここでは .value が必要です
 console.log(map.get('count').value)
 ```
 
-## Destructuring Reactive State
+## リアクティブな状態の分割代入
 
-When we want to use a few properties of the large reactive object, it could be tempting to use [ES6 destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to get properties we want:
+大きなリアクティブオブジェクトのプロパティをいくつかを使いたいときに、[ES6 の分割代入](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)を使ってプロパティを取得したくなることがあります:
 
 ```js
 import { reactive } from 'vue'
@@ -124,7 +124,7 @@ const book = reactive({
 let { author, title } = book
 ```
 
-Unfortunately, with such a destructuring the reactivity for both properties would be lost. For such a case, we need to convert our reactive object to a set of refs. These refs will retain the reactive connection to the source object:
+残念ながら、このような分割代入をすることで両方のプロパティのリアクティブが失われてしまいます。このような場合においてはリアクティブオブジェクトを ref のセットに変換する必要があります。これらの ref は元となるオブジェクトへのリアクティブな接続を保持します:
 
 ```js
 import { reactive, toRefs } from 'vue'
@@ -139,15 +139,15 @@ const book = reactive({
 
 let { author, title } = toRefs(book)
 
-title.value = 'Vue 3 Detailed Guide' // we need to use .value as title is a ref now
+title.value = 'Vue 3 Detailed Guide' // ここで title は ref であるため .value を用いる必要があります
 console.log(book.title) // 'Vue 3 Detailed Guide'
 ```
 
-You can learn more about `refs` in the [Refs API](../api/refs-api.html#ref) section
+`refs` についての詳細は [Refs API](../api/refs-api.html#ref) セクションを参照してください
 
-## Prevent Mutating Reactive Objects with `readonly`
+## `readonly` でリアクティブオブジェクトの変更を防ぐ
 
-Sometimes we want to track changes of the reactive object (`ref` or `reactive`) but we also want prevent changing it from a certain place of the application. For example, when we have a [provided](component-provide-inject.html) reactive object, we want to prevent mutating it where it's injected. To do so, we can create a readonly proxy to the original object:
+リアクティブオブジェクト(`ref` や `reactive`)の変更を追跡しながらも、アプリケーションのある場所からの変更は防ぎたい場合があります。例えば、[provide](component-provide-inject.html) されたリアクティブオブジェクトがある場合、それが注入された場所からの変更は防ぎたいことがあります。そうするために、元のオブジェクトに対する読み取り専用のプロキシを作成します:
 
 ```js
 import { reactive, readonly } from 'vue'
@@ -156,9 +156,9 @@ const original = reactive({ count: 0 })
 
 const copy = readonly(original)
 
-// mutating original will trigger watchers relying on the copy
+// original を変更すると copy 側の依存ウォッチャが発動します
 original.count++
 
-// mutating the copy will fail and result in a warning
+// copy を変更しようとすると失敗し、警告が表示されます
 copy.count++ // warning: "Set operation on key 'count' failed: target is readonly."
 ```
