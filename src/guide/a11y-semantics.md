@@ -161,7 +161,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 Chrome DevTools で検出することで Description を確認することができます:
 
-![Chrome Developer Tools showing input accessible nDme from aria-labelledby and description with aria-describedby](/images/AccessibleARIAdescribedby.png)
+![Chrome Developer Tools showing input accessible name from aria-labelledby and description with aria-describedby](/images/AccessibleARIAdescribedby.png)
 
 ### プレースホルダ
 
@@ -197,7 +197,7 @@ Chrome DevTools で検出することで Description を確認することがで
 </fieldset>
 ```
 
-あるいは、[`aria-describedby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) を使用して 入力欄に指示を添付することもできます:
+あるいは、[`aria-describedby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) を使用して入力欄に指示を添付することもできます:
 
 ```html
 <fieldset>
@@ -256,7 +256,7 @@ CSSを使用して要素を視覚的に非表示にすることができます�
 
 #### aria-hidden="true"
 
- `aria-hidden="true"`を追加すると要素は支援技術から隠されますが、他のユーザから視覚的に利用可能になります。フォーカス可能な要素や、純粋に装飾的なコンテンツ、複製されたコンテンツ、または画面外のコンテンツには使用しないでください。
+ `aria-hidden="true"` を追加すると要素は支援技術から隠されますが、他のユーザから視覚的に利用可能になります。フォーカス可能な要素や、純粋に装飾的なコンテンツ、複製されたコンテンツ、または画面外のコンテンツには使用しないでください。
 
 ```html
 <p>This is not hidden from screen readers.</p>
