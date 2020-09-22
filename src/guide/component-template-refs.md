@@ -1,14 +1,14 @@
-# Template refs
+# Template refs について
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページは、すでに[コンポーネントの基本](component-basics.md)を読んでいることを前提としています。コンポーネントを初めて使用する場合は、最初にそちらをお読みください。
 
-Despite the existence of props and events, sometimes you might still need to directly access a child component in JavaScript. To achieve this you can assign a reference ID to the child component or HTML element using the `ref` attribute. For example:
+プロップやイベントが存在するにもかかわらず、 JavaScript で子コンポーネントに直接アクセスしなければならない場合があります。それを達成するために、`ref` 属性を使うことで子コンポーネントや HTML 要素に参照IDを割り当てられます。例えば、以下のようになります:
 
 ```html
 <input ref="input" />
 ```
 
-This may be useful when you want to, for example, programmatically focus this input on component mount:
+これは、例えば、コンポーネントのマウント時にプログラムで input をフォーカスさせたい時に便利です:
 
 ```js
 const app = Vue.createApp({})
@@ -28,7 +28,7 @@ app.component('base-input', {
 })
 ```
 
-Also, you can add another `ref` to the component itself and use it to trigger `focusInput` event from the parent component:
+また、別の `ref` をコンポーネント自体に追加し、それを使用して親コンポーネントからの `focusInput` イベントをトリガーできます:
 
 ```html
 <base-input ref="usernameInput"></base-input>
@@ -39,7 +39,7 @@ this.$refs.usernameInput.focusInput()
 ```
 
 ::: warning
-`$refs` are only populated after the component has been rendered. It is only meant as an escape hatch for direct child manipulation - you should avoid accessing `$refs` from within templates or computed properties.
+`$refs` は、コンポーネントがレンダリングされた後にのみ生成されます。これは、子要素を直接操作するための脱出ハッチとしてのみ意図されています。テンプレートや `computed` プロパティから `$refs` にアクセスするべきではありません。
 :::
 
-**See also**: [Using template refs in Composition API](/guide/composition-api-template-refs.html#template-refs)
+**こちらも参照してください**: [コンポジションAPIでTemplate refsを使用する](/guide/composition-api-template-refs.html#template-refs)
