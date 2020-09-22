@@ -1,8 +1,6 @@
 # Render 関数
 
-Vue では、大多数のケースにおいてテンプレートを使ってアプリケーションを構築することを推奨していますが、
-完全な JavaScript ログラミングの力が必要になるシチュエーションもあります。
-そこでは私たちは **render 関数** を使うことができます。
+Vue では、大多数のケースにおいてテンプレートを使ってアプリケーションを構築することを推奨していますが、完全な JavaScript プログラミングの力が必要になる状況もあります。そこでは私たちは **render 関数** を使うことができます。
 
 さあ、 `render()` 関数が実用的になる例に取りかかりましょう。例えば、アンカーつきの見出しを生成したいとします:
 
@@ -55,11 +53,9 @@ app.component('anchored-heading', {
 })
 ```
 
-このテンプレートは良いものには思えません。冗長なだけでなく、 `<slot></slot>` がすべての見出しのレベルにコピーされています。
-そして、アンカー要素を追加する時にはすべての `v-if/v-else-if` の分岐にまたコピーしなければなりません。
+このテンプレートは良いものには思えません。冗長なだけでなく、 `<slot></slot>` がすべての見出しのレベルにコピーされています。そして、アンカー要素を追加する時にはすべての `v-if/v-else-if` の分岐にまたコピーしなければなりません。
 
-ほとんどのコンポーネントでテンプレートがうまく働くとはいえ、明らかにこれはそうではないものの一つです。
-そこで、 `render()` 関数を使ってこれを書き直してみましょう。
+ほとんどのコンポーネントでテンプレートがうまく働くとはいえ、明らかにこれはそうではないものの一つです。そこで、 `render()` 関数を使ってこれを書き直してみましょう。
 
 ```js
 const app = Vue.createApp({})
@@ -83,17 +79,11 @@ app.component('anchored-heading', {
 })
 ```
 
-<!-- TODO: 「instance properties API」を日本語版のタイトルに置き換える -->
-
-`render()` 関数の実装はとても単純ですが、コンポーネントインスタンスのプロパティについてよく理解している必要があります。
-この場合では、 `anchored-heading` の内側の `Hello world!` のように `v-slot` ディレクティブなしで子供を渡した時には、
-その子供は `$slots.default()` のコンポーネントインスタンスに保持されるということを知っている必要があります。
-もしまだ知らないのであれば、 **render 関数に取り掛かる前に [instance properties API](../api/instance-properties.html) を通読することをお勧めします。**
+`render()` 関数の実装はとても単純ですが、コンポーネントインスタンスのプロパティについてよく理解している必要があります。この場合では、 `anchored-heading` の内側の `Hello world!` のように `v-slot` ディレクティブなしで子供を渡した時には、その子供は `$slots.default()` のコンポーネントインスタンスに保持されるということを知っている必要があります。もしまだ知らないのであれば、 **render 関数に取り掛かる前に [インスタンスプロパティ API](../api/instance-properties.html) を通読することをお勧めします。**
 
 ## DOM ツリー
 
-render 関数に取り掛かる前に、ブラウザがどのように動くのかについて少し知っておくことが重要です。
-この HTML を例にしましょう:
+render 関数に取り掛かる前に、ブラウザがどのように動くのかについて少し知っておくことが重要です。この HTML を例にしましょう:
 
 ```html
 <div>
@@ -103,21 +93,20 @@ render 関数に取り掛かる前に、ブラウザがどのように動くの�
 </div>
 ```
 
-ブラウザはこのコードを読むと、すべてを追跡する助けとなるように [「DOM ノード」のツリー](https://javascript.info/dom-nodes)を構築します。
+ブラウザはこのコードを読み込むと、血縁関係を追跡するために家系図を構築するのと同じように、全てを追跡する [「DOM ノード」のツリー](https://javascript.info/dom-nodes)を構築します。
 
-<!-- TODO: 訳が微妙: to help it keep track of everything -> すべてを追跡する助けとなるように
-When a browser reads this code, it builds a [tree of "DOM nodes"](https://javascript.info/dom-nodes) to help it keep track of everything.
+<!-- NOTE: 
+原文が分かりづらいため、v2の記述を元に翻訳
+When a browser reads this code, it builds a tree of “DOM nodes” to help it keep track of everything, just as you might build a family tree to keep track of your extended family.
 -->
 
 上の HTML の DOM ノードツリーはこんな感じになります。
 
-![DOM Tree Visualization](/images/dom-tree.png)
+![DOM ツリーの可視化](/images/dom-tree.png)
 
-すべての要素はノードです。テキストのすべてのピースはノードです。コメントですらノードです！
-それぞれのノードは子供を持つことができます。 (つまり、それぞれのノードは他のノードを含むことができます)
+すべての要素はノードです。テキストのすべてのピースはノードです。コメントですらノードです！それぞれのノードは子供を持つことができます。 (つまり、それぞれのノードは他のノードを含むことができます)
 
-これらすべてのノードを効率的に更新することは難しくなり得ますが、ありがたいことに、それを手動で行う必要はありません。
-代わりに、テンプレートや render 関数で、ページ上にどのような HTML が欲しいかを Vue に伝えるのです。
+これらすべてのノードを効率的に更新することは難しくなり得ますが、ありがたいことに、それを手動で行う必要はありません。代わりに、テンプレートや render 関数で、ページ上にどのような HTML が欲しいかを Vue に伝えるのです。
 
 テンプレート:
 
@@ -125,7 +114,7 @@ When a browser reads this code, it builds a [tree of "DOM nodes"](https://javasc
 <h1>{{ blogTitle }}</h1>
 ```
 
-render 関数:
+または render 関数:
 
 ```js
 render() {
@@ -135,27 +124,19 @@ render() {
 
 そしてどちらの場合でも、 `blogTitle` が変更されたとしても Vue が自動的にページを最新の状態に保ちます。
 
-## 仮想DOMツリー
+## 仮想 DOM ツリー
 
-Vueは、実際のDOMに反映する必要のある変更を追跡するために **仮想DOM** を構築して、ページを最新の状態に保ちます。
-この行をよく見てみましょう:
+Vue は、実際の DOM に反映する必要のある変更を追跡するために **仮想 DOM** を構築して、ページを最新の状態に保ちます。この行をよく見てみましょう:
 
 ```js
 return Vue.h('h1', {}, this.blogTitle)
 ```
 
-`h()` 関数が返すものはなんでしょうか？これは、 _正確には_ 実際のDOM要素ではありません。
-それが返すのは、ページ上にどんな種類のノードをレンダリングするのかをVueに伝えるための情報をもったプレーンなオブジェクトです。
-この情報には子供のノードの記述も含まれます。
-私たちは、このノードの記述を *仮想ノード* と呼び、通常 **VNode** と省略します。
-「仮想DOM」というのは、Vueコンポーネントのツリーから構成されるVNodeのツリー全体のことなのです。
+`h()` 関数が返すものはなんでしょうか？これは、 _正確には_ 実際の DOM 要素ではありません。それが返すのは、ページ上にどんな種類のノードをレンダリングするのかを Vue に伝えるための情報をもったプレーンなオブジェクトです。この情報には子供のノードの記述も含まれます。私たちは、このノードの記述を *仮想ノード* と呼び、通常 **VNode** と省略します。「仮想 DOM」というのは、Vue コンポーネントのツリーから構成される VNode のツリー全体のことなのです。
 
 ## `h()` の引数
 
-`h()` 関数はVNodeを作るためのユーティリティです。
-もっと正確に `createVNode()` と名づけられることもあるかもしれませんが、頻繁に使用されるので、簡潔さのために `h()` と呼ばれます。
-
-<!-- TODO: attributesとpropsに対する訳語を確認 -->
+`h()` 関数は VNode を作るためのユーティリティです。もっと正確に `createVNode()` と名づけられることもあるかもしれませんが、頻繁に使用されるので、簡潔さのために `h()` と呼ばれます。
 
 ```js
 // @returns {VNode}
@@ -168,7 +149,7 @@ h(
   'div',
 
   // {Object} props
-  // テンプレート内で使うであろう属性(attributes)、プロパティ(props)、イベントに対応するオブジェクト
+  // テンプレート内で使うであろう属性、プロパティ、イベントに対応するオブジェクト
   //
   // 省略可能
   {},
@@ -238,22 +219,21 @@ app.component('anchored-heading', {
 
 ## 制約
 
-### VNodeは一意でなければならない
+### VNode は一意でなければならない
 
-コンポーネント内のすべてのVNodeは一意でなければなりません。つまり、下のようなrender関数は無効だということです:
+コンポーネント内のすべての VNode は一意でなければなりません。つまり、下のような render 関数は無効だということです:
 
 ```js
 render() {
   const myParagraphVNode = Vue.h('p', 'hi')
   return Vue.h('div', [
-    // おっと - VNodeが重複しています!
+    // おっと - VNode が重複しています!
     myParagraphVNode, myParagraphVNode
   ])
 }
 ```
 
-もしあなたが本当に同じ要素、コンポーネントを何回もコピーしたいなら、ファクトリー関数を使えばできます。
-例えば、次のrender関数は20個の同じ段落をレンダリングする完全に正しい方法です。
+もしあなたが本当に同じ要素、コンポーネントを何回もコピーしたいなら、ファクトリー関数を使えばできます。例えば、次の render 関数は 20 個の同じ段落をレンダリングする完全に正しい方法です。
 
 ```js
 render() {
@@ -265,12 +245,11 @@ render() {
 }
 ```
 
-## テンプレートの機能をプレーンなJavaScriptで置き換える
+## テンプレートの機能をプレーンな JavaScript で置き換える
 
 ### `v-if` と `v-for`
 
-何であれ、プレーンなJavaScriptで簡単に実現できることについては、Vueのrender関数は固有の代替手段を提供していません。
-例えば、テンプレートでの `v-if` や `v-for` の使用:
+何であれ、プレーンな JavaScript で簡単に実現できることについては、Vue の render 関数は固有の代替手段を提供していません。例えば、テンプレートでの `v-if` や `v-for` の使用:
 
 ```html
 <ul v-if="items.length">
@@ -279,7 +258,7 @@ render() {
 <p v-else>No items found.</p>
 ```
 
-これは、render関数ではJavaScriptの `if`/`else` と `map()` で書き換えることができます。
+これは、render 関数では JavaScript の `if`/`else` と `map()` で書き換えることができます。
 
 ```js
 props: ['items'],
@@ -310,8 +289,7 @@ render() {
 
 ### `v-on`
 
-私たちは適切なプロパティ名をイベントハンドラーに与える必要があります。
-例えば、 `click` イベントをハンドルする場合は、プロパティ名は `onClick` になります。
+私たちは適切なプロパティ名をイベントハンドラに与える必要があります。例えば、 `click` イベントをハンドルする場合は、プロパティ名は `onClick` になります。
 
 ```js
 render() {
@@ -323,7 +301,7 @@ render() {
 
 #### イベント修飾子
 
-`.passive` 、 `.capture` 、 `.once` イベント修飾子については、Vueはハンドラーのオブジェクトシンタックスを提供しています:
+`.passive` 、 `.capture` 、 `.once` イベント修飾子については、Vue はハンドラーのオブジェクトシンタックスを提供しています:
 
 例えば:
 
@@ -347,7 +325,7 @@ render() {
 }
 ```
 
-その他すべてのイベントおよびキー修飾子については、特別なAPIは必要ありません。
+その他すべてのイベントおよびキー修飾子については、特別な API は必要ありません。
 なぜなら、ハンドラーの中でイベントのメソッドを使用することができるからです:
 
 | 修飾子                                                | ハンドラーでの同等の記述                                                                                              |
@@ -367,12 +345,12 @@ render() {
       // イベントを発行した要素がイベントが紐づけられた要素ではない場合は
       // 中断する
       if (event.target !== event.currentTarget) return
-      // 押されたキーがEnter(13)ではない場合、Shiftキーが同時に押されて
+      // 押されたキーが Enter(13) ではない場合、Shift キーが同時に押されて
       // いなかった場合は中断する
       if (!event.shiftKey || event.keyCode !== 13) return
       // イベントの伝播(propagation)を止める
       event.stopPropagation()
-      // この要素のデフォルトのkeyupハンドラが実行されないようにする
+      // この要素のデフォルトの keyup ハンドラが実行されないようにする
       event.preventDefault()
       // ...
     }
@@ -382,7 +360,7 @@ render() {
 
 ### スロット
 
-[`this.$slots`](../api/instance-properties.html#slots) から取得したVNodeの配列でスロットの中身にアクセスすることができます:
+[`this.$slots`](../api/instance-properties.html#slots) から取得した VNode の配列でスロットの中身にアクセスすることができます:
 
 ```js
 render() {
@@ -401,7 +379,7 @@ render() {
 }
 ```
 
-render関数で子コンポーネントにスロットを渡す方法:
+render 関数で子コンポーネントにスロットを渡す方法:
 
 ```js
 render() {
@@ -420,7 +398,6 @@ render() {
 
 たくさんの `render` 関数を書いていると、こういう感じのものを書くのがつらく感じるかもしれません:
 
-
 ```js
 Vue.h(
   'anchored-heading',
@@ -437,7 +414,7 @@ Vue.h(
 <anchored-heading :level="1"> <span>Hello</span> world! </anchored-heading>
 ```
 
-これが、VueでJSXを使い、テンプレートに近い構文に戻す [Babelプラグイン](https://github.com/vuejs/jsx-next) が存在する理由です。
+これが、Vue で JSX を使い、テンプレートに近い構文に戻す [Babelプラグイン](https://github.com/vuejs/jsx-next) が存在する理由です。
 
 ```jsx
 import AnchoredHeading from './AnchoredHeading.vue'
@@ -455,12 +432,10 @@ const app = createApp({
 app.mount('#demo')
 ```
 
-JSXがどのようにJavaScriptに変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
+JSX がどのように JavaScript に変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
 
 ## テンプレートのコンパイル
 
-あなたはVueのテンプレートが実際にrender関数にコンパイルされることに興味があるかもしれません。
-これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、
-これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
+あなたは Vue のテンプレートが実際に render 関数にコンパイルされることに興味があるかもしれません。これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
 
 <iframe src="https://vue-next-template-explorer.netlify.app/" width="100%" height="420"></iframe>
