@@ -97,7 +97,7 @@ app.component('todo-list', {
 
 ## リアクティブと連携する
 
-前述の例では、リスト `todos` を変更しても、その変更は注入された `todoLength` には反映されません。これは、`provide/inject` の束縛（ binding ）がデフォルトでリアクティブ _でない_ ことが原因です。プロパティ `ref` やオブジェクト `reactive` を `provide` に渡すことにより、この振る舞いを変更することができます。この場合、祖先コンポーネントの変更に対応するには、提供する `todoLength` に、Composition API のプロパティ `computed` を割り当てる必要があります。
+前述の例では、リスト `todos` を変更しても、その変更は注入された `todoLength` には反映されません。これは、`provide/inject` の束縛（ binding ）がデフォルトでリアクティブ _でない_ ことが原因です。`ref` で定義されたプロパティや `reactive` で作成されたオブジェクトを `provide` に渡すことにより、この振る舞いを変更することができます。この場合、祖先コンポーネントをリアクティブにするためには、コンポジション API の `computed` で定義したプロパティを `todoLength` を割り当てる必要があります。
 
 ```js
 app.component('todo-list', {
