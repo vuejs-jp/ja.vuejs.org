@@ -20,7 +20,7 @@ Root
       └─ TodoListStatistics
 ```
 
-もし todo-items のサイズを `TodoListStatistics` に渡したい場合、prop をこのように渡します: `TodoList` → `TodoListFooter` → `TodoListStatistics`。provide/inject を利用すると、これを直接的に行えます。
+もし todo-items のサイズを `TodoListStatistics` に渡したい場合、プロパティをこのように渡します: `TodoList` → `TodoListFooter` → `TodoListStatistics`。provide/inject を利用すると、これを直接的に行えます。
 
 ```js
 const app = Vue.createApp({})
