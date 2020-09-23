@@ -1,16 +1,16 @@
-# Props
+# プロパティ
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページは、すでに[コンポーネントの基本](component-basics.md)を読んだことを前提としています。コンポーネントに慣れていない場合は、まずはそちらをお読みください。
 
-## Prop Types
+## プロパティの型
 
-So far, we've only seen props listed as an array of strings:
+ここまでは、プロパティを文字列の配列として列挙してきました。
 
 ```js
 props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
 ```
 
-Usually though, you'll want every prop to be a specific type of value. In these cases, you can list props as an object, where the properties' names and values contain the prop names and types, respectively:
+しかし、通常はすべてのプロパティを特定の型の値にしたいと思うでしょう。このような場合には、プロパティをオブジェクトとして列挙し、プロパティのキーと値にそれぞれプロパティの名前と型を設定します:
 
 ```js
 props: {
@@ -20,73 +20,73 @@ props: {
   commentIds: Array,
   author: Object,
   callback: Function,
-  contactsPromise: Promise // or any other constructor
+  contactsPromise: Promise // またはその他のコンストラクタ
 }
 ```
 
-This not only documents your component, but will also warn users in the browser's JavaScript console if they pass the wrong type. You'll learn much more about [type checks and other prop validations](#prop-validation) further down this page.
+こうすることでコンポーネントがドキュメント化されるだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールで警告の表示もされます。詳しくはこのページの下にある[プロパティのバリデーション](#プロパティのバリデーション) にて説明します。
 
-## Passing Static or Dynamic Props
+## 静的あるいは動的なプロパティの受け渡し
 
-So far, you've seen props passed a static value, like in:
+これまでは、このような形でプロパティが静的な値を渡しているところを見てきましたが:
 
 ```html
 <blog-post title="My journey with Vue"></blog-post>
 ```
 
-You've also seen props assigned dynamically with `v-bind` or its shortcut, the `:` character, such as in:
+次のような、`v-bind`やそのショートカットである `:` 文字を使って動的に割り当てられたプロパティも見たことがあるでしょう:
 
 ```html
-<!-- Dynamically assign the value of a variable -->
+<!-- 変数の値を動的に割り当てます -->
 <blog-post :title="post.title"></blog-post>
 
-<!-- Dynamically assign the value of a complex expression -->
+<!-- 複数の変数を合成した値を動的に割り当てます -->
 <blog-post :title="post.title + ' by ' + post.author.name"></blog-post>
 ```
 
-In the two examples above, we happen to pass string values, but _any_ type of value can actually be passed to a prop.
+上の 2 つの例では、たまたま文字列の値を渡していますが、実際には __任意の__ 型の値をプロパティに渡すことができます。
 
-### Passing a Number
+### 数値の受け渡し
 
 ```html
-<!-- Even though `42` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.       -->
+<!-- `42` は静的な値ですが、これが文字列ではなく JavaScript の式だと -->
+<!-- Vue に伝えるためには v-bind を使う必要があります。 -->
 <blog-post :likes="42"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post :likes="post.likes"></blog-post>
 ```
 
-### Passing a Boolean
+### 真偽値の受け渡し
 
 ```html
-<!-- Including the prop with no value will imply `true`. -->
+<!-- 値のないプロパティは、 `true` を意味します。 -->
 <blog-post is-published></blog-post>
 
-<!-- Even though `false` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.          -->
+<!-- `false` は静的な値ですが、これが文字列ではなく JavaScript の式だと -->
+<!-- Vue に伝えるには、 v-bind を使う必要があります。 -->
 <blog-post :is-published="false"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post :is-published="post.isPublished"></blog-post>
 ```
 
-### Passing an Array
+### 配列の受け渡し
 
 ```html
-<!-- Even though the array is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.            -->
+<!-- この配列は静的ですが、これが文字列ではなく JavaScript の式だと -->
+<!-- Vue に伝えるには、 v-bind を使う必要があります。 -->
 <blog-post :comment-ids="[234, 266, 273]"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post :comment-ids="post.commentIds"></blog-post>
 ```
 
-### Passing an Object
+### オブジェクトの受け渡し
 
 ```html
-<!-- Even though the object is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.             -->
+<!-- このオブジェクトは静的ですが、これが文字列ではなく JavaScript の式だと -->
+<!-- Vue に伝えるには、 v-bind を使う必要があります。 -->
 <blog-post
   :author="{
     name: 'Veronica',
@@ -94,13 +94,14 @@ In the two examples above, we happen to pass string values, but _any_ type of va
   }"
 ></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post :author="post.author"></blog-post>
 ```
 
-### Passing the Properties of an Object
+### オブジェクトのプロパティの受け渡し
 
-If you want to pass all the properties of an object as props, you can use `v-bind` without an argument (`v-bind` instead of `:prop-name`). For example, given a `post` object:
+オブジェクトのすべてのプロパティをコンポーネントのプロパティ(props)として渡したい場合は、引数なしで `v-bind` を使うことができます (`:prop-name` の代わりに `v-bind`を使用)。例えば、`post` オブジェクトが与えられたとします。
+
 
 ```js
 post: {
@@ -109,27 +110,27 @@ post: {
 }
 ```
 
-The following template:
+次のテンプレートは:
 
 ```html
 <blog-post v-bind="post"></blog-post>
 ```
 
-Will be equivalent to:
+以下と同等となります:
 
 ```html
 <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
 ```
 
-## One-Way Data Flow
+## 単方向データフロー
 
-All props form a **one-way-down binding** between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
+すべてのプロパティは、子プロパティと親プロパティの間に **単方向のバインディング** を形成します: 親のプロパティが更新される場合は子へと流れ落ちますが、その逆はありません。これにより、子コンポーネントが誤って親の状態を変更すること(アプリのデータフローを理解しづらくすることがあります)を防ぎます。
 
-In addition, every time the parent component is updated, all props in the child component will be refreshed with the latest value. This means you should **not** attempt to mutate a prop inside a child component. If you do, Vue will warn you in the console.
+さらに、親コンポーネントが更新されるたびに、子コンポーネントのすべてのプロパティは最新の値に更新されます。つまり、子コンポーネント内でプロパティの値を変化させては **いけません** 。変化させた場合、Vue はコンソールで警告を表示します。
 
-There are usually two cases where it's tempting to mutate a prop:
+プロパティの値を変化させたい場合は主に 2 つあります:
 
-1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
+1. **プロパティを初期値として受け渡し、子コンポーネントにてローカルのデータとして後で利用したいと考える場合。** この場合は、プロパティの値を初期値として使うローカルの data プロパティを定義するのがベストです:
 
 ```js
 props: ['initialCounter'],
@@ -140,7 +141,7 @@ data() {
 }
 ```
 
-2. **The prop is passed in as a raw value that needs to be transformed.** In this case, it's best to define a computed property using the prop's value:
+2. **プロパティを変換が必要な未加工の値として受け渡す。** この場合、プロパティの値を使用した算出プロパティを別途定義するのがベストです:
 
 ```js
 props: ['size'],
@@ -152,52 +153,53 @@ computed: {
 ```
 
 ::: tip Note
-Note that objects and arrays in JavaScript are passed by reference, so if the prop is an array or object, mutating the object or array itself inside the child component **will** affect parent state.
+JavaScript のオブジェクトと配列は、参照として渡されるため、子コンポーネント内で配列やオブジェクトを変更すると、 **親の状態に影響を与える** ことに注意してください。
 :::
 
-## Prop Validation
+## プロパティのバリデーション
 
-Components can specify requirements for their props, such as the types you've already seen. If a requirement isn't met, Vue will warn you in the browser's JavaScript console. This is especially useful when developing a component that's intended to be used by others.
+コンポーネントはプロパティに対して、すでに見たように型などの要件を指定することができます。要件が満たされていない場合、Vue はブラウザの JavaScript コンソールで警告を表示します。これは、他の人が使用することを意図したコンポーネントを開発する場合に特に便利です。
 
-To specify prop validations, you can provide an object with validation requirements to the value of `props`, instead of an array of strings. For example:
+プロパティのバリデーションを指定するには、文字列の配列の代わりに、 `props` の値についてのバリデーション要件をもったオブジェクトを渡します。例えば以下のようなものです:
 
 ```js
 app.component('my-component', {
   props: {
-    // Basic type check (`null` and `undefined` values will pass any type validation)
+    // 基本的な型チェック (`null` と `undefined` は全てのバリデーションをパスします)
     propA: Number,
-    // Multiple possible types
+    // 複数の型の許容
     propB: [String, Number],
-    // Required string
+    // 文字列型を必須で要求する
     propC: {
       type: String,
       required: true
     },
-    // Number with a default value
+    // デフォルト値つきの数値型
     propD: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // デフォルト値つきのオブジェクト型
     propE: {
       type: Object,
-      // Object or array defaults must be returned from
-      // a factory function
+      // オブジェクトもしくは配列のデフォルト値は
+      // 必ずファクトリ関数（それを生み出すための関数）を返す必要があります。
       default: function() {
         return { message: 'hello' }
       }
     },
-    // Custom validator function
+    // カスタムバリデーション関数
     propF: {
       validator: function(value) {
-        // The value must match one of these strings
+        // プロパティの値は、必ずいずれかの文字列でなければならない
         return ['success', 'warning', 'danger'].indexOf(value) !== -1
       }
     },
-    // Function with a default value
+    // デフォルト値つきの関数型
     propG: {
       type: Function,
-      // Unlike object or array default, this is not a factory function - this is a function to serve as a default value
+      // オブジェクトや配列のデフォルトとは異なり、これはファクトリ関数ではありません。
+      // これは、デフォルト値としての関数を取り扱います。
       default: function() {
         return 'Default function'
       }
@@ -206,15 +208,15 @@ app.component('my-component', {
 })
 ```
 
-When prop validation fails, Vue will produce a console warning (if using the development build).
+プロパティのバリデーションが失敗した場合、 Vue はコンソールに警告を表示します (開発用ビルドを利用しているとき)。
 
 ::: tip Note
-Note that props are validated **before** a component instance is created, so instance properties (e.g. `data`, `computed`, etc) will not be available inside `default` or `validator` functions.
+プロパティのバリデーションはコンポーネントのインスタンスが生成される **前** に行われるため、インスタンスのプロパティ (例えば `data`, `computed` など) を `dafault` および `validator` 関数の中で利用することはできません。
 :::
 
-### Type Checks
+### 型の検査
 
-The `type` can be one of the following native constructors:
+`type` は、次のネイティブコンストラクタのいずれかです:
 
 - String
 - Number
@@ -225,7 +227,7 @@ The `type` can be one of the following native constructors:
 - Function
 - Symbol
 
-In addition, `type` can also be a custom constructor function and the assertion will be made with an `instanceof` check. For example, given the following constructor function exists:
+さらに、`type` はカスタムコンストラクタ関数であってもよく、アサーションは `instanceof` チェックにより行われます。例えば、以下のようなコンストラクタ関数が存在するとします:
 
 ```js
 function Person(firstName, lastName) {
@@ -234,7 +236,7 @@ function Person(firstName, lastName) {
 }
 ```
 
-You could use:
+このように利用することができます:
 
 ```js
 app.component('blog-post', {
@@ -244,25 +246,26 @@ app.component('blog-post', {
 })
 ```
 
-to validate that the value of the `author` prop was created with `new Person`.
+上の例では、 `author` プロパティの値が `new Person` によって作成されたものかどうか検証されます。
 
-## Prop Casing (camelCase vs kebab-case)
+## プロパティの形式 (キャメルケース vs ケバブケース)
 
-HTML attribute names are case-insensitive, so browsers will interpret any uppercase characters as lowercase. That means when you're using in-DOM templates, camelCased prop names need to use their kebab-cased (hyphen-delimited) equivalents:
+HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、 DOM(HTML) テンプレート内においては、キャメルケースのプロパティ名はケバブケース(ハイフンで区切ったもの)を使う必要があります。
+
 
 ```js
 const app = Vue.createApp({})
 
 app.component('blog-post', {
-  // camelCase in JavaScript
+  // JavaScript 内ではキャメルケース
   props: ['postTitle'],
   template: '<h3>{{ postTitle }}</h3>'
 })
 ```
 
 ```html
-<!-- kebab-case in HTML -->
+<!-- HTML 内ではケバブケース -->
 <blog-post post-title="hello!"></blog-post>
 ```
 
-Again, if you're using string templates, this limitation does not apply.
+繰り返しになりますが、文字列テンプレートを使用している場合は、この制限は適用されません。
