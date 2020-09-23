@@ -110,4 +110,4 @@ app.component('todo-list', {
 })
 ```
 
-こうすると、`todos.length`へのあらゆる変更が、`todoLength` が注入されたコンポーネントに正しく反映されます。`reactive` の provide/inject の詳細については、[Composition API セクション](composition-api-provide-inject.html#injection-reactivity) をご覧ください。
+こうすると、`todos.length`へのあらゆる変更が、`todoLength` が注入されたコンポーネントに正しく反映されます。`reactive` の provide/inject の詳細については、[コンポジション API セクション](composition-api-provide-inject.html#injection-reactivity) をご覧ください。
