@@ -19,9 +19,9 @@ Vue におけるリアクティブな状態の重要なユースケースは描�
 
 これがまさに Vue のリアクティブシステムの本質です。コンポーネント内の `data()` でオブジェクトを返す際に、内部的には `reactive()` によってリアクティブを実現しています。テンプレートはこれらのリアクティブなプロパティを利用する [render 関数](render-function.html)にコンパイルされます。
 
-`reactive` についての詳細は [Basic Reactivity API](../api/basic-reactivity.html) セクションを参照してください
+`reactive` についての詳細は [基本 リアクティビティ API](../api/basic-reactivity.html) セクションを参照してください
 
-## 独立したリアクティブな値を `refs` として作成する
+## 独立したリアクティブな値を `参照` として作成する
 
 独立したプリミティブ値(例えば文字列)があって、それをリアクティブにしたい場合を想像してみてください。もちろん、同じ値の文字列を単一のプロパティとして持つオブジェクトを作成して `reactive` に渡すこともできます。Vue にはこれと同じことをしてくれる `ref` メソッドがあります:
 
@@ -45,7 +45,7 @@ console.log(count.value) // 1
 
 ### ref のアンラップ
 
-ref がレンダーコンテキスト([setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値にアンラップされます。テンプレート内においては `.value` を付ける必要はありません:
+ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値にアンラップ(ref でラップされた値を取り出す)されます。テンプレート内においては `.value` を付ける必要はありません:
 
 ```vue-html
 <template>
@@ -143,7 +143,7 @@ title.value = 'Vue 3 Detailed Guide' // ここで title は ref であるため 
 console.log(book.title) // 'Vue 3 Detailed Guide'
 ```
 
-`refs` についての詳細は [Refs API](../api/refs-api.html#ref) セクションを参照してください
+`ref` で作成した `参照` についての詳細は [参照 (refs) API](../api/refs-api.html#ref) セクションを参照してください
 
 ## `readonly` でリアクティブオブジェクトの変更を防ぐ
 
