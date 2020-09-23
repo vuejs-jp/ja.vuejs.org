@@ -1,14 +1,15 @@
 # Provide / inject
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページは既に[コンポーネントの基本](component-basics.md)を読んでいる事を前提としています。 コンポーネントを初めて使う方はそちらを先にお読みください。
 
-Usually, when we need to pass data from the parent to child component, we use [props](component-props.md). Imagine the structure where you have some deeply nested components and you only need something from the parent component in the deep nested child. In this case, you still need to pass the prop down the whole component chain which might be annoying.
+通常、親コンポーネントから子コンポーネントにデータを渡すとき、[props](component-props.md) を使います。深くネストされたいくつかのコンポーネントがあり、深い階層にあるコンポーネントが浅い階層にあるコンポーネントの何かしらのデータのみを必要としている構造を想像してください。この場合でも、鎖のように繋ったコンポーネント全体にプロパティを渡す必要がありますが、時にそれは面倒になります。
 
-For such cases, we can use the `provide` and `inject` pair. Parent components can serve as dependency provider for all its children, regardless how deep the component hierarchy is. This feature works on two parts: parent component has a `provide` option to provide data and child component has an `inject` option to start using this data.
+そのような場合は、`provide` と `inject` のペアを利用できます。コンポーネント階層の深さに関係なく、親コンポーネントは、そのすべての子階層へ依存関係を提供するプロバイダとして機能することができます。この機能は2つの機能からなります:
+親コンポーネントは、データを提供するためのオプション `provide` を持ち、子コンポーネントはそのデータを利用するためのオプション `inject` を持っています。
 
 ![Provide/inject scheme](/images/components_provide.png)
 
-For example, if we have a hierarchy like this:
+例えば、このような構造があるとします:
 
 ```
 Root
@@ -19,7 +20,7 @@ Root
       └─ TodoListStatistics
 ```
 
-If we want to pass the length of todo-items directly to `TodoListStatistics`, we would pass the prop down the hierarchy: `TodoList` -> `TodoListFooter` -> `TodoListStatistics`. With provide/inject approach, we can do this directly:
+もし todo-items のサイズを `TodoListStatistics` に渡したい場合、プロパティをこのように渡します: `TodoList` → `TodoListFooter` → `TodoListStatistics`。provide/inject を利用すると、これを直接的に行えます。
 
 ```js
 const app = Vue.createApp({})
@@ -49,7 +50,7 @@ app.component('todo-list-statistics', {
 })
 ```
 
-However, this won't work if we try to provide some component instance property here:
+ただし、ここでコンポーネントのインスタンスプロパティを提供しようとしても、うまく動作しないでしょう:
 
 ```js
 app.component('todo-list', {
@@ -67,7 +68,7 @@ app.component('todo-list', {
 })
 ```
 
-To access component instance properties, we need to convert `provide` to be a function returning an object
+コンポーネントのインスタンスプロパティにアクセスするためには、`provide` をオブジェクトを返す関数へ変換する必要があります
 
 ```js
 app.component('todo-list', {
@@ -87,16 +88,16 @@ app.component('todo-list', {
 })
 ```
 
-This allows us to more safely keep developing that component, without fear that we might change/remove something that a child component is relying on. The interface between these components remains clearly defined, just as with props.
+こうすることで、子コンポーネントが依存している何かを変更したり削除したりしてしまうことを恐れることなく、より安全にコンポーネントを開発し続けることができます。これらのコンポーネント間のインターフェースは、props と同じく、明確に定義されています。
 
-In fact, you can think of dependency injection as sort of “long-range props”, except:
+実際、依存関係の注入は、いわば「長距離な props 」のように考えることができます。後述の点を除きます:
 
-- parent components don’t need to know which descendants use the properties it provides
-- child components don’t need to know where injected properties are coming from
+- 親コンポーネントは、提供したプロパティを子孫コンポーネントのどこで使用しているか知る必要がありません
+- 子コンポーネントは、注入されたプロパティがどこから提供されたものなのか知る必要がありません
 
-## Working with reactivity
+## リアクティブと連携する
 
-In the example above, if we change the list of `todos`, this change won't be reflected in the injected `todoLength` property. This is because `provide/inject` bindings are _not_ reactive by default. We can change this behavior by passing a `ref` property or `reactive` object to `provide`. In our case, if we wanted to react to changes in the ancestor component, we would need to assign a Composition API `computed` property to our provided `todoLength`:
+前述の例では、リスト `todos` を変更しても、その変更は注入された `todoLength` には反映されません。これは、`provide/inject` の束縛（ binding ）がデフォルトでリアクティブ _でない_ ことが原因です。`ref` で定義されたプロパティや `reactive` で作成されたオブジェクトを `provide` に渡すことにより、この振る舞いを変更することができます。この場合、祖先コンポーネントをリアクティブにするためには、コンポジション API の `computed` で定義したプロパティを `todoLength` を割り当てる必要があります。
 
 ```js
 app.component('todo-list', {
@@ -109,4 +110,4 @@ app.component('todo-list', {
 })
 ```
 
-In this, any change to `todos.length` will be reflected correctly in the components, where `todoLength` is injected. Read more about `reactive` provide/inject in the [Composition API section](composition-api-provide-inject.html#injection-reactivity)
+こうすると、`todos.length`へのあらゆる変更が、`todoLength` が注入されたコンポーネントに正しく反映されます。`reactive` の provide/inject の詳細については、[コンポジション API セクション](composition-api-provide-inject.html#injection-reactivity) をご覧ください。
