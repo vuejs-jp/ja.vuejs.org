@@ -1,10 +1,10 @@
-# Semantics
+# セマンティクス
 
-## Forms
+## フォーム
 
-When creating a form, you can use the following elements: `<form>`, `<label>`, `<input>`, `<textarea>`, and `<button>`
+フォームを作成するとき、以下の要素を使用することができます: `<form>` 、`<label>` 、`<input>` 、`<textarea>` 、そして `<button>` です。
 
-Labels are typically placed on top or to the left of the form fields:
+ラベルは一般的にフォームの上部または左側に配置します。
 
 ```html
 <form action="/dataCollectionLocation" method="post" autocomplete="on">
@@ -28,11 +28,11 @@ Labels are typically placed on top or to the left of the form fields:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Notice how you can include `autocomplete='on'` on the form element and it will apply to all inputs in your form. You can also set different [values for autocomplete attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for each input.
+どのように `autocomplete='on'` をフォーム要素上に含むことができるかに注目してください。そしてそれはフォーム内の全ての入力欄に適用されます。また各入力欄の [autocomplete 属性に対して異なる値](https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/autocomplete)をセットすることもできます。
 
-### Labels
+### ラベル
 
-Provide labels to describe the purpose of all form control; linking `for` and `id`:
+全てのフォームコントロールの目的を説明するためにラベルを提供してください。`for` と `id` はリンクしています:
 
 ```html
 <label for="name">Name</label>
@@ -46,12 +46,12 @@ Provide labels to describe the purpose of all form control; linking `for` and `i
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-If you inspect this element in your chrome developer tools and open the Accessibility tab inside the Elements tab, you will see how the input gets its name from the label:
+chrome デベロッパツールでこの要素を検証し、Elements タブ内の Accessibility タブを開くと、どのように入力欄がその名前をラベルから取得するかを確認できます:
 
-![Chrome Developer Tools showing input accessible name from label](/images/AccessibleLabelChromeDevTools.png)
+![label からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleLabelChromeDevTools.png)
 
 :::warning Warning:
-Though you might have seen labels wrapping the input fields like this:
+以下のように入力欄をラップしているラベルを見たことがあるかもしれません:
 
 ```html
 <label>
@@ -60,12 +60,12 @@ Though you might have seen labels wrapping the input fields like this:
 </label>
 ```
 
-Explicitly setting the labels with an matching id is better supported by assistive technology.
+一致する id で明示的にラベルを設定することは支援技術によってより適切にサポートされます。
 :::
 
 #### aria-label
 
-You can also give the input an accessible name with [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute).
+[`aria-label`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute) によりアクセス可能な名前を入力欄に付与することもできます。
 
 ```html
 <label for="name">Name</label>
@@ -85,13 +85,13 @@ You can also give the input an accessible name with [`aria-label`](https://devel
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Feel free to inspect this element in Chrome DevTools to see how the accessible name has changed:
+この要素を Chrome DevTools で自由に検証し、どのようにアクセス可能な名前が変更されたか確認してください:
 
-![Chrome Developer Tools showing input accessible name from aria-label](/images/AccessibleARIAlabelDevTools.png)
+![aria-label からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelDevTools.png)
 
 #### aria-labelledby
 
-Using [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) is similar to `aria-label` expect it is used if the label text is visible on screen. It is paired to other elements by their `id` and you can link multiple `id`s:
+[`aria-labelledby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) は `aria-label` に類似しており、ラベルテキストが画面に表示されている場合に使用されることを期待します。これは `id` によって他の要素とペアになっており、複数の `id` を関連付けることができます:
 
 ```html
 <form
@@ -122,11 +122,11 @@ Using [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibi
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-![Chrome Developer Tools showing input accessible name from aria-labelledby](/images/AccessibleARIAlabelledbyDevTools.png)
+![aria-labelledby からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelledbyDevTools.png)
 
 #### aria-describedby
 
-[aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) is used the same way as `aria-labelledby` expect provides a description with additional information that the user might need. This can be used to describe the criteria for any input:
+[aria-describedby](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) は `aria-labelledby` と同じ方法で使用され、ユーザが必要とする可能性のある追加情報と説明を提供します。これは任意の入力欄の基準を説明するために使用することができます:
 
 ```html
 <form
@@ -159,15 +159,15 @@ Using [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibi
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-You can see the description by instecting Chrome DevTools:
+Chrome DevTools で検出することで Description を確認することができます:
 
-![Chrome Developer Tools showing input accessible name from aria-labelledby and description with aria-describedby](/images/AccessibleARIAdescribedby.png)
+![aria-labelledby と aria-describedby を含む description からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAdescribedby.png)
 
-### Placeholder
+### プレースホルダ
 
-Avoid using placeholders as they can confuse many users.
+多くのユーザが混乱する可能性があるため、プレースホルダの使用は避けてください。
 
-One of the issues with placeholders is that they don't meet the [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) by default; fixing the color contrast makes the placeholder look like pre-populated data in the input fields. Looking at the following example, you can see that the Last Name placeholder which meets the color contrast criteria looks like pre-populated data:
+プレースホルダによる問題の１つは初期状態で [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) を満たしていないことです。色のコントラストを修正するとプレースホルダが入力欄に事前入力されたデータのように見えます。以下の例を見ると、color contrast criteria を満たしている Last Name プレースホルダが事前入力されたデータのように見えることが確認できます:
 
 <p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="PoZJzeQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Placeholder">
   <span>See the Pen <a href="https://codepen.io/mlama007/pen/PoZJzeQ">
@@ -176,12 +176,12 @@ One of the issues with placeholders is that they don't meet the [color contrast 
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-It is best to provide all the information the user needs to fill out forms outside any inputs.
+ユーザがフォームを入力するために必要とするすべての情報を入力欄の外側で提供するのが最善です。
 
-### Instructions
+### 説明
 
-When adding instructions for your input fields, make sure to link it correctly to the input.
-You can provide additional instructions and bind multiple ids inside an [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute). This allows for more flexible design.
+入力欄に説明を追加するとき、入力欄に対して正しくリンクしていることを確認してください。
+あなたは追加の説明を提供し、複数の id を  [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) 内に束縛することができます。これにより、さらに柔軟な設計が可能になります。
 
 ```html
 <fieldset>
@@ -197,7 +197,7 @@ You can provide additional instructions and bind multiple ids inside an [`aria-l
 </fieldset>
 ```
 
-Alternatively, you can attach the instructions to the input with [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute):
+あるいは、[`aria-describedby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) を使用して入力欄に説明を添付することもできます:
 
 ```html
 <fieldset>
@@ -215,11 +215,11 @@ Alternatively, you can attach the instructions to the input with [`aria-describe
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-### Hiding Content
+### コンテンツの非表示
 
-Usually it is not recommended to visually hide labels, even if the input has an accessible name. However, if the functionality of the input can be understood with surrounding content, then we can hide the visual label.
+入力欄がアクセス可能な名前を持っている場合でも、視覚的にラベルを非表示にすることは非推奨です。しかし、入力欄の機能が周囲のコンテンツから理解できる場合は、視覚的なラベルを非表示にすることができます。
 
-Let's look at this search field:
+以下の検索フィールドを見てみましょう:
 
 ```html
 <form role="search">
@@ -229,9 +229,9 @@ Let's look at this search field:
 </form>
 ```
 
-We can do this because the search button will help visual users identify the purpose of the input field.
+これができるのは、検索ボタンが視覚的にユーザが入力欄の目的を特定を助けるためです。
 
-We can use CSS to visually hide elements but keep them available for assistive technology:
+CSSを使用して要素を視覚的に非表示にすることができますが、それらを支援技術で利用できるようにしておきます:
 
 ```css
 .hidden-visually {
@@ -256,17 +256,17 @@ We can use CSS to visually hide elements but keep them available for assistive t
 
 #### aria-hidden="true"
 
-Adding `aria-hidden="true"` will hide the element from assistive technology but leave it visually available for other users. Do not use it on focusable elements, purely on decorative, duplicated or offscreen content.
+ `aria-hidden="true"` を追加すると要素は支援技術から隠されますが、他のユーザから視覚的に利用可能になります。フォーカス可能な要素や、純粋に装飾的なコンテンツ、複製されたコンテンツ、または画面外のコンテンツには使用しないでください。
 
 ```html
 <p>This is not hidden from screen readers.</p>
 <p aria-hidden="true">This is hidden from screen readers.</p>
 ```
 
-### Buttons
+### ボタン
 
-When using buttons inside a form, you must set the type to prevent submitting the form.
-You can also use an input to create buttons:
+フォーム内でボタンを使用するときは、フォームの送信をしないようにタイプを設定する必要があります。
+入力欄を使用してボタンを作ることもできます:
 
 ```html
 <form action="/dataCollectionLocation" method="post" autocomplete="on">
@@ -287,13 +287,13 @@ You can also use an input to create buttons:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-#### Functional Images
+#### 機能的な画像
 
-You can use this technique to create functional images.
+機能的な画像を作るために次の技術を使うことができます。
 
-- Input fields
+- 入力欄
 
-  - These images will act as a submit type button on forms
+  - これらの画像はフォーム上の送信タイプのボタンとして機能します
 
   ```html
   <form role="search">
@@ -308,7 +308,7 @@ You can use this technique to create functional images.
   </form>
   ```
 
-- Icons
+- アイコン
 
 ```html
 <form role="search">
