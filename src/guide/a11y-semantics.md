@@ -46,9 +46,9 @@
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-chrome デベロッパツールでこの要素を検証し、Elements タブ内の Accessibility タブを開くと、どのように入力欄がその名前をラベルから取得するかを確認できます :
+chrome デベロッパツールでこの要素を検証し、Elements タブ内の Accessibility タブを開くと、どのように入力欄がその名前をラベルから取得するかを確認できます:
 
-![Chrome Developer Tools showing input accessible name from label](/images/AccessibleLabelChromeDevTools.png)
+![label からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleLabelChromeDevTools.png)
 
 :::warning Warning:
 以下のように入力欄をラップしているラベルを見たことがあるかもしれません:
@@ -87,7 +87,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 この要素を Chrome DevTools で自由に検証し、どのようにアクセス可能な名前が変更されたか確認してください:
 
-![Chrome Developer Tools showing input accessible name from aria-label](/images/AccessibleARIAlabelDevTools.png)
+![aria-label からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelDevTools.png)
 
 #### aria-labelledby
 
@@ -122,7 +122,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-![Chrome Developer Tools showing input accessible name from aria-labelledby](/images/AccessibleARIAlabelledbyDevTools.png)
+![aria-labelledby からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelledbyDevTools.png)
 
 #### aria-describedby
 
@@ -161,7 +161,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 Chrome DevTools で検出することで Description を確認することができます:
 
-![Chrome Developer Tools showing input accessible name from aria-labelledby and description with aria-describedby](/images/AccessibleARIAdescribedby.png)
+![aria-labelledby と aria-describedby を含む description からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAdescribedby.png)
 
 ### プレースホルダ
 
@@ -178,10 +178,10 @@ Chrome DevTools で検出することで Description を確認することがで
 
 ユーザがフォームを入力するために必要とするすべての情報を入力欄の外側で提供するのが最善です。
 
-### 指示
+### 説明
 
-入力欄に指示を追加するとき、入力欄に対して正しくリンクしていることを確認してください。
-あなたは追加の指示を提供し、複数の id を  [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) 内に束縛することができます。これにより、さらに柔軟な設計が可能になります。
+入力欄に説明を追加するとき、入力欄に対して正しくリンクしていることを確認してください。
+あなたは追加の説明を提供し、複数の id を  [`aria-labelledby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) 内に束縛することができます。これにより、さらに柔軟な設計が可能になります。
 
 ```html
 <fieldset>
@@ -197,7 +197,7 @@ Chrome DevTools で検出することで Description を確認することがで
 </fieldset>
 ```
 
-あるいは、[`aria-describedby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) を使用して入力欄に指示を添付することもできます:
+あるいは、[`aria-describedby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) を使用して入力欄に説明を添付することもできます:
 
 ```html
 <fieldset>
