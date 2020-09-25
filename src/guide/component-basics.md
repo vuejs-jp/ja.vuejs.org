@@ -168,11 +168,11 @@ app.mount('#blog-posts-demo')
 
 とりあえずプロパティについてはこれで以上ですが、 このページを読み終えて十分に理解できたら、後から戻ってきて [プロパティ](component-props.html) の完全なガイドを読むことをお勧めします。
 
-## Listening to Child Components Events
+## 子コンポーネントのイベントを購読する
 
-As we develop our `<blog-post>` component, some features may require communicating back up to the parent. For example, we may decide to include an accessibility feature to enlarge the text of blog posts, while leaving the rest of the page its default size.
+`<blog-post>` コンポーネントを開発する中で、いくつかの機能で親コンポーネントとの通信が必要になるかもしれません。例えば、残りの部分の大きさはそのままで、ブログ記事の文字の文字を拡大するアクセシビリティ機能を実装することを決めるかもしれません。
 
-In the parent, we can support this feature by adding a `postFontSize` data property:
+親コンポーネントでは、`postFontSize` データプロパティを追加することでこの機能をサポートすることができます:
 
 ```js
 const App = {
@@ -187,7 +187,7 @@ const App = {
 }
 ```
 
-Which can be used in the template to control the font size of all blog posts:
+すべてのブログ投稿のフォントサイズを制御するためにテンプレート内で使用できます:
 
 ```html
 <div id="blog-posts-events-demo">
@@ -197,7 +197,7 @@ Which can be used in the template to control the font size of all blog posts:
 </div>
 ```
 
-Now let's add a button to enlarge the text right before the content of every post:
+それでは、すべての投稿の内容の前にテキストを拡大するボタンを追加します:
 
 ```js
 app.component('blog-post', {
@@ -213,13 +213,13 @@ app.component('blog-post', {
 })
 ```
 
-The problem is, this button doesn't do anything:
+問題は、このボタンが何もしないことです:
 
 ```html
 <button>Enlarge text</button>
 ```
 
-When we click on the button, we need to communicate to the parent that it should enlarge the text of all posts. Fortunately, component instances provide a custom events system to solve this problem. The parent can choose to listen to any event on the child component instance with `v-on` or `@`, just as we would with a native DOM event:
+ボタンをクリックすると、全ての投稿のテキストを拡大する必要があることを親に伝える必要があります。親は、ネイティブ DOM イベントでの場合と同様に、 `v-on` や `@` を用いて子コンポーネントのインスタンスでのイベントを購読することができます:
 
 ```html
 <blog-post ... @enlarge-text="postFontSize += 0.1"></blog-post>
