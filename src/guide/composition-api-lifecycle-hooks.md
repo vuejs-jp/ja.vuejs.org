@@ -1,15 +1,16 @@
-# Lifecycle Hooks
+# ライフサイクルフック
 
-> This guide assumes that you have already read the [Composition API Introduction](composition-api-introduction.html) and [Reactivity Fundamentals](reactivity-fundamentals.html). Read that first if you are new to Composition API.
+> このページは、すでに [コンポジション API の基本](composition-api-introduction.html) と [リアクティブの基礎](reactivity-fundamentals.html) を読んでいることを前提としています。 コンポジション API を初めて使用する場合は、最初にそちらをお読みください。
 
-You can access a component's lifecycle hook by prefixing the lifecycle hook with "on".
+ライフサイクルフックの前に "on" をつけることで、コンポーネントのライフサイクルフックにアクセスすることができます。
 
-The following table contains how the lifecycle hooks are invoked inside of [setup()](composition-api-setup.html):
+[setup()](composition-api-setup.html) 内で、ライフサイクルフックを呼び出す方法は、次の表の通りです:
 
-| Options API       | Hook inside inside `setup` |
+
+| オプション API      | `setup` 内のフック          |
 | ----------------- | -------------------------- |
-| `beforeCreate`    | Not needed\*               |
-| `created`         | Not needed\*               |
+| `beforeCreate`    | 不要\*               |
+| `created`         | 不要\*               |
 | `beforeMount`     | `onBeforeMount`            |
 | `mounted`         | `onMounted`                |
 | `beforeUpdate`    | `onBeforeUpdate`           |
@@ -21,10 +22,10 @@ The following table contains how the lifecycle hooks are invoked inside of [setu
 | `renderTriggered` | `onRenderTriggered`        |
 
 :::tip
-Because `setup` is run around the `beforeCreate` and `created` lifecycle hooks, you do not need to explicitly define them. In other words, any code that would be written inside those hooks should be written directly in the `setup` function.
+`setup` は `beforeCreate` と `created` のライフサイクルで実行されるため、これらのフックを明示的に定義する必要はありません。言い換えれば、これらのフック内のコードは、 `setup` 内に直接書くべきです。
 :::
 
-These functions accept a callback that will be executed when the hook is called by the component:
+これらの関数は、コンポーネントからフックが呼び出された時に実行されるコールバックを、受け入れます:
 
 ```js
 // MyBook.vue
