@@ -1,16 +1,16 @@
-# Dynamic & Async Components
+# 動的 & 非同期コンポーネント
 
-> This page assumes you've already read the [Components Basics](component-basics.md). Read that first if you are new to components.
+> このページはすでに [コンポーネントの基本](component-basics.md) を読んでいる事を前提としています。コンポーネントをよく知らない方はそちらを先にお読みください。
 
-## Dynamic Components with `keep-alive`
+## 動的コンポーネントにおける `keep-alive` の利用
 
-Earlier, we used the `is` attribute to switch between components in a tabbed interface:
+まず、`is` 属性を利用してタブインタフェースのコンポーネントを切り替えることができます:
 
 ```vue-html
 <component :is="currentTabComponent"></component>
 ```
 
-When switching between these components though, you'll sometimes want to maintain their state or avoid re-rendering for performance reasons. For example, when expanding our tabbed interface a little:
+しかし、コンポーネントを切り替える時、コンポーネントの状態を保持したり、パフォーマンスの理由から再レンダリングを避けたいときもあるでしょう。例えば、タブインターフェースを少し拡張した場合:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="jOPjZOe" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Dynamic components: without keep-alive">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/jOPjZOe">
@@ -19,18 +19,18 @@ When switching between these components though, you'll sometimes want to maintai
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-You'll notice that if you select a post, switch to the _Archive_ tab, then switch back to _Posts_, it's no longer showing the post you selected. That's because each time you switch to a new tab, Vue creates a new instance of the `currentTabComponent`.
+投稿を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた投稿は表示されなくなります。 これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
 
-Recreating dynamic components is normally useful behavior, but in this case, we'd really like those tab component instances to be cached once they're created for the first time. To solve this problem, we can wrap our dynamic component with a `<keep-alive>` element:
+動的コンポーネントの再生成は通常は便利な挙動です。しかし、このケースでは最初に作成されたタブコンポーネントのインスタンスがキャッシュされるのが好ましいでしょう。この問題を解決するために、動的コンポーネントを `<keep-alive>` 要素でラップすることができます:
 
 ```vue-html
-<!-- Inactive components will be cached! -->
+<!-- アクティブでないコンポーネントはキャッシュされます！ -->
 <keep-alive>
   <component :is="currentTabComponent"></component>
 </keep-alive>
 ```
 
-Check out the result below:
+以下の様になります:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="VwLJQvP" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Dynamic components: with keep-alive">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/VwLJQvP">
@@ -39,13 +39,13 @@ Check out the result below:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Now the _Posts_ tab maintains its state (the selected post) even when it's not rendered.
+このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択された投稿)を保持するようになります。
 
-Check out more details on `<keep-alive>` in the [API reference](../api/built-in-components.html#keep-alive).
+`<keep-alive>` の詳細な情報については [API リファレンス](../api/built-in-components.html#keep-alive) を参照してください。
 
-## Async Components
+## 非同期コンポーネント
 
-In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a `defineAsyncComponent` method:
+大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なコンポーネントだけサーバからロードしたい場合があるでしょう。これを可能にするために、 Vue は `defineAsyncComponent` メソッドを持ちます:
 
 ```js
 const app = Vue.createApp({})
@@ -62,9 +62,9 @@ const AsyncComp = Vue.defineAsyncComponent(
 app.component('async-example', AsyncComp)
 ```
 
-As you can see, this method accepts a factory function returning a `Promise`. Promise's `resolve` callback should be called when you have retrieved your component definition from the server. You can also call `reject(reason)` to indicate the load has failed.
+ご覧の通り、このメソッドは `Promise` を返すファクトリ関数を受けます。サーバからコンポーネント定義を取得したら Promise の `resolve` コールバックが呼ばれるべきです。また、読み込みが失敗したことを示すために `reject(reason)` を呼ぶこともできます。
 
-You can also return a `Promise` in the factory function, so with Webpack 2 or later and ES2015 syntax you can do:
+ファクトリ関数の中で `Promise` を返すことができるので、 Webpack 2 以降と ES2015 の構文では以下のように書くこともできます:
 
 ```js
 import { defineAsyncComponent } from 'vue'
@@ -76,7 +76,7 @@ const AsyncComp = defineAsyncComponent(() =>
 app.component('async-component', AsyncComp)
 ```
 
-You can also use `defineAsyncComponent` when [registering a component locally](component-registration.html#local-registration):
+[コンポーネントのローカル登録](component-registration.html#local-registration) でも、 `defineAsyncComponent` を利用することができます。
 
 ```js
 import { createApp, defineAsyncComponent } from 'vue'
@@ -91,10 +91,10 @@ createApp({
 })
 ```
 
-### Using with Suspense
+### Suspense との併用
 
-Async components are _suspensible_ by default. This means if it has a [`<Suspense>`](TODO) in the parent chain, it will be treated as an async dependency of that `<Suspense>`. In this case, the loading state will be controlled by the `<Suspense>`, and the component's own loading, error, delay and timeout options will be ignored.
+非同期コンポーネントはデフォルトで _suspensible_ です。これは非同期コンポーネントが [`<Suspense>`](TODO) を親に持ったとき、 `<Suspense>` の非同期の依存として取り扱われることを意味しています。このケースでは、読み込みの状態は `<Suspense>` から制御され、コンポーネント自身が持つ loading や error, delay, timeout といったオプションは無視されます。
 
-The async component can opt-out of `Suspense` control and let the component always control its own loading state by specifying `suspensible: false` in its options.
+非同期コンポーネントのオプションに `suspensible: false` を指定することで、 `Suspense` の制御から外すことができ、常にコンポーネントが自身の読み込み状態を制御することができます。
 
-You can check the list of available options in the [API Reference](../api/global-api.html#arguments-4)
+[API リファレンス](../api/global-api.html#arguments-4) で利用可能なオプションのリストを確認できます。
