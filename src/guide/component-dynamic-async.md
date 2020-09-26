@@ -30,7 +30,7 @@
 </keep-alive>
 ```
 
-以下の様になります:
+以下の結果を確認してみてください:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="VwLJQvP" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Dynamic components: with keep-alive">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/VwLJQvP">
