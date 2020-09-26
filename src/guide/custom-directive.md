@@ -56,7 +56,7 @@ directives: {
 
 - `beforeUpdate`: 束縛された要素を含むコンポーネントの VNode が更新される前に呼ばれます。
 
-:::tip 注意
+:::tip Note
 VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱います。描画関数を説明する時です。
 :::
 
