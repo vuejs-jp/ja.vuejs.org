@@ -2,7 +2,7 @@
 
 ## 基本
 
-Vue.js 本体で提供されているデフォルトのディレクティブ (`v-model` や `v-show`) に加えて、独自のカスタムディレクティブ (custom directives) を登録することも可能です。Vue ではコードの再利用や抽象化の基本形はコンポーネントです。しかしながら、単純な要素への低レベルな DOM のアクセスが必要なケースがあるかもしれません。こういったケースにカスタムディレクティブが役に立つことでしょう。以下のような input 要素へのフォーカスが１つの例として挙げられます。
+Vue.js 本体で提供されているデフォルトのディレクティブ (`v-model` や `v-show`) に加えて、独自のカスタムディレクティブ (custom directives) を登録することも可能です。Vue ではコードの再利用や抽象化の基本形はコンポーネントです。しかしながら、単純な要素への低レベルな DOM のアクセスが必要なケースがあるかもしれません。こういったケースにカスタムディレクティブが役に立つことでしょう。以下のような input 要素へのフォーカスが１つの例として挙げられます:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="JjdxaJW" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Custom directives: basic example">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/JjdxaJW">
@@ -13,7 +13,7 @@ Vue.js 本体で提供されているデフォルトのディレクティブ (`v
 
 ページを読み込むと、この要素にフォーカスが当たります (注意：`autofucus` はモバイルの Safari で動きません)。実際、このページに訪れてから他に何もクリックしなければ、上記の input 要素にフォーカスが当たります。また、`Rerun` ボタンをクリックしても、input 要素はフォーカスされます。
 
-ここからこれを実現するディレクティブを実装しましょう。
+ここからこれを実現するディレクティブを実装しましょう:
 
 ```js
 const app = Vue.createApp({})
@@ -27,7 +27,7 @@ app.directive('focus', {
 })
 ```
 
-ディレクティブを代わりにローカルに登録したい場合、コンポーネントの `directives` オプションで登録できます。
+ディレクティブを代わりにローカルに登録したい場合、コンポーネントの `directives` オプションで登録できます:
 
 ```js
 directives: {
@@ -40,7 +40,7 @@ directives: {
 }
 ```
 
-そしてテンプレートでは、新規登録した `v-focus` 属性をどの要素に対しても以下のように利用できます。
+そしてテンプレートでは、新規登録した `v-focus` 属性をどの要素に対しても以下のように利用できます:
 
 ```html
 <input v-focus />
@@ -72,7 +72,7 @@ VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱いま�
 
 ディレクティブの引数は動的にできます。例えば、`v-mydirective:[argument]="value"` において、`argument` はコンポーネントインスタンスの data プロパティに基づいて更新されます! これにより、私たちのアプリケーション全体を通した利用に対して、カスタムディレクティブは柔軟になります。
 
-ページの固定位置に要素をピン留めするカスタムディレクティブを考えてみましょう。引数の値が縦方向のピクセル位置を更新するカスタムディレクティブを以下のように作成することができます:。
+ページの固定位置に要素をピン留めするカスタムディレクティブを考えてみましょう。引数の値が縦方向のピクセル位置を更新するカスタムディレクティブを以下のように作成することができます:
 
 ```vue-html
 <div id="dynamic-arguments-example" class="demo">
@@ -227,7 +227,7 @@ return withDirectives(h('div'), [[vDemo, test]])
 
 ここで `vDemo` はユーザによって記述されたディレクティブオブジェクトで、それは `mounted` や `updated` のフック関数を含みます。
 
-`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[描画関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます。
+`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[描画関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます:
 
 ```js
 {
