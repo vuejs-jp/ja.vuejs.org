@@ -62,7 +62,7 @@ const AsyncComp = Vue.defineAsyncComponent(
 app.component('async-example', AsyncComp)
 ```
 
-ご覧の通り、このメソッドは `Promise` を返すファクトリ関数を受けます。サーバからコンポーネント定義を取得したら Promise の `resolve` コールバックが呼ばれるべきです。また、読み込みが失敗したことを示すために `reject(reason)` を呼ぶこともできます。
+見て分かるとおり、このメソッドは `Promise` を返すファクトリ関数を受けます。サーバーからコンポーネント定義を取得したら Promise の `resolve` コールバックが呼ばれるべきです。また、読み込みが失敗したことを示すために `reject(reason)` を呼ぶこともできます。
 
 ファクトリ関数の中で `Promise` を返すことができるので、 Webpack 2 以降と ES2015 の構文では以下のように書くこともできます:
 
