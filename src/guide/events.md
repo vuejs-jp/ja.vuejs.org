@@ -4,8 +4,7 @@
 
 ## イベントの購読
 
-`v-on` ディレクティブを使うことで、DOM イベントの購読、イベント発火時の JavaScript の実行が可能になります。これは通常 `@` に省略することができます。
-`v-on:click="methodName"` もしくは `@click="methodName"` と書いて使用します。
+`v-on` ディレクティブを使うことで、DOM イベントの購読、イベント発火時の JavaScript の実行が可能になります。これは通常 `@` に省略することができます。`v-on:click="methodName"` もしくは `@click="methodName"` と書いて使用します。
 
 例:
 
