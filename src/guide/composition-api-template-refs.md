@@ -1,11 +1,11 @@
-## Template Refs
+## テンプレート参照
 
 > この節ではコード例で [単一ファイルコンポーネント](single-file-component.html)の文法を使用しています。
 
-> このガイドはすでに [Composition API 導入](composition-api-introduction.html) を読んでいることを前提に書かれています。もしまだ読んでいないのなら、先に読みましょう。
+> このガイドはすでに [コンポジション API 導入](composition-api-introduction.html) を読んでいることを前提に書かれています。もしまだ読んでいないのなら、先に読みましょう。
 
-Composition API を使うとき、 [リアクティブ refs](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) と [テンプレート refs](component-template-refs.html) のコンセプトは同じになります。
-テンプレート内の要素やコンポーネントインスタンスの参照を取得するために、 ref 変数を定義して [setup()](composition-api-setup.html) で返します.
+コンポジション API を使うとき、 [リアクティブ参照](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) と [テンプレート参照](component-template-refs.html) のコンセプトは同じになります。
+テンプレート内の要素やコンポーネントインスタンスの参照を取得するために、 ref 変数を定義して [setup()](composition-api-setup.html) で返します。
 
 ```html
 <template>
@@ -32,9 +32,9 @@ Composition API を使うとき、 [リアクティブ refs](reactivity-fundamen
 </script>
 ```
 
-描画コンテキストに `root` 変数を渡していて、`ref="root"` 経由で div 要素とバインドします. 仮想 DOM のパッチアルゴリズムの中で、 もし VNode の `ref` キーは描画コンテキストの ref に対応すると、VNode の対応する要素またはコンポーネントインスタンスに ref の値が割り当てられます。これは仮想 DOM のマウント/パッチ処理中に実行されるので、テンプレート refs では初期描画に値だけを取得できます。
+描画コンテキストに `root` 変数を渡していて、`ref="root"` 経由で div 要素と束縛します。 仮想 DOM のパッチアルゴリズムの中で、 もし VNode の `ref` キーは描画コンテキストの ref に対応すると、VNode の対応する要素またはコンポーネントインスタンスに ref の値が割り当てられます。これは仮想 DOM のマウント/パッチ処理中に実行されるので、テンプレート refs では初期描画に値だけを取得できます。
 
-テンプレート refs　は他の refs と似た挙動をします。つまり、リアクティブかつコンポジション関数に渡せる(または返せる)ことができます。
+テンプレート参照は他の参照と似た挙動をします。つまり、リアクティブかつコンポジション関数に渡せる(または返せる)ことができます。
 
 ### Usage with JSX
 
@@ -56,7 +56,7 @@ export default {
 
 ### Usage inside `v-for`
 
-コンポジション API のテンプレート refs を `v-for` 内部で使う時に特別な処理はされないです。代わりに、関数 refs を使って独自処理を実行してください。
+コンポジション API のテンプレート参照を `v-for` 内部で使う時には特別な処理はされないです。代わりに、参照を提供する関数を使って独自処理を実行してください。
 
 ```html
 <template>
