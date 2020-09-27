@@ -3,6 +3,7 @@
 <div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-user-events?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to handle events on Vue School">イベントハンドリングする方法を Vue School の無料レッスンで学ぶ</a></div>
 
 ## イベントの購読
+
 `v-on` ディレクティブを使うことで、DOM イベントの購読、イベント発火時の JavaScript の実行が可能になります。これは通常 `@` に省略することができます。
 `v-on:click="methodName"` もしくは `@click="methodName"` と書いて使用します。
 
@@ -193,6 +194,7 @@ methods: {
 <!-- 最大1回、クリックイベントはトリガされます -->
 <a @click.once="doThis"></a>
 ```
+
 他の修飾子とは違って、ネイティブ DOM イベント専用ではありますが、`.once` 修飾子を[コンポーネントイベント](component-custom-events.html)でも使用することができます。まだコンポーネントについて読んでいないなら、今は気にする必要はありません。
 
 Vue は [`addEventListener`の `passive` オプション](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
@@ -290,7 +292,6 @@ Vue は最も一般的に使用されるキーコードのエイリアスを提�
 - `.middle`
 
 これらの修飾子は、イベントのトリガのハンドリングを、特定のマウスのボタンのみに制限します。
-
 
 ## なぜ HTML にリスナを記述するのですか
 
