@@ -1,8 +1,8 @@
-# List Rendering
+# リストレンダリング
 
-## Mapping an Array to Elements with `v-for`
+## v-for で配列に要素をマッピングする
 
-We can use the `v-for` directive to render a list of items based on an array. The `v-for` directive requires a special syntax in the form of `item in items`, where `items` is the source data array and `item` is an **alias** for the array element being iterated on:
+配列に基づいて、アイテムのリストを描画するために、`v-for` ディレクティブを使用することができます。 `v-for` ディレクティブには、 `item in items` の形式の特別な構文が必要で、 `items` はソースデータの配列、 `item` は繰り返される配列要素の**エイリアス**です:
 
 ```html
 <ul id="array-rendering">
@@ -22,7 +22,7 @@ Vue.createApp({
 }).mount('#array-rendering')
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="VwLGbwa" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Array">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/VwLGbwa">
@@ -31,7 +31,7 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Inside `v-for` blocks we have full access to parent scope properties. `v-for` also supports an optional second argument for the index of the current item.
+`v-for` ブロック内では、親スコープのプロパティへの完全なアクセスを持っています。また `v-for` は現在のアイテムに対する配列のインデックスを、任意の2つ目の引数としてサポートしています。
 
 ```html
 <ul id="array-with-index">
@@ -52,7 +52,7 @@ Vue.createApp({
 }).mount('#array-with-index')
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="wvaEdBP" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Array and index">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/wvaEdBP">
@@ -61,15 +61,15 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-You can also use `of` as the delimiter instead of `in`, so that it is closer to JavaScript's syntax for iterators:
+また、区切り文字として `in` の代わりに `of` を使用することができます。これは JavaScript のイテレータ構文に近いものです:
 
 ```html
 <div v-for="item of items"></div>
 ```
 
-## `v-for` with an Object
+## オブジェクトの `v-for`
 
-You can also use `v-for` to iterate through the properties of an object.
+オブジェクトのプロパティに対して、`v-for` を使って反復処理することもできます。
 
 ```html
 <ul id="v-for-object" class="demo">
@@ -93,7 +93,7 @@ Vue.createApp({
 }).mount('#v-for-object')
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="NWqLjqy" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Object">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqLjqy">
@@ -102,7 +102,7 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-You can also provide a second argument for the property's name (a.k.a. key):
+2 つ目の引数としてプロパティ名（すなわちキー）も提供できます:
 
 ```html
 <li v-for="(value, name) in myObject">
@@ -117,7 +117,7 @@ You can also provide a second argument for the property's name (a.k.a. key):
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-And another for the index:
+index も提供できます:
 
 ```html
 <li v-for="(value, name, index) in myObject">
@@ -133,16 +133,16 @@ And another for the index:
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 :::tip Note
-When iterating over an object, the order is based on the enumeration order of `Object.keys()`, which isn't guaranteed to be consistent across JavaScript engine implementations.
+オブジェクトを反復処理するとき、順序は `Object.keys()` の列挙順のキーに基づいており、全ての JavaScript エンジンの実装で一貫性が保証されて**いません**。
 :::
 
-## Maintaining State
+## 状態の維持
 
-When Vue is updating a list of elements rendered with `v-for`, by default it uses an "in-place patch" strategy. If the order of the data items has changed, instead of moving the DOM elements to match the order of the items, Vue will patch each element in-place and make sure it reflects what should be rendered at that particular index.
+Vue が `v-for` で描画された要素のリストを更新する際、デフォルトでは “その場でパッチを適用する” (in-place patch) 戦略が用いられます。データのアイテムの順序が変更された場合、アイテムの順序に合わせて DOM 要素を移動する代わりに、 Vue は各要素にその場でパッチを適用して、その特定のインデックスに何を描画するべきかを確実に反映します。
 
-This default mode is efficient, but **only suitable when your list render output does not rely on child component state or temporary DOM state (e.g. form input values)**.
+このデフォルトのモードは効率がいいです。しかしこれは、**描画されたリストが子コンポーネントの状態や、一時的な DOM の状態に依存していないときにだけ適しています (例: フォームのインプットの値)**。
 
-To give Vue a hint so that it can track each node's identity, and thus reuse and reorder existing elements, you need to provide a unique `key` attribute for each item:
+Vue が各ノードの識別情報を追跡できるヒントを与えるために、また、先ほど説明したような既存の要素の再利用と並び替えができるように、一意な `key` 属性を全てのアイテムに与える必要があります:
 
 ```html
 <div v-for="item in items" :key="item.id">
@@ -150,21 +150,21 @@ To give Vue a hint so that it can track each node's identity, and thus reuse and
 </div>
 ```
 
-It is recommended to provide a `key` attribute with `v-for` whenever possible, unless the iterated DOM content is simple, or you are intentionally relying on the default behavior for performance gains.
+繰り返される DOM の内容が単純な場合や、性能向上のためにデフォルトの動作に意図的に頼る場合を除いて、可能なときはいつでも `v-for` に `key` 属性を与えることが推奨されます。
 
-Since it's a generic mechanism for Vue to identify nodes, the `key` also has other uses that are not specifically tied to `v-for`, as we will see later in the guide.
+これは Vue がノードを識別する汎用的な仕組みなので、`key` はガイドの後半でわかるように `v-for` に縛られない他の用途もあります。
 
 :::tip Note
-Don't use non-primitive values like objects and arrays as `v-for` keys. Use string or numeric values instead.
+オブジェクトや配列のような非プリミティブ値を `v-for` のキーとして使わないでください。代わりに、文字列や数値を使ってください。
 :::
 
-For detailed usage of the `key` attribute, please see the [`key` API documentation](../api/special-attributes.html#key).
+`key` 属性の詳細な使い方は、[`key` API ドキュメント](../api/special-attributes.html#key)を参照してください。
 
-## Array Change Detection
+## 配列の変化を検出
 
-### Mutation Methods
+### 変更メソッド
 
-Vue wraps an observed array's mutation methods so they will also trigger view updates. The wrapped methods are:
+Vue は画面の更新もトリガするために、監視された配列の変更メソッドをラップします。ラップされたメソッドは次のとおりです:
 
 - `push()`
 - `pop()`
@@ -174,23 +174,23 @@ Vue wraps an observed array's mutation methods so they will also trigger view up
 - `sort()`
 - `reverse()`
 
-You can open the console and play with the previous examples' `items` array by calling their mutation methods. For example: `example1.items.push({ message: 'Baz' })`.
+コンソールを開いて前の `items` 配列の例で変更メソッドを呼び出して試してみてください。例えば `example1.items.push({ message: 'Baz' })` のようにしてみましょう。
 
-### Replacing an Array
+### 配列の置き換え
 
-Mutation methods, as the name suggests, mutate the original array they are called on. In comparison, there are also non-mutating methods, e.g. `filter()`, `concat()` and `slice()`, which do not mutate the original array but **always return a new array**. When working with non-mutating methods, you can replace the old array with the new one:
+変更メソッドは、名前が示唆するように、それらが呼ばれると元の配列を変更します。一方で、変更しないメソッドもあります。例えば、`filter()`、`concat()`、`slice()` は、元の配列を変更せず、**常に新しい配列**を返します。これらのメソッドを使用する場合は、新しいもので古い配列を置き換えることで変更できます:
 
 ```js
 example1.items = example1.items.filter(item => item.message.match(/Foo/))
 ```
 
-You might think this will cause Vue to throw away the existing DOM and re-render the entire list - luckily, that is not the case. Vue implements some smart heuristics to maximize DOM element reuse, so replacing an array with another array containing overlapping objects is a very efficient operation.
+これにより、Vue が既存の DOM を破棄し、リスト全体を再描画すると思われるかもしれませんが、幸いなことにそうではありません。Vue は DOM 要素の再利用を最大化するためにいくつかのスマートなヒューリスティックを実装しているので、重複するオブジェクトを含んでいる別の配列で元の配列を置き換えることは、とても効率的な操作です。
 
-## Displaying Filtered/Sorted Results
+## フィルタ/ソートされた結果の表示
 
-Sometimes we want to display a filtered or sorted version of an array without actually mutating or resetting the original data. In this case, you can create a computed property that returns the filtered or sorted array.
+元のデータを実際に変更またはリセットせずに、フィルタリングやソートされたバージョンの配列を表示したいことがあります。このケースでは、フィルタリングやソートされた配列を返す算出プロパティを作ることができます。
 
-For example:
+例えば:
 
 ```html
 <li v-for="n in evenNumbers">{{ n }}</li>
@@ -209,7 +209,7 @@ computed: {
 }
 ```
 
-In situations where computed properties are not feasible (e.g. inside nested `v-for` loops), you can use a method:
+算出プロパティが使えない状況ではメソッドを使うこともできます。(例: 入れ子になった v-for のループの中):
 
 ```html
 <ul v-for="numbers in sets">
@@ -230,9 +230,9 @@ methods: {
 }
 ```
 
-## `v-for` with a Range
+## 範囲付き `v-for`
 
-`v-for` can also take an integer. In this case it will repeat the template that many times.
+`v-for` は整数値を取ることもできます。このケースでは、指定された数だけテンプレートが繰り返されます。
 
 ```html
 <div id="range" class="demo">
@@ -240,7 +240,7 @@ methods: {
 </div>
 ```
 
-Result:
+結果:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="NWqLjNY" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with a range">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqLjNY">
@@ -249,9 +249,9 @@ Result:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## `v-for` on a `<template>`
+## `<template>` での `v-for`
 
-Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to render a block of multiple elements. For example:
+テンプレート `v-if` と同様に、複数の要素のブロックをレンダリングするために、 `v-for` で `<template>` タグを使うこともできます。例:
 
 ```html
 <ul>
@@ -262,13 +262,13 @@ Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to 
 </ul>
 ```
 
-## `v-for` with `v-if`
+## `v-for` と `v-if`
 
 :::tip
-Note that it's **not** recommended to use `v-if` and `v-for` together. Refer to [style guide](../style-guide/#avoid-v-if-with-v-for-essential) for details.
+`v-if` と `v-for` を同時に利用することは**推奨されません**。 詳細については [スタイルガイド](../style-guide/#avoid-v-if-with-v-for-essential) を参照ください。
 :::
 
-When they exist on the same node, `v-for` has a higher priority than `v-if`. That means the `v-if` will be run on each iteration of the loop separately. This can be useful when you want to render nodes for only _some_ items, like below:
+それらが同じノードに存在するとき、 `v-for` は `v-if` よりも高い優先度を持ちます。これは `v-if` がループの各繰り返しで実行されることを意味します。以下のように、これはいくつかの項目のみのノードを描画する場合に便利です。
 
 ```html
 <li v-for="todo in todos" v-if="!todo.isComplete">
@@ -276,9 +276,9 @@ When they exist on the same node, `v-for` has a higher priority than `v-if`. Tha
 </li>
 ```
 
-The above only renders the todos that are not complete.
+上記は、完了していない項目だけを描画します。
 
-If instead, your intent is to conditionally skip execution of the loop, you can place the `v-if` on a wrapper element (or [`<template>`](conditional#conditional-groups-with-v-if-on-lt-template-gt)). For example:
+代わりに、ループの実行を条件付きでスキップすることを目的にしている場合は、ラッパー要素 (または [`<template>`](conditional#conditional-groups-with-v-if-on-lt-template-gt))上に `v-if` を配置できます。例えば:
 
 ```html
 <ul v-if="todos.length">
@@ -289,17 +289,17 @@ If instead, your intent is to conditionally skip execution of the loop, you can 
 <p v-else>No todos left!</p>
 ```
 
-## `v-for` with a Component
+## コンポーネントと `v-for`
 
-> This section assumes knowledge of [Components](component-basics.md). Feel free to skip it and come back later.
+> このセクションでは、[コンポーネント](component-basics.md)についての知識を前提としています。もし分からなければ、このセクションを遠慮なく飛ばして、理解した後に戻ってきてください。
 
-You can directly use `v-for` on a custom component, like any normal element:
+通常の要素のように、カスタムコンポーネントで直接 `v-for` を使うことができます:
 
 ```html
 <my-component v-for="item in items" :key="item.id"></my-component>
 ```
 
-However, this won't automatically pass any data to the component, because components have isolated scopes of their own. In order to pass the iterated data into the component, we should also use props:
+ただし、コンポーネントは自身の隔離されたスコープを持っているため、これによってコンポーネントにデータが自動的に渡されることはありません。繰り返されたデータをコンポーネントに渡すには、プロパティも使用する必要があります:
 
 ```html
 <my-component
@@ -310,9 +310,9 @@ However, this won't automatically pass any data to the component, because compon
 ></my-component>
 ```
 
-The reason for not automatically injecting `item` into the component is because that makes the component tightly coupled to how `v-for` works. Being explicit about where its data comes from makes the component reusable in other situations.
+自動的に `item` をコンポーネントに渡さない理由は、それが `v-for` の動作と密結合になってしまうからです。どこからデータが来たのかを明確にすることで、他の場面でコンポーネントを再利用できるようになります。
 
-Here's a complete example of a simple todo list:
+これは、単純な ToDo リストの完全な例です:
 
 ```html
 <div id="todo-list-example">
