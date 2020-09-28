@@ -1,12 +1,14 @@
 # Provide / Inject
 
-> This guide assumes that you have already read [Provide / Inject](component-provide-inject.html), [Composition API Introduction](composition-api-introduction.html), and [Reactivity Fundamentals](reactivity-fundamentals.html).
+> このページは、すでに [Provide / Inject](component-provide-inject.html)、[コンポジション API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
 
-We can use [provide / inject](component-provide-inject.html) with the Composition API as well. Both can only be called during [`setup()`](composition-api-setup.html) with a current active instance.
+[provide / inject](component-provide-inject.html) は コンポジション API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
 
-## Scenario Background
 
-Let's assume that we want to rewrite the following code, which contains a `MyMap` component that provides a `MyMarker` component with the user's location, using the Composition API.
+## シナリオの背景
+
+これから、コンポジション API を使用して、以下のコードを書き直そうとしているとしましょう。
+以下のコードでは、`MyMap` コンポーネントが `MyMaker` コンポーネントにユーザの位置情報を提供しています。
 
 ```vue
 <!-- src/components/MyMap.vue -->
@@ -41,16 +43,17 @@ export default {
 </script>
 ```
 
-## Using Provide
+## Provide の使い方
 
-When using `provide` in `setup()`, we start by explicitly importing the method from `vue`. This allows us to define each property with its own invocation of `provide`.
+`setup()` 内で `provide` を使う場合、始めに `vue` から明示的に `provide` をインポートします。
+これにより、 各プロパティについて `provide` の呼び出しで定義することができるようになります。
 
-The `provide` function allows you to define the property through two parameters:
+`provide` 関数は2つの引数によってプロパティを定義できます:
 
-1. The property's name (`<String>` type)
-2. The property's value
+1. プロパティの名前 (`<String>` 型)
+2. プロパティの値
 
-Using our `MyMap` component, our provided values can be refactored as the following:
+`MyMap` コンポーネントは、以下のようにリファクタリングすることができます:
 
 ```vue{7,14-20}
 <!-- src/components/MyMap.vue -->
@@ -77,16 +80,18 @@ export default {
 </script>
 ```
 
-## Using Inject
+## Inject の使い方
 
-When using `inject` in `setup()`, we also need to explicitly import it from `vue`. Once we do so, this allows us to invoke it to define how we want to expose it to our component.
+同様に `setup()` 内 `inject` を使う場合も `vue` から明示的に `inject` をインポートする必要があります。
+そうしておけば、これを呼び出すことで、注入された値をコンポーネントに公開する方法を定義することができるようになります。
 
-The `inject` function takes two parameters:
+`inject` 関数は2つの引数をとります:
 
-1. The name of the property to inject
-2. A default value (**Optional**)
+1. 注入されるプロパティ名
+2. デフォルト値 (**Optional**)
 
-Using our `MyMarker` component, we can refactor it with the following code:
+`MyMaker` コンポーネントは、以下のようにリファクタリングすることができます:
+
 
 ```vue{3,6-14}
 <!-- src/components/MyMarker.vue -->
@@ -107,13 +112,13 @@ export default {
 </script>
 ```
 
-## Reactivity
+## リアクティブ
 
-### Adding Reactivity
+### リアクティブの追加
 
-To add reactivity between provided and injected values, we can use a [ref](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) or [reactive](reactivity-fundamentals.html#declaring-reactive-state) when providing a value.
+提供された値と注入された値をリアクティブにするには、値を提供する際に [ref](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) または [reactive](reactivity-fundamentals.html#declaring-reactive-state) を使います。
 
-Using our `MyMap` component, our code can be updated as follows:
+`MyMap` コンポーネントは、以下のように変更できます:
 
 ```vue{7,15-22}
 <!-- src/components/MyMap.vue -->
@@ -143,13 +148,13 @@ export default {
 </script>
 ```
 
-Now, if anything changes in either property, the `MyMarker` component will automatically be updated as well!
+これで、どちらかのプロパティに何か変更があった場合、`MyMaker` コンポーネントも自動的に更新されるようになります。
 
-### Mutating Reactive Properties
+### リアクティブプロパティの変更
 
-When using reactive provide / inject values, **it is recommended to keep any mutations to reactive properties inside of the _provider_ whenever possible**.
+リアクティブな provide / inject の値を使う場合、**リアクティブなプロパティに対しての変更は可能な限り _提供する側_ の内部に留めることが推奨されます**
 
-For example, in the event we needed to change the user's location, we would ideally do this inside of our `MyMap` component.
+例えば、以下の location を変更する必要があるイベントでは、location の変更は `MyMap` コンポーネント内で行われるのが理想的です。
 
 ```vue{28-32}
 <!-- src/components/MyMap.vue -->
@@ -188,7 +193,7 @@ export default {
 </script>
 ```
 
-However, there are times where we need to update the data inside of the component where the data is injected. In this scenario, we recommend providing a method that is responsible for mutating the reactive property.
+しかし、データが注入されたコンポーネント側でデータを更新する必要がある場合もあります。そのような場合、リアクティブなプロパティを更新する責務を持つメソッドを提供することを推奨します。
 
 ```vue{21-23,27}
 <!-- src/components/MyMap.vue -->
@@ -244,7 +249,7 @@ export default {
 </script>
 ```
 
-Finally, we recommend using `readonly` on provided property if you want to ensure that the data passed through `provide` cannot be mutated by the injected component.
+最後に、`provide` で渡したデータが、注入されたコンポーネント内で変更されないようにしたい場合は、提供するプロパティに `readonly` をつけることを推奨します。
 
 ```vue{7,25-26}
 <!-- src/components/MyMap.vue -->
