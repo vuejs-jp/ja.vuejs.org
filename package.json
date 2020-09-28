@@ -2,11 +2,19 @@
   "devDependencies": {
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
+    "shelljs": "^0.8.4",
+    "textlint": "^11.7.6",
+    "textlint-checker-for-vuejs-jp-docs": "git+https://github.com/vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
+    "textlint-plugin-jtf-style": "^1.0.1",
+    "textlint-rule-detect-bad-chars": "^1.0.2",
+    "textlint-rule-no-mix-dearu-desumasu": "^4.0.1",
     "vuepress": "^1.5.4"
   },
   "scripts": {
     "serve": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "test": "npm run lint",
+    "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./src/**/*.md']).filter(function(file){return !file.endsWith('/guide/team.md')}).join(' ');if(shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files).code!==0){shell.exit(1)};\""
   },
   "dependencies": {
     "@docsearch/css": "^1.0.0-alpha.27",
