@@ -369,7 +369,7 @@ HTML 要素のように、コンポーネントに要素を渡すことができ
 
 ```html
 <alert-box>
-  Something bad happened. 
+  Something bad happened.
 </alert-box>
 ```
 
