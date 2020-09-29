@@ -215,7 +215,9 @@ app.component('blog-post', {
 問題は、このボタンが何もしないことです:
 
 ```html
-<button>Enlarge text</button>
+<button>
+  Enlarge text
+</button>
 ```
 
 ボタンをクリックすると、全ての投稿のテキストを拡大する必要があることを親に伝える必要があります。親は、ネイティブ DOM イベントでの場合と同様に、 `v-on` や `@` を用いて子コンポーネントのインスタンスでのイベントを購読することができます:
@@ -227,7 +229,9 @@ app.component('blog-post', {
 そして子コンポーネントはビルトインの [**`$emit`** メソッド](../api/instance-methods.html#emit) にイベントの名前を渡して呼び出すことで、イベントを送出することができます:
 
 ```html
-<button @click="$emit('enlarge-text')">Enlarge text</button>
+<button @click="$emit('enlarge-text')">
+  Enlarge text
+</button>
 ```
 
 親コンポーネントは `v-on:enlarge-text="postFontSize += 0.1"` リスナーによって、このイベントを受け取り `postFontSize` を更新することができます。
@@ -364,7 +368,9 @@ app.component('custom-input', {
 HTML 要素のように、コンポーネントに要素を渡すことができると便利なことがよくあります。例えば以下の通り:
 
 ```html
-<alert-box> Something bad happened. </alert-box>
+<alert-box>
+  Something bad happened. 
+</alert-box>
 ```
 
 これは以下のように描画されるでしょう。:
