@@ -120,7 +120,7 @@ app.component('child-component', {
 })
 ```
 
-この場合、 `child-component` が別の場所にレンダリングされたとしても、`parent-component` の子のままとなるため、`name` prop を受け取ります。
+この場合、 `child-component` が別の場所にレンダリングされたとしても、`parent-component` の子のままとなるため、`name` プロパティを受け取ります。
 
 これは、親コンポーネントからの注入が期待通りに動作し、Vue Devtools 上では実際のコンテンツが移動した場所に配置されるのではなく、親コンポーネントの下に配置されることを意味します。
 
