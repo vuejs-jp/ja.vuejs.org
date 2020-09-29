@@ -49,7 +49,6 @@ app.mount('#components-demo')
 
 ## コンポーネントの再利用
 
-Components can be reused as many times as you want:
 コンポーネントは必要なだけ何度でも再利用できます:
 
 ```html
