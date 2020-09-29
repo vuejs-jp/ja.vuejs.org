@@ -53,7 +53,7 @@ app.component('modal-button', {
 
 Teleport は、グローバルステートに頼ったり、2つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
 
-`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport**" させるよう、`modal-button` を変更しましょう。 
+`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport (テレポート) **" させるよう、`modal-button` を変更しましょう。 
 
 ```js
 app.component('modal-button', {
