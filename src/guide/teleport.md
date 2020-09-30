@@ -1,12 +1,12 @@
 # Teleport
 
-Vue encourages us to build our UIs by encapsulating UI and related behavior into components. We can nest them inside one another to build a tree that makes up an application UI.
+Vue は私たちに、UI やそれに関連する挙動をコンポーネントにして、カプセル化することで UI を作り上げることを勧めています。私たちはそれらを互いに入れ子にして、アプリケーションを構成するツリーを作ることができます。
 
-However, sometimes a part of a component's template belongs to this component logically, while from a technical point of view, it would be preferable to move this part of the template somewhere else in the DOM, outside of the Vue app. 
+しかしながら、コンポーネントのテンプレートの一部が、論理的にこのコンポーネントに属している場合もありますが、技術的な観点では、テンプレートのこの部分を Vue アプリの外や、DOM 内の別の場所に移動させることが望ましいこともあります。
 
-A common scenario for this is creating a component that includes a full-screen modal. In most cases, you'd want the modal's logic to live within the component, but the positioning of the modal quickly becomes difficult to solve through CSS, or requires a change in component composition.
+これの一般的なシナリオは、フルスクリーンのモーダルを含むコンポーネントです。多くの場合、モーダルのロジックはコンポーネント内に残したいと思うでしょうが、モーダルの配置はすぐに CSS で解決するのが難しくなったり、コンポーネントの構成を変更する必要が出てくるでしょう。
 
-Consider the following HTML structure.
+以下のような HTML 構造を考えてみましょう。
 
 ```html
 <body>
@@ -19,9 +19,9 @@ Consider the following HTML structure.
 </body>
 ```
 
-Let's take a look at `modal-button`. 
+`modal-button` について見てみましょう。
 
-The component will have a `button` element to trigger the opening of the modal, and a `div` element with a class of `.modal`, which will contain the modal's content and a button to self-close.
+コンポーネントはモーダルを開くための `button` 要素を持っており、さらに `.modal` クラスを持った `div` 要素があります。これはモーダルのコンテンツを表示して、自身を閉じるためのボタンを持っている要素です。
 
 ```js
 const app = Vue.createApp({});
@@ -49,11 +49,11 @@ app.component('modal-button', {
 })
 ```
 
-When using this component inside the initial HTML structure, we can see a problem - the modal is being rendered inside the deeply nested `div` and the `position: absolute` of the modal takes the parent relatively positioned `div` as reference.
+このコンポーネントを最初の HTML 構造の中で使うときに、問題が見えてきます。モーダルは深く入れ子になった `div` の中にレンダリングされており、モーダルの `position: absolute` は、相対的に位置する親の `div` を参照として使用します。
 
-Teleport provides a clean way to allow us to control under which parent in our DOM we want a piece of HTML to be rendered, without having to resort to global state or splitting this into two components.
+Teleport は、グローバルステートに頼ったり、2つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
 
-Let's modify our `modal-button` to use `<teleport>` and tell Vue "**teleport** this HTML **to** the "**body**" tag". 
+`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport (テレポート) **" させるよう、`modal-button` を変更しましょう。 
 
 ```js
 app.component('modal-button', {
@@ -82,7 +82,7 @@ app.component('modal-button', {
 })
 ```
 
-As a result, once we click the button to open the modal, Vue will correctly render the modal's content as a child of the `body` tag.
+その結果、ボタンをクリックしてモーダルを開くと、Vue はモーダルのコンテンツを `body` タグの子として正しくレンダリングします。
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="gOPNvjR" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue 3 Teleport">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/gOPNvjR">
@@ -91,9 +91,9 @@ As a result, once we click the button to open the modal, Vue will correctly rend
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Using with Vue components
+## Vue コンポーネントと使う
 
-If `<teleport>` contains a Vue component, it will remain a logical child component of the `<teleport>`'s parent:
+もし `<teleport>` が Vue コンポーネントを含む場合、それは`<teleport>` の親の、論理的な子コンポーネントのままになります。
 
 ```js
 const app = Vue.createApp({
@@ -120,13 +120,13 @@ app.component('child-component', {
 })
 ```
 
-In this case, even when `child-component` is rendered in the different place, it will remain a child of `parent-component` and will receive a `name` prop from it.
+この場合、 `child-component` が別の場所にレンダリングされたとしても、`parent-component` の子のままとなるため、`name` プロパティを受け取ります。
 
-This also means that injections from a parent component work as expected, and that the child component will be nested below the parent component in the Vue Devtools, instead of being placed where the actual content moved to.
+これは、親コンポーネントからの注入が期待通りに動作し、Vue Devtools 上では実際のコンテンツが移動した場所に配置されるのではなく、親コンポーネントの下に配置されることを意味します。
 
-## Using multiple teleports on the same target
+## 複数の teleport のターゲットを同じにして使う
 
-A common use case scenario would be a reusable `<Modal>` component of which there might be multiple instances active at the same time. For this kind of scenario, multiple `<teleport>` components can mount their content to the same target element. The order will be a simple append - later mounts will be located after earlier ones within the target element.
+一般的なユースケースのシナリオは、再利用可能な `<Modal>` コンポーネントで、同時に複数のインスタンスがアクティブになっている状態かもしれません。このようなシナリオの場合、複数の `<teleport>` は、同じターゲット要素に対してそれぞれのコンテンツをマウントすることができます。
 
 ```html
 <teleport to="#modals">
@@ -143,4 +143,4 @@ A common use case scenario would be a reusable `<Modal>` component of which ther
 </div>
 ```
 
-You can check `<teleport>` component options in the [API reference](../api/built-in-components.html#teleport)
+`<teleport>` コンポーネントのオプションは [API リファレンス](../api/built-in-components.html#teleport) で確認できます。
