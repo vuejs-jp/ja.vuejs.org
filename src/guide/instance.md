@@ -1,27 +1,53 @@
-# アプリケーションインスタンス
+# Application & Component Instances
 
-## インスタンスの作成
+## Creating an Application Instance
 
 全ての Vue アプリケーションは `createApp` 関数で新しい **アプリケーションインスタンス (application instance)** を作成するところから始まります:
 
 ```js
-Vue.createApp(/* options */)
+const app = Vue.createApp({ /* options */ })
 ```
 
-インスタンスが作成されたあと、コンテナを `mount` メソッドに渡すことで、これを _マウント_ できます。例えば、Vue アプリケーションを `<div id="app"></div>` にマウントしたいときは、`#app` を渡します:
+The application instance is used to register 'globals' that can then be used by components within that application. We'll discuss that in detail later in the guide but as a quick example:
 
 ```js
-Vue.createApp(/* options */).mount('#app')
+const app = Vue.createApp({})
+app.component('SearchInput', SearchInputComponent)
+app.directive('focus', FocusDirective)
+app.use(LocalePlugin)
 ```
 
-[MVVM パターン](https://ja.wikipedia.org/wiki/Model_View_ViewModel)に厳密に関連づけられているわけではないにもかかわらず、Vue の設計は部分的にその影響を受けています。慣例的に、私たちはインスタンスを参照するのに変数 `vm`（ViewModel の短縮形）を使用します。
+Most of the methods exposed by the application instance return that same instance, allowing for chaining:
 
-インスタンスを作成する際には、 **オプションオブジェクト (options object)** を渡すことができます。このガイドの多くは、意図した挙動を作るためにこれらのオプションをどのように使うことができるかを解説します。全てのオプションのリストは [API リファレンス](../api/options-data.html)で読むこともできます。
+```js
+Vue.createApp({})
+  .component('SearchInput', SearchInputComponent)
+  .directive('focus', FocusDirective)
+  .use(LocalePlugin)
+```
 
-Vue アプリケーションは、`createApp` で作られたひとつの **ルートインスタンス (root instance)** と、入れ子になった再利用可能なコンポーネントのツリーから成ります。例えば、`todo` アプリケーションのコンポーネントツリーはこのようになるでしょう:
+You can browse the full application API in the [API reference](../api/application-api.html).
+
+## The Root Component
+
+The options passed to `createApp` are used to configure the **root component**. That component is used as the starting point for rendering when we **mount** the application.
+
+An application needs to be mounted into a DOM element. For example, if we want to mount a Vue application into `<div id="app"></div>`, we should pass `#app`:
+
+```js
+const RootComponent = { /* options */ }
+const app = Vue.createApp(RootComponent)
+const vm = app.mount('#app')
+```
+
+Unlike most of the application methods, `mount` does not return the application. Instead it returns the root component instance.
+
+Although not strictly associated with the [MVVM pattern](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue's design was partly inspired by it. As a convention, we often use the variable `vm` (short for ViewModel) to refer to a component instance.
+
+While all the examples on this page only need a single component, most real applications are organized into a tree of nested, reusable components. For example, a Todo application's component tree might look like this:
 
 ```
-Root Instance
+Root Component
 └─ TodoList
    ├─ TodoItem
    │  ├─ DeleteTodoButton
@@ -31,107 +57,44 @@ Root Instance
       └─ TodoListStatistics
 ```
 
-[コンポーネントシステム](component-basics.html)の詳細は後ほど扱います。いまは、全てのVue コンポーネントもまたインスタンスであり、同じようなオプションオブジェクトを受け入れることだけを知っておいてください。
+Each component will have its own component instance, `vm`. For some components, such as `TodoItem`, there will likely be multiple instances rendered at any one time. All of the component instances in this application will share the same application instance.
 
-## データとメソッド
+We'll talk about [the component system](component-basics.html) in detail later. For now, just be aware that the root component isn't really any different from any other component. The configuration options are the same, as is the behavior of the corresponding component instance.
 
-インスタンスは作成時に、`data` で見つけられる全てのプロパティを [Vue の **リアクティブシステム (reactive system)**](reactivity.html)に追加します。これらのプロパティの値が変わると、ビューは"反応 (react)"し、新しい値に追従します。
+## Component Instance Properties
+
+Earlier in the guide we met `data` properties. Properties defined in `data` are exposed via the component instance:
 
 ```js
-// データオブジェクト
-const data = { a: 1 }
-
-// オブジェクトがルートインスタンスに追加されます
-const vm = Vue.createApp({
+const app = Vue.createApp({
   data() {
-    return data
+    return { count: 4 }
   }
-}).mount('#app')
+})
 
-// インスタンス上のプロパティを取得すると、元のデータのプロパティが返されます
-vm.a === data.a // => true
+const vm = app.mount('#app')
 
-// インスタンス上のプロパティへの代入は、元のデータにも影響されます
-vm.a = 2
-data.a // => 2
+console.log(vm.count) // => 4
 ```
 
-このデータが変更されると、ビューが再レンダリングされます。`data` のプロパティは、インスタンスが作成時に存在した場合にのみ **リアクティブ (reactive)** です。次のように新しいプロパティを代入すると:
+There are various other component options that add user-defined properties to the component instance, such as `methods`, `props`, `computed`, `inject` and `setup`. We'll discuss each of these in depth later in the guide. All of the properties of the component instance, no matter how they are defined, will be accessible in the component's template.
 
-```js
-vm.b = 'hi'
-```
+Vue also exposes some built-in properties via the component instance, such as `$attrs` and `$emit`. These properties all have a `$` prefix to avoid conflicting with user-defined property names.
 
-`b` への変更はビューへの更新を引き起こしません。あるプロパティがのちに必要であることがわかっているが、最初は空または存在しない場合は、なんらかの初期値を設定する必要があります。例:
+## Lifecycle Hooks
 
-```js
-data() {
-  return {
-    newTodoText: '',
-    visitCount: 0,
-    hideCompletedTodos: false,
-    todos: [],
-    error: null
-  }
-}
-```
-
-これに対する唯一の例外は `Object.freeze()` を使用し既存のプロパティが変更されるのを防ぐことです。これはリアクティブシステムが変更を _追跡 (track)_ することができないことも意味します。
-
-```js
-const obj = {
-  foo: 'bar'
-}
-
-Object.freeze(obj)
-
-const vm = Vue.createApp({
-  data() {
-    return obj
-  }
-}).mount('#app')
-```
-
-```html
-<div id="app">
-  <p>{{ foo }}</p>
-  <!-- これでは `foo` は更新されません！ -->
-  <button v-on:click="foo = 'baz'">Change it</button>
-</div>
-```
-
-data プロパティに加えて、インスタンスはいくつかの便利なプロパティとメソッドを提供します。これらはユーザ定義のプロパティと区別するため、頭に `$` が付けられています。例:
-
-```js
-const vm = Vue.createApp({
-  data() {
-    return {
-      a: 1
-    }
-  }
-}).mount('#example')
-
-vm.$data.a // => 1
-```
-
-今後、全てのインスタンスプロパティとメソッドのリストを調べるには [API リファレンス](../api/instance-properties.html) を利用できます。
-
-## インスタンスライフサイクルフック
-
-それぞれのインスタンスは、作成時に一連の初期化の手順を踏みます。例えば、データの監視、テンプレートのコンパイル、インスタンスの DOM へのマウント、データ変更時の DOM の変更を準備する必要があります。この中でインスタンスは、特定の段階にコードを追加する機会をユーザに与えるために、**ライフサイクルフック (lifecycle hooks)** と呼ばれる関数を実行します。
+Each component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called **lifecycle hooks**, giving users the opportunity to add their own code at specific stages.
 
 例えば [created](../api/options-lifecycle-hooks.html#created) フックは、インスタンスの作成後にコードを実行するために使用できます:
 
 ```js
 Vue.createApp({
   data() {
-    return {
-      a: 1
-    }
+    return { count: 1 }
   },
   created() {
-    // `this` は vm インスタンスを指します
-    console.log('a is: ' + this.a) // => "a is: 1"
+    // `this` points to the vm instance
+    console.log('count is: ' + this.count) // => "count is: 1"
   }
 })
 ```
