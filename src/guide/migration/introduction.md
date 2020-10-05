@@ -1,78 +1,190 @@
-# Introduction
+# はじめに
 
-> There's so much here! Does that mean 3.0 is completely different, I'll have to learn the basics all over again, and migrating will be practically impossible?
+::: info
+Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/guide/introduction.html) を参考に使い始めてみてください。
+:::
 
-We're glad you asked! The answer is no. We've gone to great lengths to ensure most of the API is the same and the core concepts haven't changed. It's long because we like to offer very detailed explanations and include a lot of examples. Rest assured, **this is not something you have to read from top to bottom!**
+このガイドは主に、Vue 3 の新機能と変更点について学びたい Vue 2 の経験があるユーザーを対象としています。 **Vue 3 を試す前にこのガイドを上から下まで読む必要はありません。** 多くの変更があったように見えますが、Vue についてあなたが知っていて愛していることの多くは同じままです。 しかし、私たちは可能な限り徹底し、文書化されたすべての変更について詳細な説明と例を提供したいと考えました。
 
-Possibly the biggest change is our new [Composition API](/guide/composition-api-introduction.html), which is entirely additive- the previous Options API will continue to be supported, as the Composition API is an advanced feature.
+- [クイックスタート](#クイックスタート)
+- [注目すべき新機能](#注目すべき新機能)
+- [破壊的変更](#破壊的変更)
+- [サポートライブラリ](#サポートライブラリ)
 
-## Overview
+## 概要
 
 <br>
 <iframe src="https://player.vimeo.com/video/440868720" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-Start learning Vue 3 at [Vue Mastery](https://www.vuemastery.com/courses-path/vue3).
+[Vue Mastery](https://www.vuemastery.com/courses-path/vue3) で Vue 3 を学び始める。
 
-### New Features
+## クイックスタート
 
-Some of the new features to keep an eye on in Vue 3 include:
+- CDN 経由: `<script src="https://unpkg.com/vue@next"></script>`
+- [Codepen](https://codepen.io/yyx990803/pen/OJNoaZL) 上のブラウザ内プレイグラウンド
+- [CodeSandbox](https://v3.vue.new) 上のブラウザ内サンドボックス
+- [Vite](https://github.com/vitejs/vite) を使った Scaffold:
+
+  ```bash
+  npm init vite-app hello-vue3 # OR yarn create vite-app hello-vue3
+  ```
+
+- [vue-cli](https://cli.vuejs.org/) を使った Scaffold:
+
+  ```bash
+  npm install -g @vue/cli # OR yarn global add @vue/cli
+  vue create hello-vue3
+  # select vue 3 preset
+  ```
+
+## 注目すべき新機能
+
+Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 
 - [Composition API](/guide/composition-api-introduction.html)
 - [Teleport](/guide/teleport.html)
 - [Fragments](/guide/migration/fragments.html)
 - [Emits Component Option](/guide/component-custom-events.html)
-- `createRenderer` API from `@vue/runtime-core` to create custom renderers
+- カスタムレンダラを作るための [`@vue/runtime-core` の `createRenderer` API](https://github.com/vuejs/vue-next/tree/master/packages/runtime-core)
+- [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-script-setup.md) <Badge text="experimental" type="warning" />
+- [SFC でのステートドリブンな CSS Variables (`<style vars>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
+- [SFC での `<style scoped>` は、グローバルルールまたはスロットされたコンテンツのみを対象とするルールを含めることができるようになった](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md)
 
-### Breaking
+## 破壊的変更
 
-The following consists a list of breaking changes from 2.x:
+::: info INFO
+Vue 2 と互換性のある動作と、互換性のない使用法に対する実行時警告を備えた Vue 3 の移行専用ビルドの開発に取り組んでいます。 重要な Vue 2 アプリの移行を計画している場合は、よりスムーズな体験のために移行ビルドを待つことを強くお勧めします。
+:::
 
-- [Global Vue API is changed to use an application instance](/guide/migration/global-api.html)
-- [Global and internal APIs have been restructured to be tree-shakable](/guide/migration/global-api-treeshaking.html)
-- [`model` component option and `v-bind`'s `sync` modifier are removed in favor of `v-model` arguments](/guide/migration/v-model.html)
-- [Render function API changed](/guide/migration/render-function-api.html)
-- [Functional components can only be created using a plain function](/guide/migration/functional-components.html)
-- [`functional` attribute on single-file component (SFC) `<template>` and `functional` component option are deprecated](/guide/migration/functional-components.html)
-- [Async components now require `defineAsyncComponent` method to be created](/guide/migration/async-components.html)
-- [Component data option should always be declared as a function](/guide/migration/data-option.html)
-- [Custom elements whitelisting is now performed during template compilation](/guide/migration/custom-elements-interop.html)
-- [Special `is` prop usage is restricted to the reserved `<component>` tag only](/guide/migration/custom-elements-interop.html)
-- [`$scopedSlots` property is removed and need to be replaced with `$slots`](/guide/migration/slots-unification.html)
-- [Attributes coercion strategy changed](/guide/migration/attribute-coercion.html)
-- [Custom directive API changed to align with component lifecycle](/guide/migration/custom-directives.html)
-- [Some transition classes got a rename](/guide/migration/transition.md)
-- [Component watch option](/api/options-data.html#watch) and [instance method `$watch`](/api/instance-methods.html#watch) no longer supports dot-delimited string paths, use a computed function as the parameter instead
-- In Vue 2.x, application root container's `outerHTML` is replaced with root component template (or eventually compiled to a template, if root component has no template/render option). Vue 3.x now uses application container's `innerHTML` instead.
+以下は、2.x からの破壊的変更の一覧です。:
 
-### Removed
+### グローバル API
 
-- [`keyCode` support as `v-on` modifiers](/guide/migration/keycode-modifiers.html)
-- [$on, $off and \$once instance methods](/guide/migration/events-api.html)
+- [グローバルな Vue API は、アプリケーションインスタンスを使用するように変更されました](/guide/migration/global-api.html)
+- [グローバル API と内部 API は、ツリーシェイキングが可能になるように再構築されました](/guide/migration/global-api-treeshaking.html)
+
+### テンプレートディレクティブ
+
+- [コンポーネントでの `v-model` の使用法が改定されました](/guide/migration/v-model.html)
+- [`<templatev-for>` ノードと非 `v-for` ノードでの `key` の使用法が変更されました](/guide/migration/key-attribute.html)
+- [同じ要素で使用した場合の `v-if` と `v-for` の優先順位が変更されました](/guide/migration/v-if-v-for.html)
+- [`v-bind="object"` は順序依存(order-sensitive)になりました](/guide/migration/v-bind.html)
+- [`v-for` 内の `ref` は refs の配列を登録しなくなりました](/guide/migration/array-refs.html)
+
+### コンポーネント
+
+- [関数コンポーネントは、単純な関数を使用してのみ作成可能になりました](/guide/migration/functional-components.html)
+- [単一ファイルコンポーネント (SFC) における `functional` 属性の `<template>` および `functional` コンポーネントオプションは非推奨になりました](/guide/migration/functional-components.html)
+- [非同期コンポーネントは、 `defineAsyncComponent` メソッドを使って作成することが必要になりました](/guide/migration/async-components.html)
+
+### Render 関数
+
+- [Render 関数の API が変更されました](/guide/migration/render-function-api.html)
+- [`$scopedSlots` プロパティが削除され、すべてのスロットが `$slots` を介して関数として公開されるようになりました](/guide/migration/slots-unification.html)
+
+### カスタム要素
+
+- [テンプレートのコンパイル中にカスタム要素のホワイトリスト化が実行されるようになりました](/guide/migration/custom-elements-interop.html)
+- [特別な `is` prop の使用は、予約済みの `<component>` タグのみに制限されるようになりました](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
+
+### その他の細かな変更
+
+- `destroyed` ライフサイクルオプションの名前が `unmounted` に変更されました
+- `beforeDestroy` ライフサイクルオプションの名前が `beforeUnmount` に変更されました
+- [Props の `default` ファクトリ関数は `this` コンテキストにアクセスできなくなりました](/guide/migration/props-default-this.html)
+- [コンポーネントライフサイクルに合わせてカスタムディレクティブ API が変更されました](/guide/migration/custom-directives.html)
+- [`data` オプションは常に関数として宣言されることが必要になりました](/guide/migration/data-option.html)
+- [ミックスインの `data` オプションは浅くマージされるようになりました](/guide/migration/data-option.html#mixin-merge-behavior-change)
+- [属性強制の戦略が変更されました](/guide/migration/attribute-coercion.html)
+- [一部のトランジションクラスの名前が変更されました](/guide/migration/transition.html)
+- [配列を監視している場合、コールバックは配列が置き換えられたときにのみ発火されるようになりました。 ミューテーションで発火する必要がある場合は、 `deep` オプションを指定する必要があります。](/guide/migration/watch.html)
+- 特別なディレクティブ(`v-if/else-if/else` 、 `v-for` 、または `v-slot`）が使われていない `<template>` タグはプレーンな要素として扱われ、内部コンテンツをレンダリングする代わりにネイティブの `<template>` 要素となります。
+- Vue 2.x では、アプリケーションルートコンテナの `outerHTML` はルートコンポーネントのテンプレートに置き換えられます(または、ルートコンポーネントにテンプレート/レンダーのオプションがない場合は、最終的にテンプレートにコンパイルされます)。 Vue 3.x では、代わりにアプリケーションコンテナの `innerHTML` を使用するようになりました。これは、コンテナ自体がテンプレートの一部とは見なされなくなったことを意味します。
+
+### 削除された API
+
+- [`v-on` の修飾子としての `keyCode` のサポート](/guide/migration/keycode-modifiers.html)
+- [$on, $off そして \$once のインスタンスメソッド](/guide/migration/events-api.html)
 - [Filters](/guide/migration/filters.html)
-- [Inline templates attributes](/guide/migration/inline-template-attribute.html)
+- [インラインテンプレート属性](/guide/migration/inline-template-attribute.html)
+- `$destroy` インスタンスメソッド。 ユーザーは、個々の Vue コンポーネントのライフサイクルを手動で管理べきではなくなりました。
 
-## FAQ
+## サポートライブラリ
 
-### Where should I start in a migration?
+現在、すべての公式ライブラリとツールが Vue 3 をサポートしていますが、それらのほとんどはまだベータ版であり、NPM の `next` 配布 (dist) タグで配布されています。 **2020 年末までにすべてのプロジェクトを安定させて `latest` 配布タグを使用するように切り替える予定です。**
 
-1. Start by running the migration helper (still under development) on a current project. We've carefully minified and compressed a senior Vue dev into a simple command line interface. Whenever they recognize an obsolete feature, they'll let you know, offer suggestions, and provide links to more info.
+### Vue CLI
 
-2. After that, browse through the table of contents for this page in the sidebar. If you see a topic you may be affected by, but the migration helper didn't catch, check it out.
+<a href="https://www.npmjs.com/package/@vue/cli" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/@vue/cli"></a>
 
-3. If you have any tests, run them and see what still fails. If you don't have tests, just open the app in your browser and keep an eye out for warnings or errors as you navigate around.
+v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するときに、Vue 3 のプリセットを選択するための組み込みオプションを提供するようになりました。 `vue-cli` をアップグレードし、 `vue create` を実行して、Vue3 プロジェクトを今すぐ作成できます。
 
-4. By now, your app should be fully migrated. If you're still hungry for more though, you can read the rest of this page - or dive in to the new and improved guide from [the beginning](#overview). Many parts will be skimmable, since you're already familiar with the core concepts.
+- [Documentation](https://cli.vuejs.org/)
+- [GitHub](https://github.com/vuejs/vue-cli)
 
-### How long will it take to migrate a Vue 2.x app to 3.0?
+### Vue Router
 
-It depends on a few factors:
+<a href="https://www.npmjs.com/package/vue-router/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vue-router/next.svg"></a>
 
-- The size of your app (small to medium-sized apps will probably be less than a day)
+Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更がいくつかあります。 詳細については、[README](https://github.com/vuejs/vue-router-next#vue-router-next-)を確認してください。
 
-- How many times you get distracted and start playing with a cool new feature. 😉 &nbsp;Not judging, it also happened to us while building 3.0!
+- [GitHub](https://github.com/vuejs/vue-router-next)
+- [RFCs](https://github.com/vuejs/rfcs/pulls?q=is%3Apr+is%3Amerged+label%3Arouter)
 
-- Which obsolete features you're using. Most can be upgraded with find-and-replace, but others might take a few minutes. If you're not currently following best practices according to [our styleguide](/style-guide/), Vue 3.0 will also try harder to force you to. This is a good thing in the long run, but could also mean a significant (though possibly overdue) refactor.
+### Vuex
 
-### If I upgrade to Vue 3, will I also have to upgrade Vuex and Vue Router?
+<a href="https://www.npmjs.com/package/vuex/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vuex/next.svg"></a>
 
-Yes, currently both [Vuex](https://github.com/vuejs/vuex/tree/4.0#vuex-4) and [Vue Router](https://github.com/vuejs/vue-router-next) are in beta
+Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供します。 唯一の破壊的変更は、[プラグインのインストール方法](https://github.com/vuejs/vuex/tree/4.0#breaking-changes)です。
+
+- [GitHub](https://github.com/vuejs/vuex/tree/4.0)
+
+### Devtools Extension
+
+新しい UI を備え、複数の Vue のバージョンをサポートするために、内部処理にリファクタリングを施した新しいバージョンの Devtools を開発中です。 新しいバージョンは現在ベータ版であり、Vue 3 のみをサポートしています(現時点では)。 Vuex と Router の統合も進行中です。
+
+- Chrome の場合: [Chrome ウェブストアからインストール](https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg?hl=ja)
+
+  - 注：ベータチャネルは devtools の安定バージョンと競合する可能性があるため、ベータチャネルが正しく機能するには、安定バージョンを一時的に無効にする必要があるかもしれません。
+
+- Firefox の場合: [署名された拡張機能をダウンロード](https://github.com/vuejs/vue-devtools/releases/tag/v6.0.0-beta.2) (Assets の下の `.xpi` ファイル)
+
+### IDE のサポート
+
+[VSCode](https://code.visualstudio.com/) を公式の拡張機能である [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), とともに使用することをお勧めします。それにより Vue3 の包括的な IDE のサポートを得ることができます。
+
+## その他のプロジェクト
+
+| Project               | NPM                           | Repo                 |
+| --------------------- | ----------------------------- | -------------------- |
+| @vue/babel-plugin-jsx | [![rc][jsx-badge]][jsx-npm]   | [[GitHub][jsx-code]] |
+| eslint-plugin-vue     | [![ga][epv-badge]][epv-npm]   | [[GitHub][epv-code]] |
+| @vue/test-utils       | [![beta][vtu-badge]][vtu-npm] | [[GitHub][vtu-code]] |
+| vue-class-component   | [![beta][vcc-badge]][vcc-npm] | [[GitHub][vcc-code]] |
+| vue-loader            | [![beta][vl-badge]][vl-npm]   | [[GitHub][vl-code]]  |
+| rollup-plugin-vue     | [![beta][rpv-badge]][rpv-npm] | [[GitHub][rpv-code]] |
+
+[jsx-badge]: https://img.shields.io/npm/v/@vue/babel-plugin-jsx.svg
+[jsx-npm]: https://www.npmjs.com/package/@vue/babel-plugin-jsx
+[jsx-code]: https://github.com/vuejs/jsx-next
+[vd-badge]: https://img.shields.io/npm/v/@vue/devtools/beta.svg
+[vd-npm]: https://www.npmjs.com/package/@vue/devtools/v/beta
+[vd-code]: https://github.com/vuejs/vue-devtools/tree/next
+[epv-badge]: https://img.shields.io/npm/v/eslint-plugin-vue.svg
+[epv-npm]: https://www.npmjs.com/package/eslint-plugin-vue
+[epv-code]: https://github.com/vuejs/eslint-plugin-vue
+[vtu-badge]: https://img.shields.io/npm/v/@vue/test-utils/next.svg
+[vtu-npm]: https://www.npmjs.com/package/@vue/test-utils/v/next
+[vtu-code]: https://github.com/vuejs/vue-test-utils-next
+[jsx-badge]: https://img.shields.io/npm/v/@ant-design-vue/babel-plugin-jsx.svg
+[jsx-npm]: https://www.npmjs.com/package/@ant-design-vue/babel-plugin-jsx
+[jsx-code]: https://github.com/vueComponent/jsx
+[vcc-badge]: https://img.shields.io/npm/v/vue-class-component/next.svg
+[vcc-npm]: https://www.npmjs.com/package/vue-class-component/v/next
+[vcc-code]: https://github.com/vuejs/vue-class-component/tree/next
+[vl-badge]: https://img.shields.io/npm/v/vue-loader/next.svg
+[vl-npm]: https://www.npmjs.com/package/vue-loader/v/next
+[vl-code]: https://github.com/vuejs/vue-loader/tree/next
+[rpv-badge]: https://img.shields.io/npm/v/rollup-plugin-vue/next.svg
+[rpv-npm]: https://www.npmjs.com/package/rollup-plugin-vue/v/next
+[rpv-code]: https://github.com/vuejs/rollup-plugin-vue/tree/next
