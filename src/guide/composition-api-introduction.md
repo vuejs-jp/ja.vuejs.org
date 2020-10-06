@@ -1,14 +1,14 @@
-# Introduction
+# はじめに
 
-## Why Composition API?
+## なぜコンポジション API なのか？
 
 ::: tip Note
-Reaching this far in the documentation, you should already be familiar with both [the basics of Vue](introduction.md) and [creating components](component-basics.md).
+ドキュメントでここまで到達しているならば、[Vue の基本](introduction.md)と[コンポーネントの作成](component-basics.md)の両方にすでに精通しているはずです。
 :::
 
-Creating Vue components allows us to extract repeatable parts of the interface coupled with its functionality into reusable pieces of code. This alone can get our application pretty far in terms of maintainability and flexibility. However, our collective experience has proved that this alone might not be enough, especially when your application is getting really big – think several hundreds of components. When dealing with such large applications, sharing and reusing code becomes especially important.
+Vue コンポーネントを作成するとその機能と結合されたインターフェースの繰り返し可能な部分を再利用可能なコードとして抽出することができます。これだけでも保守性と柔軟性の点でアプリケーションをかなり良くすることができます。しかし、蓄積された経験から、特にアプリケーションが非常に大規模な場合は、これだけでは不十分であることがわかっています。数百のコンポーネントがある場合を想像してみてください。そのような大規模なアプリケーションを扱う場合は、コードを共通化して再利用することが非常に重要になります。
 
-Let’s imagine that in our app, we have a view to show a list of repositories of a certain user. On top of that, we want to apply search and filter capabilities. Our component handling this view could look like this:
+このアプリには、特定のユーザーのリポジトリのリストを表示するビューがあると想像してみましょう。さらに、検索と絞り込みの機能を実装したいとします。このビューを処理するコンポーネントは次のようになります:
 
 ```js
 // src/components/UserRepositories.vue
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getUserRepositories () {
-      // using `this.user` to fetch user repositories
+      // `this.user` を使用してユーザーのリポジトリを取得します
     }, // 1
     updateFilters () { ... }, // 3
   },
@@ -44,37 +44,37 @@ export default {
 }
 ```
 
-This component has several responsibilities:
+このコンポーネントには複数の責務が存在します:
 
-1. Getting repositories from a presumedly external API for that user name and refreshing it whenever the user changes
-2. Searching for repositories using a `searchQuery` string
-3. Filtering repositories using a `filters` object
+1. 適当な外部 API からユーザー名に対応したリポジトリを取得して、ユーザーが変化するたびにそれを更新する
+2. `searchQuery` 文字列を使用してリポジトリを検索する
+3. `filters` オブジェクトを使用してリポジトリを絞り込む
 
-Organizing logics with component's options (`data`, `computed`, `methods`, `watch`) works in most cases. However, when our components get bigger, the list of **logical concerns** also grows. This can lead to components that are hard to read and understand, especially for people who didn't write them in the first place.
+コンポーネントのオプション (`data`, `computed`, `methods`, `watch`) でまとめたロジックはたいていの場合は正しく動作します。しかし、コンポーネントがより大きくなれば、**論理的な関心事**のリストもまた大きくなります。これは、特に最初からコンポーネントを書いていない人々にとって、コンポーネントを読みづらく、理解しづらいものにするかもしれません。
 
-![Vue Option API: Code grouped by option type](https://user-images.githubusercontent.com/499550/62783021-7ce24400-ba89-11e9-9dd3-36f4f6b1fae2.png)
+![Vue オプション API: オプションの種類によってグループ分けされたコード](https://user-images.githubusercontent.com/499550/62783021-7ce24400-ba89-11e9-9dd3-36f4f6b1fae2.png)
 
-Example presenting a large component where its **logical concerns** are grouped by colors.
+**論理的な関心事** が色でグループ化されている大きなコンポーネントを示す例。
 
-Such fragmentation is what makes it difficult to understand and maintain a complex component. The separation of options obscures the underlying logical concerns. In addition, when working on a single logical concern, we have to constantly "jump" around option blocks for the relevant code.
+このような分離は、複雑なコンポーネントを理解ししてメンテナンスすることを難しくします。このオプションの分離は背景にある論理的な関心事をわかりづらくします。さらに、単一の論理的な関心事に取り組む場合、関連するコードのオプションブロックを何度も "ジャンプ" する必要があります。
 
-It would be much nicer if we could collocate code related to the same logical concern. And this is exactly what the Composition API enables us to do.
+同じ論理的な関心事に関連するコードを並べることができれば、より良くなるでしょう。そして、これはまさにコンポジション API が可能にします。
 
-## Basics of Composition API
+## コンポジション API の基本
 
-Now that we know the **why** we can get to the **how**. To start working with the Composition API we first need a place where we can actually use it. In a Vue component, we call this place the `setup`.
+これで**なぜこの方法**にたどり着くのかわかりました。コンポジション API の使用を開始するには、初めに実際に使用できる場所が必要です。Vue コンポーネントでは、この場所を `setup` と呼びます。
 
-### `setup` Component Option
+### `setup` コンポーネントオプション
 
-The new `setup` component option is executed **before** the component is created, once the `props` are resolved, and serves as the entry point for composition API's.
+新しい `setup` コンポーネントオプションは、コンポーネントが作成される前に `props` が解決されると実行され、コンポジション API のエントリポイントとして機能します。
 
 ::: warning
-Because the component instance is not yet created when `setup` is executed, there is no `this` inside a `setup` option. This means, with the exception of `props`, you won't be able to access any properties declared in the component – **local state**, **computed properties** or **methods**.
+`setup` が実行されたときは、まだコンポーネントのインスタンスが作られないため、`setup` オプションの中では `this` を使用できません。これは `props` を除いて、コンポーネント内で宣言されているあらゆるプロパティ (**ローカルの state** や **computed プロパティ**、**methods**) にアクセスできないことを意味します。
 :::
 
-The `setup` option should be a function that accepts `props` and `context` which we will talk about [later](composition-api-setup.html#arguments). Additionally, everything that we return from `setup` will be exposed to the rest of our component (computed properties, methods, lifecycle hooks and so on) as well as to the component's template.
+`setup` オプションは `props` と[後で](composition-api-setup.html#arguments)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
 
-Let’s add `setup` to our component:
+`setup` をコンポーネントに追加しましょう:
 
 ```js
 // src/components/UserRepositories.vue
@@ -87,27 +87,27 @@ export default {
   setup(props) {
     console.log(props) // { user: '' }
 
-    return {} // anything returned here will be available for the rest of the component
+    return {} // ここで返されるものは残りの要素で使用可能です
   }
-  // the "rest" of the component
+  // 残りの要素
 }
 ```
 
-Now let’s start with extracting the first logical concern (marked as "1" in the original snippet).
+それでは、最初の論理的な関心事 (元のスニペットで "1" とマークされている) を抽出することから始めましょう。
 
-> 1. Getting repositories from a presumedly external API for that user name and refreshing it whenever the user changes
+> 1. 適当な外部 API からユーザー名に対応したリポジトリを取得して、ユーザーが変化するたびにそれを更新する
 
-We will start with the most obvious parts:
+最も明らかな部分から始めましょう:
 
-- The list of repositories
-- The function to update the list of repositories
-- Returning both the list and the function so they are accessible by other component options
+- リポジトリのリスト
+- リポジトリのリストを更新する関数
+- リストと関数を返して、他のコンポーネントのオプションから利用できるようにすること
 
 ```js
-// src/components/UserRepositories.vue `setup` function
+// src/components/UserRepositories.vue `setup` 関数
 import { fetchUserRepositories } from '@/api/repositories'
 
-// inside our component
+// コンポーネント内部
 setup (props) {
   let repositories = []
   const getUserRepositories = async () => {
@@ -116,16 +116,16 @@ setup (props) {
 
   return {
     repositories,
-    getUserRepositories // functions returned behave the same as methods
+    getUserRepositories // 返される関数は methods と同様の振る舞いをします
   }
 }
 ```
 
-This is our starting point, except it's not working yet because our `repositories` variable is not reactive. This means from a user's perspective, the repository list would remain empty. Let's fix that!
+これが出発点ですが、`repositories` 変数がリアクティブではないのでまだ正しく動作しません。これはユーザーの観点からは、リポジトリのリストは空のままになっていることを意味します。これを直しましょう！
 
-### Reactive Variables with `ref`
+### `ref` によるリアクティブな変数
 
-In Vue 3.0 we can make any variable reactive anywhere with a new `ref` function, like this:
+Vue 3.0 では、このように新しい `ref` 関数にとってあらゆる変数をリアクティブにすることができます:
 
 ```js
 import { ref } from 'vue'
@@ -133,7 +133,7 @@ import { ref } from 'vue'
 const counter = ref(0)
 ```
 
-`ref` takes the argument and returns it wrapped within an object with a `value` property, which can then be used to access or mutate the value of the reactive variable:
+`ref` は引数を受け取って、それを `value` プロパティを持つにオブジェクトでラップして返します。これを利用して、リアクティブな変数の値にアクセスしたり、変更したりします。
 
 ```js
 import { ref } from 'vue'
@@ -147,24 +147,24 @@ counter.value++
 console.log(counter.value) // 1
 ```
 
-Wrapping values inside an object might seem unnecessary but is required to keep the behavior unified across different data types in JavaScript. That’s because in JavaScript, primitive types like `Number` or `String` are passed by value, not by reference:
+オブジェクト内で値をラップすることは不要に思うかもしれませんが、JavaScript の異なるデータ型の間で動作を統一するために必要です。JavaScript において `Number` や `String` のようなプリミティブな型は参照ではなく、値によって渡されるからです:
 
-![Pass by reference vs pass by value](https://blog.penjee.com/wp-content/uploads/2015/02/pass-by-reference-vs-pass-by-value-animation.gif)
+![参照渡し vs 値渡し](https://blog.penjee.com/wp-content/uploads/2015/02/pass-by-reference-vs-pass-by-value-animation.gif)
 
-Having a wrapper object around any value allows us to safely pass it across our whole app without worrying about losing its reactivity somewhere along the way.
+任意の値の周りにラッパーオブジェクトがあると、途中でリアクティブでなくなることがなく、アプリ全体に安全に渡すことができます。
 
 ::: tip Note
-In other words, `ref` creates a **Reactive Reference** to our value. The concept of working with **References** will be used often throughout the Composition API.
+言い換えれば、`ref` は値への**リアクティブな参照**を作成します。 **参照**を操作するという概念はコンポジション API 全体で頻繁に使用されます。
 :::
 
-Back to our example, let's create a reactive `repositories` variable:
+例に戻って、リアクティブな `repositories` 変数を作成しましょう:
 
 ```js
 // src/components/UserRepositories.vue `setup` function
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref } from 'vue'
 
-// in our component
+// コンポーネント内部
 setup (props) {
   const repositories = ref([])
   const getUserRepositories = async () => {
@@ -178,7 +178,7 @@ setup (props) {
 }
 ```
 
-Done! Now whenever we call `getUserRepositories`, `repositories` will be mutated and the view will be updated to reflect the change. Our component should now look like this:
+完了です！これで `getUserRepositories` を呼ぶ出すたびに、`repositories` が更新され、変更を反映するようにビューが更新されます。コンポーネントは次のようになります:
 
 ```js
 // src/components/UserRepositories.vue
@@ -223,31 +223,31 @@ export default {
 }
 ```
 
-We have moved several pieces of our first logical concern into the `setup` method, nicely put close to each other. What’s left is calling `getUserRepositories` in the `mounted` hook and setting up a watcher to do that whenever the `user` prop changes.
+最初の論理的な関心事のいくつかを `setup` メソッドに移動し、お互いにうまく近づけました。残りは `mounted` フックで `getUserRepositories` を呼び出し、`user` プロパティが変更されるたびに、それを実行するようにウォッチャを設定することです。
 
-We will start with the lifecycle hook.
+ライフサイクルフックから始めます。
 
-### Lifecycle Hook Registration Inside `setup`
+### ライフサイクルフックを `setup` の中に登録する
 
-To make Composition API feature-complete compared to Options API, we also need a way to register lifecycle hooks inside `setup`. This is possible thanks to several new functions exported from Vue. Lifecycle hooks on composition API have the same name as for Options API but are prefixed with `on`: i.e. `mounted` would look like `onMounted`.
+オプション API に比べてコンポジション API の機能を完全にするには、ライフサイクルフックを `setup` の中に登録する必要があります。これは Vue から提供されるいくつかの新しい関数のおかげで可能になりました。コンポジション API におけるライフサイクルフックはオプション API と同様の名称ですが、`on` というプレフィックスが付いています。例: `mounted` は `onMounted` のようになっています。
 
-These functions accept a callback that will be executed when the hook is called by the component.
+それらの関数はコンポーネントによってフックが呼び出されるときに実行されるコールバックを受け付けます。
 
-Let’s add it to our `setup` function:
+それを `setup` 関数に追加しましょう:
 
 ```js
 // src/components/UserRepositories.vue `setup` function
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted } from 'vue'
 
-// in our component
+// コンポーネント内部
 setup (props) {
   const repositories = ref([])
   const getUserRepositories = async () => {
     repositories.value = await fetchUserRepositories(props.user)
   }
 
-  onMounted(getUserRepositories) // on `mounted` call `getUserRepositories`
+  onMounted(getUserRepositories) // `mounted` が `getUserRepositories` を呼び出します
 
   return {
     repositories,
@@ -256,17 +256,17 @@ setup (props) {
 }
 ```
 
-Now we need to react to the changes made to the `user` prop. For that we will use the standalone `watch` function.
+これで `user` プロパティへの変更に反応する必要があります。そのために、スタンドアロンの `watch` 関数を使用します。
 
-### Reacting to Changes with `watch`
+### `watch` で変化に反応する
 
-Just like how we set up a watcher on the `user` property inside our component using the `watch` option, we can do the same using the `watch` function imported from Vue. It accepts 3 arguments:
+コンポーネント内の `user` プロパティに `watch` オプションを使用してウォッチャを追加するのと同じように、Vue からインポートした `watch` 関数を使用することができます。それは 3 つの引数を受け付けます:
 
-- A **Reactive Reference** or getter function that we want to watch
-- A callback
-- Optional configuration options
+- **リアクティブな参照**または監視するゲッター関数
+- コールバック
+- 任意の設定オプション
 
-**Here’s a quick look at how it works.**
+**その仕組をざっと見てみましょう。**
 
 ```js
 import { ref, watch } from 'vue'
@@ -277,9 +277,9 @@ watch(counter, (newValue, oldValue) => {
 })
 ```
 
-Whenever `counter` is modified, for example `counter.value = 5`, the watch will trigger and execute the callback (second argument) which in this case will log `'The new counter value is: 5'` into our console.
+`counter.value = 5` のように`counter` が更新されたときは、ウォッチはコールバック (第 2 引数) をトリガーして実行します。この場合は、コンソールに `'The new counter value is: 5'` を出力します。
 
-**Below is the Options API equivalent:**
+**以下はオプション API と同様です:**
 
 ```js
 export default {
@@ -296,29 +296,29 @@ export default {
 }
 ```
 
-For more details on `watch`, refer to our [in-depth guide]().
+`watch` についての詳細は、[詳細ガイド]() を参照してください。
 
-**Let’s now apply it to our example:**
+**例に適用しましょう:**
 
 ```js
 // src/components/UserRepositories.vue `setup` function
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted, watch, toRefs } from 'vue'
 
-// in our component
+// コンポーネント内部
 setup (props) {
-  // using `toRefs` to create a Reactive Reference to the `user` property of props
+  // props の `user` プロパティへのリアクティブな参照を作成するために `toRefs` を使用します
   const { user } = toRefs(props)
 
   const repositories = ref([])
   const getUserRepositories = async () => {
-    // update `props.user` to `user.value` to access the Reference value
+    // リアクティブな値にアクセスするために `props.user` を `user.value` に更新します
     repositories.value = await fetchUserRepositories(user.value)
   }
 
   onMounted(getUserRepositories)
 
-  // set a watcher on the Reactive Reference to user prop
+  // ユーザープロパティへのリアクティブな参照のウォッチャをセットします
   watch(user, getUserRepositories)
 
   return {
@@ -328,13 +328,13 @@ setup (props) {
 }
 ```
 
-You probably have noticed the use of `toRefs` at the top of our `setup`. This is to ensure our watcher will react to changes made to the `user` prop.
+おそらく `setup` の先頭で `toRefs` が使われていることにお気づきでしょう。これはウォッチャが `user` プロパティに加えられた変更に確実に反応するためです。
 
-With those changes in place, we've just moved the whole first logical concern into a single place. We can now do the same with the second concern – filtering based on `searchQuery`, this time with a computed property.
+これらの変更が行われたので、最初の論理的な関心事全体を 1 つの場所に移動しました。これで、2 番目の懸念事項である `searchQuery` に基づいた絞り込みでも同じことができます。今回は computed プロパティを使用します。
 
-### Standalone `computed` properties
+### スタンドアロンな `computed` プロパティ
 
-Similar to `ref` and `watch`, computed properties can also be created outside of a Vue component with the `computed` function imported from Vue. Let’s get back to our counter example:
+`ref` や `watch` に似て、computed プロパティもまた Vue からインポートされた `computed` 関数を使用して Vue コンポーネントの外部でも作成することができます。カウンターの例に戻りましょう:
 
 ```js
 import { ref, computed } from 'vue'
@@ -347,29 +347,29 @@ console.log(counter.value) // 1
 console.log(twiceTheCounter.value) // 2
 ```
 
-Here, the `computed` function returns a _read-only_ **Reactive Reference** to the output of the getter-like callback passed as the first argument to `computed`. In order to access the **value** of the newly-created computed variable, we need to use the `.value` property just like with `ref`.
+ここで、`computed` 関数は `computed` の第 1 引数として渡されたゲッターのようなコールバックの出力として*読み取り専用*の**リアクティブな参照**を返します。新しく作成され算出された変数の**値**にアクセスするためには、`ref` と同様に `.value` プロパティを使う必要があります。
 
-Let’s move our search functionality into `setup`:
+検索機能を `setup` に移動させましょう:
 
 ```js
 // src/components/UserRepositories.vue `setup` function
 import { fetchUserRepositories } from '@/api/repositories'
 import { ref, onMounted, watch, toRefs, computed } from 'vue'
 
-// in our component
+// コンポーネント内部
 setup (props) {
-  // using `toRefs` to create a Reactive Reference to the `user` property of props
+  // props の `user` プロパティへのリアクティブな参照を作成するために `toRefs` を使用します
   const { user } = toRefs(props)
 
   const repositories = ref([])
   const getUserRepositories = async () => {
-    // update `props.user` to `user.value` to access the Reference value
+    // リアクティブな値にアクセスするために `props.user` を `user.value` に更新します
     repositories.value = await fetchUserRepositories(user.value)
   }
 
   onMounted(getUserRepositories)
 
-  // set a watcher on the Reactive Reference to user prop
+  // ユーザープロパティへのリアクティブな参照のウォッチャをセットします
   watch(user, getUserRepositories)
 
   const searchQuery = ref('')
@@ -388,7 +388,7 @@ setup (props) {
 }
 ```
 
-We could do the same for other **logical concerns** but you might be already asking the question – _Isn’t this just moving the code to the `setup` option and making it extremely big?_ Well, that’s true. That’s why before moving on with the other responsibilities, we will first extract the above code into a standalone **composition function**. Let's start with creating `useUserRepositories`:
+他の**論理的な関心事**にも同じことができますが、既に疑問があるかもしれません。- _これはコードを `setup` オプションに移動させて肥大させるだけではありませんか？_ そのため他の責務に移る前に、まず上記のコードをスタンドアローンな**コンポジション関数**に抽出します。 `useUserRepositories` の作成から始めましょう:
 
 ```js
 // src/composables/useUserRepositories.js
@@ -434,7 +434,7 @@ export default function useRepositoryNameSearch(repositories) {
 }
 ```
 
-**Now having those two functionalities in separate files, we can start using them in our component. Here’s how this can be done:**
+**これらの 2 つの機能が別々のファイルにあるので、コンポーネントでそれらを使い始められます。これを行う方法は次の通りです:**
 
 ```js
 // src/components/UserRepositories.vue
@@ -458,8 +458,8 @@ export default {
     } = useRepositoryNameSearch(repositories)
 
     return {
-      // Since we don’t really care about the unfiltered repositories
-      // we can expose the filtered results under the `repositories` name
+      // 絞り込まれていないリポジトリはあまり考慮しないので、
+      // 絞り込んだ結果を `repositories` という名前で返して良いでしょう
       repositories: repositoriesMatchingSearchQuery,
       getUserRepositories,
       searchQuery,
@@ -479,7 +479,7 @@ export default {
 }
 ```
 
-At this point you probably already know the drill, so let’s skip to the end and migrate the leftover filtering functionality. We don’t really need to get into the implementation details as it’s not the point of this guide.
+この時点でおそらくあなたは既にノウハウを知っているので、最後まで飛ばして、残りの絞り込み機能を移行しましょう。このガイドの目的ではないため、実装の詳細には立ち入りません。
 
 ```js
 // src/components/UserRepositories.vue
@@ -510,18 +510,18 @@ export default {
     } = useRepositoryFilters(repositoriesMatchingSearchQuery)
 
     return {
-      // Since we don’t really care about the unfiltered repositories
-      // we can expose the end results under the `repositories` name
+      // 絞り込まれていないリポジトリはあまり考慮しないので、
+      // 絞り込んだ結果を `repositories` という名前で返して良いでしょう
       repositories: filteredRepositories,
       getUserRepositories,
       searchQuery,
       filters,
       updateFilters
     }
-  }
+  },
 }
 ```
 
-And we are done!
+これで完了です！
 
-Keep in mind that we've only scratched the surface of Composition API and what it allows us to do. To learn more about it, refer to the in-depth guide.
+コンポジション API の表面とできることについてほんの少し触れただけであることを覚えておいてください。より詳しく知りたい場合は、詳細ガイドを参照してください。
