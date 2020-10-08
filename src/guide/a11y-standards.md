@@ -12,7 +12,7 @@ World Wide Web Consortium（W3C）の Web Accessibility Initiative（WAI）で�
 
 ## ウェブコンテンツアクセシビリティガイドライン (WCAG)
 
-[WCAG 2.1](https://www.w3.org/TR/WCAG21/) は [WCAG 2.0](https://www.w3.org/TR/WCAG20/)を拡張し、ウェブへの変更に対処することによって新しいテクノロジーの実装を可能にします。W3Cではウェブアクセシビリティにおけるポリシーを改良または更新する時、最新版のWCAGの使用を推奨しています。
+[WCAG 2.1](https://www.w3.org/TR/WCAG21/) は [WCAG 2.0](https://www.w3.org/TR/WCAG20/)を拡張し、ウェブへの変更に対処することによって新しいテクノロジーの実装を可能にします。W3C ではウェブアクセシビリティにおけるポリシーを改良または更新する時、最新版の WCAG の使用を推奨しています。
 
 ### WCAG 2.1における4つの主要な土台となる原則（略してPOUR）:
 
@@ -27,7 +27,7 @@ World Wide Web Consortium（W3C）の Web Accessibility Initiative（WAI）で�
 
 ### Web Accessibility Initiative – アクセシビリティに優れたインターネットアプリケーション (WAI-ARIA)
 
-W3CのWAI-ARIAでは、動的なコンテンツと高度なユーザインターフェイス制御を構築する方法について、ガイダンスを提供します。
+W3C の WAI-ARIA では、動的なコンテンツと高度なユーザインターフェイス制御を構築する方法について、ガイダンスを提供します。
 
 - [アクセシビリティに優れたインターネットアプリケーション (WAI-ARIA) 1.2](https://www.w3.org/TR/wai-aria-1.2/)
 - [WAI-ARIA オーサリング演習1.2](https://www.w3.org/TR/wai-aria-practices-1.2/)

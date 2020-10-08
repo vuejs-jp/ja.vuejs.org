@@ -19,7 +19,7 @@
   - [ZoomText](https://www.zoomtext.com/)
   - [Magnifier](https://support.microsoft.com/en-us/help/11542/windows-use-magnifier-to-make-things-easier-to-see)
 
-## テスト 
+## テスト
 
 - 自動化ツール
   - [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
@@ -31,11 +31,11 @@
 
 - その他の便利なツール
   - [HeadingMap](https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi?hl=en…)
-  
+
   - [Color Oracle](https://colororacle.org)
-  
+
   - [Focus Indicator](https://chrome.google.com/webstore/detail/focus-indicator/heeoeadndnhebmfebjccbhmccmaoedlf?hl=en-US…)
-  
+
   - [NerdeFocus](https://chrome.google.com/webstore/detail/nerdefocus/lpfiljldhgjecfepfljnbjnbjfhennpd?hl=en-US…)
 
 ## ユーザー
@@ -52,7 +52,7 @@
 
 - _[認知](https://webaim.org/articles/cognitive/)_ - このようなユーザーは、補足的なメディア、構造的なコンテンツ、明確でシンプルな文章などの恩恵を受けることができます。
 
-WebAimの以下のリンクをチェックして、ユーザーからの理解を深めましょう:
+WebAim の以下のリンクをチェックして、ユーザーからの理解を深めましょう:
 
 - [Web Accessibility Perspectives: Explore the Impact and Benefits for Everyone](https://www.w3.org/WAI/perspective-videos/)
 - [Stories of Web Users](https://www.w3.org/WAI/people-use-web/user-stories/)

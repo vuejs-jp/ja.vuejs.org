@@ -95,7 +95,7 @@ render 関数に取り掛かる前に、ブラウザがどのように動くの�
 
 ブラウザはこのコードを読み込むと、血縁関係を追跡するために家系図を構築するのと同じように、全てを追跡する [「DOM ノード」のツリー](https://javascript.info/dom-nodes)を構築します。
 
-<!-- NOTE: 
+<!-- NOTE:
 原文が分かりづらいため、v2の記述を元に翻訳
 When a browser reads this code, it builds a tree of “DOM nodes” to help it keep track of everything, just as you might build a family tree to keep track of your extended family.
 -->
@@ -414,7 +414,7 @@ Vue.h(
 <anchored-heading :level="1"> <span>Hello</span> world! </anchored-heading>
 ```
 
-これが、Vue で JSX を使い、テンプレートに近い構文に戻す [Babelプラグイン](https://github.com/vuejs/jsx-next) が存在する理由です。
+これが、Vue で JSX を使い、テンプレートに近い構文に戻す [Babel プラグイン](https://github.com/vuejs/jsx-next) が存在する理由です。
 
 ```jsx
 import AnchoredHeading from './AnchoredHeading.vue'

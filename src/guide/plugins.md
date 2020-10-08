@@ -1,4 +1,4 @@
-﻿# プラグイン
+# プラグイン
 
 大抵の場合、プラグインは Vue にグローバルレベルでの機能を追加するコードで、`install()` メソッドを公開する `object` または `function` です。
 
@@ -6,13 +6,13 @@
 
 1. グローバルメソッドまたはグローパルプロパティの追加　例）[vue-custom-element](https://github.com/karol-f/vue-custom-element).
 
-2. directives / filters / transitions のような1つ以上のグローバルアセットの追加　例) [vue-touch](https://github.com/vuejs/vue-touch)).
+2. ディレクティブ / フィルタ / トランジション のような 1 つ以上のグローバルアセットの追加　例) [vue-touch](https://github.com/vuejs/vue-touch)).
 
 3. グローバル mixin によるコンポーネントオプションの追加　例)  [vue-router](https://github.com/vuejs/vue-router)).
 
 4. `config.globalProperties` にグローバルインスタンスメソッドを追加する
 
-5. 自身のAPIを提供すると同時に、上記のいくつかの組み合わせを導入するライブラリ 例） [vue-router](https://github.com/vuejs/vue-router)).
+5. 自身の API を提供すると同時に、上記のいくつかの組み合わせを導入するライブラリ 例） [vue-router](https://github.com/vuejs/vue-router)).
 
 ## プラグインを書く
 

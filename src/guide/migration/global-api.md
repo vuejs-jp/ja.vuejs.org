@@ -53,7 +53,7 @@ mount(Component, { localVue })
   const app2 = new Vue({ el: '#app-2' })
   ```
 
-To avoid these problems, in Vue 3 we introduce…
+To avoid these problems, in Vue 3 we introduce …
 
 ## A New Global API: `createApp`
 

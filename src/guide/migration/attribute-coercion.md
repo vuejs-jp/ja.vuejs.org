@@ -49,7 +49,7 @@ We can see from the table above, current implementation coerces `true` to `'true
 
 We intend to drop this internal concept of "enumerated attributes" and treat them as normal non-boolean HTML attributes.
 
-- This solves the inconsistency between normal non-boolean attributes and “enumerated attributes”
+- This solves the inconsistency between normal non-boolean attributes and "enumerated attributes"
 - It also makes it possible to use values other than `'true'` and `'false'`, or even keywords yet to come, for attributes like `contenteditable`
 
 For non-boolean attributes, Vue will stop removing them if they are `false` and coerce them to `'false'` instead.
