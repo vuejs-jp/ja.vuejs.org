@@ -7,7 +7,7 @@ defaults:
     shell: bash
 
 jobs:
-  TextLint:
+  textlint:
 
     runs-on: ubuntu-latest
 
