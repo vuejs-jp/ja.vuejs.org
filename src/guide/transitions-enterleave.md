@@ -1,4 +1,4 @@
-# Enter & Leave Transitions
+# Enter & Leave トランジション
 
 Vue は、DOM からアイテムが追加、更新、削除されたときにトランジション効果を適用するための方法を複数提供しています:
 
@@ -9,7 +9,7 @@ Vue は、DOM からアイテムが追加、更新、削除されたときにト
 
 On this page, we'll only cover entering, leaving, and list transitions, but you can see the next section for [managing state transitions](transitions-state.html).
 
-## Transitioning Single Elements/Components
+## 単一要素/コンポーネントのトランジション
 
 Vue は、`transition` ラッパーコンポーネントを提供しています。このコンポーネントは、次のコンテキストにある要素やコンポーネントに entering/leaving トランジションを追加することを可能にします:
 
@@ -71,7 +71,7 @@ Vue.createApp(Demo).mount('#demo')
 
 3. もし、CSS トランジション/アニメーションが検出されず、JavaScript フックも提供されない場合、挿入、削除のいずれか、あるいは両方の DOM 操作を次のフレームでただちに実行します。(注意: ここでのフレームはブラウザのアニメーションフレームを指します。 Vue の `nextTick` のコンセプトのそれとは異なるものです)
 
-### Transition Classes
+### トランジションクラス
 
 <!-- これらはが直訳としては良いが、読みやすさで "以下は" を採用 -->
 
@@ -90,7 +90,7 @@ Vue.createApp(Demo).mount('#demo')
 
 `v-enter-active` と `v-leave-active` は、次のセクションの例で見ることができるような、enter/leave トランジションで異なるイージングカーブの指定を可能にします。
 
-### CSS Transitions
+### CSS トランジション
 
 トランジションを実現する最も一般な方法として、CSS トランジションを使います。これはシンプルな例です:
 
@@ -143,7 +143,7 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-### CSS Animations
+### CSS アニメーション
 
 CSS アニメーションは、CSS トランジションと同じように適用されますが、異なるのは `v-enter-from` が要素が挿入された直後に削除されないことです。しかし、`animationend` イベント時には削除されています。
 
@@ -201,7 +201,7 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-### Custom Transition Classes
+### カスタムトランジションクラス
 
 次の属性で、カスタムトランジションクラスを指定できます:
 
@@ -250,12 +250,13 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-### Using Transitions and Animations Together
+### トランジションとアニメーションの併用
 
 Vue はトランジションが終了したことを把握するためのイベントリスナのアタッチを必要とします。イベントは、適用される CSS ルールに応じて `transitionend` か `animationend` のいずれかのタイプになります。あなたがトランジションとアニメーション、どちらか一方だけ使用する場合は、Vue は自動的に正しいタイプを判断することができます。
 
 しかし、例えば、ホバーの CSS トランジション効果と Vue による CSS アニメーションのトリガの両方を持つ場合など、時には、同じ要素に両方を使うこともあるかもしれません。これらのケースでは、Vue に扱って欲しいタイプを `type` 属性で明示的に宣言するべきでしょう。この属性の値は、`animation` あるいは `transition` を取ります。
-### Explicit Transition Durations
+
+### 明示的なトランジション期間の設定
 
 TODO: validate and provide an example
 
@@ -275,7 +276,7 @@ TODO: validate and provide an example
 <transition :duration="{ enter: 500, leave: 800 }">...</transition>
 ```
 
-### JavaScript Hooks
+### JavaScript フック
 
 属性によって JavaScript フックを定義することができます:
 
@@ -419,7 +420,7 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Transitions on Initial Render
+## 初期描画時のトランジション
 
 ノードの初期描画時にトランジションを適用したい場合は、`appear` 属性を追加することができます:
 
@@ -429,7 +430,7 @@ Vue.createApp(Demo).mount('#demo')
 </transition>
 ```
 
-## Transitioning Between Elements
+## 要素間のトランジション
 
 あとで [コンポーネント間のトランジション](#コンポーネント間のトランジション) について説明しますが、`v-if`/`v-else` を使った通常の要素同士でもトランジションできます。最も共通の2つの要素のトランジションの例として、リストコンテナとリストが空と説明するメッセージの間で行うものがあります:
 
@@ -483,7 +484,7 @@ computed: {
 }
 ```
 
-### Transition Modes
+### トランジションモード
 
 まだひとつ問題が残っています。以下のボタンをクリックしてください:
 
@@ -543,7 +544,7 @@ We can use this to coordinate more expressive movement, such as a folding card, 
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Transitioning Between Components
+## コンポーネント間のトランジション
 
 コンポーネント間のトランジションは、 `key` 属性が必要ではないのでさらに単純です。代わりに、ただ [動的コンポーネント](components.html#動的コンポーネント) でラップするだけです:
 
