@@ -98,9 +98,7 @@ Vue.createApp(Demo).mount('#demo')
 
 ### CSS Transitions
 
-<!-- ここは v2.x と同じ-->
-
-One of the most common transition types uses CSS transitions. Here's an example:
+トランジションを実現する最も一般な方法として、CSS トランジションを使います。これはシンプルな例です:
 
 ```html
 <div id="demo">
@@ -127,8 +125,8 @@ Vue.createApp(Demo).mount('#demo')
 ```
 
 ```css
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+/* Enter および leave アニメーションは、それぞれ異なる */
+/* 間隔やタイミング関数を利用できます。              */
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -153,11 +151,9 @@ Vue.createApp(Demo).mount('#demo')
 
 ### CSS Animations
 
-CSS animations are applied in the same way as CSS transitions, the difference being that `v-enter-from` is not removed immediately after the element is inserted, but on an `animationend` event.
+CSS アニメーションは、CSS トランジションと同じように適用されますが、異なるのは `v-enter-from` が要素が挿入された直後に削除されないことです。しかし、`animationend` イベント時には削除されています。
 
-Here's an example, omitting prefixed CSS rules for the sake of brevity:
-
-<!-- div への ID だけ変わっているが対応の必要なし -->
+これは簡潔にするために CSS ルールの接頭辞を除いた例です。
 
 ```html
 <div id="example-2">
