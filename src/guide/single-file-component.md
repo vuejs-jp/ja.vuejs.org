@@ -48,7 +48,7 @@
 
 ### サンドボックスの例
 
-すぐに触ってそして単一ファイルコンポーネントを試したい方は、CodeSandBox 上の [この単純な todo アプリケーション](https://codesandbox.io/s/vue-todo-list-app-with-single-file-component-vzkl3?file=/src/App.vue) 
+すぐに触ってそして単一ファイルコンポーネントを試したい方は、CodeSandBox 上の [この単純な todo アプリケーション](https://codesandbox.io/s/vue-todo-list-app-with-single-file-component-vzkl3?file=/src/App.vue)
 をチェックしてみてください。
 
 ### JavaScript でモジュールビルドシステムが初めてなユーザ向け
@@ -65,4 +65,4 @@
 
 CLI はツールの設定の大部分の面倒を見てくれますが、[設定オプション](https://cli.vuejs.org/config/)を通してよりきめ細かいカスタマイズをすることもできます。
 
-あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org)を手動で設定する必要があるでしょう。webpackについてもっと学びたいときは、[公式ドキュメント](https://webpack.js.org/configuration/)や [webpack learning academy](https://webpack.academy/p/the-core-concepts)を参照してください。
+あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org)を手動で設定する必要があるでしょう。webpack についてもっと学びたいときは、[公式ドキュメント](https://webpack.js.org/configuration/)や [webpack learning academy](https://webpack.academy/p/the-core-concepts)を参照してください。
