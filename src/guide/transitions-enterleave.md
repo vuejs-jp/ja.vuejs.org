@@ -427,7 +427,7 @@ Vue.createApp(Demo).mount('#demo')
 
 ## Transitions on Initial Render
 
-If you also want to apply a transition on the initial render of a node, you can add the `appear` attribute:
+ノードの初期描画時にトランジションを適用したい場合は、`appear` 属性を追加することができます:
 
 ```html
 <transition appear>
@@ -437,7 +437,7 @@ If you also want to apply a transition on the initial render of a node, you can 
 
 ## Transitioning Between Elements
 
-We discuss [transitioning between components](#transitioning-between-components) later, but you can also transition between raw elements using `v-if`/`v-else`. One of the most common two-element transitions is between a list container and a message describing an empty list:
+あとで [コンポーネント間のトランジション](#コンポーネント間のトランジション) について説明しますが、`v-if`/`v-else` を使った通常の要素同士でもトランジションできます。最も共通の2つの要素のトランジションの例として、リストコンテナとリストが空と説明するメッセージの間で行うものがあります:
 
 ```html
 <transition>
@@ -448,7 +448,7 @@ We discuss [transitioning between components](#transitioning-between-components)
 </transition>
 ```
 
-It's actually possible to transition between any number of elements, either by using multiple `v-if`s or binding a single element to a dynamic property. For example:
+`v-if` を複数使ったり、ひとつの要素に対して動的プロパティでバインディングを行ういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
 
 TODO: rewrite example and put in codepen example
 
@@ -466,7 +466,7 @@ TODO: rewrite example and put in codepen example
 </transition>
 ```
 
-Which could also be written as:
+このようにも書き換えることもできます:
 
 ```html
 <transition>
