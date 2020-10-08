@@ -258,25 +258,24 @@ Vue.createApp(Demo).mount('#demo')
 
 ### Using Transitions and Animations Together
 
-Vue needs to attach event listeners in order to know when a transition has ended. It can either be `transitionend` or `animationend`, depending on the type of CSS rules applied. If you are only using one or the other, Vue can automatically detect the correct type.
+Vue はトランジションが終了したことを把握するためのイベントリスナのアタッチを必要とします。イベントは、適用される CSS ルールに応じて `transitionend` か `animationend` のいずれかのタイプになります。あなたがトランジションとアニメーション、どちらか一方だけ使用する場合は、Vue は自動的に正しいタイプを判断することができます。
 
-However, in some cases you may want to have both on the same element, for example having a CSS animation triggered by Vue, along with a CSS transition effect on hover. In these cases, you will have to explicitly declare the type you want Vue to care about in a `type` attribute, with a value of either `animation` or `transition`.
-
+しかし、例えば、ホバーの CSS トランジション効果と Vue による CSS アニメーションのトリガの両方を持つ場合など、時には、同じ要素に両方を使うこともあるかもしれません。これらのケースでは、Vue に扱って欲しいタイプを `type` 属性で明示的に宣言するべきでしょう。この属性の値は、`animation` あるいは `transition` を取ります。
 ### Explicit Transition Durations
 
 TODO: validate and provide an example
 
-> New in 2.2.0+
+> 2.2.0 から新規追加
 
-In most cases, Vue can automatically figure out when the transition has finished. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element. However, this may not always be desired - for example, we may have a choreographed transition sequence where some nested inner elements have a delayed transition or a longer transition duration than the root transition element.
+ほとんどの場合、 Vue は、自動的にトランジションが終了したことを見つけ出すことは可能です。デフォルトでは、 Vue はルート要素の初めの `transitionend` もしくは `animationend` イベントを待ちます。しかし、これが常に望む形とは限りません。例えば、幾つかの入れ子となっている内部要素にてトランジションの遅延がある場合や、ルートのトランジション要素よりも非常に長いトランジション期間を設けている場合の、一連のトランジションのまとまりなどです。
 
-In such cases you can specify an explicit transition duration (in milliseconds) using the `duration` prop on the `<transition>` component:
+このような場合 `<transition>` コンポーネントがもつ `duration` プロパティを利用することで、明示的に遷移にかかる時間（ミリ秒単位）を指定することが可能です:
 
 ```html
 <transition :duration="1000">...</transition>
 ```
 
-You can also specify separate values for enter and leave durations:
+また、活性化時と終了時の期間を、個別に指定することも可能です:
 
 ```html
 <transition :duration="{ enter: 500, leave: 800 }">...</transition>
@@ -284,7 +283,7 @@ You can also specify separate values for enter and leave durations:
 
 ### JavaScript Hooks
 
-You can also define JavaScript hooks in attributes:
+属性によって JavaScript フックを定義することができます:
 
 ```html
 <transition
@@ -312,8 +311,7 @@ methods: {
   beforeEnter(el) {
     // ...
   },
-  // the done callback is optional when
-  // used in combination with CSS
+  // CSS と組み合わせて使う時、done コールバックはオプションです
   enter(el, done) {
     // ...
     done()
@@ -332,8 +330,7 @@ methods: {
   beforeLeave(el) {
     // ...
   },
-  // the done callback is optional when
-  // used in combination with CSS
+  // CSS と組み合わせて使う時、done コールバックはオプションです
   leave(el, done) {
     // ...
     done()
@@ -341,18 +338,18 @@ methods: {
   afterLeave(el) {
     // ...
   },
-  // leaveCancelled only available with v-show
+  // v-show と共に使うときだけ leaveCancelled は有効です
   leaveCancelled(el) {
     // ...
   }
 }
 ```
 
-These hooks can be used in combination with CSS transitions/animations or on their own.
+これらのフックは、CSS トランジション/アニメーション、または別の何かと組み合わせて使うことができます。
 
-When using JavaScript-only transitions, **the `done` callbacks are required for the `enter` and `leave` hooks**. Otherwise, the hooks will be called synchronously and the transition will finish immediately. Adding `:css="false"` will also let know Vue to skip CSS detection. Aside from being slightly more performant, this also prevents CSS rules from accidentally interfering with the transition.
+JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。呼ばない場合は、フックは同期的に呼ばれ、トランジションはただちに終了します。また、 `:css="false"` を追加することで、CSS の検出をスキップすることを Vue に伝えられます。これによってわずかにパフォーマンスが改善するほか、CSS のルールの誤ったトランジションへの干渉を防ぐことができます。
 
-Now let's dive into an example. Here's a JavaScript transition using [GreenSock](https://greensock.com/):
+今から例をみていきましょう。これは [GreenSock](https://greensock.com/) を使ったシンプルな JavaScript トランジションの例です:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
