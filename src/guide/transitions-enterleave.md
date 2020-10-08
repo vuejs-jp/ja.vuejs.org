@@ -506,11 +506,12 @@ computed: {
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-ただ、そうするわけにはいかない場合や、より複雑な in と out の動きの扱いについて調整する必要がある場合に、Vue は非常に便利な **トランジションモード** というユーティリティを提供しています。
+<!-- ここ coordinate を調整で訳していたがそのままカタカナ語のほうが良さそう -->
+
+ただ、そうするわけにはいかない場合や、より複雑な in と out の動きの扱いについてコーディネートする必要がある場合に、Vue は非常に便利な **トランジションモード** というユーティリティを提供しています。
 
 - `in-out`: 最初に新しい要素がトランジションして、それが完了したら、現在の要素がトランジションアウトする。
 - `out-in`: 最初に現在の要素がトランジションアウトして、それが完了したら、新しい要素がトランジションインする。
-
 
 <!-- find が感じる？気づく？ -->
 
@@ -535,7 +536,7 @@ computed: {
 
 特別なスタイルの追加無しで、ひとつのシンプルな属性を追加するだけでオリジナルのトランジションを修正できました。
 
-We can use this to coordinate more expressive movement, such as a folding card, as demonstrated below. It's actually two elements transitioning between eachother, but since the beginning and end states are scaling the same: horizontally to 0, it appears like one fluid movement. This type of slight-of-hand can be very useful for realistic UI microinteractions:
+これを利用することによって、以下のようなより表現力のある動きをコーディネートすることができます。二つの要素がお互いの間でトランジションしていますが、そのお互いの大きさが同じであり、水平方向の 0 の位置で重なるため、一つの要素の動きの流れに見えます。このような細かな調整は、よりリアルなマイクロインタラクションの表現で役立ちます:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="76e344bf057bd58b5936bba260b787a8" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Flip Cards">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/76e344bf057bd58b5936bba260b787a8">
