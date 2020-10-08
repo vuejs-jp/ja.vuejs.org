@@ -1,5 +1,7 @@
 # Enter & Leave Transitions
 
+<!-- ここは v2.x と同じ-->
+
 Vue provides a variety of ways to apply transition effects when items are inserted, updated, or removed from the DOM. This includes tools to:
 
 - automatically apply classes for CSS transitions and animations
@@ -10,6 +12,8 @@ Vue provides a variety of ways to apply transition effects when items are insert
 On this page, we'll only cover entering, leaving, and list transitions, but you can see the next section for [managing state transitions](transitions-state.html).
 
 ## Transitioning Single Elements/Components
+
+<!-- ここは v2.x と同じ-->
 
 Vue provides a `transition` wrapper component, allowing you to add entering/leaving transitions for any element or component in the following contexts:
 
@@ -73,6 +77,8 @@ When an element wrapped in a `transition` component is inserted or removed, this
 
 ### Transition Classes
 
+<!-- ここは概ね v2.x と同じ-->
+
 There are six classes applied for enter/leave transitions.
 
 1. `v-enter-from`: Starting state for enter. Added before element is inserted, removed one frame after element is inserted.
@@ -94,6 +100,8 @@ Each of these classes will be prefixed with the name of the transition. Here the
 `v-enter-active` and `v-leave-active` give you the ability to specify different easing curves for enter/leave transitions, which you'll see an example of in the following section.
 
 ### CSS Transitions
+
+<!-- ここは v2.x と同じ-->
 
 One of the most common transition types uses CSS transitions. Here's an example:
 
@@ -151,6 +159,8 @@ Vue.createApp(Demo).mount('#demo')
 CSS animations are applied in the same way as CSS transitions, the difference being that `v-enter-from` is not removed immediately after the element is inserted, but on an `animationend` event.
 
 Here's an example, omitting prefixed CSS rules for the sake of brevity:
+
+<!-- div への ID だけ変わっているが対応の必要なし -->
 
 ```html
 <div id="example-2">
