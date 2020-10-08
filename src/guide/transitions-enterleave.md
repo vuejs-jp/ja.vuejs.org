@@ -2,27 +2,25 @@
 
 <!-- ここは v2.x と同じ-->
 
-Vue provides a variety of ways to apply transition effects when items are inserted, updated, or removed from the DOM. This includes tools to:
+Vue は、DOM からアイテムが追加、更新、削除されたときにトランジション効果を適用するための方法を複数提供しています:
 
-- automatically apply classes for CSS transitions and animations
-- integrate 3rd-party CSS animation libraries, such as [Animate.css](https://animate.style/)
-- use JavaScript to directly manipulate the DOM during transition hooks
-- integrate 3rd-party JavaScript animation libraries
+- 自動的に CSS トランジションやアニメーションのためのクラスを適用します。
+- [Animate.css](https://animate.style/) のようなサードパーティの CSS アニメーションライブラリと連携します。
+- トランジションフックが実行されている間、JavaScript を使って直接 DOM 操作を行います。
+- サードパーティの JavaScript アニメーションライブラリと連携します。
 
 On this page, we'll only cover entering, leaving, and list transitions, but you can see the next section for [managing state transitions](transitions-state.html).
 
 ## Transitioning Single Elements/Components
 
-<!-- ここは v2.x と同じ-->
+Vue は、`transition` ラッパーコンポーネントを提供しています。このコンポーネントは、次のコンテキストにある要素やコンポーネントに entering/leaving トランジションを追加することを可能にします:
 
-Vue provides a `transition` wrapper component, allowing you to add entering/leaving transitions for any element or component in the following contexts:
+- 条件付きの描画 (`v-if` を使用)
+- 条件付きの表示 (`v-show` を利用)
+- 動的コンポーネント
+- コンポーネントルートノード (Component root nodes)
 
-- Conditional rendering (using `v-if`)
-- Conditional display (using `v-show`)
-- Dynamic components
-- Component root nodes
-
-This is what an example looks like in action:
+これは、アクションのように見える非常にシンプルな例です:
 
 ```html
 <div id="demo">
@@ -67,13 +65,13 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-When an element wrapped in a `transition` component is inserted or removed, this is what happens:
+`transition` コンポーネントにラップされた要素が挿入あるいは削除されるとき、次のことが行われます:
 
-1. Vue will automatically sniff whether the target element has CSS transitions or animations applied. If it does, CSS transition classes will be added/removed at appropriate timings.
+1. Vue は、対象の要素が CSS トランジションあるいはアニメーションが適用されるか自動的に察知します。それがない場合、適切なタイミングで、CSS トランジションのクラスを追加/削除します。
 
-2. If the transition component provided [JavaScript hooks](#javascript-hooks), these hooks will be called at appropriate timings.
+2. もし、トランジションコンポーネントが [JavaScript フック](#JavaScript-フック) を提供している場合は、適切なタイミングでそれらのフックが呼ばれます。
 
-3. If no CSS transitions/animations are detected and no JavaScript hooks are provided, the DOM operations for insertion and/or removal will be executed immediately on next frame (Note: this is a browser animation frame, different from Vue's concept of `nextTick`).
+3. もし、CSS トランジション/アニメーションが検出されず、JavaScript フックも提供されない場合、挿入、削除のいずれか、あるいは両方の DOM 操作を次のフレームでただちに実行します。(注意: ここでのフレームはブラウザのアニメーションフレームを指します。 Vue の `nextTick` のコンセプトのそれとは異なるものです)
 
 ### Transition Classes
 
