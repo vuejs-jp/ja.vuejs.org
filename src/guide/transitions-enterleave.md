@@ -78,16 +78,10 @@ Vue.createApp(Demo).mount('#demo')
 以下は、enter/leave トランジションのために適用される 6 つのクラスです。
 
 1. `v-enter-from `: enter の開始状態。要素が挿入される前に適用され、要素が挿入された 1 フレーム後に削除されます。
-
-
 2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。要素が挿入される前に追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-
 3. `v-enter-to`: **バージョン 2.1.8 以降でのみ利用可能です。** enter の終了状態。要素が挿入された 1 フレーム後に追加され (同時に `v-enter` が削除されます)、トランジション/アニメーションが終了すると削除されます。
-
 4. `v-leave-from`: leave の開始状態。トランジションの終了がトリガされるとき、直ちに追加され、1フレーム後に削除されます。
-
 5. `v-leave-active`: leave の活性状態。トランジションが終わるフェーズ中に適用されます。leave トランジションがトリガされるとき、直ちに追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの終了に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-
 6. `v-leave-to`: **バージョン 2.1.8 以降でのみ利用可能です。** leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave` が削除されます)、トランジション/アニメーションが終了すると削除されます。
 
 ![Transition Diagram](/images/transitions.svg)
@@ -491,7 +485,7 @@ computed: {
 
 ### Transition Modes
 
-There's still one problem though. Try clicking the button below:
+まだひとつ問題が残っています。以下のボタンをクリックしてください:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="Rwrqzpr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Button Problem">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/Rwrqzpr">
@@ -500,9 +494,9 @@ There's still one problem though. Try clicking the button below:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-As it's transitioning between the "on" button and the "off" button, both buttons are rendered - one transitioning out while the other transitions in. This is the default behavior of `<transition>` - entering and leaving happens simultaneously.
+それは、"on" ボタンと "off" ボタン間でトランジションを行うとき、片方のボタンがトランジションアウトして、別の片方がトランジションインするとき、両方のボタンが描画されてしまうことです。これは、`<transition>` のデフォルトの振る舞いです - entering と leaving は同時に起きます。
 
-Sometimes this works great, like when transitioning items are absolutely positioned on top of each other:
+時には、これで問題なく、うまく動作する場合があります。例えば、位置が絶対位置で指定されているアイテムのトランジションを行うような場合です:
 
 <p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="abdQgLr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Button Problem- positioning">
   <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abdQgLr">
@@ -511,16 +505,19 @@ Sometimes this works great, like when transitioning items are absolutely positio
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Sometimes this isn't an option, though, or we're dealing with more complex movement where in and out states need to be coordinated, so Vue offers an extremely useful utility called **transition modes**:
+ただ、そうするわけにはいかない場合や、より複雑な in と out の動きの扱いについて調整する必要がある場合に、Vue は非常に便利な **トランジションモード** というユーティリティを提供しています。
 
-- `in-out`: New element transitions in first, then when complete, the current element transitions out.
-- `out-in`: Current element transitions out first, then when complete, the new element transitions in.
+- `in-out`: 最初に新しい要素がトランジションして、それが完了したら、現在の要素がトランジションアウトする。
+- `out-in`: 最初に現在の要素がトランジションアウトして、それが完了したら、新しい要素がトランジションインする。
+
+
+<!-- find が感じる？気づく？ -->
 
 ::: tip
-You'll find very quickly that `out-in` is the state you will want most of the time :)
+`out-in` がほとんどの場合に求めているものと感じるはずです。
 :::
 
-Now let's update the transition for our on/off buttons with `out-in`:
+今から、`out-in` を使って、先程の on/off ボタンのトランジションを書き換えてみましょう:
 
 ```html
 <transition name="fade" mode="out-in">
@@ -535,7 +532,7 @@ Now let's update the transition for our on/off buttons with `out-in`:
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-With one attribute addition, we've fixed that original transition without having to add any special styling.
+特別なスタイルの追加無しで、ひとつのシンプルな属性を追加するだけでオリジナルのトランジションを修正できました。
 
 We can use this to coordinate more expressive movement, such as a folding card, as demonstrated below. It's actually two elements transitioning between eachother, but since the beginning and end states are scaling the same: horizontally to 0, it appears like one fluid movement. This type of slight-of-hand can be very useful for realistic UI microinteractions:
 
@@ -548,7 +545,7 @@ We can use this to coordinate more expressive movement, such as a folding card, 
 
 ## Transitioning Between Components
 
-Transitioning between components is even simpler - we don't even need the `key` attribute. Instead, we wrap a [dynamic component](component-basics.html#dynamic-components):
+コンポーネント間のトランジションは、 `key` 属性が必要ではないのでさらに単純です。代わりに、ただ [動的コンポーネント](components.html#動的コンポーネント) でラップするだけです:
 
 TODO: update to Vue 3
 
