@@ -209,7 +209,7 @@ Vue.createApp(Demo).mount('#demo')
 
 ### Custom Transition Classes
 
-You can also specify custom transition classes by providing the following attributes:
+次の属性で、カスタムトランジションクラスを指定できます:
 
 - `enter-from-class`
 - `enter-active-class`
@@ -218,9 +218,9 @@ You can also specify custom transition classes by providing the following attrib
 - `leave-active-class`
 - `leave-to-class` (2.1.8+)
 
-These will override the conventional class names. This is especially useful when you want to combine Vue's transition system with an existing CSS animation library, such as [Animate.css](https://daneden.github.io/animate.css/).
+これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
-Here's an example:
+こちらが例となります:
 
 ```html
 <link
