@@ -1,7 +1,5 @@
 # Enter & Leave Transitions
 
-<!-- ここは v2.x と同じ-->
-
 Vue は、DOM からアイテムが追加、更新、削除されたときにトランジション効果を適用するための方法を複数提供しています:
 
 - 自動的に CSS トランジションやアニメーションのためのクラスを適用します。
@@ -75,27 +73,28 @@ Vue.createApp(Demo).mount('#demo')
 
 ### Transition Classes
 
-<!-- ここは概ね v2.x と同じ-->
+<!-- これらはが直訳としては良いが、読みやすさで "以下は" を採用 -->
 
-There are six classes applied for enter/leave transitions.
+以下は、enter/leave トランジションのために適用される 6 つのクラスです。
 
-1. `v-enter-from`: Starting state for enter. Added before element is inserted, removed one frame after element is inserted.
+1. `v-enter-from `: enter の開始状態。要素が挿入される前に適用され、要素が挿入された 1 フレーム後に削除されます。
 
-2. `v-enter-active`: Active state for enter. Applied during the entire entering phase. Added before element is inserted, removed when transition/animation finishes. This class can be used to define the duration, delay and easing curve for the entering transition.
 
-3. `v-enter-to`: **Only available in versions 2.1.8+.** Ending state for enter. Added one frame after element is inserted (at the same time `v-enter` is removed), removed when transition/animation finishes.
+2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。要素が挿入される前に追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
 
-4. `v-leave-from`: Starting state for leave. Added immediately when a leaving transition is triggered, removed after one frame.
+3. `v-enter-to`: **バージョン 2.1.8 以降でのみ利用可能です。** enter の終了状態。要素が挿入された 1 フレーム後に追加され (同時に `v-enter` が削除されます)、トランジション/アニメーションが終了すると削除されます。
 
-5. `v-leave-active`: Active state for leave. Applied during the entire leaving phase. Added immediately when leave transition is triggered, removed when the transition/animation finishes. This class can be used to define the duration, delay and easing curve for the leaving transition.
+4. `v-leave-from`: leave の開始状態。トランジションの終了がトリガされるとき、直ちに追加され、1フレーム後に削除されます。
 
-6. `v-leave-to`: **Only available in versions 2.1.8+.** Ending state for leave. Added one frame after a leaving transition is triggered (at the same time `v-leave` is removed), removed when the transition/animation finishes.
+5. `v-leave-active`: leave の活性状態。トランジションが終わるフェーズ中に適用されます。leave トランジションがトリガされるとき、直ちに追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの終了に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
+
+6. `v-leave-to`: **バージョン 2.1.8 以降でのみ利用可能です。** leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave` が削除されます)、トランジション/アニメーションが終了すると削除されます。
 
 ![Transition Diagram](/images/transitions.svg)
 
-Each of these classes will be prefixed with the name of the transition. Here the `v-` prefix is the default when you use a `<transition>` element with no name. If you use `<transition name="my-transition">` for example, then the `v-enter-from` class would instead be `my-transition-enter-from`.
+各クラスは、トランジションの名前が先頭に付きます。`<transition>` 要素に名前がない場合は、デフォルトで `v-` が先頭に付きます。例えば、`<transition name="my-transition">` の場合は、`v-enter-from` クラスではなく、`my-transition-enter-from` となります。
 
-`v-enter-active` and `v-leave-active` give you the ability to specify different easing curves for enter/leave transitions, which you'll see an example of in the following section.
+`v-enter-active` と `v-leave-active` は、次のセクションの例で見ることができるような、enter/leave トランジションで異なるイージングカーブの指定を可能にします。
 
 ### CSS Transitions
 
