@@ -1,19 +1,20 @@
-# Overview
+# 概要
 
-Vue offers some abstractions that can help work with transitions and animations, particularly in response to something changing. Some of these abstractions include:
+Vue は何らかの変化に応じてトランジションやアニメーションを付けるのに役立つ、いくつかの抽象化を提供します。
+ これらの抽象化には、次のものが含まれます:
 
-- Hooks for components entering and leaving the DOM, in both CSS and JS, using the built-in `<transition>` component.
-- Transition Modes so that you can orchestrate ordering during a transition.
-- Hooks for when multiple elements are updating in position, with FLIP techniques applied under the hood to increase performance, using the `<transition-group>` component.
-- Transitioning different states in an application, with `watchers`.
+- 組み込みコンポーネントの `<transition>` を使用して、CSS と JS の両方で DOM に出入りするコンポーネントをフックします。
+- トランジションの途中の順序を調整できるようにトランジションモードがあります。
+- `<transition-group>` コンポーネントを使用すると、パフォーマンス向上のために内部で FLIP 手法が適用され、複数の要素が所定の位置で更新された時にフックします。
+- アプリケーション内をさまざまな状態へ遷移するには `watchers` を使用します。
 
-We will cover all of these and more in the next three sections in this Guide. However, aside from these useful API offerings, it's worth mentioning that the class and style declarations we covered earlier can be used to apply animations and transitions as well, for more simple use cases.
+このガイドの次の3つのセクションでは、上記のことについてすべて説明します。 ただし、提供する便利な API とは別に、前セクションで説明したクラスとスタイルの宣言を使用して、アニメーションやトランジションを適用し、より単純なユースケースにすることもできます。
 
-In this next section, we'll go over some web animation and transitions basics, and link off to some resources for further exploration. If you're already familiar with web animation and how those principles might work with some of Vue's directives, feel free to skip this next section. For anyone else looking to learn a little more about web animation basics before diving in, read on.
+この次のセクションでは、いくつかの Web アニメーションとトランジションの基本について説明し、さらに詳しく調べるためにいくつかのリソースにリンクします。Web アニメーションとそれらの原則が Vue のディレクティブの一部でどのように機能するか既に理解している場合、次のセクションをスキップしてください。Web アニメーションの基本についてもう少し学びたい人は、次のセクションを読んでください。
 
-## Class-based Animations & Transitions
+## クラスベースのアニメーションとトランジション
 
-Though the `<transition>` component can be wonderful for components entering and leaving, you can also activate an animation without mounting a component, by adding a conditional class.
+`<transition>` コンポーネントはコンポーネントを出入りさせるのに最適ですが、条件付きクラスを追加することでコンポーネントをマウントせずにアニメーションをアクティブ化することもできます。
 
 ```html
 <div id="demo">
@@ -77,9 +78,9 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-# Transitions with Style Bindings
+# スタイルバインディングによるトランジション
 
-Some transition affects can be applied by interpolating values, for instance by binding a style to an element while an interaction occurs. Take this example for instance:
+一部のトランジションによるエフェクトは補間値を適用できます。たとえば、トランジションの発生中に要素にスタイルをバインドすることによって適用できます。 例を見てみましょう:
 
 ```html
 <div id="demo">
@@ -124,27 +125,27 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-In this example, we are creating animation through the use of interpolation, attached to the mouse movement. The CSS transition is applied to the element as well, to let the element know what kind of easing to use while it's updating.
+この例では、マウスの動きに付随してアニメーションを作成しています。 CSS トランジションは要素にも適用され、更新中にどのような操作か要素に通知します。
 
-## Performance
+## パフォーマンス
 
-You may notice that the animations shown above are using things like `transforms`, and applying strange properties like `perspective`- why were they built that way instead of just using `margin` and `top` etc?
+上記のアニメーションは `transforms` のようなものを使用しています。そして、 `perspective` のような奇妙なプロパティを適用していることに気付くかもしれません。なぜそれらは単に `margin` や `top` などを使用するのではなく、そのように構築されたのでしょう？
 
-We can create extremely smooth animations on the web by being aware of performance. We want to hardware accelerate elements when we can, and use properties that don't trigger repaints. Let's go over some of how we can accomplish this.
+パフォーマンスを意識することで、Web 上で非常にスムーズなアニメーションを作成できます。 私たちは可能な限り要素をハードウェアで高速化し、再描画をトリガーしないプロパティを使用したいと考えています。 これを実現する方法をいくつか見ていきましょう。
 
-### Transform and Opacity
+### 変形と不透明度
 
-We can check resources like [CSS-Triggers](https://csstriggers.com/) to see which properties will trigger repaints if we animate them. Here, if you look under `transform`, you will see:
+[CSS-Triggers](https://csstriggers.com/) などのリソースをチェックして、アニメーション化した場合にどのプロパティが再描画をトリガーするか確認できます。 ここで `transform` の項目を見ると:
 
-> Changing transform does not trigger any geometry changes or painting, which is very good. This means that the operation can likely be carried out by the compositor thread with the help of the GPU.
+> `transform` を変更してもジオメトリの変更や描画はトリガーされません。これは非常に優れています。これは GPU を使用して `compositor thread` で操作を実行できる可能性が高いことを意味します。
 
-Opacity behaves similarly. Thus, they are ideal candidates for movement on the web.
+不透明度も同様に動作します。 従って、それらは Web 上でのアニメーションに理想的な候補です。
 
-### Hardware Acceleration
+### ハードウェアアクセラレーション
 
-Properties such as `perspective`, `backface-visibility`, and `transform: translateZ(x)` will allow the browser to know you need hardware acceleration.
+`perspective` , `backface-visibility` , `transform：translateZ（x）` などのプロパティにより、ブラウザはハードウェアアクセラレーションが必要であることを認識します。
 
-If you wish to hardware-accelerate an element, you can apply any of these properties (not all are necessary, only one):
+要素をハードウェアで高速化したい場合、これらのプロパティのいずれかに適用できます（すべてに必要なわけではなく、1つだけ）:
 
 ```css
 perspective: 1000px;
@@ -152,19 +153,19 @@ backface-visibility: hidden;
 transform: translateZ(0);
 ```
 
-Many JS libraries like GreenSock will assume you want hardware acceleration and will apply them by default, so you do not need to set them manually.
+GreenSock のような多くの JS ライブラリは、ハードウェアアクセラレーションが必要になることを想定してデフォルトで適用するため、手動で設定する必要はありません。
 
-## Timing
+## タイミング
 
-For simple UI transitions, meaning from just one state to another with no intermediary states, it's common to use timings between 0.1s and 0.4s, and most folks find that _0.25s_ tends to be a sweet spot. Can you use that timing for everything? No, not really. If you have something that needs to move a greater distance or has more steps or state changes, 0.25s is not going to work as well and you will have to be much more intentional, and the timing will need to be more unique. That doesn't mean you can't have nice defaults that you repeat within your application, though.
+単純な UI トランジション、つまり中間を持たないとある状態から別の状態へのトランジションでは、0.1秒から0.4秒の間のタイミングを使用するのが一般的であり、ほとんどの人は _0.25秒_ がスイートスポットになる傾向があることに気付きます。 そのタイミングをすべてに使用できますか？ いいえ、そうではありません。 より長い距離を移動する必要があるもの、またはより多くのステップや状態変化があるものの場合、0.25秒ではうまく機能せず、タイミングはより意図的に、よりユニークである必要があります。 ただし、これはアプリケーション内で適切な既定値を設定できないという意味ではありません。
 
-You may also find that entrances look better with slightly more time than an exit. The user typically is being guided during the entrance, and is a little less patient upon exit because they want to go on their way.
+また、トランジションの序盤は終盤よりも少し時間がかかると見栄えが良くなります。 ユーザは通常、序盤でガイドを受け途中で離脱したいので終盤での忍耐力が少なくなります。
 
-## Easing
+## イージング
 
-Easing is an important way to convey depth in an animation. One of the most common mistakes newcomers to animation have is to use `ease-in` for entrances, and `ease-out` for exits. You'll actually need the opposite.
+イージングはアニメーションの深みを伝える重要な方法です。 アニメーションの初心者がおかす最も一般的な間違いの1つは、序盤に `ease-in` を使用し、終盤に `ease-out` を使用することです。 実際には反対のことが必要です。
 
-If we were to apply these states to a transition, it would look something like this:
+この状態遷移を適用すると、次のようになります。:
 
 ```css
 .button {
@@ -187,7 +188,7 @@ If we were to apply these states to a transition, it would look something like t
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Easing can also convey the quality of material being animated. Take this pen for example, which ball do you think is hard and which is soft?
+イージングはアニメーション化されている素材の品質を伝えることもできます。 この CodePen を例にとると、どちらのボールが硬く、どちらのボールが柔らかいと思いますか？
 
 <p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="result" data-user="sdras" data-slug-hash="zxJWBJ" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Bouncing Ball Demo">
   <span>See the Pen <a href="https://codepen.io/sdras/pen/zxJWBJ">
@@ -196,15 +197,15 @@ Easing can also convey the quality of material being animated. Take this pen for
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-You can get a lot of unique effects and make your animation very stylish by adjusting your easing. CSS allows you to modify this by adjusting a cubic bezier property, [this playground](https://cubic-bezier.com/#.17,.67,.83,.67) by Lea Verou is very helpful for exploring this.
+イージングを調整することで多くのユニークな効果を得ることができ、アニメーションを非常にスタイリッシュにすることができます。CSS を使用すると、3次のベジェ曲線のプロパティを調整して変形できます。 Lea Verou 氏によって作成された [Playground](https://cubic-bezier.com/#.17,.67,.83,.67) は、イージングを探索するのに非常に役立ちます。
 
-Though you can achieve great effects for simple animation with the two handles the cubic-bezier ease offers, JavaScript allows multiple handles, and therefore, allows for much more variance.
+3次のベジェ曲線が提供する2つのハンドルを使用すると単純なアニメーションで優れた効果を実現できますが、JavaScript では複数のハンドルを使用できるため、より多くのバリエーションが可能になります。
 
 ![Ease Comparison](/images/css-vs-js-ease.svg)
 
-Take a bounce, for instance. In CSS we have to declare each keyframe, up and down. In JavaScript, we can express all of that movement within the ease, by declaring `bounce` in the [GreenSock API (GSAP)](https://greensock.com/) (other JS libraries have other types of easing defaults).
+たとえば、バウンスさせる場合、CSS では各キーフレームを上下に宣言する必要があります。 JavaScript では[GreenSock API (GSAP)](https://greensock.com/) で `bounce` を宣言することで、そのすべての動きを簡単に表現できます (他の JS ライブラリには他の種類のイージングの既定値があります)
 
-Here is the code used for a bounce in CSS (example from animate.css):
+CSS でバウンスに使用されるコードは次の通りです (animate.css の例):
 
 ```css
 @keyframes bounceInDown {
@@ -244,15 +245,15 @@ Here is the code used for a bounce in CSS (example from animate.css):
 }
 ```
 
-And here is the same bounce in JS using GreenSock:
+そして、これが GreenSock を使用した JS での同じバウンスです:
 
 ```js
 gsap.from(element, { duration: 1, ease: 'bounce.out', y: -500 })
 ```
 
-We'll be using GreenSock in some of the examples in the sections following. They have a great [ease visualizer](https://greensock.com/ease-visualizer) that will help you build nicely crafted eases.
+次のセクションのいくつかの例では、GreenSock を使用します。GreenSock が持つ [ease visualizer](https://greensock.com/ease-visualizer) は、あなたがより良いイージングを構築するのに役立つでしょう。
 
-## Further Reading
+## 参考文献
 
 - [Designing Interface Animation: Improving the User Experience Through Animation by Val Head](https://www.amazon.com/dp/B01J4NKSZA/)
 - [Animation at Work by Rachel Nabors](https://abookapart.com/products/animation-at-work)
