@@ -3,17 +3,17 @@ badges:
   - removed
 ---
 
-# Filters <MigrationBadges :badges="$frontmatter.badges" />
+# フィルター <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-Filters are removed from Vue 3.0 and no longer be supported.
+フィルターは Vue 3.0 で削除され、サポートされません。
 
-## 2.x Syntax
+## 2.x での構文
 
-In 2.x, developers could use filters in order to apply common text formatting.
+2.0 で開発者は共通のテキストフォーマットを適用するためにフィルターを使うことができました。
 
-For example:
+例:
 
 ```html
 <template>
@@ -38,13 +38,13 @@ For example:
 </script>
 ```
 
-While this seems like a convenience, it requires a custom syntax that breaks the assumption of expressions inside of curly braces being "just JavaScript," which has both learning and implementation costs.
+これは便利に見える一方、括弧の中の式は"ただのJavaScript"になるという前提を崩すカスタム構文が必要であり、学習コストと実装コストの両方がかかります。
 
-## 3.x Update
+## 3.x での更新
 
-In 3.x, filters are removed and no longer supported. Instead, we recommend replacing them with method calls or computed properties.
+3.x ではフィルターは削除され、サポートされません。代わりに、関数の呼び出しか算出プロパティに置き換えることを推奨します。
 
-Using the example above, here is one example of how it could be implemented.
+上記の例を用いて、実装する方法の一例です。
 
 ```html
 <template>
@@ -69,6 +69,6 @@ Using the example above, here is one example of how it could be implemented.
 </script>
 ```
 
-## Migration Strategy
+## 移行方法
 
-Instead of using filters, we recommend replacing them with computed properties or methods.
+フィルターを使う代わりに、算出プロパティか関数に置き換えることを推奨します。
