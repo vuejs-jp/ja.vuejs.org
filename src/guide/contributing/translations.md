@@ -1,11 +1,11 @@
-# Translations
+# 翻訳
 
-Vue has spread across the globe, with the core team being in at least half a dozen different timezones. [The forum](https://forum.vuejs.org/) includes 7 languages and counting and many of our docs have [actively-maintained translations](https://github.com/vuejs?utf8=%E2%9C%93&q=vuejs.org). We'are very proud of Vue's international reach, but we can do even better.
+Vue はすでに世界中に広まっており、コアチームでさえ少なくとも 6 つのタイムゾーンにいます。[フォーラム](https://forum.vuejs.org/) は 7 ヶ国語を含んでおり私達のドキュメントの多くが[積極的にメンテナンスされ翻訳](https://github.com/vuejs?utf8=%E2%9C%93&q=vuejs.org) されています。私たちは Vue の国際的な広がりをとても誇りに思う一方で、さらに良くできると考えています。
 
-## Can we start translating Vue 3 docs?
+## Vue 3 のドキュメントの翻訳を始められますか？
 
-Yes! We are ready for translation!
+始められます！翻訳の準備が整っています！
 
-## How can I get involved with translations?
+## 翻訳に携わるには？
 
-The best way to get started is to check out [this pinned issue](https://github.com/vuejs/docs-next/issues/478) that contains active discussions on the various initiatives happening in the community.
+翻訳を始めるのに一番良い方法は、コミュニティで起こっているさまざまな取り組みについての活発な議論を含む[このピン留めされた Issue](https://github.com/vuejs/docs-next/issues/478) を確認することです。
