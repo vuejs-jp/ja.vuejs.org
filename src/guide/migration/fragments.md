@@ -5,13 +5,13 @@ badges:
 
 # Fragments <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-In Vue 3, components now have official support for multi-root node components, i.e., fragments!
+Vue 3 では、コンポーネントがマルチルートノードコンポーネント、つまりフラグメントを公式にサポートするようになりました！
 
-## 2.x Syntax
+## 2.x 構文
 
-In 2.x, multi-root components were not supported and would emit a warning when a user accidentally created one. As a result, many components are wrapped in a single `<div>` in order to fix this error.
+2.x では、マルチルートコンポーネントはサポートされておらず、ユーザーが誤ってコンポーネントを作成した場合に警告を表示していました。その結果、このエラーを修正するために、多くのコンポーネントが単一の `<div>` で囲むようになりました。
 
 ```html
 <!-- Layout.vue -->
@@ -24,9 +24,9 @@ In 2.x, multi-root components were not supported and would emit a warning when a
 </template>
 ```
 
-## 3.x Syntax
+## 3.x 構文
 
-In 3.x, components now can have multiple root nodes! However, this does require developers to explicitly define where attributes should be distributed.
+3.x では、コンポーネントは複数のルートノードを持つことができるようになりました。しかし、これは開発者が属性をどこに割り当てるかを明示的に定義する必要があります。
 
 ```html
 <!-- Layout.vue -->
@@ -37,4 +37,4 @@ In 3.x, components now can have multiple root nodes! However, this does require 
 </template>
 ```
 
-For more information on how attribute inheritance works, see [Non-Prop Attributes](/guide/component-attrs.html).
+属性の継承の仕組みについては、[プロパティでない属性](/guide/component-attrs.html)を参照してください。
