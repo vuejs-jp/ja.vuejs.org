@@ -22,7 +22,6 @@ render関数を使用する場合、つまり、`h` は、2.x ではコンテン
 
 ```js
 // 2.x 構文
-
 h(LayoutComponent, [
   h('div', { slot: 'header' }, this.header),
   h('div', { slot: 'content' }, this.content)
@@ -33,7 +32,6 @@ h(LayoutComponent, [
 
 ```js
 // 2.x 構文
-
 this.$scopedSlots.header
 ```
 
@@ -43,7 +41,6 @@ this.$scopedSlots.header
 
 ```js
 // 3.x 構文
-
 h(LayoutComponent, {}, {
   header: () => h('div', this.header),
   content: () => h('div', this.content)
@@ -54,11 +51,9 @@ h(LayoutComponent, {}, {
 
 ```js
 // 2.x 構文
-
 this.$scopedSlots.header
 
 // 3.x 構文
-
 this.$slots.header()
 ```
 
