@@ -127,7 +127,8 @@ const sidebar = {
         'migration/render-function-api',
         'migration/slots-unification',
         'migration/transition',
-        'migration/v-model'
+        'migration/v-model',
+        'migration/v-bind'
       ]
     },
     {
