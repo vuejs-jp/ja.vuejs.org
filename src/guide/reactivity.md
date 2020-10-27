@@ -44,10 +44,7 @@ val1 = 3
 プレーンな JavaScript オブジェクトを `data` オプションとしてアプリケーションまたはコンポーネントインスタンスに渡すと、Vue はそのすべてのプロパティを走査して、ゲッターとセッターのハンドラを使用しそれらを[プロキシ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy)に変換します。 これは ES6 のみの機能ですが、旧式の `Object.defineProperty` を使用した Vue 3 のバージョンを IE ブラウザをサポートするために提供しています。どちらも表面的には同じ API を提供しますが、プロキシバージョンの方がよりスリムで、パフォーマンスが改良されています。
 
 <div class="reactivecontent">
-  <iframe height="500" style="width: 100%;" scrolling="no" title="Proxies and Vue's Reactivity Explained Visually" src="https://codepen.io/sdras/embed/zYYzjBg?height=500&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-    See the Pen <a href='https://codepen.io/sdras/pen/zYYzjBg'>Proxies and Vue's Reactivity Explained Visually</a> by Sarah Drasner
-    (<a href='https://codepen.io/sdras'>@sdras</a>) on <a href='https://codepen.io'>CodePen</a>.
-  </iframe>
+  <common-codepen-snippet title="Proxies and Vue's Reactivity Explained Visually" slug="zYYzjBg" tab="result" theme="light" :height="500" :team="false" user="sdras" name="Sarah Drasner" :editable="false" :preview="false" />
 </div>
 
 この例はかなり素早いので、理解するには[プロキシ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy)についての知識がある程度必要です！では、少し詳しく見ていきましょう。プロキシに関する文献はたくさんありますが、本当に知っておく必要があることは **プロキシは別のオブジェクトまたは関数を包み、操作を差し込むこと(intercept)ができるオブジェクトだということです。**
@@ -212,10 +209,7 @@ const obj = reactive({
 すべてのコンポーネントインスタンスには対応するウォッチャインスタンスがあり、コンポーネントのレンダリング中に「触れられた」プロパティを依存関係として記録します。後に依存関係にあるもののセッターが発火されると、ウォッチャーに通知され、コンポーネントが再レンダリングされます。
 
 <div class="reactivecontent">
-  <iframe height="500" style="width: 100%;" scrolling="no" title="Second Reactivity with Proxies in Vue 3 Explainer" src="https://codepen.io/sdras/embed/GRJZddR?height=500&theme-id=light&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
-    See the Pen <a href='https://codepen.io/sdras/pen/GRJZddR'>Second Reactivity with Proxies in Vue 3 Explainer</a> by Sarah Drasner
-    (<a href='https://codepen.io/sdras'>@sdras</a>) on <a href='https://codepen.io'>CodePen</a>.
-  </iframe>
+  <common-codepen-snippet title="Second Reactivity with Proxies in Vue 3 Explainer" slug="GRJZddR" tab="result" theme="light" :height="500" :team="false" user="sdras" name="Sarah Drasner" :editable="false" :preview="false" />
 </div>
 
 オブジェクトをデータとしてコンポーネントインスタンスに渡すと、Vue はそれをプロキシに変換します。このプロキシにより、Vue はプロパティがアクセスまたは変更されたときに、依存関係の追跡と変更通知の実行ができるようになります。各プロパティは依存関係と見なされます。

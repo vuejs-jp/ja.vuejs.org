@@ -69,12 +69,7 @@ Vue.createApp({
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="NWqzrjr" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Computed basic example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqzrjr">
-  Computed basic example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Computed basic example" slug="NWqzrjr" tab="js,result" :preview="false" />
 
 ここでは `publishedBooksMessage` という算出プロパティを宣言しています。
 
@@ -197,12 +192,7 @@ computed: {
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="GRJGqXp" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Watch basic example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/GRJGqXp">
-  Watch basic example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Watch basic example" slug="GRJGqXp" tab="result" :preview="false" />
 
 このケースでは `watch` オプションを使用することで、非同期処理（API へのアクセス）の実行と、その処理を実行する条件を設定できています。このようなことは算出プロパティではできません。
 
