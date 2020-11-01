@@ -3,113 +3,113 @@ badges:
   - breaking
 ---
 
-# Attribute Coercion Behavior <MigrationBadges :badges="$frontmatter.badges" />
+# 属性強制の振舞い <MigrationBadges :badges="$frontmatter.badges" />
 
 ::: info Info
-This is a low-level internal API change and does not affect most developers.
+これはローレベルな内部 API の変更であり、ほとんどの開発者には影響しません。
 :::
 
-## Overview
+## 概要
 
-Here is a high level summary of the changes:
+以下に変更点の概要を示します:
 
-- Drop the internal concept of enumerated attributes and treat those attributes the same as normal non-boolean attributes
-- **BREAKING**: No longer removes attribute if value is boolean `false`. Instead, it's set as attr="false" instead. To remove the attribute, use `null` or `undefined`.
+- 列挙された属性の内部概念を削除し、それらの属性を通常の非ブール属性と同じように扱う。
+- **破壊的変更**: 値がブール値 `false` の場合に属性を削除しないようになりました。代わりに attr="false" として設定されます。属性を削除するには、`null` か `undefined` を使ってください。
 
-For more information, read on!
+詳しくは、以下をお読みください!
 
-## 2.x Syntax
+## 2.x での構文
 
-In 2.x, we had the following strategies for coercing `v-bind` values:
+2.x では、`v-bind`の値を強制するために以下のような戦略がありました:
 
-- For some attribute/element pairs, Vue is always using the corresponding IDL attribute (property): [like `value` of `<input>`, `<select>`, `<progress>`, etc](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L11-L18).
+- いくつかの属性/要素のペアでは、Vue は常に対応する IDL 属性（プロパティ）を使用します。: [`<input>`、`<select>`、`<progress>`における`value`など](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L11-L18)
 
-- For "[boolean attributes](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L33-L40)" and [xlinks](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L44-L46), Vue removes them if they are "falsy" ([`undefined`, `null` or `false`](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L52-L54)) and adds them otherwise (see [here](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L66-L77) and [here](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L81-L85)).
+- 「[ブール属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L33-L40)」と[xlinks](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L44-L46)については、Vue はそれらが"falsy"([`undefined`、`null`、`false`](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L52-L54))の場合には削除し、それ以外の場合には追加します ([ここ](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L66-L77)や[こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L81-L85)を見てください)。
 
-- For "[enumerated attributes](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L20)" (currently `contenteditable`, `draggable` and `spellcheck`), Vue tries to [coerce](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L24-L31) them to string (with special treatment for `contenteditable` for now, to fix [vuejs/vue#9397](https://github.com/vuejs/vue/issues/9397)).
+- 「[列挙された属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L20)」(現在は`contenteditable`、`draggable`、`spellcheck`)については、Vue はそれらを[強制的に](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L24-L31)文字列にしようとします ([vuejs/vue#9397](https://github.com/vuejs/vue/issues/9397)を修正するために、`contenteditable`については今のところ特別な扱いをしています)。
 
-- For other attributes, we remove "falsy" values (`undefined`, `null`, or `false`) and set other values as-is (see [here](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L92-L113)).
+- 他の属性については、"falsy"な値(`undefined`, `null`, or `false`)は削除し、他の値はそのまま設定します([こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L92-L113)を見てください)。
 
-The following table describes how Vue coerce "enumerated attributes" differently with normal non-boolean attributes:
+次の表では、Vue が「列挙された属性」を通常の非ブール属性とは異なる方法で強制する方法を説明しています:
 
-| Binding expression  | `foo` <sup>normal</sup> | `draggable` <sup>enumerated</sup> |
-| ------------------- | ----------------------- | --------------------------------- |
-| `:attr="null"`      | /                       | `draggable="false"`               |
-| `:attr="undefined"` | /                       | /                                 |
-| `:attr="true"`      | `foo="true"`            | `draggable="true"`                |
-| `:attr="false"`     | /                       | `draggable="false"`               |
-| `:attr="0"`         | `foo="0"`               | `draggable="true"`                |
-| `attr=""`           | `foo=""`                | `draggable="true"`                |
-| `attr="foo"`        | `foo="foo"`             | `draggable="true"`                |
-| `attr`              | `foo=""`                | `draggable="true"`                |
+| バインディング式    | `foo` <sup>通常の属性</sup> | `draggable` <sup>列挙された属性</sup> |
+| ------------------- | --------------------------- | ------------------------------------- |
+| `:attr="null"`      | /                           | `draggable="false"`                   |
+| `:attr="undefined"` | /                           | /                                     |
+| `:attr="true"`      | `foo="true"`                | `draggable="true"`                    |
+| `:attr="false"`     | /                           | `draggable="false"`                   |
+| `:attr="0"`         | `foo="0"`                   | `draggable="true"`                    |
+| `attr=""`           | `foo=""`                    | `draggable="true"`                    |
+| `attr="foo"`        | `foo="foo"`                 | `draggable="true"`                    |
+| `attr`              | `foo=""`                    | `draggable="true"`                    |
 
-We can see from the table above, current implementation coerces `true` to `'true'` but removes the attribute if it's `false`. This also led to inconsistency and required users to manually coerce boolean values to string in very common use cases like `aria-*` attributes like `aria-selected`, `aria-hidden`, etc.
+上の表からわかるように、現在の実装では`true`を`'true'`に強制していますが、`false`の場合は属性を削除しています。これはまた、`aria-selected`や`aria-hidden`といった`aria-*`属性のような非常に一般的なユースケースでも、ユーザーが手動でブール値を文字列に強制する必要があるなど、一貫性に欠けていました。
 
-## 3.x Syntax
+## 3.x での構文
 
-We intend to drop this internal concept of "enumerated attributes" and treat them as normal non-boolean HTML attributes.
+この「列挙された属性」という内部概念を捨てて、通常の非ブール HTML 属性として扱うつもりです。
 
-- This solves the inconsistency between normal non-boolean attributes and "enumerated attributes"
-- It also makes it possible to use values other than `'true'` and `'false'`, or even keywords yet to come, for attributes like `contenteditable`
+- これは、通常の非ブール属性と「列挙された属性」の間の矛盾を解決します。
+- また、`'true'`や`'false'`以外の値や、`contenteditable` のような属性には、これから定義されるキーワードを使用することも可能になります。
 
-For non-boolean attributes, Vue will stop removing them if they are `false` and coerce them to `'false'` instead.
+非ブール属性については、Vue は`false`であれば削除はせず、代わりに`'false'`に強制します。
 
-- This solves the inconsistency between `true` and `false` and makes outputting `aria-*` attributes easier
+- これにより、`true`と`false`の間の矛盾が解消され、`aria-*`属性の出力が容易になります。
 
-The following table describes the new behavior:
+新しい振舞いについては、以下の表を参照してください:
 
-| Binding expression  | `foo` <sup>normal</sup>    | `draggable` <sup>enumerated</sup> |
-| ------------------- | -------------------------- | --------------------------------- |
-| `:attr="null"`      | /                          | / <sup>†</sup>                    |
-| `:attr="undefined"` | /                          | /                                 |
-| `:attr="true"`      | `foo="true"`               | `draggable="true"`                |
-| `:attr="false"`     | `foo="false"` <sup>†</sup> | `draggable="false"`               |
-| `:attr="0"`         | `foo="0"`                  | `draggable="0"` <sup>†</sup>      |
-| `attr=""`           | `foo=""`                   | `draggable=""` <sup>†</sup>       |
-| `attr="foo"`        | `foo="foo"`                | `draggable="foo"` <sup>†</sup>    |
-| `attr`              | `foo=""`                   | `draggable=""` <sup>†</sup>       |
+| バインディング式    | `foo` <sup>通常の属性</sup> | `draggable` <sup>列挙された属性</sup> |
+| ------------------- | --------------------------- | ------------------------------------- |
+| `:attr="null"`      | /                           | / <sup>†</sup>                        |
+| `:attr="undefined"` | /                           | /                                     |
+| `:attr="true"`      | `foo="true"`                | `draggable="true"`                    |
+| `:attr="false"`     | `foo="false"` <sup>†</sup>  | `draggable="false"`                   |
+| `:attr="0"`         | `foo="0"`                   | `draggable="0"` <sup>†</sup>          |
+| `attr=""`           | `foo=""`                    | `draggable=""` <sup>†</sup>           |
+| `attr="foo"`        | `foo="foo"`                 | `draggable="foo"` <sup>†</sup>        |
+| `attr`              | `foo=""`                    | `draggable=""` <sup>†</sup>           |
 
-<small>†: changed</small>
+<small>†: 変更点</small>
 
-Coercion for boolean attributes is left untouched.
+ブール属性への強制はそのままです。
 
-## Migration Strategy
+## 移行の戦略
 
-### Enumerated attributes
+### 列挙された属性
 
-The absence of an enumerated attribute and `attr="false"` may produce different IDL attribute values (which will reflect the actual state), described as follows:
+列挙された属性が存在しない場合や`attr="false"`が存在しない場合に、以下のように異なる IDL 属性値(実際の状態を反映した値)が生成されることがあります:
 
-| Absent enumerated attr | IDL attr & value                     |
-| ---------------------- | ------------------------------------ |
-| `contenteditable`      | `contentEditable` &rarr; `'inherit'` |
-| `draggable`            | `draggable` &rarr; `false`           |
-| `spellcheck`           | `spellcheck` &rarr; `true`           |
+| 列挙された属性の不在 | IDL 属性と値                         |
+| -------------------- | ------------------------------------ |
+| `contenteditable`    | `contentEditable` &rarr; `'inherit'` |
+| `draggable`          | `draggable` &rarr; `false`           |
+| `spellcheck`         | `spellcheck` &rarr; `true`           |
 
-To keep the old behavior work, and as we will be coercing `false` to `'false'`, in 3.x Vue developers need to make `v-bind` expression resolve to `false` or `'false'` for `contenteditable` and `spellcheck`.
+これまでの振舞いを維持するために、また、`false`を`'false'`に強制するために、3.x Vue の開発者は`contenteditable`と`spellcheck`に対して`v-bind`式を`false`または`'false'`に解決する必要があります。
 
-In 2.x, invalid values were coerced to `'true'` for enumerated attributes. This was usually unintended and unlikely to be relied upon on a large scale. In 3.x `true` or `'true'` should be explicitly specified.
+2.x では、列挙された属性に対して無効な値を`'true'`に強制的に設定していました。これは通常意図していなかったもので、大規模に利用される可能性は低いと思われます。3.x では、`true`または`'true'`を明示的に指定する必要があります。
 
-### Coercing `false` to `'false'` instead of removing the attribute
+### 属性を削除する代わりに `false` を `'false'` に強制する
 
-In 3.x, `null` or `undefined` should be used to explicitly remove an attribute.
+3.x では、明示的に属性を削除するには `null` または `undefined` を使用しなければなりません。
 
-### Comparison between 2.x & 3.x behavior
+### 2.x と 3.x 間の振舞いの比較
 
 <table>
   <thead>
     <tr>
-      <th>Attribute</th>
-      <th><code>v-bind</code> value <sup>2.x</sup></th>
-      <th><code>v-bind</code> value <sup>3.x</sup></th>
-      <th>HTML output</th>
+      <th>属性</th>
+      <th><code>v-bind</code> 値 <sup>2.x</sup></th>
+      <th><code>v-bind</code> 値 <sup>3.x</sup></th>
+      <th>HTML 出力</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td rowspan="3">2.x “Enumerated attrs”<br><small>i.e. <code>contenteditable</code>, <code>draggable</code> and <code>spellcheck</code>.</small></td>
+      <td rowspan="3">2.x “列挙された属性”<br><small>つまり<code>contenteditable</code>、<code>draggable</code>、<code>spellcheck</code></small></td>
       <td><code>undefined</code>, <code>false</code></td>
       <td><code>undefined</code>, <code>null</code></td>
-      <td><i>removed</i></td>
+      <td><i>削除されます</i></td>
     </tr>
     <tr>
       <td>
@@ -125,10 +125,11 @@ In 3.x, `null` or `undefined` should be used to explicitly remove an attribute.
       <td><code>"false"</code></td>
     </tr>
     <tr>
-      <td rowspan="2">Other non-boolean attrs<br><small>eg. <code>aria-checked</code>, <code>tabindex</code>, <code>alt</code>, etc.</small></td>
+      <td rowspan="2">その他の非ブール属性<br><small>例えば 
+      <code>aria-checked</code>、<code>tabindex</code>、<code>alt</code>など</small></td>
       <td><code>undefined</code>, <code>null</code>, <code>false</code></td>
       <td><code>undefined</code>, <code>null</code></td>
-      <td><i>removed</i></td>
+      <td><i>削除されます</i></td>
     </tr>
     <tr>
       <td><code>'false'</code></td>
