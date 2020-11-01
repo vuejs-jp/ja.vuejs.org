@@ -3,63 +3,63 @@ badges:
   - breaking
 ---
 
-# Slots Unification <MigrationBadges :badges="$frontmatter.badges" />
+# スロットの統合 <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-This change unifies normal and scoped slots in 3.x.
+この変更により、3.x の通常のスロットとスコープ付きスロットが統合されます。
 
-Here is a quick summary of what has changed:
+変更点の概要は次のとおりです:
 
-- `this.$slots` now exposes slots as functions
-- **BREAKING**: `this.$scopedSlots` is removed
+- `this.$slots` はスロットを関数として公開するようになりました
+- **破壊的変更**: `this.$scopedSlots` が削除されました
 
-For more information, read on!
+詳細については、以下をお読みください!
 
-## 2.x Syntax
+## 2.x 構文
 
-When using the render function, i.e., `h`, 2.x used to define the `slot` data property on the content nodes.
+render 関数を使用する場合、つまり、`h` は、2.x ではコンテンツノードの `slot` データプロパティを定義するために使用されます。
 
 ```js
-// 2.x Syntax
+// 2.x 構文
 h(LayoutComponent, [
   h('div', { slot: 'header' }, this.header),
   h('div', { slot: 'content' }, this.content)
 ])
 ```
 
-In addition, when referencing scoped slots, they could be referenced using the following syntax:
+さらに、スコープ付きスロットを参照する場合、次の構文を使用して参照できます:
 
 ```js
-// 2.x Syntax
+// 2.x 構文
 this.$scopedSlots.header
 ```
 
-## 3.x Syntax
+## 3.x 構文
 
-In 3.x, slots are defined as children of the current node as an object:
+3.x では、スロットはオブジェクトとしての現在のノードの子として定義されています:
 
 ```js
-// 3.x Syntax
+// 3.x 構文
 h(LayoutComponent, {}, {
   header: () => h('div', this.header),
   content: () => h('div', this.content)
 })
 ```
 
-And when you need to reference scoped slots programmatically, they are now unified into the `$slots` option.
+また、スコープ付きスロットをプログラムで参照する必要がある場合、それらは `$slots` オプションに統合されるようになりました。
 
 ```js
-// 2.x Syntax
+// 2.x 構文
 this.$scopedSlots.header
 
-// 3.x Syntax
+// 3.x 構文
 this.$slots.header()
 ```
 
-## Migration Strategy
+## 移行戦略
 
-A majority of the change has already been shipped in 2.6. As a result, the migration can happen in one step:
+変更の大部分はすでに 2.6 で行われています。その結果、移行は1つのステップで実行できます:
 
-1. Replace all `this.$scopedSlots` occurrences with `this.$slots` in 3.x.
-2. Replace all occurences of `this.$slots.mySlot` with `this.$slots.mySlot()`
+1. 3.x の `this.$scopedSlots` の出現箇所をすべて `this.$slots` に置き換えます。
+2. `this.$slots.mySlot` のすべての出現箇所を `this.$slots.mySlot()` に置き換えます。
