@@ -1,9 +1,10 @@
 ---
+title: Data オプション
 badges:
   - breaking
 ---
 
-# Data オプション <MigrationBadges :badges="$frontmatter.badges" />
+# {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
 ## 概要
 
