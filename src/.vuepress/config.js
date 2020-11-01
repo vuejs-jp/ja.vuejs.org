@@ -111,6 +111,7 @@ const sidebar = {
       collapsable: true,
       children: [
         'migration/introduction',
+        'migration/array-refs',
         'migration/async-components',
         'migration/attribute-coercion',
         'migration/custom-directives',
