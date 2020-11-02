@@ -1,8 +1,8 @@
-# Vue Docs Writing Guide
+# Vue ドキュメントのライティングガイド
 
 Writing documentation is an exercise in empathy. We're not describing an objective reality - the source code already does that. Our job is to help shape the relationship between users and the Vue ecosystem. This ever-evolving guide provides some rules and recommendations on how to do that consistently within the Vue ecosystem.
 
-## Principles
+## 原則
 
 - **A feature doesn't exist until it's well documented.**
 - **Respect users' cognitive capacity (i.e. brain power).** When a user starts reading, they begin with a certain amount of limited brain power and when they run out, they stop learning.
@@ -13,7 +13,7 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
 - **While writing, don't be afraid to ask questions**, _especially_ if you're afraid they might be "dumb". Being vulnerable is hard, but it's the only way for us to more fully understand what we need to explain.
 - **Be involved in feature discussions.** The best APIs come from documentation-driven development, where we build features that are easy to explain, rather than trying to figure out how to explain them later. Asking questions (especially "dumb" questions) earlier often helps reveal confusions, inconsistencies, and problematic behavior before a breaking change would be required to fix them.
 
-## Organization
+## 組織
 
 - **Installation/Integration**: Provide a thorough overview of how to integrate the software into as many different kinds of projects as necessary.
 - **Introduction/Getting Started**:
@@ -29,9 +29,9 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
 - **Style Guide**: There are necessarily some key pieces in development that need a decision, but are not core to the API. The style guide provides educated, opinionated recommendations to help guide these decisions. They shouldn't be followed blindly, but can help teams save time by being aligned on smaller details.
 - **Cookbook**: Recipes in the cookbook are written with some assumption of familiarity with Vue and its ecosystem. Each is a highly structured document that walks through some common implementation details that a Vue dev might encounter.
 
-## Writing & Grammar
+## ライティング & 文法
 
-### Style
+### スタイル
 
 - **Headings should describe problems**, not solutions. For example, a less effective heading might be "Using props", because it describes a solution. A better heading might be "Passing Data to Child Components with Props", because it provides the context of the problem props solve. Users won't really start paying attention to the explanation of a feature until they have some idea of why/when they'd use it.
 - **When you assume knowledge, declare it** at the beginning and link to resources for less common knowledge that you're expecting.
@@ -53,7 +53,7 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
   - "function that returns a function" instead of "higher order function"
 - **Avoid language that invalidate struggle**, such as "easy", "just", "obviously", etc. For reference, see [Words To Avoid in Educational Writing](https://css-tricks.com/words-avoid-educational-writing/).
 
-### Grammar
+### 文法
 
 - **Avoid abbreviations** in writing and code examples (e.g. `attribute` is better than `attr`, `message` is better than `msg`), unless you are specifically referencing an abbreviation in an API (e.g. `$attrs`). Abbreviation symbols included on standard keyboards (e.g. `@`, `#`, `&`) are OK.
 - **When referencing a directly following example, use a colon (`:`) to end a sentence**, rather than a period (`.`).
@@ -63,7 +63,7 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
 - **Use Title Case for headings** - at least for now, since it's what we use through the rest of the docs. There's research suggesting that sentence case (only first word of the heading starts with a capital) is actually superior for legibility and also reduces the cognitive overhead for documentation writers, since they don't have to try to remember whether to capitalize words like "and", "with", and "about".
 - **Don't use emojis (except in discussions).** Emojis are cute and friendly, but they can be a distraction in documentation and some emoji even convey different meanings in different cultures.
 
-## Iteration & Communication
+## イテレーション & コミュニケーション
 
 - **Excellence comes from iteration.** First drafts are always bad, but writing them is a vital part of the process. It's extremely difficult to avoid the slow progression of Bad -> OK -> Good -> Great -> Inspiring -> Transcendent.
 - **Only wait until something is "Good" before publishing.** The community will help you push it further down the chain.
@@ -91,18 +91,18 @@ There is a certain temptation to abuse these styles, as one can simply add a cha
 
 Under no circumstances should 2 alerts be used next to one another, it's a sign that we're not able to explain context well enough.
 
-### Contributing
+### コントリビュート
 
 We appreciate small, focused PRs. If you'd like to make an extremely large change, please communicate with team members prior to a pull request. Here's a [writeup that details why this is so critical](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/) for us to work well on this team. Please understand that though we always appreciate contributions, ultimately we have to prioritize what works best for the project as a whole.
 
-## Resources
+## リソース
 
-### Software
+### ソフトウェア
 
 - [Grammarly](https://www.grammarly.com/): Desktop app and browser extension for checking spelling and grammar (though grammar checking doesn't catch everything and occasionally shows a false positive).
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): An extension for VS Code to help you check spelling within markdown and code examples.
 
-### Books
+### 本
 
 - [On Writing Well](https://www.amazon.com/Writing-Well-30th-Anniversary-Nonfiction-ebook/dp/B0090RVGW0) (see [popular quotes](https://www.goodreads.com/work/quotes/1139032-on-writing-well-the-classic-guide-to-writing-nonfiction))
 - [Bird by Bird](https://www.amazon.com/Bird-Some-Instructions-Writing-Life/dp/0385480016) (see [popular quotes](https://www.goodreads.com/work/quotes/841198-bird-by-bird-some-instructions-on-writing-and-life))
