@@ -1,23 +1,23 @@
 ---
-title: Data Option
+title: Data オプション
 badges:
   - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-- **BREAKING**: `data` component option declaration no longer accepts a plain JavaScript `object` and expects a `function` declaration.
+`data` コンポーネントオプション宣言はプレーンな JavaScript `object` を受け入れず、`function` 宣言を期待します。
 
-## 2.x Syntax
+## 2.x での構文
 
-In 2.x, developers could define the `data` option with either an `object` or a `function`.
+2.x では、`data` オプションは `object` か `function` のどちらか一方で定義できました。
 
-For example:
+例:
 
 ```html
-<!-- Object Declaration -->
+<!-- オブジェクト宣言 -->
 <script>
   const app = new Vue({
     data: {
@@ -26,7 +26,7 @@ For example:
   })
 </script>
 
-<!-- Function Declaration -->
+<!-- 関数宣言 -->
 <script>
   const app = new Vue({
     data() {
@@ -38,13 +38,13 @@ For example:
 </script>
 ```
 
-Though this provided some convenience in terms of root instances having a shared state, this has led to confusion due to the fact that its only possible on the root instance.
+これは状態が共有されているルートインスタンスに関してはある程度の利便性をもたらしましたが、ルートインスタンスでのみ可能であるという事実のため混乱を招きました。
 
-## 3.x Update
+## 3.x での更新
 
-In 3.x, the `data` option has been standardized to only accept a `function` that returns an `object`.
+3.x では、 `data` オプションは `object` を返す `function` 宣言のみ受け入れるよう標準化されました。
 
-Using the example above, there would only be one possible implementation of the code:
+上記を例にすると、コードの可能な実装は1つだけです:
 
 ```html
 <script>
@@ -60,9 +60,9 @@ Using the example above, there would only be one possible implementation of the 
 </script>
 ```
 
-## Migration Strategy
+## 移行の戦略
 
-For users relying on the object declaration, we recommend:
+オブジェクト宣言を利用しているユーザーには以下を推奨します:
 
-- Extracting the shared data into an external object and using it as a property in `data`
-- Rewrite references to the shared data to point to a new shared object
+- 共有データを外部オブジェクトとして抽出し、それを `data` のプロパティとして使う
+- 共有データへの参照、新しい共有オブジェクトを指すようにを書き換える
