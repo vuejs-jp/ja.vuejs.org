@@ -136,6 +136,6 @@ Vue 2 では、ネイティブタグに `is` プロパティを使用してこ�
 
 ## 移行の戦略
 
-- `config.ignorededElements` を `vue-loader` の `compilerOptions` (のビルドステップ) または `app.config.isCustomElement` (オンザフライのテンプレートコンパイルで) のいずれかで置き換えます。
+- `config.ignorededElements` を `vue-loader` の `compilerOptions` (ビルドステップ) または `app.config.isCustomElement` (オンザフライのテンプレートコンパイル) のいずれかで置き換えます。
 
 - `<component>`以外のタグで `is` を使用しているものはすべて `<component is="...">` (SFC テンプレートの場合) または `v-is` (in-DOM テンプレートの場合) に変更します。
