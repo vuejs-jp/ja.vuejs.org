@@ -2,35 +2,35 @@
 sidebar: auto
 ---
 
-# Style Guide
+# スタイルガイド
 
-This is the official style guide for Vue-specific code. If you use Vue in a project, it's a great reference to avoid errors, bikeshedding, and anti-patterns. However, we don't believe that any style guide is ideal for all teams or projects, so mindful deviations are encouraged based on past experience, the surrounding tech stack, and personal values.
+このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
 
-For the most part, we also avoid suggestions about JavaScript or HTML in general. We don't mind whether you use semicolons or trailing commas. We don't mind whether your HTML uses single-quotes or double-quotes for attribute values. Some exceptions will exist however, where we've found that a particular pattern is helpful in the context of Vue.
+ほとんどのパートにおいて、基本的に JavaScript や HTML に対する提案は避けています。セミコロンやカンマの使用の是非はどちらでも良いです。 HTML の属性に対してシングルクォートかダブルクォートどちらかを利用するかもどちらでも良いです。しかし、 Vue のコンテキストにおいて特定のパターンが役立つと判明した場合については、その限りではありません。
 
-Finally, we've split rules into four categories:
+最後に、私たちはルール群を 4 つのカテゴリに分割しました:
 
-## Rule Categories
+## ルールカテゴリ
 
-### Priority A: Essential
+### 優先度 A: 必須
 
-These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
+これらのルールはエラー防止に役立ちます。ですので、学び、遵守してください。例外は存在するかもしれませんが、それらは極めて稀で、かつ JavaScript と Vue の両方の専門知識を持った人によってのみ作られるべきです。
 
-### Priority B: Strongly Recommended
+### 優先度 B: 強く推奨
 
-These rules have been found to improve readability and/or developer experience in most projects. Your code will still run if you violate them, but violations should be rare and well-justified.
+これらのルールは、ほとんどのプロジェクトで読みやすさや開発者の体験をよりよくするために見いだされました。これらに違反してもあなたのコードは動きますが、ごくまれなケースで、かつちゃんと正当を示した上でのみ違反するようにすべきです。
 
-### Priority C: Recommended
+### 優先度 C: 推奨
 
-Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
+同じくらい良いオプションが複数ある場合､一貫性を確保するために任意の選択をすることができます｡これらのルールでは､それぞれ許容可能なオプションを説明し､既定の選択を提案します｡つまり､一貫性があり､正当な理由を持ち続ける限り､独自のコードベースで自由に異なる選択肢を作ることができます｡ですが､正当な理由を必ず持つようにしてください！コミュニティの標準に合わせることで､あなたは:
 
-1. train your brain to more easily parse most of the community code you encounter
-2. be able to copy and paste most community code examples without modification
-3. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
+1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます｡
+2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます｡
+3. 少なくとも Vue に関しては､ほとんどの場合､新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます｡
 
-### Priority D: Use with Caution
+### 優先度 D: 使用注意
 
-Some features of Vue exist to accommodate rare edge cases or smoother migrations from a legacy code base. When overused however, they can make your code more difficult to maintain or even become a source of bugs. These rules shine a light on potentially risky features, describing when and why they should be avoided.
+Vue のいくつかの機能は、レアケースまたは従来のコードベースからスムーズな移行に対応するために存在します。しかしながらこれを使いすぎると、コードを保守することが難しくなり、またバグの原因になることさえあります。これらのルールは潜在的な危険な機能を照らし、いつ、なぜ避けなかればならないのかを説明しています。
 
 ## Priority A Rules: Essential <span class="hide-from-sidebar">(Error Prevention)</span>
 
