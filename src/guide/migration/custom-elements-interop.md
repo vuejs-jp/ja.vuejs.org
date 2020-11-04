@@ -52,7 +52,7 @@ Vue.config.ignoredElements = ['plastic-button']
   ]
   ```
 
-- オンザフライでテンプレートをコンパイルする場合は、`app.config.isCustomElement`で設定します。
+- 直接テンプレートをコンパイルする場合は、`app.config.isCustomElement`で設定します。
 
   ```js
   const app = Vue.createApp({})
@@ -136,6 +136,6 @@ Vue 2 では、ネイティブタグに `is` プロパティを使用してこ�
 
 ## 移行の戦略
 
-- `config.ignorededElements` を `vue-loader` の `compilerOptions` (ビルドステップ) または `app.config.isCustomElement` (オンザフライのテンプレートコンパイル) のいずれかで置き換えます。
+- `config.ignorededElements` を `vue-loader` の `compilerOptions` (ビルドステップ) または `app.config.isCustomElement` (直接テンプレートコンパイル) のいずれかで置き換えます。
 
 - `<component>`以外のタグで `is` を使用しているものはすべて `<component is="...">` (SFC テンプレートの場合) または `v-is` (in-DOM テンプレートの場合) に変更します。
