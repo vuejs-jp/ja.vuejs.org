@@ -12,7 +12,7 @@ badges:
 - **破壊的変更**: `v-on`修飾子にキーコードの数字を利用することはサポートされなくなりました
 - **破壊的変更**: `config.keyCodes` の利用はサポートされなくなりました
 
-## 2.x 構文
+## 2.x での構文
 
 Vue 2では、`v-on`メソッドでキーコードを利用することができました。
 
@@ -40,7 +40,7 @@ Vue.config.keyCodes = {
 <input v-on:keyup.f1="showHelpText" />
 ```
 
-## 3.x 構文
+## 3.x での構文
 
 [`KeyboardEvent.keyCode` は非推奨](https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode)となり、Vue 3においても引き続きサポートすることはもはや意味がありません。そのため、修飾子に利用したいキーのケバブケース名を利用することが推奨されます。
 
@@ -53,4 +53,4 @@ Vue.config.keyCodes = {
 
 ## 移行方法
 
-キーコードを利用している場合は、ケバブケース名を利用する方法に変更することを推奨します。
+キーコードを利用している場合は、ケバブケースでの命名に変更することを推奨します。
