@@ -1,18 +1,18 @@
 ---
-title: Props Default Function this Access
+title: プロパティのデフォルト値ファクトリ関数の `this` アクセス
 badges:
   - breaking
 ---
 
-# Props Default Function `this` Access <MigrationBadges :badges="$frontmatter.badges" />
+# プロパティのデフォルト値ファクトリ関数の `this` アクセス <MigrationBadges :badges="$frontmatter.badges" />
 
-Props default value factory functions no longer have access to `this`.
+プロパティのデフォルト値ファクトリ関数が `this` にアクセスできなくなりました。
 
-Instead:
+代わりの方法は以下です。
 
-- Raw props received by the component are passed to the default function as argument;
+- コンポーネントが受け取った生のプロパティは、引数としてデフォルト関数に渡されます。
 
-- The [inject](../composition-api-provide-inject.md) API can be used inside default functions.
+- [inject](../composition-api-provide-inject.md) API がデフォルト関数の内部で使用できます。
 
 ```js
 import { inject } from 'vue'
@@ -21,9 +21,9 @@ export default {
   props: {
     theme: {
       default (props) {
-        // `props` is the raw values passed to the component,
-        // before any type / default coercions
-        // can also use `inject` to access injected properties
+        // `props` 引数はコンポーネントに渡される生の値で、
+        // 型やデフォルトの強制より前のものです。 
+        // また、`inject` を使用して注入されたプロパティにアクセスすることもできます。
         return inject('theme', 'default-theme')
       }
     }
