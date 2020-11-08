@@ -125,6 +125,7 @@ const sidebar = {
         'migration/global-api-treeshaking',
         'migration/inline-template-attribute',
         'migration/keycode-modifiers',
+        'migration/props-default-this',
         'migration/render-function-api',
         'migration/slots-unification',
         'migration/transition',
