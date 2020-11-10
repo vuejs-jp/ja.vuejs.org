@@ -3,28 +3,28 @@ badges:
   - breaking
 ---
 
-# KeyCode Modifiers <MigrationBadges :badges="$frontmatter.badges" />
+# キーコード修飾子 <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-Here is a quick summary of what has changed:
+変更点の概要は以下です
 
-- **BREAKING**: Using numbers, i.e. keyCodes, as `v-on` modifiers is no longer supported
-- **BREAKING**: `config.keyCodes` is no longer supported
+- **破壊的変更**: `v-on`修飾子にキーコードの数字を利用することはサポートされなくなりました
+- **破壊的変更**: `config.keyCodes` の利用はサポートされなくなりました
 
-## 2.x Syntax
+## 2.x での構文
 
-In Vue 2, `keyCodes` were supported as a way to modify a `v-on` method.
+Vue 2では、`v-on`メソッドでキーコードを利用することができました。
 
 ```html
-<!-- keyCode version -->
+<!-- キーコードを利用した場合 -->
 <input v-on:keyup.13="submit" />
 
-<!-- alias version -->
+<!-- エイリアスを利用した場合 -->
 <input v-on:keyup.enter="submit" />
 ```
 
-In addition, you could define your own aliases via the global `config.keyCodes` option.
+さらに、`config.keyCodes`のグローバルオプションを利用することで、独自のエイリアスを定義できました。
 
 ```js
 Vue.config.keyCodes = {
@@ -33,24 +33,24 @@ Vue.config.keyCodes = {
 ```
 
 ```html
-<!-- keyCode version -->
+<!-- キーコードを利用した場合 -->
 <input v-on:keyup.112="showHelpText" />
 
-<!-- custom alias version -->
+<!-- 独自のエイリアスを利用した場合 -->
 <input v-on:keyup.f1="showHelpText" />
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-Since [`KeyboardEvent.keyCode` has been deprecated](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode), it no longer makes sense for Vue 3 to continue supporting this as well. As a result, it is now recommended to use the kebab-case name for any key you want to use as a modifier.
+[`KeyboardEvent.keyCode` は非推奨](https://developer.mozilla.org/ja/docs/Web/API/KeyboardEvent/keyCode)となり、Vue 3においても引き続きサポートすることはもはや意味がありません。そのため、修飾子に利用したいキーのケバブケース名を利用することが推奨されます。
 
 ```html
-<!-- Vue 3 Key Modifier on v-on -->
+<!-- Vue 3 の v-on でキー修飾子を利用する場合 -->
 <input v-on:keyup.delete="confirmDelete" />
 ```
 
-As a result, this means that `config.keyCodes` is now also deprecated and will no longer be supported.
+`config.keyCodes`の利用も同様の理由で非推奨となり、サポートされなくなりました。
 
-## Migration Strategy
+## 移行方法
 
-For those using `keyCode` in their codebase, we recommend converting them to their kebab-cased named equivalents.
+キーコードを利用している場合は、ケバブケースでの命名に変更することを推奨します。
