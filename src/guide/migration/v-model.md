@@ -5,40 +5,40 @@ badges:
 
 # `v-model` <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-In terms of what has changed, at a high level:
+こちらが大まかな変更の概要です。
 
-- **BREAKING:** When used on custom components, `v-model` prop and event default names are changed:
-  - prop: `value` -> `modelValue`;
-  - event: `input` -> `update:modelValue`;
-- **BREAKING:** `v-bind`'s `.sync` modifier and component `model` option are removed and replaced with an argument on `v-model`;
-- **NEW:** Multiple `v-model` bindings on the same component are possible now;
-- **NEW:** Added the ability to create custom `v-model` modifiers.
+- **破壊的変更:** カスタムコンポーネントで使用する場合に、`v-model` のプロパティとイベントのデフォルト名が変更されます。
+  - プロパティ: `value` -> `modelValue`
+  - イベント: `input` -> `update:modelValue`
+- **破壊的変更:** `v-bind` の `.sync` 修飾子とコンポーネントの `model` オプションは削除され、`v-model` の引数に置き換えられます。
+- **追加:** 同じコンポーネントに複数の `v-model` バインディングが可能になりました。
+- **追加:** カスタムの `v-model` 修飾子を作成する機能が追加されました。
 
-For more information, read on!
+さらに詳しく知るために読み進めましょう！
 
-## Introduction
+## はじめに
 
-When Vue 2.0 was released, the `v-model` directive required developers to always use the `value` prop. And if developers required different props for different purposes, they would have to resort to using `v-bind.sync`. In addition, this hard-coded relationship between `v-model` and `value` led to issues with how native elements and custom elements were handled.
+Vue 2.0 がリリースされたとき、`v-model` ディレクティブでは、常に `value` プロパティを使う必要がありました。また、異なる目的で複数のプロパティが必要な場合は、`v-bind.sync` を使う必要がありました。さらに、この `v-model` と `value` のハードコードされた関係により、ネイティブ要素とカスタム要素の扱い方に問題が生じていました。
 
-In 2.2 we introduced the `model` component option that allows the component to customize the prop and event to use for `v-model`. However, this still only allowed a single `v-model` to be used on the component.
+Vue 2.2 では、`model` コンポーネントオプションが導入されました。これにより、コンポーネントが `v-model` で使用するプロパティ名とイベント名を変更できるようになりました。しかし、これでもコンポーネントで使えるのは１つの `v-model` だけでした。
 
-With Vue 3, the API for two-way data binding is being standardized in order to reduce confusion and to allow developers more flexibility with the `v-model` directive.
+Vue 3 では、双方向データバインディングの API が標準化され、混乱を減らし、開発者が `v-model` ディレクティブをより柔軟に使えるようになりました。
 
-## 2.x Syntax
+## 2.x での構文
 
-In 2.x, using a `v-model` on a component was an equivalent of passing a `value` prop and emitting an `input` event:
+2.x では、コンポーネントで `v-model` を使うことは、`value` プロパティを渡して `input` イベントを発火することと同じでした。
 
 ```html
 <ChildComponent v-model="pageTitle" />
 
-<!-- would be shorthand for: -->
+<!-- これは下記の省略形です -->
 
 <ChildComponent :value="pageTitle" @input="pageTitle = $event" />
 ```
 
-If we wanted to change prop or event names to something different, we would need to add a `model` option to `ChildComponent` component:
+プロパティやイベント名を変更する場合は、`ChildComponent` コンポーネントに `model` オプションを追加します。
 
 ```html
 <!-- ParentComponent.vue -->
@@ -55,9 +55,9 @@ export default {
     event: 'change'
   },
   props: {
-    // this allows using the `value` prop for a different purpose
+    // これにより、`value` プロパティを別の目的に使えます
     value: String,
-    // use `title` as the prop which take the place of `value`
+    // `value` の代わりに `title` をプロパティに使います
     title: {
       type: String,
       default: 'Default title'
@@ -66,40 +66,40 @@ export default {
 }
 ```
 
-So, `v-model` in this case would be a shorthand to
+したがって、この場合の `v-model` は下記の省略形になります。
 
 ```html
 <ChildComponent :title="pageTitle" @change="pageTitle = $event" />
 ```
 
-### Using `v-bind.sync`
+### `v-bind.sync` の使用について
 
-In some cases, we might need "two-way binding" for a prop (sometimes in addition to existing `v-model` for the different prop). To do so, we recommended emitting events in the pattern of `update:myPropName`. For example, for `ChildComponent` from the previous example with the `title` prop, we could communicate the intent of assigning a new value with:
+場合によっては、プロパティへの「双方向バインディング」が必要になります（時々、既存の `v-model` に加えて別のプロパティを使うために）。そのためには、`update:myPropName` のパターンでのイベント発火をお勧めしていました。たとえば、`title` プロパティを使用した前の例の `ChildComponent` の場合、新しい値に更新するイベントを次のように発火できました。
 
 ```js
 this.$emit('update:title', newValue)
 ```
 
-Then the parent could listen to that event and update a local data property, if it wants to. For example:
+そうすると、親はそのイベントをリッスンしてローカルのデータプロパティを更新できました。例えば、以下のようになります。
 
 ```html
 <ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
 ```
 
-For convenience, we had a shorthand for this pattern with the .sync modifier:
+便宜上、このパターンには '.sync' 修飾子による省略記法がありました。
 
 ```html
 <ChildComponent :title.sync="pageTitle" />
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-In 3.x `v-model` on the custom component is an equivalent of passing a `modelValue` prop and emitting an `update:modelValue` event:
+3.x では、カスタムコンポーネント上の `v-model` は `modelValue` プロパティを渡して `update:modelValue` イベントを発火するのと同じです。
 
 ```html
 <ChildComponent v-model="pageTitle" />
 
-<!-- would be shorthand for: -->
+<!-- これは下記の省略形です -->
 
 <ChildComponent
   :modelValue="pageTitle"
@@ -107,26 +107,26 @@ In 3.x `v-model` on the custom component is an equivalent of passing a `modelVal
 />
 ```
 
-### `v-model` arguments
+### `v-model` の引数
 
-To change a model name, instead of a `model` component option, now we can pass an _argument_ to `v-model`:
+モデル名を変更するための `model` コンポーネントオプションの代わりに、今は `v-model` に 引数 を渡せるようになりました。
 
 ```html
 <ChildComponent v-model:title="pageTitle" />
 
-<!-- would be shorthand for: -->
+<!-- これは下記の省略形です -->
 
 <ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
 ```
 
 ![v-bind anatomy](/images/v-bind-instead-of-sync.png)
 
-This also serves as a replacement to `.sync` modifier and allows us to have multiple `v-model`s on the custom component.
+これは `.sync` 修飾子の代わりとしても機能し、カスタムコンポーネントに複数の `v-model` を含めることができます。
 
 ```html
 <ChildComponent v-model:title="pageTitle" v-model:content="pageContent" />
 
-<!-- would be shorthand for: -->
+<!-- これは下記の省略形です -->
 
 <ChildComponent
   :title="pageTitle"
@@ -136,31 +136,31 @@ This also serves as a replacement to `.sync` modifier and allows us to have mult
 />
 ```
 
-### `v-model` modifiers
+### `v-model` 修飾子
 
-In addition to 2.x hard-coded `v-model` modifiers like `.trim`, now 3.x supports custom modifiers:
+2.x でのハードコードされた `.trim` のような `v-model` 修飾子に加えて、3.x ではカスタム修飾子をサポートしています。
 
 ```html
 <ChildComponent v-model.capitalize="pageTitle" />
 ```
 
-Read more about custom `v-model` modifiers in the [Custom Events](../component-custom-events.html#handling-v-model-modifiers) section.
+カスタム `v-model` 修飾子の詳細は、[`v-model` 修飾子の処理](../component-custom-events.html#v-model-修飾子の処理) の章を参照してください。
 
-## Migration Strategy
+## 移行の戦略
 
-We recommend:
+以下をお勧めします。
 
-- checking your codebase for `.sync` usage and replace it with `v-model`:
+- コードベースに `.sync` を使用しているかチェックして、`v-model` に置き換えてください。
 
   ```html
   <ChildComponent :title.sync="pageTitle" />
 
-  <!-- to be replaced with -->
+  <!-- 以下に置き換えましょう -->
 
   <ChildComponent v-model:title="pageTitle" />
   ```
 
-- for all `v-model`s without arguments, make sure to change props and events name to `modelValue` and `update:modelValue` respectively
+- 引数のないすべての `v-model` について、プロパティとイベントの名前をそれぞれ `modelValue` と `update:modelValue` に置き換えてください。
 
   ```html
   <ChildComponent v-model="pageTitle" />
@@ -171,20 +171,20 @@ We recommend:
 
   export default {
     props: {
-      modelValue: String // previously was `value: String`
+      modelValue: String // 以前は `value:String` でした
     },
     methods: {
       changePageTitle(title) {
-        this.$emit('update:modelValue', title) // previously was `this.$emit('input', title)`
+        this.$emit('update:modelValue', title) // 以前は `this.$emit('input', title)` でした
       }
     }
   }
   ```
 
-## Next Steps
+## 次のステップ
 
-For more information on the new `v-model` syntax, see:
+新しい `v-model` 構文の詳細については、以下を参照してください。
 
-- [Using `v-model` on Components](../component-basics.html#using-v-model-on-components)
-- [`v-model` arguments](../component-custom-events.html#v-model-arguments)
-- [Handling `v-model` modifiers](../component-custom-events.html#v-model-arguments)
+- [コンポーネントで `v-model` を使う](../component-basics.html#コンポーネントで-v-model-を使う)
+- [`v-model` の引数](../component-custom-events.html#v-model-の引数)
+- [`v-model` 修飾子の処理](../component-custom-events.html#v-model-修飾子の処理)
