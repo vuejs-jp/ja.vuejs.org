@@ -23,9 +23,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Add upstream
         run: |
-          git remote add upstream git@github.com:vuejs/docs-next.git
+          git remote add upstream https://github.com/vuejs/docs-next.git
       - name: Pull upstream changes
         run: |
+          git config pull.rebase false
           git pull upstream master
       - name: Sync it
         run: |
