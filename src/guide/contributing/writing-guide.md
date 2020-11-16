@@ -99,11 +99,11 @@ We appreciate small, focused PRs. If you'd like to make an extremely large chang
 
 ### ソフトウェア
 
-- [Grammarly](https://www.grammarly.com/): Desktop app and browser extension for checking spelling and grammar (though grammar checking doesn't catch everything and occasionally shows a false positive).
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): An extension for VS Code to help you check spelling within markdown and code examples.
+- [Grammarly](https://www.grammarly.com/): スペルと文法をチェックするためのデスクトップアプリとブラウザ拡張機能（ただし、文法チェックは全てをキャッチできるわけではなく、たまに誤検出が出ることがあります）。
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): マークダウンやサンプルコードのスペルチェックに役立つ VS Code の拡張機能。
 
 ### 本
 
-- [On Writing Well](https://www.amazon.com/Writing-Well-30th-Anniversary-Nonfiction-ebook/dp/B0090RVGW0) (see [popular quotes](https://www.goodreads.com/work/quotes/1139032-on-writing-well-the-classic-guide-to-writing-nonfiction))
-- [Bird by Bird](https://www.amazon.com/Bird-Some-Instructions-Writing-Life/dp/0385480016) (see [popular quotes](https://www.goodreads.com/work/quotes/841198-bird-by-bird-some-instructions-on-writing-and-life))
+- [On Writing Well](https://www.amazon.com/Writing-Well-30th-Anniversary-Nonfiction-ebook/dp/B0090RVGW0)（[人気の名言](https://www.goodreads.com/work/quotes/1139032-on-writing-well-the-classic-guide-to-writing-nonfiction)を見る）
+- [Bird by Bird](https://www.amazon.com/Bird-Some-Instructions-Writing-Life/dp/0385480016)（[人気の名言](https://www.goodreads.com/work/quotes/841198-bird-by-bird-some-instructions-on-writing-and-life)見る）
 - [Cognitive Load Theory](https://www.amazon.com/Cognitive-Explorations-Instructional-Performance-Technologies/dp/144198125X/)
