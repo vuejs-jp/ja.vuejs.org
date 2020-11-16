@@ -13,21 +13,21 @@
 - **書いている間は、質問することを恐れないようにしましょう。**相手が "間抜け" であるかもしれないと怖がっている場合は特に、弱みがあるのは辛いことですが、質問することが説明する必要があることを完璧に理解するための唯一方法です、
 - **機能の議論に参加しましょう。**最高の API は、後で説明する方法を考えようとするのではなく、説明しやすい機能を構築するという、ドキュメントドリブンの開発から生まれます。質問（特に、「間抜けな」質問）を早い段階ですることで、互換性のない修正を行う必要が出てくる前に、混乱や矛盾、問題のある動作を明らかにすることができます。
 
-## 組織
+## ドキュメントの構成
 
-- **Installation/Integration**: Provide a thorough overview of how to integrate the software into as many different kinds of projects as necessary.
-- **Introduction/Getting Started**:
-  - Provide a less than 10 minute overview of the problems the project solves and why it exists.
-  - Provide a less than 30 minute overview of the problems the project solves and how, including when and why to use the project and some simple code examples. At the end, link to both to Installation page and the beginning of the Essentials Guide.
-- **Guide**: Make users feel smart, powerful, and curious, then maintain this state so that users maintain the motivation and cognitive capacity to keep learning more. Guide pages are meant to be read sequentially, so should generally be ordered from the highest to lowest power/effort ratio.
-  - **Essentials**: It should take no longer than 5 hours to read the Essentials, though shorter is better. Its goal is to provide the 20% of knowledge that will help users handle 80% of use cases. Essentials can link to more advanced guides and the API, though, in most cases, you should avoid such links. When they are provided, you need also provide a context so users are aware if they should follow this link on their first reading. Otherwise, many users end up exhausting their cognitive capacity link-hopping, trying to fully learn every aspect of a feature before moving on, and as a result, never finish that first read-through of the Essentials. Remember that a smooth read is more important than being thorough. We want to give people the information they need to avoid a frustrating experience, but they can always come back and read further, or Google a less common problem when they encounter it.
-  - **Advanced**: While the Essentials helps people handle ~80% of use cases, subsequent guides help get users to 95% of use cases, plus more detailed information on non-essential features (e.g. transitions, animations), more complex convenience features (e.g. mixins, custom directives), and dev experience improvements (e.g. JSX, plugins). The final 5% of use cases that are more niche, complex, and/or prone to abuse will be left to the cookbook and API reference, which can be linked to from these advanced guides.
-- **Reference/API**: Provide a complete list of features, including type information, descriptions of the problem each solves, examples of every combination of options, and links to guides, cookbook recipes, and other internal resources providing more detail. Unlike other pages, this one is not meant to be read top-to-bottom, so plenty of detail can be provided. These references must also be more easily skimmable than the guides, so the format should be closer to dictionary entries than the story-telling format of the guides.
-- **Migrations**:
-  - **Versions**: When important changes are made, it's useful to include a full list of changes, including a detailed explanation of why the change was made and how to migrate their projects.
-  - **From other projects**: How does this software compare to similar software? This is important to help users understand what additional problems we might solve or create for them, and to what extent they can transfer knowledge they already have.
-- **Style Guide**: There are necessarily some key pieces in development that need a decision, but are not core to the API. The style guide provides educated, opinionated recommendations to help guide these decisions. They shouldn't be followed blindly, but can help teams save time by being aligned on smaller details.
-- **Cookbook**: Recipes in the cookbook are written with some assumption of familiarity with Vue and its ecosystem. Each is a highly structured document that walks through some common implementation details that a Vue dev might encounter.
+- **インストール / 統合**：必要な分だけ異なる種類のプロジェクトにソフトウェアを統合する方法の完全な概要を提供します。
+- **イントロダクション / Getting Started**：
+  - プロジェクトが解決する問題と存在理由について、概要を 10 分以内に説明してください。
+  - プロジェクトが解決する問題とその方法について、いつ、なぜプロジェクトを使用するのか、簡単なコード例を含めて、概要を 30 分以内に説明してください。最後に、"Installation" と "Essentials Guide" の冒頭の両方にリンクしてください。
+- **ガイド**：ユーザに賢く、力強く、好奇心を感じさせ、その状態を維持することで、ユーザがさらに学び続けるためのモチベーションと認知能力を維持できるようにします。ガイドページは順番に読まれることを意図しているため、一般的には、必要な労力の比率が高いものから低いものへと順番に進むように並べられるべきです。
+  - **Essentials**："Essentials" を読むのに 5 時間はかかりませんが、より短い方が良いでしょう。目標は、ユーザが 80 % のユースケースを処理するのに役立つ 20%の知識を提供することです。Essentials では、より高度なガイドや API にリンクすることはできますが、ほとんどの場合、そのようなリンクは避けるべきです。リンクが提供されている場合、ユーザが初めてドキュメントを読む際にこのリンクに従うべきかを認識できるよう、コンテキストを提供する必要があります。そうしないと、多くのユーザは、リンクを次から次へと飛び、先に進む前に機能のあらゆる側面を完璧に学ぼうとして、認知能力を疲れ果てさせ、結果的に Essentials の最初の一読を終えることができなくなってしまいます。徹底していることよりも、スムーズに読めることが重要であることを忘れないでください。ユーザがイライラするような経験を避けるため、彼らが必要としてる情報を提供したいと考えていますが、ユーザはいつでも戻ってきてさらに読み進めることができますし、一般的ではない問題に遭遇したときにはグーグルで検索することもできます。
+  - **Advanced**："Essentials" では全体の 80% までのユースケースに対応できるようになっていますが、その後のガイドでは 95% のユースケースに対応できるようになり、さらに非必須機能（例：トランジション、アニメーション）、より複雑な便利機能（例：mixin、カスタムディレクティブ）、開発者のエクスペリエンス向上（例：JSX、プラグイン）に関するより詳細な情報を提供します。ニッチで複雑なユースケースや濫用されやすいユースケースの最後の 5%は、クックブックと API リファレンスに委ねられます。これらは、Advanced ガイドからリンクされています。
+- **リファレンス / API**：Vue の機能の完全なリストを提供します。リストは型情報、それぞれが解決する問題の説明、オプションのすべての組み合わせの例、ガイド、クックブックのレシピ、より詳細な情報を提供する他の内部リソースへのリンクですが含まれます。他のページとは異なり、このページは上から下へ読むことを目的としていないので、多くの詳細情報を提供することができます。また、これらの参考文献は、ガイドよりも簡単に必要な情報をすぐ取得できなければならないので、ガイドのストーリーテリング形式よりも辞書の項目に近い形式になっているはずです。
+- **移行**：
+  - **バージョン**：重要な変更が行われた場合は、変更の完全なリストを含めると便利です。変更が行われた理由やプロジェクトの移行方法についての詳細な説明を含みます。
+  - **他のプロジェクトから**：このソフトウェアは、類似のソフトウェアと比較してどうでしょうか？これは、ユーザが、我々がどのような問題を解決したり作成したりする可能性があるのか、また、すでに持っている知識をどの程度まで移行できるのかを理解するために重要です。
+- **スタイルガイド**：開発には、決定を必要とするいくつかの重要な部分がありますが、API のコアではありません。スタイルガイドでは、これらの決定の指針となるよう、教育的で強固な推奨事項を提供しています。やみくもに従うべきではありませんが、細かな部分の調整を行うことで、チームの時間を節約できます。
+- **クックブック**：クックブックのレシピは、Vue とそのエコシステムに精通していることを前提に書かれています。それぞれのレシピは、Vue の開発者が遭遇する可能性のある共通の実装の詳細を説明するための、高度に構造化されたドキュメントです。
 
 ## ライティング & 文法
 
