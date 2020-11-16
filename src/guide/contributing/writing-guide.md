@@ -1,6 +1,6 @@
-# Vue ドキュメントのライティングガイド
+# Vue ドキュメントライティングガイド
 
-Writing documentation is an exercise in empathy. We're not describing an objective reality - the source code already does that. Our job is to help shape the relationship between users and the Vue ecosystem. This ever-evolving guide provides some rules and recommendations on how to do that consistently within the Vue ecosystem.
+ドキュメントを書くことは共感の練習です．私たちは客観的な現実を記述しているわけではありません - それは既にソースコードがやってくれています．私たちの仕事は，ユーザーと Vue エコシステムとの関係を形成するための手助けをすることです．この進化し続けるガイドでは，Vue エコシステム内で一貫してドキュメントを作成する方法について，いくつかのルールと推奨事項を紹介しています．
 
 ## 原則
 
