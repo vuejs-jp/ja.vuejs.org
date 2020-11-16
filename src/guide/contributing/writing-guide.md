@@ -4,14 +4,14 @@
 
 ## 原則
 
-- **A feature doesn't exist until it's well documented.**
-- **Respect users' cognitive capacity (i.e. brain power).** When a user starts reading, they begin with a certain amount of limited brain power and when they run out, they stop learning.
-  - Cognitive capacity is **depleted faster** by complex sentences, having to learn more than one concept at a time, and abstract examples that don't directly relate to a user's work.
-  - Cognitive capacity is **depleted more slowly** when we help them feel consistently smart, powerful, and curious. Breaking things down into digestible pieces and minding the flow of the document can help keep them in this state.
-- **Always try to see from the user's perspective.** When we understand something thoroughly, it becomes obvious to us. This is called _the curse of knowledge_. In order to write good documentation, try to remember what you first needed to know when learning this concept. What jargon did you need to learn? What did you misunderstand? What took a long time to really grasp? Good documentation meets users where they are. It can be helpful to practice explaining the concept to people in person before
-- **Describe the _problem_ first, then the solution.** Before showing how a feature works, it's important to explain why it exists. Otherwise, users won't have the context to know if this information is important to them (is it a problem they experience?) or what prior knowledge/experience to connect it to.
-- **While writing, don't be afraid to ask questions**, _especially_ if you're afraid they might be "dumb". Being vulnerable is hard, but it's the only way for us to more fully understand what we need to explain.
-- **Be involved in feature discussions.** The best APIs come from documentation-driven development, where we build features that are easy to explain, rather than trying to figure out how to explain them later. Asking questions (especially "dumb" questions) earlier often helps reveal confusions, inconsistencies, and problematic behavior before a breaking change would be required to fix them.
+- **機能は十分に文書化されていないと存在しません。**
+- **ユーザの認知能力（例えば，頭脳）を尊重する。**ユーザが読書を始めるときには，ある程度の限られた頭脳で始めます．そして彼らがそれを使い果たした時，学ぶのをやめます．
+  - 認知能力は，複雑な文章、一度に複数の概念を学ばなければならないこと、そしてユーザの仕事に直接関係のない抽象的な例によって、**より早く枯渇します**。
+  - 認知能力は、ユーザが一貫して賢く、力強く、好奇心旺盛であると感じさせるように支援すると、**よりゆっくりと枯渇していきます**。物事を消化しやすい断片に分解し、文書の流れに注意を払うことは、この状態を維持するのに役立ちます。
+- **常にユーザの立場に立って見ることを心がけましょう。**私たちは何かを徹底的に理解すると、それが当たり前になってきます。これは _知識の呪い_（_the curse of knowledge_）と呼ばれています。良いドキュメントを書くためには、「この概念を学ぶときに最初に何を知る必要があったか？」を思い出すよう努力しましょう。どんな専門用語を学ぶ必要がありましたか？何を誤解していたでしょうか？理解するのに時間がかかったものは何ですか？優れたドキュメントは、ユーザーが読んでいる部分で概念を理解することができます。事前にその概念を実際に人に説明する練習をしておくと良いでしょう．
+- **最初に _問題_ を説明し、次に解決策を説明します。**機能がどのように動作するかを示す前に、なぜその機能が存在するのかを説明することが重要です。そうしないと、その情報がユーザーにとって重要なものなのか（自分が経験した問題なのか）、あるいは，それをどのような予備知識，経験と結びつけるのかを知るためのコンテキストを把握することができません。
+- **書いている間は、質問することを恐れないようにしましょう。**相手が "間抜け" であるかもしれないと怖がっている場合は特に．弱みがあるのは辛いことですが、質問することが説明する必要があることを完璧に理解するための唯一方法です．
+- **機能の議論に参加しましょう。**最高の API は、後で説明する方法を考えようとするのではなく、説明しやすい機能を構築するという，ドキュメントドリブンの開発から生まれます。質問（特に，「間抜けな」質問）を早い段階ですることで、互換性のない修正を行う必要が出てくる前に，混乱や矛盾、問題のある動作を明らかにすることができます。
 
 ## 組織
 
