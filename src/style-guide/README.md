@@ -32,16 +32,16 @@ sidebar: auto
 
 Vue のいくつかの機能は、レアケースまたは従来のコードベースからスムーズな移行に対応するために存在します。しかしながらこれを使いすぎると、コードを保守することが難しくなり、またバグの原因になることさえあります。これらのルールは潜在的な危険な機能を照らし、いつ、なぜ避けなかればならないのかを説明しています。
 
-## Priority A Rules: Essential <span class="hide-from-sidebar">(Error Prevention)</span>
+## 優先度 A ルール: 必須 <span class="hide-from-sidebar">(エラー防止)</span>
 
-### Multi-word component names <sup data-p="a">essential</sup>
+### 複数単語のコンポーネント名 <sup data-p="a">必須</sup>
 
-**Component names should always be multi-word, except for root `App` components, and built-in components provided by Vue, such as `<transition>` or `<component>`.**
+**ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-This [prevents conflicts](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
+全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との[衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 app.component('todo', {
@@ -55,10 +55,11 @@ export default {
   // ...
 }
 ```
+
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 app.component('todo-item', {
@@ -74,30 +75,30 @@ export default {
 ```
 </div>
 
-### Prop definitions <sup data-p="a">essential</sup>
+### Prop の定義 <sup data-p="a">必須</sup>
 
-**Prop definitions should be as detailed as possible.**
+**Prop の定義は可能な限り詳細にするべきです。**
 
-In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
+コミットされたコードでは、prop の定義は常に可能な限り詳細にすべきで、少なくともタイプの指定をする必要があります。
 
-::: details Detailed Explanation
-Detailed [prop definitions](https://vuejs.org/v2/guide/components.html#Prop-Validation) have two advantages:
+::: details 詳細な説明
+詳細な[プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
 
-- They document the API of the component, so that it's easy to see how the component is meant to be used.
-- In development, Vue will warn you if a component is ever provided incorrectly formatted props, helping you catch potential sources of error.
+- コンポーネントの API が明文化されるため、そのコンポーネントの使用方法が簡単に確認できます。
+- 開発中、コンポーネントに対して誤った形式のプロパティが提供されると Vue は警告を通知するため、潜在的なエラー原因の検知に役立ちます。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
-// This is only OK when prototyping
+// プロトタイピングの時に限り OK
 props: ['status']
 ```
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 props: {
@@ -106,7 +107,7 @@ props: {
 ```
 
 ``` js
-// Even better!
+// さらに良いです!
 props: {
   status: {
     type: String,
@@ -125,14 +126,14 @@ props: {
 ```
 </div>
 
-### Keyed `v-for` <sup data-p="a">essential</sup>
+### キー付き `v-for` <sup data-p="a">必須</sup>
 
-**Always use `key` with `v-for`.**
+**`v-for` に対しては常に `key` を使用してください。**
 
-`key` with `v-for` is _always_ required on components, in order to maintain internal component state down the subtree. Even for elements though, it's a good practice to maintain predictable behavior, such as [object constancy](https://bost.ocks.org/mike/constancy/) in animations.
+サブツリーの内部コンポーネントの状態を維持するために、コンポーネントでの `v-for` には _常に_ `key` を付ける必要があります。ただし要素の場合であっても、アニメーションでの[オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/)のように、予測可能な振る舞いを維持することをお勧めします。
 
-::: details Detailed Explanation
-Let's say you have a list of todos:
+::: details 詳細な説明
+TODO リストを持っているとしましょう:
 
 ``` js
 data() {
@@ -151,15 +152,15 @@ data() {
 }
 ```
 
-Then you sort them alphabetically. When updating the DOM, Vue will optimize rendering to perform the cheapest DOM mutations possible. That might mean deleting the first todo element, then adding it again at the end of the list.
+次に、それらをアルファベット順に並べ替えます。 DOM を更新するとき、可能な限り安価な DOM の変更を行うために Vue はレンダリングを最適化します。 これは、最初の todo 要素を削除して、再度リストの最後に追加することを意味するかもしれません。
 
-The problem is, there are cases where it's important not to delete elements that will remain in the DOM. For example, you may want to use `<transition-group>` to animate list sorting, or maintain focus if the rendered element is an `<input>`. In these cases, adding a unique key for each item (e.g. `:key="todo.id"`) will tell Vue how to behave more predictably.
+問題は、DOM に残る要素を削除しないことが重要となる場合があることです。 例えば、 `<transition-group>` を使用してリストの並べ替えをアニメーション化する場合だったり、レンダリングされた要素が `<input>` の時はフォーカスを維持したいといった場合があります。 このような場合、アイテムごとに一意のキー (`:key="todo.id"` など) を追加することで、 Vue に対してどうしたらより予期した通りの動作ができるかを伝えることができます。
 
-In our experience, it's better to _always_ add a unique key, so that you and your team simply never have to worry about these edge cases. Then in the rare, performance-critical scenarios where object constancy isn't necessary, you can make a conscious exception.
+これまでの経験から、あなたとあなたのチームがこれらのエッジケースについて心配する必要がないように、 _常に_ 一意のキーを追加することをお勧めします。 その上で、オブジェクトの一貫性が必要なくてパフォーマンスが重要な稀なシナリオにおいては、意識的な例外を作成すると良いでしょう。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <ul>
@@ -171,7 +172,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <ul>
@@ -185,18 +186,18 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 ```
 </div>
 
-### Avoid `v-if` with `v-for` <sup data-p="a">essential</sup>
+### `v-for` と一緒に `v-if` を使うのを避ける <sup data-p="a">必須</sup>
 
-**Never use `v-if` on the same element as `v-for`.**
+**`v-for` と同じ要素に `v-if` を決して使わないでください。**
 
-There are two common cases where this can be tempting:
+こうしたくなる一般的なケースが 2 通りほどあります:
 
-- To filter items in a list (e.g. `v-for="user in users" v-if="user.isActive"`). In these cases, replace `users` with a new computed property that returns your filtered list (e.g. `activeUsers`).
+- リストのアイテムをフィルタリングする時 (`v-for="user in users" v-if="user.isActive"` のように)。このような場合、 `users` をフィルタリングをされたリストを返す新しい算出プロパティ (例えば `activeUsers`) に置き換えます。
 
-- To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
+- リストを非表示にする必要がある場合に、リストがレンダリングされるのを避ける時 (`v-for="user in users" v-if="shouldShowUsers"` のように)。このような場合、 `v-if` をコンテナ要素 (例えば `ul`, `ol`)に移動します。
 
-::: details Detailed Explanation
-When Vue processes directives, `v-for` has a higher priority than `v-if`, so that this template:
+::: details 詳細な説明
+Vue がディレクティブを処理する場合、`v-for` は `v-if` よりも優先度が高いため、次のようなテンプレートは:
 
 ``` html
 <ul>
@@ -210,19 +211,9 @@ When Vue processes directives, `v-for` has a higher priority than `v-if`, so tha
 </ul>
 ```
 
-Will be evaluated similar to:
+`v-if` ディレクティブが最初に評価され、反復変数の `user` がこの時点では存在しないためエラーが投げられます。
 
-``` js
-this.users.map(user => {
-  if (user.isActive) {
-    return user.name
-  }
-})
-```
-
-So even if we only render elements for a small fraction of users, we have to iterate over the entire list every time we re-render, whether or not the set of active users has changed.
-
-By iterating over a computed property instead, like this:
+これは、代わりに算出プロパティを元に反復処理をすることで修正できます。次のようになります:
 
 ``` js
 computed: {
@@ -243,44 +234,22 @@ computed: {
 </ul>
 ```
 
-We get the following benefits:
-
-- The filtered list will _only_ be re-evaluated if there are relevant changes to the `users` array, making filtering much more efficient.
-- Using `v-for="user in activeUsers"`, we _only_ iterate over active users during render, making rendering much more efficient.
-- Logic is now decoupled from the presentation layer, making maintenance (change/extension of logic) much easier.
-
-We get similar benefits from updating:
+または、 `v-for` と一緒に `<template>` タグを使用して、 `<li>` 要素をラップすることもできます:
 
 ``` html
 <ul>
-  <li
-    v-for="user in users"
-    v-if="shouldShowUsers"
-    :key="user.id"
-  >
-    {{ user.name }}
-  </li>
+  <template v-for="user in users" :key="user.id">
+    <li v-if="user.isActive">
+      {{ user.name }}
+    </li>
+  </template>
 </ul>
 ```
 
-to:
-
-``` html
-<ul v-if="shouldShowUsers">
-  <li
-    v-for="user in users"
-    :key="user.id"
-  >
-    {{ user.name }}
-  </li>
-</ul>
-```
-
-By moving the `v-if` to a container element, we're no longer checking `shouldShowUsers` for _every_ user in the list. Instead, we check it once and don't even evaluate the `v-for` if `shouldShowUsers` is false.
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <ul>
@@ -293,22 +262,10 @@ By moving the `v-if` to a container element, we're no longer checking `shouldSho
   </li>
 </ul>
 ```
-
-``` html
-<ul>
-  <li
-    v-for="user in users"
-    v-if="shouldShowUsers"
-    :key="user.id"
-  >
-    {{ user.name }}
-  </li>
-</ul>
-```
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <ul>
@@ -322,35 +279,34 @@ By moving the `v-if` to a container element, we're no longer checking `shouldSho
 ```
 
 ``` html
-<ul v-if="shouldShowUsers">
-  <li
-    v-for="user in users"
-    :key="user.id"
-  >
-    {{ user.name }}
-  </li>
+<ul>
+  <template v-for="user in users" :key="user.id">
+    <li v-if="user.isActive">
+      {{ user.name }}
+    </li>
+  </template>
 </ul>
 ```
 </div>
 
-### Component style scoping <sup data-p="a">essential</sup>
+### コンポーネントスタイルのスコープ <sup data-p="a">必須</sup>
 
-**For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.**
+**アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネントのスタイルはグローバルである可能性がありますが、他のすべてのコンポーネントは常にスコープ化されているべきです。**
 
-This is only relevant for [single-file components](../guide/single-file-components.html). It does _not_ require that the [`scoped` attribute](https://vue-loader.vuejs.org/en/features/scoped-css.html) be used. Scoping could be through [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html), a class-based strategy such as [BEM](http://getbem.com/), or another library/convention.
+これは、[単一ファイルコンポーネント](../guide/single-file-component.html)のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他の ライブラリ/慣例 を介して行うことができます。
 
-**Component libraries, however, should prefer a class-based strategy instead of using the `scoped` attribute.**
+**ただしコンポーネントライブラリでは、 `scoped` 属性を使用するのではなく、クラスに基づいた戦略を優先すべきです**
 
-This makes overriding internal styles easier, with human-readable class names that don't have too high specificity, but are still very unlikely to result in a conflict.
+これにより、人間が読み取りやすいクラス名を使って、内部のスタイルを上書きすることが容易になります。またそのクラス名は、高い特定性を持たないけれど、依然として競合が発生する可能性が低いままのものになります。
 
-::: details Detailed Explanation
-If you are developing a large project, working with other developers, or sometimes include 3rd-party HTML/CSS (e.g. from Auth0), consistent scoping will ensure that your styles only apply to the components they are meant for.
+::: details 詳細な説明
+大規模なプロジェクトを開発している場合や他の開発者と一緒に開発している場合、またはサードパーティの HTML/CSS (Auth0 など) を含んでいる場合は、一貫したスコープによってスタイルが対象のコンポーネントのみに適用されることが保証されます。
 
-Beyond the `scoped` attribute, using unique class names can help ensure that 3rd-party CSS does not apply to your own HTML. For example, many projects use the `button`, `btn`, or `icon` class names, so even if not using a strategy such as BEM, adding an app-specific and/or component-specific prefix (e.g. `ButtonClose-icon`) can provide some protection.
+`scoped` 属性以外にも、一意のクラス名を使用することでサードパーティの CSS が独自の HTML に適用されないことを保証しやすくできます。例えば、多くのプロジェクトでは `button` や `btn` 、または `icon` といったクラス名を使用しているため、BEM などの戦略を使用していない場合でも、アプリ固有 かつ/または コンポーネント固有(例： `ButtonClose-icon`)のプレフィックスを追加することで、ある程度の保護を提供できます。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <template>
@@ -366,14 +322,14 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <template>
   <button class="button button-close">×</button>
 </template>
 
-<!-- Using the `scoped` attribute -->
+<!-- `scoped` を使用 -->
 <style scoped>
 .button {
   border: none;
@@ -409,7 +365,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button class="c-Button c-Button--close">×</button>
 </template>
 
-<!-- Using the BEM convention -->
+<!-- BEM の慣例を使用 -->
 <style>
 .c-Button {
   border: none;
@@ -423,20 +379,20 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 ```
 </div>
 
-### Private property names <sup data-p="a">essential</sup>
+### プライベートなプロパティ名 <sup data-p="a">必須</sup>
 
-**Use module scoping to keep private functions inaccessible from the outside. If that's not possible, always use the `$_` prefix for custom private properties in a plugin, mixin, etc that should not be considered public API. Then to avoid conflicts with code by other authors, also include a named scope (e.g. `$_yourPluginName_`).**
+**モジュールスコープを使用して、外部からプライベート関数にアクセスできないようにします。それが不可能な場合は、パブリック API と見なすべきではないプラグインやミックスインなどのカスタムプライベートプロパティに、常に `$_` のプレフィックスを使用してください。 その上で、他の作成者によるコードとの競合を避けるために、名前付きスコープも含めるようにしてください (例： `$_yourPluginName_`)**
 
-::: details Detailed Explanation
-Vue uses the `_` prefix to define its own private properties, so using the same prefix (e.g. `_update`) risks overwriting an instance property. Even if you check and Vue is not currently using a particular property name, there is no guarantee a conflict won't arise in a later version.
+::: details 詳細な説明
+Vue は `_` のプレフィックスを使用して独自のプライベートプロパティを定義するため、同じプレフィックス (`_update` など) を使用すると、インスタンスプロパティが上書きされるリスクがあります。 Vue が現在特定のプロパティ名を使用していないことを確認したとしても、それ以降のバージョンで競合が発生しないという保証はありません。
 
-As for the `$` prefix, its purpose within the Vue ecosystem is special instance properties that are exposed to the user, so using it for _private_ properties would not be appropriate.
+`$` のプレフィックスに関しては、Vue エコシステム内でのそのプレフィックスの目的は、ユーザーに公開される特別なインスタンスプロパティであるため、_独自_プロパティに使用することは適切ではありません。
 
-Instead, we recommend combining the two prefixes into `$_`, as a convention for user-defined private properties that guarantee no conflicts with Vue.
+代わりに、Vue との競合がないことを保証するユーザー定義のプライベートプロパティの規則として、2 つのプレフィックスを `$_` に結合することをお勧めしています。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 const myGreatMixin = {
@@ -485,7 +441,7 @@ const myGreatMixin = {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 const myGreatMixin = {
@@ -499,7 +455,7 @@ const myGreatMixin = {
 ```
 
 ``` js
-// Even better!
+// さらに良いです!
 const myGreatMixin = {
   // ...
   methods: {
@@ -1774,7 +1730,7 @@ $color-priority-d: #3f536d;
   &-bad {
     background: $color-bgr-bad;
     border-color: darken($color-bgr-bad, 20%);
-    
+
     h4 {
       color: darken($color-bgr-bad, 50%);
     }
@@ -1787,7 +1743,7 @@ $color-priority-d: #3f536d;
   &-good {
     background: $color-bgr-good;
     border-color: darken($color-bgr-good, 20%);
-    
+
     h4 {
       color: darken($color-bgr-good, 50%);
     }
@@ -1806,7 +1762,7 @@ h3 {
   a.header-anchor {
     // as we have too many h3 elements on this page, set the anchor to be always visible
     // to make them stand out more from paragraph texts.
-    opacity: 1; 
+    opacity: 1;
   }
 
   sup {
