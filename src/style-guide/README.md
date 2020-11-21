@@ -38,7 +38,7 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 
 **ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在 HTML 要素や将来定義される HTML 要素との[衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との[衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
@@ -84,7 +84,7 @@ export default {
 ::: details 詳細な説明
 詳細な[プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
 
-- コンポーネントの API が文書化されるため、そのコンポーネントの使用方法が簡単に確認できます。
+- コンポーネントの API が明文化されるため、そのコンポーネントの使用方法が簡単に確認できます。
 - 開発中、コンポーネントに対して誤った形式のプロパティが提供されると Vue は警告を通知するため、潜在的なエラー原因の検知に役立ちます。
 :::
 
@@ -92,7 +92,7 @@ export default {
 <h4>悪い例</h4>
 
 ``` js
-// プロトタイピングの時だけ OK
+// プロトタイピングの時に限り OK
 props: ['status']
 ```
 </div>
@@ -291,7 +291,7 @@ computed: {
 
 ### コンポーネントスタイルのスコープ <sup data-p="a">必須</sup>
 
-**アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネントのスタイルはグローバルである可能性がありますが、他のすべてのコンポーネントは常にスコープされているべきです。**
+**アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネントのスタイルはグローバルである可能性がありますが、他のすべてのコンポーネントは常にスコープ化されているべきです。**
 
 これは、[単一ファイルコンポーネント](../guide/single-file-component.html)のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他の ライブラリ/慣例 を介して行うことができます。
 
