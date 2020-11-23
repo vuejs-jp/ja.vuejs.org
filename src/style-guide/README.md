@@ -474,16 +474,16 @@ export default myGreatMixin
 ```
 </div>
 
-## Priority B Rules: Strongly Recommended <span class="hide-from-sidebar">(Improving Readability)</span>
+## 優先度B のルール: 強く推奨 <span class="hide-from-sidebar">(読みやすさの向上)</span>
 
-### Component files <sup data-p="b">strongly recommended</sup>
+### コンポーネントのファイル <sup data-p="b">強く推奨</sup>
 
-**Whenever a build system is available to concatenate files, each component should be in its own file.**
+**ファイルを結合してくれるビルドシステムがあるときは必ず、各コンポーネントはそれぞれ別のファイルに書くべきです。**
 
-This helps you to more quickly find a component when you need to edit it or review how to use it.
+そうすれば、コンポーネントを編集したり使い方を確認するときにより素早く見つけることができます。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 app.component('TodoList', {
@@ -497,7 +497,7 @@ app.component('TodoItem', {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -512,14 +512,14 @@ components/
 ```
 </div>
 
-### Single-file component filename casing <sup data-p="b">strongly recommended</sup>
+### 単一ファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
 
-**Filenames of [single-file components](../guide/single-file-components.html) should either be always PascalCase or always kebab-case.**
+**[単一ファイルコンポーネント](../guide/single-file-component.html)のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
 
-PascalCase works best with autocompletion in code editors, as it's consistent with how we reference components in JS(X) and templates, wherever possible. However, mixed case filenames can sometimes create issues on case-insensitive file systems, which is why kebab-case is also perfectly acceptable.
+パスカルケースは、JS(X) やテンプレートの中でコンポーネントを参照する方法と一致しているので、コードエディタ上でオートコンプリートが可能な場合はとてもうまく働きます。しかし、大文字と小文字が混ざったファイル名は、大文字と小文字を区別しないファイルシステム上で時々問題を起こす可能性があります。そのため、ケバブケースもまた完全に受け入れられています。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -533,7 +533,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -546,28 +546,28 @@ components/
 ```
 </div>
 
-### Base component names <sup data-p="b">strongly recommended</sup>
+### 基底コンポーネントの名前 <sup data-p="b">強く推奨</sup>
 
-**Base components (a.k.a. presentational, dumb, or pure components) that apply app-specific styling and conventions should all begin with a specific prefix, such as `Base`, `App`, or `V`.**
+**アプリケーション特有のスタイルやルールを適用する基底コンポーネント (またはプレゼンテーションコンポーネント: Presentation Components、ダムコンポーネント: Dumb Components、純粋コンポーネント: Pure Components とも) は、すべて `Base`、`App`、`V` などの固有のプレフィックスで始まるべきです。**
 
-::: details Detailed Explanation
-These components lay the foundation for consistent styling and behavior in your application. They may **only** contain:
+::: details 詳細な説明
+これらのコンポーネントは、あなたのアプリケーションに一貫したスタイルやふるまいをもたせる基礎として位置づけられます。これらは、おそらく以下のもの**だけ**を含むでしょう:
 
-- HTML elements,
-- other base components, and
-- 3rd-party UI components.
+- HTML 要素、
+- 別の基底コンポーネント、そして
+- サードパーティ製の UI コンポーネント
 
-But they'll **never** contain global state (e.g. from a Vuex store).
+しかし、それらにはグローバルな状態(例:Vuexストアからのもの)は含まれ**ません**。
 
-Their names often include the name of an element they wrap (e.g. `BaseButton`, `BaseTable`), unless no element exists for their specific purpose (e.g. `BaseIcon`). If you build similar components for a more specific context, they will almost always consume these components (e.g. `BaseButton` may be used in `ButtonSubmit`).
+これらのコンポーネントの名前は、しばしばラップしている要素の名前を含みます(例えば `BaseButton`、`BaseTable`)。それ特有の目的のための要素がない場合は別ですが(例えば `BaseIcon`)。もっと特定の用途に向けた同じようなコンポーネントを作る時は、ほとんどすべての場合にこれらのコンポーネントを使うことになるでしょう。(例えば `BaseButton` を `ButtonSubmit` で使うなど)
 
-Some advantages of this convention:
+このルールの長所:
 
-- When organized alphabetically in editors, your app's base components are all listed together, making them easier to identify.
+- エディタ上でアルファベット順に並べられた時に、アプリケーションの基底コンポーネントはすべて一緒にリストされ、識別しやすくなります。
 
-- Since component names should always be multi-word, this convention prevents you from having to choose an arbitrary prefix for simple component wrappers (e.g. `MyButton`, `VueButton`).
+- コンポーネントの名前は常に複数単語にするべきなので、このルールによってシンプルなコンポーネントラッパーに勝手なプレフィックスを選ばなければならない(例えば `MyButton`、`VueButton`)ということがなくなります。
 
-- Since these components are so frequently used, you may want to simply make them global instead of importing them everywhere. A prefix makes this possible with Webpack:
+- これらのコンポーネントはとても頻繁に使われるので、あらゆる場所で import するよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスを利用して、それを Webpack でできるようになります。
 
   ``` js
   const requireComponent = require.context("./src", true, /Base[A-Z]\w+\.(vue|js)$/)
@@ -585,7 +585,7 @@ Some advantages of this convention:
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -596,7 +596,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -620,14 +620,14 @@ components/
 ```
 </div>
 
-### Single-instance component names <sup data-p="b">strongly recommended</sup>
+### 単一インスタンスのコンポーネント名 <sup data-p="b">強く推奨</sup>
 
-**Components that should only ever have a single active instance should begin with the `The` prefix, to denote that there can be only one.**
+**常に 1 つのアクティブなインスタンスしか持たないコンポーネントは、1 つしか存在しえないことを示すために `The` というプレフィックスで始めるべきです。**
 
-This does not mean the component is only used in a single page, but it will only be used once _per page_. These components never accept any props, since they are specific to your app, not their context within your app. If you find the need to add props, it's a good indication that this is actually a reusable component that is only used once per page _for now_.
+これはそのコンポーネントが 1 つのページでしか使われないということを意味するのではなく、_ページごとに_ 1 回しか使われないという意味です。これらのコンポーネントは、アプリケーション内のコンテキストではなく、アプリケーションに対して固有のため、決してプロパティを受け入れることはありません。もしプロパティを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに 1 回しか使われていないだけで、実際には再利用可能なコンポーネントだということを示すよい目印です。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -637,7 +637,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -646,14 +646,14 @@ components/
 ```
 </div>
 
-### Tightly coupled component names <sup data-p="b">strongly recommended</sup>
+### 密結合コンポーネントの名前 <sup data-p="b">強く推奨</sup>
 
-**Child components that are tightly coupled with their parent should include the parent component name as a prefix.**
+**親コンポーネントと密結合した子コンポーネントには、親コンポーネントの名前をプレフィックスとして含むべきです。**
 
-If a component only makes sense in the context of a single parent component, that relationship should be evident in its name. Since editors typically organize files alphabetically, this also keeps these related files next to each other.
+もし、コンポーネントが単一の親コンポーネントの中でだけ意味をもつものなら、その関連性は名前からはっきりわかるようにするべきです。一般的にエディタはファイルをアルファベット順に並べるので、関連をもつものどうしが常に隣り合って並ぶことにもなります。
 
-::: details Detailed Explanation
-You might be tempted to solve this problem by nesting child components in directories named after their parent. For example:
+::: details 詳細な説明
+この問題を、子コンポーネントを親コンポーネントの名前を元に命名したディレクトリの中に入れることで解決したいと思うかもしれません。例えば:
 
 ```
 components/
@@ -664,7 +664,7 @@ components/
    |- index.vue
 ```
 
-or:
+もしくは:
 
 ```
 components/
@@ -675,14 +675,14 @@ components/
 |- TodoList.vue
 ```
 
-This isn't recommended, as it results in:
+これは推奨されません。以下のような結果を生むからです:
 
-- Many files with similar names, making rapid file switching in code editors more difficult.
-- Many nested sub-directories, which increases the time it takes to browse components in an editor's sidebar.
+- 同じような名前のファイルがたくさんできてしまい、コードエディタ上で素早くファイルを切り替えるのが難しくなります。
+- ネストしたサブディレクトリがたくさんできてしまい、エディタのサイドバーでコンポーネントを参照するのに時間がかかるようになります。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -699,7 +699,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -715,24 +715,25 @@ components/
 ```
 </div>
 
-### Order of words in component names <sup data-p="b">strongly recommended</sup>
+### コンポーネント名における単語の順番 <sup data-p="b">強く推奨</sup>
 
-**Component names should start with the highest-level (often most general) words and end with descriptive modifying words.**
+**コンポーネント名は、最高レベルの(たいていは最も一般的な)単語から始めて、説明的な修飾語で終わるべきです。**
 
-::: details Detailed Explanation
-You may be wondering:
+::: details 詳細な説明
+あなたは疑問に思うかもしれません:
 
-> "Why would we force component names to use less natural language?"
+> “なぜコンポーネント名に自然な言語でないものを使うように強制するのですか？”
 
-In natural English, adjectives and other descriptors do typically appear before the nouns, while exceptions require connector words. For example:
+自然な英語では、形容詞やその他の記述子は一般的に名詞の前に置かれ、そうでない場合には接続詞が必要になります。例えば:
 
 - Coffee _with_ milk
 - Soup _of the_ day
 - Visitor _to the_ museum
 
-You can definitely include these connector words in component names if you'd like, but the order is still important.
+もちろん、あなたがそうしたいのならば、これらの接続詞をコンポーネント名に含めても構いませんが、それでも順番は重要です。
 
-Also note that **what's considered "highest-level" will be contextual to your app**. For example, imagine an app with a search form. It may include components like this one:
+また、 **何を「最高レベル」として尊重するかがアプリケーションの文脈になる** ことに注意してください。例えば、検索フォームを持ったアプリケーションを想像してください。こんなコンポーネントがあるかもしれません:
+
 
 ```
 components/
@@ -744,7 +745,7 @@ components/
 |- TermsCheckbox.vue
 ```
 
-As you might notice, it's quite difficult to see which components are specific to the search. Now let's rename the components according to the rule:
+あなたも気づいたと思いますが、これではどのコンポーネントが検索に特有のものなのかとても分かりづらいです。では、このルールに従ってコンポーネントの名前を変えてみましょう。
 
 ```
 components/
@@ -756,17 +757,17 @@ components/
 |- SettingsCheckboxTerms.vue
 ```
 
-Since editors typically organize files alphabetically, all the important relationships between components are now evident at a glance.
+一般的にエディタではファイルはアルファベット順に並ぶので、コンポーネント間のあらゆる重要な関連性はひと目ではっきりと分かります。
 
-You might be tempted to solve this problem differently, nesting all the search components under a "search" directory, then all the settings components under a "settings" directory. We only recommend considering this approach in very large apps (e.g. 100+ components), for these reasons:
+あなたは、これを別の方法で解決したいと思うかもしれません。つまり、すべての検索コンポーネントは search ディレクトリの下に、すべての設定コンポーネントは settings ディレクトリの下にネストするという方法です。以下の理由から、とても大規模なアプリケーション(例えば 100 以上のコンポーネントがあるような)の場合に限ってこのアプローチを考慮することを推奨します:
 
-- It generally takes more time to navigate through nested sub-directories, than scrolling through a single `components` directory.
-- Name conflicts (e.g. multiple `ButtonDelete.vue` components) make it more difficult to quickly navigate to a specific component in a code editor.
-- Refactoring becomes more difficult, because find-and-replace often isn't sufficient to update relative references to a moved component.
+- 一般的に、入れ子のサブディレクトリの中を移動するのは、単一の `components` ディレクトリをスクロールするのと比べて余分に時間がかかります。
+- 名前の競合（複数の `ButtonDelete.vue` コンポーネントなど）により、コードエディタで特定のコンポーネントに素早く移動しづらくなります。
+- 移動したコンポーネントへの相対参照を更新するには、検索と置換だけでは不十分な場合が多いため、リファクタリングはより困難になります。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -780,7 +781,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -793,111 +794,111 @@ components/
 ```
 </div>
 
-### Self-closing components <sup data-p="b">strongly recommended</sup>
+### 自己終了形式のコンポーネント <sup data-p="b">強く推奨</sup>
 
-**Components with no content should be self-closing in [single-file components](../guide/single-file-components.html), string templates, and [JSX](../guide/render-function.html#JSX) - but never in DOM templates.**
+**[単一ファイルコンポーネント](../guide/single-file-component.html)、文字列テンプレート、および [JSX](../guide/render-function.html#jsx) の中にある、中身を持たないコンポーネントは自己終了形式で書くべきです。ただし、DOM テンプレート内ではそうしてはいけません。**
 
-Components that self-close communicate that they not only have no content, but are **meant** to have no content. It's the difference between a blank page in a book and one labeled "This page intentionally left blank." Your code is also cleaner without the unnecessary closing tag.
+自己終了形式のコンポーネントは、単に中身を持たないだけでなく、中身を持たないことを **意図した** ことだとはっきりと表現します。本の中にある白紙のページと、「このページは意図的に白紙のままにしています」と書かれたページとは違うということです。また、不要な閉じタグがなくなることであなたのコードはより読みやすくなります。
 
-Unfortunately, HTML doesn't allow custom elements to be self-closing - only [official "void" elements](https://www.w3.org/TR/html/syntax.html#void-elements). That's why the strategy is only possible when Vue's template compiler can reach the template before the DOM, then serve the DOM spec-compliant HTML.
+残念ながら、HTML はカスタム要素の自己終了形式を許していません。[公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。これが、Vue のテンプレートコンパイラが DOM よりも先にテンプレートにアクセスして、その後 DOM の仕様に準拠した HTML を出力することができる場合にだけこの方策を使うことができる理由です。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
-<!-- In single-file components, string templates, and JSX -->
+<!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent></MyComponent>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component/>
 ```
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
-<!-- In single-file components, string templates, and JSX -->
+<!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 </div>
 
-### Component name casing in templates <sup data-p="b">strongly recommended</sup>
+### テンプレート内でのコンポーネント名の形式 <sup data-p="b">強く推奨</sup>
 
-**In most projects, component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
+**ほとんどのプロジェクトにおいて、[単一ファイルコンポーネント](../guide/single-file-component.html) と文字列テンプレートの中では、コンポーネント名は常にパスカルケース(PascalCase)になるべきです。 - しかし、 DOM テンプレートの中ではケバブケース(kebab-case)です。**
 
-PascalCase has a few advantages over kebab-case:
+パスカルケースには、ケバブケースよりも優れた点がいくつかあります:
 
-- Editors can autocomplete component names in templates, because PascalCase is also used in JavaScript.
-- `<MyComponent>` is more visually distinct from a single-word HTML element than `<my-component>`, because there are two character differences (the two capitals), rather than just one (a hyphen).
-- If you use any non-Vue custom elements in your templates, such as a web component, PascalCase ensures that your Vue components remain distinctly visible.
+- パスカルケースは JavaScript でも使われるので、エディタがテンプレート内のコンポーネント名を自動補完できます。
+- `<MyComponent>` は `<my-component>` よりも一単語の HTML 要素との見分けがつきやすいです。なぜなら、ハイフン 1 文字だけの違いではなく 2 文字(2 つの大文字) の違いがあるからです。
+- もし、テンプレート内で、Vue 以外のカスタム要素(例: Web コンポーネントなど)を使っていたとしても、パスカルケースは Vue コンポーネントがはっきりと目立つことを保証します。
 
-Unfortunately, due to HTML's case insensitivity, DOM templates must still use kebab-case.
+残念ですが、HTML は大文字と小文字を区別しないので、DOM テンプレートの中ではまだケバブケースを使う必要があります。
 
-Also note that if you've already invested heavily in kebab-case, consistency with HTML conventions and being able to use the same casing across all your projects may be more important than the advantages listed above. In those cases, **using kebab-case everywhere is also acceptable.**
+ただし、もしあなたが既にケバブケースを大量に使っているのなら、HTML の慣習との一貫性を保ちすべてのあなたのプロジェクトで同じ型式を使えるようにすることはおそらく上にあげた利点よりも重要です。このような状況では、 **どこでもケバブケースを使うのもアリです。**
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <mycomponent/>
 ```
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <myComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <MyComponent></MyComponent>
 ```
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <MyComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 
-OR
+または
 
 ``` html
-<!-- Everywhere -->
+<!-- どこでも -->
 <my-component></my-component>
 ```
 </div>
 
-### Component name casing in JS/JSX <sup data-p="b">strongly recommended</sup>
+### JS/JSX 内でのコンポーネント名の形式 <sup data-p="b">強く推奨</sup>
 
-**Component names in JS/[JSX](../guide/render-function.html#JSX) should always be PascalCase, though they may be kebab-case inside strings for simpler applications that only use global component registration through `app.component`.**
+**JS/[JSX](../guide/render-function.html#jsx) 内でのコンポーネント名は常にパスカルケース(PascalCase)にするべきです。ただし、`app.component` で登録したグローバルコンポーネントしか使わないような単純なアプリケーションでは、ケバブケース(kebab-case)を含む文字列になるかもしれません。**
 
-::: details Detailed Explanation
-In JavaScript, PascalCase is the convention for classes and prototype constructors - essentially, anything that can have distinct instances. Vue components also have instances, so it makes sense to also use PascalCase. As an added benefit, using PascalCase within JSX (and templates) allows readers of the code to more easily distinguish between components and HTML elements.
+::: details 詳細な説明
+JavaScript では、クラスやプロトタイプのコンストラクタは - 原則として異なるインスタンスを持ちうるものはすべて- パスカルケースにするのがしきたりです。Vue コンポーネントもインスタンスをもつので、同じようにパスカルケースにするのが理にかなっています。さらなる利点として、JSX(とテンプレート)の中でパスカルケースを使うことによって、コードを読む人がコンポーネントと HTML 要素をより簡単に見分けられるようになります。
 
-However, for applications that use **only** global component definitions via `app.component`, we recommend kebab-case instead. The reasons are:
+しかし、`app.component` によるグローバルコンポーネント定義**だけ**を使うアプリケーションでは、代わりにケバブケースを使うことを推奨します。理由は以下の通りです:
 
-- It's rare that global components are ever referenced in JavaScript, so following a convention for JavaScript makes less sense.
-- These applications always include many in-DOM templates, where [kebab-case **must** be used](#Component-name-casing-in-templates-strongly-recommended).
+- グローバルコンポーネントを JavaScript から参照することはほとんどないので、 JavaScript の原則に従う意味もほとんどありません。
+- そのようなアプリケーションはたくさんの DOM 内テンプレート をもつのが常ですが、 そこでは [ケバブケースを **必ず** 使う必要があります](#テンプレート内でのコンポーネント名の形式-強く推奨)
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 app.component('myComponent', {
@@ -925,7 +926,7 @@ export default {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 app.component('MyComponent', {
@@ -951,14 +952,14 @@ export default {
 ```
 </div>
 
-### Full-word component names <sup data-p="b">strongly recommended</sup>
+### 完全な単語によるコンポーネント名 <sup data-p="b">強く推奨</sup>
 
-**Component names should prefer full words over abbreviations.**
+**コンポーネント名には、略語よりも完全な単語を使うべきです。**
 
-The autocompletion in editors make the cost of writing longer names very low, while the clarity they provide is invaluable. Uncommon abbreviations, in particular, should always be avoided.
+長い名前によってもたらされる明快さは非常に貴重ですが、それをタイプする労力はエディタの自動補完によってとても小さくなります。特に、一般的でない略語は常に避けるべきです。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```
 components/
@@ -968,7 +969,7 @@ components/
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```
 components/
@@ -977,14 +978,14 @@ components/
 ```
 </div>
 
-### Prop name casing <sup data-p="b">strongly recommended</sup>
+### プロパティ名の型式 <sup data-p="b">強く推奨</sup>
 
-**Prop names should always use camelCase during declaration, but kebab-case in templates and [JSX](../guide/render-function.html#JSX).**
+**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#JSX) ではケバブケース(kebab-case)にするべきです。**
 
-We're simply following the conventions of each language. Within JavaScript, camelCase is more natural. Within HTML, kebab-case is.
+私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然で、HTML の中ではケバブケースが自然です。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 props: {
@@ -998,7 +999,7 @@ props: {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 props: {
@@ -1011,14 +1012,14 @@ props: {
 ```
 </div>
 
-### Multi-attribute elements <sup data-p="b">strongly recommended</sup>
+### 複数の属性をもつ要素 <sup data-p="b">強く推奨</sup>
 
-**Elements with multiple attributes should span multiple lines, with one attribute per line.**
+**複数の属性をもつ要素は、1 行に 1 要素ずつ、複数の行にわたって書くべきです。**
 
-In JavaScript, splitting objects with multiple properties over multiple lines is widely considered a good convention, because it's much easier to read. Our templates and [JSX](../guide/render-function.html#JSX) deserve the same consideration.
+JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#JSX)  も同じように考えることがふさわしいです。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
@@ -1030,7 +1031,7 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <img
@@ -1048,14 +1049,14 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 ```
 </div>
 
-### Simple expressions in templates <sup data-p="b">strongly recommended</sup>
+### テンプレート内での単純な式 <sup data-p="b">強く推奨</sup>
 
-**Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.**
+**複雑な式は算出プロパティかメソッドにリファクタリングして、コンポーネントのテンプレートには単純な式だけを含むようにするべきです。**
 
-Complex expressions in your templates make them less declarative. We should strive to describe _what_ should appear, not _how_ we're computing that value. Computed properties and methods also allow the code to be reused.
+テンプレート内に複雑な式があると、テンプレートが宣言的ではなくなります。私たちは、_どのように_ その値を算出するかではなく、_何が_ 表示されるべきかを記述するように努力するべきです。また、算出プロパティやメソッドによってコードが再利用できるようになります。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 {{
@@ -1067,15 +1068,15 @@ Complex expressions in your templates make them less declarative. We should stri
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
-<!-- In a template -->
+<!-- テンプレート内 -->
 {{ normalizedFullName }}
 ```
 
 ``` js
-// The complex expression has been moved to a computed property
+// 複雑な式を算出プロパティに移動
 computed: {
   normalizedFullName() {
     return this.fullName.split(' ')
@@ -1086,30 +1087,30 @@ computed: {
 ```
 </div>
 
-### Simple computed properties <sup data-p="b">strongly recommended</sup>
+### 単純な算出プロパティ <sup data-p="b">強く推奨</sup>
 
-**Complex computed properties should be split into as many simpler properties as possible.**
+**複雑な算出プロパティは、できる限りたくさんの単純なプロパティに分割するべきです。**
 
-::: details Detailed Explanation
-Simpler, well-named computed properties are:
+::: details 詳細な説明
+単純な、よい名前を持つ算出プロパティは:
 
-- __Easier to test__
+- テストしやすい
 
-  When each computed property contains only a very simple expression, with very few dependencies, it's much easier to write tests confirming that it works correctly.
+  それぞれの算出プロパティが、依存がとても少ないごく単純な式だけを含む場合、それが正しく動くことを確認するテストを書くのがより簡単になります。
 
-- __Easier to read__
+- 読みやすい
 
-  Simplifying computed properties forces you to give each value a descriptive name, even if it's not reused. This makes it much easier for other developers (and future you) to focus in on the code they care about and figure out what's going on.
+  算出プロパティを単純にするということは、たとえそれが再利用可能ではなかったとしても、それぞれに分かりやすい名前をつけることになります。それによって、他の開発者(そして未来のあなた)が、注意を払うべきコードに集中し、何が起きているかを把握することがより簡単になります。
 
-- __More adaptable to changing requirements__
+- 要求の変更を受け入れやすい
 
-  Any value that can be named might be useful to the view. For example, we might decide to display a message telling the user how much money they saved. We might also decide to calculate sales tax, but perhaps display it separately, rather than as part of the final price.
+  名前をつけることができる値は何でも、ビューでも役に立つ可能性があります。例えば、いくら割引になっているかをユーザに知らせるメッセージを表示することに決めたとします。 また、消費税も計算して、最終的な価格の一部としてではなく、別々に表示することにします。
 
-  Small, focused computed properties make fewer assumptions about how information will be used, so require less refactoring as requirements change.
+  小さく焦点が当てられた算出プロパティは、どのように情報が使われるかの決めつけをより少なくし、少しのリファクタリングで要求の変更を受け入れられます。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` js
 computed: {
@@ -1125,7 +1126,7 @@ computed: {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 computed: {
@@ -1144,14 +1145,14 @@ computed: {
 ```
 </div>
 
-### Quoted attribute values <sup data-p="b">strongly recommended</sup>
+### 引用符付きの属性値 <sup data-p="b">強く推奨</sup>
 
-**Non-empty HTML attribute values should always be inside quotes (single or double, whichever is not used in JS).**
+**空ではない HTML 属性の値は常に引用符(シングルコーテーションかダブルコーテーション、 JS の中で使われていない方)でくくるべきです。**
 
-While attribute values without any spaces are not required to have quotes in HTML, this practice often leads to _avoiding_ spaces, making attribute values less readable.
+HTML では、空白を含まない属性値は引用符でくくらなくてもよいことになっていますが、そのせいで空白の使用を _避けてしまい_ 属性値が読みづらくなりがちです。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <input type=text>
@@ -1163,7 +1164,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <input type="text">
@@ -1174,12 +1175,12 @@ While attribute values without any spaces are not required to have quotes in HTM
 ```
 </div>
 
-### Directive shorthands <sup data-p="b">strongly recommended</sup>
+### ディレクティブの短縮記法 <sup data-p="b">強く推奨</sup>
 
-**Directive shorthands (`:` for `v-bind:`, `@` for `v-on:` and `#` for `v-slot`) should be used always or never.**
+**ディレクティブの短縮記法 (`v-bind:` に対する `:`、`v-on:` に対する `@`、`v-slot:` に対する `#`)は、常に使うか、まったく使わないかのどちらかにするべきです。**
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <input
@@ -1207,7 +1208,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <input
