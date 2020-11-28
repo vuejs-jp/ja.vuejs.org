@@ -1,29 +1,29 @@
 ---
-title: v-if vs. v-for Precedence
+title: v-if と v-for の優先順位
 badges:
   - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-- **BREAKING**: If used on the same element, `v-if` will have higher precedence than `v-for`
+- **BREAKING**: 二つを同じエレメントで利用している場合、`v-if` は　`v-for` より優先されます。
 
-## Introduction
+## イントロダクション
 
-Two of the most commonly used directives in Vue.js are `v-if` and `v-for`. So it's no surprise that there comes a time when developers want to use both together. While this is not a recommended practice, there may be times when this is necessary, so we wanted to provide guidance for how it works.
+Vue.js で最も一般的に使われているディレクティブの二つは `v-if` と `v-for` です。したがって開発者が両方を一緒に使用したいときが来るのは当然のことです。これは推奨される方法ではありませんが、必要な場合があるため、私たちはその仕組みについてのガイダンスを提供したいと思いました。
 
-## 2.x Syntax
+## 2.x での構文
 
-In 2.x, when using `v-if` and `v-for` on the same element, `v-for` would take precedence.
+2.x では、`v-if` と `v-for` を同じエレメントで使うと、`v-for` が優先されます。
 
-## 3.x Syntax
+## 3.x での構文
 
-In 3.x, `v-if` will always have the higher precedence than `v-for`.
+3.x では、 `v-if` はいつも `v-for` より優先されます。
 
-## Migration Strategy
+## 移行の戦略
 
-It is recommended to avoid using both on the same element due to the syntax ambiguity.
+構文の曖昧さにより、同じエレメントで両方の使用を避けることをお勧めします。
 
-Rather than managing this at the template level, one method for accomplishing this is to create a computed property that filters out a list for the visible elements.
+これをテンプレートレベルで管理するのではなく、これを実現する一つの方法は表示されている要素のリストを除外する算出プロパティを作成することです。
