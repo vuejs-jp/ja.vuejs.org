@@ -1,11 +1,11 @@
 const sidebar = {
   cookbook: [{
-    title: 'Cookbook',
+    title: 'クックブック',
     collapsable: false,
     children: ['/cookbook/', '/cookbook/editable-svg-icons']
   }],
   guide: [{
-      title: 'Essentials',
+      title: '基本的な使い方',
       collapsable: false,
       children: [
         '/guide/installation',
@@ -22,7 +22,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Components In-Depth',
+      title: 'コンポーネントの詳細',
       collapsable: false,
       children: [
         '/guide/component-registration',
@@ -37,7 +37,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Transitions & Animation',
+      title: 'トランジションとアニメーション',
       collapsable: false,
       children: [
         '/guide/transitions-overview',
@@ -47,7 +47,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Reusability & Composition',
+      title: '高度な使い方',
       collapsable: false,
       children: [
         '/guide/mixins',
@@ -58,10 +58,10 @@ const sidebar = {
       ]
     },
     {
-      title: 'Advanced Guides',
+      title: '再利用と構成',
       collapsable: false,
       children: [{
-          title: 'Reactivity',
+          title: 'リアクティビティ',
           children: [
             '/guide/reactivity',
             '/guide/reactivity-fundamentals',
@@ -83,7 +83,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Tooling',
+      title: 'ツール',
       collapsable: false,
       children: [
         '/guide/single-file-component',
@@ -92,12 +92,12 @@ const sidebar = {
       ]
     },
     {
-      title: 'Scaling Up',
+      title: 'スケールアップ',
       collapsable: false,
       children: ['/guide/routing', '/guide/state-management', '/guide/ssr']
     },
     {
-      title: 'Accessibility',
+      title: 'アクセシビリティ',
       collapsable: false,
       children: [
         '/guide/a11y-basics',
@@ -107,7 +107,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Migration from Vue 2',
+      title: 'Vue 2 からのマイグレーション',
       collapsable: true,
       children: [
         'migration/introduction',
@@ -135,7 +135,7 @@ const sidebar = {
       ]
     },
     {
-      title: 'Contribute to the Docs',
+      title: 'ドキュメントへの貢献',
       collapsable: true,
       children: [
         'contributing/writing-guide',
@@ -149,7 +149,7 @@ const sidebar = {
     '/api/application-api',
     '/api/global-api',
     {
-      title: 'Options',
+      title: 'オプション',
       collapsable: false,
       children: [
         '/api/options-data',
@@ -166,7 +166,7 @@ const sidebar = {
     '/api/special-attributes',
     '/api/built-in-components.md',
     {
-      title: 'Reactivity API',
+      title: 'リアクティビティ API',
       collapsable: false,
       children: [
         '/api/basic-reactivity',
@@ -177,7 +177,7 @@ const sidebar = {
     '/api/composition-api'
   ],
   examples: [{
-    title: 'Examples',
+    title: '例',
     collapsable: false,
     children: [
       '/examples/markdown',
@@ -232,55 +232,55 @@ module.exports = {
   themeConfig: {
     logo: '/logo.png',
     nav: [{
-        text: 'Docs',
+        text: 'ドキュメント',
         ariaLabel: 'Documentation Menu',
         items: [{
-            text: 'Guide',
+            text: 'ガイド',
             link: '/guide/introduction'
           },
           {
-            text: 'Style Guide',
+            text: 'スタイルガイド',
             link: '/style-guide/'
           },
           {
-            text: 'Cookbook',
+            text: 'クックブック',
             link: '/cookbook/'
           },
           {
-            text: 'Examples',
+            text: '例',
             link: '/examples/markdown'
           }
         ]
       },
       {
-        text: 'API Reference',
+        text: 'API リファレンス',
         link: '/api/application-config'
       },
       {
-        text: 'Ecosystem',
+        text: 'エコシステム',
         items: [{
-            text: 'Community',
+            text: 'コミュニティ',
             ariaLabel: 'Community Menu',
             items: [{
-                text: 'Team',
+                text: 'チーム',
                 link: '/community/team/'
               },
               {
-                text: 'Partners',
+                text: 'パートナー',
                 link: '/community/partners'
               },
               {
-                text: 'Join',
+                text: '参加する',
                 link: '/community/join/'
               },
               {
-                text: 'Themes',
+                text: 'テーマ',
                 link: '/community/themes/'
               }
             ]
           },
           {
-            text: 'Official Projects',
+            text: '公式プロジェクト',
             items: [{
                 text: 'Vue Router',
                 link: 'https://router.vuejs.org/'
@@ -302,7 +302,7 @@ module.exports = {
                 link: 'https://github.com/vuejs/vue-devtools'
               },
               {
-                text: 'Weekly news',
+                text: 'ウィークリーニュース',
                 link: 'https://news.vuejs.org/'
               }
             ]
@@ -310,18 +310,18 @@ module.exports = {
         ]
       },
       {
-        text: 'Support Vue',
+        text: 'Vue を支援する',
         link: '/support-vuejs/',
         items: [{
-            text: 'One-time Donations',
+            text: '1 回きりの支援',
             link: '/support-vuejs/#one-time-donations'
           },
           {
-            text: 'Recurring Pledges',
+            text: '継続的な支援',
             link: '/support-vuejs/#recurring-pledges'
           },
           {
-            text: 'T-Shirt Shop',
+            text: 'Tシャツショップ',
             link: 'https://vue.threadless.com/'
           }
         ]
@@ -329,8 +329,8 @@ module.exports = {
     ],
     repo: 'vuejs/docs-next',
     editLinks: false,
-    editLinkText: 'Edit this on GitHub!',
-    lastUpdated: 'Last updated',
+    editLinkText: 'GitHub でこのページを編集！',
+    lastUpdated: '最終更新日',
     docsDir: 'src',
     sidebarDepth: 2,
     sidebar: {

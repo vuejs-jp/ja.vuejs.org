@@ -1,4 +1,4 @@
-# Global API
+# グローバル API
 
 ## createApp
 

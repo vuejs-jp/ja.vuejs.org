@@ -1,7 +1,7 @@
 <template>
   <div class="newsletter">
     <div class="inner">
-      <h3><label for="member_email">Subscribe to our Weekly Newsletter</label></h3>
+      <h3><label for="member_email">ウィークリーニュースレターの購読</label></h3>
       <form
         class="newsletter-form"
         id="revue-form"
@@ -17,18 +17,18 @@
           name="member[email]"
           id="member_email"
           required
-          placeholder="Email address"
+          placeholder="E メールアドレス"
         >
         <input
           class="button newsletter-button"
           type="submit"
-          value="Subscribe"
+          value="購読する"
           name="member[subscribe]"
           id="member_submit"
         >
       </form>
       <p>
-        You can read the previous issues and listen to our podcast at <a href="https://news.vuejs.org" target="_blank" rel="noopener">news.vuejs.org</a>.
+        <a href="https://news.vuejs.org" target="_blank" rel="noopener">news.vuejs.org</a>の過去号の閲覧と、ポッドキャストの再生ができます。
       </p>
     </div>
   </div>

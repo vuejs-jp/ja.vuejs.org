@@ -1,4 +1,4 @@
-# Instance Properties
+# インスタンスプロパティ
 
 ## $data
 

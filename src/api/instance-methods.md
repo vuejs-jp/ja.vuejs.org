@@ -1,4 +1,4 @@
-# Instance Methods
+# インスタンスメソッド
 
 ## $watch
 
