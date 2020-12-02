@@ -47,7 +47,7 @@ const sidebar = {
       ]
     },
     {
-      title: '高度な使い方',
+      title: '再利用と構成',
       collapsable: false,
       children: [
         '/guide/mixins',
@@ -58,7 +58,7 @@ const sidebar = {
       ]
     },
     {
-      title: '再利用と構成',
+      title: '高度な使い方',
       collapsable: false,
       children: [{
           title: 'リアクティビティ',
