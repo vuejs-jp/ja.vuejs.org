@@ -1,20 +1,20 @@
-# List Transitions
+# リストのトランジション
 
-So far, we've managed transitions for:
+ここまでで、私たちが管理しているトランジションは以下です:
 
-- Individual nodes
-- Multiple nodes where only 1 is rendered at a time
+- 個別のノード
+- 一度だけレンダリングされる複数のノード
 
-So what about for when we have a whole list of items we want to render simultaneously, for example with `v-for`? In this case, we'll use the `<transition-group>` component. Before we dive into an example though, there are a few things that are important to know about this component:
+その上で、例えば `v-for` のように、全てをまとめてレンダーしたいリスト全体がある場合はどうしましょうか？このような場合では、 `<transition-group>` コンポーネントを利用します。ですが具体的な例を見る前に、コンポーネントについていくつかの重要なことを知っておく必要があります:
 
-- Unlike `<transition>`, it renders an actual element: a `<span>` by default. You can change the element that's rendered with the `tag` attribute.
-- [Transition modes](/guide/transitions-enterleave#transition-modes) are not available, because we are no longer alternating between mutually exclusive elements.
-- Elements inside are **always required** to have a unique `key` attribute.
-- CSS transition classes will be applied to inner elements and not to the group/container itself.
+- `<transition>` とは異なり、デフォルトで実際の `<span>` 要素をレンダリングします。レンダリングされる要素は、 `tag` 属性によって変更できます。
+- 2つの排他の要素が切り替わっているわけではないため、[Transition モード](/guide/transitions-enterleave#transition-modes) は利用できません。
+- 要素の内部では、 **常に** 固有の `key` 属性を **持つ必要** があります。
+- CSS トランジションクラスは内部の要素に適用され、グループやコンテナには適用されません。
 
-### List Entering/Leaving Transitions
+### リストの Enter/Leave トランジション
 
-Now let's dive into an example, transitioning entering and leaving using the same CSS classes we've used previously:
+早速例に飛び込んでみましょう。以前利用したものと同じ CSS クラスを利用して、 enter/leave を行います:
 
 ```html
 <div id="list-demo">
@@ -75,13 +75,13 @@ Vue.createApp(Demo).mount('#list-demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-There's one problem with this example. When you add or remove an item, the ones around it instantly snap into their new place instead of smoothly transitioning. We'll fix that later.
+この例には一つの問題があります。item を追加や削除を行うと、その item の周りのものがスムーズに遷移せず、すぐに移動してしまいます。これは後で修正します。
 
 ### List Move Transitions
 
-The `<transition-group>` component has another trick up its sleeve. It can not only animate entering and leaving, but also changes in position. The only new concept you need to know to use this feature is the addition of **the `v-move` class**, which is added when items are changing positions. Like the other classes, its prefix will match the value of a provided `name` attribute and you can also manually specify a class with the `move-class` attribute.
+`<transition-group>` コンポーネントはもう一つの機能を持っています。それは、 enter/leave にだけでなく、位置の変更もアニメーションできることです。この機能を利用するための概念として、要素が位置を変更するときに **`v-move` クラス** が追加されることを知る必要があります。これはその他のクラスと同様、接頭辞はトランジションの `name` 属性と一致しているほか、 `move-class` 属性で手動でクラスを指定できます。
 
-This class is mostly useful for specifying the transition timing and easing curve, as you'll see below:
+このクラスは、後述のようにトランジションのタイミングや easing カーブを設定する際に便利です。
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
@@ -126,9 +126,9 @@ Vue.createApp(Demo).mount('#flip-list-demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-This might seem like magic, but under the hood, Vue is using an animation technique called [FLIP](https://aerotwist.com/blog/flip-your-animations/) to smoothly transition elements from their old position to their new position using transforms.
+これは魔法のように見えますが、Vue は [FLIP](https://aerotwist.com/blog/flip-your-animations/) と呼ばれるアニメーションのテクニックによって、transform を利用した要素の位置をスムーズに遷移させています。
 
-We can combine this technique with our previous implementation to animate every possible change to our list!
+このテクニックと前の実装を組み合わせることで、リストへの変更をアニメーションさせることができます！
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
@@ -198,16 +198,16 @@ Vue.createApp(Demo).mount('#list-complete-demo')
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ::: tip
-One important note is that these FLIP transitions do not work with elements set to `display: inline`. As an alternative, you can use `display: inline-block` or place elements in a flex context.
+重大な注意点として、これらの FLIP トランジションは、 `display: inline` が設定された要素では動作しません。代わりに、 `display: inline-block` を利用するか、または flex コンテキスト内に要素を配置することとなります。
 :::
 
-These FLIP animations are also not limited to a single axis. Items in a multidimensional grid can be [transitioned too](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-list-move-transitions):
+これらの FLIP アニメーションは、一つの軸の動作に限定されません。多次元のグリッドに対しても、[同様に](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-list-move-transitions)操作できます:
 
 TODO: example
 
-### Staggering List Transitions
+### 時間差でのリストトランジション
 
-By communicating with JavaScript transitions through data attributes, it's also possible to stagger transitions in a list:
+data 属性によって JavaScript によるトランジションと通信することで、時間差でのリストトランジションが可能となります:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
@@ -289,13 +289,13 @@ Vue.createApp(Demo).mount('#demo')
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Reusable Transitions
+## 再利用可能なトランジション
 
-Transitions can be reused through Vue's component system. To create a reusable transition, all you have to do is place a `<transition>` or `<transition-group>` component at the root, then pass any children into the transition component.
+トランジション群は、 Vue のコンポーネントシステムによって再利用できます。再利用可能なトランジションを作るためには、コンポーネントのルートに `<transition>` または `<transition-group>` を配置し、その children をトランジションコンポーネントへと渡すだけです。
 
 TODO: refactor to Vue 3
 
-Here's an example using a template component:
+これらは、template コンポーネントを利用した例です:
 
 ```js
 Vue.component('my-special-transition', {
@@ -320,7 +320,7 @@ Vue.component('my-special-transition', {
 })
 ```
 
-And [functional components](render-function.html#Functional-Components) are especially well-suited to this task:
+そして[関数型コンポーネント](render-function.html#Functional-Components)は、このようなタスクに時に適しています:
 
 ```js
 Vue.component('my-special-transition', {
@@ -345,9 +345,9 @@ Vue.component('my-special-transition', {
 })
 ```
 
-## Dynamic Transitions
+## 動的なトランジション
 
-Yes, even transitions in Vue are data-driven! The most basic example of a dynamic transition binds the `name` attribute to a dynamic property.
+そうです！Vue では、トランジションの設定さえもデータ駆動となります。動的なトランジション設定の最も基本的な例は、 `name` 属性を動的なプロパティに紐付けるものです。
 
 ```html
 <transition :name="transitionName">
@@ -355,9 +355,9 @@ Yes, even transitions in Vue are data-driven! The most basic example of a dynami
 </transition>
 ```
 
-This can be useful when you've defined CSS transitions/animations using Vue's transition class conventions and want to switch between them.
+これは Vue のトランジションクラスの規約によって、 CSS トランジション/アニメーションを定義し、切り替えたい場合に便利です。
 
-Really though, any transition attribute can be dynamically bound. And it's not only attributes. Since event hooks are methods, they have access to any data in the context. That means depending on the state of your component, your JavaScript transitions can behave differently.
+そしてこれは本当にあらゆるトランジション属性を動的に紐付けることができ、その対象は属性だけではありません。イベントフックはメソッドであるため、コンテキストにおけるあらゆるデータへとアクセスすることができます。それはコンポーネントの状態に依存して、 JavaScript トランジションが異なる挙動する可能性があるということです。
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
@@ -441,4 +441,4 @@ app.mount('#dynamic-fade-demo')
 
 TODO: example
 
-Finally, the ultimate way of creating dynamic transitions is through components that accept props to change the nature of the transition(s) to be used. It may sound cheesy, but the only limit really is your imagination.
+最後に、究極的には、プロップを受け付けるコンポーネントを利用し、性質を変化させる、動的なトランジションを実現することができます。安っぽい表現に聞こえるかもしれませんが、限界はあなたの想像力次第です。
