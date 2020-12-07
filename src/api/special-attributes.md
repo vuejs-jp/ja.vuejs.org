@@ -1,4 +1,4 @@
-# Special Attributes
+# 特別な属性
 
 ## key
 
