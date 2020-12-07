@@ -1,3 +1,3 @@
-# Meet the Team
+# チームに会おう
 
 <community-team-index/>

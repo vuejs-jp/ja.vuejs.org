@@ -1,7 +1,7 @@
-# Vue Partners
+# Vue パートナー
 
-Vue Partners are premium shops that provide first-class Vue consulting and development. If your company is interested in being listed as a partner, please contact us at [partners@vuejs.org](mailto:partners@vuejs.org).
+Vue パートナーは、第一級の Vue についてのコンサルティングと開発を行うプレミアムショップです。パートナーとしての掲載を希望する場合、[partners@vuejs.org](mailto:partners@vuejs.org) までご連絡ください。
 
-## Active Partners
+## アクティブなパートナー
 
 <community-partners-index/>
