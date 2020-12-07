@@ -90,7 +90,7 @@ watchEffect(async onInvalidate => {
 
 非同期関数は暗黙的に Promise を返却しますが、 Promise が resolve される前にクリーンアップ関数を登録する必要があります。Vue は、 Promise チェーンにおける潜在的なエラーを自動的に処理するため、返却される Promise に依存しています。
 
-### 実行タイミング
+### 作用フラッシュのタイミング
 
 Vue のリアクティブシステムは、無効になった変更をバッファリングし、非同期に処理することによって、おなじ "tick" の中での複数の状態の変化に対して、不要な重複の呼び出しを避けることができています。内部的には、コンポーネントの `update` 関数も、監視されている作用の一つです。ユーザーによる作用がキューに入っている場合、それは常に、他の全てのコンポーネントの更新の後に呼び出されます:
 
@@ -222,4 +222,4 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 
 ### `watchEffect` との振る舞いの共有
 
-`watch` は[明示的な停止](#stopping-the-watcher)、[副作用の無効化](#side-effect-invalidation) (代わりに第三引数に `onInvalidate` を渡すことになります)、[実行タイミング](#effect-flush-timing)ならびに[デバッグ手法](#watcher-debugging)についての挙動を[`watchEffect`](#watcheffect)と共有しています。
+`watch` は[明示的な停止](#stopping-the-watcher)、[副作用の無効化](#side-effect-invalidation) (代わりに第三引数に `onInvalidate` を渡すことになります)、[作用フラッシュのタイミング](#effect-flush-timing)ならびに[デバッグ手法](#watcher-debugging)についての挙動を[`watchEffect`](#watcheffect)と共有しています。
