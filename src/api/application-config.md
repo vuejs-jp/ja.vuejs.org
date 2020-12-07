@@ -1,6 +1,6 @@
 # アプリケーション構成
 
-`config` is an object containing Vue application global configurations. You can modify its properties listed below before mounting your application:
+`config` は、 Vue アプリケーションのグローバル設定を含むオブジェクトです。アプリケーションをマウントする前に、以下のプロパティを変更できます:
 
 ```js
 const app = Vue.createApp({})
@@ -10,61 +10,61 @@ app.config = {...}
 
 ## devtools
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `true` (`false` in production builds)
+- **デフォルト:** `true` (プロダクションビルドでは `false`)
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.devtools = true
 ```
 
-Configure whether to allow [vue-devtools](https://github.com/vuejs/vue-devtools) inspection. This option's default value is `true` in development builds and `false` in production builds. You can set it to `true` to enable inspection for production builds.
+[vue-devtools](https://github.com/vuejs/vue-devtools) による検査を許可するかどうかを設定します。このオプションのデフォルト値は、development ビルドでは `true` に、プロダクションビルドでは `false` となります。true にすることで、プロダクションビルドで検査を有効にできます。
 
 ## errorHandler
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.errorHandler = (err, vm, info) => {
-  // handle error
-  // `info` is a Vue-specific error info, e.g. which lifecycle hook
-  // the error was found in
+  // エラーハンドリング
+  // `info` は、Vue 固有のエラー情報です。例: ライフサイクルフック
+  // エラーが見つかった際の処理
 }
 ```
 
-Assign a handler for uncaught errors during component render function and watchers. The handler gets called with the error and the application instance.
+コンポーネントの描画関数とウォッチャーに捕捉されなかったエラーのハンドラを割り当てます。ハンドラには、アプリケーションのインスタンスとエラーが渡されて呼び出されます。
 
-> Error tracking services [Sentry](https://sentry.io/for/vue/) and [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) provide official integrations using this option.
+> エラートラッキングサービスの [Sentry](https://sentry.io/for/vue/) ならびに [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) は公式に連携のためのオプションを用意しています。
 
 ## warnHandler
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.warnHandler = function(msg, vm, trace) {
-  // `trace` is the component hierarchy trace
+  // `trace` は、コンポーネントのヒエラルキートレースです。
 }
 ```
 
-Assign a custom handler for runtime Vue warnings. Note this only works during development and is ignored in production.
+Vue の warning のためのカスタムハンドラを割り当てます。開発環境でのみ動き、プロダクションでは動作しないことに注意してください。
 
 ## globalProperties
 
-- **Type:** `[key: string]: any`
+- **型:** `[key: string]: any`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.globalProperties.foo = 'bar'
@@ -76,9 +76,9 @@ app.component('child-component', {
 })
 ```
 
-Adds a global property that can be accessed in any component instance inside the application. The component’s property will take priority when there are conflicting keys.
+アプリケーション内のあらゆるコンポーネントのインスタンスからアクセスできるグローバルなプロパティを追加します。名称が競合した場合、コンポーネントのプロパティが優先されます。
 
-This can replace Vue 2.x `Vue.prototype` extending:
+これは、 Vue 2.x における Vue.prototype` 拡張を置き換えることができます:
 
 ```js
 // Before
@@ -91,28 +91,28 @@ app.config.globalProperties.$http = () => {}
 
 ## isCustomElement
 
-- **Type:** `(tag: string) => boolean`
+- **型:** `(tag: string) => boolean`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
-// any element starting with 'ion-' will be recognized as a custom one
+// 'ion-' から始まる要素は、Custom Element として認識されます。
 app.config.isCustomElement = tag => tag.startsWith('ion-')
 ```
 
-Specifies a method to recognize custom elements defined outside of Vue (e.g., using the Web Components APIs). If component matches this condition, it won't need local or global registration and Vue won't throw a warning about an `Unknown custom element`.
+Vue の外部にて定義された(Web Components API を利用した場合などの)Custom Element を認識する方法を指定します。条件にコンポーネントがマッチした場合は、ローカルならびにグローバルでの登録を必要とせず、`Unknown custom element` の警告をスローしません。
 
-> Note that all native HTML and SVG tags don't need to be matched in this function - Vue parser performs this check automatically
+> この関数では、全てのネイティブの HTML ならびに SVG のタグをマッチさせる必要はありません。Vue のパーサが自動的にこのチェックを行います。
 
 ## optionMergeStrategies
 
-- **Type:** `{ [key: string]: Function }`
+- **型:** `{ [key: string]: Function }`
 
-- **Default:** `{}`
+- **デフォルト:** `{}`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 const app = Vue.createApp({
@@ -132,18 +132,18 @@ app.mixin({
 // 'Hello, Vue
 ```
 
-Define merging strategies for custom options.
+カスタムオプションのマージ戦略を定義します。
 
-The merge strategy receives the value of that option defined on the parent and child instances as the first and second arguments, respectively. The context application instance is passed as the third argument.
+マージ戦略は、親インスタンスと子インスタンスで定義されたオプションの値をそれぞれ第一引数と第二引数として受け取ります。アプリケーションコンテキストのインスタンスは、第三引数として渡されます。
 
-- **See also:** [Custom Option Merging Strategies](../guide/mixins.html#custom-option-merge-strategies)
+- **こちらも:** [Custom Option Merging Strategies](../guide/mixins.html#custom-option-merge-strategies)
 
 ## performance
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `false`
+- **デフォルト:** `false`
 
-- **Usage**:
+- **使用方法**:
 
-Set this to `true` to enable component init, compile, render and patch performance tracing in the browser devtool performance/timeline panel. Only works in development mode and in browsers that support the [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API.
+コンポーネントの初期化に `true` に設定することで、ブラウザの devtool 内の performance/timeline パネルにて、レンダリングおよびパッチにおけるパフォーマンスの追跡が可能となります。development モード並びに[performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API が有効なブラウザでのみ機能します。
