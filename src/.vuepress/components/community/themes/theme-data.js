@@ -1,8 +1,8 @@
 export default [
   {
     name: 'Creative Tim',
-    description: `With the examples below built by our partners from [Creative Tim](https://creative-tim.com?affiliate_id=116187) you can see how a real world application is built, the technology stack behind it and how most of the concepts you've learned so far apply in a real world application.`,
-    seeMoreUrl: 'https://www.creative-tim.com/bootstrap-themes/vuejs-themes?affiliate_id=116187',
+    description: `[Creative Tim](https://creative-tim.com?affiliate_id=116187) によって作成された現実のアプリケーションが、どのように構築されているか、技術スタック、あなたが学んだコンセプトがどのように適用されているかを見られます。`,
+    seeMoreUrl: 'https://www. creative-tim.com/bootstrap-themes/vuejs-themes?affiliate_id=116187',
     products: [
       {
         name: 'Vue Argon Design System',
@@ -92,7 +92,7 @@ export default [
   },
   {
     name: "MDBootstrap",
-    description: `Check out the themes, UI Kits and plugins below built by our partners from [MDBootstrap](https://mdbootstrap.com/?utm_ref_id=82665). Learn how to use Vue in professional projects along such technologies as Bootstrap. Templates & ready components make your development faster and more efficient.`,
+    description: `[MDBootstrap](https://mdbootstrap.com/?utm_ref_id=82665) によって作成された、テーマ・UIキット・プラグインをチェックしてください。プロのプロジェクトにおいて、Bootstrap などの技術に沿って Vue を利用する方法を学びましょう。テンプレートと準備されたコンポーネントは、あなたの開発をより速く、効率的にします。`,
     seeMoreUrl: "https://mdbootstrap.com/docs/vue?utm_ref_id=82665",
     products: [
       {
@@ -127,7 +127,7 @@ export default [
   },
   {
     name: 'PrimeVue',
-    description: `The open-source UI component library [PrimeVue](https://www.primefaces.org/primevue/#/?af_id=4218) offers over 50 flexible components to build your apps with! They have a ton of different component themes and Vue-CLI application templates available to get the look&feel that suits you best.`,
+    description: `オープンソースの UI コンポーネントライブラリ [PrimeVue](https://www.primefaces.org/primevue/#/?af_id=4218) は、アプリケーションを開発するための 50 を超えるフレキシブルなコンポーネントを提供しています。その中には様々なコンポーネントテーマと、 Vue CLI のアプリケーションテンプレートが用意されており、あなたがベストだと考えるルック&フィールのものを利用できます。`,
     seeMoreUrl: 'https://www.primefaces.org/primevue/#/?af_id=4218',
     products: [
       {
@@ -183,7 +183,7 @@ export default [
   },
   {
     name: 'Flatlogic',
-    description: `Check the admin dashboards templates built by our partners from [Flatlogic](https://flatlogic.com/templates?ref=x-fdkuTAVW). With these themes you can see how real applications is built. Additionally these templates will help you to start a new application and save you time and money.`,
+    description: `[Flatlogic](https://flatlogic.com/templates?ref=x-fdkuTAVW) によって作成された、管理画面ダッシュボードのテンプレートをチェックしてください。これらのテーマでは、現実のアプリケーションがどのように作られているかを見ることができます。さらに、これらのテンプレートは新しいアプリケーションを構築することに役立ち、時間とお金を削減できます。`,
     seeMoreUrl: 'https://flatlogic.com/templates?ref=x-fdkuTAVW',
     products: [
       {
