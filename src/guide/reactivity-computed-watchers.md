@@ -1,10 +1,10 @@
-# Computed and Watch
+# 算出プロパティとウォッチ
 
-> This section uses [single-file component](single-file-component.html) syntax for code examples
+> この章では、[単一ファイルコンポーネント](../guide/single-file-component.html)記法を例として使用します。
 
-## Computed values
+## 算出プロパティ
 
-Sometimes we need state that depends on other state - in Vue this is handled with component [computed properties](computed.html#computed-properties). To directly create a computed value, we can use the `computed` method: it takes a getter function and returns an immutable reactive [ref](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) object for the returned value from the getter.
+開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの[算出プロパティ](computed.html#computed-properties)として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./refs-api.html#ref) オブジェクトを返却する `computed` メソッドを利用します。。
 
 ```js
 const count = ref(1)
@@ -15,7 +15,7 @@ console.log(plusOne.value) // 2
 plusOne.value++ // error
 ```
 
-Alternatively, it can take an object with `get` and `set` functions to create a writable ref object.
+または、`get` ならびに `set` 関数を用意することで、書き込み可能なオブジェクトを作成できます。
 
 ```js
 const count = ref(1)
@@ -32,7 +32,7 @@ console.log(count.value) // 0
 
 ## `watchEffect`
 
-To apply and _automatically re-apply_ a side effect based on reactive state, we can use the `watchEffect` method. It runs a function immediately while reactively tracking its dependencies and re-runs it whenever the dependencies are changed.
+リアクティブの状態に応じて、作用を *自動的に適用しなおす* ために、`watchEffect` を利用できます。これは依存関係をリアクティブにトラッキングし、変更されるたびに即座に関数を再実行します。
 
 ```js
 const count = ref(0)
@@ -46,54 +46,53 @@ setTimeout(() => {
 }, 100)
 ```
 
-### Stopping the Watcher
+### 監視の停止
 
-When `watchEffect` is called during a component's [setup()](composition-api-setup.html) function or [lifecycle hooks](composition-api-lifecycle-hooks.html), the watcher is linked to the component's lifecycle and will be automatically stopped when the component is unmounted.
+`watchEffect` をコンポーネントの [setup()](composition-api-setup.html) 関数または[ライフサイクルフック](composition-api-lifecycle-hooks.html)の中で呼び出すと、ウォッチャはコンポーネントのライフサイクルにリンクされ、コンポーネントのアンマウント時に自動的に監視が停止します。
 
-In other cases, it returns a stop handle which can be called to explicitly stop the watcher:
+その他のケースのため、明示的にウォッチャによる監視を停止するための stop ハンドルが返されます:
 
 ```js
 const stop = watchEffect(() => {
   /* ... */
 })
 
-// later
+// 処理後
 stop()
 ```
 
-### Side Effect Invalidation
+### 副作用の無効化
 
-Sometimes the watched effect function will perform asynchronous side effects that need to be cleaned up when it is invalidated (i.e state changed before the effects can be completed). The effect function receives an `onInvalidate` function that can be used to register an invalidation callback. This invalidation callback is called when:
+ウォッチされている関数は、それが無効化された時(つまりは、該当の作用が完了する前に状態が変化した時)にクリーンアップする必要のある非同期の関数を実行することがあります。 watchEffect による関数は、コールバックを無効化するための `onInvalidate` 関数を受け取ることができます。この関数は以下の場合に呼び出されます:
 
-- the effect is about to re-run
-- the watcher is stopped (i.e. when the component is unmounted if `watchEffect` is used inside `setup()` or lifecycle hooks)
+- 該当の作用が再度実行された場合
+- ウォッチャが停止した場合 (例えば……: `setup()` またはライフサイクルフックの中で `watchEffect` が使用されているコンポーネントがアンマウントされた時)
 
 ```js
 watchEffect(onInvalidate => {
   const token = performAsyncOperation(id.value)
   onInvalidate(() => {
-    // id has changed or watcher is stopped.
-    // invalidate previously pending async operation
+    // ID が変更されたまたはウォッチャが停止した
+    // 依然 pending となった非同期の処理を向こうにする
     token.cancel()
   })
 })
 ```
-
-We are registering the invalidation callback via a passed-in function instead of returning it from the callback because the return value is important for async error handling. It is very common for the effect function to be an async function when performing data fetching:
+無効化するコールバックを直接返すのではなく、 passed-in 関数を経由して登録しているのは、非同期のエラー処理では、返り値が非常に重要であるためです。データ取得を行う時、作用となる関数が非同期であることは非常に一般的なことです:
 
 ```js
 const data = ref(null)
 watchEffect(async onInvalidate => {
-  onInvalidate(() => {...}) // we register cleanup function before Promise resolves
+  onInvalidate(() => {...}) // Promise の解決前にクリーンアップする関数を登録
   data.value = await fetchData(props.id)
 })
 ```
 
-An async function implicitly returns a Promise, but the cleanup function needs to be registered immediately before the Promise resolves. In addition, Vue relies on the returned Promise to automatically handle potential errors in the Promise chain.
+非同期関数は暗黙的に Promise を返却しますが、 Promise が resolve される前にクリーンアップ関数を登録する必要があります。Vue は、 Promise チェーンにおける潜在的なエラーを自動的に処理するため、返却される Promise に依存しています。
 
-### Effect Flush Timing
+### 実行タイミング
 
-Vue's reactivity system buffers invalidated effects and flushes them asynchronously to avoid unnecessary duplicate invocation when there are many state mutations happening in the same "tick". Internally, a component's `update` function is also a watched effect. When a user effect is queued, it is always invoked after all component `update` effects:
+Vue のリアクティブシステムは、無効になった変更をバッファリングし、非同期に処理することによって、おなじ "tick" の中での複数の状態の変化に対して、費用な重複の呼び出しを避けることができています。内部的には、コンポーネントの `update` 関数も、監視されている作用の一つです。ユーザーによる作用がキューに入っている場合、それは常に、他の全てのコンポーネントの更新の後に呼び出されます:
 
 ```html
 <template>
@@ -117,25 +116,25 @@ Vue's reactivity system buffers invalidated effects and flushes them asynchronou
 </script>
 ```
 
-In this example:
+この例では:
 
-- The count will be logged synchronously on initial run.
-- When `count` is mutated, the callback will be called **after** the component has updated.
+- count は最初の実行時に記録されます。
+- `count` が変化した時、コンポーネントの**変更後**にコールバック関数が実行されます。
 
-Note the first run is executed before the component is mounted. So if you wish to access the DOM (or template refs) in a watched effect, do it in the `onMounted` hook:
+初回実行は、コンポーネントがマウントされる前に実行されることに注意してください。そのため、作用の中で DOM(またはテンプレートの ref)へとアクセスしたい場合は、 `onMounted` フック内にて実行してください:
 
 ```js
 onMounted(() => {
   watchEffect(() => {
-    // access the DOM or template refs
+    // DOM やテンプレートの ref へのアクセス処理
   })
 })
 ```
 
-In cases where a watcher effect needs to be re-run synchronously or before component updates, we can pass an additional `options` object with the `flush` option (default is `'post'`):
+ウォッチャの作用を同期的に、またはコンポーネントの更新前に再実行したい場合は、 `option` に対して、 `flush` オプション(デフォルト値は `post`)を渡すことができます:
 
 ```js
-// fire synchronously
+// 同時に発火
 watchEffect(
   () => {
     /* ... */
@@ -145,7 +144,7 @@ watchEffect(
   }
 )
 
-// fire before component updates
+// コンポーネントの更新前に発火
 watchEffect(
   () => {
     /* ... */
@@ -156,19 +155,19 @@ watchEffect(
 )
 ```
 
-### Watcher Debugging
+### Watcher のデバッグ
 
-The `onTrack` and `onTrigger` options can be used to debug a watcher's behavior.
+`onTrack` および `onTrigger` オプションは、ウォッチャの振る舞いのデバッグに利用できます。
 
-- `onTrack` will be called when a reactive property or ref is tracked as a dependency
-- `onTrigger` will be called when the watcher callback is triggered by the mutation of a dependency
+- `onTrack` はリアクティブな値もしくは ref が依存関係としてトラッキングされているときに実行されます。
+- `onTrigger` は、依存関係の値が変更され、コールバック関数がトリガされたときに実行されます。
 
-Both callbacks will receive a debugger event which contains information on the dependency in question. It is recommended to place a `debugger` statement in these callbacks to interactively inspect the dependency:
+どちらのコールバックについても、問題の依存関係に関する情報を含むデバッガイベントを受け取ります。これらのコールバックに `debugger` 文を記述して、対話的に依存性を検査することを推奨します:
 
 ```js
 watchEffect(
   () => {
-    /* side effect */
+    /* 副作用を持つ処理 */
   },
   {
     onTrigger(e) {
@@ -178,21 +177,21 @@ watchEffect(
 )
 ```
 
-`onTrack` and `onTrigger` only work in development mode.
+`onTrack` および `onTrigger` は、開発モードでのみ動作します。
 
 ## `watch`
 
-The `watch` API is the exact equivalent of the component [watch](computed.html#watchers) property. `watch` requires watching a specific data source and applies side effects in a separate callback function. It also is lazy by default - i.e. the callback is only called when the watched source has changed.
+`watch` API は、コンポーネントの[watch](computed.html#watchers) プロパティと完全に同じものです。`watch` は特定のデータソースを監視し、別のコールバック関数内で副作用を適用する必要があります。また、デフォルトでは lazy となっています(つまり、監視しているデータソースが変更された場合に限り、コールバック関数が実行されます)。
 
-- Compared to [watchEffect](#watcheffect), `watch` allows us to:
+- [watchEffect](#watcheffect) と比較して、 `watch` は以下を可能とします:
 
-  - Perform the side effect lazily;
-  - Be more specific about what state should trigger the watcher to re-run;
-  - Access both the previous and current value of the watched state.
+  - 作用の効率的な実行
+  - ウォッチャの再実行条件の明文化
+  - ウォッチされている状態に対しての、変更前後の値両方へのアクセス
 
-### Watching a Single Source
+### 単一のデータソースの監視
 
-A watcher data source can either be a getter function that returns a value, or directly a `ref`:
+ウォッチャは、 `ref` または、直接な値そのもののどちらかを返却できます:
 
 ```js
 // watching a getter
@@ -211,9 +210,9 @@ watch(count, (count, prevCount) => {
 })
 ```
 
-### Watching Multiple Sources
+### 複数のデータソースの監視
 
-A watcher can also watch multiple sources at the same time using an array:
+ウォッチャは、配列を利用することで、複数のデータソースを同時に監視できます:
 
 ```js
 watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
@@ -221,6 +220,6 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 })
 ```
 
-### Shared Behavior with `watchEffect`
+### `watchEffect` との振る舞いの共有
 
-`watch` shares behavior with [`watchEffect`](#watcheffect) in terms of [manual stoppage](#stopping-the-watcher), [side effect invalidation](#side-effect-invalidation) (with `onInvalidate` passed to the callback as the 3rd argument instead), [flush timing](#effect-flush-timing) and [debugging](#watcher-debugging).
+`watch` は[明示的な停止](#stopping-the-watcher)、[副作用の無効化](#side-effect-invalidation) (代わりに第三引数に `onInvalidate` を渡すことになります)、[実行タイミング](#effect-flush-timing)ならびに[デバッグ手法](#watcher-debugging)についての挙動を[`watchEffect`](#watcheffect)と共有しています。
