@@ -2,7 +2,7 @@
   <div>
     <div class="team">
       <h2 id="active-core-team-members">
-        Active Core Team Members
+        アクティブなコアチームメンバー
         <GetPositionButton
           v-if="!userPosition"
           @positionRetrieved="setUserPosition"
@@ -11,15 +11,15 @@
       </h2>
 
       <div v-if="errorGettingLocation" class="danger custom-block">
-        <p>Failed to get your location.</p>
+        <p>位置情報を取得できません。</p>
       </div>
 
       <p>
-        The development of Vue and its ecosystem is guided by an international team, some of whom have chosen to be featured below.
+        Vue とそのエコシステムの開発は国際的なチームによって導かれていますが、そのうちの数名については以下で紹介されることを希望しています。
       </p>
 
       <div v-if="userPosition" class="tip custom-block">
-        <p>The core team have been sorted by their distance from you.</p>
+        <p>コアチームはあなたからの距離でソートされています。</p>
       </div>
 
       <VuerProfile v-for="profile in members" :key="profile.name" :profile="profile" :use-miles="useMiles"/>
@@ -27,11 +27,11 @@
 
     <div class="team">
       <h2 id="core-team-emeriti">
-        Core Team Emeriti
+        コアチーム表彰
       </h2>
 
       <p>
-        Here we honor some no-longer-active core team members who have made valuable contributions in the past.
+        今はもうアクティブではないものの、過去に大きな貢献をしてくれたコアチームメンバーをここに称えます。
       </p>
 
       <VuerProfile v-for="profile in emeriti" :key="profile.name" :profile="profile" :use-miles="useMiles"/>
@@ -39,7 +39,7 @@
 
     <div class="team">
       <h2 id="community-partners">
-        Community Partners
+        コミュニティパートナー
         <GetPositionButton
           v-if="!userPosition"
           @positionRetrieved="setUserPosition"
@@ -48,15 +48,15 @@
       </h2>
 
       <div v-if="errorGettingLocation" class="danger custom-block">
-        <p>Failed to get your location.</p>
+        <p>位置情報を取得できません。</p>
       </div>
 
       <p>
-        Some members of the Vue community have so enriched it, that they deserve special mention. We've developed a more intimate relationship with these key partners, often coordinating with them on upcoming features and news.
+        Vue コミュニティのメンバーは非常に豊かで、特別な言及が必要なものもあります。 私たちはこれら重要なパートナーとより親密な関係を築いており、しばしば今後のニュースや機能について調整しています。
       </p>
 
       <div v-if="userPosition" class="tip custom-block">
-        <p>The community partners have been sorted by their distance from you.</p>
+        <p>コミュニティパートナーはあなたからの距離でソートされています。</p>
       </div>
 
       <VuerProfile v-for="profile in partners" :key="profile.name" :profile="profile" :use-miles="useMiles"/>
