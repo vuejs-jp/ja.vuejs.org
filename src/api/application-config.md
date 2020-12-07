@@ -129,7 +129,7 @@ app.mixin({
   hello: 'Vue'
 })
 
-// 'Hello, Vue
+// 'Hello, Vue'
 ```
 
 カスタムオプションのマージ戦略を定義します。
