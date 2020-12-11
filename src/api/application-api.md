@@ -1,6 +1,6 @@
 # アプリケーション API
 
-In Vue 3, APIs that globally mutate Vue's behavior are now moved to application instances created by the new `createApp` method. In addition, their effects are now scoped to that specific application's instance:
+Vue 3 では、Vue の動作にグローバルな変更を与える API は、新しい `createApp` メソッドによって作成されたアプリケーションインスタンスへと移行されました。さらに、その効果が適用されるスコープは、指定したアプリケーションのインスタンス内に限定されるようになりました:
 
 ```js
 import { createApp } from 'vue'
@@ -8,51 +8,51 @@ import { createApp } from 'vue'
 const app = createApp({})
 ```
 
-Calling `createApp` returns an application instance. This instance provides an application context. The entire component tree mounted by the application instance share the same context, which provides the configurations that were previously "global" in Vue 2.x.
+`createApp` を呼び出すと、アプリケーションのインスタンスが返されます。このインスタンスはアプリケーションコンテキストを提供します。アプリケーションインスタンスによってマウントされたコンポーネントツリー全体が同じコンテキストを共有し、Vue 2.x で以前は **グローバル** であった設定を提供します。
 
-In addition, since the `createApp` method returns the application instance itself, you can chain other methods after it which can be found in the following sections.
+加えて、 `createApp` メソッドは自身のアプリケーションインスタンスを返すため、今後のセクションにて紹介するように、メソッドに対して他のメソッドをチェーンさせることができます。
 
 ## component
 
-- **Arguments:**
+- **引数:**
 
   - `{string} name`
   - `{Function | Object} definition (optional)`
 
-- **Returns:**
+- **返り値:**
 
-  - The application instance if a `definition` argument was passed
-  - The component definition if a `definition` argument was not passed 
+  - `definition` 引数が渡されている場合、アプリケーションのインスタンス
+  - `definition` 引数が渡されていない場合、コンポーネントの定義
 
-- **Usage:**
+- **使用方法:**
 
-  Register or retrieve a global component. Registration also automatically sets the component's `name` with the given `name` parameter.
+  グローバルコンポーネントを登録または取得します。登録すると、与えられた `name` に対して、コンポーネントの `name` が自動的に設定されます。
 
-- **Example:**
+- **例:**
 
 ```js
 import { createApp } from 'vue'
 
 const app = createApp({})
 
-// register an options object
+// オブジェクトの登録
 app.component('my-component', {
   /* ... */
 })
 
-// retrieve a registered component
+// 登録済みのコンポーネントの取得
 const MyComponent = app.component('my-component')
 ```
 
-- **See also:** [Components](../guide/component-basics.html)
+- **参照:** [Components](../guide/component-basics.html)
 
 ## config
 
-- **Usage:**
+- **使用方法:**
 
-An object containing application configurations.
+アプリケーションの設定を含む場合に利用
 
-- **Example:**
+- **例:**
 
 ```js
 import { createApp } from 'vue'
@@ -61,72 +61,72 @@ const app = createApp({})
 app.config = {...}
 ```
 
-- **See also:** [Application Config](./application-config.html)
+- **参照:** [Application Config](./application-config.html)
 
 ## directive
 
-- **Arguments:**
+- **引数:**
 
   - `{string} name`
   - `{Function | Object} definition (optional)`
 
-- **Returns:**
+- **返り値:**
 
-  - The application instance if a `definition` argument was passed
-  - The directive definition if a `definition` argument was not passed 
+  - `definition` 引数が渡された場合はアプリケーションのインスタンス
+  - `definition` 引数が渡されていない場合はディレクティブの定義
 
-- **Usage:**
+- **使用方法:**
 
-  Register or retrieve a global directive.
+  グローバルディレクティブを登録または取得します。
 
-- **Example:**
+- **例:**
 
 ```js
 import { createApp } from 'vue'
 const app = createApp({})
 
-// register
+// 登録
 app.directive('my-directive', {
-  // Directive has a set of lifecycle hooks:
-  // called before bound element's parent component is mounted
+  // ディレクティブはライフサイクルのセットをもちます:
+  // バインドされた要素の親コンポーネントがマウントされる前に呼び出されます。
   beforeMount() {},
-  // called when bound element's parent component is mounted
+  // バインドされた要素の親コンポーネントがマウントされた後に呼び出されます。
   mounted() {},
-  // called before the containing component's VNode is updated
+  // コンポーネントが含む VNode に更新が行われる前に呼び出されます。
   beforeUpdate() {},
-  // called after the containing component's VNode and the VNodes of its children // have updated
+  // コンポーネントが含む VNode 及びその子要素に更新が行われた場合に呼び出されます。
   updated() {},
-  // called before the bound element's parent component is unmounted
+  // バインドされた要素の親コンポーネントがアンマウントされる前に呼び出されます。
   beforeUnmount() {},
-  // called when the bound element's parent component is unmounted
+  // バインドされた要素の親コンポーネントがアンマウントされた後に呼び出されます。
   unmounted() {}
 })
 
-// register (function directive)
+// 登録 (関数ディレクティブ)
 app.directive('my-directive', () => {
-  // this will be called as `mounted` and `updated`
+  // `mounted` ならびに `updated` にて呼び出されます。
 })
 
-// getter, return the directive definition if registered
+// ゲッター。登録されている場合、ディレクティブ定義を返却します。
 const myDirective = app.directive('my-directive')
 ```
 
-Directive hooks are passed these arguments:
+ディレクティブフックには、これらの要素が渡されます:
 
 #### el
 
-The element the directive is bound to. This can be used to directly manipulate the DOM.
+ディレクティブがバインドされる要素。これを利用することで、 DOM を直接操作できます。
 
 #### binding
 
-An object containing the following properties.
+このオブジェクトは、以下のプロパティを持ちます。
 
-- `instance`: The instance of the component where directive is used.
-- `value`: The value passed to the directive. For example in `v-my-directive="1 + 1"`, the value would be `2`.
-- `oldValue`: The previous value, only available in `beforeUpdate` and `updated`. It is available whether or not the value has changed.
-- `arg`: The argument passed to the directive, if any. For example in `v-my-directive:foo`, the arg would be `"foo"`.
-- `modifiers`: An object containing modifiers, if any. For example in `v-my-directive.foo.bar`, the modifiers object would be `{ foo: true, bar: true }`.
-- `dir`: an object, passed as a parameter when directive is registered. For example, in the directive
+- `instance`: ディレクティブが使われているコンポーネントのインスタンス。
+- `value`: ディレクティブの値。例えば `v-my-directive="1 + 1"` の場合、 value は `2`となります。
+- `oldValue`: 以前の値であり、 `beforeUpdate` および `updated` でのみ利用できます。値が変更されているかを判別できます。
+- `arg`: 引数がある場合はそれを含むオブジェクト。例えば `v-my-directive:foo` の場合、 arg は `"foo"` となります。
+- `modifiers`: 修飾子がある場合はそれを含むオブジェクト。例えば `v-my-directive.foo.bar` の場合、 modifiers オブジェクトは `{ foo: true, bar: true }` となります。
+- `dir`: ディレクティブが登録されたとき、パラメータとして渡されるオブジェクト。例えば、このディレクティブ内では
 
 ```js
 app.directive('focus', {
@@ -136,7 +136,7 @@ app.directive('focus', {
 })
 ```
 
-`dir` would be the following object:
+`dir` は以下のオブジェクトとなります:
 
 ```js
 {
@@ -148,50 +148,50 @@ app.directive('focus', {
 
 #### vnode
 
-A blueprint of the real DOM element received as el argument above.
+el にて受け取った実際の DOM 要素の blueprint を表します。
 
 #### prevNode
 
-The previous virtual node, only available in the `beforeUpdate` and `updated` hooks.
+以前の VNode を表します。`beforeUpdate` および `updated` フックでのみ利用可能です。
 
 :::tip Note
-Apart from `el`, you should treat these arguments as read-only and never modify them. If you need to share information across hooks, it is recommended to do so through element's [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).
+`el` を除き、これらはすべて読み取り専用であり、変更してはいけません。フック間にて情報を共有したい場合、要素の[データセット](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset)を通して情報を共有することを推奨します。
 :::
 
-- **See also:** [Custom Directives](../guide/custom-directive.html)
+- **参照:** [Custom Directives](../guide/custom-directive.html)
 
 ## mixin
 
-- **Arguments:**
+- **引数:**
 
   - `{Object} mixin`
 
-- **Returns:**
+- **返り値:**
 
-  - The application instance 
+  - アプリケーションのインスタンス
 
-- **Usage:**
+- **使用方法:**
 
-  Apply a mixin in the whole application scope. Once registered they can be used in the template of any component within the current application. This can be used by plugin authors to inject custom behavior into components. **Not recommended in application code**.
+  アプリケーションスコープ全体に mixin を適用します。一度登録された場合、該当のアプリケーション内の任意のコンポーネントのテンプレートで利用することができます。プラグイン作者がコンポーネントにカスタムの振る舞いを注入するために使用することができます。**アプリケーションコードでは推奨されません。**.
 
-- **See also:** [Global Mixin](../guide/mixins.html#global-mixin)
+- **参照:** [Global Mixin](../guide/mixins.html#global-mixin)
 
 ## mount
 
-- **Arguments:**
+- **引数:**
 
   - `{Element | string} rootContainer`
   - `{boolean} isHydrate (optional)`
 
-- **Returns:**
+- **返り値:**
 
-  - The root component instance
+  - ルートコンポーネントのインスタンス
 
-- **Usage:**
+- **使用方法:**
 
-  Mounts a root component of the application instance on the provided DOM element.
+  渡された DOM 要素に対して、アプリケーションインスタンスのルートコンポーネントをマウントします。
 
-- **Example:**
+- **例:**
 
 ```html
 <body>
@@ -203,41 +203,41 @@ Apart from `el`, you should treat these arguments as read-only and never modify 
 import { createApp } from 'vue'
 
 const app = createApp({})
-// do some necessary preparations
+// 必要な事前処理を実行
 app.mount('#my-app')
 ```
 
-- **See also:**
+- **参照:**
   - [Lifecycle Diagram](../guide/instance.html#lifecycle-diagram)
 
 ## provide
 
-- **Arguments:**
+- **引数:**
 
   - `{string | Symbol} key`
   - `value`
 
-- **Returns:**
+- **返り値:**
 
-  - The application instance
+  - アプリケーションのインスタンス
 
-- **Usage:**
+- **使用方法:**
 
-  Sets a value that can be injected into all components within the application. Components should use `inject` to receive the provided values.
-   
-  From a `provide`/`inject` perspective, the application can be thought of as the root-level ancestor, with the root component as its only child.
+  アプリケーション内のすべてのコンポーネントがアクセスできる値を設定します。コンポーネントは provide されている値を受け取るためには、 `inject` を使用しなければなりません。
 
-  This method should not be confused with the [provide component option](options-composition.html#provide-inject) or the [provide function](composition-api.html#provide-inject) in the composition API. While those are also part of the same `provide`/`inject` mechanism, they are used to configure values provided by a component rather than an application. 
+  `provide`/`inject` の観点からはアプリケーションはルートレベルでの祖先であり、ルートコンポーネントはその子コンポーネントであると考えることができます。
 
-  Providing values via the application is especially useful when writing plugins, as plugins typically wouldn't be able to provide values using components. It is an alternative to using [globalProperties](application-config.html#globalproperties).
+  このメソッドは、 Composition API の [provide コンポーネントオプション](options-composition.html#provide-inject)や [provide 関数](composition-api.html#provide-inject)と混同してはいけません。これらも同じ provide/inject メカニズムの一部ですが、アプリケーションではなく、コンポーネントによって提供される値を設定するために利用されます。
+
+  プラグインはコンポーネントを使って値を提供することができないため、アプリケーションを通じて値を提供することは、プラグインを書くときに特に便利です。これは [globalProperties](application-config.html#globalproperties) を使用することの代替となる方法です。
 
   :::tip Note
-  The `provide` and `inject` bindings are NOT reactive. This is intentional. However, if you pass down an observed object, properties on that object do remain reactive.
+  `provide` および `inject` のバインディングはリアクティブではありません。これは意図的な挙動です。 しかし、リアクティブなオブジェクトを設定した場合は、プロパティはリアクティブなままとなります。
   :::
 
-- **Example:**
+- **例:**
 
-  Injecting a property into the root component, with a value provided by the application:
+  アプリケーションから提供された値を持つプロパティを、ルートコンポーネントに対して注入します:
 
 ```js
 import { createApp } from 'vue'
@@ -254,20 +254,20 @@ const app = createApp({
 app.provide('user', 'administrator')
 ```
 
-- **See also:**
+- **参照:**
   - [Provide / Inject](../guide/component-provide-inject.md)
 
 ## unmount
 
-- **Arguments:**
+- **引数:**
 
   - `{Element | string} rootContainer`
 
-- **Usage:**
+- **使用方法:**
 
-  Unmounts a root component of the application instance on the provided DOM element.
+  与えられた引数に合致した DOM 要素のアプリケーションインスタンスのルート要素をアンマウントします。
 
-- **Example:**
+- **例:**
 
 ```html
 <body>
@@ -279,30 +279,30 @@ app.provide('user', 'administrator')
 import { createApp } from 'vue'
 
 const app = createApp({})
-// do some necessary preparations
+// 必要な事前処理を実行
 app.mount('#my-app')
 
-// Application will be unmounted 5 seconds after mount
+// アプリケーションは5秒後にアンマウントされます
 setTimeout(() => app.unmount('#my-app'), 5000)
 ```
 
 ## use
 
-- **Arguments:**
+- **引数:**
 
   - `{Object | Function} plugin`
   - `...options (optional)`
 
-- **Returns:**
+- **返り値:**
 
-  - The application instance
+  - アプリケーションのインスタンス
 
-- **Usage:**
+- **使用方法:**
 
-  Install a Vue.js plugin. If the plugin is an Object, it must expose an `install` method. If it is a function itself, it will be treated as the install method.
-  
-  The install method will be called with the application as its first argument. Any `options` passed to `use` will be passed on in subsequent arguments.
+  Vue.js プラグインをインストールします。プラグインが Object の場合は `install` メソッドが必要となります。関数の場合は、それ自体をインストールメソッドとして適用します。
 
-  When this method is called on the same plugin multiple times, the plugin will be installed only once.
+  インストールメソッドはアプリケーションを第一引数に受け取って実行されます。`use` に渡されたあらゆるy `options` は、第二引数以降に渡されます。
 
-- **See also:** [Plugins](../guide/plugins.html)
+  同じプラグインに対してこのメソッドが複数回呼び出された場合、プラグインは一度だけインストールされます。
+
+- **参照:** [Plugins](../guide/plugins.html)
