@@ -44,7 +44,7 @@ app.component('my-component', {
 const MyComponent = app.component('my-component')
 ```
 
-- **こちらも:** [Components](../guide/component-basics.html)
+- **参照:** [Components](../guide/component-basics.html)
 
 ## config
 
@@ -61,7 +61,7 @@ const app = createApp({})
 app.config = {...}
 ```
 
-- **こちらも:** [Application Config](./application-config.html)
+- **参照:** [Application Config](./application-config.html)
 
 ## directive
 
@@ -158,7 +158,7 @@ el にて受け取った実際の DOM 要素の blueprint を表します。
 `el` を除き、これらはすべて読み取り専用であり、変更してはいけません。フック間にて情報を共有したい場合、要素の[データセット](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset)を通して情報を共有することを推奨します。
 :::
 
-- **こちらも:** [Custom Directives](../guide/custom-directive.html)
+- **参照:** [Custom Directives](../guide/custom-directive.html)
 
 ## mixin
 
@@ -174,7 +174,7 @@ el にて受け取った実際の DOM 要素の blueprint を表します。
 
   アプリケーションスコープ全体に mixin を適用します。一度登録された場合、該当のアプリケーション内の任意のコンポーネントのテンプレートで利用することができます。プラグイン作者がコンポーネントにカスタムの振る舞いを注入するために使用することができます。**アプリケーションコードでは推奨されません。**.
 
-- **こちらも:** [Global Mixin](../guide/mixins.html#global-mixin)
+- **参照:** [Global Mixin](../guide/mixins.html#global-mixin)
 
 ## mount
 
@@ -207,7 +207,7 @@ const app = createApp({})
 app.mount('#my-app')
 ```
 
-- **こちらも:**
+- **参照:**
   - [Lifecycle Diagram](../guide/instance.html#lifecycle-diagram)
 
 ## provide
@@ -254,7 +254,7 @@ const app = createApp({
 app.provide('user', 'administrator')
 ```
 
-- **こちらも:**
+- **参照:**
   - [Provide / Inject](../guide/component-provide-inject.md)
 
 ## unmount
@@ -305,4 +305,4 @@ setTimeout(() => app.unmount('#my-app'), 5000)
 
   同じプラグインに対してこのメソッドが複数回呼び出された場合、プラグインは一度だけインストールされます。
 
-- **こちらも:** [Plugins](../guide/plugins.html)
+- **参照:** [Plugins](../guide/plugins.html)
