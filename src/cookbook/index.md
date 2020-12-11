@@ -1,20 +1,19 @@
-# Introduction
+# イントロダクション
 
-## The Cookbook vs the Guide
+## クックブックとガイド
 
-How is the cookbook different from the guide? Why is this necessary?
+クックブックはガイドとどう違うのでしょうか？なぜそれが必要なのでしょうか？
 
-- **Greater Focus**: In the guide, we're essentially telling a story. Each section builds on and assumes knowledge from each previous section. In the cookbook, each recipe can and should stand on its own. This means recipes can focus on one specific aspect of Vue, rather than having to give a general overview.
+- **よりフォーカスする**: ガイドの中では、基本的にストーリーを語っています。それぞれのセクションは、前のセクションの知識を基にしています。クックブックにおいては、それぞれのレシピはそれ自体が独立しています。つまりレシピは、一般的なVueの概要を説明するのではなく、Vueの特定の側面に焦点を当てることができます。
 
-- **Greater Depth**: To avoid making the guide too long, we try to include only the simplest possible examples to help you understand each feature. Then we move on. In the cookbook, we can include more complex examples, combining features in interesting ways. Each recipe can also be as long and detailed as it needs to be, in order to fully explore its niche.
+- **より深くまで**: ガイドは長くなりすぎず、それぞれの機能を理解していただくために、可能な限り簡単な例だけを掲載するようにしています。そして次に進みます。クックブックでは、興味深い方法で機能を組み合わせた、より複雑な例を含めることができます。それぞれレシピはまた、それらの例を完全に探求するために、必要なだけ長くて詳細なものにすることができます。
 
-- **Teaching JavaScript**: In the guide, we assume at least intermediate familiarity with ES5 JavaScript. For example, we won't explain how `Array.prototype.filter` works in a computed property that filters a list. In the cookbook however, essential JavaScript features (including ES6/2015+) can be explored and explained in the context of how they help us build better Vue applications.
+- **JavaScriptを教える**: ガイドでは、少なくともES5のJavaScriptの中級程度の知識があることを前提としています。例えば、 `Array.prototype.filter` がリストをフィルタリングする計算プロパティでどのように動作するかは説明しません。しかし、クックブックでは、必須の JavaScript 機能 (ES6/2015+ を含む) を探索し、より良い Vue アプリケーションの構築にどのように役立つのかという文脈で説明します。
 
-- **Exploring the Ecosystem**: For advanced features, we assume some ecosystem knowledge. For example, if you want to use single-file components in Webpack, we don't explain how to configure the non-Vue parts of the Webpack config. In the cookbook, we have the space to explore these ecosystem libraries in more depth - at least to the extent that is universally useful for Vue developers.
+- **エコシステムを探求する**: 高度な機能については、ある程度のエコシステムの知識を前提としています。たとえば、Webpack でシングルファイルコンポーネントを使用したい場合、Webpack の confing についての Vue 以外の部分を設定する方法については説明しません。クックブックでは、少なくともVue開発者にとって普遍的に有用な範囲でこれらのエコシステムライブラリをより深く探求するスペースがあります。
 
-::: tip
-With all these differences, please note that the cookbook is still _not_ a step-by-step manual. For most of its content, you are expected to have a basic understanding of concepts like HTML, CSS, JavaScript, npm/yarn, etc.
-:::
+::: ヒント
+これらの違いはあるものの、クックブックはまだステップバイステップのマニュアルではないことに注意してください。その内容のほとんどは、HTML、CSS、JavaScript、npm/yarnなどの概念を基本的に理解していることが求められます。
 
 ## Cookbook Contributions
 
