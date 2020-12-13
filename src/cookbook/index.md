@@ -15,62 +15,62 @@
 ::: ヒント
 これらの違いはあるものの、クックブックはまだステップバイステップのマニュアルではないことに注意してください。その内容のほとんどは、HTML、CSS、JavaScript、npm/yarnなどの概念を基本的に理解していることが求められます。
 
-## Cookbook Contributions
+## クックブックへの貢献
 
-### What we're looking for
+### 私たちが求めているもの
 
-The Cookbook gives developers examples to work off of that both cover common or interesting use cases, and also progressively explain more complex detail. Our goal is to move beyond a simple introductory example, and demonstrate concepts that are more widely applicable, as well as some caveats to the approach.
+このクックブックでは、一般的なユースケースや興味深いユースケースを網羅した開発者向けのサンプルを提供したり、より複雑な細かい部分を段階的にに説明していきます。私たちの目標は、単純な入門的な例を超えて、より広く適用可能な概念を示すことと、アプローチの注意点を示すことです。
 
-If you're interested in contributing, please initiate collaboration by filing an issue under the tag **cookbook idea** with your concept so that we can help guide you to a successful pull request. After your idea has been approved, please follow the template below as much as possible. Some sections are required, and some are optional. Following the numerical order is strongly suggested, but not required.
+貢献に興味のある方は、 **cookbook idea** というタグの下にあなたのコンセプトを書いてissueを提出して、コラボレーションを開始してください。あなたのアイデアが承認されたら、以下のテンプレートにできるだけ従ってください。いくつかのセクションは必須であり、いくつかのセクションは任意です。数字の順番に従うことを強くお勧めしますが、必須ではありません。
 
-Recipes should generally:
+レシピは一般的に:
 
-- Solve a specific, common problem
-- Start with the simplest possible example
-- Introduce complexities one at a time
-- Link to other docs, rather than re-explaining concepts
-- Describe the problem, rather than assuming familiarity
-- Explain the process, rather than just the end result
-- Explain the pros and cons of your strategy, including when it is and isn't appropriate
-- Mention alternative solutions, if relevant, but leave in-depth explorations to a separate recipe
+- 特定の一般的な問題を解決しましょう。
+- できるだけシンプルな例から始めましょう。
+- 複雑なことは1つずつ紹介しましょう。
+- 概念を再説明するのではなく、他のドキュメントにリンクしましょう。
+- その問題に精通していると前提とするのではなく、問題点を説明しましょう。
+- 最終的な結果だけではなく、プロセスを説明しましょう。
+- 適切な場合とそうでない場合を含めて、戦略の長所と短所を説明しましょう。
+- 関連性がある場合は、代替案に言及しますが、詳細な調査は別のレシピに任せましょう。
 
-We request that you follow the template below. We understand, however, that there are times when you may necessarily need to deviate for clarity or flow. Either way, all recipes should at some point discuss the nuance of the choice made using this pattern, preferably in the form of the alternative patterns section.
+下記のテンプレートに従ってください。しかし、説明の分かりやすさや流れのために、どうしてもテンプレートから逸脱する必要がある場合もあると思います。いずれにしても、すべてのレシピでは、このパターンを使った選択のニュアンスを、できれば代替パターンのセクションで説明する必要があります。
 
-### Base Example <Badge text="required" type="error" />
+### 基本的な例 <Badge text="必須" type="error" />
 
-1.  Articulate the problem in a sentence or two.
-2.  Explain the simplest possible solution in a sentence or two.
-3.  Show a small code sample.
-4.  Explain what this accomplishes in a sentence.
+1.  問題を1文か2文で明確にしましょう。
+2.  最も簡単な問題に対しての解答を1文か2文で説明しましょう。
+3.  小さなコードサンプルを表示しましょう。
+4.  これが何を達成しているのかを文章で説明しましょう。
 
-### Details about the Value <Badge text="required" type="error" />
+### バリューの詳細 <Badge text="必須" type="error" />
 
-1.  Address common questions that one might have while looking at the example. (Blockquotes are great for this)
-2.  Show examples of common missteps and how they can be avoided.
-3.  Show very simple code samples of good and bad patterns.
-4.  Discuss why this may be a compelling pattern. Links for reference are not required but encouraged.
+1.  例を見ている間に持っているかもしれない一般的な質問に対処しましょう。(ブロッククオートはこれに最適です)
+2.  よくある間違いの例を示し、どのように避けることができるかを示しましょう。
+3.  良いパターンと悪いパターンの非常にシンプルなコードサンプルを表示しましょう。
+4.  なぜこれが説得力のあるパターンなのか議論してください。参照用のリンクは必須ではありませんが、それをつけることを推奨します。
 
-### Real-World Example <Badge text="required" type="error" />
+### 実際の例 <Badge text="必須" type="error" />
 
-Demonstrate the code that would power a common or interesting use case, either by:
+一般的なユースケースや興味深いユースケースを動かすコードを、以下のいずれかの方法で実行してください。
 
-1.  Walking through a few terse examples of setup, or
-2.  Embedding a codepen/jsfiddle example
+1.  セットアップの簡潔な例をいくつか紹介する。または
+2.  codepen / jsfiddleの埋め込みの例
 
-If you choose to do the latter, you should still talk through what it is and does.
+後者を選択した場合でも、それが何であり、何をするのかをディスカッションする必要があります。
 
-### Additional Context <Badge text="optional" />
+### 追加の文脈 <Badge text="任意" />
 
-It's extremely helpful to write a bit about this pattern, where else it would apply, why it works well, and run through a bit of code as you do so or give people further reading materials here.
+このパターンについて、他のどこに適用されるのか、なぜそれがうまく機能するのか、そして、あなたがそうするように少しのコードを実行したり、ここでさらに読み物を人々に与えたりすることについて少し書くのは非常に有用です。
 
-### When To Avoid This Pattern <Badge text="optional" />
+### このパターンを回避するケース <Badge text="任意" />
 
-This section is not required, but heavily recommended. It won't make sense to write it for something very simple such as toggling classes based on state change, but for more advanced patterns like mixins it's vital. The answer to most questions about development is ["It depends!"](https://codepen.io/rachsmith/pen/YweZbG), this section embraces that. Here, we'll take an honest look at when the pattern is useful and when it should be avoided, or when something else makes more sense.
+このセクションは必須ではありませんが、書くことを強くお勧めします。 状態変化に応じてクラスを切り替えるような非常に単純なものには意味がありませんが、mixinsのようなより高度なパターンには不可欠です。開発に関するほとんどの質問に対する答えは ["It depends!"]](https://codepen.io/rachsmith/pen/YweZbG) であり、このセクションではそれを受け入れます。ここでは、そのパターンがどのような時に役立つのか、避けるべき時はどのような時なのか、他の何かがより意味を持つ時はどのような時なのかを率直に見ていきましょう。
 
-### Alternative Patterns <Badge text="required with avoidance section" type="warning" />
+### 代替パターン <Badge text="必須 with avoidance section" type="warning" />
 
-This section is required when you've provided the section above about avoidance. It's important to explore other methods so that people told that something is an antipattern in certain situations are not left wondering. In doing so, consider that the web is a big tent and that many people have different codebase structures and are solving different goals. Is the app large or small? Are they integrating Vue into an existing project, or are they building from scratch? Are their users only trying to achieve one goal or many? Is there a lot of asynchronous data? All of these concerns will impact alternative implementations. A good cookbook recipe gives developers this context.
+このセクションは、上記の回避についてのセクションを提供した場合に必要となります。特定の状況で何かがアンチパターンだと言われても、疑問を残さないように、他の方法を模索することが重要です。その際には、ウェブは大きなテントであり、多くの人が異なるコードベースの構造を持ち、異なる目標を解決していることを考慮してください。アプリの規模は大きいのか小さいのか？既存のプロジェクトに Vue を統合しているのか、それともゼロから構築しているのか。ユーザーは1つの目標だけを達成しようとしているのか、それとも多くの目標を達成しようとしているのか？非同期データが多いのか？これらの懸念事項はすべて、代替の実装に影響を与えます。良いクックブックのレシピは、開発者にこのような状況を提供します。
 
-## Thank you
+## 謝辞
 
-It takes time to contribute to documentation, and if you spend the time to submit a PR to this section of our docs, you do so with our gratitude.
+ドキュメンテーションに貢献するには時間がかかりますが、この部分に時間をかけてプルリクエストを提出してくれると、感謝の気持ちを込めてやってくれます。
