@@ -52,7 +52,7 @@ app.config.errorHandler = (err, vm, info) => {
 
 ```js
 app.config.warnHandler = function(msg, vm, trace) {
-  // `trace` は、コンポーネントのヒエラルキートレースです。
+  // `trace` は、コンポーネント階層のトレースです。
 }
 ```
 
