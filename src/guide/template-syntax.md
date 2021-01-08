@@ -69,8 +69,11 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 これまで、テンプレートに単純なキーをバインディングしてきました。実際には Vue.js は全てのデータバインディング内部で JavaScript 式を完全にサポートします:
 
 ```html
-{{ number + 1 }} {{ ok ? 'YES' : 'NO' }} {{ message.split('').reverse().join('')
-}}
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
 
 <div v-bind:id="'list-' + id"></div>
 ```
