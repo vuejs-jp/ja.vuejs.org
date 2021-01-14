@@ -189,7 +189,7 @@ Vue.js には他にもかなりの数のディレクティブがあり、それ�
 ```html
 <div id="list-rendering">
   <ol>
-    <li v-for="todo in todos">
+    <li v-for="todo in todos" v-bind:key="todo.text">
       {{ todo.text }}
     </li>
   </ol>
