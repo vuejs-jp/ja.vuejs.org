@@ -76,7 +76,7 @@ vue upgrade --next
 npm の場合:
 
 ```bash
-$ npm init vite-app <プロジェクト名>
+$ npm init @vitejs/app <プロジェクト名>
 $ cd <プロジェクト名>
 $ npm install
 $ npm run dev
@@ -85,8 +85,8 @@ $ npm run dev
 または Yarn の場合:
 
 ```bash
-$ yarn create vite-app <project-name>
-$ cd <project-name>
+$ yarn create @vitejs/app <プロジェクト名>
+$ cd <プロジェクト名>
 $ yarn
 $ yarn dev
 ```
