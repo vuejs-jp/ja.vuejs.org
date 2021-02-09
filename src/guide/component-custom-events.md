@@ -141,8 +141,6 @@ app.component('user-name', {
 
 ## `v-model` 修飾子の処理
 
-When we were learning about form input bindings, we saw that `v-model` has [built-in modifiers](/guide/forms.html#modifiers) - `.trim`, `.number` and `.lazy`. In some cases, however, you might also want to add your own custom modifiers.
-
 フォーム入力バインディングについて学習していたときに、 `v-model`に [組み込み修飾子](/guide/forms.html#modifiers) -`.trim` 、 `.number` 、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
 
 `v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize`を作成してみましょう。
