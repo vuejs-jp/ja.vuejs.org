@@ -42,9 +42,9 @@ export default {
 import { toRefs } from 'vue'
 
 setup(props) {
-	const { title } = toRefs(props)
+  const { title } = toRefs(props)
 
-	console.log(title.value)
+  console.log(title.value)
 }
 ```
 
