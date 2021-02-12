@@ -110,7 +110,6 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
 // tacos
 ```
 
@@ -131,7 +130,6 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
 // tacos
 ```
 
@@ -156,7 +154,6 @@ const handler = {
 const proxy = new Proxy(dinner, handler)
 console.log(proxy.meal)
 
-// intercepted!
 // tacos
 ```
 
