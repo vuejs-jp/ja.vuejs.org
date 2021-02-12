@@ -52,7 +52,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </todo-button>
 ```
 
-もしも `<todo-button>` のテンプレートが `<slot>` 要素を含ま **ない** 場合、開始タグと終了タグの間にある任意のコンテンツは破棄されます。
+もしも `<todo-button>` のテンプレートが `<slot>` **要素を含まない** 場合、開始タグと終了タグの間にある任意のコンテンツは破棄されます。
 
 ```html
 <!-- todo-button コンポーネントのテンプレート -->
