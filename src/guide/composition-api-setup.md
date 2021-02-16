@@ -31,7 +31,7 @@ export default {
 ```
 
 :::warning
-しかし、`props` はリアクティブなので、props のリアクティブを削除してしまうため、**ES6 の分割代入を使うことができません。**
+しかし、`props` はリアクティブなので、**ES6 の分割代入を使うことができません。** props のリアクティブを削除してしまうからです。
 :::
 
 もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって安全に分割代入を行うことができます。
