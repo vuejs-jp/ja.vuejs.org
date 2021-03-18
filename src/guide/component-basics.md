@@ -233,7 +233,7 @@ app.component('blog-post', {
 そして子コンポーネントはビルトインの [**`$emit`** メソッド](../api/instance-methods.html#emit)にイベントの名前を渡して呼び出すことで、イベントを送出することができます:
 
 ```html
-<button @click="$emit('enlarge-text')">
+<button @click="$emit('enlargeText')">
   Enlarge text
 </button>
 ```
@@ -252,7 +252,7 @@ app.component('blog-post', {
 ```js
 app.component('blog-post', {
   props: ['title'],
-  emits: ['enlarge-text']
+  emits: ['enlargeText']
 })
 ```
 
@@ -263,7 +263,7 @@ app.component('blog-post', {
 イベントを特定の値と一緒に送出すると便利な場合があります。例えば、テキストをどれだけ大きく表示するかを `<blog-post>` コンポーネントの責務とさせたいかもしれません。そのような場合、 `$emit` の第二引数を使ってこの値を渡すことができます:
 
 ```html
-<button @click="$emit('enlarge-text', 0.1)">
+<button @click="$emit('enlargeText', 0.1)">
   Enlarge text
 </button>
 ```

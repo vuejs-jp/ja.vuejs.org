@@ -27,7 +27,7 @@ this.$emit('myEvent')
 
 ```js
 app.component('custom-form', {
-  emits: ['in-focus', 'submit']
+  emits: ['inFocus', 'submit']
 })
 ```
 
