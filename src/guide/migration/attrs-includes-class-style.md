@@ -1,23 +1,24 @@
 ---
-title: $attrs includes class & style
+title: class と style を含む $attrs
 badges:
   - breaking
 ---
 
-# `$attrs` includes `class` & `style` <MigrationBadges :badges="$frontmatter.badges" />
+# `class` と `style` を含む `$attrs` <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-`$attrs` now contains _all_ attributes passed to a component, including `class` and `style`.
+`$attrs` は、 `class` と `style` を含む、コンポーネントに渡されるすべての属性が含まれるようになりました。
 
-## 2.x Behavior
+## 2.x の挙動
 
-`class` and `style` attributes get some special handling in the Vue 2 virtual DOM implementation. For that reason, they are _not_ included in `$attrs`, while all other attributes are.
+`class` と `style` 属性は、Vue 2 の仮想 DOM 実装でいくつかの特別な処理が行われます。そのため、他のすべての属性は含まれていますが、これらは `$attrs` に含まれていません。
 
-A side effect of this manifests when using `inheritAttrs: false`:
+この副作用は、 `inheritAttrs: false` を使用した場合に明らかになります:
 
-- Attributes in `$attrs` are no longer automatically added to the root element, leaving it to the developer to decide where to add them.
+- `$attrs` に含まれる属性は、自動的にルート要素に追加されなくなり、どこに追加するかは開発者の判断に委ねられます。
 - But `class` and `style`, not being part of `$attrs`, will still be applied to the component's root element:
+- しかし、 `class` と `style` は、 `$attrs` の一部ではないので、コンポーネントのルート要素に適用されます:
 
 ```vue
 <template>
@@ -32,13 +33,13 @@ export default {
 </script>
 ```
 
-when used like this:
+このような使い方をする場合:
 
 ```html
 <my-component id="my-id" class="my-class"></my-component>
 ```
 
-...will generate this HTML:
+...以下のHTMLが生成されます:
 
 ```html
 <label class="my-class">
@@ -46,9 +47,9 @@ when used like this:
 </label>
 ```
 
-## 3.x Behavior
+## 3.x の挙動
 
-`$attrs` contains _all_ attributes, which makes it easier to apply all of them to a different element. The example from above now generates the following HTML:
+`$attrs` には、すべての属性が含まれているので、すべての属性を別の要素に適用することが簡単にできます。先ほどの例は、次のHTMLが生成されます:
 
 ```html
 <label>
@@ -56,14 +57,14 @@ when used like this:
 </label>
 ```
 
-## Migration Strategy
+## 移行方針
 
-In components that use `inheritAttrs: false`, make sure that styling still works as intended. If you previously relied on the special behavior of `class` and `style`, some visuals might be broken as these attributes might now be applied to another element.
+`inheritAttrs: false` を使用しているコンポーネントでは、スタイルの適用が意図したとおりに動作することを確認してください。もし以前に `class` や `style` の特別な動作に依存していた場合、これらの属性が別の要素に適用されている可能性があるため、一部の見た目が崩れている可能性があります。
 
-## See also
+## 関連情報
 
-- [Relevant RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
-- [Migration guide - `$listeners` removed](./listeners-removed.md)
-- [Migration guide - New Emits Option](./emits-option.md)
-- [Migration guide - `.native` modifier removed](./v-on-native-modifier-removed.md)
-- [Migration guide - Changes in the Render Functions API](./render-function-api.md)
+- [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
+- [移行ガイド - `$listeners` の削除](./listeners-removed.md)
+- [移行ガイド - 新しい Emits のオプション](./emits-option.md)
+- [移行ガイド - `.native` 修飾子の削除](./v-on-native-modifier-removed.md)
+- [移行ガイド - Render 関数 API の変更](./render-function-api.md)
