@@ -78,7 +78,7 @@ export default {
 <my-button v-on:click="handleClick"></my-button>
 ```
 
-これは_2回_引き起こされます。
+これは _2回_ 引き起こされます。
 
 - `$emit()` から一度。
 - ルート要素に適用されたネイティブイベントリスナから一度。
