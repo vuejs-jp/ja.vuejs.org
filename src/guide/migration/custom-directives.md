@@ -7,11 +7,7 @@ badges:
 
 ## 概要
 
-変更点の概要は次のとおりです。
-
-- API は、コンポーネントのライフサイクルとの整合性を高めるために名前が変更されました
-
-詳細については、以下をお読みください。
+コンポーネントのライフサイクルに合わせて、ディレクティブのフック関数の名称が変更されました。
 
 ## 2.x の文法
 
@@ -44,6 +40,7 @@ Vue.directive('highlight', {
 
 ただし、Vue 3 では、カスタムディレクティブ用のよりまとまりのある API を作成しました。Vue 2 では、似たようなイベントにフックしているにもかかわらず、コンポーネントのライフサイクルメソッドとは大きく異なります。これらを次のように統合しました。
 
+- **created** - 追加されました! これは、要素の属性やイベントリスナーが適用される前に呼び出されます。
 - bind → **beforeMount**
 - inserted → **mounted**
 - **beforeUpdate**: 追加されました! これは、コンポーネントのライフサイクルフックのように、要素自体が更新される前に呼び出されます。
@@ -58,7 +55,7 @@ Vue.directive('highlight', {
 const MyDirective = {
   beforeMount(el, binding, vnode, prevVnode) {},
   mounted() {},
-  beforeUpdate() {},
+  beforeUpdate() {}, // 追加
   updated() {},
   beforeUnmount() {}, // 追加
   unmounted() {}
@@ -104,5 +101,5 @@ mounted(el, binding, vnode) {
 ```
 
 :::warning
-[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がスローされます。
+[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がログ出力されます。
 :::
