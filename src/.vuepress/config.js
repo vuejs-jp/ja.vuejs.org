@@ -114,6 +114,7 @@ const sidebar = {
         'migration/array-refs',
         'migration/async-components',
         'migration/attribute-coercion',
+        'migration/children',
         'migration/custom-directives',
         'migration/custom-elements-interop',
         'migration/data-option',
