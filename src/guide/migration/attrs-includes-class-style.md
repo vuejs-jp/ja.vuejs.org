@@ -17,7 +17,6 @@ badges:
 この副作用は、 `inheritAttrs: false` を使用した場合に明らかになります:
 
 - `$attrs` に含まれる属性は、自動的にルート要素に追加されなくなり、どこに追加するかは開発者の判断に委ねられます。
-- But `class` and `style`, not being part of `$attrs`, will still be applied to the component's root element:
 - しかし、 `class` と `style` は、 `$attrs` の一部ではないので、コンポーネントのルート要素に適用されます:
 
 ```vue
