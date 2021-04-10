@@ -58,6 +58,25 @@ export default {
 
 ## 移行の戦略
 
-既存のイベントハブは、イベントエミッタインタフェースを実装した外部ライブラリ、例えば [mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) を使用して置き換えることができます。
+Vue 3 では、これらの API を使用して、コンポーネント内からコンポーネント自身が発行したイベントをリッスンすることはできなくなりました。そのユースケースのための移行パスはありません。
 
-これらのメソッドは互換性のあるビルドでもサポートされています。
+ただし、イベントハブパターンは、イベントエミッタインタフェースを実装した外部ライブラリを使用することで置き換えることができます。例えば、[mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) などです。
+
+例:
+
+```js
+// eventHub.js
+import emitter from 'tiny-emitter/instance'
+
+export default {
+  $on: (...args) => emitter.on(...args),
+  $once: (...args) => emitter.once(...args),
+  $off: (...args) => emitter.off(...args),
+  $emit: (...args) => emitter.emit(...args),
+}
+```
+
+これは Vue 2 と同じようなイベントエミッタ API を提供します。
+
+These methods may also be supported in a future compatibility build of Vue 3.
+これらのメソッドは、Vue 3 の将来の互換ビルドでもサポートされる可能性があります。
