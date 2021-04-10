@@ -58,6 +58,6 @@ export default {
 
 ## 移行の戦略
 
-既存のイベントハブは、イベントエミッタインタフェースを実装した外部ライブラリ、例えば [mitt](https://github.com/developit/mitt) を使用して置き換えることができます。
+既存のイベントハブは、イベントエミッタインタフェースを実装した外部ライブラリ、例えば [mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) を使用して置き換えることができます。
 
 これらのメソッドは互換性のあるビルドでもサポートされています。
