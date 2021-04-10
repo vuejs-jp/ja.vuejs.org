@@ -118,6 +118,7 @@ const sidebar = {
         'migration/custom-directives',
         'migration/custom-elements-interop',
         'migration/data-option',
+        'migration/emits-option',
         'migration/events-api',
         'migration/filters',
         'migration/fragments',
