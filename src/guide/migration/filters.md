@@ -77,15 +77,15 @@ badges:
 
 もしグローバルに登録されてからアプリ全体で使用されているフィルタを使用している場合、それを個々のコンポーネントで算出プロパティやメソッドに置き換えるのは不便でしょう。
 
-その代わり、 `app.globalProperties` によって、すべてのコンポーネントがグローバルフィルタを利用できるようにすることができます:
+その代わり、 [globalProperties](../../api/application-config.html#globalproperties) によって、すべてのコンポーネントがグローバルフィルタを利用できるようにすることができます:
 
 ```javascript
 // main.js
 const app = createApp(App)
 
 app.config.globalProperties.$filters = {
-  accountInUSD(num) {
-    return '$' + num
+  currencyUSD(value) {
+    return '$' + value
   }
 }
 ```
@@ -95,7 +95,7 @@ app.config.globalProperties.$filters = {
 ```html
 <template>
   <h1>Bank Account Balance</h1>
-  <p>{{ $filters.accountInUSD(accountInUSD) }}</p>
+  <p>{{ $filters.currencyUSD(accountBalance) }}</p>
 </template>
 ```
 
