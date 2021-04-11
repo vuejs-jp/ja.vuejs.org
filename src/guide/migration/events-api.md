@@ -60,7 +60,7 @@ export default {
 
 Vue 3 では、これらの API を使用して、コンポーネント内からコンポーネント自身が発行したイベントを購読することはできなくなりました。そのユースケースのための移行パスはありません。
 
-ただし、イベントハブパターンは、イベントエミッタインタフェースを実装した外部ライブラリを使用することで置き換えることができます。例えば、[mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) などです。
+ただし、EventHub (イベントハブ) パターンは、Event Emitter (イベントエミッタ) インタフェースを実装した外部ライブラリを使用することで置き換えることができます。例えば、[mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) などです。
 
 例:
 
