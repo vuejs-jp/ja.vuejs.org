@@ -76,7 +76,7 @@ export default {
 }
 ```
 
-これは Vue 2 と同じようなイベントエミッタ API を提供します。
+これは Vue 2 と同じような Event Emitter API を提供します。
 
 These methods may also be supported in a future compatibility build of Vue 3.
 これらのメソッドは、Vue 3 の将来の互換ビルドでもサポートされる可能性があります。
