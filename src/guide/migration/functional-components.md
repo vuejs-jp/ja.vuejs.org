@@ -44,8 +44,8 @@ export default {
 
 または、単一ファイルコンポーネントの `<template>` を好む人向けに:
 
-```js
-// Vue 2 での <template> を使用した関数型コンポーネントの例
+```vue
+<!-- Vue 2 での <template> を使用した関数型コンポーネントの例 -->
 <template functional>
   <component
     :is="`h${props.level}`"
@@ -91,7 +91,7 @@ export default DynamicHeading
 
 先ほどの `<dynamic-heading>` の例を使うと、次のようになります。
 
-```js{1,3,4}
+```vue{1,3,4}
 <template>
   <component
     v-bind:is="`h${$props.level}`"
