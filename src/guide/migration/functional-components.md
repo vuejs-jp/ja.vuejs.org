@@ -44,8 +44,8 @@ export default {
 
 または、単一ファイルコンポーネントの `<template>` を好む人向けに:
 
-```js
-// Vue 2 での <template> を使用した関数型コンポーネントの例
+```vue
+<!-- Vue 2 での <template> を使用した関数型コンポーネントの例 -->
 <template functional>
   <component
     :is="`h${props.level}`"
@@ -87,14 +87,14 @@ export default DynamicHeading
 
 ### 単一ファイルコンポーネント (SFC)
 
-3.x では、ステートフルコンポーネントと関数型コンポーネントのパフォーマンスの差は大幅に減少し、ほとんどのユースケースでは重要ではないでしょう。その結果、単一ファイルコンポーネントで `functional` を使用している開発者の移行方法は、その属性を削除することです。 追加の作業は必要ありません。
+3.x では、ステートフルコンポーネントと関数型コンポーネントのパフォーマンスの差は大幅に減少し、ほとんどのユースケースでは重要ではないでしょう。その結果、単一ファイルコンポーネントで `functional` を使用している開発者の移行方法は、この属性を削除して、 `props` を `$props` に、 `attrs` を `$attrs` にすべての参照を変更することになります。
 
 先ほどの `<dynamic-heading>` の例を使うと、次のようになります。
 
-```js{1}
+```vue{1,3,4}
 <template>
   <component
-    v-bind:is="`h${props.level}`"
+    v-bind:is="`h${$props.level}`"
     v-bind="$attrs"
   />
 </template>
