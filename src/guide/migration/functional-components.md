@@ -91,7 +91,7 @@ export default DynamicHeading
 
 先ほどの `<dynamic-heading>` の例を使うと、次のようになります。
 
-```js{1}
+```js{1,3,4}
 <template>
   <component
     v-bind:is="`h${$props.level}`"
