@@ -34,7 +34,7 @@ Vue 2.x では子コンポーネントの内部のコンテンツを分散コン
 
 このような場合の最も簡単な回避策は、`<script>` を代替として使うことです:
 
-```js
+```html
 <script type="text/html" id="my-comp-template">
   <div>{{ hello }}</div>
 </script>
