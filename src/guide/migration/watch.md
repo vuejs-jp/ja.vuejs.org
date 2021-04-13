@@ -1,18 +1,18 @@
 ---
-title: Watch on Arrays
+title: 配列の監視
 badges:
   - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-- **BREAKING**: When watching an array, the callback will only trigger when the array is replaced. If you need to trigger on mutation, the `deep` option must be specified.
+- **破壊的変更**: 配列を監視している場合、コールバックは配列が置き換えられたときにのみ実行します。配列の変更で実行する必要がある場合は、 `deep` オプションを指定する必要があります。
 
-## 3.x Syntax
+## 3.x の構文
 
-When using [the `watch` option](/api/options-data.html#watch) to watch an array, the callback will only trigger when the array is replaced. In other words, the watch callback will no longer be triggered on array mutation. To trigger on mutation, the `deep` option must be specified.
+[`watch` オプション](/api/options-data.html#watch) を使って配列を監視する場合、コールバックは配列が置き換えられたときにのみ実行します。言い換えれば、 watch コールバックは配列の変更では実行されなくなります。配列の変更で実行するには、 `deep` オプションを指定する必要があります。
 
 ```js
 watch: {
@@ -25,6 +25,6 @@ watch: {
 }
 ```
 
-## Migration Strategy
+## 移行の戦略
 
-If you rely on watching array mutations, add the `deep` property to ensure that your callback is triggered correctly.
+配列の変更を監視することに依存している場合は、 `deep` プロパティを追加して、コールバックが正しく実行されるようにします。
