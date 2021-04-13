@@ -5,19 +5,19 @@ badges:
 
 # Suspense <MigrationBadges :badges="$frontmatter.badges" />
 
-:::warning Experimental
-Suspense is an experimental new feature and the API could change at any time. It is documented here so that the community can provide feedback on the current implementation.
+:::warning 実験的
+Suspense は実験的な新機能であり、 API はいつでも変更される可能性があります。コミュニティが現在の実装についてフィードバックできるように、ここにドキュメント化されています。
 
-It should not be used in production applications.
+本番のアプリケーションでは使用しないでください。
 :::
 
-## Introduction
+## イントロダクション
 
-It is common for components to need to perform some kind of asynchronous request before they can be rendered properly. Components often handle this locally and in many cases that is a perfectly good approach.
+コンポーネントが正しくレンダリングされる前に、なにか非同期のリクエストを実行する必要があるのはよくあることです。コンポーネントはローカルでよくこの処理をしますが、多くの場合にこれは優れたアプローチです。
 
-The `<suspense>` component provides an alternative, allowing for the waiting to be handled further up the component tree rather than in each individual component.
+`<suspense>` コンポーネントは、個々のコンポーネントではなくコンポーネントツリーのさらに上で待機処理できるように、代替手段を提供します。
 
-A common use case involves [async components](/guide/component-dynamic-async.html#async-components):
+よくある使用例は、 [非同期コンポーネント](/guide/component-dynamic-async.html#async-components) があります:
 
 ```vue{2-4,6,17}
 <template>
@@ -42,22 +42,22 @@ export default {
 </script>
 ```
 
-The `<suspense>` component has two slots. Both slots only allow for one immediate child node. The node in the `default` slot is shown if possible. If not, the node in the `fallback` slot will be shown instead.
+`<suspense>` コンポーネントには2つのスロットがあります。どちらのスロットにも1つの直系の子要素しか入れられません。可能であれば、 `default` スロットの要素が表示されます。そうでない場合は、代わりに `fallback` スロットの要素が表示されます。
 
-Importantly, the async component doesn't need to be the immediate child of the `<suspense>`. It can be at any depth within the component tree and doesn't need to appear in the same template as the `<suspense>` itself. The content is only considered resolved once all descendants are ready.
+重要なのは、非同期コンポーネントは `<suspense>` の直系の子要素である必要はないということです。コンポーネントツリー内のどの深さにあってもよく、`<suspense>` 自身と同じテンプレート内にある必要はありません。コンテンツは、すべての子孫要素が準備できたときに初めて解決したとみなされます。
 
-The other way to trigger the `fallback` slot is for a descendant component to return a promise from its `setup` function. This is typically implemented using `async` rather than explicitly returning a promise:
+`fallback` スロットを発火するもう一つの方法は、子孫コンポーネントがその `setup` 関数から Promise を返すことです。これは、明示的に Promise を返すのではなく、通常は `async` を使用して実装されます:
 
 ```js{2}
 export default {
   async setup() {
-    // Be very careful using `await` inside `setup` as
-    // most Composition API functions will only work
-    // prior to the first `await`
+    // ほとんどの Composition API 関数は、
+    // 最初の `await` より前にしか動かないため、
+    // `setup` 内で `await` を使用するには十分注意してください。
     const data = await loadData()
 
-    // This is implicitly wrapped in a promise because
-    // the function is `async`
+    // この関数は `async` なので、
+    // 暗黙的に Promise でラップされています。
     return {
       // ...
     }
@@ -65,25 +65,25 @@ export default {
 }
 ```
 
-## Child Updates
+## 子要素の更新
 
-Once a `<suspense>` has resolved the contents of its `default` slot, it can only be triggered again if the `default` root node is replaced. New components nested deeper in the tree are not sufficient to move the `<suspense>` back into a pending state.
+一度 `<suspense>` がその `default` スロットのコンテンツを解決すると、 `default` ルート要素が置き換えられた場合にのみ、再び発火されます。
 
-If the root node does change it will trigger the `pending` event. However, by default, it won't update the DOM to show the `fallback` content. Instead, it will continue to show the old DOM until the new components are ready. This can be controlled using the `timeout` prop. This value, expressed in milliseconds, tells the `<suspense>` component how long to wait before showing the `fallback`. A value of `0` will show it immediately when the `<suspense>` enters the pending state.
+ルート要素が変更されると `pending` イベントが発火します。しかし、デフォルトでは DOM を更新して `fallback` コンテンツを表示することはありません。代わりに、新しいコンポーネントの準備が整うまで、古い DOM を表示し続けます。これは `timeout` プロパティを使って制御できます。このミリ秒単位で表される値は `<suspense>` コンポーネントに `fallback` を表示するまでの待ち時間を伝えます。 値を `0` にすると、 `<suspense>` が pending 状態になったときにすぐ表示されます。
 
-## Events
+## イベント
 
-In addition to the `pending` event, the `<suspense>` component also has `resolve` and `fallback` events. The `resolve` event is emitted when new content has finished resolving in the `default` slot. The `fallback` event is fired when the contents of the `fallback` slot are shown.
+`<suspense>` コンポーネントは、 `pending` イベントに加えて、 `resolve` イベントと `fallback` イベントも持っています。 `resolve` イベントは、新しいコンテンツが `default` スロットで解決を終えたときに発行されます。 `fallback` イベントは、 `fallback` スロットの内容が表示されたときに発火します。
 
-The events could be used, for example, to show a loading indicator in front of the old DOM while new components are loading.
+このイベントは、例えば、新しいコンポーネントを読み込んでいる間、古い DOM の前にローディングインジケータを表示するのに使用することができます。
 
-## Combining with Other Components
+## 他のコンポーネントとの組み合わせ
 
-It is common to want to use `<suspense>` in combination with the [`<transition>`](/api/built-in-components.html#transition) and [`<keep-alive>`](/api/built-in-components.html#keep-alive) components. The nesting order of these components is important to get them all working correctly.
+`<suspense>` は [`<transition>`](/api/built-in-components.html#transition) や [`<keep-alive>`](/api/built-in-components.html#keep-alive) コンポーネントと組み合わせて使いたいことがよくあります。これらのコンポーネントを正しく動作させるためには、その入れ子の順序が重要です。
 
-In addition, these components are often used in conjunction with the `<router-view>` component from [Vue Router](https://next.router.vuejs.org/).
+また、これらのコンポーネントは、 [Vue Router](https://next.router.vuejs.org/) の `<router-view>` コンポーネントと組み合わせて使われることが多いです。
 
-The following example shows how to nest these components so that they all behave as expected. For simpler combinations you can remove the components that you don't need:
+次の例では、これらのコンポーネントを入れ子にして、すべてのコンポーネントが期待通りの動作をするようにしています。よりシンプルな組み合わせの場合は、必要のない部品を取り除くことができます:
 
 ```html
 <router-view v-slot="{ Component }">
@@ -104,4 +104,4 @@ The following example shows how to nest these components so that they all behave
 </router-view>
 ```
 
-Vue Router has built-in support for [lazily loading components](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) using dynamic imports. These are distinct from async components and currently they will not trigger `<suspense>`. However, they can still have async components as descendants and those can trigger `<suspense>` in the usual way.
+Vue Router には、 Dynamic imports (動的インポート) を使った [遅延ローディングルート](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) のサポートが組み込まれています。これらは非同期コンポーネントとは異なり、現在のところ `<suspense>` を発火させることはありません。しかし、それらは子孫要素として非同期コンポーネントを持つことができ、通常の方法で `<suspense>` を発火することができます。
