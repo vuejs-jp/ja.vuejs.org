@@ -8,7 +8,7 @@ badges:
 
 ## 概要
 
-`$listeners` オブジェクトは Vue 3 ですべて削除されました。イベントリスナは `$attrs` の一部になりました。
+`$listeners` オブジェクトは Vue 3 で削除されました。イベントリスナは `$attrs` の一部になりました。
 
 ```javascript
 {
