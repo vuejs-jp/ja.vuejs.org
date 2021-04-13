@@ -1,14 +1,14 @@
 ---
-title: $listeners removed
+title: $listeners の削除
 badges:
   - breaking
 ---
 
-# `$listeners` removed <MigrationBadges :badges="$frontmatter.badges" />
+# `$listeners` の削除 <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-The `$listeners` object has been removed in Vue 3. Event listeners are now part of `$attrs`:
+`$listeners` オブジェクトは Vue 3 ですべて削除されました。イベントリスナは `$attrs` の一部になりました。
 
 ```javascript
 {
@@ -17,10 +17,10 @@ The `$listeners` object has been removed in Vue 3. Event listeners are now part 
 }
 ```
 
-## 2.x Syntax
+## 2.x での構文
 
-In Vue 2, you can access attributes passed to your components with `this.$attrs`, and event listeners with `this.$listeners`.
-In combination with `inheritAttrs: false`, they allow the developer to apply these attributes and listeners to some other element instead of the root element:
+Vue 2 では、コンポーネントに渡された属性は `this.$attrs` で、イベントリスナは `this.$listeners` でアクセスできます。
+`inheritAttrs: false` と組み合わせることで、開発者はこれらの属性やリスナを、ルート要素ではなく他の要素に適用することができます:
 
 ```html
 <template>
@@ -35,9 +35,9 @@ In combination with `inheritAttrs: false`, they allow the developer to apply the
 </script>
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-In Vue 3's virtual DOM, event listeners are now just attributes, prefixed with `on`, and as such are part of the `$attrs` object, so `$listeners` has been removed.
+Vue 3 の仮想 DOM では、イベントリスナはプレフィックスに `on` がついた単なる属性になり、 `$attrs` オブジェクトの一部であるため、 `$listeners` は削除されました。
 
 ```vue
 <template>
@@ -52,7 +52,7 @@ export default {
 </script>
 ```
 
-If this component received an `id` attribute and a `v-on:close` listener, the `$attrs` object will now look like this:
+もしこのコンポーネントが `id` 属性と `v-on:close` リスナを受け取った場合、 `$attrs` オブジェクトは次のようになります:
 
 ```javascript
 {
@@ -61,14 +61,14 @@ If this component received an `id` attribute and a `v-on:close` listener, the `$
 }
 ```
 
-## Migration Strategy
+## 移行の戦略
 
-Remove all usages of `$listeners`.
+`$listeners` の使用をすべて削除します。
 
-## See also
+## 参照
 
-- [Relevant RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
-- [Migration guide - `$attrs`includes `class` & `style` ](./attrs-includes-class-style.md)
-- [Migration guide - Changes in the Render Functions API](./render-function-api.md)
-- [Migration guide - New Emits Option](./emits-option.md)
-- [Migration guide - `.native` modifier removed](./v-on-native-modifier-removed.md)
+- [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)
+- [移行ガイド - `class` と `style` を含む `$attrs`](./attrs-includes-class-style.md)
+- [移行ガイド - Render 関数 API](./render-function-api.md)
+- [移行ガイド - 新しい Emits のオプション](./emits-option.md)
+- [移行ガイド - `.native` 修飾子の削除](./v-on-native-modifier-removed.md)
