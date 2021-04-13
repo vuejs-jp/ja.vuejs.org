@@ -131,6 +131,7 @@ const sidebar = {
         'migration/props-default-this',
         'migration/render-function-api',
         'migration/slots-unification',
+        'migration/suspense',
         'migration/transition',
         'migration/v-if-v-for',
         'migration/v-model',
