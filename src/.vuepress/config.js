@@ -136,7 +136,8 @@ const sidebar = {
         'migration/transition',
         'migration/v-if-v-for',
         'migration/v-model',
-        'migration/v-bind'
+        'migration/v-bind',
+        'migration/watch'
       ]
     },
     {
