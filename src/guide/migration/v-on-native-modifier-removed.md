@@ -1,18 +1,18 @@
 ---
-title: v-on.native modifier removed
+title: v-on.native 修飾子の削除
 badges:
   - breaking
 ---
 
-# `v-on.native` modifier removed <MigrationBadges :badges="$frontmatter.badges" />
+# `v-on.native` 修飾子の削除 <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-The `.native` modifier for `v-on` has been removed.
+`v-on` の `.native` 修飾子は削除されました。
 
-## 2.x Syntax
+## 2.x での構文
 
-Event listeners passed to a component with `v-on` are by default only triggered by emitting an event with `this.$emit`. To add a native DOM listener to the child component's root element instead, the `.native` modifier can be used:
+`v-on` でコンポーネントに渡されたイベントリスナは、デフォルトでは `this.$emit` でイベントを発行することでのみ発火されます。代わりにネイティブ DOM リスナを子コンポーネントのルート要素に追加するには、 `.native` 修飾子を使用できます:
 
 ```html
 <my-component
@@ -21,11 +21,11 @@ Event listeners passed to a component with `v-on` are by default only triggered 
 />
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-The `.native` modifier for `v-on` has been removed. At the same time, the [new `emits` option](./emits-option.md) allows the child to define which events it does indeed emit.
+`v-on` の `.native` 修飾子は削除されました。同時に、 [新しい `emits` オプション](./emits-option.md) によって、子要素が実際に発行するイベントを定義できるようになりました。
 
-Consequently, Vue will now add all event listeners that are _not_ defined as component-emitted events in the child as native event listeners to the child's root element (unless `inheritAttrs: false` has been set in the child's options).
+その結果、 Vue は子コンポーネントの発行するイベントとして定義されて _いない_　すべてのイベントリスナを、子のルート要素のネイティブイベントリスナとして追加するようになりました（ただし `inheritAttrs: false` が子のオプションで設定されていない場合）。
 
 ```html
 <my-component
@@ -44,14 +44,14 @@ Consequently, Vue will now add all event listeners that are _not_ defined as com
 </script>
 ```
 
-## Migration Strategy
+## 移行の戦略
 
-- remove all instances of the `.native` modifier.
-- ensure that all your components document their events with the `emits` option.
+- `.native` 修飾子のすべてのインスタンスを削除します。
+- すべてのコンポーネントが、 `emits` オプションでイベントを記録するようにします。
 
-## See also
+## 参照
 
-- [Relevant RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md#v-on-listener-fallthrough)
-- [Migration guide - New Emits Option](./emits-option.md)
-- [Migration guide - `$listeners` removed](./listeners-removed.md)
-- [Migration guide - Changes in the Render Functions API](./render-function-api.md)
+- [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md#v-on-listener-fallthrough)
+- [移行ガイド - 新しい Emits のオプション](./emits-option.md)
+- [移行ガイド - `$listeners` の削除](./listeners-removed.md)
+- [移行ガイド - Render 関数 API](./render-function-api.md)
