@@ -193,7 +193,7 @@ const sidebar = {
         '/guide/migration/inline-template-attribute',
         '/guide/migration/key-attribute',
         '/guide/migration/keycode-modifiers',
-        // '/guide/migration/listeners-removed',
+        '/guide/migration/listeners-removed',
         // '/guide/migration/mount-changes',
         // '/guide/migration/props-data',
         '/guide/migration/props-default-this',
@@ -202,12 +202,12 @@ const sidebar = {
         '/guide/migration/suspense',
         '/guide/migration/transition',
         // '/guide/migration/transition-group',
-        // '/guide/migration/v-on-native-modifier-removed',
+        '/guide/migration/v-on-native-modifier-removed',
         '/guide/migration/v-model',
         '/guide/migration/v-if-v-for',
         '/guide/migration/v-bind',
         // '/guide/migration/vnode-lifecycle-events',
-        // '/guide/migration/watch'
+        '/guide/migration/watch'
       ]
     },
   ],
