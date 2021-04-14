@@ -135,6 +135,7 @@ const sidebar = {
         'migration/suspense',
         'migration/transition',
         'migration/v-if-v-for',
+        'migration/v-on-native-modifier-removed',
         'migration/v-model',
         'migration/v-bind',
         'migration/watch'
