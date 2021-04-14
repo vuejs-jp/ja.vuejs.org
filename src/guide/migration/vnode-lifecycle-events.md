@@ -3,17 +3,17 @@ badges:
   - breaking
 ---
 
-# VNode Lifecycle Events <MigrationBadges :badges="$frontmatter.badges" />
+# VNode ライフサイクルイベント <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-In Vue 2, it was possible to use events to listen for key stages in a component's lifecycle. These events had names that started with the prefix `hook:`, followed by the name of the corresponding lifecycle hook.
+Vue 2 では、イベントを使ってコンポーネントのライフサイクルの重要なステージを監視することができました。これらのイベントは、プレフィックスの `hook:` からはじまり、その後にライフサイクルフックの名前がついていました。
 
-In Vue 3, this prefix has been changed to `vnode-`. In addition, these events are now available for HTML elements as well as components.
+Vue 3 では、このプレフィックスが `vnode-` に変更されました。また、これらのイベントは、コンポーネントとしてだけでなく HTML 要素でも利用できるようになりました。
 
-## 2.x Syntax
+## 2.x での構文
 
-In Vue 2, the event name is the same as the equivalent lifecycle hook, prefixed with `hook:`:
+Vue 2 では、イベント名は同等のライフサイクルフックと同じで、プレフィックスに `hook:` がついています:
 
 ```html
 <template>
@@ -21,9 +21,9 @@ In Vue 2, the event name is the same as the equivalent lifecycle hook, prefixed 
 </template>
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-In Vue 3, the event name is prefixed with `vnode-`:
+Vue 3 では、イベント名のプレフィックスに `vnode-` がついています:
 
 ```html
 <template>
@@ -31,7 +31,7 @@ In Vue 3, the event name is prefixed with `vnode-`:
 </template>
 ```
 
-Or just `vnode` if you're using camel case:
+またはキャメルケースを使用している場合は、単に `vnode` となります:
 
 ```html
 <template>
@@ -39,10 +39,10 @@ Or just `vnode` if you're using camel case:
 </template>
 ```
 
-## Migration Strategy
+## 移行の戦略
 
-In most cases it should just require changing the prefix. The lifecycle hooks `beforeDestroy` and `destroyed` have been renamed to `beforeUnmount` and `unmounted` respectively, so the corresponding event names will also need to be updated.
+ほとんどの場合、プレフィックスの変更だけで済みます。ライフサイクルフックの `beforeDestroy` と `destroyed` は、それぞれ `beforeUnmount` と `unmounted` に名前が変更され、対応するイベント名も更新する必要があります。
 
-## See also
+## 参照
 
-- [Migration guide - Events API](/guide/migration/events-api.html)
+- [移行ガイド - イベント API](/guide/migration/events-api.html)
