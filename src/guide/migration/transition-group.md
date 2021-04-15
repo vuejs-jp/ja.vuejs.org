@@ -1,18 +1,18 @@
 ---
-title: Transition Group Root Element
+title: トランジショングループのルート要素
 badges:
   - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-`<transition-group>` no longer renders a root element by default, but can still create one with the `tag` prop.
+`<transition-group>` は、デフォルトではルート要素をレンダリングしなくなりましたが、 `tag` プロパティでルート要素を作成することができます。
 
-## 2.x Syntax
+## 2.x での構文
 
-In Vue 2, `<transition-group>`, like other custom components, needed a root element, which by default was a `<span>` but was customizable via the `tag` prop.
+Vue 2 では、 `<transition-group>` は他のカスタムコンポーネントと同様に、ルート要素を必要として、デフォルトでは `<span>` となっており `tag` プロパティを通してカスタマイズできました。
 
 ```html
 <transition-group tag="ul">
@@ -22,12 +22,12 @@ In Vue 2, `<transition-group>`, like other custom components, needed a root elem
 </transition-group>
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-In Vue 3, we have [fragment support](/guide/migration/fragments.html), so components no longer _need_ a root node. Consequently, `<transition-group>` no longer renders one by default.
+Vue 3 では [Fragments](/guide/migration/fragments.html) があるので、コンポーネントにはルート要素が _必要なくなりました_ 。そのため、 `<transition-group>` はデフォルトではルート要素をレンダリングしなくなりました。
 
-- If you already have the `tag` prop defined in your Vue 2 code, like in the example above, everything will work as before
-- If you didn't have one defined _and_ your styling or other behaviors relied on the presence of the `<span>` root element to work properly, simply add `tag="span"` to the `<transition-group>`:
+- 上の例のように、 `tag` プロパティが Vue 2 のコードですでに定義されている場合、すべてが以前のように動作します
+- もし定義されていなくて、スタイルやその他の動作が `<span>` ルート要素の存在に依存していた場合は、 `<transition-group>` に `tag="span"` を追加するだけです
 
 ```html
 <transition-group tag="span">
@@ -35,6 +35,6 @@ In Vue 3, we have [fragment support](/guide/migration/fragments.html), so compon
 </transition-group>
 ```
 
-## See also
+## 参照
 
-- [Some transition classes got a rename](/guide/migration/transition.html)
+- [トランジションクラスの変更](/guide/migration/transition.html)
