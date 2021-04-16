@@ -113,7 +113,8 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [$on, $off そして $once のインスタンスメソッド](/guide/migration/events-api.html)
 - [Filters](/guide/migration/filters.html)
 - [インラインテンプレート属性](/guide/migration/inline-template-attribute.html)
-- [`$children` インスタンスプロパティ](/guide/migration/children.md)
+- [`$children` インスタンスプロパティ](/guide/migration/children.html)
+- [`propsData` オプション](/guide/migration/props-data.html)
 - `$destroy` インスタンスメソッド。 ユーザーは、個々の Vue コンポーネントのライフサイクルを手動で管理べきではなくなりました。
 
 ## サポートライブラリ
