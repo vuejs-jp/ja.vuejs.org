@@ -65,7 +65,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 
 ### テンプレートディレクティブ
 
-- [コンポーネントでの `v-model` の使用法が改定されました](/guide/migration/v-model.html)
+- [コンポーネントでの `v-model` の使用方法が作り直され、 `v-bind.sync` が置き換えられました](/guide/migration/v-model.html)
 - [`<templatev-for>` ノードと非 `v-for` ノードでの `key` の使用法が変更されました](/guide/migration/key-attribute.html)
 - [同じ要素で使用した場合の `v-if` と `v-for` の優先順位が変更されました](/guide/migration/v-if-v-for.html)
 - [`v-bind="object"` は順序依存(order-sensitive)になりました](/guide/migration/v-bind.html)
