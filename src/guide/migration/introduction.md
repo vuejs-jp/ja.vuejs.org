@@ -192,3 +192,7 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 [rpv-badge]: https://img.shields.io/npm/v/rollup-plugin-vue/next.svg
 [rpv-npm]: https://www.npmjs.com/package/rollup-plugin-vue/v/next
 [rpv-code]: https://github.com/vuejs/rollup-plugin-vue/tree/next
+
+::: info
+Vue 3 のライブラリとの互換性については、 [awesome-vue のこの Issue](https://github.com/vuejs/awesome-vue/issues/3544) を見てください。
+:::
