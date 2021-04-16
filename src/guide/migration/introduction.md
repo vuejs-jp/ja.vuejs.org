@@ -109,9 +109,10 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 ### 削除された API
 
 - [`v-on` の修飾子としての `keyCode` のサポート](/guide/migration/keycode-modifiers.html)
-- [$on, $off そして \$once のインスタンスメソッド](/guide/migration/events-api.html)
+- [$on, $off そして $once のインスタンスメソッド](/guide/migration/events-api.html)
 - [Filters](/guide/migration/filters.html)
 - [インラインテンプレート属性](/guide/migration/inline-template-attribute.html)
+- [`$children` インスタンスプロパティ](/guide/migration/children.md)
 - `$destroy` インスタンスメソッド。 ユーザーは、個々の Vue コンポーネントのライフサイクルを手動で管理べきではなくなりました。
 
 ## サポートライブラリ
