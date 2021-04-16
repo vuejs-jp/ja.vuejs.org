@@ -69,6 +69,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [`<templatev-for>` ノードと非 `v-for` ノードでの `key` の使用法が変更されました](/guide/migration/key-attribute.html)
 - [同じ要素で使用した場合の `v-if` と `v-for` の優先順位が変更されました](/guide/migration/v-if-v-for.html)
 - [`v-bind="object"` は順序依存(order-sensitive)になりました](/guide/migration/v-bind.html)
+- [`v-on:event.native` 修飾子は削除されました](./v-on-native-modifier-removed.md)
 - [`v-for` 内の `ref` は refs の配列を登録しなくなりました](/guide/migration/array-refs.html)
 
 ### コンポーネント
@@ -76,11 +77,14 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [関数コンポーネントは、単純な関数を使用してのみ作成可能になりました](/guide/migration/functional-components.html)
 - [単一ファイルコンポーネント (SFC) における `functional` 属性の `<template>` および `functional` コンポーネントオプションは非推奨になりました](/guide/migration/functional-components.html)
 - [非同期コンポーネントは、 `defineAsyncComponent` メソッドを使って作成することが必要になりました](/guide/migration/async-components.html)
+- [コンポーネントのイベントは、 `emits` で宣言できるようになりました](./emits-option.md)
 
 ### Render 関数
 
 - [Render 関数の API が変更されました](/guide/migration/render-function-api.html)
 - [`$scopedSlots` プロパティが削除され、すべてのスロットが `$slots` を介して関数として公開されるようになりました](/guide/migration/slots-unification.html)
+- [`$listeners` は削除され、 `$attrs` にマージされました](./listeners-removed)
+- [`$attrs` に `class` と `style` 属性が追加されました](./attrs-includes-class-style.md)
 
 ### カスタム要素
 
