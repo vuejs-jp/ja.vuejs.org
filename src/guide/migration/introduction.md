@@ -123,7 +123,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 
 <a href="https://www.npmjs.com/package/@vue/cli" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/@vue/cli"></a>
 
-v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するときに、Vue 3 のプリセットを選択するための組み込みオプションを提供するようになりました。 `vue-cli` をアップグレードし、 `vue create` を実行して、Vue3 プロジェクトを今すぐ作成できます。
+v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するときに、Vue 3 を選択するための組み込みオプションを提供するようになりました。 `vue-cli` をアップグレードし、 `vue create` を実行して、Vue3 プロジェクトを今すぐ作成できます。
 
 - [Documentation](https://cli.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vue-cli)
@@ -132,8 +132,9 @@ v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するとき�
 
 <a href="https://www.npmjs.com/package/vue-router/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vue-router/next.svg"></a>
 
-Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更がいくつかあります。 詳細については、[README](https://github.com/vuejs/vue-router-next#vue-router-next-)を確認してください。
+Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更がいくつかあります。 詳細については、[移行ガイド](https://next.router.vuejs.org/guide/migration/) を確認してください。
 
+- [Documentation](https://next.router.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vue-router-next)
 - [RFCs](https://github.com/vuejs/rfcs/pulls?q=is%3Apr+is%3Amerged+label%3Arouter)
 
@@ -141,8 +142,9 @@ Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更�
 
 <a href="https://www.npmjs.com/package/vuex/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vuex/next.svg"></a>
 
-Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供します。 唯一の破壊的変更は、[プラグインのインストール方法](https://github.com/vuejs/vuex/tree/4.0#breaking-changes)です。
+Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供します。 唯一の破壊的変更は、[プラグインのインストール方法](https://next.vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html#breaking-changes)です。
 
+- [Documentation](https://next.vuex.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vuex/tree/4.0)
 
 ### Devtools Extension
@@ -167,7 +169,7 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 | eslint-plugin-vue     | [![ga][epv-badge]][epv-npm]   | [[GitHub][epv-code]] |
 | @vue/test-utils       | [![beta][vtu-badge]][vtu-npm] | [[GitHub][vtu-code]] |
 | vue-class-component   | [![beta][vcc-badge]][vcc-npm] | [[GitHub][vcc-code]] |
-| vue-loader            | [![beta][vl-badge]][vl-npm]   | [[GitHub][vl-code]]  |
+| vue-loader            | [![rc][vl-badge]][vl-npm]     | [[GitHub][vl-code]]  |
 | rollup-plugin-vue     | [![beta][rpv-badge]][rpv-npm] | [[GitHub][rpv-code]] |
 
 [jsx-badge]: https://img.shields.io/npm/v/@vue/babel-plugin-jsx.svg
