@@ -117,6 +117,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [`$children` インスタンスプロパティ](/guide/migration/children.html)
 - [`propsData` オプション](/guide/migration/props-data.html)
 - `$destroy` インスタンスメソッド。 ユーザーは、個々の Vue コンポーネントのライフサイクルを手動で管理べきではなくなりました。
+- グローバル関数の `set` と `delete`、およびインスタンスメソッドの `$set` と `$delete`。これらはプロキシベースの変更検出では必要なくなりました。
 
 ## サポートライブラリ
 
