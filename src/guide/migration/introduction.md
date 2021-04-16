@@ -47,7 +47,7 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - [Emits Component Option](/guide/component-custom-events.html)
 - カスタムレンダラを作るための [`@vue/runtime-core` の `createRenderer` API](https://github.com/vuejs/vue-next/tree/master/packages/runtime-core)
 - [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-script-setup.md) <Badge text="experimental" type="warning" />
-- [SFC でのステートドリブンな CSS Variables (`<style vars>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
+- [SFC でのステートドリブンな CSS Variables (`<style>` の `v-bind`)](https://github.com/vuejs/rfcs/blob/style-vars-2/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
 - [SFC での `<style scoped>` は、グローバルルールまたはスロットされたコンテンツのみを対象とするルールを含めることができるようになった](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md)
 
 ## 破壊的変更
