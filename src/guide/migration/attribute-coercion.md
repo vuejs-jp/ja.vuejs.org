@@ -3,7 +3,7 @@ badges:
   - breaking
 ---
 
-# 属性強制の振舞い <MigrationBadges :badges="$frontmatter.badges" />
+# 属性強制の振る舞い <MigrationBadges :badges="$frontmatter.badges" />
 
 ::: info Info
 これはローレベルな内部 API の変更であり、ほとんどの開発者には影響しません。
@@ -56,7 +56,7 @@ badges:
 
 - これにより、`true`と`false`の間の矛盾が解消され、`aria-*`属性の出力が容易になります。
 
-新しい振舞いについては、以下の表を参照してください:
+新しい振る舞いについては、以下の表を参照してください:
 
 | バインディング式    | `foo` <sup>通常の属性</sup> | `draggable` <sup>列挙された属性</sup> |
 | ------------------- | --------------------------- | ------------------------------------- |
@@ -85,7 +85,7 @@ badges:
 | `draggable`          | `draggable` &rarr; `false`           |
 | `spellcheck`         | `spellcheck` &rarr; `true`           |
 
-これまでの振舞いを維持するために、また、`false`を`'false'`に強制するために、3.x Vue の開発者は`contenteditable`と`spellcheck`に対して`v-bind`式を`false`または`'false'`に解決する必要があります。
+これまでの振る舞いを維持するために、また、`false`を`'false'`に強制するために、3.x Vue の開発者は`contenteditable`と`spellcheck`に対して`v-bind`式を`false`または`'false'`に解決する必要があります。
 
 2.x では、列挙された属性に対して無効な値を`'true'`に強制的に設定していました。これは通常意図していなかったもので、大規模に利用される可能性は低いと思われます。3.x では、`true`または`'true'`を明示的に指定する必要があります。
 
@@ -93,7 +93,7 @@ badges:
 
 3.x では、明示的に属性を削除するには `null` または `undefined` を使用しなければなりません。
 
-### 2.x と 3.x 間の振舞いの比較
+### 2.x と 3.x 間の振る舞いの比較
 
 <table>
   <thead>
