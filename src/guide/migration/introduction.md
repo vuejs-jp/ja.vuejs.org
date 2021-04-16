@@ -89,7 +89,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 
 ### カスタム要素
 
-- [テンプレートのコンパイル中にカスタム要素のホワイトリスト化が実行されるようになりました](/guide/migration/custom-elements-interop.html)
+- [テンプレートのコンパイル中にカスタム要素のチェックが実行されるようになりました](/guide/migration/custom-elements-interop.html)
 - [特別な `is` prop の使用は、予約済みの `<component>` タグのみに制限されるようになりました](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 
 ### その他の細かな変更
