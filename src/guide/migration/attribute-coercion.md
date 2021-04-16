@@ -20,15 +20,15 @@ badges:
 
 ## 2.x での構文
 
-2.x では、`v-bind`の値を強制するために以下のような戦略がありました:
+2.x では、`v-bind` の値を強制するために以下のような戦略がありました:
 
 - いくつかの属性/要素のペアでは、Vue は常に対応する IDL 属性（プロパティ）を使用します。: [`<input>`、`<select>`、`<progress>`における`value`など](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L11-L18)
 
-- 「[ブール属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L33-L40)」と[xlinks](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L44-L46)については、Vue はそれらが"falsy"([`undefined`、`null`、`false`](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L52-L54))の場合には削除し、それ以外の場合には追加します ([ここ](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L66-L77)や[こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L81-L85)を見てください)。
+- 「[ブール属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L33-L40)」と [xlinks](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L44-L46) については、Vue はそれらが "falsy" ([`undefined`、`null`、`false`](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L52-L54)) の場合には削除し、それ以外の場合には追加します ([ここ](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L66-L77)や[こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L81-L85)を見てください)。
 
-- 「[列挙された属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L20)」(現在は`contenteditable`、`draggable`、`spellcheck`)については、Vue はそれらを[強制的に](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L24-L31)文字列にしようとします ([vuejs/vue#9397](https://github.com/vuejs/vue/issues/9397)を修正するために、`contenteditable`については今のところ特別な扱いをしています)。
+- 「[列挙された属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L20)」(現在は `contenteditable`、`draggable`、`spellcheck`)については、Vue はそれらを[強制的に](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L24-L31)文字列にしようとします ([vuejs/vue#9397](https://github.com/vuejs/vue/issues/9397)を修正するために、`contenteditable` については今のところ特別な扱いをしています)。
 
-- 他の属性については、"falsy"な値(`undefined`, `null`, or `false`)は削除し、他の値はそのまま設定します([こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L92-L113)を見てください)。
+- 他の属性については、"falsy" な値(`undefined`, `null`, or `false`)は削除し、他の値はそのまま設定します([こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L92-L113)を見てください)。
 
 次の表では、Vue が「列挙された属性」を通常の非ブール属性とは異なる方法で強制する方法を説明しています:
 
@@ -43,18 +43,18 @@ badges:
 | `attr="foo"`        | `foo="foo"`                 | `draggable="true"`                    |
 | `attr`              | `foo=""`                    | `draggable="true"`                    |
 
-上の表からわかるように、現在の実装では`true`を`'true'`に強制していますが、`false`の場合は属性を削除しています。これはまた、`aria-selected`や`aria-hidden`といった`aria-*`属性のような非常に一般的なユースケースでも、ユーザーが手動でブール値を文字列に強制する必要があるなど、一貫性に欠けていました。
+上の表からわかるように、現在の実装では `true` を `'true'` に強制していますが、`false` の場合は属性を削除しています。これはまた、`aria-selected` や `aria-hidden` といった `aria-*` 属性のような非常に一般的なユースケースでも、ユーザーが手動でブール値を文字列に強制する必要があるなど、一貫性に欠けていました。
 
 ## 3.x での構文
 
 この「列挙された属性」という内部概念を捨てて、通常の非ブール HTML 属性として扱うつもりです。
 
 - これは、通常の非ブール属性と「列挙された属性」の間の矛盾を解決します。
-- また、`'true'`や`'false'`以外の値や、`contenteditable` のような属性には、これから定義されるキーワードを使用することも可能になります。
+- また、`'true'` や `'false'` 以外の値や、`contenteditable` のような属性には、これから定義されるキーワードを使用することも可能になります。
 
-非ブール属性については、Vue は`false`であれば削除はせず、代わりに`'false'`に強制します。
+非ブール属性については、Vue は `false` であれば削除はせず、代わりに `'false'` に強制します。
 
-- これにより、`true`と`false`の間の矛盾が解消され、`aria-*`属性の出力が容易になります。
+- これにより、`true` と `false` の間の矛盾が解消され、`aria-*` 属性の出力が容易になります。
 
 新しい振る舞いについては、以下の表を参照してください:
 
@@ -77,7 +77,7 @@ badges:
 
 ### 列挙された属性
 
-列挙された属性が存在しない場合や`attr="false"`が存在しない場合に、以下のように異なる IDL 属性値(実際の状態を反映した値)が生成されることがあります:
+列挙された属性が存在しない場合や `attr="false"` が存在しない場合に、以下のように異なる IDL 属性値(実際の状態を反映した値)が生成されることがあります:
 
 | 列挙された属性の不在 | IDL 属性と値                         |
 | -------------------- | ------------------------------------ |
@@ -85,9 +85,9 @@ badges:
 | `draggable`          | `draggable` &rarr; `false`           |
 | `spellcheck`         | `spellcheck` &rarr; `true`           |
 
-これまでの振る舞いを維持するために、また、`false`を`'false'`に強制するために、3.x Vue の開発者は`contenteditable`と`spellcheck`に対して`v-bind`式を`false`または`'false'`に解決する必要があります。
+これまでの振る舞いを維持するために、また、`false` を `'false'` に強制するために、3.x Vue の開発者は `contenteditable` と `spellcheck` に対して `v-bind` 式を `false` または `'false'` に解決する必要があります。
 
-2.x では、列挙された属性に対して無効な値を`'true'`に強制的に設定していました。これは通常意図していなかったもので、大規模に利用される可能性は低いと思われます。3.x では、`true`または`'true'`を明示的に指定する必要があります。
+2.x では、列挙された属性に対して無効な値を `'true'` に強制的に設定していました。これは通常意図していなかったもので、大規模に利用される可能性は低いと思われます。3.x では、`true` または `'true'` を明示的に指定する必要があります。
 
 ### 属性を削除する代わりに `false` を `'false'` に強制する
 
