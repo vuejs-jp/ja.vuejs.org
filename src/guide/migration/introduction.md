@@ -101,6 +101,7 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [ミックスインの `data` オプションは浅くマージされるようになりました](/guide/migration/data-option.html#mixin-merge-behavior-change)
 - [属性強制の戦略が変更されました](/guide/migration/attribute-coercion.html)
 - [一部のトランジションクラスの名前が変更されました](/guide/migration/transition.html)
+- [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
 - [配列を監視している場合、コールバックは配列が置き換えられたときにのみ発火されるようになりました。 ミューテーションで発火する必要がある場合は、 `deep` オプションを指定する必要があります。](/guide/migration/watch.html)
 - 特別なディレクティブ(`v-if/else-if/else` 、 `v-for` 、または `v-slot`）が使われていない `<template>` タグはプレーンな要素として扱われ、内部コンテンツをレンダリングする代わりにネイティブの `<template>` 要素となります。
 - Vue 2.x では、アプリケーションルートコンテナの `outerHTML` はルートコンポーネントのテンプレートに置き換えられます(または、ルートコンポーネントにテンプレート/レンダーのオプションがない場合は、最終的にテンプレートにコンパイルされます)。 Vue 3.x では、代わりにアプリケーションコンテナの `innerHTML` を使用するようになりました。これは、コンテナ自体がテンプレートの一部とは見なされなくなったことを意味します。
