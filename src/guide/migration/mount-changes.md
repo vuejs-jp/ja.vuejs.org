@@ -1,18 +1,18 @@
 ---
-title: 'Mount API changes'
+title: 'マウント API の変更'
 badges:
   - breaking
 ---
 
-# Mounted application does not replace the element <MigrationBadges :badges="$frontmatter.badges" />
+# 要素を置換しないアプリケーションのマウント <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-In Vue 2.x, when mounting an application that has a `template`, the rendered content replaces the element we mount to. In Vue 3.x, the rendered application is appended as a child of such an element, replacing element's `innerHTML`.
+Vue 2.x では、 `template` を持つアプリケーションをマウントすると、レンダリングされたコンテンツがマウント先の要素を置き換えます。 Vue 3.x では、レンダリングされたアプリケーションは、子要素として追加され、要素の `innerHTML` を置き換えます。
 
-## 2.x Syntax
+## 2.x での構文
 
-In Vue 2.x, we pass an HTML element selector to `new Vue()` or `$mount`:
+Vue 2.x では、 HTML 要素セレクタを `new Vue()` または `$mount` に渡します:
 
 ```js
 new Vue({
@@ -27,7 +27,7 @@ new Vue({
   `
 })
 
-// or
+// または
 const app = new Vue({
   data() {
     return {
@@ -42,7 +42,7 @@ const app = new Vue({
 app.$mount('#app')
 ```
 
-When we mount this application to the page that has a `div` with the passed selector (in our case, it's `id="app"`):
+このアプリケーションを渡されたセレクタ (ここでは `id="app"`) を持つ `div` のあるページにマウントした場合:
 
 ```html
 <body>
@@ -52,7 +52,7 @@ When we mount this application to the page that has a `div` with the passed sele
 </body>
 ```
 
-in the rendered result, the mentioned `div` will be replaced with the rendered application content:
+レンダリングされた結果は、上記の `div` がレンダリングされたアプリケーションのコンテンツと置き換えられます:
 
 ```html
 <body>
@@ -60,9 +60,9 @@ in the rendered result, the mentioned `div` will be replaced with the rendered a
 </body>
 ```
 
-## 3.x Syntax
+## 3.x での構文
 
-In Vue 3.x, when we mount an application, its rendered content will replace the `innerHTML` of the element we pass to `mount`:
+Vue 3.x では、アプリケーションをマウントすると、レンダリングされたコンテンツが `mount` に渡した要素の `innerHTML` を置き換えます:
 
 ```js
 const app = Vue.createApp({
@@ -79,7 +79,7 @@ const app = Vue.createApp({
 app.mount('#app')
 ```
 
-When this app is mounted to the page that has a `div` with `id="app"`, this will result in:
+このアプリケーションを `id="app"` を持つ `div` のあるページにマウントすると、このようになります:
 
 ```html
 <body>
@@ -89,6 +89,6 @@ When this app is mounted to the page that has a `div` with `id="app"`, this will
 </body>
 ```
 
-## See also
+## 参照
 
 - [`mount` API](/api/application-api.html#mount)
