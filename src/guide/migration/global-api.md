@@ -65,6 +65,13 @@ import { createApp } from 'vue'
 const app = createApp({})
 ```
 
+Vue の [CDN](/guide/installation.html#cdn) ビルドを使っている場合、 `createApp` はグローバルな `Vue` オブジェクトを介して公開されます:
+
+```js
+const { createApp } = Vue
+const app = createApp({})
+```
+
 アプリケーションインスタンスは、現在のグローバル API のサブセットを公開します。おおまかには、_Vue の振る舞いをグローバルに変更する全ての API は、アプリケーションインスタンスに移されます_ 。こちらは、現在のグローバル API とインスタンス API との対応表です:
 
 | 2.x グローバル API         | 3.x インスタンス API (`app`)                                                                     |
