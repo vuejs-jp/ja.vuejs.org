@@ -55,7 +55,7 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 - `leave-class` は `leave-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
 - `enter-class` は `enter-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
 
-## 移行戦略
+## 移行の戦略
 
 1. `.v-enter` のインスタンスを `.v-enter-from` に置き換えます。
 2. `.v-leave` のインスタンスを `.v-leave-from` に置き換えます。
