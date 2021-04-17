@@ -60,3 +60,7 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 1. `.v-enter` のインスタンスを `.v-enter-from` に置き換えます。
 2. `.v-leave` のインスタンスを `.v-leave-from` に置き換えます。
 3. 上記のように、関連するプロップ名のインスタンスを置き換えます。
+
+## 参照
+
+- [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
