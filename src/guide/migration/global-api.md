@@ -76,6 +76,7 @@ const app = createApp({})
 | Vue.directive              | app.directive                                                                                    |
 | Vue.mixin                  | app.mixin                                                                                        |
 | Vue.use                    | app.use ([以下を参照](#a-note-for-plugin-authors))                                               |
+| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |                                                                     |
 
 グローバルに振る舞いを変更しないその他のグローバル API は [グローバル API の Treeshaking](./global-api-treeshaking.html) にあるように、名前付きエクスポートになりました。
 
@@ -105,6 +106,25 @@ Vue 3.0 では、要素がコンポーネントであるかどうかのチェッ
 - ランタイム限定ビルド使用時に、`config.isCustomElement` が代入された場合、ビルドの設定でこのオプションを設定するように警告が表示されます。
 - これは、Vue CLI 設定の新しいトップレベルのオプションになります。
   :::
+
+### `Vue.prototype` は `config.globalProperties` と置換
+
+Vue 2 では、すべてのコンポーネントでアクセス可能なプロパティを追加するために、 `Vue.prototype` がよく使われていました。
+
+Vue 3 では、 [`config.globalProperties`](/api/application-config.html#globalproperties) が同様のものです。これらのプロパティは、アプリケーション内でコンポーネントをインスタンス化する際にコピーされます:
+
+```js
+// before - Vue 2
+Vue.prototype.$http = () => {}
+```
+
+```js
+// after - Vue 3
+const app = Vue.createApp({})
+app.config.globalProperties.$http = () => {}
+```
+
+また `globalProperties` の代わりに `provide` ([後述](#provide-inject)) を使うことも考えられます。
 
 ### プラグイン作者へのノート
 
@@ -177,6 +197,8 @@ export default {
   template: `<div>{{ book }}</div>`
 }
 ```
+
+`provide` を使うことは、特にプラグインを書くときに、 `globalProperties` の代わりになります。
 
 ## アプリケーション間での設定の共有
 
