@@ -5,7 +5,7 @@ badges:
 
 # グローバル API の Treeshaking <MigrationBadges :badges="$frontmatter.badges" />
 
-## 2.x での文法
+## 2.x での構文
 
 手動で DOM 操作を行う必要があった場合に、このようなパターンを目にしたと思います:
 
@@ -40,7 +40,7 @@ test('an async feature', async () => {
 
 [webpack](https://webpack.js.org/) のようなモジュールバンドラーは、[tree-shaking](https://webpack.js.org/guides/tree-shaking/) と呼ばれる、聞こえの良い "不要コード削除" をサポートします。残念ながら Vue の過去のバージョンではコードの作りに起因して `Vue.nextTick()` のようなグローバル API は tree-shaking 可能ではなく、実際にどこで使われているかそうでないかに関わらず、最終成果物の中に含まれてしまいます。
 
-## 3.x での文法
+## 3.x での構文
 
 Vue 3 では、グローバル API と内部 API は tree-shaking のサポートを念頭に置いて作り直されました。その結果、グローバル API は ES Modules ビルドの名前付きエクスポートとしてのみアクセスすることができます。例えば、以前のスニペットは次のようになります:
 
