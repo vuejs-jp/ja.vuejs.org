@@ -114,7 +114,6 @@ export default {
 
 ### 3.x での構文
 
-In 3.x, the entire VNode props structure is flattened. Using the example from above, here is what it would look like now.
 3.x では、全ての VNode のプロパティ構造はフラットになりました。上記の例が下記のようになります。
 
 ```js
