@@ -5,7 +5,7 @@ badges:
 
 # グローバル API <MigrationBadges :badges="$frontmatter.badges" />
 
-Vue 2.x では、グローバルに Vue の振る舞いを変更するグローバル API や設定が多数ありました。例えば、グローバルコンポーネントを作る際には、 以下のような `Vue.component` API を使用していました:
+Vue 2.x では、グローバルに Vue の振る舞いを変更するグローバル API や設定が多数ありました。例えば、グローバルコンポーネントを登録するには、 以下のような `Vue.component` API を使用します:
 
 ```js
 Vue.component('button-counter', {
@@ -28,18 +28,18 @@ Vue.directive('focus', {
 
 - グローバル設定を使用することで、テスト中に他のテストケースを誤って汚染しやすくなってしまいました。ユーザーは元のグローバル設定を保存し、各テスト後に元に戻すことを注意深くやる必要がありました (例 `Vue.config.errorHandler` のリセット)。`Vue.use` や、`Vue.mixin` のような API は、影響を元に戻す方法もありません。このため、プラグインを含むテストは特に厄介でした。実際、vue-test-utils はそれらに対応するために `createLocalVue` という特別な API を作らなければなりませんでした:
 
-```js
-import { createLocalVue, mount } from '@vue/test-utils'
+  ```js
+  import { createLocalVue, mount } from '@vue/test-utils'
 
-// 拡張した `Vue` コンストラクタを作成
-const localVue = createLocalVue()
+  // 拡張した `Vue` コンストラクタを作成
+  const localVue = createLocalVue()
 
-// "ローカル" Vue コンストラクタに、"グローバル" にプラグインをインストール
-localVue.use(MyPlugin)
+  // "ローカル" Vue コンストラクタに、"グローバル" にプラグインをインストール
+  localVue.use(MyPlugin)
 
-// `localVue` をマウントオプションに渡す
-mount(Component, { localVue })
-```
+  // `localVue` をマウントオプションに渡す
+  mount(Component, { localVue })
+  ```
 
 - また、グローバル設定では、同じページ上の複数のアプリケーション間でグローバル設定が異なる Vue のコピーを共有することが困難でした。
 
@@ -65,7 +65,15 @@ import { createApp } from 'vue'
 const app = createApp({})
 ```
 
-アプリケーションインスタンスは、現在のグローバル API のサブセットを公開します。おおまかには、_Vue の振る舞いをグローバルに変更する全ての API は、アプリケーションインスタンスに移されます_ 。こちらは、現在のグローバル API とインスタンス API との対応表です:
+Vue の [CDN](/guide/installation.html#cdn) ビルドを使っている場合、 `createApp` はグローバルな `Vue` オブジェクトを介して公開されます:
+
+```js
+const { createApp } = Vue
+
+const app = createApp({})
+```
+
+アプリケーションインスタンスは、 Vue 2 のグローバル API のサブセットを公開します。おおまかには、_Vue の振る舞いをグローバルに変更する全ての API は、アプリケーションインスタンスに移されます_ 。こちらは、 Vue 2 のグローバル API とインスタンス API との対応表です:
 
 | 2.x グローバル API         | 3.x インスタンス API (`app`)                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -76,6 +84,7 @@ const app = createApp({})
 | Vue.directive              | app.directive                                                                                    |
 | Vue.mixin                  | app.mixin                                                                                        |
 | Vue.use                    | app.use ([以下を参照](#a-note-for-plugin-authors))                                               |
+| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |                                                                     |
 
 グローバルに振る舞いを変更しないその他のグローバル API は [グローバル API の Treeshaking](./global-api-treeshaking.html) にあるように、名前付きエクスポートになりました。
 
@@ -94,17 +103,36 @@ ES Modules ビルドでは、モジュールバンドラーと一緒に使用さ
 Vue.config.ignoredElements = ['my-el', /^ion-/]
 
 // after
-const app = Vue.createApp({})
+const app = createApp({})
 app.config.isCustomElement = tag => tag.startsWith('ion-')
 ```
 
 ::: tip 重要
 
-Vue 3.0 では、要素がコンポーネントであるかどうかのチェックはコンパイルフェーズに移されたため、この設定はランタイムコンパイラを使用しているときにのみ尊重されます。ランタイム限定のビルドを使用している場合は、代わりにビルド設定で `isCustomElement` を `@vue/compiler-dom` に渡す必要があります - 例えば [`compilerOptions` option in vue-loader](https://vue-loader.vuejs.org/options.html#compileroptions) で。
+Vue 3 では、要素がコンポーネントであるかどうかのチェックはコンパイルフェーズに移されたため、この設定はランタイムコンパイラを使用しているときにのみ尊重されます。ランタイム限定のビルドを使用している場合は、代わりにビルド設定で `isCustomElement` を `@vue/compiler-dom` に渡す必要があります - 例えば [`compilerOptions` option in vue-loader](https://vue-loader.vuejs.org/options.html#compileroptions) で。
 
 - ランタイム限定ビルド使用時に、`config.isCustomElement` が代入された場合、ビルドの設定でこのオプションを設定するように警告が表示されます。
 - これは、Vue CLI 設定の新しいトップレベルのオプションになります。
-  :::
+:::
+
+### `Vue.prototype` は `config.globalProperties` と置換
+
+Vue 2 では、すべてのコンポーネントでアクセス可能なプロパティを追加するために、 `Vue.prototype` がよく使われていました。
+
+Vue 3 では、 [`config.globalProperties`](/api/application-config.html#globalproperties) が同様のものです。これらのプロパティは、アプリケーション内でコンポーネントをインスタンス化する際にコピーされます:
+
+```js
+// before - Vue 2
+Vue.prototype.$http = () => {}
+```
+
+```js
+// after - Vue 3
+const app = createApp({})
+app.config.globalProperties.$http = () => {}
+```
+
+また `globalProperties` の代わりに `provide` ([後述](#provide-inject)) を使うことも考えられます。
 
 ### プラグイン作者へのノート
 
@@ -127,7 +155,7 @@ app.use(VueRouter)
 
 ## アプリケーションインスタンスのマウント
 
-`createApp(/* オプション */)` で初期化した後、アプリケーションインスタンス `app` は、`app.mount(domTarget)` を使って Vue ルートインスタンスをマウントできます。
+`createApp(/* オプション */)` で初期化した後、アプリケーションインスタンス `app` は、`app.mount(domTarget)` を使ってルートコンポーネントインスタンスをマウントできます。
 
 ```js
 import { createApp } from 'vue'
@@ -178,6 +206,8 @@ export default {
 }
 ```
 
+`provide` を使うことは、特にプラグインを書くときに、 `globalProperties` の代わりになります。
+
 ## アプリケーション間での設定の共有
 
 コンポーネントや、ディレクティブの設定をアプリケーション間で共有する方法の一つとして、以下のようなファクトリ関数があります:
@@ -189,7 +219,7 @@ import Bar from './Bar.vue'
 
 const createMyApp = options => {
   const app = createApp(options)
-  app.directive('focus' /* ... */)
+  app.directive('focus', /* ... */)
 
   return app
 }
@@ -198,4 +228,4 @@ createMyApp(Foo).mount('#foo')
 createMyApp(Bar).mount('#bar')
 ```
 
-このようにして、 `fucus` ディレクティブは Foo と Bar 両方のインスタンスとその子で有効になります。
+このようにして、 `fucus` ディレクティブは `Foo` と `Bar` 両方のインスタンスとその子で有効になります。
