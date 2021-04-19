@@ -26,7 +26,7 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
 - [Vite](https://github.com/vitejs/vite) を使った Scaffold:
 
   ```bash
-  npm init vite-app hello-vue3 # OR yarn create vite-app hello-vue3
+  npm init @vitejs/app hello-vue3 # OR yarn create @vitejs/app hello-vue3
   ```
 
 - [vue-cli](https://cli.vuejs.org/) を使った Scaffold:
@@ -47,8 +47,9 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - [Emits Component Option](/guide/component-custom-events.html)
 - カスタムレンダラを作るための [`@vue/runtime-core` の `createRenderer` API](https://github.com/vuejs/vue-next/tree/master/packages/runtime-core)
 - [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-script-setup.md) <Badge text="experimental" type="warning" />
-- [SFC でのステートドリブンな CSS Variables (`<style vars>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
+- [SFC でのステートドリブンな CSS Variables (`<style>` の `v-bind`)](https://github.com/vuejs/rfcs/blob/style-vars-2/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
 - [SFC での `<style scoped>` は、グローバルルールまたはスロットされたコンテンツのみを対象とするルールを含めることができるようになった](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md)
+- [Suspense](/guide/migration/suspense.html) <Badge text="experimental" type="warning" />
 
 ## 破壊的変更
 
@@ -65,10 +66,11 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 
 ### テンプレートディレクティブ
 
-- [コンポーネントでの `v-model` の使用法が改定されました](/guide/migration/v-model.html)
+- [コンポーネントでの `v-model` の使用方法が作り直され、 `v-bind.sync` が置き換えられました](/guide/migration/v-model.html)
 - [`<templatev-for>` ノードと非 `v-for` ノードでの `key` の使用法が変更されました](/guide/migration/key-attribute.html)
 - [同じ要素で使用した場合の `v-if` と `v-for` の優先順位が変更されました](/guide/migration/v-if-v-for.html)
 - [`v-bind="object"` は順序依存(order-sensitive)になりました](/guide/migration/v-bind.html)
+- [`v-on:event.native` 修飾子は削除されました](./v-on-native-modifier-removed.md)
 - [`v-for` 内の `ref` は refs の配列を登録しなくなりました](/guide/migration/array-refs.html)
 
 ### コンポーネント
@@ -76,15 +78,18 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [関数コンポーネントは、単純な関数を使用してのみ作成可能になりました](/guide/migration/functional-components.html)
 - [単一ファイルコンポーネント (SFC) における `functional` 属性の `<template>` および `functional` コンポーネントオプションは非推奨になりました](/guide/migration/functional-components.html)
 - [非同期コンポーネントは、 `defineAsyncComponent` メソッドを使って作成することが必要になりました](/guide/migration/async-components.html)
+- [コンポーネントのイベントは、 `emits` で宣言できるようになりました](./emits-option.md)
 
 ### Render 関数
 
 - [Render 関数の API が変更されました](/guide/migration/render-function-api.html)
 - [`$scopedSlots` プロパティが削除され、すべてのスロットが `$slots` を介して関数として公開されるようになりました](/guide/migration/slots-unification.html)
+- [`$listeners` は削除され、 `$attrs` にマージされました](./listeners-removed)
+- [`$attrs` に `class` と `style` 属性が追加されました](./attrs-includes-class-style.md)
 
 ### カスタム要素
 
-- [テンプレートのコンパイル中にカスタム要素のホワイトリスト化が実行されるようになりました](/guide/migration/custom-elements-interop.html)
+- [テンプレートのコンパイル中にカスタム要素のチェックが実行されるようになりました](/guide/migration/custom-elements-interop.html)
 - [特別な `is` prop の使用は、予約済みの `<component>` タグのみに制限されるようになりました](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 
 ### その他の細かな変更
@@ -97,27 +102,32 @@ Vue 2 と互換性のある動作と、互換性のない使用法に対する�
 - [ミックスインの `data` オプションは浅くマージされるようになりました](/guide/migration/data-option.html#mixin-merge-behavior-change)
 - [属性強制の戦略が変更されました](/guide/migration/attribute-coercion.html)
 - [一部のトランジションクラスの名前が変更されました](/guide/migration/transition.html)
+- [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
 - [配列を監視している場合、コールバックは配列が置き換えられたときにのみ発火されるようになりました。 ミューテーションで発火する必要がある場合は、 `deep` オプションを指定する必要があります。](/guide/migration/watch.html)
 - 特別なディレクティブ(`v-if/else-if/else` 、 `v-for` 、または `v-slot`）が使われていない `<template>` タグはプレーンな要素として扱われ、内部コンテンツをレンダリングする代わりにネイティブの `<template>` 要素となります。
-- Vue 2.x では、アプリケーションルートコンテナの `outerHTML` はルートコンポーネントのテンプレートに置き換えられます(または、ルートコンポーネントにテンプレート/レンダーのオプションがない場合は、最終的にテンプレートにコンパイルされます)。 Vue 3.x では、代わりにアプリケーションコンテナの `innerHTML` を使用するようになりました。これは、コンテナ自体がテンプレートの一部とは見なされなくなったことを意味します。
+- [マウントされたアプリケーションは、マウント先の要素を置き換えなくなりました](/guide/migration/mount-changes.html)
+- [ライフサイクルの `hook:` イベントのプレフィックスは `vnode-` に変更されました](/guide/migration/vnode-lifecycle-events.html)
 
 ### 削除された API
 
 - [`v-on` の修飾子としての `keyCode` のサポート](/guide/migration/keycode-modifiers.html)
-- [$on, $off そして \$once のインスタンスメソッド](/guide/migration/events-api.html)
+- [$on, $off そして $once のインスタンスメソッド](/guide/migration/events-api.html)
 - [Filters](/guide/migration/filters.html)
 - [インラインテンプレート属性](/guide/migration/inline-template-attribute.html)
+- [`$children` インスタンスプロパティ](/guide/migration/children.html)
+- [`propsData` オプション](/guide/migration/props-data.html)
 - `$destroy` インスタンスメソッド。 ユーザーは、個々の Vue コンポーネントのライフサイクルを手動で管理べきではなくなりました。
+- グローバル関数の `set` と `delete`、およびインスタンスメソッドの `$set` と `$delete`。これらはプロキシベースの変更検出では必要なくなりました。
 
 ## サポートライブラリ
 
-現在、すべての公式ライブラリとツールが Vue 3 をサポートしていますが、それらのほとんどはまだベータ版であり、NPM の `next` 配布 (dist) タグで配布されています。 **2020 年末までにすべてのプロジェクトを安定させて `latest` 配布タグを使用するように切り替える予定です。**
+現在、すべての公式ライブラリとツールが Vue 3 をサポートしていますが、中にはまだベータ版やリリース候補版のものもあります。それぞれのライブラリの詳細は以下のとおりです。ほとんどのライブラリは現在、 npm の `next` 配布 (dist) タグで配布されています。すべての公式ライブラリが互換性のある安定したバージョンになったら、 `latest` に変更する予定です。
 
 ### Vue CLI
 
 <a href="https://www.npmjs.com/package/@vue/cli" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/@vue/cli"></a>
 
-v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するときに、Vue 3 のプリセットを選択するための組み込みオプションを提供するようになりました。 `vue-cli` をアップグレードし、 `vue create` を実行して、Vue3 プロジェクトを今すぐ作成できます。
+v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するときに、Vue 3 を選択するための組み込みオプションを提供するようになりました。 `vue-cli` をアップグレードし、 `vue create` を実行して、Vue3 プロジェクトを今すぐ作成できます。
 
 - [Documentation](https://cli.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vue-cli)
@@ -126,8 +136,9 @@ v4.5.0 以降、 `vue-cli` は新しいプロジェクトを作成するとき�
 
 <a href="https://www.npmjs.com/package/vue-router/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vue-router/next.svg"></a>
 
-Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更がいくつかあります。 詳細については、[README](https://github.com/vuejs/vue-router-next#vue-router-next-)を確認してください。
+Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更がいくつかあります。 詳細については、[移行ガイド](https://next.router.vuejs.org/guide/migration/) を確認してください。
 
+- [Documentation](https://next.router.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vue-router-next)
 - [RFCs](https://github.com/vuejs/rfcs/pulls?q=is%3Apr+is%3Amerged+label%3Arouter)
 
@@ -135,8 +146,9 @@ Vue Router 4.0 は Vue 3 のサポートを提供し、独自の破壊的変更�
 
 <a href="https://www.npmjs.com/package/vuex/v/next" target="_blank" noopener noreferrer><img src="https://img.shields.io/npm/v/vuex/next.svg"></a>
 
-Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供します。 唯一の破壊的変更は、[プラグインのインストール方法](https://github.com/vuejs/vuex/tree/4.0#breaking-changes)です。
+Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供します。 唯一の破壊的変更は、[プラグインのインストール方法](https://next.vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html#breaking-changes)です。
 
+- [Documentation](https://next.vuex.vuejs.org/)
 - [GitHub](https://github.com/vuejs/vuex/tree/4.0)
 
 ### Devtools Extension
@@ -155,13 +167,13 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 
 ## その他のプロジェクト
 
-| Project               | NPM                           | Repo                 |
+| Project               | npm                           | Repo                 |
 | --------------------- | ----------------------------- | -------------------- |
 | @vue/babel-plugin-jsx | [![rc][jsx-badge]][jsx-npm]   | [[GitHub][jsx-code]] |
 | eslint-plugin-vue     | [![ga][epv-badge]][epv-npm]   | [[GitHub][epv-code]] |
 | @vue/test-utils       | [![beta][vtu-badge]][vtu-npm] | [[GitHub][vtu-code]] |
 | vue-class-component   | [![beta][vcc-badge]][vcc-npm] | [[GitHub][vcc-code]] |
-| vue-loader            | [![beta][vl-badge]][vl-npm]   | [[GitHub][vl-code]]  |
+| vue-loader            | [![rc][vl-badge]][vl-npm]     | [[GitHub][vl-code]]  |
 | rollup-plugin-vue     | [![beta][rpv-badge]][rpv-npm] | [[GitHub][rpv-code]] |
 
 [jsx-badge]: https://img.shields.io/npm/v/@vue/babel-plugin-jsx.svg
@@ -188,3 +200,7 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 [rpv-badge]: https://img.shields.io/npm/v/rollup-plugin-vue/next.svg
 [rpv-npm]: https://www.npmjs.com/package/rollup-plugin-vue/v/next
 [rpv-code]: https://github.com/vuejs/rollup-plugin-vue/tree/next
+
+::: info
+Vue 3 のライブラリとの互換性については、 [awesome-vue のこの Issue](https://github.com/vuejs/awesome-vue/issues/3544) を見てください。
+:::
