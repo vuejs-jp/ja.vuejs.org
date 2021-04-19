@@ -30,7 +30,7 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 
 これは _enter_ と _leave_ が広義であり、クラスのフックと同じ命名規則を使っていないため、混乱を招いてしまっています。
 
-## 3.x でのアップデート
+## 3.x での更新
 
 より明示的で読みやすいように、これらの開始状態クラスの名前を変更しました。
 
@@ -55,8 +55,12 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 - `leave-class` は `leave-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
 - `enter-class` は `enter-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
 
-## 移行戦略
+## 移行の戦略
 
 1. `.v-enter` のインスタンスを `.v-enter-from` に置き換えます。
 2. `.v-leave` のインスタンスを `.v-leave-from` に置き換えます。
 3. 上記のように、関連するプロップ名のインスタンスを置き換えます。
+
+## 参照
+
+- [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
