@@ -127,6 +127,7 @@ export default {
   key: 'submit-button'
 }
 ```
+
 ## 登録済みコンポーネント
 
 ### 2.x での構文
@@ -136,12 +137,14 @@ export default {
 ```js
 // 2.x
 Vue.component('button-counter', {
-  data: () => ({
-    count: 0
-  }),
+  data() {
+    return {
+      count: 0
+    }
+  }
   template: `
     <button @click="count++">
-          Clicked {{ count }} times.
+      Clicked {{ count }} times.
     </button>
   `
 })
