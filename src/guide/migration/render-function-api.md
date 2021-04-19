@@ -127,6 +127,47 @@ export default {
   key: 'submit-button'
 }
 ```
+## 登録済みコンポーネント
+
+### 2.x での構文
+
+2.x では、コンポーネントが登録されていた場合、コンポーネントの名前を文字列として第1引数に渡すと、 Render 関数がうまく動作します:
+
+```js
+// 2.x
+Vue.component('button-counter', {
+  data: () => ({
+    count: 0
+  }),
+  template: `
+    <button @click="count++">
+          Clicked {{ count }} times.
+    </button>
+  `
+})
+export default {
+  render(h) {
+    return h('button-counter')
+  }
+}
+```
+
+### 3.x での構文
+
+3.x では、 VNodes がコンテキストフリーになったため、登録されているコンポーネントを暗黙的に探すために、文字列 ID を使うことができなくなります。代わりに、 `resolveComponent` メソッドを使う必要があります:
+
+```js
+// 3.x
+import { h, resolveComponent } from 'vue'
+export default {
+  setup() {
+    const ButtonCounter = resolveComponent('button-counter')
+    return () => h(ButtonCounter)
+  }
+}
+```
+
+詳細については、 [Render 関数 API の変更に関する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0008-render-function-api-change.md#context-free-vnodes) を見てください。
 
 ## 移行の戦略
 
