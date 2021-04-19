@@ -16,12 +16,12 @@ badges:
 
 詳細については、以下をお読みください!
 
-## 2.x 構文
+## 2.x での構文
 
 render 関数を使用する場合、つまり、`h` は、2.x ではコンテンツノードの `slot` データプロパティを定義するために使用されます。
 
 ```js
-// 2.x 構文
+// 2.x での構文
 h(LayoutComponent, [
   h('div', { slot: 'header' }, this.header),
   h('div', { slot: 'content' }, this.content)
@@ -31,16 +31,16 @@ h(LayoutComponent, [
 さらに、スコープ付きスロットを参照する場合、次の構文を使用して参照できます:
 
 ```js
-// 2.x 構文
+// 2.x での構文
 this.$scopedSlots.header
 ```
 
-## 3.x 構文
+## 3.x での構文
 
 3.x では、スロットはオブジェクトとしての現在のノードの子として定義されています:
 
 ```js
-// 3.x 構文
+// 3.x での構文
 h(LayoutComponent, {}, {
   header: () => h('div', this.header),
   content: () => h('div', this.content)
@@ -50,14 +50,14 @@ h(LayoutComponent, {}, {
 また、スコープ付きスロットをプログラムで参照する必要がある場合、それらは `$slots` オプションに統合されるようになりました。
 
 ```js
-// 2.x 構文
+// 2.x での構文
 this.$scopedSlots.header
 
-// 3.x 構文
+// 3.x での構文
 this.$slots.header()
 ```
 
-## 移行戦略
+## 移行の戦略
 
 変更の大部分はすでに 2.6 で行われています。その結果、移行は1つのステップで実行できます:
 
