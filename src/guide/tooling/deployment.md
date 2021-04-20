@@ -1,24 +1,24 @@
-# Production Deployment
+# 実運用への展開
 
 ::: info
-Most of the tips below are enabled by default if you are using [Vue CLI](https://cli.vuejs.org). This section is only relevant if you are using a custom build setup.
+以下のヒントのほとんどは、 [Vue CLI](https://cli.vuejs.org) を使っている場合、デフォルトで有効になっています。このセクションは、カスタムビルドのセットアップを使っている場合にのみ関連します。
 :::
 
-## Turn on Production Mode
+## プロダクションモードをオンにする
 
-During development, Vue provides a lot of warnings to help you with common errors and pitfalls. However, these warning strings become useless in production and bloat your app's payload size. In addition, some of these warning checks have small runtime costs that can be avoided in [production mode](https://cli.vuejs.org/guide/mode-and-env.html#modes).
+開発中、 Vue は一般的なエラーや落とし穴に役立つたくさんの警告を提供しています。しかし、これらの警告文は実運用では役に立たず、アプリケーションのペイロードの大きさを肥大化させてしまいます。 さらに、これらの警告チェックの中には、 [プロダクションモード](https://cli.vuejs.org/guide/mode-and-env.html#modes) では避けることのできる小さなランタイムコストがあります。
 
-### Without Build Tools
+### ビルドツールなし
 
-If you are using the full build, i.e. directly including Vue via a script tag without a build tool, make sure to use the minified version for production. This can be found in the [Installation guide](/guide/installation.html#cdn).
+フルビルドを使う場合、つまりビルドツールを使わずに script タグで Vue を直接含める場合は、必ず minifiled バージョンを本番で使ってください。これは、 [インストールガイド](/guide/installation.html#cdn) に記載されています。
 
-### With Build Tools
+### ビルドツールあり
 
-When using a build tool like Webpack or Browserify, the production mode will be determined by `process.env.NODE_ENV` inside Vue's source code, and it will be in development mode by default. Both build tools provide ways to overwrite this variable to enable Vue's production mode, and warnings will be stripped by minifiers during the build. Vue CLI has this pre-configured for you, but it would be beneficial to know how it is done:
+Webpack や Browserify などのビルドツールを使う場合は、プロダクションモードは Vue のソースコード内の `process.env.NODE_ENV` で決定され、デフォルトでは開発モードになります。どちらのビルドツールも、 Vue のプロダクションモードを有効にするために、この変数を上書きする方法を提供しており、警告はビルド中に Minifier (圧縮・軽量化) によって取り除かれます。Vue CLI では事前設定されていますが、どのように行われているか知っておくことはよいでしょう:
 
 #### Webpack
 
-In Webpack 4+, you can use the `mode` option:
+Webpack 4+ では、 `mode` オプションを使えます:
 
 ```js
 module.exports = {
@@ -28,45 +28,45 @@ module.exports = {
 
 #### Browserify
 
-- Run your bundling command with the actual `NODE_ENV` environment variable set to `"production"`. This tells `vueify` to avoid including hot-reload and development related code.
+- 実際の `NODE_ENV` 環境変数に `"production"` を設定して、バンドルコマンドを実行してください。これは `vueify` にホットリロードや開発関連のコードを含まないように指示します。
 
-- Apply a global [envify](https://github.com/hughsk/envify) transform to your bundle. This allows the minifier to strip out all the warnings in Vue's source code wrapped in env variable conditional blocks. For example:
+- バンドルにグローバルな [envify](https://github.com/hughsk/envify) の変換を適用します。これにより、 Minifier は環境変数の条件ブロックに含まれた Vue のソースコードのすべての警告を取り除くことができます。例えば:
 
   ```bash
   NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
   ```
 
-- Or, using [envify](https://github.com/hughsk/envify) with Gulp:
+- または、 [envify](https://github.com/hughsk/envify) を Gulp で使うと:
 
   ```js
-  // Use the envify custom module to specify environment variables
+  // envify のカスタムモジュールで環境変数を指定
   const envify = require('envify/custom')
 
   browserify(browserifyOptions)
     .transform(vueify)
     .transform(
-      // Required in order to process node_modules files
+      // node_modules ファイルを処理するために必要
       { global: true },
       envify({ NODE_ENV: 'production' })
     )
     .bundle()
   ```
 
-- Or, using [envify](https://github.com/hughsk/envify) with Grunt and [grunt-browserify](https://github.com/jmreidy/grunt-browserify):
+- または、 [envify](https://github.com/hughsk/envify) を Grunt と [grunt-browserify](https://github.com/jmreidy/grunt-browserify) で使うと:
 
   ```js
-  // Use the envify custom module to specify environment variables
+  // envify のカスタムモジュールで環境変数を指定
   const envify = require('envify/custom')
 
   browserify: {
     dist: {
       options: {
-        // Function to deviate from grunt-browserify's default order
+        // grunt-browserify のデフォルトの順序からはずれる関数
         configure: (b) =>
           b
             .transform('vueify')
             .transform(
-              // Required in order to process node_modules files
+              // node_modules ファイルを処理するために必要
               { global: true },
               envify({ NODE_ENV: 'production' })
             )
@@ -78,7 +78,7 @@ module.exports = {
 
 #### Rollup
 
-Use [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace):
+[@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace) を使ってください:
 
 ```js
 const replace = require('@rollup/plugin-replace')
@@ -93,24 +93,24 @@ rollup({
 }).then(...)
 ```
 
-## Pre-Compiling Templates
+## テンプレートのプリコンパイル
 
-When using in-DOM templates or in-JavaScript template strings, the template-to-render-function compilation is performed on the fly. This is usually fast enough in most cases, but is best avoided if your application is performance-sensitive.
+DOM 内のテンプレートや、 JavaScript 内のテンプレートリテラルを使う場合、テンプレートからレンダリング関数へのコンパイルは実行時に行われます。ほとんどの場合、この方法で十分な速度が得られますが、アプリケーションがパフォーマンスを重視される場合は避けたほうがよいです。
 
-The easiest way to pre-compile templates is using [Single-File Components](/guide/single-file-component.html) - the associated build setups automatically performs pre-compilation for you, so the built code contains the already compiled render functions instead of raw template strings.
+テンプレートをプリコンパイルする最も簡単な方法は、 [単一ファイルコンポーネント](/guide/single-file-component.html) を使うことです。これは関連するビルドセットアップが自動的にプリコンパイルを行います。これにより、ビルドされたコードは生のテンプレート文字列ではなく、すでにコンパイルされたレンダリング関数が含まれることになります。
 
-If you are using Webpack, and prefer separating JavaScript and template files, you can use [vue-template-loader](https://github.com/ktsn/vue-template-loader), which also transforms the template files into JavaScript render functions during the build step.
+Webpack を使っていて、 JavaScript とテンプレートファイルを分離したい場合は、 [vue-template-loader](https://github.com/ktsn/vue-template-loader) を使うと、ビルドステップでテンプレートファイルを JavaScript のレンダリング関数に変換することもできます。
 
-## Extracting Component CSS
+## コンポーネントの CSS を抽出
 
-When using Single-File Components, the CSS inside components are injected dynamically as `<style>` tags via JavaScript. This has a small runtime cost, and if you are using server-side rendering it will cause a "flash of unstyled content". Extracting the CSS across all components into the same file will avoid these issues, and also result in better CSS minification and caching.
+単一ファイルコンポーネントを使う場合、コンポーネント内の CSS は JavaScript を介して `<style>` タグとして動的に差し込まれます。これにはわずかなランタイムコストがかかります。また、サーバーサイドレンダリングを使っている場合は、「瞬間的にスタイルのないコンテンツ」を引き起こします。同じファイルにすべてのコンポーネントの CSS を抽出することで、このような問題を回避して、よりよい CSS の最小化やキャッシュ化をすることができます。
 
-Refer to the respective build tool documentations to see how it's done:
+その方法については、各ビルドツールのドキュメントを参照してください:
 
-- [Webpack + vue-loader](https://vue-loader.vuejs.org/en/configurations/extract-css.html) (the `vue-cli` webpack template has this pre-configured)
+- [Webpack + vue-loader](https://vue-loader.vuejs.org/en/configurations/extract-css.html) (`vue-cli` の Webpack テンプレートには、これがあらかじめ設定されています)
 - [Browserify + vueify](https://github.com/vuejs/vueify#css-extraction)
 - [Rollup + rollup-plugin-vue](https://rollup-plugin-vue.vuejs.org/)
 
-## Tracking Runtime Errors
+## ランタイムエラーの追跡
 
-If a runtime error occurs during a component's render, it will be passed to the global `app.config.errorHandler` config function if it has been set. It might be a good idea to leverage this hook together with an error-tracking service like [Sentry](https://sentry.io), which provides [an official integration](https://sentry.io/for/vue/) for Vue.
+コンポーネントのレンダリング中にランタイムエラーが発生した場合、グローバルの `app.config.errorHandler` に設定した関数があれば、それに渡されます。Vue の [公式インテグレーション](https://sentry.io/for/vue/) を提供している [Sentry](https://sentry.io) のようなエラー追跡サービスと一緒にこのフックを活用するのはよいアイデアかもしれません。
