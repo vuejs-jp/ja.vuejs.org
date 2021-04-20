@@ -1,8 +1,8 @@
-# Data Properties and Methods
+# データプロパティとメソッド
 
-## Data Properties
+## データプロパティ
 
-The `data` option for a component is a function. Vue calls this function as part of creating a new component instance. It should return an object, which Vue will then wrap in its reactivity system and store on the component instance as `$data`. For convenience, any top-level properties of that object are also exposed directly via the component instance:
+コンポーネントの `data` オプションは関数です。Vue は新しいコンポーネントのインスタンスを作成する際に、この関数を呼び出します。これはオブジェクトを返すもので、 Vue はオブジェクトをそのリアクティブシステムでラップして、コンポーネントのインスタンスに `$data` として格納します。便宜上、そのオブジェクトのトップレベルのプロパティは、コンポーネントのインスタンスを介して直接公開されます:
 
 ```js
 const app = Vue.createApp({
@@ -16,24 +16,24 @@ const vm = app.mount('#app')
 console.log(vm.$data.count) // => 4
 console.log(vm.count)       // => 4
 
-// Assigning a value to vm.count will also update $data.count
+// vm.count に値を代入すると、 $data.count も更新
 vm.count = 5
 console.log(vm.$data.count) // => 5
 
-// ... and vice-versa
+// ... 逆もまた同様
 vm.$data.count = 6
 console.log(vm.count) // => 6
 ```
 
-These instance properties are only added when the instance is first created, so you need to ensure they are all present in the object returned by the `data` function. Where necessary, use `null`, `undefined` or some other placeholder value for properties where the desired value isn't yet available.
+これらのインスタンスプロパティは、インスタンスの初回作成時にのみ追加されます。そのため、 `data` 関数から返されたオブジェクトに、それらがすべて含まれていることを確認する必要があります。必要に応じて、必要な値がまだ利用できないプロパティには、 `null` や `undefined` 、またはその他のプレースホルダーの値を使ってください。
 
-It is possible to add a new property directly to the component instance without including it in `data`. However, because this property isn't backed by the reactive `$data` object, it won't automatically be tracked by [Vue's reactivity system](reactivity.html).
+新しいプロパティを `data` に含めずに、コンポーネントのインスタンスに直接追加することはできます。しかし、このプロパティはリアクティブな `$data` オブジェクトによって裏付けされていないので、 [Vue のリアクティブシステム](reactivity.html) によって、自動的に追跡されることはありません。
 
-Vue uses a `$` prefix when exposing its own built-in APIs via the component instance. It also reserves the prefix `_` for internal properties. You should avoid using names for top-level `data` properties that start with either of these characters.
+Vue は、コンポーネントのインスタンスを介して自身のビルトイン API を公開する際に、 `$` をプレフィックスに使います。 また、内部プロパティのために `_` を予約しています。トップレベルの `data` プロパティの名前に、これらの文字からはじまる名前を使うことは避けるべきです。
 
-## Methods
+## メソッド
 
-To add methods to a component instance we use the `methods` option. This should be an object containing the desired methods:
+コンポーネントのインスタンスにメソッドを追加するには、 `methods` オプションを使います。これは必要なメソッドを含むオブジェクトでなければなりません:
 
 ```js
 const app = Vue.createApp({
@@ -42,7 +42,7 @@ const app = Vue.createApp({
   },
   methods: {
     increment() {
-      // `this` will refer to the component instance
+      // `this` はコンポーネントインスタンスを参照
       this.count++
     }
   }
@@ -57,17 +57,17 @@ vm.increment()
 console.log(vm.count) // => 5
 ```
 
-Vue automatically binds the `this` value for `methods` so that it always refers to the component instance. This ensures that a method retains the correct `this` value if it's used as an event listener or callback. You should avoid using arrow functions when defining `methods`, as that prevents Vue from binding the appropriate `this` value.
+Vue は、 `methods` の `this` を自動的に束縛して、常にコンポーネントのインスタンスを参照します。これにより、メソッドがイベントリスナやコールバックとして使われる際に、正しい `this` の値を保持することができます。Vue が適切な `this` の値を束縛するのを防ぐため、 `methods` を定義する際にはアロー関数を使うのは避けるべきです。
 
-Just like all other properties of the component instance, the `methods` are accessible from within the component's template. Inside a template they are most commonly used as event listeners:
+コンポーネントのインスタンスの他のすべてのプロパティと同様に、 `methods` はコンポーネントのテンプレート内からアクセスできます。テンプレート内からはよくイベントリスナとして使われます:
 
 ```html
 <button @click="increment">Up vote</button>
 ```
 
-In the example above, the method `increment` will be called when the `<button>` is clicked.
+上の例では、 `<button>` がクリックされると、 `increment` メソッドが呼ばれます。
 
-It is also possible to call a method directly from a template. As we'll see shortly, it's usually better to use a [computed property](computed.html) instead. However, using a method can be useful in scenarios where computed properties aren't a viable option. You can call a method anywhere that a template supports JavaScript expressions:
+また、テンプレートから直接メソッドを呼び出すこともできます。後で説明しますが、通常は変わりに [算出プロパティ](computed.html) を使うのがよいです。しかし、メソッドを使うことは算出プロパティが実行可能なオプションではない場合に役に立ちます。テンプレートが JavaScript の式をサポートしていれば、どこでもメソッドを呼び出すことができます:
 
 ```html
 <span :title="toTitleDate(date)">
@@ -75,45 +75,45 @@ It is also possible to call a method directly from a template. As we'll see shor
 </span>
 ```
 
-If the methods `toTitleDate` or `formatDate` access any reactive data then it will be tracked as a rendering dependency, just as if it had been used in the template directly.
+`toTitleDate` や `formatDate` メソッドがどれかリアクティブなデータにアクセスすると、あたかもテンプレートで直接使われていたかのように、それはレンダリングの依存関係として追跡されます。
 
-Methods called from a template should not have any side effects, such as changing data or triggering asynchronous processes. If you find yourself tempted to do that you should probably use a [lifecycle hook](instance.html#lifecycle-hooks) instead.
+テンプレートから呼び出されたメソッドは、データの変更や非同期処理の発火などの副作用があってはなりません。もしそのようなことをしたくなったら、代わりに [ライフサイクルフック](instance.html#lifecycle-hooks) を使うべきです。
 
-### Debouncing and Throttling
+### Debounce (デバウンス) と Throttle (スロットル)
 
-Vue doesn't include built-in support for debouncing or throttling but it can be implemented using libraries such as [Lodash](https://lodash.com/).
+Vue は、 デバウンスやスロットルのサポートが組み込まれていませんが、 [Lodash](https://lodash.com/) などのライブラリを使って実装することができます。
 
-In cases where a component is only used once, the debouncing can be applied directly within `methods`:
+コンポーネントが一度しか使われない場合には、 `methods` の中で直接デバウンスを適用することができます:
 
 ```html
 <script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
 <script>
   Vue.createApp({
     methods: {
-      // Debouncing with Lodash
+      // Lodash によるデバウンス
       click: _.debounce(function() {
-        // ... respond to click ...
+        // ... クリックに反応 ...
       }, 500)
     }
   }).mount('#app')
 </script>
 ```
 
-However, this approach is potentially problematic for components that are reused because they'll all share the same debounced function. To keep the component instances independent from each other, we can add the debounced function in the `created` lifecycle hook:
+しかし、この方法ではコンポーネントが再利用される場合に、すべてのコンポーネントが同じデバウンス関数を共有するため、問題が起きる可能性があります。コンポーネントのインスタンスをお互いに独立させるために、 `created` ライフサイクルフックにデバウンス関数を追加することができます:
 
 ```js
 app.component('save-button', {
   created() {
-    // Debouncing with Lodash
+    // Lodash によるデバウンス
     this.debouncedClick = _.debounce(this.click, 500)
   },
   unmounted() {
-    // Cancel the timer when the component is removed
+    // コンポーネントが削除されたらタイマーをキャンセル
     this.debouncedClick.cancel()
   },
   methods: {
     click() {
-      // ... respond to click ...
+      // ... クリックに反応 ...
     }
   },
   template: `
