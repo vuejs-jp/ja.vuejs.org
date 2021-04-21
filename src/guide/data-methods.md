@@ -81,16 +81,16 @@ Vue は、 `methods` の `this` を自動的に束縛して、常にコンポー
 
 ### Debounce (デバウンス) と Throttle (スロットル)
 
-Vue は、 デバウンスやスロットルのサポートが組み込まれていませんが、 [Lodash](https://lodash.com/) などのライブラリを使って実装することができます。
+Vue は、 Debounce や Throttle のサポートが組み込まれていませんが、 [Lodash](https://lodash.com/) などのライブラリを使って実装することができます。
 
-コンポーネントが一度しか使われない場合には、 `methods` の中で直接デバウンスを適用することができます:
+コンポーネントが一度しか使われない場合には、 `methods` の中で直接 Debounce を適用することができます:
 
 ```html
 <script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
 <script>
   Vue.createApp({
     methods: {
-      // Lodash によるデバウンス
+      // Lodash による Debounce
       click: _.debounce(function() {
         // ... クリックに反応 ...
       }, 500)
@@ -99,12 +99,12 @@ Vue は、 デバウンスやスロットルのサポートが組み込まれて
 </script>
 ```
 
-しかし、この方法ではコンポーネントが再利用される場合に、すべてのコンポーネントが同じデバウンス関数を共有するため、問題が起きる可能性があります。コンポーネントのインスタンスをお互いに独立させるために、 `created` ライフサイクルフックにデバウンス関数を追加することができます:
+しかし、この方法ではコンポーネントが再利用される場合に、すべてのコンポーネントが同じ Debounce 関数を共有するため、問題が起きる可能性があります。コンポーネントのインスタンスをお互いに独立させるために、 `created` ライフサイクルフックに Debounce 関数を追加することができます:
 
 ```js
 app.component('save-button', {
   created() {
-    // Lodash によるデバウンス
+    // Lodash によるDebounce
     this.debouncedClick = _.debounce(this.click, 500)
   },
   unmounted() {
