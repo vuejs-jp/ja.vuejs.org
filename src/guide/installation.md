@@ -1,13 +1,13 @@
 # インストール
 
-Vue.js is built by design to be incrementally adoptable. This means that it can be integrated into a project multiple ways depending on the requirements.
+Vue.js は、段階的に導入できるように設計されています。これは要件に応じて、複数の方法でプロジェクトに組み込むことができることを意味します。
 
-There are four primary ways of adding Vue.js to a project:
+Vue.js をプロジェクトに追加するには主に4つの方法があります:
 
-1. Import it as a [CDN package](#cdn) on the page
-2. Download the JavaScript files and [host them yourself](#download-and-self-host)
-3. Install it using [npm](#npm)
-4. Use the official [CLI](#cli) to scaffold a project, which provides batteries-included build setups for a modern frontend workflow (e.g., hot-reload, lint-on-save, and much more)
+1. ページ上で [CDN パッケージ](#cdn) として取り込む
+2. JavaScript ファイルをダウンロードして、 [自分でホストする](#download-and-self-host)
+3. [npm](#npm) を使ってインストールする
+4. 公式の [CLI](#cli) を使ってプロジェクトの基礎を作る。これはモダンなフロントエンドのワークフローのためのバッテリー同梱のようなビルドセットアップを提供します (例えば、ホットリロード、保存時に Lint など)
 
 ## リリースノート
 
@@ -17,7 +17,7 @@ There are four primary ways of adding Vue.js to a project:
 
 ## Vue Devtools
 
-> Currently in Beta - Vuex and Router integration is still WIP
+> 現在ベータ版 - Vuex と Router の統合は WIP です
 
 Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
@@ -39,9 +39,9 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ## Download and Self Host
 
-If you want to avoid using build tools but can't use a CDN in production then you can download the relevant `.js` file and host it using your own web server. You can then include it using a `<script>` tag, just like with the CDN approach.
+ビルドツールの使用を避けたいが、本番環境で CDN を使用できない場合は、関連する `.js` ファイルをダウンロードして、自分のウェブサーバを使ってホストすることができます。CDN の場合と同じように `<script>` タグを使って導入することができます。
 
-The files can be browsed and downloaded from a CDN such as [unpkg](https://unpkg.com/browse/vue@next/dist/) or [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/). The various different files are [explained later](#explanation-of-different-builds) but you would typically want to download both a development build and a production build.
+ファイルは [unpkg](https://unpkg.com/browse/vue@next/dist/) や [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/) などの CDN から閲覧、ダウンロードすることができます。様々な異なるファイルは [後で説明しますが](#explanation-of-different-builds) 、通常は開発用のビルドと本番用のビルドの両方をダウンロードすることになります。
 
 ## npm
 
@@ -98,10 +98,10 @@ $ yarn
 $ yarn dev
 ```
 
-It might occur, that when your username has a space in it like 'Mike Baker', Vite cannot succeed. Have a try with
+ユーザ名に「Mike Baker」のように空白が入っていると、 Vite が成功しないことがあります。次を試してみてください。
 
 ```bash
-$ create-vite-app <project-name>
+$ create-vite-app <プロジェクト名>
 ```
 
 ## さまざまなビルドについて
