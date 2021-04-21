@@ -36,9 +36,9 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします。
 
-## NPM
+## npm
 
-Vue による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
+Vue による大規模アプリケーションを構築するときには、npm を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
 
 ```bash
 # 最新安定版
