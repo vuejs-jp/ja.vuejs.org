@@ -1,7 +1,7 @@
 # はじめに
 
 ::: tip NOTE
-Already know Vue 2 and just want to learn about what's new in Vue 3? Check out the [Migration Guide](/guide/migration/introduction.html)!
+すでに Vue 2 について知っていて、 Vue 3 の新機能について知りたいですか？ [移行ガイド](/guide/migration/introduction.html) をご覧ください！
 :::
 
 ## Vue.js とは？
