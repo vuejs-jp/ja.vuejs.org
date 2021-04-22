@@ -19,7 +19,7 @@ const sidebar = {
         '/guide/introduction',
         '/guide/instance',
         '/guide/template-syntax',
-        // '/guide/data-methods',
+        '/guide/data-methods',
         '/guide/computed',
         '/guide/class-and-style',
         '/guide/conditional',
