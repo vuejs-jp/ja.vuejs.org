@@ -2,7 +2,7 @@
 
 さらに深く見ていきましょう！Vue の最大の特徴の 1 つは、控えめなリアクティブシステムです。モデルはプロキシされた JavaScript オブジェクトです。それらを変更するとビューが更新されます。これは状態管理を非常にシンプルかつ直感的にしますが、よくある問題を避けるためにその仕組みを理解することも重要です。このセクションでは、Vue のリアクティブシステムに関する低レベルの詳細のいくつかを掘り下げていきます。
 
-<VideoLesson href="https://www.vuemastery.com/courses/vue-3-reactivity/vue3-reactivity" title="Vue Mastery のリアクティブの探求に関する無料ビデオを視聴する">Vue Mastery のリアクティブの探求に関する無料ビデオを視聴する</VideoLesson>
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-reactivity/vue3-reactivity" title="Vue Mastery でリアクティビティの仕組みを深く学ぶ">Vue Mastery のリアクティブの探求に関する無料ビデオを視聴する</VideoLesson>
 
 # リアクティブとは何か？
 

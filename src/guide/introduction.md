@@ -10,7 +10,7 @@ Vue (発音は /vju:/、**view** と同様) は、ユーザーインターフェ
 
 ここから先に進む前に Vue についてより深く知りたい方のために、基本理念やサンプルプロジェクトについて説明する<a id="modal-player" class="vuemastery-trigger" href="#">ビデオを作成しました</a>。
 
-<VideoLesson href="https://www.vuemastery.com/courses/intro-to-vue-3/intro-to-vue3" title="Watch a free video course on Vue Mastery">Watch a free video course on Vue Mastery</VideoLesson>
+<VideoLesson href="https://www.vuemastery.com/courses/intro-to-vue-3/intro-to-vue3" title="Vue Mastery の無料ビデオコースを見る">Vue Mastery の無料ビデオコースを見る</VideoLesson>
 
 <common-vuemastery-video-modal/>
 
