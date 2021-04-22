@@ -34,7 +34,7 @@
 
 ```bash
 # 1. Vue CLI をまだインストールしていなければ、インストールします
-npm install --global @vue/cli@next
+npm install --global @vue/cli
 
 # 2. 新しいプロジェクトを作成し、"Manually select features" を選択してください
 vue create my-project-name
