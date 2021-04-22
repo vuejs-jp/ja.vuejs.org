@@ -99,7 +99,7 @@ const sidebar = {
         '/guide/testing',
         '/guide/typescript-support',
         '/guide/mobile',
-        // '/guide/tooling/deployment'
+        '/guide/tooling/deployment'
       ]
     },
     {
