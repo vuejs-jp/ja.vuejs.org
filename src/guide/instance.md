@@ -97,7 +97,7 @@ Vue.createApp({
     return { count: 1 }
   },
   created() {
-    // `this` points to the vm instance
+    // `this` は vm インスタンスを指す
     console.log('count is: ' + this.count) // => "count is: 1"
   }
 })
