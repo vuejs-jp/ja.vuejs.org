@@ -211,4 +211,4 @@ in-DOM テンプレートの中では、v-bind:[someattr] に変換されます�
 
 #### JavaScript 式 の制約
 
-テンプレート式はサンドボックスで、`Math` や `Date` といった [ホワイトリストにあるグローバルオブジェクト](https://github.com/vuejs/vue-next/blob/master/packages/shared/src/globalsWhitelist.ts#L3)だけにアクセスできます。テンプレート式内でユーザーが定義したグローバルオブジェクトにアクセスしようとしてはいけません。
+テンプレート式はサンドボックス化されていて、 `Math` や `Date` といった [グローバルオブジェクトの制限リスト](https://github.com/vuejs/vue-next/blob/master/packages/shared/src/globalsWhitelist.ts#L3) にだけアクセスできます。テンプレート式内でユーザーが定義したグローバルオブジェクトにアクセスしようとしてはいけません。
