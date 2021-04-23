@@ -26,12 +26,7 @@ form の input 要素や textarea 要素、 select 要素に双方向データ�
 <p>Message is: {{ message }}</p>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="eYNPEqj" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: basic v-model">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/eYNPEqj">
-  Handling forms: basic v-model</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: basic v-model" slug="eYNPEqj" :preview="false" />
 
 ### 複数行テキスト
 
@@ -42,12 +37,7 @@ form の input 要素や textarea 要素、 select 要素に双方向データ�
 <textarea v-model="message" placeholder="add multiple lines"></textarea>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="xxGyXaG" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: textarea">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/xxGyXaG">
-  Handling forms: textarea</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: textarea" slug="xxGyXaG" :preview="false" />
 
 textarea への挿入は機能しません。代わりに`v-model`を用いてください。
 
@@ -68,12 +58,7 @@ textarea への挿入は機能しません。代わりに`v-model`を用いて�
 <label for="checkbox">{{ checked }}</label>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="PoqyJVE" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: checkbox">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/PoqyJVE">
-  Handling forms: checkbox</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: checkbox" slug="PoqyJVE" :preview="false" />
 
 同じ配列にバインドされた複数のチェックボックス:
 
@@ -100,12 +85,7 @@ Vue.createApp({
 }).mount('#v-model-multiple-checkboxes')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="bGdmoyj" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: multiple checkboxes">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/bGdmoyj">
-  Handling forms: multiple checkboxes</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: multiple checkboxes" slug="bGdmoyj" :preview="false" />
 
 ### ラジオ
 
@@ -131,12 +111,7 @@ Vue.createApp({
 }).mount('#v-model-radiobutton')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="MWwPEMM" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: radiobutton">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/MWwPEMM">
-  Handling forms: radiobutton</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: radiobutton" slug="MWwPEMM" :preview="false" />
 
 ### セレクト
 
@@ -164,12 +139,7 @@ Vue.createApp({
 }).mount('#v-model-select')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="KKpGydL" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: select">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/KKpGydL">
-  Handling forms: select</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: select" slug="KKpGydL" :preview="false" />
 
 :::tip Note
 `v-model`の式の初期値がいずれのオプションとも一致しない場合、`<select>`要素は *未選択* の状態で描画されます。これにより iOS では最初のアイテムが選択できなくなります。なぜなら iOS はこのような場合に `change` イベントを発火させないためです。したがって、上記の例で示したように、`value`を持たない`disabled` なオプションを追加しておくことをおすすめします。
@@ -187,12 +157,7 @@ Vue.createApp({
 <span>Selected: {{ selected }}</span>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="gOpBXPz" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: select bound to array">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/gOpBXPz">
-  Handling forms: select bound to array</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: select bound to array" slug="gOpBXPz" tab="html,result" :preview="false" />
 
 動的なオプションを`v-for`により描画:
 
@@ -222,12 +187,7 @@ Vue.createApp({
 }).mount('#v-model-select-dynamic')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="abORVZm" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Handling forms: select with dynamic options">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abORVZm">
-  Handling forms: select with dynamic options</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Handling forms: select with dynamic options" slug="abORVZm" :preview="false" />
 
 ## 値のバインディング
 

@@ -23,6 +23,8 @@ this.$emit('myEvent')
 
 ## カスタムイベントの定義
 
+<VideoLesson href="https://vueschool.io/lessons/defining-custom-events-emits?friend=vuejs" title="Learn how to define which events a component can emit with Vue School">Watch a free video about Defining Custom Events on Vue School</VideoLesson>
+
 発行されたイベントは、 `emits` オプションを介して、コンポーネントで定義することが出来ます。
 
 ```js
@@ -132,12 +134,7 @@ app.component('user-name', {
 })
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="GRoPPrM" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Multiple v-models">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/GRoPPrM">
-  Multiple v-models</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Multiple v-models" slug="GRoPPrM" tab="html,result" />
 
 ## `v-model` 修飾子の処理
 

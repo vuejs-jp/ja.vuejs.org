@@ -1,12 +1,18 @@
 # はじめに
 
+::: tip NOTE
+すでに Vue 2 について知っていて、 Vue 3 の新機能について知りたいですか？ [移行ガイド](/guide/migration/introduction.html) をご覧ください！
+:::
+
 ## Vue.js とは？
 
 Vue (発音は /vju:/、**view** と同様) は、ユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は少しずつ適用していけるように設計されています。中核となるライブラリはビュー層だけに焦点を当てており、使い始めるのも、他のライブラリや既存のプロジェクトに統合することも容易です。一方で、Vue を[モダンなツール](../guide/single-file-component.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#components--libraries)と組み合わせることで、洗練されたシングルページアプリケーションを開発することもできます。
 
-ここから先に進む前に Vue についてより深く知りたい方のために、基本理念やサンプルプロジェクトについて説明する<a id="modal-player" href="#">ビデオを作成しました</a>。
+ここから先に進む前に Vue についてより深く知りたい方のために、基本理念やサンプルプロジェクトについて説明する<a id="modal-player" class="vuemastery-trigger" href="#">ビデオを作成しました</a>。
 
-フロントエンド開発の経験があり、Vue が他のライブラリ/フレームワークとどう違うか知りたい方は、[他のフレームワークとの比較](TODO:comparison.html)を確認してください。
+<VideoLesson href="https://www.vuemastery.com/courses/intro-to-vue-3/intro-to-vue3" title="Vue Mastery の無料ビデオコースを見る">Vue Mastery の無料ビデオコースを見る</VideoLesson>
+
+<common-vuemastery-video-modal/>
 
 ## はじめに
 
@@ -88,12 +94,7 @@ const AttributeBinding = {
 Vue.createApp(AttributeBinding).mount('#bind-attribute')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="KKpRVvJ" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Attribute dynamic binding">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/KKpRVvJ">
-  Attribute dynamic binding</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Attribute dynamic binding" slug="KKpRVvJ" />
 
 ここで新しい属性が出てきました。`v-bind` 属性は**ディレクティブ**と呼ばれます。ディレクティブは Vue によって提供された特別な属性であることを示すために `v-` 接頭辞がついています。これはあなたの推測通り、レンダリングされた DOM に特定のリアクティブな振る舞いを与えます。ここで宣言されているのは、「_この要素の `title` 属性を、現在アクティブなインスタンスにおける `message` プロパティの最新状態に維持する_」ということになります。
 
@@ -128,12 +129,7 @@ const EventHandling = {
 Vue.createApp(EventHandling).mount('#event-handling')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="dyoeGjW" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Event handling">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/dyoeGjW">
-  Event handling</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Event handling" slug="dyoeGjW" />
 
 この方法では、DOM を触るのではなくアプリケーションの状態を更新することに注意してください。DOM の操作はすべて Vue によって処理されるので、背後にあるロジックを書くことに集中することができます。
 
@@ -158,12 +154,7 @@ const TwoWayBinding = {
 Vue.createApp(TwoWayBinding).mount('#two-way-binding')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="poJVgZm" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Two-way binding">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/poJVgZm">
-  Two-way binding</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Two-way binding" slug="poJVgZm" />
 
 ## 条件分岐とループ
 
@@ -191,12 +182,7 @@ Vue.createApp(ConditionalRendering).mount('#conditional-rendering')
 
 以下のサンドボックスで `seen` を `true` から `false` に変更すると、エフェクトを確認することができます:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="oNXdbpB" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Conditional rendering">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/oNXdbpB">
-  Conditional rendering</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Conditional rendering" slug="oNXdbpB" tab="js,result" />
 
 Vue.js には他にもかなりの数のディレクティブがあり、それぞれが特定の機能を持っています。例えば、`v-for` ディレクティブを使えばアイテムのリストを配列内のデータを使って表示することができます:
 
@@ -226,12 +212,7 @@ const ListRendering = {
 Vue.createApp(ListRendering).mount('#list-rendering')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="mdJLVXq" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="List rendering">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/mdJLVXq">
-  List rendering</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="List rendering" slug="mdJLVXq" />
 
 ## コンポーネントによる構成
 
@@ -314,12 +295,7 @@ app.component('todo-item', {
 app.mount('#todo-list-app')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="VwLxeEz" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Intro-Components-1">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/VwLxeEz">
-  Intro-Components-1</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Intro-Components-1" slug="VwLxeEz" />
 
 このサンプルは不自然ではありますが、アプリケーションをより小さな単位に分割することに成功し、またプロパティのインターフェイスによって子コンポーネントは適切に疎結合な状態になりました。ここからさらに `<todo-item>` コンポーネントを、より複雑なテンプレートやロジックを使って、親コンポーネントに影響を与えることなく改良することができます。
 

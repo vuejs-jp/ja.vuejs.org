@@ -71,12 +71,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="css,result" data-user="Vue" data-slug-hash="ff45b91caf7a98c8c9077ad8ab539260" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Create animation with a class">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/ff45b91caf7a98c8c9077ad8ab539260">
-  Create animation with a class</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Create animation with a class" slug="ff45b91caf7a98c8c9077ad8ab539260" tab="css,result" :editable="false" :preview="false" />
 
 # スタイルバインディングによるトランジション
 
@@ -118,12 +113,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="JjGezQY" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Interpolation with style bindings">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/JjGezQY">
-  Interpolation with style bindings</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Interpolation with style bindings" slug="JjGezQY" :editable="false" />
 
 この例では、マウスの動きに付随してアニメーションを作成しています。 CSS トランジションは要素にも適用され、更新中にどのような操作か要素に通知します。
 
@@ -181,21 +171,11 @@ GreenSock のような多くの JS ライブラリは、ハードウェアアク
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="css,result" data-user="Vue" data-slug-hash="996a9665131e7902327d350ca8a655ac" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Ease Example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/996a9665131e7902327d350ca8a655ac">
-  Transition Ease Example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition Ease Example" slug="996a9665131e7902327d350ca8a655ac" tab="css,result" :editable="false" :preview="false" />
 
 イージングはアニメーション化されている素材の品質を伝えることもできます。 この CodePen を例にとると、どちらのボールが硬く、どちらのボールが柔らかいと思いますか？
 
-<p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="result" data-user="sdras" data-slug-hash="zxJWBJ" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Bouncing Ball Demo">
-  <span>See the Pen <a href="https://codepen.io/sdras/pen/zxJWBJ">
-  Bouncing Ball Demo</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Bouncing Ball Demo" slug="zxJWBJ" :height="500" :team="false" user="sdras" name="Sarah Drasner" :editable="false" />
 
 イージングを調整することで多くのユニークな効果を得ることができ、アニメーションを非常にスタイリッシュにすることができます。CSS を使用すると、3次のベジェ曲線のプロパティを調整して変形できます。 Lea Verou 氏によって作成された [Playground](https://cubic-bezier.com/#.17,.67,.83,.67) は、イージングを探索するのに非常に役立ちます。
 
