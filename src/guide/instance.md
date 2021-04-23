@@ -1,6 +1,6 @@
-# Application & Component Instances
+# アプリケーションとコンポーネントのインスタンス
 
-## Creating an Application Instance
+## アプリケーションインスタンスの作成
 
 全ての Vue アプリケーションは `createApp` 関数で新しい **アプリケーションインスタンス (application instance)** を作成するところから始まります:
 
@@ -10,7 +10,7 @@ const app = Vue.createApp({
 })
 ```
 
-The application instance is used to register 'globals' that can then be used by components within that application. We'll discuss that in detail later in the guide but as a quick example:
+アプリケーションインスタンスは、そのアプリケーション内のコンポーネントが使えるグローバル（コンポーネント、ディレクティブ、プラグインなど）を登録するために使われます。詳しいことはガイドの後半で説明しますが、簡単な例をあげると:
 
 ```js
 const app = Vue.createApp({})
@@ -19,7 +19,7 @@ app.directive('focus', FocusDirective)
 app.use(LocalePlugin)
 ```
 
-Most of the methods exposed by the application instance return that same instance, allowing for chaining:
+アプリケーションインスタンスが公開するほとんどのメソッドは、同じインスタンスを返すので、チェーンすることができます:
 
 ```js
 Vue.createApp({})
@@ -28,27 +28,27 @@ Vue.createApp({})
   .use(LocalePlugin)
 ```
 
-You can browse the full application API in the [API reference](../api/application-api.html).
+すべてのアプリケーション API は [API リファレンス](../api/application-api.html) で閲覧できます。
 
-## The Root Component
+## ルートコンポーネント
 
-The options passed to `createApp` are used to configure the **root component**. That component is used as the starting point for rendering when we **mount** the application.
+`createApp` に渡されたオプションは、**ルートコンポーネント** の設定に使われます。このコンポーネントは、アプリケーションを **マウント** する際に、レンダリングの起点として使われます。
 
-An application needs to be mounted into a DOM element. For example, if we want to mount a Vue application into `<div id="app"></div>`, we should pass `#app`:
+アプリケーションは DOM 要素にマウントする必要があります。例えば、 Vue アプリケーションを `<div id="app"></div>` にマウントしたい場合、 `#app` を渡す必要があります:
 
 ```js
 const RootComponent = {
-  /* options */
+  /* オプション */
 }
 const app = Vue.createApp(RootComponent)
 const vm = app.mount('#app')
 ```
 
-Unlike most of the application methods, `mount` does not return the application. Instead it returns the root component instance.
+ほとんどのアプリケーションメソッドとは異なり、 `mount` はアプリケーションを返しません。代わりにルートコンポーネントのインスタンスを返します。
 
-Although not strictly associated with the [MVVM pattern](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue's design was partly inspired by it. As a convention, we often use the variable `vm` (short for ViewModel) to refer to a component instance.
+厳密には [MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel) とは関係ないですが、 Vue の設計はその影響を受けています。慣習として、コンポーネントのインスタンスを参照するのに `vm` (ViewModel の略) という変数を使うことがよくあります。
 
-While all the examples on this page only need a single component, most real applications are organized into a tree of nested, reusable components. For example, a Todo application's component tree might look like this:
+このページのすべての例では1つのコンポーネントしか必要としていませんが、実際の多くのアプリケーションでは再利用可能なコンポーネントを入れ子にしたツリー状に構成されています。例えば、 Todo アプリケーションのコンポーネントツリーは次のようになります:
 
 ```
 Root Component
@@ -61,13 +61,13 @@ Root Component
       └─ TodoListStatistics
 ```
 
-Each component will have its own component instance, `vm`. For some components, such as `TodoItem`, there will likely be multiple instances rendered at any one time. All of the component instances in this application will share the same application instance.
+各コンポーネントは、独自のコンポーネントインスタンス `vm` を持ちます。 `TodoItem` のような一部のコンポーネントでは、一度に複数のインスタンスがレンダリングされる可能性があります。このアプリケーションのすべてのコンポーネントインスタンスは、同じアプリケーションインスタンスを共有します。
 
-We'll talk about [the component system](component-basics.html) in detail later. For now, just be aware that the root component isn't really any different from any other component. The configuration options are the same, as is the behavior of the corresponding component instance.
+[コンポーネントシステム](component-basics.html) について詳しくは、後で説明します。とりあえず、 ルートコンポーネントは他のコンポーネントとはなにも違いはないことを認識しておいてください。設定オプションは同じで、対応するコンポーネントインスタンスの振る舞いも同じです。
 
-## Component Instance Properties
+## コンポーネントインスタンスのプロパティ
 
-Earlier in the guide we met `data` properties. Properties defined in `data` are exposed via the component instance:
+このガイドでは `data` プロパティについて説明しました。 `data` で定義されたプロパティは、コンポーネントインスタンスを介して公開されます:
 
 ```js
 const app = Vue.createApp({
@@ -81,13 +81,13 @@ const vm = app.mount('#app')
 console.log(vm.count) // => 4
 ```
 
-There are various other component options that add user-defined properties to the component instance, such as `methods`, `props`, `computed`, `inject` and `setup`. We'll discuss each of these in depth later in the guide. All of the properties of the component instance, no matter how they are defined, will be accessible in the component's template.
+他にもコンポーネントインスタンスにユーザ定義のプロパティを追加する様々なコンポーネントオプション、`methods`、 `props`、 `computed`、 `inject`、 `setup` などがあります。このガイドでは、それぞれについて後で詳しく説明します。コンポーネントインスタンスのすべてのプロパティは、それらがどのように定義されているかに関わらず、コンポーネントのテンプレートからアクセスできます。
 
-Vue also exposes some built-in properties via the component instance, such as `$attrs` and `$emit`. These properties all have a `$` prefix to avoid conflicting with user-defined property names.
+Vue はコンポーネントインスタンスを介した `$attrs` や `$emit` などいくつかの組み込みプロパティも公開しています。これらのプロパティは、すべて `$` プレフィックスとなっており、ユーザ定義のプロパティ名と衝突を避けるようになっています。
 
-## Lifecycle Hooks
+## ライフサイクルフック
 
-Each component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called **lifecycle hooks**, giving users the opportunity to add their own code at specific stages.
+各コンポーネントインスタンスは、作られるときに一連の初期化ステップを通ります。例えば、データ監視の設定、テンプレートのコンパイル、DOM へのインスタンスのマウント、データ変更時の DOM 更新などが必要になります。また、ユーザが特定の段階で独自のコードを追加できるように **ライフサイクルフック** と呼ばれる関数の実行をします。
 
 例えば [created](../api/options-lifecycle-hooks.html#created) フックは、インスタンスの作成後にコードを実行するために使用できます:
 
