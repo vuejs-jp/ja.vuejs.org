@@ -48,7 +48,7 @@ mustache タグは、対応するコンポーネントインスタンスから `
 
 ### 属性
 
-Mustache は、HTML 属性の内部で使用することはできません。代わりに、[`v-bind` ディレクティブ](../api/#v-bind)を使用してください:
+Mustache は、HTML 属性の内部で使用することはできません。代わりに、[`v-bind` ディレクティブ](../api/directives.html#v-bind)を使用してください:
 
 ```html
 <div v-bind:id="dynamicId"></div>
