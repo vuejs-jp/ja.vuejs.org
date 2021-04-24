@@ -244,7 +244,7 @@ methods: {
 <!-- インスタンスに "todo" プロパティが定義されていないため、エラーが発生します。 -->
 
 <li v-for="todo in todos" v-if="!todo.isComplete">
-  {{ todo }}
+  {{ todo.name }}
 </li>
 ```
 
@@ -253,7 +253,7 @@ methods: {
 ```html
 <template v-for="todo in todos" :key="todo.name">
   <li v-if="!todo.isComplete">
-    {{ todo }}
+    {{ todo.name }}
   </li>
 </template>
 ```
