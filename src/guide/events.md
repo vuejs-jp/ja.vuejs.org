@@ -17,7 +17,7 @@
 Vue.createApp({
   data() {
     return {
-      counter: 1
+      counter: 0
     }
   }
 }).mount('#basic-event')
