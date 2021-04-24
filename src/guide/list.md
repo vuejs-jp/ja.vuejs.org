@@ -168,7 +168,7 @@ example1.items = example1.items.filter(item => item.message.match(/Foo/))
 例えば:
 
 ```html
-<li v-for="n in evenNumbers">{{ n }}</li>
+<li v-for="n in evenNumbers" :key="n">{{ n }}</li>
 ```
 
 ```js
@@ -188,7 +188,7 @@ computed: {
 
 ```html
 <ul v-for="numbers in sets">
-  <li v-for="n in even(numbers)">{{ n }}</li>
+  <li v-for="n in even(numbers)" :key="n">{{ n }}</li>
 </ul>
 ```
 
@@ -211,7 +211,7 @@ methods: {
 
 ```html
 <div id="range" class="demo">
-  <span v-for="n in 10">{{ n }} </span>
+  <span v-for="n in 10" :key="n">{{ n }} </span>
 </div>
 ```
 
@@ -225,7 +225,7 @@ methods: {
 
 ```html
 <ul>
-  <template v-for="item in items">
+  <template v-for="item in items" :key="item.msg">
     <li>{{ item.msg }}</li>
     <li class="divider" role="presentation"></li>
   </template>
@@ -238,25 +238,24 @@ methods: {
 `v-if` と `v-for` を同時に利用することは**推奨されません**。 詳細については [スタイルガイド](../style-guide/#avoid-v-if-with-v-for-essential) を参照ください。
 :::
 
-それらが同じノードに存在するとき、 `v-for` は `v-if` よりも高い優先度を持ちます。これは `v-if` がループの各繰り返しで実行されることを意味します。以下のように、これはいくつかの項目のみのノードを描画する場合に便利です。
+それらが同じノードに存在するとき、 `v-if` は `v-for` よりも高い優先度を持ちます。つまり `v-if` の条件は、 `v-for` のスコープの変数にはアクセスできないということです:
 
 ```html
+<!-- インスタンスに "todo" プロパティが定義されていないため、エラーが発生します。 -->
+
 <li v-for="todo in todos" v-if="!todo.isComplete">
-  {{ todo }}
+  {{ todo.name }}
 </li>
 ```
 
-上記は、完了していない項目だけを描画します。
-
-代わりに、ループの実行を条件付きでスキップすることを目的にしている場合は、ラッパー要素 (または [`<template>`](conditional#conditional-groups-with-v-if-on-lt-template-gt))上に `v-if` を配置できます。例えば:
+これは `v-for` を `<template>` タグで囲み、移動させることで修正できます:
 
 ```html
-<ul v-if="todos.length">
-  <li v-for="todo in todos">
-    {{ todo }}
+<template v-for="todo in todos" :key="todo.name">
+  <li v-if="!todo.isComplete">
+    {{ todo.name }}
   </li>
-</ul>
-<p v-else>No todos left!</p>
+</template>
 ```
 
 ## コンポーネントと `v-for`
@@ -346,7 +345,8 @@ app.component('todo-item', {
       <button @click="$emit('remove')">Remove</button>
     </li>
   `,
-  props: ['title']
+  props: ['title'],
+  emits: ['remove']
 })
 
 app.mount('#todo-list-example')
