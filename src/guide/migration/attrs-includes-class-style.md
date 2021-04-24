@@ -38,7 +38,7 @@ export default {
 <my-component id="my-id" class="my-class"></my-component>
 ```
 
-...以下のHTMLが生成されます:
+...以下の HTML が生成されます:
 
 ```html
 <label class="my-class">
@@ -48,7 +48,7 @@ export default {
 
 ## 3.x の挙動
 
-`$attrs` には、すべての属性が含まれているので、すべての属性を別の要素に適用することが簡単にできます。先ほどの例は、次のHTMLが生成されます:
+`$attrs` には、すべての属性が含まれているので、すべての属性を別の要素に適用することが簡単にできます。先ほどの例は、次の HTML が生成されます:
 
 ```html
 <label>
