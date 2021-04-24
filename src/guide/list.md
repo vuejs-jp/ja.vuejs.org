@@ -238,25 +238,24 @@ methods: {
 `v-if` と `v-for` を同時に利用することは**推奨されません**。 詳細については [スタイルガイド](../style-guide/#avoid-v-if-with-v-for-essential) を参照ください。
 :::
 
-それらが同じノードに存在するとき、 `v-for` は `v-if` よりも高い優先度を持ちます。これは `v-if` がループの各繰り返しで実行されることを意味します。以下のように、これはいくつかの項目のみのノードを描画する場合に便利です。
+それらが同じノードに存在するとき、 `v-if` は `v-for` よりも高い優先度を持ちます。つまり `v-if` の条件は、 `v-for` のスコープの変数にはアクセスできないということです:
 
 ```html
+<!-- インスタンスに "todo" プロパティが定義されていないため、エラーが発生します。 -->
+
 <li v-for="todo in todos" v-if="!todo.isComplete">
   {{ todo }}
 </li>
 ```
 
-上記は、完了していない項目だけを描画します。
-
-代わりに、ループの実行を条件付きでスキップすることを目的にしている場合は、ラッパー要素 (または [`<template>`](conditional#conditional-groups-with-v-if-on-lt-template-gt))上に `v-if` を配置できます。例えば:
+これは `v-for` を `<template>` タグで囲み、移動させることで修正できます:
 
 ```html
-<ul v-if="todos.length">
-  <li v-for="todo in todos">
+<template v-for="todo in todos">
+  <li v-if="!todo.isComplete">
     {{ todo }}
   </li>
-</ul>
-<p v-else>No todos left!</p>
+</template>
 ```
 
 ## コンポーネントと `v-for`
