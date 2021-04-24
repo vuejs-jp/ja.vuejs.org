@@ -196,7 +196,7 @@ computed: {
 
 このケースでは `watch` オプションを使用することで、非同期処理（API へのアクセス）の実行と、その処理を実行する条件を設定できています。このようなことは算出プロパティではできません。
 
-`watch` オプションに加え、命令的な [vm.\$watch API](../api/instance-methods.html#watch) を使うこともできます。
+`watch` オプションに加え、命令的な [vm.$watch API](../api/instance-methods.html#watch) を使うこともできます。
 
 ### 算出プロパティ vs 監視プロパティ
 
