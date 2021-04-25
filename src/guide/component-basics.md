@@ -307,6 +307,7 @@ methods: {
 ```js
 app.component('custom-input', {
   props: ['modelValue'],
+  emits: ['update:modelValue'],
   template: `
     <input
       :value="modelValue"
@@ -331,6 +332,7 @@ app.component('custom-input', {
 ```js
 app.component('custom-input', {
   props: ['modelValue'],
+  emits: ['update:modelValue'],
   template: `
     <input v-model="value">
   `,
