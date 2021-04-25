@@ -223,7 +223,7 @@ app.component('blog-post', {
 </button>
 ```
 
-親コンポーネントは `v-on:enlarge-text="postFontSize += 0.1"` リスナーによって、このイベントを受け取り `postFontSize` を更新することができます。
+親コンポーネントは `@enlarge-text="postFontSize += 0.1"` リスナーによって、このイベントを受け取り `postFontSize` を更新することができます。
 
 <common-codepen-snippet title="Component basics: emitting events" slug="KKpGyrp" tab="html,result" :preview="false" />
 
