@@ -161,7 +161,7 @@ console.log(counter.value) // 1
 
 ![参照渡し vs 値渡し](https://blog.penjee.com/wp-content/uploads/2015/02/pass-by-reference-vs-pass-by-value-animation.gif)
 
-任意の値の周りにラッパーオブジェクトがあると、途中でリアクティブでなくなることがなく、アプリ全体に安全に渡すことができます。
+どんな値でもラッパーオブジェクトを持つことで、途中でリアクティブでなくなることがなく、アプリ全体に安全に渡すことができます。
 
 ::: tip Note
 言い換えれば、`ref` は値への**リアクティブな参照**を作成します。 **参照**を操作するという概念は Composition API 全体で頻繁に使用されます。
