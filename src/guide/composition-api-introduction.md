@@ -79,7 +79,7 @@ export default {
 `setup` が実行されたときは、まだコンポーネントのインスタンスが作られないため、`setup` オプションの中では `this` を使用できません。これは `props` を除いて、コンポーネント内で宣言されているあらゆるプロパティ (**ローカルの state** や **computed プロパティ**、**methods**) にアクセスできないことを意味します。
 :::
 
-`setup` オプションは `props` と[後で](composition-api-setup.html#arguments)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
+`setup` オプションは `props` と[後で](composition-api-setup.html#引数)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
 
 `setup` をコンポーネントに追加しましょう:
 
