@@ -34,7 +34,7 @@ export default {
 しかし、`props` はリアクティブなので、**ES6 の分割代入を使うことができません。** props のリアクティブを削除してしまうからです。
 :::
 
-もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって安全に分割代入を行うことができます。
+もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって分割代入を行うことができます:
 
 ```js
 // MyBook.vue
@@ -43,6 +43,20 @@ import { toRefs } from 'vue'
 
 setup(props) {
   const { title } = toRefs(props)
+
+  console.log(title.value)
+}
+```
+
+`title` オプションのプロパティである場合、 `props` から抜けている可能性があります。その場合、 `toRefs` では `title` の ref はつくられません。代わりに `toRef` を使う必要があります:
+
+```js
+// MyBook.vue
+
+import { toRef } from 'vue'
+
+setup(props) {
+  const title = toRef(props, 'title')
 
   console.log(title.value)
 }
