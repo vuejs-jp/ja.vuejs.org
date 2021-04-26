@@ -309,7 +309,7 @@ export default {
 }
 ```
 
-`watch` についての詳細は、[詳細ガイド]() を参照してください。
+`watch` についての詳細は、[詳細ガイド](reactivity-computed-watchers.md#watch) を参照してください。
 
 **例に適用しましょう:**
 
