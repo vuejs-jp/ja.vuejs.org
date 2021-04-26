@@ -1,12 +1,12 @@
 # Provide / Inject
 
-> このページは、すでに [Provide / Inject](component-provide-inject.html)、[コンポジション API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
+> このページは、すでに [Provide / Inject](component-provide-inject.html)、[Composition API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
 
-[provide / inject](component-provide-inject.html) は コンポジション API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
+[provide / inject](component-provide-inject.html) は Composition API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
 
 ## シナリオの背景
 
-これから、コンポジション API を使用して、以下のコードを書き直そうとしているとしましょう。以下のコードでは、`MyMap` コンポーネントが `MyMaker` コンポーネントにユーザの位置情報を提供しています。
+これから、Composition API を使用して、以下のコードを書き直そうとしているとしましょう。以下のコードでは、`MyMap` コンポーネントが `MyMaker` コンポーネントにユーザの位置情報を提供しています。
 
 ```vue
 <!-- src/components/MyMap.vue -->
