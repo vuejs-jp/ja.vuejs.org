@@ -34,7 +34,7 @@ export default {
 しかし、`props` はリアクティブなので、**ES6 の分割代入を使うことができません。** props のリアクティブを削除してしまうからです。
 :::
 
-もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって分割代入を行うことができます:
+もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#リアクティブな状態の分割代入) を使うことによって分割代入を行うことができます:
 
 ```js
 // MyBook.vue
