@@ -99,19 +99,19 @@ export default {
 
 ## テンプレートでの使用
 
-`setup` がオブジェクトを返す場合、コンポーネントのテンプレート内でオブジェクトのプロパティにアクセスすることができます。:
+`setup` がオブジェクトを返す場合、コンポーネントのテンプレート内でオブジェクトのプロパティにアクセスすることができ、 `setup` に渡された `props` のプロパティも同じようにアクセスできます:
 
 ```vue-html
 <!-- MyBook.vue -->
 <template>
-  <div>{{ readersNumber }} {{ book.title }}</div>
+  <div>{{ props.collectionName }}: {{ readersNumber }} {{ book.title }}</div>
 </template>
 
 <script>
   import { ref, reactive } from 'vue'
 
   export default {
-    setup() {
+    setup(props) {
       const readersNumber = ref(0)
       const book = reactive({ title: 'Vue 3 Guide' })
 
