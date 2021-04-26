@@ -18,7 +18,10 @@ Vue コンポーネントを作成するとその機能と結合されたイン�
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
@@ -86,7 +89,10 @@ export default {
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     console.log(props) // { user: '' }
@@ -192,7 +198,10 @@ import { ref } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const repositories = ref([])
@@ -449,7 +458,10 @@ import { toRefs } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const { user } = toRefs(props)
@@ -495,7 +507,10 @@ import useRepositoryFilters from '@/composables/useRepositoryFilters'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     const { user } = toRefs(props)
