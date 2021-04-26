@@ -1,6 +1,6 @@
 # ライフサイクルフック
 
-> このページは、すでに [コンポジション API の基本](composition-api-introduction.html) と [リアクティブの基礎](reactivity-fundamentals.html) を読んでいることを前提としています。 コンポジション API を初めて使用する場合は、最初にそちらをお読みください。
+> このページは、すでに [Composition API の基本](composition-api-introduction.html) と [リアクティブの基礎](reactivity-fundamentals.html) を読んでいることを前提としています。 Composition API を初めて使用する場合は、最初にそちらをお読みください。
 
 <VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/lifecycle-hooks" title="Vue Mastery でライフサイクルフックがどのように動作するのか学ぶ">Vue Mastery でライフサイクルフックに関する無料ビデオを視聴する</VideoLesson>
 
