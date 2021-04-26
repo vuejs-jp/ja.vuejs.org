@@ -425,7 +425,7 @@ export default function useUserRepositories(user) {
 }
 ```
 
-And then the searching functionality:
+それから検索機能も:
 
 ```js
 // src/composables/useRepositoryNameSearch.js
