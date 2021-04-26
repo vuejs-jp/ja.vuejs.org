@@ -125,7 +125,7 @@ export default {
 </script>
 ```
 
-`setup` から返された [refs](../api/refs-api.html#ref) は、テンプレート内でアクセスされたときに[自動的にアンラップ](../api/refs-api.html#access-in-templates)されるので、テンプレート内で `.value` を使用すべきではないことに注意してください。
+`setup` から返された [refs](../api/refs-api.html#ref) は、テンプレート内でアクセスされたときに[自動的にアンラップ](/guide/reactivity-fundamentals.html#ref-のアンラップ)されるので、テンプレート内で `.value` を使用すべきではないことに注意してください。
 
 ## 描画関数での使用
 
