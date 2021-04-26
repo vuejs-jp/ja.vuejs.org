@@ -111,7 +111,7 @@ export default {
 
 ### リアクティブの追加
 
-提供された値と注入された値をリアクティブにするには、値を提供する際に [ref](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) または [reactive](reactivity-fundamentals.html#declaring-reactive-state) を使います。
+提供された値と注入された値をリアクティブにするには、値を提供する際に [ref](reactivity-fundamentals.html#独立したリアクティブな値を-参照-として作成する) または [reactive](reactivity-fundamentals.html#リアクティブな状態の宣言) を使います。
 
 `MyMap` コンポーネントは、以下のように変更できます:
 
