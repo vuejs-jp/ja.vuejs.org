@@ -53,7 +53,7 @@ export default {
 }
 ```
 
-## Usage inside `v-for`
+## `v-for` 内部での使用
 
 コンポジション API のテンプレート参照を `v-for` 内部で使う場合、特別な処理はされません。代わりに、関数を使って ref に独自処理を行うようにします。
 
@@ -86,11 +86,11 @@ export default {
 </script>
 ```
 
-## Watching Template Refs
+## テンプレート参照の監視
 
-Watching a template ref for changes can be an alternative to the use of lifecycle hooks that was demonstrated in the previous examples.
+変更のためテンプレート参照の監視をすることは、前の例で説明したライフサイクルフックの使い方に代わる方法です。
 
-But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` effects are run *before* the DOM is mounted or updated so the template ref hasn't been updated when the watcher runs the effect:
+しかしライフサイクルフックとの重要な違いは、`watch()` や `watchEffect()` の作用は、DOM がマウントされたり更新されたりする *前に* 実行されるので、ウォッチャが作用を実行したときには、テンプレート参照は更新されていないということです:
 
 ```vue
 <template>
@@ -105,8 +105,8 @@ But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` ef
       const root = ref(null)
 
       watchEffect(() => {
-        // This effect runs before the DOM is updated, and consequently, 
-        // the template ref does not hold a reference to the element yet.
+        // この作用は DOM が更新される前に実行され、
+        // 結果的にテンプレート参照は、まだ要素への参照を保持していません。
         console.log(root.value) // => null
       })
 
@@ -118,7 +118,7 @@ But a key difference to lifecycle hooks is that `watch()` and `watchEffect()` ef
 </script>
 ```
 
-Therefore, watchers that use template refs should be defined with the `flush: 'post'` option. This will run the effect *after* the DOM has been updated and ensure that the template ref stays in sync with the DOM and references the correct element.
+そのため、テンプレート参照を使うウォッチャは、 `flush: 'post'` オプションをつけて定義する必要があります。これにより、DOM が更新された *あとに*　作用が実行され、テンプレート参照が DOM と同期して、正しい要素を参照するようになります。
 
 ```vue
 <template>
@@ -147,4 +147,4 @@ Therefore, watchers that use template refs should be defined with the `flush: 'p
 </script>
 ```
 
-* See also: [Computed and Watchers](./reactivity-computed-watchers.html#effect-flush-timing)
+* 参照: [算出プロパティとウォッチ](./reactivity-computed-watchers.html#作用フラッシュのタイミング)
