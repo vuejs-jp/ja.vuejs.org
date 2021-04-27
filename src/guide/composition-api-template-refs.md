@@ -4,8 +4,7 @@
 
 > このガイドはすでに [コンポジション API 導入](composition-api-introduction.html) を読んでいることを前提に書かれています。もしまだ読んでいないのなら、先に読みましょう。
 
-コンポジション API を使うとき、 [リアクティブ参照](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) と [テンプレート参照](component-template-refs.html) のコンセプトは同じになります。
-テンプレート内の要素やコンポーネントインスタンスの参照を取得するために、 ref 宣言して [setup()](composition-api-setup.html) で返します。
+コンポジション API を使うとき、 [リアクティブ参照](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) と [テンプレート参照](component-template-refs.html) のコンセプトは同じになります。テンプレート内の要素やコンポーネントインスタンスの参照を取得するために、 ref 宣言して [setup()](composition-api-setup.html) で返します。
 
 ```html
 <template>
