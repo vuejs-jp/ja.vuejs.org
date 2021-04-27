@@ -52,7 +52,7 @@ directives: {
 - `beforeUpdate`: 束縛された要素を含むコンポーネントの VNode が更新される前に呼ばれます。
 
 :::tip Note
-VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱います。描画関数を説明する時です。
+VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱います。Render 関数を説明する時です。
 :::
 
 - `updated`: 束縛された要素を含むコンポーネントの VNode **とその子コンポーネントの VNode** が更新された後に呼ばれます。
@@ -212,7 +212,7 @@ return withDirectives(h('div'), [[vDemo, test]])
 
 ここで `vDemo` はユーザによって記述されたディレクティブオブジェクトで、それは `mounted` や `updated` のフック関数を含みます。
 
-`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[描画関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます:
+`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[Render 関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます:
 
 ```js
 {

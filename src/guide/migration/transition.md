@@ -52,8 +52,8 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 
 `<transition>` コンポーネントの関連するプロップ名も変更されます。
 
-- `leave-class` は `leave-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
-- `enter-class` は `enter-from-class` に名前が変更されます。（描画関数や JSX では `leaveFromClass` と書くことができます）
+- `leave-class` は `leave-from-class` に名前が変更されます。（Render 関数や JSX では `leaveFromClass` と書くことができます）
+- `enter-class` は `enter-from-class` に名前が変更されます。（Render 関数や JSX では `leaveFromClass` と書くことができます）
 
 ## 移行の戦略
 
