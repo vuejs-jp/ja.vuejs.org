@@ -1,6 +1,6 @@
 # Teleport
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to use teleport with Vue School">Learn how to use teleport with a free lesson on Vue School</a></div>
+<VideoLesson href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" title="Learn how to use teleport with Vue School">Learn how to use teleport with a free lesson on Vue School</VideoLesson>
 
 Vue は私たちに、UI やそれに関連する挙動をコンポーネントにして、カプセル化することで UI を作り上げることを勧めています。私たちはそれらを互いに入れ子にして、アプリケーションを構成するツリーを作ることができます。
 
