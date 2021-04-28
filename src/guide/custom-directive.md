@@ -6,7 +6,7 @@ Vue.js 本体で提供されているデフォルトのディレクティブ (`v
 
 <common-codepen-snippet title="Custom directives: basic example" slug="JjdxaJW" :preview="false" />
 
-ページを読み込むと、この要素にフォーカスが当たります (注意：`autofucus` はモバイルの Safari で動きません)。実際、このページに訪れてから他に何もクリックしなければ、上記の input 要素にフォーカスが当たります。また、`Rerun` ボタンをクリックしても、input 要素はフォーカスされます。
+ページを読み込むと、この要素にフォーカスが当たります (注意：`autofocus` はモバイルの Safari で動きません)。実際、このページに訪れてから他に何もクリックしなければ、上記の input 要素にフォーカスが当たります。また、`Rerun` ボタンをクリックしても、input 要素はフォーカスされます。
 
 ここからこれを実現するディレクティブを実装しましょう:
 
