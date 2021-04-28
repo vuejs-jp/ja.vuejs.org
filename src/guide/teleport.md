@@ -1,5 +1,7 @@
 # Teleport
 
+[Watch a free video about Teleport on Vue Mastery](https://www.vuemastery.com/courses/vue-3-essentials/teleport)
+
 Vue は私たちに、UI やそれに関連する挙動をコンポーネントにして、カプセル化することで UI を作り上げることを勧めています。私たちはそれらを互いに入れ子にして、アプリケーションを構成するツリーを作ることができます。
 
 しかしながら、コンポーネントのテンプレートの一部が、論理的にこのコンポーネントに属している場合もありますが、技術的な観点では、テンプレートのこの部分を Vue アプリの外や、DOM 内の別の場所に移動させることが望ましいこともあります。
