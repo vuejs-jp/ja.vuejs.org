@@ -45,7 +45,9 @@ directives: {
 
 ディレクティブの定義オブジェクトは、いくつかのフック関数を提供しています (全てオプション):
 
-- `beforeMount`: ディレクティブが初めて要素に束縛された時、そして親コンポーネントがマウントされる前に呼ばれます。ここは1度だけ実行するセットアップ処理を行える場所です。
+- `created`: called before the bound element's attributes or event listeners are applied. This is useful in cases where the directive needs to attach event listeners that must be called before normal `v-on` event listeners.
+
+- `beforeMount`: called when the directive is first bound to the element and before parent component is mounted.
 
 - `mounted`: 束縛された要素の親コンポーネントがマウントされた時に呼ばれます。
 
