@@ -194,40 +194,22 @@ app.directive('demo', (el, binding) => {
 
 ## コンポーネントにおける使用法
 
-3.0 ではフラグメントがサポートされているため、コンポーネントは潜在的に１つ以上のルートノードを持つことができます。これは複数のルートノードを持つ１つのコンポーネントにカスタムディレクティブが使用された時に、問題を引き起こします。
-
-3.0 のコンポーネント上でどのようにカスタムディレクティブが動作するかを詳細に説明するために、3.0 においてカスタムディレクティブがどのようにコンパイルされるのかをまずは理解する必要があります。以下のようなディレクティブは:
+When used on components, custom directive will always apply to component's root node, similarly to [non-prop attributes](component-attrs.html).
 
 ```vue-html
-<div v-demo="test"></div>
+<my-component v-demo="test"></my-component>
 ```
-
-おおよそ以下のようにコンパイルされます:
 
 ```js
-const vDemo = resolveDirective('demo')
-
-return withDirectives(h('div'), [[vDemo, test]])
+app.component('my-component', {
+  template: `
+    <div> // v-demo directive will be applied here
+      <span>My component content</span>
+    </div>
+  `
+})
 ```
 
-ここで `vDemo` はユーザによって記述されたディレクティブオブジェクトで、それは `mounted` や `updated` のフック関数を含みます。
+Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`.
 
-`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[Render 関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます:
-
-```js
-{
-  onVnodeMounted(vnode) {
-    // vDemo.mounted(...) を呼びます
-  }
-}
-```
-
-**結果として、VNode のデータの一部としてカスタムディレクティブは全て含まれます。カスタムディレクティブがコンポーネントで利用される場合、これらの `onVnodeXXX` フック関数は無関係な props としてコンポーネントに渡され、最終的に `this.$attrs` になります。**
-
-これは以下のようなテンプレートのように、要素のライフサイクルに直接フックできることを意味しています。これはカスタムディレクティブが複雑すぎる場合に便利です:
-
-```vue-html
-<div @vnodeMounted="myHook" />
-```
-
-これは [属性のフォールスロー](component-attrs.html) と一貫性があります。つまり、コンポーネントにおけるカスタムディレクティブのルールは、その他の異質な属性と同じです: それをどこにまた適用するかどうかを決めるのは、子コンポーネント次第です。子コンポーネントが内部の要素に `v-bind="$attrs"` を利用している場合、あらゆるカスタムディレクティブもその要素に適用されます。
+With [fragments](/guide/migration/fragments.html#overview) support, components can potentially have more than one root nodes. When applied to a multi-root component, directive will be ignored and the warning will be thrown.
