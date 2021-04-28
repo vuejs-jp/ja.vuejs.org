@@ -1,6 +1,6 @@
 # Teleport
 
-<VideoLesson href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" title="Learn how to use teleport with Vue School">Learn how to use teleport with a free lesson on Vue School</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" title="Vue School で Teleport の使い方を学ぶ">Vue School の無料レッスンで Teleport の使い方を学ぶ</VideoLesson>
 
 Vue は私たちに、UI やそれに関連する挙動をコンポーネントにして、カプセル化することで UI を作り上げることを勧めています。私たちはそれらを互いに入れ子にして、アプリケーションを構成するツリーを作ることができます。
 
@@ -55,7 +55,7 @@ app.component('modal-button', {
 
 Teleport は、グローバルステートに頼ったり、2つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
 
-`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport (テレポート) **" させるよう、`modal-button` を変更しましょう。 
+`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport** (テレポート) " させるよう、`modal-button` を変更しましょう。 
 
 ```js
 app.component('modal-button', {
