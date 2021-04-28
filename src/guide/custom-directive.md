@@ -45,9 +45,9 @@ directives: {
 
 ディレクティブの定義オブジェクトは、いくつかのフック関数を提供しています (全てオプション):
 
-- `created`: called before the bound element's attributes or event listeners are applied. This is useful in cases where the directive needs to attach event listeners that must be called before normal `v-on` event listeners.
+- `created`: 束縛された要素の属性や、イベントリスナが適用される前に呼ばれます。これは通常の `v-on` イベントリスナの前に呼ばれなければならないイベントリスナをつける必要がある場合に便利です。
 
-- `beforeMount`: called when the directive is first bound to the element and before parent component is mounted.
+- `beforeMount`: ディレクティブが最初に要素に束縛されたとき、親コンポーネントがマウントされる前に呼ばれます。
 
 - `mounted`: 束縛された要素の親コンポーネントがマウントされた時に呼ばれます。
 
@@ -169,7 +169,7 @@ app.directive('pin', {
 
 ## 関数による省略記法
 
-前回の例では、`mounted` と `updated` に同じ振る舞いを欲しかったでしょう。しかし、その他のフック関数を気にしてはいけません。ディレクティブにコールバックを渡すことで実現できます:
+前の例では、`mounted` と `updated` に同じ振る舞いをさせたいが、その他のフックは気にしない、という場合があります。そのような場合は、ディレクティブにコールバックを渡すことで実現できます:
 
 ```js
 app.directive('pin', (el, binding) => {
@@ -194,9 +194,9 @@ app.directive('demo', (el, binding) => {
 })
 ```
 
-## コンポーネントにおける使用法
+## コンポーネントでの使い方
 
-When used on components, custom directive will always apply to component's root node, similarly to [non-prop attributes](component-attrs.html).
+コンポーネントに使われた場合、カスタムディレクティブは [プロパティでない属性](component-attrs.html) と同じように、常にコンポーネントのルートノードに適用されます
 
 ```vue-html
 <my-component v-demo="test"></my-component>
@@ -205,13 +205,13 @@ When used on components, custom directive will always apply to component's root 
 ```js
 app.component('my-component', {
   template: `
-    <div> // v-demo directive will be applied here
+    <div> // v-demo ディレクティブはここで適用される
       <span>My component content</span>
     </div>
   `
 })
 ```
 
-Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`.
+属性とは異なり、ディレクティブは `v-bind="$attrs"` で別の要素に渡すことはできません。
 
-With [fragments](/guide/migration/fragments.html#overview) support, components can potentially have more than one root nodes. When applied to a multi-root component, directive will be ignored and the warning will be thrown.
+[Fragments](/guide/migration/fragments.html#overview) のサポートによって、コンポーネントは複数のルートノードを持つことができます。マルチルートコンポーネントに適用された場合、ディレクティブは無視され、警告が投げられます。
