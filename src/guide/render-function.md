@@ -238,7 +238,7 @@ render() {
 ```js
 render() {
   return Vue.h('div',
-    Array.apply(null, { length: 20 }).map(() => {
+    Array.from({ length: 20 }).map(() => {
       return Vue.h('p', 'hi')
     })
   )
