@@ -275,7 +275,7 @@ app.component('todo-list', {
 <todo-list>
   <template v-slot:default="slotProps">
     <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
+    <span class="green">{{ slotProps.item }}</span>
   </template>
 </todo-list>
 ```
@@ -291,7 +291,7 @@ app.component('todo-list', {
 ```html
 <todo-list v-slot:default="slotProps">
   <i class="fas fa-check"></i>
-  <span class="green">{{ slotProps.item }}<span>
+  <span class="green">{{ slotProps.item }}</span>
 </todo-list>
 ```
 
@@ -300,7 +300,7 @@ app.component('todo-list', {
 ```html
 <todo-list v-slot="slotProps">
   <i class="fas fa-check"></i>
-  <span class="green">{{ slotProps.item }}<span>
+  <span class="green">{{ slotProps.item }}</span>
 </todo-list>
 ```
 
@@ -311,7 +311,7 @@ app.component('todo-list', {
 <todo-list v-slot="slotProps">
   <todo-list v-slot:default="slotProps">
     <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
+    <span class="green">{{ slotProps.item }}</span>
   </todo-list>
   <template v-slot:other="otherSlotProps">
     slotProps is NOT available here
@@ -325,7 +325,7 @@ app.component('todo-list', {
 <todo-list>
   <template v-slot:default="slotProps">
     <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
+    <span class="green">{{ slotProps.item }}</span>
   </template>
 
   <template v-slot:other="otherSlotProps">
@@ -358,7 +358,7 @@ function (slotProps) {
 ```html
 <todo-list v-slot="{ item: todo }">
   <i class="fas fa-check"></i>
-  <span class="green">{{ todo }}<span>
+  <span class="green">{{ todo }}</span>
 </todo-list>
 ```
 
