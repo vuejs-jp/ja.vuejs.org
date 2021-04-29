@@ -12,7 +12,7 @@
 
 すべてのページで最初にフォーカス可能な要素になるため、通常これは `App.vue` の上部で使われます:
 
-``` html
+```html
 <ul class="skip-links">
   <li>
     <a href="#main" ref="skipLink">Skip to main content</a>
@@ -22,7 +22,7 @@
 
 フォーカスされていない時にリンクを非表示にするには、以下のスタイルを追加します:
 
-``` css
+```css
 .skipLink {
   white-space: nowrap;
   margin: 1em auto;
@@ -42,7 +42,7 @@
 
 ユーザがルートを変更したら、スキップリンクにフォーカスを戻します。これは以下のように `ref` にフォーカスを呼ぶことで実現できます:
 
-``` vue
+```vue
 <script>
 export default {
   watch: {
