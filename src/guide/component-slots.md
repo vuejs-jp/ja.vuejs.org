@@ -222,7 +222,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
   </footer>
 </div>
 ```
-**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
+**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
 
 ## スコープ付きスロット
 
@@ -247,7 +247,7 @@ app.component('todo-list', {
 })
 ```
 
-親コンポーネントでこれをカスタマイズするために、スロットに交換してもよいでしょう:
+親コンポーネントでこれをカスタマイズするために、`{{ item }}` を `<slot>` に置き換えたい場合があります:
 
 
 ```html
@@ -311,7 +311,7 @@ app.component('todo-list', {
 <todo-list v-slot="slotProps">
   <i class="fas fa-check"></i>
   <span class="green">{{ slotProps.item }}</span>
-  
+
   <template v-slot:other="otherSlotProps">
     slotProps is NOT available here
   </template>
