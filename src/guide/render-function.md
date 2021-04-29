@@ -400,7 +400,7 @@ render() {
 
 ```js
 Vue.h(
-  'anchored-heading',
+  Vue.resolveComponent('anchored-heading'),
   {
     level: 1
   },
