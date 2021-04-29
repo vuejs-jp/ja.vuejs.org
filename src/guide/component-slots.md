@@ -264,7 +264,7 @@ app.component('todo-list', {
 ```html
 <ul>
   <li v-for="( item, index ) in items">
-    <slot v-bind:item="item"></slot>
+    <slot :item="item"></slot>
   </li>
 </ul>
 ```
