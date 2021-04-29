@@ -309,10 +309,9 @@ app.component('todo-list', {
 ```html
 <!-- 不正。警告が出ます -->
 <todo-list v-slot="slotProps">
-  <todo-list v-slot:default="slotProps">
-    <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}</span>
-  </todo-list>
+  <i class="fas fa-check"></i>
+  <span class="green">{{ slotProps.item }}</span>
+  
   <template v-slot:other="otherSlotProps">
     slotProps is NOT available here
   </template>
