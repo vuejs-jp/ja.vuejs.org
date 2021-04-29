@@ -413,7 +413,7 @@ render() {
 }
 ```
 
-For component VNodes, we need to pass the children to `h` as an Object rather than an Array. Each property is used to populate the slot of the same name:
+For component VNodes, we need to pass the children to `h` as an object rather than an array. Each property is used to populate the slot of the same name:
 
 ```js
 render() {
