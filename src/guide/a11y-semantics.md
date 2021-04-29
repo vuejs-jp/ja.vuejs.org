@@ -21,7 +21,7 @@
 </form>
 ```
 
-<common-codepen-snippet title="Simple Form" slug="YzwpPYZ" :height="368" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Simple Form" slug="dyNzzWZ" :height="368" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 どのように `autocomplete='on'` をフォーム要素上に含むことができるかに注目してください。そしてそれはフォーム内の全ての入力欄に適用されます。また各入力欄の [autocomplete 属性に対して異なる値](https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/autocomplete)をセットすることもできます。
 
@@ -34,7 +34,7 @@
 <input type="text" name="name" id="name" v-model="name" />
 ```
 
-<common-codepen-snippet title="Form Label" slug="wvMrGqz" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form Label" slug="XWpaaaj" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 chrome デベロッパツールでこの要素を検証し、Elements タブ内の Accessibility タブを開くと、どのように入力欄がその名前をラベルから取得するかを確認できます:
 
@@ -68,7 +68,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 />
 ```
 
-<common-codepen-snippet title="Form ARIA label" slug="jOWGqgz" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form ARIA label" slug="NWdvvYQ" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 この要素を Chrome DevTools で自由に検証し、どのようにアクセス可能な名前が変更されたか確認してください:
 
@@ -100,7 +100,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 </form>
 ```
 
-<common-codepen-snippet title="Form ARIA labelledby" slug="ZEQXOLP" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form ARIA labelledby" slug="MWJvvBe" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ![aria-labelledby からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelledbyDevTools.png)
 
@@ -132,7 +132,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 </form>
 ```
 
-<common-codepen-snippet title="Form ARIA describedby" slug="JjGrKyY" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form ARIA describedby" slug="gOgxxQE" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 Chrome DevTools で検出することで Description を確認することができます:
 
@@ -144,7 +144,7 @@ Chrome DevTools で検出することで Description を確認することがで
 
 プレースホルダによる問題の１つは初期状態で [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) を満たしていないことです。色のコントラストを修正するとプレースホルダが入力欄に事前入力されたデータのように見えます。以下の例を見ると、color contrast criteria を満たしている Last Name プレースホルダが事前入力されたデータのように見えることが確認できます:
 
-<common-codepen-snippet title="Form Placeholder" slug="PoZJzeQ" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form Placeholder" slug="ExZvvMw" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ユーザがフォームを入力するために必要とするすべての情報を入力欄の外側で提供するのが最善です。
 
@@ -178,7 +178,7 @@ Chrome DevTools で検出することで Description を確認することがで
 </fieldset>
 ```
 
-<common-codepen-snippet title="Form Instructions" slug="GRoMqYy" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form Instructions" slug="WNREEqv" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ### コンテンツの非表示
 
@@ -212,7 +212,7 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 }
 ```
 
-<common-codepen-snippet title="Form Search" slug="qBbpQwB" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form Search" slug="QWdMqWy" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 #### aria-hidden="true"
 
@@ -240,7 +240,7 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 </form>
 ```
 
-<common-codepen-snippet title="Form Buttons" slug="PoZEXoj" :height="467" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Form Buttons" slug="JjEyrYZ" :height="467" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 #### 機能的な画像
 
@@ -276,4 +276,4 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 </form>
 ```
 
-<common-codepen-snippet title="Functional Images" slug="NWxXeqY" :height="265" tab="js,result" :team="false" user="mlama007" name="Maria" theme="light" :preview="false" :editable="false" />
+<common-codepen-snippet title="Functional Images" slug="jOyLGqM" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
