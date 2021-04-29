@@ -279,6 +279,7 @@ render() {
 
 ```js
 props: ['modelValue'],
+emits: ['update:modelValue'],
 render() {
   return Vue.h(SomeComponent, {
     modelValue: this.modelValue,
