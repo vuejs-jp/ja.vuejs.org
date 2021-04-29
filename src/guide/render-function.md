@@ -367,13 +367,13 @@ render() {
 その他すべてのイベントおよびキー修飾子については、特別な API は必要ありません。
 なぜなら、ハンドラーの中でイベントのメソッドを使用することができるからです:
 
-| 修飾子                                                | ハンドラーでの同等の記述                                                                                              |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `.stop`                                               | `event.stopPropagation()`                                                                                            |
-| `.prevent`                                            | `event.preventDefault()`                                                                                             |
-| `.self`                                               | `if (event.target !== event.currentTarget) return`                                                                   |
-| Keys:<br>`.enter`, `.13`                              | `if (event.keyCode !== 13) return` (他のキー修飾子については、 `13` を [別のキーコード](http://keycode.info/) に変更する) |
-| Modifiers Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (`ctrlKey` をそれぞれ `altKey`、 `shiftKey`、 `metaKey` に変更する)                      |
+| 修飾子                                                 | ハンドラーでの同等の記述                                                                                              |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `.stop`                                              | `event.stopPropagation()`                                                                                            |
+| `.prevent`                                           | `event.preventDefault()`                                                                                             |
+| `.self`                                              | `if (event.target !== event.currentTarget) return`                                                                   |
+| Keys:<br>e.g. `.enter`                               | `if (event.key !== 'Enter') return`<br><br>Change `'Enter'` to the appropriate [key](http://keycode.info/) |
+| Modifier Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return`<br><br>Likewise for `altKey`, `shiftKey`, and `metaKey`                       |
 
 これらすべての修飾子を一緒に使った例がこちらです:
 
@@ -384,9 +384,9 @@ render() {
       // イベントを発行した要素がイベントが紐づけられた要素ではない場合は
       // 中断する
       if (event.target !== event.currentTarget) return
-      // 押されたキーが Enter(13) ではない場合、Shift キーが同時に押されて
-      // いなかった場合は中断する
-      if (!event.shiftKey || event.keyCode !== 13) return
+      // 押されたキーが Enter ではなく、
+      // また Shift キーが同時に押されていなかった場合は中断する
+      if (!event.shiftKey || event.key !== 'Enter') return
       // イベントの伝播(propagation)を止める
       event.stopPropagation()
       // この要素のデフォルトの keyup ハンドラが実行されないようにする
