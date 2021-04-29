@@ -301,26 +301,16 @@ render() {
 
 #### イベント修飾子
 
-`.passive` 、 `.capture` 、 `.once` イベント修飾子については、Vue はハンドラーのオブジェクトシンタックスを提供しています:
+For the `.passive`, `.capture`, and `.once` event modifiers, they can be concatenated after event name using camel case.
 
 例えば:
 
 ```javascript
 render() {
   return Vue.h('input', {
-    onClick: {
-      handler: this.doThisInCapturingMode,
-      capture: true
-    },
-    onKeyup: {
-      handler: this.doThisOnce,
-      once: true
-    },
-    onMouseover: {
-      handler: this.doThisOnceInCapturingMode,
-      once: true,
-      capture: true
-    },
+    onClickCapture: this.doThisInCapturingMode,
+    onKeyupOnce: this.doThisOnce,
+    onMouseoverOnceCapture: this.doThisOnceInCapturingMode,
   })
 }
 ```
