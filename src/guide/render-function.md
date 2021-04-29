@@ -375,11 +375,15 @@ render 関数で子コンポーネントにスロットを渡す方法:
 render() {
   // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
   return Vue.h('div', [
-    Vue.h('child', {}, {
+    Vue.h(
+      Vue.resolveComponent('child'),
+      {},
       // { name: props => VNode | Array<VNode> } の形で
       // 子供のオブジェクトを `slots` として渡す
-      default: (props) => Vue.h('span', props.text)
-    })
+      {
+        default: (props) => Vue.h('span', props.text)
+      }
+    )
   ])
 }
 ```
@@ -394,7 +398,9 @@ Vue.h(
   {
     level: 1
   },
-  [Vue.h('span', 'Hello'), ' world!']
+  {
+    default: () => [Vue.h('span', 'Hello'), ' world!']
+  }
 )
 ```
 
