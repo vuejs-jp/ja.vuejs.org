@@ -48,7 +48,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 <todo-button>
   <!-- コンポーネントを使ってアイコンを追加 -->
   <font-awesome-icon name="plus"></font-awesome-icon>
-  Your Profile
+  Add todo
 </todo-button>
 ```
 
@@ -331,7 +331,7 @@ app.component('todo-list', {
   <template v-slot:other="otherSlotProps">
     ...
   </template>
-</current-user>
+</todo-list>
 ```
 
 ### スロットプロパティの分割代入
