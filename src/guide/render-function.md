@@ -136,9 +136,9 @@ return h('h1', {}, this.blogTitle)
 ```js
 // @returns {VNode}
 h(
-  // {String | Object | Function } tag
-  // HTMLタグ名、コンポーネントまたは非同期コンポーネント
-  // nullを返す関数を使用した場合、コメントがレンダリングされます。
+  // {String | Object | Function} tag
+  // HTMLタグ名、コンポーネント、非同期コンポーネント、
+  // または関数型コンポーネント。
   //
   // 必須
   'div',
@@ -608,6 +608,31 @@ app.mount('#demo')
 ```
 
 JSX がどのように JavaScript に変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
+
+## Functional Components
+
+Functional components are an alternative form of component that don't have any state of their own. They are rendered without creating a component instance, bypassing the usual component lifecycle.
+
+To create a functional component we use a plain function, rather than an options object. The function is effectively the `render` function for the component. As there is no `this` reference for a functional component, Vue will pass in the `props` as the first argument:
+
+```js
+const FunctionalComponent = (props, context) => {
+  // ...
+}
+```
+
+The second argument, `context`, contains three properties: `attrs`, `emit`, and `slots`. These are equivalent to the instance properties [`$attrs`](/api/instance-properties.html#attrs), [`$emit`](/api/instance-methods.html#emit), and [`$slots`](/api/instance-properties.html#slots) respectively.
+
+Most of the usual configuration options for components are not available for functional components. However, it is possible to define [`props`](/api/options-data.html#props) and [`emits`](/api/options-data.html#emits) by adding them as properties:
+
+```js
+FunctionalComponent.props = ['value']
+FunctionalComponent.emits = ['click']
+```
+
+If the `props` option is not specified, then the `props` object passed to the function will contain all attributes, the same as `attrs`. The prop names will not be normalized to camelCase unless the `props` option is specified.
+
+Functional components can be registered and consumed just like normal components. If you pass a function as the first argument to `h`, it will be treated as a functional component.
 
 ## テンプレートのコンパイル
 
