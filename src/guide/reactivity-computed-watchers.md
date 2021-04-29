@@ -4,7 +4,7 @@
 
 ## 算出プロパティ
 
-開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの[算出プロパティ](computed.html#computed-properties)として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./refs-api.html#ref) オブジェクトを返却する `computed` メソッドを利用します。。
+開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの[算出プロパティ](computed.html#computed-properties)として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./reactivity-fundamentals.html#独立したリアクティブな値を-参照-として作成する) オブジェクトを返却する `computed` メソッドを利用します。。
 
 ```js
 const count = ref(1)
