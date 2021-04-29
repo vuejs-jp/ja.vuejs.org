@@ -100,7 +100,6 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 > 親のテンプレート内の全てのものは親のスコープでコンパイルされ、子のテンプレート内の全てのものは子のスコープでコンパイルされる。
 
-
 ## フォールバックコンテンツ
 
 スロットに対して、コンテンツがない場合にだけ描画されるフォールバック (つまり、デフォルトの) コンテンツを指定すると便利な場合があります。例えば、`<submit-button>` コンポーネントにおいて:
@@ -222,6 +221,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
   </footer>
 </div>
 ```
+
 **`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
 
 ## スコープ付きスロット
@@ -249,7 +249,6 @@ app.component('todo-list', {
 
 親コンポーネントでこれをカスタマイズするために、`{{ item }}` を `<slot>` に置き換えたい場合があります:
 
-
 ```html
 <todo-list>
   <i class="fas fa-check"></i>
@@ -265,6 +264,16 @@ app.component('todo-list', {
 <ul>
   <li v-for="( item, index ) in items">
     <slot :item="item"></slot>
+  </li>
+</ul>
+```
+
+You can bind as many attributes to the `slot` as you need:
+
+```html
+<ul>
+  <li v-for="( item, index ) in items">
+    <slot :item="item" :index="index" :another-attribute="anotherAttribute"></slot>
   </li>
 </ul>
 ```
@@ -385,7 +394,6 @@ function (slotProps) {
 ## 名前付きスロットの省略記法
 
 `v-on` や `v-bind` と同様に `v-slot` にも省略記法があり、引数の前のすべての部分 (`v-slot:`) を特別な記号 `#` で置き換えます。例えば、`v-slot:header` は `#header` に書き換えることができます:
-
 
 ```html
 <base-layout>
