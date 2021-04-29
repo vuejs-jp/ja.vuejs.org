@@ -76,7 +76,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 #### aria-labelledby
 
-[`aria-labelledby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) は `aria-label` に類似しており、ラベルテキストが画面に表示されている場合に使用されることを期待します。これは `id` によって他の要素とペアになっており、複数の `id` を関連付けることができます:
+[`aria-labelledby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) の使用法は、ラベルテキストが画面に表示されている場合に使用されることを除けば、`aria-label` に似ています。これは `id` によって他の要素とペアになっており、複数の `id` を関連付けることができます:
 
 ```html
 <form
@@ -106,7 +106,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 #### aria-describedby
 
-[aria-describedby](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) は `aria-labelledby` と同じ方法で使用され、ユーザが必要とする可能性のある追加情報と説明を提供します。これは任意の入力欄の基準を説明するために使用することができます:
+[aria-describedby](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) は、ユーザが必要とする可能性のある追加情報と説明を提供することを除けば、 `aria-labelledby` と同じ方法で使用されます。これは任意の入力欄の基準を説明するために使用することができます:
 
 ```html
 <form
