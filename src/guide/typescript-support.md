@@ -174,7 +174,6 @@ const Component = defineComponent({
 
 ## コンポジション API とともに使用する
 
-On `setup()` function, you don't need to pass a typing to `props` parameter as it will infer types from `props` component option.
 `setup()` 関数においては、`props` 引数に型をつける必要はありません。`setup()` 関数は　`props` コンポーネントオプションから型を推論するからです。
 
 ```ts
@@ -197,7 +196,6 @@ const Component = defineComponent({
 
 ### `ref` を型定義する
 
-Refs infer the type from the initial value:
 Ref は初期値から肩を推論します:
 
 ```ts
