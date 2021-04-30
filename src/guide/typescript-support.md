@@ -53,7 +53,7 @@ vue add typescript
 
 ### エディタによるサポート
 
-TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-components.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
+TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-component.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
 
 [WebStorm](https://www.jetbrains.com/webstorm/) もすぐに利用できる TypeScript と Vue のサポートを提供しています。
 
