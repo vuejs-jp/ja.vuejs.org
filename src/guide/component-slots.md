@@ -48,7 +48,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 <todo-button>
   <!-- コンポーネントを使ってアイコンを追加 -->
   <font-awesome-icon name="plus"></font-awesome-icon>
-  Your Profile
+  Add todo
 </todo-button>
 ```
 
@@ -99,7 +99,6 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 ルールとしては、以下を覚えておいてください:
 
 > 親のテンプレート内の全てのものは親のスコープでコンパイルされ、子のテンプレート内の全てのものは子のスコープでコンパイルされる。
-
 
 ## フォールバックコンテンツ
 
@@ -222,7 +221,8 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
   </footer>
 </div>
 ```
-**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
+
+**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
 
 ## スコープ付きスロット
 
@@ -247,8 +247,7 @@ app.component('todo-list', {
 })
 ```
 
-親コンポーネントでこれをカスタマイズするために、スロットに交換してもよいでしょう:
-
+親コンポーネントでこれをカスタマイズするために、<span v-pre>`{{ item }}`</span> を `<slot>` に置き換えたい場合があります:
 
 ```html
 <todo-list>
@@ -259,23 +258,33 @@ app.component('todo-list', {
 
 しかし、これは動作しません。というのも、 `item` にアクセスすることができるのは `<todo-list>` コンポーネントだけですが、ここで指定しているコンテンツは親コンポーネントで描画されるからです。
 
-親コンポーネント内でスロットコンテンツとして `item` を使えるようにするためには、これを `<slot>` 要素の属性としてバインドします:
+親コンポーネント内でスロットコンテンツとして `item` を使えるようにするためには、これを `<slot>` 要素の属性として束縛します:
 
 ```html
 <ul>
   <li v-for="( item, index ) in items">
-    <slot v-bind:item="item"></slot>
+    <slot :item="item"></slot>
   </li>
 </ul>
 ```
 
-`<slot>` 要素にバインドされた属性は、 **スロットプロパティ** と呼ばれます。これで、親スコープ内で `v-slot` に値を指定して、渡されたスロットプロパティの名前を定義できます:
+必要な数の属性を `slot` に束縛できます:
+
+```html
+<ul>
+  <li v-for="( item, index ) in items">
+    <slot :item="item" :index="index" :another-attribute="anotherAttribute"></slot>
+  </li>
+</ul>
+```
+
+`<slot>` 要素に束縛された属性は、 **スロットプロパティ** と呼ばれます。これで、親スコープ内で `v-slot` に値を指定して、渡されたスロットプロパティの名前を定義できます:
 
 ```html
 <todo-list>
   <template v-slot:default="slotProps">
     <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
+    <span class="green">{{ slotProps.item }}</span>
   </template>
 </todo-list>
 ```
@@ -291,7 +300,7 @@ app.component('todo-list', {
 ```html
 <todo-list v-slot:default="slotProps">
   <i class="fas fa-check"></i>
-  <span class="green">{{ slotProps.item }}<span>
+  <span class="green">{{ slotProps.item }}</span>
 </todo-list>
 ```
 
@@ -300,7 +309,7 @@ app.component('todo-list', {
 ```html
 <todo-list v-slot="slotProps">
   <i class="fas fa-check"></i>
-  <span class="green">{{ slotProps.item }}<span>
+  <span class="green">{{ slotProps.item }}</span>
 </todo-list>
 ```
 
@@ -309,10 +318,9 @@ app.component('todo-list', {
 ```html
 <!-- 不正。警告が出ます -->
 <todo-list v-slot="slotProps">
-  <todo-list v-slot:default="slotProps">
-    <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
-  </todo-list>
+  <i class="fas fa-check"></i>
+  <span class="green">{{ slotProps.item }}</span>
+
   <template v-slot:other="otherSlotProps">
     slotProps is NOT available here
   </template>
@@ -325,13 +333,13 @@ app.component('todo-list', {
 <todo-list>
   <template v-slot:default="slotProps">
     <i class="fas fa-check"></i>
-    <span class="green">{{ slotProps.item }}<span>
+    <span class="green">{{ slotProps.item }}</span>
   </template>
 
   <template v-slot:other="otherSlotProps">
     ...
   </template>
-</current-user>
+</todo-list>
 ```
 
 ### スロットプロパティの分割代入
@@ -358,7 +366,7 @@ function (slotProps) {
 ```html
 <todo-list v-slot="{ item: todo }">
   <i class="fas fa-check"></i>
-  <span class="green">{{ todo }}<span>
+  <span class="green">{{ todo }}</span>
 </todo-list>
 ```
 
@@ -386,7 +394,6 @@ function (slotProps) {
 ## 名前付きスロットの省略記法
 
 `v-on` や `v-bind` と同様に `v-slot` にも省略記法があり、引数の前のすべての部分 (`v-slot:`) を特別な記号 `#` で置き換えます。例えば、`v-slot:header` は `#header` に書き換えることができます:
-
 
 ```html
 <base-layout>
