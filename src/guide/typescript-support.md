@@ -26,6 +26,31 @@
 
 より詳細を知るためには、[TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を参照してください。
 
+## Webpack の設定
+
+カスタムの Webpack の設定を使っている場合、 `.vue` ファイルの `<script lang="ts">` ブロックをパースするように `ts-loader` を設定する必要があります:
+
+```js{10}
+// webpack.config.js
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      }
+      ...
+```
+
 ## 開発ツール
 
 ### プロジェクトの作成
@@ -51,9 +76,17 @@ vue add typescript
 </script>
 ```
 
+また、TypeScript と [JSX `render` 関数](/guide/render-function.html#jsx) を組み合わせたい場合:
+
+```html
+<script lang="tsx">
+  ...
+</script>
+```
+
 ### エディタによるサポート
 
-TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-components.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
+TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-component.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
 
 [WebStorm](https://www.jetbrains.com/webstorm/) もすぐに利用できる TypeScript と Vue のサポートを提供しています。
 
@@ -67,6 +100,18 @@ import { defineComponent } from 'vue'
 const Component = defineComponent({
   // 型推論が有効になります
 })
+```
+
+[単一ファイルコンポーネント](/guide/single-file-component.html) を使っている場合、これは一般的に次のように書かれます:
+
+```vue
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  // type inference enabled
+})
+</script>
 ```
 
 ## オプション API とともに使用する
@@ -108,6 +153,52 @@ const Component = defineComponent({
 })
 ```
 
+### `globalProperties` のための型の拡張
+
+Vue 3 には [`globalProperties` オブジェクト](../api/application-config.html#globalproperties) が用意されていて、任意のコンポーネントインスタンスからアクセス可能なグローバルプロパティを追加するために使用できます。例えば、 [プラグイン](./plugins.html#プラグインを書く) では共有されたグローバルオブジェクトや関数を注入したい場合があります。
+
+```ts
+// ユーザの定義
+import axios from 'axios'
+
+const app = Vue.createApp({})
+app.config.globalProperties.$http = axios
+
+// あるデータを検証するためのプラグイン
+export default {
+  install(app, options) {
+    app.config.globalProperties.$validate = (data: object, rule: object) => {
+      // 対象のデータが特定のルールを満たしているかチェック
+    }
+  }
+}
+```
+
+これらの新しいプロパティを TypeScript に伝えるために、[Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) を使うことができます。
+
+上記の例では、次のような型宣言を追加することができます:
+
+```ts
+import axios from 'axios'
+
+declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    $http: typeof axios
+    $validate: (data: object, rule: object) => boolean
+  }
+}
+```
+
+この型宣言は同じファイル、またはプロジェクト全体の `*.d.ts` ファイル（例えば、 TypeScript で自動的に読み込まれる `src/typings` フォルダの中）に記述することができます。ライブラリやプラグインの作者は、このファイルを `package.json` の `types` プロパティで指定します。
+
+::: warning 宣言ファイルが TypeScript モジュールであることを確認
+Module Augmentation を利用するためには、ファイルの中に少なくとも1つのトップレベルの `import` か `export` があることを確認する必要があります。それが単に `export {}` であってもです。
+
+[TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html) では、トップレベルの `import` や `export` を含むファイルはすべて「モジュール」とみなされます。モジュールの外で型宣言が行われた場合、元の型を拡張するのではなく、上書きしてしまいます。
+:::
+
+`ComponentCustomProperties` 型について詳しくは、[`@vue/runtime-core` での定義](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) と、[TypeScript ユニットテスト](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) を参照してください。
+
 ### 戻り値の型にアノテーションをつける
 
 Vue の型宣言ファイルの循環的な性質により、TypeScript は算出プロパティの型を推論することが困難な場合があります。この理由により、算出プロパティの戻り値の型にアノテーションをつける必要があります。
@@ -125,7 +216,7 @@ const Component = defineComponent({
     // アノテーションが必要です
     greeting(): string {
       return this.message + '!'
-    }
+    },
 
     // セッターを持つ算出プロパティのでは、ゲッターにアノテーションが必要です
     greetingUppercased: {
@@ -134,8 +225,8 @@ const Component = defineComponent({
       },
       set(newValue: string) {
         this.message = newValue.toUpperCase();
-      },
-    },
+      }
+    }
   }
 })
 ```
@@ -147,11 +238,12 @@ Vue は `type` が定義されたプロパティについてランタイムバ�
 ```ts
 import { defineComponent, PropType } from 'vue'
 
-interface ComplexMessage {
+interface Book {
   title: string
-  okMessage: string
-  cancelMessage: string
+  author: string
+  year: number
 }
+
 const Component = defineComponent({
   props: {
     name: String,
@@ -159,22 +251,78 @@ const Component = defineComponent({
     callback: {
       type: Function as PropType<() => void>
     },
-    message: {
-      type: Object as PropType<ComplexMessage>,
-      required: true,
-      validator(message: ComplexMessage) {
-        return !!message.title
+    book: {
+      type: Object as PropType<Book>,
+      required: true
+    }
+  }
+})
+```
+
+::: warning
+TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validators` と、オブジェクトや配列の `default` 値に注意する必要があります:
+:::
+
+```ts
+import { defineComponent, PropType } from 'vue'
+
+interface Book {
+  title: string
+  year?: number
+}
+
+const Component = defineComponent({
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      // 必ずアロー関数を使うこと
+      default: () => ({
+        title: 'Arrow Function Expression'
+      }),
+      validator: (book: Book) => !!book.title
+    },
+    bookB: {
+      type: Object as PropType<Book>,
+      // または明示的にこのパラメータを提供する
+      default(this: void) {
+        return {
+          title: 'Function Expression'
+        }
+      },
+      validator(this: void, book: Book) {
+        return !!book.title
       }
     }
   }
 })
 ```
 
-バリデータの型推論やメンバの補完が機能していない場合、引数に期待される型のアノテーションをつけることで問題に対処できるかもしれません。
+### emits にアノテーションをつける
+
+発行されたイベントのペイロードにアノテーションをつけることができます。また、すべての宣言されていない発行されたイベントは、呼び出されたときに型エラーが発生します:
+
+```ts
+const Component = defineComponent({
+  emits: {
+    addBook(payload: { bookName: string }) {
+      // ランタイムバリデーションの実行
+      return payload.bookName.length > 0
+    }
+  },
+  methods: {
+    onSubmit() {
+      this.$emit('addBook', {
+        bookName: 123 // 型エラー！
+      })
+
+      this.$emit('non-declared-event') // 型エラー！
+    }
+  }
+})
+```
 
 ## コンポジション API とともに使用する
 
-On `setup()` function, you don't need to pass a typing to `props` parameter as it will infer types from `props` component option.
 `setup()` 関数においては、`props` 引数に型をつける必要はありません。`setup()` 関数は　`props` コンポーネントオプションから型を推論するからです。
 
 ```ts
@@ -197,7 +345,6 @@ const Component = defineComponent({
 
 ### `ref` を型定義する
 
-Refs infer the type from the initial value:
 Ref は初期値から肩を推論します:
 
 ```ts
