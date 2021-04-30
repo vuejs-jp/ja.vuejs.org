@@ -26,9 +26,9 @@
 
 より詳細を知るためには、[TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を参照してください。
 
-## Webpack Configuration
+## Webpack の設定
 
-If you are using a custom Webpack configuration `ts-loader` needs to be configured to parse `<script lang="ts">` blocks in `.vue` files:
+カスタムの Webpack の設定を使っている場合、 `.vue` ファイルの `<script lang="ts">` ブロックをパースするように `ts-loader` を設定する必要があります:
 
 ```js{10}
 // webpack.config.js
@@ -76,7 +76,7 @@ vue add typescript
 </script>
 ```
 
-Or, if you want to combine TypeScript with a [JSX `render` function](/guide/render-function.html#jsx):
+また、TypeScript と [JSX `render` 関数](/guide/render-function.html#jsx) を組み合わせたい場合:
 
 ```html
 <script lang="tsx">
@@ -102,7 +102,7 @@ const Component = defineComponent({
 })
 ```
 
-If you're using [single-file components](/guide/single-file-component.html) then this would typically be written as:
+[単一ファイルコンポーネント](/guide/single-file-component.html) を使っている場合、これは一般的に次のように書かれます:
 
 ```vue
 <script lang="ts">
@@ -153,30 +153,30 @@ const Component = defineComponent({
 })
 ```
 
-### Augmenting Types for `globalProperties`
+### `globalProperties` のための型の拡張
 
-Vue 3 provides a [`globalProperties` object](../api/application-config.html#globalproperties) that can be used to add a global property that can be accessed in any component instance. For example, a [plugin](./plugins.html#writing-a-plugin) might want to inject a shared global object or function.
+Vue 3 には [`globalProperties` オブジェクト](../api/application-config.html#globalproperties) が用意されていて、任意のコンポーネントインスタンスからアクセス可能なグローバルプロパティを追加するために使用できます。例えば、 [プラグイン](./plugins.html#プラグインを書く) では共有されたグローバルオブジェクトや関数を注入したい場合があります。
 
 ```ts
-// User Definition
+// ユーザの定義
 import axios from 'axios'
 
 const app = Vue.createApp({})
 app.config.globalProperties.$http = axios
 
-// Plugin for validating some data
+// あるデータを検証するためのプラグイン
 export default {
   install(app, options) {
     app.config.globalProperties.$validate = (data: object, rule: object) => {
-      // check whether the object meets certain rules
+      // 対象のデータが特定のルールを満たしているかチェック
     }
   }
 }
 ```
 
-In order to tell TypeScript about these new properties, we can use [module augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+これらの新しいプロパティを TypeScript に伝えるために、[Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) を使うことができます。
 
-In the above example, we could add the following type declaration:
+上記の例では、次のような型宣言を追加することができます:
 
 ```ts
 import axios from 'axios'
@@ -189,15 +189,15 @@ declare module '@vue/runtime-core' {
 }
 ```
 
-We can put this type declaration in the same file, or in a project-wide `*.d.ts` file (for example, in the `src/typings` folder that is automatically loaded by TypeScript). For library/plugin authors, this file should be specified in the `types` property in `package.json`.
+この型宣言は同じファイル、またはプロジェクト全体の `*.d.ts` ファイル（例えば、 TypeScript で自動的に読み込まれる `src/typings` フォルダの中）に記述することができます。ライブラリやプラグインの作者は、このファイルを `package.json` の `types` プロパティで指定します。
 
-::: warning Make sure the declaration file is a TypeScript module
-In order to take advantage of module augmentation, you will need to ensure there is at least one top-level `import` or `export` in your file, even if it is just `export {}`.
+::: warning 宣言ファイルが TypeScript モジュールであることを確認
+Module Augmentation を利用するためには、ファイルの中に少なくとも1つのトップレベルの `import` か `export` があることを確認する必要があります。それが単に `export {}` であってもです。
 
-[In TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html), any file containing a top-level `import` or `export` is considered a 'module'. If type declaration is made outside of a module, it will overwrite the original types rather than augmenting them.
+[TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html) では、トップレベルの `import` や `export` を含むファイルはすべて「モジュール」とみなされます。モジュールの外で型宣言が行われた場合、元の型を拡張するのではなく、上書きしてしまいます。
 :::
 
-For more information about the `ComponentCustomProperties` type, see its [definition in `@vue/runtime-core`](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) and [the TypeScript unit tests](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) to learn more.
+`ComponentCustomProperties` 型について詳しくは、[`@vue/runtime-core` での定義](https://github.com/vuejs/vue-next/blob/2587f36fe311359e2e34f40e8e47d2eebfab7f42/packages/runtime-core/src/componentOptions.ts#L64-L80) と、[TypeScript ユニットテスト](https://github.com/vuejs/vue-next/blob/master/test-dts/componentTypeExtensions.test-d.tsx) を参照してください。
 
 ### 戻り値の型にアノテーションをつける
 
@@ -260,8 +260,7 @@ const Component = defineComponent({
 ```
 
 ::: warning
-Because of a [design limitation](https://github.com/microsoft/TypeScript/issues/38845) in TypeScript when it comes
-to type inference of function expressions, you have to be careful with `validators` and `default` values for objects and arrays:
+TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validators` と、オブジェクトや配列の `default` 値に注意する必要があります:
 :::
 
 ```ts
@@ -276,7 +275,7 @@ const Component = defineComponent({
   props: {
     bookA: {
       type: Object as PropType<Book>,
-      // Make sure to use arrow functions
+      // 必ずアロー関数を使うこと
       default: () => ({
         title: 'Arrow Function Expression'
       }),
@@ -284,7 +283,7 @@ const Component = defineComponent({
     },
     bookB: {
       type: Object as PropType<Book>,
-      // Or provide an explicit this parameter
+      // または明示的にこのパラメータを提供する
       default(this: void) {
         return {
           title: 'Function Expression'
@@ -298,25 +297,25 @@ const Component = defineComponent({
 })
 ```
 
-### Annotating emits
+### アノテーション emits
 
-We can annotate a payload for the emitted event. Also, all non-declared emitted events will throw a type error when called:
+発行されたイベントのペイロードにアノテーションをつけることができます。また、すべての宣言されていない発行されたイベントは、呼び出されたときに型エラーが発生します:
 
 ```ts
 const Component = defineComponent({
   emits: {
     addBook(payload: { bookName: string }) {
-      // perform runtime validation
+      // ランタイムバリデーションの実行
       return payload.bookName.length > 0
     }
   },
   methods: {
     onSubmit() {
       this.$emit('addBook', {
-        bookName: 123 // Type error!
+        bookName: 123 // 型エラー！
       })
 
-      this.$emit('non-declared-event') // Type error!
+      this.$emit('non-declared-event') // 型エラー！
     }
   }
 })
