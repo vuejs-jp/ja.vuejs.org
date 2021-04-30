@@ -172,11 +172,12 @@ Vue は `type` が定義されたプロパティについてランタイムバ�
 ```ts
 import { defineComponent, PropType } from 'vue'
 
-interface ComplexMessage {
+interface Book {
   title: string
-  okMessage: string
-  cancelMessage: string
+  author: string
+  year: number
 }
+
 const Component = defineComponent({
   props: {
     name: String,
@@ -184,18 +185,52 @@ const Component = defineComponent({
     callback: {
       type: Function as PropType<() => void>
     },
-    message: {
-      type: Object as PropType<ComplexMessage>,
-      required: true,
-      validator(message: ComplexMessage) {
-        return !!message.title
-      }
+    book: {
+      type: Object as PropType<Book>,
+      required: true
     }
   }
 })
 ```
 
-バリデータの型推論やメンバの補完が機能していない場合、引数に期待される型のアノテーションをつけることで問題に対処できるかもしれません。
+::: warning
+Because of a [design limitation](https://github.com/microsoft/TypeScript/issues/38845) in TypeScript when it comes
+to type inference of function expressions, you have to be careful with `validators` and `default` values for objects and arrays:
+:::
+
+```ts
+import { defineComponent, PropType } from 'vue'
+
+interface Book {
+  title: string
+  year?: number
+}
+
+const Component = defineComponent({
+  props: {
+    bookA: {
+      type: Object as PropType<Book>,
+      // Make sure to use arrow functions
+      default: () => ({
+        title: "Arrow Function Expression"
+      }),
+      validator: (book: Book) => !!book.title
+    },
+    bookB: {
+      type: Object as PropType<Book>,
+      // Or provide an explicit this parameter
+      default(this: void) {
+        return {
+          title: "Function Expression"
+        }
+      },
+      validator(this: void, book: Book) {
+        return !!book.title
+      }
+    }
+  }
+})
+```
 
 ## コンポジション API とともに使用する
 
