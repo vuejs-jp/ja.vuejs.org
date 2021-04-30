@@ -102,6 +102,18 @@ const Component = defineComponent({
 })
 ```
 
+If you're using [single-file components](/guide/single-file-component.html) then this would typically be written as:
+
+```vue
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  // type inference enabled
+})
+</script>
+```
+
 ## オプション API とともに使用する
 
 TypeScript は明示的に型を定義することなく、ほとんどの型を推論できるようにあるべきです。例えば、数値である `count` プロパティを持つコンポーネントがある場合、文字列に特有のメソッドを呼び出すとエラーになります:
