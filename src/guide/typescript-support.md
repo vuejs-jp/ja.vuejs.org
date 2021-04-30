@@ -26,6 +26,31 @@
 
 より詳細を知るためには、[TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を参照してください。
 
+## Webpack Configuration
+
+If you are using a custom Webpack configuration `ts-loader` needs to be configured to parse `<script lang="ts">` blocks in `.vue` files:
+
+```js{10}
+// webpack.config.js
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      }
+      ...
+```
+
 ## 開発ツール
 
 ### プロジェクトの作成
