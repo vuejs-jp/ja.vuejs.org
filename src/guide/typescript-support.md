@@ -76,6 +76,14 @@ vue add typescript
 </script>
 ```
 
+Or, if you want to combine TypeScript with a [JSX `render` function](/guide/render-function.html#jsx):
+
+```html
+<script lang="tsx">
+  ...
+</script>
+```
+
 ### エディタによるサポート
 
 TypeScript による Vue アプリケーションの開発のために、すぐに利用できる TypeScript サポートを提供している [Visual Studio Code](https://code.visualstudio.com/) を強く推奨します。[単一ファイルコンポーネント](./single-file-component.html) (SFCs) を使用している場合、SFC 内部での TypeScript の推論やその他の優れた機能を提供している、素晴らしい [Vetur エクステンション](https://github.com/vuejs/vetur) を入手してください。
