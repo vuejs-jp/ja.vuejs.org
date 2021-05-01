@@ -38,9 +38,11 @@
 大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なコンポーネントだけサーバーから読み込みたい場合があるでしょう。これを可能にするために、 Vue は `defineAsyncComponent` メソッドを持ちます:
 
 ```js
-const app = Vue.createApp({})
+const { createApp, defineAsyncComponent } = Vue
 
-const AsyncComp = Vue.defineAsyncComponent(
+const app = createApp({})
+
+const AsyncComp = defineAsyncComponent(
   () =>
     new Promise((resolve, reject) => {
       resolve({
