@@ -18,7 +18,7 @@ this.$emit('myEvent')
 
 ## カスタムイベントの定義
 
-<VideoLesson href="https://vueschool.io/lessons/defining-custom-events-emits?friend=vuejs" title="Learn how to define which events a component can emit with Vue School">Watch a free video about Defining Custom Events on Vue School</VideoLesson>
+<VideoLesson href="https://vueschool.io/lessons/defining-custom-events-emits?friend=vuejs" title="Vue School でコンポーネントが発行できるイベントを定義する方法を学ぶ">Vue School でカスタムイベントの定義についての無料ビデオを視聴する</VideoLesson>
 
 発行されたイベントは、 `emits` オプションを介して、コンポーネントで定義することが出来ます。
 
