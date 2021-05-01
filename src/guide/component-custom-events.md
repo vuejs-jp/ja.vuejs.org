@@ -33,7 +33,6 @@ app.component('custom-form', {
 })
 ```
 
-
 ネイティブイベント（例、 `click` など）が `emits` オプションで定義されている場合、ネイティブリスナーとして扱われるのではなく、コンポーネントのイベントによって上書きされます。
 
 ::: tip
@@ -75,28 +74,29 @@ app.component('custom-form', {
 デフォルトでは、コンポーネントの `v-model` はプロパティとして `modelValue` を使用し、イベントとして `update:modelValue` を使用します。`v-model` 引数を渡してこれらの名前の変更が出来ます。
 
 ```html
-<my-component v-model:foo="bar"></my-component>
+<my-component v-model:title="bookTitle"></my-component>
 ```
-この場合、子コンポーネントは `foo` プロパティを期待し、同期するために `update:foo` イベントを発行します。
+
+この場合、子コンポーネントは `title` プロパティを期待し、同期するために `update:title` イベントを発行します。
 
 ```js
 const app = Vue.createApp({})
 
 app.component('my-component', {
   props: {
-    foo: String
+    title: String
   },
   template: `
     <input
       type="text"
-      :value="foo"
-      @input="$emit('update:foo', $event.target.value)">
+      :value="title"
+      @input="$emit('update:title', $event.target.value)">
   `
 })
 ```
 
 ```html
-<my-component v-model:foo="bar"></my-component>
+<my-component v-model:title="bookTitle"></my-component>
 ```
 
 ## 複数の `v-model` のバインディング
