@@ -90,12 +90,11 @@ app.component('custom-form', {
 この場合、子コンポーネントは `title` プロパティを期待し、同期するために `update:title` イベントを発行します。
 
 ```js
-const app = Vue.createApp({})
-
 app.component('my-component', {
   props: {
     title: String
   },
+  emits: ['update:title'],
   template: `
     <input
       type="text"
@@ -123,13 +122,12 @@ app.component('my-component', {
 ```
 
 ```js
-const app = Vue.createApp({})
-
 app.component('user-name', {
   props: {
     firstName: String,
     lastName: String
   },
+  emits: ['update:firstName', 'update:lastName'],
   template: `
     <input
       type="text"
@@ -157,7 +155,7 @@ app.component('user-name', {
 コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
 
 ```html
-<my-component v-model.capitalize="bar"></my-component>
+<my-component v-model.capitalize="myText"></my-component>
 ```
 
 ```js
@@ -168,6 +166,7 @@ app.component('my-component', {
       default: () => ({})
     }
   },
+  emits: ['update:modelValue'],
   template: `
     <input type="text"
       :value="modelValue"
@@ -204,6 +203,7 @@ app.component('my-component', {
       default: () => ({})
     }
   },
+  emits: ['update:modelValue'],
   methods: {
     emitValue(e) {
       let value = e.target.value
@@ -225,19 +225,20 @@ app.mount('#app')
 引数を持つ `v-model` バインディングの場合、生成されるプロパティ名は `arg + "Modifiers"` になります。
 
 ```html
-<my-component v-model:foo.capitalize="bar"></my-component>
+<my-component v-model:description.capitalize="myText"></my-component>
 ```
 
 ```js
 app.component('my-component', {
-  props: ['foo', 'fooModifiers'],
+  props: ['description', 'descriptionModifiers'],
+  emits: ['update:description'],
   template: `
     <input type="text"
-      :value="foo"
-      @input="$emit('update:foo', $event.target.value)">
+      :value="description"
+      @input="$emit('update:description', $event.target.value)">
   `,
   created() {
-    console.log(this.fooModifiers) // { capitalize: true }
+    console.log(this.descriptionModifiers) // { capitalize: true }
   }
 })
 ```
