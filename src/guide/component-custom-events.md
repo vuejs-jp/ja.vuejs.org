@@ -146,13 +146,13 @@ app.component('user-name', {
 
 ## `v-model` 修飾子の処理
 
-フォーム入力バインディングについて学習していたときに、 `v-model`に [組み込み修飾子](/guide/forms.html#modifiers) -`.trim` 、 `.number` 、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
+フォーム入力バインディングについて学習していたときに、 `v-model` に [組み込み修飾子](/guide/forms.html#modifiers) - `.trim`、`.number`、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
 
-`v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize`を作成してみましょう。
+`v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize` を作成してみましょう。
 
 コンポーネント `v-model` に追加された修飾子は、`modelModifiers` プロパティを介してコンポーネントに提供されます。以下の例では、デフォルトで空のオブジェクトになる `modelModifiers` プロパティを含むコンポーネントを作成しました。
 
-コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
+コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は `true` になります。これは、 `v-model` バインディングに `v-model.capitalize="myText"` が設定されているためです。
 
 ```html
 <my-component v-model.capitalize="myText"></my-component>
