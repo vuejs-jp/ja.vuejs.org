@@ -13,17 +13,19 @@
 Vue アプリケーションの情報源となっているのがリアクティブな `data` オブジェクト、すなわち、`data` オブジェクトへのアクセスのみをプロキシするコンポーネントインスタンスであることは見過ごされがちです。それゆえに、複数のインスタンスで共有されるべき状態がある場合、オブジェクトをリアクティブにするために [reactive](/guide/reactivity-fundamentals.html#declaring-reactive-state) 関数を利用できます:
 
 ```js
-const sourceOfTruth = Vue.reactive({
+const { createApp, reactive } = Vue
+
+const sourceOfTruth = reactive({
   message: 'Hello'
 })
 
-const appA = Vue.createApp({
+const appA = createApp({
   data() {
     return sourceOfTruth
   }
 }).mount('#app-a')
 
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return sourceOfTruth
   }
@@ -39,7 +41,7 @@ const appB = Vue.createApp({
 このようにすることで `sourceOfTruth` が変化するたびに、`appA` と `appB` の両方がそれぞれの view を自動的に更新します。いま、唯一の情報源を持っていることにはなりますが、デバッグは悪夢になるでしょう。あらゆるデータが、アプリケーションのどこからでも、そしていつでも、トレースを残すことなく変更できてしまうのです。
 
 ```js
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return sourceOfTruth
   },
@@ -55,7 +57,7 @@ const appB = Vue.createApp({
 const store = {
   debug: true,
 
-  state: Vue.reactive({
+  state: reactive({
     message: 'Hello!'
   }),
 
@@ -88,7 +90,7 @@ Store の状態を変化させる action がすべて store 自身の中にあ�
 ```
 
 ```js
-const appA = Vue.createApp({
+const appA = createApp({
   data() {
     return {
       privateState: {},
@@ -100,7 +102,7 @@ const appA = Vue.createApp({
   }
 }).mount('#app-a')
 
-const appB = Vue.createApp({
+const appB = createApp({
   data() {
     return {
       privateState: {},
