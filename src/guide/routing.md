@@ -2,7 +2,7 @@
 
 ## 公式ルータ
 
-ほとんどのシングルページアプリケーションでは、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router)を使うことをオススメします。詳細は vue-router の[ドキュメント](https://router.vuejs.org/)を参照してください。
+ほとんどのシングルページアプリケーションでは、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router)を使うことをオススメします。詳細は vue-router の[ドキュメント](https://next.router.vuejs.org/)を参照してください。
 
 ## スクラッチからのシンプルなルーティング
 
