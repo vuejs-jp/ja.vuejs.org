@@ -2,7 +2,7 @@
 
 ## 公式の Flux ライクな実装
 
-大規模なアプリケーションは、たくさんのコンポーネント上に複数の状態が散らばっていることや、それらのコンポーネント間の相互作用が原因となって、複雑になりがちです。この問題を解消するために、Vue は Elm に触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供しています。これは [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
+大規模なアプリケーションは、たくさんのコンポーネント上に複数の状態が散らばっていることや、それらのコンポーネント間の相互作用が原因となって、複雑になりがちです。この問題を解消するために、Vue は Elm に触発された状態管理ライブラリの [Vuex](https://next.vuex.vuejs.org/) を提供しています。これは [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
 
 ### React 開発者向けの情報
 
@@ -118,4 +118,4 @@ action によって、元の状態を保持するオブジェクトを置き換�
 
 store が保持する状態をコンポーネントが直接的に変更することを禁止し、代わりにコンポーネントが store に通知するイベントを送ることによってアクションを実行する、という規約を発展させていくに従って、最終的に [Flux](https://facebook.github.io/flux/) アーキテクチャに辿り着きました。この規約による利点としては、store に起こるすべての状態変化を記録することができたり、変更ログやスナップショット、履歴や時間の巻き戻しといった高度なデバッギングヘルパーを実装できることが挙げられます。
 
-ここまで来ると一周まわって [Vuex](https://github.com/vuejs/vuex) に戻ってきました。ここまで読み進めてきたのなら、vuex を試してみるとよいでしょう！
+ここまで来ると一周まわって [Vuex](https://next.vuex.vuejs.org/) に戻ってきました。ここまで読み進めてきたのなら、vuex を試してみるとよいでしょう！
