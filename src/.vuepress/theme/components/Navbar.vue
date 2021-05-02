@@ -26,7 +26,7 @@
       <SearchBox
         v-if="
           isAlgoliaSearch === false &&
-            !(
+            (
               $site.themeConfig.search !== false &&
               $page.frontmatter.search !== false
             )
@@ -68,7 +68,7 @@ export default {
     },
 
     isAlgoliaSearch() {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
+      return !!(this.algolia && this.algolia.apiKey && this.algolia.indexName)
     }
   },
 
@@ -108,7 +108,7 @@ $navbar-horizontal-padding = 1.5rem;
   padding: $navbar-vertical-padding $navbar-horizontal-padding;
   line-height: $navbarHeight - 1.4rem;
 
-  a, span, img {
+  a, img {
     display: inline-block;
   }
 
