@@ -261,28 +261,28 @@ module.exports = {
         href: '/logo.png'
       }
     ],
-    // ['link', { rel: 'manifest', href: '/manifest.json' }],
-    // ['meta', { name: 'theme-color', content: '#3eaf7c' }],
-    // ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    // [
-    //   'meta',
-    //   { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
-    // ],
-    // [
-    //   'link',
-    //   {
-    //     rel: 'apple-touch-icon',
-    //     href: '/images/icons/apple-icon-152x152.png'
-    //   }
-    // ],
-    // [
-    //   'meta',
-    //   {
-    //     name: 'msapplication-TileImage',
-    //     content: '/images/icons/ms-icon-144x144.png'
-    //   }
-    // ],
-    // ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
+    ],
+    [
+      'link',
+      {
+        rel: 'apple-touch-icon',
+        href: '/images/icons/apple-icon-152x152.png'
+      }
+    ],
+    [
+      'meta',
+      {
+        name: 'msapplication-TileImage',
+        content: '/images/icons/ms-icon-144x144.png'
+      }
+    ],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     [
       'script',
       {
