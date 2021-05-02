@@ -2,7 +2,7 @@
 
 > このページは [コンポーネントの基本](component-basics.md) が読まれていることが前提となっています。 コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-プロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。よくある例としては、コンポーネント要素タグに付与する `class` 、`style` 、`id` などの属性があります。
+プロパティでない属性とは、コンポーネントに渡される属性やイベントリスナのうち、[props](component-props) や [emits](component-custom-events.html#defining-custom-events) で定義されたものを除いたものをいいます。よくある例としては、コンポーネント要素タグに付与する `class` 、`style` 、`id` などの属性があります。これらの属性には `$attrs` プロパティでアクセスできます。
 
 ## 属性の継承
 
@@ -12,13 +12,13 @@
 app.component('date-picker', {
   template: `
     <div class="date-picker">
-      <input type="datetime" />
+      <input type="datetime-local" />
     </div>
   `
 })
 ```
 
-`data-status` 属性を用いて　date-picker コンポーネントの状態を定義するような場合には、この属性はルート要素 (すなわち `div.date-picker`) に適用されます。
+`data-status` 属性を用いて date-picker コンポーネントの状態を定義するような場合には、この属性はルート要素 (すなわち `div.date-picker`) に適用されます。
 
 ```html
 <!-- プロパティでない属性 とともに用いられる Date-picker コンポーネント -->
@@ -26,7 +26,7 @@ app.component('date-picker', {
 
 <!-- 実際には以下のような形で描画されます -->
 <div class="date-picker" data-status="activated">
-  <input type="datetime" />
+  <input type="datetime-local" />
 </div>
 ```
 
@@ -78,11 +78,11 @@ const app = Vue.createApp({
 
 ## 属性の継承の無効化
 
-コンポーネントのオプション内で、`inheritAttrs: false`を指定することで、属性の継承を **無効化** することも可能です。
+コンポーネントのオプション内で、`inheritAttrs: false` を指定することで、属性の継承を **無効化** することも可能です。
 
 一般的に属性の継承の無効化は、ルート要素ではない別の要素に属性を適用したいようなケースで利用される場面が考えられるでしょう。
 
-`inheritAttrs` を `false` にセットした場合属性の継承は無効化されますが、`inheritAttrs` の設定に関わらずコンポーネントの `$attrs` プロパティから、`props` や `emits`といったコンポーネントのプロパティを除く全ての属性(例えば`class` や `style` 、 `v-on` といったものも)にアクセスすることができます。
+`inheritAttrs` を `false` にセットした場合属性の継承は無効化されますが、`inheritAttrs` の設定に関わらずコンポーネントの `$attrs` プロパティを使って、`props` や `emits` といったコンポーネントのプロパティを除く全ての属性（例えば `class` や `style` 、`v-on` といったものも）を他の要素の属性への適用することを制御できます。
 
 [前節](#属性の継承) で利用した date-picker のコンポーネント例を用いて、プロパティでない属性の全てを ルートの `div` 要素ではなく `input` 要素に適用する場合、`v-bind` を用いて簡略的に記述することも可能です。
 
@@ -91,7 +91,7 @@ app.component('date-picker', {
   inheritAttrs: false,
   template: `
     <div class="date-picker">
-      <input type="datetime" v-bind="$attrs" />
+      <input type="datetime-local" v-bind="$attrs" />
     </div>
   `
 })
@@ -105,7 +105,7 @@ app.component('date-picker', {
 
 <!-- Rendered date-picker component -->
 <div class="date-picker">
-  <input type="datetime" data-status="activated" />
+  <input type="datetime-local" data-status="activated" />
 </div>
 ```
 
