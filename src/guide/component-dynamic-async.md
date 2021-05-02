@@ -4,7 +4,7 @@
 
 ## 動的コンポーネントにおける `keep-alive` の利用
 
-まず、`is` 属性を利用してタブインタフェースのコンポーネントを切り替えることができます:
+まず、タブインタフェースにおいてコンポーネントを切り替える `is` 属性を使ったとします:
 
 ```vue-html
 <component :is="currentTabComponent"></component>
@@ -14,9 +14,9 @@
 
 <common-codepen-snippet title="Dynamic components: without keep-alive" slug="jOPjZOe" tab="html,result" :preview="false" />
 
-投稿を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた投稿は表示されなくなります。 これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
+Posts タブの投稿を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた投稿が表示されないことに気づくでしょう。これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
 
-動的コンポーネントの再生成は通常は便利な挙動です。しかし、このケースでは最初に作成されたタブコンポーネントのインスタンスがキャッシュされるのが好ましいでしょう。この問題を解決するために、動的コンポーネントを `<keep-alive>` 要素でラップすることができます:
+動的コンポーネントの再生成は通常は便利な挙動です。しかし、このケースでは最初に生成されたタブコンポーネントのインスタンスがキャッシュされるのが好ましいでしょう。この問題を解決するためには、動的コンポーネントを `<keep-alive>` 要素で囲みます:
 
 ```vue-html
 <!-- アクティブでないコンポーネントはキャッシュされます！ -->
@@ -29,18 +29,20 @@
 
 <common-codepen-snippet title="Dynamic components: with keep-alive" slug="VwLJQvP" tab="html,result" :preview="false" />
 
-このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択された投稿)を保持するようになります。
+このように _Posts_ タブがレンダリングされていなくても、自身の状態（選択された投稿）を保持するようになります。
 
 `<keep-alive>` の詳細な情報については [API リファレンス](../api/built-in-components.html#keep-alive) を参照してください。
 
 ## 非同期コンポーネント
 
-大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なコンポーネントだけサーバーから読み込みたい場合があるでしょう。これを可能にするために、 Vue は `defineAsyncComponent` メソッドを持ちます:
+大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なときにだけコンポーネントをサーバーから読み込みたい場合があるでしょう。これを可能にするために、 Vue には `defineAsyncComponent` メソッドがあります:
 
 ```js
-const app = Vue.createApp({})
+const { createApp, defineAsyncComponent } = Vue
 
-const AsyncComp = Vue.defineAsyncComponent(
+const app = createApp({})
+
+const AsyncComp = defineAsyncComponent(
   () =>
     new Promise((resolve, reject) => {
       resolve({
@@ -66,7 +68,7 @@ const AsyncComp = defineAsyncComponent(() =>
 app.component('async-component', AsyncComp)
 ```
 
-[コンポーネントのローカル登録](component-registration.html#local-registration) でも、 `defineAsyncComponent` を利用することができます。
+[コンポーネントのローカル登録](component-registration.html#ローカル登録) でも、 `defineAsyncComponent` を利用できます。
 
 ```js
 import { createApp, defineAsyncComponent } from 'vue'
