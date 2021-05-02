@@ -124,7 +124,7 @@ const sidebar = {
     '/api/global-api',
     {
       title: 'オプション',
-      // path: '/api/options-api',
+      path: '/api/options-api',
       collapsable: false,
       children: [
         '/api/options-data',
@@ -142,7 +142,7 @@ const sidebar = {
     '/api/built-in-components.md',
     {
       title: 'リアクティビティ API',
-      // path: '/api/reactivity-api',
+      path: '/api/reactivity-api',
       collapsable: false,
       children: [
         '/api/basic-reactivity',
