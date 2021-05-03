@@ -166,11 +166,11 @@ h(
 )
 ```
 
-If there are no props then the children can usually be passed as the second argument. In cases where that would be ambiguous, `null` can be passed as the second argument to keep the children as the third argument.
+props がない場合は、通常 children を第2引数として渡すことができます。それがあいまいな場合は、 `null` を第2引数として渡して、 children を第3引数にしておけます。
 
 ## 完全な例
 
-この知識によって、書き始めたコンポーネントを今では完成させることができます:
+この知識によって、今度は書き始めたコンポーネントを完成させることができます:
 
 ```js
 const { createApp, h } = Vue
@@ -246,9 +246,9 @@ render() {
 }
 ```
 
-## Creating Component VNodes
+## コンポーネントの VNodes を作る
 
-To create a VNode for a component, the first argument passed to `h` should be the component itself:
+コンポーネントの VNode を作るためには、 `h` の第1引数にコンポーネントそのものを渡します:
 
 ```js
 render() {
@@ -256,7 +256,7 @@ render() {
 }
 ```
 
-If we need to resolve a component by name then we can call `resolveComponent`:
+コンポーネントを名前解決する必要がある場合は、 `resolveComponent` で呼び出せます:
 
 ```js
 const { h, resolveComponent } = Vue
@@ -269,12 +269,12 @@ render() {
 }
 ```
 
-`resolveComponent` is the same function that templates use internally to resolve components by name.
+`resolveComponent` は、テンプレートがコンポーネントを名前解決するために内部的に使っているものと同じ関数です。
 
-A `render` function will normally only need to use `resolveComponent` for components that are [registered globally](/guide/component-registration.html#global-registration). [Local component registration](/guide/component-registration.html#local-registration) can usually be skipped altogether. Consider the following example:
+`render` 関数は通常、 [グローバルに登録された](/guide/component-registration.html#グローバル登録) コンポーネントにだけ `resolveComponent` を使う必要があります。 [ローカルのコンポーネント登録](/guide/component-registration.html#ローカル登録) は通常、完全に省略できます。次のような例を考えてみましょう:
 
 ```js
-// We can simplify this
+// これを単純化してみると
 components: {
   ButtonCounter
 },
@@ -283,7 +283,7 @@ render() {
 }
 ```
 
-Rather than registering a component by name and then looking it up we can use it directly instead:
+コンポーネントの名前を登録して、それを調べるというよりも、直接使うことができます:
 
 ```js
 render() {
@@ -319,7 +319,7 @@ render() {
 }
 ```
 
-In a template it can be useful to use a `<template>` tag to hold a `v-if` or `v-for` directive. When migrating to a `render` function, the `<template>` tag is no longer required and can be discarded.
+テンプレートでは、 `<template>` タグを使って `v-if` や `v-for` ディレクティブを当てておくと便利です。 `render` 関数に移行するときには、 `<template>` タグは不要となり、破棄することができます。
 
 ### `v-model`
 
@@ -350,7 +350,7 @@ render() {
 
 #### イベント修飾子
 
-For the `.passive`, `.capture`, and `.once` event modifiers, they can be concatenated after the event name using camel case.
+`.passive`、`.capture`、 `.once` イベント修飾子は、キャメルケースを使ってイベント名の後につなげます。
 
 例えば:
 
@@ -372,8 +372,8 @@ render() {
 | `.stop`                                              | `event.stopPropagation()`                                                                                            |
 | `.prevent`                                           | `event.preventDefault()`                                                                                             |
 | `.self`                                              | `if (event.target !== event.currentTarget) return`                                                                   |
-| Keys:<br>e.g. `.enter`                               | `if (event.key !== 'Enter') return`<br><br>Change `'Enter'` to the appropriate [key](http://keycode.info/) |
-| Modifier Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return`<br><br>Likewise for `altKey`, `shiftKey`, and `metaKey`                       |
+| キー:<br>例 `.enter`                               | `if (event.key !== 'Enter') return`<br><br>`'Enter'` キーを適切な [キー](http://keycode.info/) に変更 |
+| 修飾キー:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return`<br><br>`altKey`、`shiftKey`、`metaKey` も同様                       |
 
 これらすべての修飾子を一緒に使った例がこちらです:
 
@@ -418,7 +418,7 @@ render() {
 }
 ```
 
-For component VNodes, we need to pass the children to `h` as an object rather than an array. Each property is used to populate the slot of the same name:
+コンポーネントの VNodes の場合、引数 children を配列ではなくオブジェクトとして `h` に渡す必要があります。各プロパティは、同名のスロットに移植するために使われます:
 
 ```js
 render() {
@@ -437,12 +437,12 @@ render() {
 }
 ```
 
-The slots are passed as functions, allowing the child component to control the creation of each slot's contents. Any reactive data should be accessed within the slot function to ensure that it's registered as a dependency of the child component and not the parent. Conversely, calls to `resolveComponent` should be made outside the slot function, otherwise they'll resolve relative to the wrong component:
+スロットは関数として渡され、子コンポーネントが各スロットのコンテンツの作成を制御できるようになっています。リアクティブなデータは、親コンポーネントではなく子コンポーネントの依存関係として登録されるように、スロット関数内でアクセスする必要があります。逆に `resolveComponent` の呼び出しは、スロット関数の外で行うべきで、そうしないと間違ったコンポーネントへの相対的な解決になってしまいます:
 
 ```js
 // `<MyButton><MyIcon :name="icon" />{{ text }}</MyButton>`
 render() {
-  // Calls to resolveComponent should be outside the slot function
+  // resolveComponent の呼び出しはスロット関数の外側でなければなりません
   const Button = resolveComponent('MyButton')
   const Icon = resolveComponent('MyIcon')
 
@@ -450,10 +450,10 @@ render() {
     Button,
     null,
     {
-      // Use an arrow function to preserve the `this` value
+      // アロー関数を使って `this` の値を保持します
       default: (props) => {
-        // Reactive properties should be read inside the slot function
-        // so that they become dependencies of the child's rendering
+        // リアクティブなプロパティは、子のレンダリングの依存関係になるように
+        // スロット関数の内側で読み込む必要があります
         return [
           h(Icon, { name: this.icon }),
           this.text
@@ -464,7 +464,7 @@ render() {
 }
 ```
 
-If a component receives slots from its parent, they can be passed on directly to a child component:
+コンポーネントが親からスロットを受け取った場合、そのスロットを子のコンポーネントに直接渡せます:
 
 ```js
 render() {
@@ -472,7 +472,7 @@ render() {
 }
 ```
 
-They can also be passed individually or wrapped as appropriate:
+また、必要に応じて個別に渡したり、ラップすることもできます:
 
 ```js
 render() {
@@ -480,11 +480,11 @@ render() {
     Panel,
     null,
     {
-      // If we want to pass on a slot function we can
+      // スロット関数を渡したい場合は次のようになります
       header: this.$slots.header,
 
-      // If we need to manipulate the slot in some way
-      // then we need to wrap it in a new function
+      // スロットを何らかの方法で操作する必要がある場合は、
+      // 新しい関数でそれをラップする必要があります
       default: (props) => {
         const children = this.$slots.default ? this.$slots.default(props) : []
 
