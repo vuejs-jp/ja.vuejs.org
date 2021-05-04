@@ -2,14 +2,14 @@
 
 ## 前書き
 
-多くの Vue プロジェクトでは、 グローバルコンポーネントは  `app.mount('#app')` の後に各ページの body においてコンテナ要素のターゲットすることに続いて、`app.component()` を使用して定義されています。
+多くの Vue プロジェクトでは、グローバルコンポーネントは  `app.mount('#app')` の後に各ページの body においてコンテナ要素のターゲットすることに続いて、`app.component()` を使用して定義されています。
 
 これはある view を拡張するためだけに JavaScript が利用された中小規模のプロジェクトにおいてはとても有効です。しかしながら、あなたのフロントエンドで JavaScript 全体を操作するようなもっと複雑なプロジェクトでは、これらの点において不利益になります。:
 
 - **グローバル宣言**は全てのコンポーネントに一意な名前を強制すること
 - シンタックスハイライトがない**文字列テンプレート**と複数行 HTML の時の醜いスラッシュが強要されること
 - **CSS サポート無し**だと HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されること
-- **ビルド処理がない**と Pug(前 Jade)と Babel のようなプリプロセッサよりむしろ、 HTML や ES5 JavaScript を制限されること
+- **ビルド処理がない**と Pug(前 Jade)と Babel のようなプリプロセッサよりむしろ、HTML や ES5 JavaScript を制限されること
 
 これらは全ては Webpack や Browserify のビルドツールにより実現された `.vue`拡張子の**単一ファイルコンポーネント**によって解決されます。
 
@@ -23,7 +23,7 @@
 - [CommonJS モジュール](https://webpack.js.org/concepts/modules/#what-is-a-webpack-module)
 - [コンポーネントスコープ CSS](https://vue-loader.vuejs.org/en/features/scoped-css.html)
 
-約束した通り、Pug、Babel (ES2015 モジュールと一緒に) や Stylus など 綺麗で機能が豊富なコンポーネントもプリプロセッサとして利用することができます。
+約束した通り、Pug、Babel (ES2015 モジュールと一緒に) や Stylus など綺麗で機能が豊富なコンポーネントもプリプロセッサとして利用することができます。
 
 <a href="https://codesandbox.io/s/vue-single-file-component-with-pre-processors-mr3ik?file=/src/App.vue" target="_blank" rel="noopener noreferrer"><img src="/images/sfc-with-preprocessors.png" width="563" alt="Single-file component with pre-processors example (click for code as text)" style="display: block; margin: 15px auto; max-width: 100%"></a>
 
@@ -31,7 +31,7 @@
 
 ### 関心の分離について
 
-注意すべき重要な点の１つは、**関心の分離がファイルタイプの分離とは等しくないことです。** 現代の UI 開発では、私たちはコードベースを互いに織りなす3つの巨大なレイヤーに分割するのではなく、それらを疎結合なコンポーネントに分割して構成する方がはるかに理にかなっていることを発見しました。コンポーネントの内部では、そのテンプレート、ロジック、スタイルが本質的に結合しており、実際にそれらを配置することでコンポーネントの一貫性と保守性が高くなります。
+注意すべき重要な点の 1 つは、**関心の分離がファイルタイプの分離とは等しくないことです。** 現代の UI 開発では、私たちはコードベースを互いに織りなす 3 つの巨大なレイヤーに分割するのではなく、それらを疎結合なコンポーネントに分割して構成する方がはるかに理にかなっていることを発見しました。コンポーネントの内部では、そのテンプレート、ロジック、スタイルが本質的に結合しており、実際にそれらを配置することでコンポーネントの一貫性と保守性が高くなります。
 
 単一ファイルコンポーネントのアイディアが好きではなくても、JavaScript と CSS を別々ファイルに分けることによってホットリロードとプリコンパイル機能を活用することができます:
 
@@ -58,7 +58,7 @@
 
 - **ES2015/16 を使ったモダンな JavaScript**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/en/learn)を読んでみてください。今すぐには全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
-これらのリソースに没頭した後は、[Vue CLI](https://cli.vuejs.org/)を確認することをお勧めします。 指示に従うことであっという間に `.vue` コンポーネントと ES2015、 Webpack、ホットリローティングを備えた Vue プロジェクトを手に入れられるはずです！
+これらのリソースに没頭した後は、[Vue CLI](https://cli.vuejs.org/)を確認することをお勧めします。 指示に従うことであっという間に `.vue` コンポーネントと ES2015、Webpack、ホットリローティングを備えた Vue プロジェクトを手に入れられるはずです！
 
 ### 上級ユーザ向け
 
@@ -66,60 +66,60 @@ CLI はツールの設定の大部分の面倒を見てくれますが、[設定
 
 あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org)を手動で設定する必要があるでしょう。webpack についてもっと学びたいときは、[公式ドキュメント](https://webpack.js.org/configuration/)や [webpack learning academy](https://webpack.academy/p/the-core-concepts)を参照してください。
 
-### Building with rollup
+### Rollup でビルド
 
-Most of the time when developing a third-party library we want to build it in a way that allows the consumers of the library to [tree shake](https://webpack.js.org/guides/tree-shaking/) it. To enable tree-shaking we need to build `esm` modules. Since webpack and, in turn, vue-cli do not support building `esm` modules we need to rely on [rollup](https://rollupjs.org/).
+ほとんどの場合、サードパーティのライブラリを開発するときは、そのライブラリの利用者が [Tree Shaking](https://webpack.js.org/guides/tree-shaking/) できるような方法でビルドしたいと考えています。Tree Shaking を有効にするためには、`esm` モジュールをビルドする必要があります。 Webpack や Vue CLI は `esm` モジュールのビルドをサポートしていないため、[Rollup](https://rollupjs.org/) の依存が必要です。
 
-#### Installing Rollup
+#### Rollup のインストール
 
-We will need to install Rollup and a few dependencies:
+Rollup といくつかの依存関係をインストールする必要があります:
 
 ```bash
 npm install --save-dev rollup @rollup/plugin-commonjs rollup-plugin-vue
 ```
 
-These are the minimal amount of rollup plugins that we need to use to compile the code in an `esm` module. We may want to also add [rollup-plugin-babel](https://github.com/rollup/plugins/tree/master/packages/babel) to transpile their code and [node-resolve](https://github.com/rollup/plugins/tree/master/packages/node-resolve) if we use dependencies that we want to bundle with our library.
+これらは `esm` モジュールのコードをコンパイルするために必要な最小限の Rollup プラグインです。コードをコンパイルするために [rollup-plugin-babel](https://github.com/rollup/plugins/tree/master/packages/babel) を、ライブラリにバンドルしたい依存関係を使うならば [node-resolve](https://github.com/rollup/plugins/tree/master/packages/node-resolve) を追加できます。
 
-#### Configuring Rollup
+#### Rollup の設定
 
-To configure our build with Rollup we will need to create a `rollup.config.js` file in the root of our project:
+Rollup でビルドを設定するには、プロジェクトのルートに `rollup.config.js` ファイルを作成する必要があります:
 
 ```bash
 touch rollup.config.js
 ```
 
-Once the file is created we will need to open it with our editor of choice and add the following code.
+ファイルを作成したら、お好きなエディタで開き、以下のコードを追加します。
 
 ```js
-// import our third party plugins
+// サードパーティのプラグインをインポート
 import commonjs from 'rollup-plugin-commonjs'
 import VuePlugin from 'rollup-plugin-vue'
-import pkg from './package.json' // import our package.json file to re-use the naming
+import pkg from './package.json' // 名前を再利用するために package.json ファイルをインポート
 
 export default {
-  // this is the file containing all our exported components/functions
+  // エクスポートされたすべてのコンポーネントや関数を含むファイル
   input: 'src/index.js',
-  // this is an array of outputted formats
+  // 出力されるフォーマットの配列
   output: [
     {
-      file: pkg.module, // the name of our esm library
-      format: 'esm', // the format of choice
-      sourcemap: true, // ask rollup to include sourcemaps
+      file: pkg.module, // esm ライブラリの名前
+      format: 'esm', // フォーマットの選択
+      sourcemap: true, // ソースマップを含めるか
     }
   ],
-  // this is an array of the plugins that we are including
+  // 含めるプラグインの配列
   plugins: [
     commonjs(),
     VuePlugin()
   ],
-  // ask rollup to not bundle Vue in the library
+  // ライブラリに Vue をバンドルしないように
   external: ['vue']
 }
 ```
 
-#### Configuring package.json
+#### package.json の設定
 
-To take advantage of our newly created `esm` module we need to add a few fields in our `package.json` file:
+新しく作成した `esm` モジュールを利用するためには、`package.json` ファイルにいくつかのフィールドを追加する必要があります:
 
 ```json
  "scripts": {
@@ -133,15 +133,15 @@ To take advantage of our newly created `esm` module we need to add a few fields 
  ],
  ```
 
-Here we are specifying:
+ここで指定しています:
 
-- how to build our package
-- what files we want to bundle in our package
-- what file represents our `esm` module
+- パッケージのビルド方法
+- パッケージにバンドルするファイル
+- `esm` モジュールを示すファイル
 
-#### Bundling `umd` and `cjs` modules
+#### `umd` と `cjs` のバンドル
 
-To also build `umd` and `cjs` modules we can simply add a few lines of configuration to our `rollup.config.js` and `package.json`
+`umd` と `cjs` モジュールを一緒にビルドするには、`rollup.config.js` と `package.json` に数行の設定を追加するだけです。
 
 ##### rollup.config.js
 ```js
