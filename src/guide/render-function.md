@@ -495,9 +495,9 @@ render() {
 }
 ```
 
-### `<component>` and `is`
+### `<component>` と `is`
 
-Behind the scenes, templates use `resolveDynamicComponent` to implement the `is` attribute. We can use the same function if we need all the flexibility provided by `is` in our `render` function:
+舞台裏では、テンプレートは `resolveDynamicComponent` をつかって `is` 属性を実装しています。 `render` 関数で `is` 属性がもつ、すべての柔軟性が必要な場合は、同じ関数を使うことができます:
 
 ```js
 const { h, resolveDynamicComponent } = Vue
@@ -511,13 +511,13 @@ render() {
 }
 ```
 
-Just like `is`, `resolveDynamicComponent` supports passing a component name, an HTML element name, or a component options object.
+`is` と同じように `resolveDynamicComponent` は、コンポーネント名、HTML 要素名、コンポーネントのオプションオブジェクトをサポートします。
 
-However, that level of flexibility is usually not required. It's often possible to replace `resolveDynamicComponent` with a more direct alternative.
+しかし、通常このレベルの柔軟性はいりません。 `resolveDynamicComponent` をより直接的な代替手段で置き換えることができる場合が多いです。
 
-For example, if we only need to support component names then `resolveComponent` can be used instead.
+例えば、コンポーネント名をサポートするだけならば、代わりに `resolveComponent` が使えます。
 
-If the VNode is always an HTML element then we can pass its name directly to `h`:
+VNode が常に HTML 要素ならば、 `h` にその要素名を直接渡せます:
 
 ```js
 // `<component :is="bold ? 'strong' : 'em'"></component>`
@@ -526,13 +526,13 @@ render() {
 }
 ```
 
-Similarly, if the value passed to `is` is a component options object then there's no need to resolve anything, it can be passed directly as the first argument of `h`.
+同じように、 `is` に渡された値がコンポーネントのオプションオブジェクトならば、なにも解決する必要はなく、 `h` の第1引数として直接渡せます。
 
-Much like a `<template>` tag, a `<component>` tag is only required in templates as a syntactical placeholder and should be discarded when migrating to a `render` function.
+`<template>` タグと同様に、 `<component>` タグはテンプレートの中で構文上のプレースホルダとしてのみ必要で、 `render` 関数に移行するときには破棄してください。
 
-### Custom Directives
+### カスタムディレクティブ
 
-Custom directives can be applied to a VNode using [`withDirectives`](/api/global-api.html#withdirectives):
+カスタムディレクティブは、 [`withDirectives`](/api/global-api.html#withdirectives) を使って VNode に適用できます:
 
 ```js
 const { h, resolveDirective, withDirectives } = Vue
@@ -549,13 +549,13 @@ render () {
 }
 ```
 
-[`resolveDirective`](/api/global-api.html#resolvedirective) is the same function that templates use internally to resolve directives by name. That is only necessary if you don't already have direct access to the directive's definition object.
+[`resolveDirective`](/api/global-api.html#resolvedirective) は、テンプレートが内部でディレクティブの名前解決をするのと同じ関数です。これは、まだディレクティブの定義オブジェクトに直接アクセスしていない場合にのみ必要です。
 
-### Built-in Components
+### 組み込みコンポーネント
 
-[Built-in components](/api/built-in-components.html) such as `<keep-alive>`, `<transition>`, `<transition-group>`, and `<teleport>` are not registered globally by default. This allows bundlers to perform tree-shaking, so that the components are only included in the build if they are used. However, that also means we can't access them using `resolveComponent` or `resolveDynamicComponent`.
+`<keep-alive>`、`<transition>`、`<transition-group>`、 `<teleport>` などの [組み込みコンポーネント](/api/built-in-components.html) はデフォルトではグローバルに登録されません。これによりバンドラーが Tree Shaking（ツリーシェイキング）を行い、コンポーネントが使われている場合にだけビルドに含まれるようになります。しかし、これは `resolveComponent` や `resolveDynamicComponent` を使ってアクセスできないということです。
 
-Templates have special handling for those components, automatically importing them when they are used. When we're writing our own `render` functions, we need to import them ourselves:
+テンプレートはこれらのコンポーネントを特別扱いしていて、使われるときには自動的にインポートします。自分で `render` 関数を書く場合は、自身でそれらをインポートする必要があります:
 
 ```js
 const { h, KeepAlive, Teleport, Transition, TransitionGroup } = Vue
@@ -567,11 +567,11 @@ render () {
 }
 ```
 
-## Return Values for Render Functions
+## Render 関数の返り値
 
-In all of the examples we've seen so far, the `render` function has returned a single root VNode. However, there are alternatives.
+これまで見てきた例は、 `render` 関数が1つのルート VNode を返してきました。しかし、これには代替手段があります。
 
-Returning a string will create a text VNode, without any wrapping element:
+文字列を返すと、ラップする要素のないテキストの VNode が作成されます:
 
 ```js
 render() {
@@ -579,10 +579,10 @@ render() {
 }
 ```
 
-We can also return an array of children, without wrapping them in a root node. This creates a fragment:
+また、ルートノードでラップしない子の配列を返せます。これは Fragment を作成します:
 
 ```js
-// Equivalent to a template of `Hello<br>world!`
+// テンプレートの `Hello<br>world!` に相当します
 render() {
   return [
     'Hello',
@@ -592,7 +592,7 @@ render() {
 }
 ```
 
-If a component needs to render nothing, perhaps because data is still loading, it can just return `null`. This will be rendered as a comment node in the DOM.
+データの読み込み中など、コンポーネントがなにもレンダリングしない必要がある場合は、単に `null` を返すことができます。これは DOM のコメントノードとしてレンダリングされます。
 
 ## JSX
 
@@ -636,11 +636,11 @@ app.mount('#demo')
 
 JSX がどのように JavaScript に変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
 
-## Functional Components
+## 関数型コンポーネント
 
-Functional components are an alternative form of component that don't have any state of their own. They are rendered without creating a component instance, bypassing the usual component lifecycle.
+関数型コンポーネントとは、それ自体にはなんの状態も持たないコンポーネントの別方式です。これはコンポーネントのインスタンスを作成しないでレンダリングされるため、通常のコンポーネントのライフサイクルを無視します。
 
-To create a functional component we use a plain function, rather than an options object. The function is effectively the `render` function for the component. As there is no `this` reference for a functional component, Vue will pass in the `props` as the first argument:
+関数型コンポーネントを作成するには、オプションオブジェクトではなく、単純な関数を使います。この関数は、事実上、コンポーネントの `render` 関数です。関数型コンポーネントには `this` の参照がないため、 Vue は `props` を最初の引数として渡します:
 
 ```js
 const FunctionalComponent = (props, context) => {
@@ -648,21 +648,21 @@ const FunctionalComponent = (props, context) => {
 }
 ```
 
-The second argument, `context`, contains three properties: `attrs`, `emit`, and `slots`. These are equivalent to the instance properties [`$attrs`](/api/instance-properties.html#attrs), [`$emit`](/api/instance-methods.html#emit), and [`$slots`](/api/instance-properties.html#slots) respectively.
+第2引数の `context` には3つのプロパティが含まれます: `attrs`、`emit`、`slots` です。これらはインスタンスプロパティの [`$attrs`](/api/instance-properties.html#attrs)、[`$emit`](/api/instance-methods.html#emit)、[`$slots`](/api/instance-properties.html#slots) に相当します。
 
-Most of the usual configuration options for components are not available for functional components. However, it is possible to define [`props`](/api/options-data.html#props) and [`emits`](/api/options-data.html#emits) by adding them as properties:
+コンポーネントで使う通常の設定オプションのほとんどは、関数型コンポーネントでは使えません。しかし、 [`props`](/api/options-data.html#props) や [`emits`](/api/options-data.html#emits) はプロパティとして追加定義することができます。:
 
 ```js
 FunctionalComponent.props = ['value']
 FunctionalComponent.emits = ['click']
 ```
 
-If the `props` option is not specified, then the `props` object passed to the function will contain all attributes, the same as `attrs`. The prop names will not be normalized to camelCase unless the `props` option is specified.
+`props` オプションが指定されていない場合、この関数に渡される `props` オブジェクトは `attrs` と同じく、すべての属性が含まれます。 `props` オプションが指定されていない場合、プロパティ名はキャメルケースに正規化されません。
 
-Functional components can be registered and consumed just like normal components. If you pass a function as the first argument to `h`, it will be treated as a functional component.
+関数型コンポーネントは、通常のコンポーネントと同様に登録したり、実行したりすることができます。関数を `h` の第1引数として渡すと、その関数は関数型コンポーネントとして扱われます。
 
 ## テンプレートのコンパイル
 
-あなたは Vue のテンプレートが実際に render 関数にコンパイルされることに興味があるかもしれません。これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
+あなたは Vue のテンプレートが実際に Render 関数にコンパイルされることに興味があるかもしれません。これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
 
 <iframe src="https://vue-next-template-explorer.netlify.app/" width="100%" height="420"></iframe>
