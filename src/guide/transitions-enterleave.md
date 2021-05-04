@@ -7,7 +7,7 @@ Vue は、DOM からアイテムが追加、更新、削除されたときにト
 - トランジションフックが実行されている間、JavaScript を使って直接 DOM 操作を行います。
 - サードパーティの JavaScript アニメーションライブラリと連携します。
 
-このページでは、entering/leaving とリストのトランジションについてのみ取り扱いますが、次の章では、[リストのトランジション](transitions-list.html) と [状態のトランジション](transitions-state.html) について扱います。
+このページでは、entering/leaving のトランジションについてのみ取り扱いますが、次の章では、[リストのトランジション](transitions-list.html) と [状態のトランジション](transitions-state.html) について扱います。
 
 ## 単一要素/コンポーネントのトランジション
 
