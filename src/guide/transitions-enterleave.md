@@ -510,7 +510,7 @@ computed: {
 
 ```html
 <div id="demo">
-  <input v-model="view" type="radio" value="v-a" id="a"><label for="a">A</label>	TODO: update to Vue 3
+  <input v-model="view" type="radio" value="v-a" id="a"><label for="a">A</label>
   <input v-model="view" type="radio" value="v-b" id="b"><label for="b">B</label>
   <transition name="component-fade" mode="out-in">
     <component :is="view"></component>
