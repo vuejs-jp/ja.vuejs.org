@@ -65,3 +65,107 @@
 CLI はツールの設定の大部分の面倒を見てくれますが、[設定オプション](https://cli.vuejs.org/config/)を通してよりきめ細かいカスタマイズをすることもできます。
 
 あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org)を手動で設定する必要があるでしょう。webpack についてもっと学びたいときは、[公式ドキュメント](https://webpack.js.org/configuration/)や [webpack learning academy](https://webpack.academy/p/the-core-concepts)を参照してください。
+
+### Building with rollup
+
+Most of the time when developing a third-party library we want to build it in a way that allows the consumers of the library to [tree shake](https://webpack.js.org/guides/tree-shaking/) it. To enable tree-shaking we need to build `esm` modules. Since webpack and, in turn, vue-cli do not support building `esm` modules we need to rely on [rollup](https://rollupjs.org/).
+
+#### Installing Rollup
+
+We will need to install Rollup and a few dependencies:
+
+```bash
+npm install --save-dev rollup @rollup/plugin-commonjs rollup-plugin-vue
+```
+
+These are the minimal amount of rollup plugins that we need to use to compile the code in an `esm` module. We may want to also add [rollup-plugin-babel](https://github.com/rollup/plugins/tree/master/packages/babel) to transpile their code and [node-resolve](https://github.com/rollup/plugins/tree/master/packages/node-resolve) if we use dependencies that we want to bundle with our library.
+
+#### Configuring Rollup
+
+To configure our build with Rollup we will need to create a `rollup.config.js` file in the root of our project:
+
+```bash
+touch rollup.config.js
+```
+
+Once the file is created we will need to open it with our editor of choice and add the following code.
+
+```javascript
+// import our third party plugins
+import commonjs from 'rollup-plugin-commonjs'
+import VuePlugin from 'rollup-plugin-vue'
+import pkg from './package.json' // import our package.json file to re-use the naming
+
+export default {
+  // this is the file containing all our exported components/functions
+  input: 'src/index.js',
+  // this is an array of outputed formats
+  output: [
+    {
+      file: pkg.module, // the name of our esm librry
+      format: 'esm', // the format of choice
+      sourcemap: true, // ask rollup to include sourcemaps
+    }
+  ],
+  // this is an array of the plugins that we are including
+  plugins: [
+    commonjs(),
+    VuePlugin()
+  ],
+  // ask rollup to not bundle Vue in the library
+  external: ['vue']
+}
+```
+
+#### Configuring package.json
+
+To take advantage of our newly created `esm` module we need to add a few fields in our `package.json` file:
+
+```json
+ "scripts": {
+   ...
+   "build": "rollup -c rollup.config.js",
+   ...
+ },
+ "module": "dist/my-library-name.esm.js",
+ "files": [
+   "dist/",
+ ],
+ ```
+
+Here we are specifying:
+
+- how to build our package
+- what files we want to bundle in our package
+- what file represents our `esm` module
+
+#### Bundling `umd` and `cjs` modules
+
+To also build `umd` and `cjs` modules we can simply add a few lines of configuration to our `rollup.config.js` and `package.json`
+
+##### rollup.config.js
+```javascript
+output: [
+  ...
+   {
+      file: pkg.main,
+      format: 'cjs',
+      sourcemap: true,
+    },
+    {
+      file: pkg.unpkg,
+      format: 'umd',
+      name: 'MyLibraryName',
+      sourcemap: true,
+      globals: {
+        vue: 'Vue',
+      },
+    },
+]
+```
+##### package.json
+```json
+"module": "dist/my-library-name.esm.js",
+"main": "dist/my-library-name.cjs.js",
+"unpkg": "dist/my-library-name.global.js",
+```
