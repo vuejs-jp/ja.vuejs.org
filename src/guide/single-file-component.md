@@ -35,7 +35,7 @@
 
 単一ファイルコンポーネントのアイディアが好きではなくても、JavaScript と CSS を別々ファイルに分けることによってホットリロードとプリコンパイル機能を活用することができます:
 
-``` html
+```html
 <!-- my-component.vue -->
 <template>
   <div>This will be pre-compiled</div>
@@ -55,7 +55,7 @@
 
 `.vue` コンポーネントにより、高度な JavaScript アプリケーションの分野へ入っていきます。 これはあなたがまだ使ったことのない、いくつかの追加のツールの使い方を学ぶことを意味します:
 
-- **Node Package Manager (NPM)**: レジストリからパッケージを取得する方法については[Getting Started guide](https://docs.npmjs.com/packages-and-modules/getting-packages-from-the-registry) のセクションを読んでください。
+- **Node Package Manager (npm)**: レジストリからパッケージを取得する方法については[Getting Started guide](https://docs.npmjs.com/packages-and-modules/getting-packages-from-the-registry) のセクションを読んでください。
 
 - **ES2015/16 を使ったモダンな JavaScript**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/en/learn)を読んでみてください。今すぐには全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
