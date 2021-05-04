@@ -48,8 +48,7 @@
 
 ### サンドボックスの例
 
-すぐに触ってそして単一ファイルコンポーネントを試したい方は、CodeSandBox 上の [この単純な todo アプリケーション](https://codesandbox.io/s/vue-todo-list-app-with-single-file-component-vzkl3?file=/src/App.vue)
-をチェックしてみてください。
+すぐに触ってそして単一ファイルコンポーネントを試したい方は、CodeSandBox 上の [この単純な todo アプリケーション](https://codesandbox.io/s/vue-todo-list-app-with-single-file-component-vzkl3?file=/src/App.vue) をチェックしてみてください。
 
 ### JavaScript でモジュールビルドシステムが初めてなユーザ向け
 
