@@ -7,7 +7,7 @@ Vue は、DOM からアイテムが追加、更新、削除されたときにト
 - トランジションフックが実行されている間、JavaScript を使って直接 DOM 操作を行います。
 - サードパーティの JavaScript アニメーションライブラリと連携します。
 
-このページでは、entering/leaving とリストのトランジションについてのみ取り扱いますが、次の章では、[状態のトランジション](transitions-state.html) について扱います。
+このページでは、entering/leaving のトランジションについてのみ取り扱いますが、次の章では、[リストのトランジション](transitions-list.html) と [状態のトランジション](transitions-state.html) について扱います。
 
 ## 単一要素/コンポーネントのトランジション
 
@@ -70,12 +70,17 @@ Vue.createApp(Demo).mount('#demo')
 
 以下は、enter/leave トランジションのために適用される 6 つのクラスです。
 
-1. `v-enter-from `: enter の開始状態。要素が挿入される前に適用され、要素が挿入された 1 フレーム後に削除されます。
-2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。要素が挿入される前に追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-3. `v-enter-to`: **バージョン 2.1.8 以降でのみ利用可能です。** enter の終了状態。要素が挿入された 1 フレーム後に追加され (同時に `v-enter` が削除されます)、トランジション/アニメーションが終了すると削除されます。
+1. `v-enter-from `: enter の開始状態。その要素が挿入される前に適用され、その要素が挿入された 1 フレーム後に削除されます。
+
+2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。その要素が挿入される前に追加され、そのトランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
+
+3. `v-enter-to`: enter の終了状態。その要素が挿入された 1 フレーム後に追加され (同時に `v-enter-from` が削除されます)、そのトランジション/アニメーションが終了すると削除されます。
+
 4. `v-leave-from`: leave の開始状態。トランジションの終了がトリガされるとき、直ちに追加され、1フレーム後に削除されます。
+
 5. `v-leave-active`: leave の活性状態。トランジションが終わるフェーズ中に適用されます。leave トランジションがトリガされるとき、直ちに追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの終了に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-6. `v-leave-to`: **バージョン 2.1.8 以降でのみ利用可能です。** leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave` が削除されます)、トランジション/アニメーションが終了すると削除されます。
+
+6. `v-leave-to`: leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave-from` が削除されます)、トランジション/アニメーションが終了すると削除されます。
 
 ![Transition Diagram](/images/transitions.svg)
 
@@ -138,7 +143,7 @@ CSS アニメーションは、CSS トランジションと同じように適用
 これは簡潔にするために CSS ルールの接頭辞を除いた例です。
 
 ```html
-<div id="example-2">
+<div id="demo">
   <button @click="show = !show">Toggle show</button>
   <transition name="bounce">
     <p v-if="show">
@@ -174,7 +179,7 @@ Vue.createApp(Demo).mount('#demo')
     transform: scale(0);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.25);
   }
   100% {
     transform: scale(1);
@@ -190,10 +195,10 @@ Vue.createApp(Demo).mount('#demo')
 
 - `enter-from-class`
 - `enter-active-class`
-- `enter-to-class` (2.1.8+)
+- `enter-to-class`
 - `leave-from-class`
 - `leave-active-class`
-- `leave-to-class` (2.1.8+)
+- `leave-to-class`
 
 これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
@@ -241,9 +246,7 @@ Vue はトランジションが終了したことを把握するためのイベ�
 
 ### 明示的なトランジション期間の設定
 
-TODO: validate and provide an example
-
-> 2.2.0 から新規追加
+<!-- TODO: validate and provide an example -->
 
 ほとんどの場合、 Vue は、自動的にトランジションが終了したことを見つけ出すことは可能です。デフォルトでは、 Vue はルート要素の初めの `transitionend` もしくは `animationend` イベントを待ちます。しかし、これが常に望む形とは限りません。例えば、幾つかの入れ子となっている内部要素にてトランジションの遅延がある場合や、ルートのトランジション要素よりも非常に長いトランジション期間を設けている場合の、一連のトランジションのまとまりなどです。
 
@@ -289,7 +292,8 @@ methods: {
   beforeEnter(el) {
     // ...
   },
-  // CSS と組み合わせて使う時、done コールバックはオプションです
+  // CSS と組み合わせて使う時、
+  // done コールバックはオプションです
   enter(el, done) {
     // ...
     done()
@@ -308,7 +312,8 @@ methods: {
   beforeLeave(el) {
     // ...
   },
-  // CSS と組み合わせて使う時、done コールバックはオプションです
+  // CSS と組み合わせて使う時、
+  // done コールバックはオプションです
   leave(el, done) {
     // ...
     done()
@@ -325,7 +330,7 @@ methods: {
 
 これらのフックは、CSS トランジション/アニメーション、または別の何かと組み合わせて使うことができます。
 
-JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。呼ばない場合は、フックは同期的に呼ばれ、トランジションはただちに終了します。また、 `:css="false"` を追加することで、CSS の検出をスキップすることを Vue に伝えられます。これによってわずかにパフォーマンスが改善するほか、CSS のルールの誤ったトランジションへの干渉を防ぐことができます。
+JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。呼ばない場合は、フックは同期的に呼ばれ、トランジションはただちに終了します。また、 `:css="false"` を追加することで、CSS の検出をスキップすることも Vue に伝えられます。これによってわずかにパフォーマンスが改善するほか、CSS のルールの誤ったトランジションへの干渉を防ぐことができます。
 
 今から例をみていきましょう。これは [GreenSock](https://greensock.com/) を使ったシンプルな JavaScript トランジションの例です:
 
@@ -421,19 +426,19 @@ Vue.createApp(Demo).mount('#demo')
 </transition>
 ```
 
-`v-if` を複数使ったり、ひとつの要素に対して動的プロパティでバインディングを行ういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
+`v-if`/`v-else-if`/`v-else` を使ったり、ひとつの要素に対して動的プロパティでバインディングを行ういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
 
-TODO: rewrite example and put in codepen example
+<!-- TODO: rewrite example and put in codepen example -->
 
 ```html
 <transition>
   <button v-if="docState === 'saved'" key="saved">
     Edit
   </button>
-  <button v-if="docState === 'edited'" key="edited">
+  <button v-else-if="docState === 'edited'" key="edited">
     Save
   </button>
-  <button v-if="docState === 'editing'" key="editing">
+  <button v-else-if="docState === 'editing'" key="editing">
     Cancel
   </button>
 </transition>
@@ -503,19 +508,22 @@ computed: {
 
 コンポーネント間のトランジションは、 `key` 属性が必要ではないのでさらに単純です。代わりに、ただ [動的コンポーネント](components.html#動的コンポーネント) でラップするだけです:
 
-TODO: update to Vue 3
-
 ```html
-<transition name="component-fade" mode="out-in">
-  <component :is="view"></component>
-</transition>
+<div id="demo">
+  <input v-model="view" type="radio" value="v-a" id="a"><label for="a">A</label>
+  <input v-model="view" type="radio" value="v-b" id="b"><label for="b">B</label>
+  <transition name="component-fade" mode="out-in">
+    <component :is="view"></component>
+  </transition>
+</div>
 ```
 
 ```js
-new Vue({
-  el: '#transition-components-demo',
-  data: {
-    view: 'v-a'
+const Demo = {
+  data() {
+    return {
+      view: 'v-a'
+    }
   },
   components: {
     'v-a': {
@@ -525,7 +533,9 @@ new Vue({
       template: '<div>Component B</div>'
     }
   }
-})
+}
+
+Vue.createApp(Demo).mount('#demo')
 ```
 
 ```css
@@ -533,8 +543,9 @@ new Vue({
 .component-fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active below version 2.1.8 */ {
+
+.component-fade-enter-from,
+.component-fade-leave-to {
   opacity: 0;
 }
 ```
