@@ -1,7 +1,6 @@
 # 概要
 
-Vue は何らかの変化に応じてトランジションやアニメーションを付けるのに役立つ、いくつかの抽象化を提供します。
- これらの抽象化には、次のものが含まれます:
+Vue は何らかの変化に応じてトランジションやアニメーションを付けるのに役立つ、いくつかの抽象化を提供します。これらの抽象化には、次のものが含まれます:
 
 - 組み込みコンポーネントの `<transition>` を使用して、CSS と JS の両方で DOM に出入りするコンポーネントをフックします。
 - トランジションの途中の順序を調整できるようにトランジションモードがあります。
@@ -73,9 +72,9 @@ Vue.createApp(Demo).mount('#demo')
 
 <common-codepen-snippet title="Create animation with a class" slug="ff45b91caf7a98c8c9077ad8ab539260" tab="css,result" :editable="false" :preview="false" />
 
-# スタイルバインディングによるトランジション
+## スタイルバインディングによるトランジション
 
-一部のトランジションによるエフェクトは補間値を適用できます。たとえば、トランジションの発生中に要素にスタイルをバインドすることによって適用できます。 例を見てみましょう:
+一部のトランジションによる効果は補間値を適用できます。たとえば、トランジションの発生中に要素にスタイルをバインドすることによって適用できます。 例を見てみましょう:
 
 ```html
 <div id="demo">
@@ -166,7 +165,7 @@ GreenSock のような多くの JS ライブラリは、ハードウェアアク
 
 .button:hover {
   background: #3eaf7c;
-  /* applied to the hover state, so this trnaisition will be applied when a hover is triggered */
+  /* applied to the hover state, so this transition will be applied when a hover is triggered */
   transition: background 0.35s ease-out;
 }
 ```
@@ -175,7 +174,7 @@ GreenSock のような多くの JS ライブラリは、ハードウェアアク
 
 イージングはアニメーション化されている素材の品質を伝えることもできます。 この CodePen を例にとると、どちらのボールが硬く、どちらのボールが柔らかいと思いますか？
 
-<common-codepen-snippet title="Bouncing Ball Demo" slug="zxJWBJ" :height="500" :team="false" user="sdras" name="Sarah Drasner" :editable="false" />
+<common-codepen-snippet title="Bouncing Ball Demo" slug="wvgqyyW" :height="500" :editable="false" />
 
 イージングを調整することで多くのユニークな効果を得ることができ、アニメーションを非常にスタイリッシュにすることができます。CSS を使用すると、3次のベジェ曲線のプロパティを調整して変形できます。 Lea Verou 氏によって作成された [Playground](https://cubic-bezier.com/#.17,.67,.83,.67) は、イージングを探索するのに非常に役立ちます。
 
