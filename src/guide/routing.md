@@ -2,13 +2,15 @@
 
 ## 公式ルータ
 
-ほとんどのシングルページアプリケーションでは、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router)を使うことをオススメします。詳細は vue-router の[ドキュメント](https://router.vuejs.org/)を参照してください。
+ほとんどのシングルページアプリケーションでは、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router-next)を使うことをオススメします。詳細は vue-router の[ドキュメント](https://next.router.vuejs.org/)を参照してください。
 
 ## スクラッチからのシンプルなルーティング
 
 とてもシンプルなルーティングだけが必要で、フル機能のルータライブラリを使用したくない場合は、以下のようにページレベルのコンポーネントで動的にレンダリングができます。
 
 ```js
+const { createApp, h } = Vue
+
 const NotFoundComponent = { template: '<p>Page not found</p>' }
 const HomeComponent = { template: '<p>Home page</p>' }
 const AboutComponent = { template: '<p>About page</p>' }
@@ -30,11 +32,11 @@ const SimpleRouter = {
   },
 
   render() {
-    return Vue.h(this.CurrentComponent)
+    return h(this.CurrentComponent)
   }
 }
 
-Vue.createApp(SimpleRouter).mount('#app')
+createApp(SimpleRouter).mount('#app')
 ```
 
 [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API) と組み合わせることで、とても基本的ですが完全に機能するクライアント側のルータを構築できます。実際に確認するには、[このサンプルアプリ](https://github.com/phanan/vue-3.0-simple-routing-example)をチェックしてみてください。
