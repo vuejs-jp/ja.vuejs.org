@@ -74,13 +74,13 @@ ref がレンダーコンテキスト(render contenxt - [setup()](composition-ap
 ```
 
 :::tip
-  If you don't need to access the actual object instance, you can wrap it in a reactive:
+If you don't need to access the actual object instance, you can wrap it in a `reactive`:
 
-  ```js
-  nested: reactive({
-    count
-  })
-  ```
+```js
+nested: reactive({
+  count
+})
+```
 :::
 
 ### リアクティブオブジェクト内でのアクセス
