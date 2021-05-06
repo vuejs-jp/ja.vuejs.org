@@ -82,8 +82,8 @@ watchEffect(onInvalidate => {
 
 ```js
 const data = ref(null)
-watchEffect(async onInvalidate => {
-  onInvalidate(() => {...}) // Promise の解決前にクリーンアップする関数を登録
+watchEffect(async (onInvalidate) => {
+  onInvalidate(() => {/* ... */}) // Promise の解決前にクリーンアップする関数を登録
   data.value = await fetchData(props.id)
 })
 ```
@@ -199,9 +199,15 @@ watch(count, (count, prevCount) => {
 ウォッチャは、配列を利用することで、複数のデータソースを同時に監視できます:
 
 ```js
-watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
-  /* ... */
+const firstName = ref('');
+const lastName= ref('');
+
+watch([firstName, lastName], (newValues, prevValues) => {
+  console.log(newValues, prevValues);
 })
+
+firstName.value = "John"; // logs: ["John",""] ["", ""]
+lastName.value = "Smith"; // logs: ["John", "Smith"] ["John", ""]
 ```
 
 ### `watchEffect` との振る舞いの共有
