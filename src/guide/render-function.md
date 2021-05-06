@@ -21,7 +21,9 @@ Vue では、大多数のケースにおいてテンプレートを使ってア�
 コンポーネントは、`level` の値に応じた見出しを生成する必要があります。手っ取り早くこれで実現しましょう:
 
 ```js
-const app = Vue.createApp({})
+const { createApp } = Vue
+
+const app = createApp({})
 
 app.component('anchored-heading', {
   template: `
@@ -58,12 +60,12 @@ app.component('anchored-heading', {
 ほとんどのコンポーネントでテンプレートがうまく働くとはいえ、明らかにこれはそうではないものの一つです。そこで、 `render()` 関数を使ってこれを書き直してみましょう。
 
 ```js
-const app = Vue.createApp({})
+const { createApp, h } = Vue
+
+const app = createApp({})
 
 app.component('anchored-heading', {
   render() {
-    const { h } = Vue
-
     return h(
       'h' + this.level, // タグ名
       {}, // props/属性
@@ -95,20 +97,13 @@ render 関数に取り掛かる前に、ブラウザがどのように動くの�
 
 ブラウザはこのコードを読み込むと、血縁関係を追跡するために家系図を構築するのと同じように、全てを追跡する [「DOM ノード」のツリー](https://javascript.info/dom-nodes)を構築します。
 
-<!-- NOTE:
-原文が分かりづらいため、v2の記述を元に翻訳
-When a browser reads this code, it builds a tree of “DOM nodes” to help it keep track of everything, just as you might build a family tree to keep track of your extended family.
--->
-
 上の HTML の DOM ノードツリーはこんな感じになります。
 
 ![DOM ツリーの可視化](/images/dom-tree.png)
 
 すべての要素はノードです。テキストのすべてのピースはノードです。コメントですらノードです！それぞれのノードは子供を持つことができます。 (つまり、それぞれのノードは他のノードを含むことができます)
 
-これらすべてのノードを効率的に更新することは難しくなり得ますが、ありがたいことに、それを手動で行う必要はありません。代わりに、テンプレートや render 関数で、ページ上にどのような HTML が欲しいかを Vue に伝えるのです。
-
-テンプレート:
+これらすべてのノードを効率的に更新することは難しくなり得ますが、ありがたいことに、それを手動で行う必要はありません。代わりに、Vue にどのような HTML を表示させたいのかをテンプレートで伝えます:
 
 ```html
 <h1>{{ blogTitle }}</h1>
@@ -118,7 +113,7 @@ When a browser reads this code, it builds a tree of “DOM nodes” to help it k
 
 ```js
 render() {
-  return Vue.h('h1', {}, this.blogTitle)
+  return h('h1', {}, this.blogTitle)
 }
 ```
 
@@ -129,7 +124,7 @@ render() {
 Vue は、実際の DOM に反映する必要のある変更を追跡するために **仮想 DOM** を構築して、ページを最新の状態に保ちます。この行をよく見てみましょう:
 
 ```js
-return Vue.h('h1', {}, this.blogTitle)
+return h('h1', {}, this.blogTitle)
 ```
 
 `h()` 関数が返すものはなんでしょうか？これは、 _正確には_ 実際の DOM 要素ではありません。それが返すのは、ページ上にどんな種類のノードをレンダリングするのかを Vue に伝えるための情報をもったプレーンなオブジェクトです。この情報には子供のノードの記述も含まれます。私たちは、このノードの記述を *仮想ノード* と呼び、通常 **VNode** と省略します。「仮想 DOM」というのは、Vue コンポーネントのツリーから構成される VNode のツリー全体のことなのです。
@@ -141,21 +136,23 @@ return Vue.h('h1', {}, this.blogTitle)
 ```js
 // @returns {VNode}
 h(
-  // {String | Object | Function } tag
-  // HTMLタグ名、コンポーネントまたは非同期コンポーネント
-  // nullを返す関数を使用した場合、コメントがレンダリングされます。
+  // {String | Object | Function} tag
+  // HTMLタグ名、コンポーネント、非同期コンポーネント、
+  // または関数型コンポーネント。
   //
   // 必須
   'div',
 
   // {Object} props
-  // テンプレート内で使うであろう属性、プロパティ、イベントに対応するオブジェクト
+  // テンプレート内で使うであろう
+  // 属性、プロパティ、イベントに対応するオブジェクト
   //
   // 省略可能
   {},
 
   // {String | Array | Object} children
-  // `h()` で作られた子供のVNode、または文字列(テキストVNodeになる)、
+  // `h()` で作られた子供のVNode、
+  // または文字列(テキストVNodeになる)、
   // またはスロットをもつオブジェクト
   //
   // 省略可能
@@ -169,12 +166,16 @@ h(
 )
 ```
 
+props がない場合は、通常 children を第2引数として渡すことができます。それがあいまいな場合は、 `null` を第2引数として渡して、 children を第3引数にしておけます。
+
 ## 完全な例
 
-この知識によって、書き始めたコンポーネントを今では完成させることができます:
+この知識によって、今度は書き始めたコンポーネントを完成させることができます:
 
 ```js
-const app = Vue.createApp({})
+const { createApp, h } = Vue
+
+const app = createApp({})
 
 /** 子供のノードから再帰的にテキストを取得する */
 function getChildrenTextContent(children) {
@@ -197,8 +198,8 @@ app.component('anchored-heading', {
       .replace(/\W+/g, '-') // 英数字とアンダースコア以外の文字を-に置換する
       .replace(/(^-|-$)/g, '') // 頭と末尾の-を取り除く
 
-    return Vue.h('h' + this.level, [
-      Vue.h(
+    return h('h' + this.level, [
+      h(
         'a',
         {
           name: headingId,
@@ -225,8 +226,8 @@ app.component('anchored-heading', {
 
 ```js
 render() {
-  const myParagraphVNode = Vue.h('p', 'hi')
-  return Vue.h('div', [
+  const myParagraphVNode = h('p', 'hi')
+  return h('div', [
     // おっと - VNode が重複しています!
     myParagraphVNode, myParagraphVNode
   ])
@@ -237,11 +238,56 @@ render() {
 
 ```js
 render() {
-  return Vue.h('div',
-    Array.apply(null, { length: 20 }).map(() => {
-      return Vue.h('p', 'hi')
+  return h('div',
+    Array.from({ length: 20 }).map(() => {
+      return h('p', 'hi')
     })
   )
+}
+```
+
+## コンポーネントの VNodes を作る
+
+コンポーネントの VNode を作るためには、 `h` の第1引数にコンポーネントそのものを渡します:
+
+```js
+render() {
+  return h(ButtonCounter)
+}
+```
+
+コンポーネントを名前解決する必要がある場合は、 `resolveComponent` で呼び出せます:
+
+```js
+const { h, resolveComponent } = Vue
+
+// ...
+
+render() {
+  const ButtonCounter = resolveComponent('ButtonCounter')
+  return h(ButtonCounter)
+}
+```
+
+`resolveComponent` は、テンプレートがコンポーネントを名前解決するために内部的に使っているものと同じ関数です。
+
+`render` 関数は通常、 [グローバルに登録された](/guide/component-registration.html#グローバル登録) コンポーネントにだけ `resolveComponent` を使う必要があります。 [ローカルのコンポーネント登録](/guide/component-registration.html#ローカル登録) は通常、完全に省略できます。次のような例を考えてみましょう:
+
+```js
+// これを単純化してみると
+components: {
+  ButtonCounter
+},
+render() {
+  return resolveComponent('ButtonCounter')
+}
+```
+
+コンポーネントの名前を登録して、それを調べるというよりも、直接使うことができます:
+
+```js
+render() {
+  return h(ButtonCounter)
 }
 ```
 
@@ -264,14 +310,16 @@ render() {
 props: ['items'],
 render() {
   if (this.items.length) {
-    return Vue.h('ul', this.items.map((item) => {
-      return Vue.h('li', item.name)
+    return h('ul', this.items.map((item) => {
+      return h('li', item.name)
     }))
   } else {
-    return Vue.h('p', 'No items found.')
+    return h('p', 'No items found.')
   }
 }
 ```
+
+テンプレートでは、 `<template>` タグを使って `v-if` や `v-for` ディレクティブを当てておくと便利です。 `render` 関数に移行するときには、 `<template>` タグは不要となり、破棄することができます。
 
 ### `v-model`
 
@@ -279,8 +327,9 @@ render() {
 
 ```js
 props: ['modelValue'],
+emits: ['update:modelValue'],
 render() {
-  return Vue.h(SomeComponent, {
+  return h(SomeComponent, {
     modelValue: this.modelValue,
     'onUpdate:modelValue': value => this.$emit('update:modelValue', value)
   })
@@ -293,7 +342,7 @@ render() {
 
 ```js
 render() {
-  return Vue.h('div', {
+  return h('div', {
     onClick: $event => console.log('clicked', $event.target)
   })
 }
@@ -301,26 +350,16 @@ render() {
 
 #### イベント修飾子
 
-`.passive` 、 `.capture` 、 `.once` イベント修飾子については、Vue はハンドラーのオブジェクトシンタックスを提供しています:
+`.passive`、`.capture`、 `.once` イベント修飾子は、キャメルケースを使ってイベント名の後につなげます。
 
 例えば:
 
-```javascript
+```js
 render() {
-  return Vue.h('input', {
-    onClick: {
-      handler: this.doThisInCapturingMode,
-      capture: true
-    },
-    onKeyup: {
-      handler: this.doThisOnce,
-      once: true
-    },
-    onMouseover: {
-      handler: this.doThisOnceInCapturingMode,
-      once: true,
-      capture: true
-    },
+  return h('input', {
+    onClickCapture: this.doThisInCapturingMode,
+    onKeyupOnce: this.doThisOnce,
+    onMouseoverOnceCapture: this.doThisOnceInCapturingMode
   })
 }
 ```
@@ -328,26 +367,26 @@ render() {
 その他すべてのイベントおよびキー修飾子については、特別な API は必要ありません。
 なぜなら、ハンドラーの中でイベントのメソッドを使用することができるからです:
 
-| 修飾子                                                | ハンドラーでの同等の記述                                                                                              |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `.stop`                                               | `event.stopPropagation()`                                                                                            |
-| `.prevent`                                            | `event.preventDefault()`                                                                                             |
-| `.self`                                               | `if (event.target !== event.currentTarget) return`                                                                   |
-| Keys:<br>`.enter`, `.13`                              | `if (event.keyCode !== 13) return` (他のキー修飾子については、 `13` を [別のキーコード](http://keycode.info/) に変更する) |
-| Modifiers Keys:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (`ctrlKey` をそれぞれ `altKey`、 `shiftKey`、 `metaKey` に変更する)                      |
+| 修飾子                                                 | ハンドラーでの同等の記述                                                                                              |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `.stop`                                              | `event.stopPropagation()`                                                                                            |
+| `.prevent`                                           | `event.preventDefault()`                                                                                             |
+| `.self`                                              | `if (event.target !== event.currentTarget) return`                                                                   |
+| キー:<br>例 `.enter`                               | `if (event.key !== 'Enter') return`<br><br>`'Enter'` キーを適切な [キー](http://keycode.info/) に変更 |
+| 修飾キー:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return`<br><br>`altKey`、`shiftKey`、`metaKey` も同様                       |
 
 これらすべての修飾子を一緒に使った例がこちらです:
 
 ```js
 render() {
-  return Vue.h('input', {
+  return h('input', {
     onKeyUp: event => {
       // イベントを発行した要素がイベントが紐づけられた要素ではない場合は
       // 中断する
       if (event.target !== event.currentTarget) return
-      // 押されたキーが Enter(13) ではない場合、Shift キーが同時に押されて
-      // いなかった場合は中断する
-      if (!event.shiftKey || event.keyCode !== 13) return
+      // 押されたキーが Enter ではなく、
+      // また Shift キーが同時に押されていなかった場合は中断する
+      if (!event.shiftKey || event.key !== 'Enter') return
       // イベントの伝播(propagation)を止める
       event.stopPropagation()
       // この要素のデフォルトの keyup ハンドラが実行されないようにする
@@ -365,7 +404,7 @@ render() {
 ```js
 render() {
   // `<div><slot></slot></div>`
-  return Vue.h('div', {}, this.$slots.default())
+  return h('div', this.$slots.default())
 }
 ```
 
@@ -373,38 +412,201 @@ render() {
 props: ['message'],
 render() {
   // `<div><slot :text="message"></slot></div>`
-  return Vue.h('div', {}, this.$slots.default({
+  return h('div', this.$slots.default({
     text: this.message
   }))
 }
 ```
 
-render 関数で子コンポーネントにスロットを渡す方法:
+コンポーネントの VNodes の場合、引数 children を配列ではなくオブジェクトとして `h` に渡す必要があります。各プロパティは、同名のスロットに移植するために使われます:
 
 ```js
 render() {
   // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
-  return Vue.h('div', [
-    Vue.h('child', {}, {
+  return h('div', [
+    h(
+      resolveComponent('child'),
+      null,
       // { name: props => VNode | Array<VNode> } の形で
       // 子供のオブジェクトを `slots` として渡す
-      default: (props) => Vue.h('span', props.text)
-    })
+      {
+        default: (props) => h('span', props.text)
+      }
+    )
   ])
 }
 ```
+
+スロットは関数として渡され、子コンポーネントが各スロットのコンテンツの作成を制御できるようになっています。リアクティブなデータは、親コンポーネントではなく子コンポーネントの依存関係として登録されるように、スロット関数内でアクセスする必要があります。逆に `resolveComponent` の呼び出しは、スロット関数の外で行うべきで、そうしないと間違ったコンポーネントへの相対的な解決になってしまいます:
+
+```js
+// `<MyButton><MyIcon :name="icon" />{{ text }}</MyButton>`
+render() {
+  // resolveComponent の呼び出しはスロット関数の外側でなければなりません
+  const Button = resolveComponent('MyButton')
+  const Icon = resolveComponent('MyIcon')
+
+  return h(
+    Button,
+    null,
+    {
+      // アロー関数を使って `this` の値を保持します
+      default: (props) => {
+        // リアクティブなプロパティは、子のレンダリングの依存関係になるように
+        // スロット関数の内側で読み込む必要があります
+        return [
+          h(Icon, { name: this.icon }),
+          this.text
+        ]
+      }
+    }
+  )
+}
+```
+
+コンポーネントが親からスロットを受け取った場合、そのスロットを子のコンポーネントに直接渡せます:
+
+```js
+render() {
+  return h(Panel, null, this.$slots)
+}
+```
+
+また、必要に応じて個別に渡したり、ラップすることもできます:
+
+```js
+render() {
+  return h(
+    Panel,
+    null,
+    {
+      // スロット関数を渡したい場合は次のようになります
+      header: this.$slots.header,
+
+      // スロットを何らかの方法で操作する必要がある場合は、
+      // 新しい関数でそれをラップする必要があります
+      default: (props) => {
+        const children = this.$slots.default ? this.$slots.default(props) : []
+
+        return children.concat(h('div', 'Extra child'))
+      }
+    }
+  )
+}
+```
+
+### `<component>` と `is`
+
+裏では、テンプレートは `resolveDynamicComponent` をつかって `is` 属性を実装しています。 `render` 関数で `is` 属性がもつ、すべての柔軟性が必要な場合は、同じ関数を使うことができます:
+
+```js
+const { h, resolveDynamicComponent } = Vue
+
+// ...
+
+// `<component :is="name"></component>`
+render() {
+  const Component = resolveDynamicComponent(this.name)
+  return h(Component)
+}
+```
+
+`is` と同じように `resolveDynamicComponent` は、コンポーネント名、HTML 要素名、コンポーネントのオプションオブジェクトをサポートします。
+
+しかし、通常このレベルの柔軟性はいりません。 `resolveDynamicComponent` をより直接的な代替手段で置き換えることができる場合が多いです。
+
+例えば、コンポーネント名をサポートするだけならば、代わりに `resolveComponent` が使えます。
+
+VNode が常に HTML 要素ならば、 `h` にその要素名を直接渡せます:
+
+```js
+// `<component :is="bold ? 'strong' : 'em'"></component>`
+render() {
+  return h(this.bold ? 'strong' : 'em')
+}
+```
+
+同じように、 `is` に渡された値がコンポーネントのオプションオブジェクトならば、なにも解決する必要はなく、 `h` の第1引数として直接渡せます。
+
+`<template>` タグと同様に、 `<component>` タグはテンプレートの中で構文上のプレースホルダとしてのみ必要で、 `render` 関数に移行するときには破棄してください。
+
+### カスタムディレクティブ
+
+カスタムディレクティブは、 [`withDirectives`](/api/global-api.html#withdirectives) を使って VNode に適用できます:
+
+```js
+const { h, resolveDirective, withDirectives } = Vue
+
+// ...
+
+// <div v-pin:top.animate="200"></div>
+render () {
+  const pin = resolveDirective('pin')
+
+  return withDirectives(h('div'), [
+    [pin, 200, 'top', { animate: true }]
+  ])
+}
+```
+
+[`resolveDirective`](/api/global-api.html#resolvedirective) は、テンプレートが内部でディレクティブの名前解決をするのと同じ関数です。これは、まだディレクティブの定義オブジェクトに直接アクセスしていない場合にのみ必要です。
+
+### 組み込みコンポーネント
+
+`<keep-alive>`、`<transition>`、`<transition-group>`、 `<teleport>` などの [組み込みコンポーネント](/api/built-in-components.html) はデフォルトではグローバルに登録されません。これによりバンドラーが Tree Shaking（ツリーシェイキング）を行い、コンポーネントが使われている場合にだけビルドに含まれるようになります。しかし、これは `resolveComponent` や `resolveDynamicComponent` を使ってアクセスできないということです。
+
+テンプレートはこれらのコンポーネントを特別扱いしていて、使われるときには自動的にインポートします。自分で `render` 関数を書く場合は、自身でそれらをインポートする必要があります:
+
+```js
+const { h, KeepAlive, Teleport, Transition, TransitionGroup } = Vue
+
+// ...
+
+render () {
+  return h(Transition, { mode: 'out-in' }, /* ... */)
+}
+```
+
+## Render 関数の返り値
+
+これまで見てきた例は、 `render` 関数が1つのルート VNode を返してきました。しかし、これには代替手段があります。
+
+文字列を返すと、ラップする要素のないテキストの VNode が作成されます:
+
+```js
+render() {
+  return 'Hello world!'
+}
+```
+
+また、ルートノードでラップしない子の配列を返せます。これは Fragment を作成します:
+
+```js
+// テンプレートの `Hello<br>world!` に相当します
+render() {
+  return [
+    'Hello',
+    h('br'),
+    'world!'
+  ]
+}
+```
+
+データの読み込み中など、コンポーネントがなにもレンダリングしない必要がある場合は、単に `null` を返すことができます。これは DOM のコメントノードとしてレンダリングされます。
 
 ## JSX
 
 たくさんの `render` 関数を書いていると、こういう感じのものを書くのがつらく感じるかもしれません:
 
 ```js
-Vue.h(
-  'anchored-heading',
+h(
+  resolveComponent('anchored-heading'),
   {
     level: 1
   },
-  [Vue.h('span', 'Hello'), ' world!']
+  {
+    default: () => [h('span', 'Hello'), ' world!']
+  }
 )
 ```
 
@@ -434,8 +636,33 @@ app.mount('#demo')
 
 JSX がどのように JavaScript に変換されるのか、より詳細な情報は、 [使用方法](https://github.com/vuejs/jsx-next#installation) を見てください。
 
+## 関数型コンポーネント
+
+関数型コンポーネントとは、それ自体にはなんの状態も持たないコンポーネントの別方式です。これはコンポーネントのインスタンスを作成しないでレンダリングされるため、通常のコンポーネントのライフサイクルを無視します。
+
+関数型コンポーネントを作成するには、オプションオブジェクトではなく、単純な関数を使います。この関数は、事実上、コンポーネントの `render` 関数です。関数型コンポーネントには `this` の参照がないため、 Vue は `props` を最初の引数として渡します:
+
+```js
+const FunctionalComponent = (props, context) => {
+  // ...
+}
+```
+
+第2引数の `context` には3つのプロパティが含まれます: `attrs`、`emit`、`slots` です。これらはインスタンスプロパティの [`$attrs`](/api/instance-properties.html#attrs)、[`$emit`](/api/instance-methods.html#emit)、[`$slots`](/api/instance-properties.html#slots) に相当します。
+
+コンポーネントで使う通常の設定オプションのほとんどは、関数型コンポーネントでは使えません。しかし、 [`props`](/api/options-data.html#props) や [`emits`](/api/options-data.html#emits) はプロパティとして追加定義することができます。:
+
+```js
+FunctionalComponent.props = ['value']
+FunctionalComponent.emits = ['click']
+```
+
+`props` オプションが指定されていない場合、この関数に渡される `props` オブジェクトは `attrs` と同じく、すべての属性が含まれます。 `props` オプションが指定されていない場合、プロパティ名はキャメルケースに正規化されません。
+
+関数型コンポーネントは、通常のコンポーネントと同様に登録したり、実行したりすることができます。関数を `h` の第1引数として渡すと、その関数は関数型コンポーネントとして扱われます。
+
 ## テンプレートのコンパイル
 
-あなたは Vue のテンプレートが実際に render 関数にコンパイルされることに興味があるかもしれません。これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
+あなたは Vue のテンプレートが実際に Render 関数にコンパイルされることに興味があるかもしれません。これは通常知っておく必要のない実装の詳細ですが、もし特定のテンプレートの機能がどのようにコンパイルされるか知りたいのなら、これが面白いかもしれません。これは、 `Vue.compile` を使用してテンプレートの文字列をライブコンパイルする小さなデモです:
 
 <iframe src="https://vue-next-template-explorer.netlify.app/" width="100%" height="420"></iframe>
