@@ -123,7 +123,7 @@ Vue のリアクティブシステムは、無効になった変更をバッフ�
 - count は最初の実行時に同期的に記録されます。
 - `count` が変化した時、コンポーネントの**変更前**にコールバック関数が実行されます。
 
-In cases where a watcher effect needs to be re-run **after** component updates, we can pass an additional `options` object with the `flush` option (default is `'pre'`):
+In cases where a watcher effect needs to be re-run **after** component updates (i.e. when working with [Template Refs](./composition-api-template-refs.md#watching-template-refs)), we can pass an additional `options` object with the `flush` option (default is `'pre'`):
 
 ```js
 // コンポーネントが更新された後に発火、更新された DOM にアクセスできる
