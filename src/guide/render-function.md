@@ -497,7 +497,7 @@ render() {
 
 ### `<component>` と `is`
 
-舞台裏では、テンプレートは `resolveDynamicComponent` をつかって `is` 属性を実装しています。 `render` 関数で `is` 属性がもつ、すべての柔軟性が必要な場合は、同じ関数を使うことができます:
+裏では、テンプレートは `resolveDynamicComponent` をつかって `is` 属性を実装しています。 `render` 関数で `is` 属性がもつ、すべての柔軟性が必要な場合は、同じ関数を使うことができます:
 
 ```js
 const { h, resolveDynamicComponent } = Vue
