@@ -45,13 +45,14 @@ console.log(count.value) // 1
 
 ### ref のアンラップ
 
-ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値にアンラップ(ref でラップされた値を取り出す)されます。テンプレート内においては `.value` を付ける必要はありません:
+ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値に浅くアンラップ(ref でラップされた値を取り出す)されます。ネストした ref だけが、テンプレート内で `.value` が必要です:
 
 ```vue-html
 <template>
   <div>
     <span>{{ count }}</span>
     <button @click="count ++">Increment count</button>
+    <button @click="nested.count.value ++">Nested Increment count</button>
   </div>
 </template>
 
@@ -61,12 +62,26 @@ ref がレンダーコンテキスト(render contenxt - [setup()](composition-ap
     setup() {
       const count = ref(0)
       return {
-        count
+        count,
+
+        nested: {
+          count
+        }
       }
     }
   }
 </script>
 ```
+
+::tip
+  If you don't need to access the actual object instance, you can wrap it in a reactive:
+
+  ```js
+  rested: reactive({
+    count
+  })
+  ```
+::
 
 ### リアクティブオブジェクト内でのアクセス
 
