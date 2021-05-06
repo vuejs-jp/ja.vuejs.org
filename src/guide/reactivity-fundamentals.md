@@ -17,11 +17,11 @@ const state = reactive({
 
 Vue におけるリアクティブな状態の重要なユースケースは描画の際に用いることができることです。依存関係の追跡のおかげで、リアクティブな状態が変化するとビューが自動的に更新されます。
 
-これがまさに Vue のリアクティブシステムの本質です。コンポーネント内の `data()` でオブジェクトを返す際に、内部的には `reactive()` によってリアクティブを実現しています。テンプレートはこれらのリアクティブなプロパティを利用する [render 関数](render-function.html)にコンパイルされます。
+これがまさに Vue のリアクティブシステムの本質です。コンポーネント内の `data()` でオブジェクトを返す際に、内部的には `reactive()` によってリアクティブを実現しています。テンプレートはこれらのリアクティブなプロパティを利用する [Render 関数](render-function.html)にコンパイルされます。
 
-`reactive` についての詳細は [基本 リアクティビティ API](../api/basic-reactivity.html) セクションを参照してください
+`reactive` についての詳細は [基本リアクティビティ API](../api/basic-reactivity.html) セクションを参照してください
 
-## 独立したリアクティブな値を `参照` として作成する
+## 独立したリアクティブな値を `ref` として作成する
 
 独立したプリミティブ値(例えば文字列)があって、それをリアクティブにしたい場合を想像してみてください。もちろん、同じ値の文字列を単一のプロパティとして持つオブジェクトを作成して `reactive` に渡すこともできます。Vue にはこれと同じことをしてくれる `ref` メソッドがあります:
 
@@ -45,13 +45,14 @@ console.log(count.value) // 1
 
 ### ref のアンラップ
 
-ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値にアンラップ(ref でラップされた値を取り出す)されます。テンプレート内においては `.value` を付ける必要はありません:
+ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値に浅くアンラップ(ref でラップされた値を取り出す)されます。入れ子になった ref だけが、テンプレート内で `.value` が必要です:
 
 ```vue-html
 <template>
   <div>
     <span>{{ count }}</span>
     <button @click="count ++">Increment count</button>
+    <button @click="nested.count.value ++">Nested Increment count</button>
   </div>
 </template>
 
@@ -61,12 +62,26 @@ ref がレンダーコンテキスト(render contenxt - [setup()](composition-ap
     setup() {
       const count = ref(0)
       return {
-        count
+        count,
+
+        nested: {
+          count
+        }
       }
     }
   }
 </script>
 ```
+
+:::tip
+実際のオブジェクトインスタンスにアクセスする必要がない場合は、 `reactive` でラップできます:
+
+```js
+nested: reactive({
+  count
+})
+```
+:::
 
 ### リアクティブオブジェクト内でのアクセス
 
@@ -147,7 +162,7 @@ console.log(book.title) // 'Vue 3 Detailed Guide'
 
 ## `readonly` でリアクティブオブジェクトの変更を防ぐ
 
-リアクティブオブジェクト(`ref` や `reactive`)の変更を追跡しながらも、アプリケーションのある場所からの変更は防ぎたい場合があります。例えば、[provide](component-provide-inject.html) されたリアクティブオブジェクトがある場合、それが注入された場所からの変更は防ぎたいことがあります。そうするために、元のオブジェクトに対する読み取り専用のプロキシを作成します:
+リアクティブオブジェクト(`ref` や `reactive`)の変更を追跡しながらも、アプリケーションのある場所からの変更は防ぎたい場合があります。例えば、[Provide](component-provide-inject.html) されたリアクティブオブジェクトがある場合、それが注入された場所からの変更は防ぎたいことがあります。そうするために、元のオブジェクトに対する読み取り専用のプロキシを作成します:
 
 ```js
 import { reactive, readonly } from 'vue'
