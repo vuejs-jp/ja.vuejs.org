@@ -7,7 +7,7 @@
 ウォッチャがコンポーネントを更新する方法がわかったので、その変更が最終的に DOM にどのように反映されるのか気になるかもしれません。 もしかすると以前に仮想 DOM について聞いたことがあるかもしれませんが、Vue を含む多くのフレームワークはこのパラダイムを使用して、JavaScript で更新している変更を効果的にインターフェイスに反映させるようにしています。
 
 <div class="reactivecontent">
-  <common-codepen-snippet title="How does the Virtual DOM work?" slug="RwwQapa" tab="result" theme="light" :height="500" :team="false" user="sdras" name="Sarah Drasner" :editable="false" :preview="false" />
+  <common-codepen-snippet title="How does the Virtual DOM work?" slug="KKNJKbw" tab="result" theme="light" :height="500" :editable="false" :preview="false" />
 </div>
 
 仮想 DOM と呼ばれる DOM のコピーを JavaScript で作成しています。これは、JavaScript で DOM を操作すると計算コストがかかるためです。JavaScript で更新を行うコストはあまりかかりませんが、必要な DOM ノードを見つけて更新するのはコストがかかります。そこで呼び出しをバッチ処理し、DOM を一度に変更します。
