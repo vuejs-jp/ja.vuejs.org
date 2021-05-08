@@ -4,7 +4,7 @@
 
 ## 算出プロパティ
 
-開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの[算出プロパティ](computed.html#computed-properties)として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./reactivity-fundamentals.html#独立したリアクティブな値を-参照-として作成する) オブジェクトを返却する `computed` メソッドを利用します。。
+開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの [算出プロパティ](computed.html#算出プロパティ) として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./reactivity-fundamentals.html#独立したリアクティブな値を-ref-として作成する) オブジェクトを返却する `computed` メソッドを利用します。
 
 ```js
 const count = ref(1)
@@ -48,7 +48,7 @@ setTimeout(() => {
 
 ### 監視の停止
 
-`watchEffect` をコンポーネントの [setup()](composition-api-setup.html) 関数または[ライフサイクルフック](composition-api-lifecycle-hooks.html)の中で呼び出すと、ウォッチャはコンポーネントのライフサイクルにリンクされ、コンポーネントのアンマウント時に自動的に監視が停止します。
+`watchEffect` をコンポーネントの [setup()](composition-api-setup.html) 関数または [ライフサイクルフック](composition-api-lifecycle-hooks.html) の中で呼び出すと、ウォッチャはコンポーネントのライフサイクルにリンクされ、コンポーネントのアンマウント時に自動的に監視が停止します。
 
 その他のケースのため、明示的にウォッチャによる監視を停止するための stop ハンドルが返されます:
 
@@ -63,10 +63,10 @@ stop()
 
 ### 副作用の無効化
 
-ウォッチされている関数は、それが無効化された時(つまりは、該当の作用が完了する前に状態が変化した時)にクリーンアップする必要のある非同期の関数を実行することがあります。 watchEffect による関数は、コールバックを無効化するための `onInvalidate` 関数を受け取ることができます。この関数は以下の場合に呼び出されます:
+ウォッチされている関数は、それが無効化された時（つまりは、該当の作用が完了する前に状態が変化した時）にクリーンアップする必要のある非同期の関数を実行することがあります。 watchEffect による関数は、コールバックを無効化するための `onInvalidate` 関数を受け取ることができます。この関数は以下の場合に呼び出されます:
 
 - 該当の作用が再度実行された場合
-- ウォッチャが停止した場合 (例: `setup()` またはライフサイクルフックの中で `watchEffect` が使用されているコンポーネントがアンマウントされた時)
+- ウォッチャが停止した場合（例: `setup()` またはライフサイクルフックの中で `watchEffect` が使用されているコンポーネントがアンマウントされた時）
 
 ```js
 watchEffect(onInvalidate => {
@@ -79,7 +79,7 @@ watchEffect(onInvalidate => {
 })
 ```
 
-無効化するコールバックを直接返すのではなく、 `onInvalidate` 関数のコールバックを経由して登録しているのは、非同期のエラー処理では、返り値が非常に重要であるためです。データ取得を行う時、作用となる関数が非同期であることは非常に一般的なことです:
+無効化するコールバックを直接返すのではなく、 `onInvalidate` 関数のコールバックを経由して登録しているのは、非同期のエラー処理では、返り値が非常に重要だからです。データ取得を行う時、作用となる関数が非同期であることは非常に一般的なことです:
 
 ```js
 const data = ref(null)
@@ -93,7 +93,7 @@ watchEffect(async (onInvalidate) => {
 
 ### 作用フラッシュのタイミング
 
-Vue のリアクティブシステムは、無効になった変更をバッファリングし、非同期に処理することによって、おなじ "tick" の中での複数の状態の変化に対して、不要な重複の呼び出しを避けることができています。内部的には、コンポーネントの `update` 関数も、監視されている作用の一つです。ユーザーによる作用がキューに入っている場合、デフォルトではすべてのコンポーネントの更新の **前に** 呼び出されます:
+Vue のリアクティブシステムは、無効になった変更をバッファリングし、非同期に処理することによって、おなじ "tick" の中での複数の状態の変化に対して、不要な重複の呼び出しを避けることができています。内部的には、コンポーネントの `update` 関数も、監視されている作用の 1 つです。ユーザーによる作用がキューに入っている場合、デフォルトではすべてのコンポーネントの更新の **前に** 呼び出されます:
 
 ```html
 
@@ -121,9 +121,9 @@ Vue のリアクティブシステムは、無効になった変更をバッフ�
 この例では:
 
 - count は最初の実行時に同期的に記録されます。
-- `count` が変化した時、コンポーネントの**変更前**にコールバック関数が実行されます。
+- `count` が変化した時、コンポーネントの **変更前** にコールバック関数が実行されます。
 
-In cases where a watcher effect needs to be re-run **after** component updates (i.e. when working with [Template Refs](./composition-api-template-refs.md#watching-template-refs)), we can pass an additional `options` object with the `flush` option (default is `'pre'`):
+コンポーネントの **更新後に** ウォッチャの作用を再実行する必要がある場合（例: [テンプレート参照](./composition-api-template-refs.md#テンプレート参照の監視) を使っている場合など）、追加の `options` オブジェクトを `flush` オプション（デフォルトは `'pre'`）と一緒に渡すことができます:
 
 ```js
 // コンポーネントが更新された後に発火、更新された DOM にアクセスできる
@@ -139,7 +139,7 @@ watchEffect(
 )
 ```
 
-The `flush` option also accepts `'sync'`, which forces the effect to always trigger synchronously. This is however inefficient and should be rarely needed.
+`flush` オプションは `'sync'` も指定できます。これは作用をいつも同期的に発火することを強制します。しかし、これは非効率的であって、ほとんど必要ないでしょう。
 
 ### Watcher のデバッグ
 
@@ -167,7 +167,7 @@ watchEffect(
 
 ## `watch`
 
-`watch` API は、コンポーネントの[watch](computed.html#watchers) プロパティと完全に同じものです。`watch` は特定のデータソースを監視し、別のコールバック関数内で副作用を適用する必要があります。また、デフォルトでは lazy となっています(つまり、監視しているデータソースが変更された場合に限り、コールバック関数が実行されます)。
+`watch` API は、コンポーネントの [watch](computed.html#ウォッチャ) プロパティと完全に同じものです。`watch` は特定のデータソースを監視し、別のコールバック関数内で副作用を適用する必要があります。また、デフォルトでは lazy となっています（つまり、監視しているデータソースが変更された場合に限り、コールバック関数が実行されます）。
 
 - [watchEffect](#watcheffect) と比較して、 `watch` は以下を可能とします:
 
@@ -212,9 +212,9 @@ firstName.value = "John"; // logs: ["John",""] ["", ""]
 lastName.value = "Smith"; // logs: ["John", "Smith"] ["John", ""]
 ```
 
-### Watching Reactive Objects
+### リアクティブなオブジェクトの監視
 
-Using a watcher to compare values of an array or object that are reactive requires that it has a copy made of just the values.
+ウォッチャを使って、リアクティブな配列やオブジェクトの値を比較するには、値だけのコピーを作っておく必要があります。
 
 ```js
 const numbers = reactive([1, 2, 3, 4])
@@ -228,12 +228,12 @@ watch(
 numbers.push(5) // logs: [1,2,3,4,5] [1,2,3,4]
 ```
 
-Attempting to check for changes of properties in a deeply nested object or array will still require the `deep` option to be true:
+深くネストしたオブジェクトや配列のプロパティの変更をチェックするには、やはり `deep` オプションを true にする必要があります:
 
 ```js
-const state = reactive({ 
-  id: 1, 
-  attributes: { 
+const state = reactive({
+  id: 1,
+  attributes: {
     name: "",
   },
 });
@@ -264,7 +264,7 @@ watch(
 state.attributes.name = "Alex"; // Logs: "deep " "Alex" "Alex"
 ```
 
-However, watching a reactive object or array will always return a reference to the current value of that object for both the current and previous value of the state. To fully watch deeply nested objects and arrays, a deep copy of values may be required. This can be achieved with a utility such as [lodash.cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep)
+しかし、リアクティブなオブジェクトや配列を監視すると、そのオブジェクトの状態の現在値と前回値の両方について参照が常に返されます。深くネストされたオブジェクトや配列を完全に監視するためには、値のディープコピーが必要な場合があります。これは [lodash.cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep) のようなユーティリティで実現できます。
 
 ```js
 import _ from 'lodash';
@@ -280,7 +280,7 @@ watch(
   () => _.cloneDeep(state),
   (state, prevState) => {
     console.log(
-      state.attributes.name, 
+      state.attributes.name,
       prevState.attributes.name
     );
   }
@@ -291,4 +291,4 @@ state.attributes.name = "Alex"; // Logs: "Alex" ""
 
 ### `watchEffect` との振る舞いの共有
 
-`watch` は[明示的な停止](#stopping-the-watcher)、[副作用の無効化](#side-effect-invalidation) (代わりに第三引数に `onInvalidate` を渡すことになります)、[作用フラッシュのタイミング](#effect-flush-timing)ならびに[デバッグ手法](#watcher-debugging)についての挙動を[`watchEffect`](#watcheffect)と共有しています。
+`watch` は [明示的な停止](#監視の停止)、[副作用の無効化](#副作用の無効化)（代わりに第三引数に `onInvalidate` を渡すことになります）、[作用フラッシュのタイミング](#作用フラッシュのタイミング) ならびに [デバッグ手法](#watcher-のデバッグ) についての挙動を [`watchEffect`](#watcheffect) と共有しています。
