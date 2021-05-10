@@ -11,3 +11,13 @@
 ## Quasar Framework SSR + PWA
 
 [Quasar Framework](https://quasar.dev) は、SSR アプリケーション (PWA ハンドオフオプションあり) を生成するフレームワークで、最高クラスのビルドシステム、実用的な環境設定、そして開発者の拡張性を活用して、あなたのアイデアを設計し構築することを簡単にします。100 を超える "Material Design 2.0" に準拠したコンポーネントがあり、どれかひとつをサーバ上で実行できます。これはブラウザでも使用でき、サイト内の `<meta>` タグで管理もできます。 Quasar は Node.js と webpack ベースの開発環境で、SPA、PWA、SSR、Electron、Capacitor、そして Cordova アプリケーション、全て 1 つのコードベースからの迅速な開発を合理化し、加速させます。
+
+## Vite SSR
+
+[Vite](https://vitejs.dev/) is a new breed of frontend build tool that significantly improves the frontend development experience. It consists of two major parts:
+
+- A dev server that serves your source files over native ES modules, with rich built-in features and astonishingly fast Hot Module Replacement (HMR).
+
+- A build command that bundles your code with [Rollup](https://rollupjs.org/), pre-configured to output highly optimized static assets for production.
+
+Vite also provides built-in [support for server-side rendering](https://vitejs.dev/guide/ssr.html). You can find an example project with Vue [here](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue)
