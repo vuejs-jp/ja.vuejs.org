@@ -2,7 +2,7 @@
 
 ## 完全な SSR ガイド
 
-私たちは、サーバーでレンダリングされた Vue アプリケーションを作成するためのスタンドアロンのガイドを作成しました。これは、すでにクライアント側の Vue 開発、サーバー側の Node.js 開発そして Webpack に精通している方にとって非常に詳細なガイドです。[ssr.vuejs.org](https://ssr.vuejs.org/) を確認してください。
+私たちは、サーバーでレンダリングされた Vue アプリケーションを作成するためのスタンドアロンのガイドを作成しました。これは、すでにクライアント側の Vue 開発、サーバー側の Node.js 開発そして Webpack に精通している方にとって非常に詳細なガイドです。[こちら](/guide/ssr/introduction.html) を確認してください。
 
 ## Nuxt.js
 
@@ -11,3 +11,13 @@
 ## Quasar Framework SSR + PWA
 
 [Quasar Framework](https://quasar.dev) は、SSR アプリケーション (PWA ハンドオフオプションあり) を生成するフレームワークで、最高クラスのビルドシステム、実用的な環境設定、そして開発者の拡張性を活用して、あなたのアイデアを設計し構築することを簡単にします。100 を超える "Material Design 2.0" に準拠したコンポーネントがあり、どれかひとつをサーバ上で実行できます。これはブラウザでも使用でき、サイト内の `<meta>` タグで管理もできます。 Quasar は Node.js と webpack ベースの開発環境で、SPA、PWA、SSR、Electron、Capacitor、そして Cordova アプリケーション、全て 1 つのコードベースからの迅速な開発を合理化し、加速させます。
+
+## Vite SSR
+
+[Vite](https://vitejs.dev/) は、フロントエンド開発の経験を大幅に改善する新しいタイプのフロントエンドビルドツールです。大きく分けて 2 つの部分で構成されています。:
+
+- ソースファイルをネイティブ ES モジュールで提供する開発サーバで、豊富な組み込み機能と、驚異的な速さの HMR (Hot Module Replacement) を備えています。
+
+- コードを [Rollup](https://rollupjs.org/) でバンドルするビルドコマンドで、本番用に高度に最適化した静的アセットを出力するようにあらかじめ設定されています。
+
+Vite は組み込みの [サーバサイドレンダリングのサポート](https://vitejs.dev/guide/ssr.html) もあります。Vue を使ったプロジェクトの例は [こちら](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue) で見ることができます。
