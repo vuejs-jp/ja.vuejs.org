@@ -88,7 +88,7 @@ export default {
 1. `click` イベントを適切に宣言する。これは `<my-button>` のイベントハンドラに何らかのロジックを実際に追加する場合で役立ちます。
 2. `.native` を追加しなくても、親は簡単にネイティブイベントをリッスンできるので、イベントの再発行を削除します。とにかく明らかにイベントを再発行するだけの場合に適しています。
 
-## 関連情報
+## 参照
 
 - [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0030-emits-option.md)
 - [移行ガイド - `.native` 修飾子の削除](./v-on-native-modifier-removed.md)
