@@ -14,10 +14,10 @@
 
 ## Vite SSR
 
-[Vite](https://vitejs.dev/) is a new breed of frontend build tool that significantly improves the frontend development experience. It consists of two major parts:
+[Vite](https://vitejs.dev/) は、フロントエンド開発の経験を大幅に改善する新しいタイプのフロントエンドビルドツールです。大きく分けて 2 つの部分で構成されています。:
 
-- A dev server that serves your source files over native ES modules, with rich built-in features and astonishingly fast Hot Module Replacement (HMR).
+- ソースファイルをネイティブ ES モジュールで提供する開発サーバで、豊富な組み込み機能と、驚異的な速さの HMR (Hot Module Replacement) を備えています。
 
-- A build command that bundles your code with [Rollup](https://rollupjs.org/), pre-configured to output highly optimized static assets for production.
+- コードを [Rollup](https://rollupjs.org/) でバンドルするビルドコマンドで、本番用に高度に最適化した静的アセットを出力するようにあらかじめ設定されています。
 
-Vite also provides built-in [support for server-side rendering](https://vitejs.dev/guide/ssr.html). You can find an example project with Vue [here](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue)
+Vite は組み込みの [サーバサイドレンダリングのサポート](https://vitejs.dev/guide/ssr.html) もあります。Vue を使ったプロジェクトの例は [こちら](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue) で見ることができます。
