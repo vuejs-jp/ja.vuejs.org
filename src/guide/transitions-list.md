@@ -7,7 +7,7 @@
 
 その上で、例えば `v-for` のように、全てをまとめてレンダーしたいリスト全体がある場合はどうしましょうか？このような場合では、 `<transition-group>` コンポーネントを利用します。ですが具体的な例を見る前に、コンポーネントについていくつかの重要なことを知っておく必要があります:
 
-- `<transition>` とは異なり、デフォルトで実際の `<span>` 要素をレンダリングします。レンダリングされる要素は、 `tag` 属性によって変更できます。
+- By default, it doesn't render a wrapper element, but you can specify an element to be rendered with the `tag` attribute.
 - 2つの排他の要素が切り替わっているわけではないため、[Transition モード](/guide/transitions-enterleave#transition-modes) は利用できません。
 - 要素の内部では、 **常に** 固有の `key` 属性を **持つ必要** があります。
 - CSS トランジションクラスは内部の要素に適用され、グループやコンテナには適用されません。
