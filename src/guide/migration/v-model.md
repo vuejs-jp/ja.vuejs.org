@@ -173,6 +173,7 @@ this.$emit('update:title', newValue)
     props: {
       modelValue: String // 以前は `value:String` でした
     },
+    emits: ['update:modelValue'],
     methods: {
       changePageTitle(title) {
         this.$emit('update:modelValue', title) // 以前は `this.$emit('input', title)` でした
