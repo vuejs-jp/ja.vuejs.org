@@ -20,7 +20,7 @@ yarn add @vue/server-renderer
 
 ## Vue アプリケーションのレンダリング
 
- `createApp` で作ったクライアント専用の Vue アプリケーションとは異なり、 SSR アプリケーションは `createSSRApp` で作る必要があります:
+`createApp` で作ったクライアント専用の Vue アプリケーションとは異なり、 SSR アプリケーションは `createSSRApp` で作る必要があります:
 
 ```js
 const { createSSRApp } = require('vue')
