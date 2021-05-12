@@ -1,10 +1,10 @@
-# Getting Started
+# はじめに
 
-> This guide is currently under active development
+> このガイドは現在開発中です
 
-## Installation
+## インストール
 
-In order to create a server-side rendered application, we need to install the `@vue/server-renderer` package:
+サーバサイドレンダリングのアプリケーションを作成するためには、 `@vue/server-renderer` パッケージのインストールが必要です:
 
 ```bash
 npm install @vue/server-renderer
@@ -12,15 +12,15 @@ npm install @vue/server-renderer
 yarn add @vue/server-renderer
 ```
 
-#### Notes
+#### 注意点
 
-- It's recommended to use Node.js version 10+.
-- `@vue/server-renderer` and `vue` must have matching versions.
-- `@vue/server-renderer` relies on some Node.js native modules and therefore can only be used in Node.js. We may provide a simpler build that can be run in other JavaScript runtimes in the future.
+- Node.js のバージョンは 10 以上を推奨します。
+- `@vue/server-renderer` と `vue` のバージョンが一致する必要があります。
+- `@vue/server-renderer` はいくつかの Node.js ネイティブモジュールに依存しているため、 Node.js でのみ使用できます。将来的には他の JavaScript ランタイムで実行できるよりシンプルなビルドを提供するかもしれません。
 
-## Rendering a Vue Application
+## Vue アプリケーションのレンダリング
 
-Unlike a client-only Vue application, which is created using `createApp`, an SSR application needs to be created using `createSSRApp`:
+ `createApp` で作ったクライアント専用の Vue アプリケーションとは異なり、 SSR アプリケーションは `createSSRApp` で作る必要があります:
 
 ```js
 const { createSSRApp } = require('vue')
@@ -35,7 +35,7 @@ const app = createSSRApp({
 })
 ```
 
-Now, we can use the `renderToString` function to render our application instance to a string. This function returns a Promise which resolves to the rendered HTML.
+それでは、 `renderToString` 関数を使い、アプリケーションのインスタンスを文字列にレンダリングしてみます。この関数は、レンダリングされた HTML に解決される Promise を返します。
 
 ```js{2,13}
 const { createSSRApp } = require('vue')
@@ -53,9 +53,9 @@ const app = createSSRApp({
 const appContent = await renderToString(app)
 ```
 
-## Integrating with a Server
+## サーバとの連携
 
-To run an application, in this example we will use [Express](https://expressjs.com/):
+アプリケーションを実行するために、この例では [Express](https://expressjs.com/) を利用します:
 
 ```bash
 npm install express
@@ -96,4 +96,4 @@ server.get('*', async (req, res) => {
 server.listen(8080)
 ```
 
-Now, when running this Node.js script, we can see a static HTML page on `localhost:8080`. However, this code is not _hydrated_: Vue hasn't yet taken over the static HTML sent by the server to turn it into dynamic DOM that can react to client-side data changes. This will be covered in the [Client Side Hydration](hydration.html) section.
+この Node.js スクリプトを実行すると、 `localhost:8080` で静的な HTML ページが表示されます。しかし、このコードは _Hydrate_ ではありません: Vue はまだサーバから送られてきた静的な HTML を引き継いでいて、クライアント側のデータ変更に反応できる動的な DOM に変えていません。これについては [クライアントサイド Hydration](hydration.html) セクションで説明します。
