@@ -1,29 +1,29 @@
-# Writing Universal Code
+# Universal（ユニバーサルな）コードを書く
 
-Before going further, let's take a moment to discuss the constraints when writing "universal" code - that is, code that runs on both the server and the client. Due to use case and platform API differences, the behavior of our code will not be exactly the same when running in different environments. Here we will go over the key things you need to be aware of.
+先に進む前に、 "Universal" コード、つまりサーバとクライアントの両方で動くコードを書くとき、その制約について考えてみましょう。ユースケースとプラットフォームの API の違いにより、異なる環境で実行したコードの動作は全く同じものにはなりません。ここでは知っておくべき重要な項目について説明します。
 
-## Data Reactivity on the Server
+## サーバ上のデータリアクティビティ
 
-In a client-only app, every user will be using a fresh instance of the app in their browser. For server-side rendering we want the same: each request should have a fresh, isolated app instance so that there is no cross-request state pollution.
+クライアントだけで実行するアプリケーションでは、すべてのユーザがブラウザでアプリケーションの新しいインスタンスを使用します。サーバサイドレンダリングでも、同じ振る舞いが必要とされます: リクエスト間で状態の汚染がないように、各リクエストは新しく独立したアプリケーションのインスタンスが必要になります。
 
-Because the actual rendering process needs to be deterministic, we will also be "pre-fetching" data on the server - this means our application state will be already resolved when we start rendering. This means data reactivity is unnecessary on the server, so it is disabled by default. Disabling data reactivity also avoids the performance cost of converting data into reactive objects.
+実際のレンダリング処理は決定的であることが求められるので、サーバ上でデータを "プリフェッチ" することもあります - これはレンダリングを開始するとき、アプリケーションの状態はすでに解決済みであるということです。つまり、サーバ上ではデータのリアクティビティは必要ないためデフォルトで無効化されています。データのリアクティビティを無効にすることで、データをリアクティブなオブジェクトに変換する際のパフォーマンスコストを無視できます。
 
-## Component Lifecycle Hooks
+## コンポーネントのライフサイクルフック
 
-Since there are no dynamic updates, the only [lifecycle hooks](/guide/instance.html#lifecycle-hooks) that will be called during SSR are `beforeCreate` and `created`. This means any code inside other lifecycle hooks such as `beforeMount` or `mounted` will only be executed on the client.
+動的な更新がないため、 SSR 中に呼び出される [ライフサイクルフック](/guide/instance.html#ライフサイクルフック) は `beforeCreate` と `created` だけになります。つまり、 `beforeMount` や `mounted` など他のライフサイクルフックにあるコードは、クライアントでのみ実行されるということです。
 
-Another thing to note is that you should avoid code that produces global side effects in `beforeCreate` and `created`, for example setting up timers with `setInterval`. In client-side only code we may setup a timer and then tear it down in `beforeUnmount` or `unmounted`. However, because the destroy hooks will not be called during SSR, the timers will stay around forever. To avoid this, move your side-effect code into `beforeMount` or `mounted` instead.
+もうひとつの注意点は、 `beforeCreate` と `created` でグローバルな副作用を引き起こすコードは避けるべきということです。例えば `setInterval` を使ったタイマーの設定です。クライアントサイドのみのコードでは、タイマーを設定して、 `beforeUnmount` や `unmounted` でそれを破棄します。しかし、 SSR 中には destroy フックが呼び出されないために、タイマーは永遠に残り続けることになります。これを避けるため、代わりに副作用を引き起こすコードを `beforeMount` や `mounted` に移動してください。
 
-## Access to Platform-Specific APIs
+## プラットフォーム固有の API へのアクセス
 
-Universal code cannot assume access to platform-specific APIs, so if your code directly uses browser-only globals like `window` or `document`, they will throw errors when executed in Node.js, and vice-versa.
+Universal コードは、プラットフォーム固有の API アクセスを前提にできないため、コードが `window` や `document` のようなブラウザ専用のグローバル変数を直接使用している場合、 Node.js で実行するとエラーが発生しますし、その逆も同様です。
 
-For tasks shared between server and client but using different platform APIs, it's recommended to wrap the platform-specific implementations inside a universal API, or use libraries that do this for you. For example, [axios](https://github.com/axios/axios) is an HTTP client that exposes the same API for both server and client.
+サーバとクライアントで共有されたタスクで、異なるプラットフォームの API を使っている場合は、プラットフォーム固有の実装を Universal API の中にラップするか、これを行うライブラリの使用をお勧めします。例えば、 [axios](https://github.com/axios/axios) は、サーバとクライアントの両方に同じ API を提供する HTTP クライアントです。
 
-For browser-only APIs, the common approach is to lazily access them inside client-only lifecycle hooks.
+ブラウザ専用の API の場合は、クライアント用のライフサイクルフックの中で遅延アクセスするのが一般的なアプローチです。
 
-Note that if a 3rd party library is not written with universal usage in mind, it could be tricky to integrate it into an server-rendered app. You _might_ be able to get it working by mocking some of the globals, but it would be hacky and may interfere with the environment detection code of other libraries.
+サードパーティのライブラリが Universal での利用を考慮していない場合は、サーバサイドレンダリングしたアプリケーションと統合するのは難しいかもしれないことに注意してください。グローバル変数の一部をモックして動かすことは _できるかも_ しれませんが、それはハック的なもので、他のライブラリの環境検出するコードと干渉する可能性があります。
 
-## Custom Directives
+## カスタムディレクティブ
 
-Most [custom directives](/guide/custom-directive.html#custom-directives) directly manipulate the DOM, which will cause errors during SSR. We recommend to prefer using components as the abstraction mechanism instead of directives.
+ほとんどの [カスタムディレクティブ](/guide/custom-directive.html#custom-directives) は DOM を直接操作するため、SSR 中にエラーが発生します。このため、抽象化の仕組みとしてはディレクティブではなくコンポーネントを使うことをお勧めします。
