@@ -1,10 +1,10 @@
-# Source Code Structure
+# ソースコードの構造
 
-## Avoid Stateful Singletons
+## ステートフルなシングルトンの回避
 
-When writing client-only code, we can assume that our code will be evaluated in a fresh context every time. However, a Node.js server is a long-running process. When our code is first imported by the process, it will be evaluated once and then stay in memory. This means that if you create a singleton object, it will be shared between every incoming request, with the risk of cross-request state pollution.
+クライアントのみのコードを書くとき、コードは毎回新しいコンテキストで評価されると考えることができます。しかし、 Node.js サーバは長時間実行されるプロセスです。コードがプロセスにはじめて要求されるとき、コードは一度評価されメモリ内にとどまります。つまり、シングルトンのオブジェクトを作成すると、すべての受信リクエストの間で共有されることになり、リクエスト間での状態の汚染リスクがあるということです。
 
-Therefore, we need to **create a new root Vue instance for each request.** In order to do that, we need to write a factory function that can be repeatedly executed to create fresh app instances for each request:
+よって、 **リクエストごとに新しいルート Vue インスタンスを作成する** 必要があります。そのためには、リクエストごとに新しいアプリケーションのインスタンスを作成する、繰り返し実行可能なファクトリ関数を書く必要があります:
 
 ```js
 // app.js
@@ -22,7 +22,7 @@ function createApp() {
 }
 ```
 
-And our server code now becomes:
+そして、サーバコードはこのようになります:
 
 ```js
 // server.js
@@ -49,27 +49,27 @@ server.get('*', async (req, res) => {
 server.listen(8080)
 ```
 
-The same rule applies to other instances as well (such as the router or store). Instead of exporting the router or store directly from a module and importing it across your app, you should create a fresh instance in `createApp` and inject it from the root Vue instance.
+同じルールが他のインスタンス（ルータやストアなど）にも当てはまります。ルータやストアをモジュールから直接エクスポートしてアプリケーション全体にインポートするのではなく、 `createApp` で新しいインスタンスを作成して、ルート Vue インスタンスから注入する必要があります。
 
-## Introducing a Build Step
+## ビルド手順の導入
 
-So far, we haven't discussed how to deliver the same Vue app to the client yet. To do that, we need to use webpack to bundle our Vue app.
+ここまでは、同じ Vue アプリケーションをクライアントに配信する方法をまだ説明していませんでした。そのためには、 webpack で Vue アプリケーションのバンドルが必要です。
 
-- We need to process the server code with webpack. For example, `.vue` files need to be processed with `vue-loader`, and many webpack-specific features such as importing files via `file-loader` or importing CSS via `css-loader` do not work directly in Node.js.
+- サーバコードを webpack で処理する必要があります。例えば、 `.vue` ファイルは `vue-loader` の処理が必要で、 `file-loader` でのファイルのインポートや、 `css-loader` での CSS のインポートなど、多くの webpack 固有の機能は Node.js で直接動作しません。
 
-- Similarly, we need a separate client-side build because although the latest version of Node.js fully supports ES2015 features, older browsers will require the code to be transpiled.
+- 同じように、最新の Node.js は ES2015 の機能を完全にサポートしていますが、古いブラウザではコードのトランスパイルが必要で、クライアントサイドのビルドも別に行う必要があります。
 
-So the basic idea is that we will use webpack to bundle our app for both client and server. The server bundle will be required on the server and used to render static HTML, while the client bundle will be sent to the browser to hydrate the static markup.
+基本的な考え方は、 webpack でアプリケーションをクライアントとサーバの両方にバンドルすることです。サーバ用のバンドルは、サーバ上で静的な HTML をレンダリングするために使われ、クライアント用のバンドルは、静的なマークアップを Hydrate（ハイドレート）するためにブラウザに送信されます。
 
 ![architecture](https://cloud.githubusercontent.com/assets/499550/17607895/786a415a-5fee-11e6-9c11-45a2cfdf085c.png)
 
-We will discuss the details of the setup in later sections - for now, let's just assume we've got the build setup figured out and we can write our Vue app code with webpack enabled.
+セットアップの詳細については後のセクションで説明しますが、ここではビルドのセットアップが完了して、 webpack を有効にした Vue アプリケーションのコードが書けるようになったと仮定してみます。
 
-## Code Structure with webpack
+## webpack によるコード構造
 
-Now that we are using webpack to process the app for both server and client, the majority of our source code can be written in a universal fashion, with access to all the webpack-powered features. At the same time, there are a number of things you should keep in mind when [writing universal code](./universal.html).
+サーバとクライアントの両方のアプリケーションを処理するのに webpack を使うようになったため、ソースコードの大部分はユニバーサルな方法で書くことができ、すべての webpack の機能にアクセスすることができます。同時に、 [ユニバーサルなコードを書く](./universal.html) ときに留意すべき点がいくつかあります。
 
-A simple project would look like this:
+簡単なプロジェクトはこのようなものです:
 
 ```bash
 src
@@ -77,20 +77,20 @@ src
 │   ├── MyUser.vue
 │   └── MyTable.vue
 ├── App.vue
-├── app.js # universal entry
-├── entry-client.js # runs in browser only
-└── entry-server.js # runs on server only
+├── app.js # 共通のエントリ
+├── entry-client.js # ブラウザでのみ実行
+└── entry-server.js # サーバでのみ実行
 ```
 
 ### `app.js`
 
-`app.js` is the universal entry to our app. In a client-only app, we would create the Vue application instance right in this file and mount directly to DOM. However, for SSR that responsibility is moved into the client-only entry file. `app.js` instead creates an application instance and exports it:
+`app.js` は、アプリケーションの共通のエントリです。クライアント専用のアプリケーションでは、このファイルの中で Vue アプリケーションのインスタンスを作成して、 DOM に直接マウントします。しかし SSR では、その責務はクライアント専用のエントリファイルに移されます。代わりに `app.js` でアプリケーションのインスタンスを作成して、エクスポートします:
 
 ```js
 import { createSSRApp } from 'vue'
 import App from './App.vue'
 
-// export a factory function for creating a root component
+// ルートコンポーネントを作成するためのファクトリ関数をエクスポート
 export default function(args) {
   const app = createSSRApp(App)
 
@@ -102,24 +102,24 @@ export default function(args) {
 
 ### `entry-client.js`
 
-The client entry creates the application using the root component factory and mounts it to the DOM:
+クライアント用のエントリは、ルートコンポーネントのファクトリを使ってアプリケーションを作成し、 DOM にマウントします:
 
 ```js
 import createApp from './app'
 
-// client-specific bootstrapping logic...
+// クライアント固有の初回起動ロジック
 
 const { app } = createApp({
-  // here we can pass additional arguments to app factory
+  // ここでアプリケーションのファクトリに追加の引数を渡すことが可能
 })
 
-// this assumes App.vue template root element has `id="app"`
+// これは App.vue テンプレートのルート要素に `id="app"` が前提
 app.mount('#app')
 ```
 
 ### `entry-server.js`
 
-The server entry uses a default export which is a function that can be called repeatedly for each render. At this moment, it doesn't do much other than returning the app instance - but later we will perform server-side route matching and data pre-fetching logic here.
+サーバ用のエントリは、レンダリングごとに繰り返し呼び出される関数を default でエクスポートします。いまのところは、アプリケーションのインスタンスを返す以外の機能はありませんが、あとでサーバサイドのルートマッチングやデータのプリフェッチのロジックをここに加えます。
 
 ```js
 import createApp from './app'
