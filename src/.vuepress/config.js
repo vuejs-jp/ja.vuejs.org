@@ -431,6 +431,10 @@ module.exports = {
             link: 'https://v3.ko.vuejs.org/'
           },
           {
+            text: 'Русский',
+            link: 'https://v3.ru.vuejs.org/'
+          },
+          {
             text: 'その他の翻訳',
             link: '/guide/contributing/translations#community-translations'
           }
