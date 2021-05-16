@@ -1,3 +1,3 @@
 # 弾力のあるヘッダ
 
-<common-codepen-snippet title="Vue 3 Elastic Draggable Header Example" slug="ZEWGmar" :height="474" tab="js,result" :team="false" user="immarina" name="Vue" :preview="false" :editable="false" />
+<common-codepen-snippet title="Vue 3 Elastic Draggable Header Example" slug="PoWpdWY" :height="474" tab="js,result" :preview="false" :editable="false" />
