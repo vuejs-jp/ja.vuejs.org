@@ -2,7 +2,7 @@ name: che-tsumi
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 6 * * *'
 
 jobs:
   che-tsumi:
@@ -24,7 +24,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.CHE_TSUMI_ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.CHE_TSUMI_USER_NAME }}
           EMAIL: ${{ secrets.CHE_TSUMI_USER_EMAIL }}
-          UPSTREAM_REPO: git@github.com:naokie/ja.vuejs.org.git
+          UPSTREAM_REPO: https://github.com/vuejs-jp/ja.vuejs.org.git
           UPSTREAM_REPO_BRANCH: lang-ja
           HEAD_REPO: https://github.com/vuejs/docs-next
           HEAD_REPO_BRANCH: master
