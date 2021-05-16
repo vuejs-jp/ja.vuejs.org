@@ -4,8 +4,6 @@
 
 :::warning
 あなたの Web ブラウザで 3rd-party データ/クッキーをブロックするよう設定している場合、 **localeStorage** データの保存に失敗するため、以下の example は動作しない可能性があります。
-
-さらに、 CodePen の制約によってハッシュナビゲーションは動作しません。
 :::
 
 <common-codepen-snippet title="Vue 3 TodoMVC" slug="Yzqyozj" tab="js,result" />
