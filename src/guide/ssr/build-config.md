@@ -1,16 +1,16 @@
-# Build Configuration
+# ビルド設定
 
-The webpack config for an SSR project will be similar to a client-only project. If you're not familiar with configuring webpack, you can find more information in the documentation for [Vue CLI](https://cli.vuejs.org/guide/webpack.html#working-with-webpack) or [configuring Vue Loader manually](https://vue-loader.vuejs.org/guide/#manual-setup).
+SSR プロジェクトの webpack 設定は、クライアント用のプロジェクトと似ています。 webpack の設定に慣れていなければ、 [Vue CLI](https://cli.vuejs.org/guide/webpack.html#working-with-webpack) や [Vue Loader の手動設定](https://vue-loader.vuejs.org/guide/#manual-setup) のドキュメントに詳しい情報があります。
 
-## Key Differences with Client-Only Builds
+## クライアント用ビルドとの主な相違点
 
-1. We need to create a [webpack manifest](https://webpack.js.org/concepts/manifest/) for our server-side code. This is a JSON file that webpack keeps to track how all the modules map to the output bundles.
+1. サーバサイドのコード用に [webpack マニフェスト](https://webpack.js.org/concepts/manifest/) を作成する必要があります。これは、すべてのモジュールが出力されたバンドルにどのようにマッピングされるかを追跡するため、 webpack が保持している JSON ファイルです。
 
-2. We should [externalize application dependencies](https://webpack.js.org/configuration/externals/). This makes the server build much faster and generates a smaller bundle file. When doing this, we have to exclude dependencies that need to be processed by webpack (like `.css`. or `.vue` files).
+2. [アプリケーションの依存関係を外部化](https://webpack.js.org/configuration/externals/) するべきです。これにより、サーバのビルドがずっと速くなり、バンドルしたファイルサイズも小さくなります。このとき、 webpack で処理する必要のある依存関係（`.css` や `.vue` ファイルなど）を除外する必要があります。
 
-3. We need to change webpack [target](https://webpack.js.org/concepts/targets/) to Node.js. This allows webpack to handle dynamic imports in a Node-appropriate fashion, and also tells `vue-loader` to emit server-oriented code when compiling Vue components.
+3. webpack の [target](https://webpack.js.org/concepts/targets/) を Node.js に変更する必要があります。これによって、 webpack は Node に適した方法で動的インポートを扱うことができ、また `vue-loader` に Vue コンポーネントをコンパイルするとき、サーバ向けのコードを出力するように指定できます。
 
-4. When building a server entry, we would need to define an environment variable to indicate we are working with SSR. It might be helpful to add a few `scripts` to the project's `package.json`:
+4. サーバエントリをビルドする際には、 SSR で動作することを示す環境変数を定義する必要があります。プロジェクトの `package.json` にいくつか `scripts` を追加すると便利かもしれません:
 
 ```json
 "scripts": {
@@ -20,9 +20,9 @@ The webpack config for an SSR project will be similar to a client-only project. 
 }
 ```
 
-## Example Configuration
+## 設定例
 
-Below is a sample `vue.config.js` that adds SSR rendering to a Vue CLI project, but it can be adapted for any webpack build.
+以下は Vue CLI プロジェクトに SSR を追加する `vue.config.js` の例ですが、どのような webpack ビルドにも対応できます。
 
 ```js
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
@@ -31,15 +31,15 @@ const webpack = require('webpack')
 
 module.exports = {
   chainWebpack: webpackConfig => {
-    // We need to disable cache loader, otherwise the client build
-    // will used cached components from the server build
+    // cache-loader の無効化が必要です。そうしないと、クライアントのビルドはサーバのビルドから
+    // キャッシュされたコンポーネントを使ってしまいます。
     webpackConfig.module.rule('vue').uses.delete('cache-loader')
     webpackConfig.module.rule('js').uses.delete('cache-loader')
     webpackConfig.module.rule('ts').uses.delete('cache-loader')
     webpackConfig.module.rule('tsx').uses.delete('cache-loader')
 
     if (!process.env.SSR) {
-      // Point entry to your app's client entry file
+      // クライアント用エントリファイルの基点
       webpackConfig
         .entry('app')
         .clear()
@@ -47,17 +47,17 @@ module.exports = {
       return
     }
 
-    // Point entry to your app's server entry file
+    // サーバ用エントリファイルの基点
     webpackConfig
       .entry('app')
       .clear()
       .add('./src/entry-server.js')
 
-    // This allows webpack to handle dynamic imports in a Node-appropriate
-    // fashion, and also tells `vue-loader` to emit server-oriented code when
-    // compiling Vue components.
+    // これにより webpack は Node に適した方法で動的インポートを扱うことができ、
+    // Vue コンポーネントをコンパイルするときに、
+    // サーバ向けのコードを発行するように 'vue-loader' に指示します。
     webpackConfig.target('node')
-    // This tells the server bundle to use Node-style exports
+    // これは Node スタイルのエクスポートを使うようにサーバ用のバンドルに指示します。
     webpackConfig.output.libraryTarget('commonjs2')
 
     webpackConfig
@@ -66,11 +66,11 @@ module.exports = {
 
     // https://webpack.js.org/configuration/externals/#function
     // https://github.com/liady/webpack-node-externals
-    // Externalize app dependencies. This makes the server build much faster
-    // and generates a smaller bundle file.
+    // アプリケーションの依存関係を外部化します。
+    // これによりサーバでのビルドがずっと速くなり、バンドルしたファイルのサイズも小さくなります。
 
-    // Do not externalize dependencies that need to be processed by webpack.
-    // You should also whitelist deps that modify `global` (e.g. polyfills)
+    // webpack で処理する必要がある依存関係を外部化しないでください。
+    // また `global` を変更する依存を許可リスト化する必要があります（Polyfill など）
     webpackConfig.externals(nodeExternals({ allowlist: /\.(css|vue)$/ }))
 
     webpackConfig.optimization.splitChunks(false).minimize(false)
@@ -89,18 +89,18 @@ module.exports = {
 }
 ```
 
-## Externals Caveats
+## Externals の注意点
 
-Notice that in the `externals` option we are whitelisting CSS files. This is because CSS imported from dependencies should still be handled by webpack. If you are importing any other types of files that also rely on webpack (e.g. `*.vue`, `*.sass`), you should add them to the whitelist as well.
+`externals` オプションでは、 CSS ファイルを許可リスト化していることに気づいてください。これは依存関係にあるファイルからインポートされた CSS は、 webpack によって処理されるべきだからです。もし webpack に依存する他の種類のファイル（`*.vue` や `*.sass` など）をインポートしているなら、同じように許可リストへ追加する必要があります。
 
-If you are using `runInNewContext: 'once'` or `runInNewContext: true`, then you also need to whitelist polyfills that modify `global`, e.g. `babel-polyfill`. This is because when using the new context mode, **code inside a server bundle has its own `global` object.** Since you don't really need it on the server, it's actually easier to just import it in the client entry.
+`runInNewContext: 'once'` や `runInNewContext: true` を使っている場合、 `global` を変更する Polyfill、例えば `babel-polyfill` を許可リストに登録する必要があります。これは New Context モードを使っている場合に **サーバ用のバンドル内のコードは独自の `global` オブジェクト** を持っているからです。サーバ上ではまったく必要ないため、 実際はクライアントのエントリでインポートするほうが簡単です。
 
-## Generating `clientManifest`
+## `clientManifest` の生成
 
-In addition to the server bundle, we can also generate a client build manifest. With the client manifest and the server bundle, the renderer now has information of both the server _and_ client builds. This way it can automatically infer and inject [preload / prefetch directives](https://css-tricks.com/prefetching-preloading-prebrowsing/), `<link>` and `<script>` tags into the rendered HTML.
+サーバ用のバンドルに加えて、クライアント用のビルドマニフェストも生成できます。クライアント用マニフェストとサーバ用バンドルによって、レンダラーは _サーバとクライアント両方の_ ビルドの情報を持つことになります。これによりレンダリングされた HTML に [preload / prefetch ディレクティブ](https://css-tricks.com/prefetching-preloading-prebrowsing/)、 `<link>`、 `<script>` タグを自動的に推測して注入することができます。
 
-The benefits are two-fold:
+利点は 2 つあります:
 
-1. It can replace `html-webpack-plugin` for injecting the correct asset URLs when there are hashes in your generated filenames.
+1. 生成されたファイル名にハッシュがある場合、正しいアセットの URL を注入するため、 `html-webpack-plugin` を置き換えることができます。
 
-2. When rendering a bundle that leverages webpack's on-demand code splitting features, we can ensure the optimal chunks are preloaded / prefetched, and also intelligently inject `<script>` tags for needed async chunks to avoid waterfall requests on the client, thus improving TTI (time-to-interactive).
+2. webpack のオンデマンドなコード分割機能を活用したバンドルをレンダリングするときに、最適なチャンクがプリロード・プリフェッチされるようにします。また、必要な非同期チャンクに対しては賢く `<script>` タグを注入することで、クライアントでのウォーターフォールリクエストを回避し、 TTI (time-to-interactive) を向上させることができます。
