@@ -29,6 +29,6 @@ jobs:
           HEAD_REPO: https://github.com/vuejs/docs-next
           HEAD_REPO_BRANCH: master
           WORKFLOW_NAME: che-tsumi
-          TRACK_FROM: 5753b78caa80309065554b2c2583bcdce03bc325
+          TRACK_FROM: 81015036143874f539c3717f650c93e45892e06d
           PATH_STARTS_WITH: src
         run: yarn start
