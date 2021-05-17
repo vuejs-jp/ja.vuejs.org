@@ -84,7 +84,7 @@ const app = createApp({})
 | Vue.directive              | app.directive                                                                                    |
 | Vue.mixin                  | app.mixin                                                                                        |
 | Vue.use                    | app.use ([以下を参照](#a-note-for-plugin-authors))                                               |
-| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |                                                                     |
+| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |
 
 グローバルに振る舞いを変更しないその他のグローバル API は [グローバル API の Treeshaking](./global-api-treeshaking.html) にあるように、名前付きエクスポートになりました。
 
