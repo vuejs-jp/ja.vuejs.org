@@ -1,8 +1,8 @@
-# Server Configuration
+# サーバ設定
 
-The [code structure](./structure.html) and [webpack configuration](./build-config.html) we've described also require some changes to our Express server code.
+[コードの構造](./structure.html) と [webpack の設定](./build-config.html) でも説明したとおり、 Express サーバのコードにもいくつかの変更を必要とします。
 
-- we need to create an application with a built `app.js` from the resulting bundle. A path to it can be found using the webpack manifest:
+- バンドル結果のビルドした `app.js` を使ってアプリケーションを作成する必要があります。ファイルパスは、webpack マニフェストを使って見つけられます:
 
   ```js
   // server.js
@@ -13,7 +13,7 @@ The [code structure](./structure.html) and [webpack configuration](./build-confi
   const createApp = require(appPath).default
   ```
 
-- we have to define correct paths to all the assets:
+- すべてのアセットへ正しいパスを定義しなければなりません:
 
   ```js
   // server.js
@@ -32,7 +32,7 @@ The [code structure](./structure.html) and [webpack configuration](./build-confi
   )
   ```
 
-- we need to replace the `index.html` content with our server-side rendered application content:
+- `index.html` のコンテンツをサーバサイドでレンダリングしたアプリケーションのコンテンツに置き換える必要があります:
 
   ```js
   // server.js
@@ -55,7 +55,7 @@ The [code structure](./structure.html) and [webpack configuration](./build-confi
   })
   ```
 
-Below you can find a full code for our Express server:
+以下は Express サーバのすべてのコードです:
 
 ```js
 const path = require('path')
