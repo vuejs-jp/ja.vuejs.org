@@ -1,0 +1,34 @@
+name: che-tsumi
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  che-tsumi:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: vuejs-jp/che-tsumi-next
+          ref: main
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install deps
+        run: yarn
+      - name: Run che-tsumi-next
+        env:
+          ACCESS_TOKEN: ${{ secrets.CHE_TSUMI_ACCESS_TOKEN }}
+          USER_NAME: ${{ secrets.CHE_TSUMI_USER_NAME }}
+          EMAIL: ${{ secrets.CHE_TSUMI_USER_EMAIL }}
+          UPSTREAM_REPO: https://github.com/vuejs-jp/ja.vuejs.org.git
+          UPSTREAM_REPO_BRANCH: lang-ja
+          HEAD_REPO: https://github.com/vuejs/docs-next
+          HEAD_REPO_BRANCH: master
+          WORKFLOW_NAME: che-tsumi
+          TRACK_FROM: 81015036143874f539c3717f650c93e45892e06d
+          PATH_STARTS_WITH: src
+        run: yarn start
