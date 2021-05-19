@@ -418,10 +418,10 @@ module.exports = {
         link: '#',
         items: [
           // Translation maintainers: Please include the link below to the English documentation
-          // {
-          //   text: 'English',
-          //   link: 'https://v3.vuejs.org/'
-          // },
+          {
+            text: 'English',
+            link: 'https://v3.vuejs.org/'
+          },
           {
             text: '中文',
             link: 'https://v3.cn.vuejs.org/'
@@ -431,13 +431,17 @@ module.exports = {
             link: 'https://v3.ko.vuejs.org/'
           },
           {
+            text: 'Русский',
+            link: 'https://v3.ru.vuejs.org/'
+          },
+          {
             text: 'その他の翻訳',
             link: '/guide/contributing/translations#community-translations'
           }
         ]
       }
     ],
-    repo: 'vuejs/docs-next',
+    repo: 'vuejs-jp/ja.vuejs.org',
     editLinks: false,
     editLinkText: 'GitHub でこのページを編集！',
     lastUpdated: '最終更新日',
@@ -457,31 +461,31 @@ module.exports = {
     smoothScroll: false,
     algolia: {
       indexName: 'vuejs-v3',
-      // appId: 'BH4D9OD16A',
+      appId: 'BH4D9OD16A',
       apiKey: 'bc6e8acb44ed4179c30d0a45d6140d3f'
     },
-    // carbonAds: {
-    //   carbon: 'CEBDT27Y',
-    //   custom: 'CKYD62QM',
-    //   placement: 'vuejsorg'
-    // }
+    carbonAds: {
+      carbon: 'CEBDT27Y',
+      custom: 'CKYD62QM',
+      placement: 'vuejsorg'
+    }
   },
   plugins: [
-    // [
-    //   '@vuepress/last-updated',
-    //   {
-    //     transformer(timestamp) {
-    //       const date = new Date(timestamp)
+    [
+      '@vuepress/last-updated',
+      {
+        transformer(timestamp) {
+          const date = new Date(timestamp)
 
-    //       const digits = [
-    //         date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
-    //         date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()
-    //       ].map(num => String(num).padStart(2, '0'))
+          const digits = [
+            date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
+            date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()
+          ].map(num => String(num).padStart(2, '0'))
 
-    //       return '{0}-{1}-{2}, {3}:{4}:{5} UTC'.replace(/{(\d)}/g, (_, num) => digits[num])
-    //     }
-    //   }
-    // ],
+          return '{0}-{1}-{2}, {3}:{4}:{5} UTC'.replace(/{(\d)}/g, (_, num) => digits[num])
+        }
+      }
+    ],
     [
       '@vuepress/pwa',
       {
