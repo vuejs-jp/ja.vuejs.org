@@ -1,10 +1,10 @@
-# Routing and Code-Splitting
+# ルーティングとコード分割
 
-## Routing with `vue-router`
+## `vue-router` によるルーティング
 
-You may have noticed that our server code uses a `*` handler which accepts arbitrary URLs. This allows us to pass the visited URL into our Vue app, and reuse the same routing config for both client and server!
+ここまでのサーバコードで、任意の URL を受け付ける `*` ハンドラを使っていることに気づいたかもしれません。これにより訪問した URL を Vue アプリケーションに渡すことができ、クライアントとサーバの両方で同じルーティング設定を再利用することができます！
 
-It is recommended to use the official [vue-router](https://github.com/vuejs/vue-router-next) library for this purpose. Let's first create a file where we create the router. Note that similar to application instance, we also need a fresh router instance for each request, so the file exports a `createRouter` function:
+この目的のためには、公式の [vue-router](https://github.com/vuejs/vue-router-next) ライブラリを使うことをお勧めします。まず、ルータを作るためのファイルを作成します。アプリケーションのインスタンスと同様に、リクエストごとに新しいルータのインスタンスが必要なので、このファイルでは `createRouter` 関数をエクスポートします:
 
 ```js
 // router.js
@@ -22,7 +22,7 @@ export default function() {
 }
 ```
 
-And update our `app.js`, client and server entries:
+そして `app.js` と、クライアントとサーバのエントリを更新します:
 
 ```js
 // app.js
@@ -57,24 +57,24 @@ const { app, router } = createApp({
 })
 ```
 
-## Code-Splitting
+## コード分割
 
-Code-splitting, or lazy-loading part of your app, helps reduce the size of assets that need to be downloaded by the browser for the initial render, and can greatly improve TTI (time-to-interactive) for apps with large bundles. The key is "loading just what is needed" for the initial screen.
+コード分割、またはアプリの一部を遅延読み込みすることは、初期レンダリングのためにブラウザがダウンロードしなければならないアセットのサイズを減らすことができ、大きなバンドルを持つアプリケーションの TTI (time-to-interactive) を大幅に改善できます。重要なのは初期画面で 「必要なものだけ読み込む」ことです。
 
-Vue Router provides [lazy-loading support](https://next.router.vuejs.org/guide/advanced/lazy-loading.html), allowing [webpack to code-split at that point](https://webpack.js.org/guides/code-splitting-async/). All you need to do is:
+Vue Router は、 [遅延読み込みのサポート](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) を提供しており、 [webpack がその時点でコード分割すること](https://webpack.js.org/guides/code-splitting-async/) を可能にしています。必要なのは:
 
 ```js
-// change this...
+// これを変更して
 import MyUser from './components/MyUser.vue'
 const routes = [{ path: '/user', component: MyUser }]
 
-// to this:
+// このようにします:
 const routes = [
   { path: '/user', component: () => import('./components/MyUser.vue') }
 ]
 ```
 
-On both client and server we need to wait for router to resolve async route components ahead of time in order to properly invoke in-component hooks. For this we will be using [router.isReady](https://next.router.vuejs.org/api/#isready) method Let's update our client entry:
+クライアントとサーバのどちらでも、コンポーネント内のフックを適切に呼び出すために、ルータが非同期のルートコンポーネントを事前に解決するのを待つ必要があります。このため、 [router.isReady](https://next.router.vuejs.org/api/#isready) メソッドでクライアントのエントリを更新しましょう:
 
 ```js
 // entry-client.js
@@ -89,7 +89,7 @@ router.isReady().then(() => {
 })
 ```
 
-We also need to update our `server.js` script:
+また、 `server.js` スクリプトを更新する必要があります:
 
 ```js
 // server.js
