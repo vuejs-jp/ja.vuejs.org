@@ -228,7 +228,8 @@ const sidebar = {
       children: [
         '/guide/contributing/writing-guide',
         '/guide/contributing/doc-style-guide',
-        '/guide/contributing/translations'
+        '/guide/contributing/translations',
+        '/guide/contributing/ja-translators'
       ]
     }
   ]
