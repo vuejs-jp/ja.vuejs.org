@@ -86,7 +86,7 @@ app.directive('highlight', {
 
 Vue 2 では、コンポーネントインスタンスは `vnode` 引数を使ってアクセスする必要がありました。
 
-```javascript
+```js
 bind(el, binding, vnode) {
   const vm = vnode.context
 }
@@ -94,7 +94,7 @@ bind(el, binding, vnode) {
 
 Vue 3 では、インスタンスは `binding` の一部になりました。
 
-```javascript
+```js
 mounted(el, binding, vnode) {
   const vm = binding.instance
 }

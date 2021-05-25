@@ -79,7 +79,7 @@ badges:
 
 その代わり、 [globalProperties](../../api/application-config.html#globalproperties) によって、すべてのコンポーネントがグローバルフィルタを利用できるようにすることができます:
 
-```javascript
+```js
 // main.js
 const app = createApp(App)
 
