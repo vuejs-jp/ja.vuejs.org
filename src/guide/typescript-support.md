@@ -131,7 +131,7 @@ const Component = defineComponent({
 })
 ```
 
-複雑な型や推論の場合、[タイプアサーション (type assertion)](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) を使用してキャストすることができます:
+複雑な型や推論の場合、[タイプアサーション (type assertion)](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) を使用してキャストすることができます:
 
 ```ts
 interface Book {
@@ -260,7 +260,7 @@ const Component = defineComponent({
 ```
 
 ::: warning
-TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validators` と、オブジェクトや配列の `default` 値に注意する必要があります:
+TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validator` と、オブジェクトや配列の `default` 値に注意する必要があります:
 :::
 
 ```ts
