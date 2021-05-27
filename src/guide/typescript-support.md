@@ -131,7 +131,7 @@ const Component = defineComponent({
 })
 ```
 
-複雑な型や推論の場合、[タイプアサーション (type assertion)](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) を使用してキャストすることができます:
+複雑な型や推論の場合、[タイプアサーション (type assertion)](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) を使用してキャストすることができます:
 
 ```ts
 interface Book {
@@ -221,10 +221,10 @@ const Component = defineComponent({
     // セッターを持つ算出プロパティのでは、ゲッターにアノテーションが必要です
     greetingUppercased: {
       get(): string {
-        return this.greeting.toUpperCase();
+        return this.greeting.toUpperCase()
       },
       set(newValue: string) {
-        this.message = newValue.toUpperCase();
+        this.message = newValue.toUpperCase()
       }
     }
   }
@@ -260,7 +260,7 @@ const Component = defineComponent({
 ```
 
 ::: warning
-TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validators` と、オブジェクトや配列の `default` 値に注意する必要があります:
+TypeScript には、関数式の型推論に [設計上の制限](https://github.com/microsoft/TypeScript/issues/38845) があるため、 `validator` と、オブジェクトや配列の `default` 値に注意する必要があります:
 :::
 
 ```ts
@@ -297,7 +297,7 @@ const Component = defineComponent({
 })
 ```
 
-### emits にアノテーションをつける
+### Emit にアノテーションをつける
 
 発行されたイベントのペイロードにアノテーションをつけることができます。また、すべての宣言されていない発行されたイベントは、呼び出されたときに型エラーが発生します:
 
@@ -371,6 +371,77 @@ year.value = 2020 // OKです!
 ::: tip Note
 ジェネリックの型が不明の場合、`ref` を `Ref<T>` にキャストすることを推奨します。
 :::
+
+### テンプレート参照を型定義する
+
+ときどき、子コンポーネントのパブリックメソッドを呼び出すために、テンプレート参照にアノテーションをつける必要があるかもしれません。例えば、 `MyModal` という子コンポーネントにモーダルを開くメソッドがあるとします:
+
+```ts
+import { defineComponent, ref } from 'vue'
+
+const MyModal = defineComponent({
+  setup() {
+    const isContentShown = ref(false)
+    const open = () => (isContentShown.value = true)
+
+    return {
+      isContentShown,
+      open
+    }
+  }
+})
+```
+
+この親コンポーネントからテンプレート参照を介して、このメソッドを呼び出したいです:
+
+```ts
+import { defineComponent, ref } from 'vue'
+
+const MyModal = defineComponent({
+  setup() {
+    const isContentShown = ref(false)
+    const open = () => (isContentShown.value = true)
+
+    return {
+      isContentShown,
+      open
+    }
+  }
+})
+
+const app = defineComponent({
+  components: {
+    MyModal
+  },
+  template: `
+    <button @click="openModal">Open from parent</button>
+    <my-modal ref="modal" />
+  `,
+  setup() {
+    const modal = ref()
+    const openModal = () => {
+      modal.value.open()
+    }
+
+    return { modal, openModal }
+  }
+})
+```
+
+この方法でも動作しますが、 `MyModal` とその利用可能なメソッドについての型情報がありません。これを解決するためには、 ref を作成するときに `InstanceType` を使う必要があります:
+
+```ts
+setup() {
+  const modal = ref<InstanceType<typeof MyModal>>()
+  const openModal = () => {
+    modal.value?.open()
+  }
+
+  return { modal, openModal }
+}
+```
+
+[オプショナルチェイニング](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) や他の方法を使って、 `modal.value` が未定義でないことの確認が必要であることに注意してください。
 
 ### `reactive` を型定義する
 
