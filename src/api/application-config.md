@@ -1,6 +1,6 @@
 # アプリケーション構成
 
-Every Vue application exposes a `config` object that contains the configuration settings for that application:
+すべての Vue アプリケーションは、そのアプリケーションの構成設定を含む `config` オブジェクトを公開します:
 
 ```js
 const app = createApp({})
@@ -8,7 +8,7 @@ const app = createApp({})
 console.log(app.config)
 ```
 
-You can modify its properties, listed below, before mounting your application.
+アプリケーションをマウントする前に、以下に列挙したプロパティを変更することができます。
 
 ## errorHandler
 
@@ -66,7 +66,7 @@ app.component('child-component', {
 
 アプリケーション内のあらゆるコンポーネントのインスタンスからアクセスできるグローバルなプロパティを追加します。名称が競合した場合、コンポーネントのプロパティが優先されます。
 
-これは、 Vue 2.x における Vue.prototype` 拡張を置き換えることができます:
+これは、 Vue 2.x における `Vue.prototype` 拡張を置き換えることができます:
 
 ```js
 // Before
@@ -95,7 +95,7 @@ Vue の外部にて定義された(Web Components API を利用した場合な�
 > この関数では、全てのネイティブの HTML ならびに SVG のタグをマッチさせる必要はありません。Vue のパーサが自動的にこのチェックを行います。
 
 ::: tip Important
-This config option is only respected when using the runtime compiler. If you are using the runtime-only build, `isCustomElement` must be passed to `@vue/compiler-dom` in the build setup instead - for example, via the [`compilerOptions` option in vue-loader](https://vue-loader.vuejs.org/options.html#compileroptions).
+この設定オプションは、ランタイムコンパイラを使うときにのみ尊重されます。ランタイム限定ビルドを使う場合、 `isCustomElement` は代わりにビルドの設定で `@vue/compiler-dom` に渡す必要があります。例えば、 [vue-loader の `compilerOptions` オプション](https://vue-loader.vuejs.org/options.html#compileroptions) を経由して渡します。
 :::
 
 ## optionMergeStrategies
@@ -126,9 +126,9 @@ app.mixin({
 
 カスタムオプションのマージ戦略を定義します。
 
-マージ戦略は、親インスタンスと子インスタンスで定義されたオプションの値をそれぞれ第一引数と第二引数として受け取ります。アプリケーションコンテキストのインスタンスは、第三引数として渡されます。
+マージ戦略は、親インスタンスと子インスタンスで定義されたオプションの値をそれぞれ第 1 引数と第 2 引数として受け取ります。アプリケーションコンテキストのインスタンスは、第 3 引数として渡されます。
 
-- **こちらも:** [Custom Option Merging Strategies](../guide/mixins.html#custom-option-merge-strategies)
+- **参照:** [Custom Option Merging Strategies](../guide/mixins.html#custom-option-merge-strategies)
 
 ## performance
 
