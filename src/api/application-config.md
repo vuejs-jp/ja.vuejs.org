@@ -8,20 +8,6 @@ const app = Vue.createApp({})
 app.config = {...}
 ```
 
-## devtools
-
-- **型:** `boolean`
-
-- **デフォルト:** `true` (プロダクションビルドでは `false`)
-
-- **使用方法:**
-
-```js
-app.config.devtools = true
-```
-
-[vue-devtools](https://github.com/vuejs/vue-devtools) による検査を許可するかどうかを設定します。このオプションのデフォルト値は、development ビルドでは `true` に、プロダクションビルドでは `false` となります。true にすることで、プロダクションビルドで検査を有効にできます。
-
 ## errorHandler
 
 - **型:** `Function`
