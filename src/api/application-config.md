@@ -1,14 +1,14 @@
 # アプリケーション構成
 
-`config` は、 Vue アプリケーションのグローバル設定を含むオブジェクトです。アプリケーションをマウントする前に、以下のプロパティを変更できます:
+Every Vue application exposes a `config` object that contains the configuration settings for that application:
 
 ```js
 const app = Vue.createApp({})
 
-app.config = {...}
-
-app.mount(...);
+console.log(app.config)
 ```
+
+You can modify its properties, listed below, before mounting your application.
 
 ## errorHandler
 
