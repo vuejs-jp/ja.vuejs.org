@@ -94,6 +94,10 @@ Vue の外部にて定義された(Web Components API を利用した場合な�
 
 > この関数では、全てのネイティブの HTML ならびに SVG のタグをマッチさせる必要はありません。Vue のパーサが自動的にこのチェックを行います。
 
+::: tip Important
+This config option is only respected when using the runtime compiler. If you are using the runtime-only build, `isCustomElement` must be passed to `@vue/compiler-dom` in the build setup instead - for example, via the [`compilerOptions` option in vue-loader](https://vue-loader.vuejs.org/options.html#compileroptions).
+:::
+
 ## optionMergeStrategies
 
 - **型:** `{ [key: string]: Function }`
