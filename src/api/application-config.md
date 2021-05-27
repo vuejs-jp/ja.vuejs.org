@@ -3,7 +3,7 @@
 Every Vue application exposes a `config` object that contains the configuration settings for that application:
 
 ```js
-const app = Vue.createApp({})
+const app = createApp({})
 
 console.log(app.config)
 ```
@@ -73,7 +73,7 @@ app.component('child-component', {
 Vue.prototype.$http = () => {}
 
 // After
-const app = Vue.createApp({})
+const app = createApp({})
 app.config.globalProperties.$http = () => {}
 ```
 
@@ -107,7 +107,7 @@ This config option is only respected when using the runtime compiler. If you are
 - **使用方法:**
 
 ```js
-const app = Vue.createApp({
+const app = createApp({
   mounted() {
     console.log(this.$options.hello)
   }
