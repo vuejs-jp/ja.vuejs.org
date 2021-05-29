@@ -242,6 +242,10 @@ const members = [
     {
       name: 'nagamaaaaachi',
       github: 'Nag729',
+    },
+    {
+      name: 'colorbox',
+      github: 'colorbox',
     }
   ])
 )
