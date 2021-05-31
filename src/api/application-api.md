@@ -303,7 +303,7 @@ setTimeout(() => app.unmount(), 5000)
 
   同じプラグインに対してこのメソッドが複数回呼び出された場合、プラグインは一度だけインストールされます。
 
-- **Example:**
+- **例:**
 
   ```js
   import { createApp } from 'vue'
@@ -319,11 +319,11 @@ setTimeout(() => app.unmount(), 5000)
 
 ## version
 
-- **Usage:**
+- **使用方法:**
 
-  Provides the installed version of Vue as a string. This is especially useful for community [plugins](/guide/plugins.html), where you might use different strategies for different versions.
+  インストールされている Vue のバージョンを文字列で提供します。これはバージョンごとに異なる戦略を使う可能性のあるコミュニティの [プラグイン](/guide/plugins.html) の場合に便利です。
 
-- **Example:**
+- **例:**
 
   ```js
   export default {
@@ -339,4 +339,4 @@ setTimeout(() => app.unmount(), 5000)
   }
   ```
 
-- **See also**: [Global API - version](/api/global-api.html#version)
+- **参照**: [Global API - version](/api/global-api.html#version)
