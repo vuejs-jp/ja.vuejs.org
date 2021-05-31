@@ -261,13 +261,9 @@ app.provide('user', 'administrator')
 
 ## unmount
 
-- **引数:**
-
-  - `{Element | string} rootContainer`
-
 - **使用方法:**
 
-  与えられた引数に合致した DOM 要素のアプリケーションインスタンスのルート要素をアンマウントします。
+  アプリケーションインスタンスのルートコンポーネントをアンマウントします。
 
 - **例:**
 
@@ -285,7 +281,7 @@ const app = createApp({})
 app.mount('#my-app')
 
 // アプリケーションは5秒後にアンマウントされます
-setTimeout(() => app.unmount('#my-app'), 5000)
+setTimeout(() => app.unmount(), 5000)
 ```
 
 ## use
