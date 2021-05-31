@@ -303,4 +303,17 @@ setTimeout(() => app.unmount(), 5000)
 
   同じプラグインに対してこのメソッドが複数回呼び出された場合、プラグインは一度だけインストールされます。
 
+- **Example:**
+
+```js
+import { createApp } from 'vue'
+import MyPlugin from './plugins/MyPlugin'
+
+const app = createApp({})
+const i18nStrings = {
+
+app.use(MyPlugin)
+app.mount('#app')
+```
+
 - **参照:** [Plugins](../guide/plugins.html)
