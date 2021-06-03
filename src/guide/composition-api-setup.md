@@ -48,7 +48,7 @@ setup(props) {
 }
 ```
 
-`title` オプションのプロパティである場合、 `props` から抜けている可能性があります。その場合、 `toRefs` では `title` の ref はつくられません。代わりに `toRef` を使う必要があります:
+`title` が省略可能なプロパティである場合、 `props` から抜けている可能性があります。その場合、 `toRefs` では `title` の ref はつくられません。代わりに `toRef` を使う必要があります:
 
 ```js
 // MyBook.vue
