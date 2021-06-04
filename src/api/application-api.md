@@ -88,6 +88,8 @@ const app = createApp({})
 // 登録
 app.directive('my-directive', {
   // ディレクティブはライフサイクルのセットをもちます:
+  // バインドされた要素の属性やイベントリスナが適用される前に呼び出されます。
+  created() {},
   // バインドされた要素の親コンポーネントがマウントされる前に呼び出されます。
   beforeMount() {},
   // バインドされた要素の親コンポーネントがマウントされた後に呼び出されます。
@@ -189,7 +191,7 @@ el にて受け取った実際の DOM 要素の blueprint を表します。
 
 - **使用方法:**
 
-  渡された DOM 要素に対して、アプリケーションインスタンスのルートコンポーネントをマウントします。
+  与えられた DOM 要素の `innerHTML` は、アプリケーションのルートコンポーネントのレンダリングされたテンプレートに置き換えられます。
 
 - **例:**
 
@@ -259,13 +261,9 @@ app.provide('user', 'administrator')
 
 ## unmount
 
-- **引数:**
-
-  - `{Element | string} rootContainer`
-
 - **使用方法:**
 
-  与えられた引数に合致した DOM 要素のアプリケーションインスタンスのルート要素をアンマウントします。
+  アプリケーションインスタンスのルートコンポーネントをアンマウントします。
 
 - **例:**
 
@@ -283,7 +281,7 @@ const app = createApp({})
 app.mount('#my-app')
 
 // アプリケーションは5秒後にアンマウントされます
-setTimeout(() => app.unmount('#my-app'), 5000)
+setTimeout(() => app.unmount(), 5000)
 ```
 
 ## use
@@ -305,4 +303,40 @@ setTimeout(() => app.unmount('#my-app'), 5000)
 
   同じプラグインに対してこのメソッドが複数回呼び出された場合、プラグインは一度だけインストールされます。
 
+- **例:**
+
+  ```js
+  import { createApp } from 'vue'
+  import MyPlugin from './plugins/MyPlugin'
+
+  const app = createApp({})
+
+  app.use(MyPlugin)
+  app.mount('#app')
+  ```
+
 - **参照:** [Plugins](../guide/plugins.html)
+
+## version
+
+- **使用方法:**
+
+  インストールされている Vue のバージョンを文字列で提供します。これはバージョンごとに異なる戦略を使う可能性のあるコミュニティの [プラグイン](/guide/plugins.html) の場合に便利です。
+
+- **例:**
+
+  ```js
+  export default {
+    install(app) {
+      const version = Number(app.version.split('.')[0])
+
+      if (version < 3) {
+        console.warn('This plugin requires Vue 3')
+      }
+
+      // ...
+    }
+  }
+  ```
+
+- **参照**: [Global API - version](/api/global-api.html#version)
