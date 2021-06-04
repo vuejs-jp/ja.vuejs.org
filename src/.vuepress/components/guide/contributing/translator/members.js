@@ -246,6 +246,10 @@ const members = [
     {
       name: 'colorbox',
       github: 'colorbox',
+    },
+    {
+      name: 'nesso',
+      github: 'nesso-pfl',
     }
   ])
 )
