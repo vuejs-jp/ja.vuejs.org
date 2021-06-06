@@ -59,7 +59,7 @@ const { app, router } = createApp({
 
 ## コード分割
 
-コード分割、またはアプリの一部を遅延読み込みすることは、初期レンダリングのためにブラウザがダウンロードしなければならないアセットのサイズを減らすことができ、大きなバンドルを持つアプリケーションの TTI (time-to-interactive) を大幅に改善できます。重要なのは初期画面で 「必要なものだけ読み込む」ことです。
+コード分割、またはアプリの一部を遅延読み込みすることは、初期レンダリングのためにブラウザがダウンロードしなければならないアセットのサイズを減らすことができ、大きなバンドルを持つアプリケーションの TTI (time-to-interactive) を大幅に改善できます。重要なのは初期画面で「必要なものだけ読み込む」ことです。
 
 Vue Router は、 [遅延読み込みのサポート](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) を提供しており、 [webpack がその時点でコード分割すること](https://webpack.js.org/guides/code-splitting-async/) を可能にしています。必要なのは:
 

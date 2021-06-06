@@ -61,7 +61,7 @@
 </div>
 ```
 
-`v-else` と同様に、`v-else-if` 要素は `v-if` 要素または`v-else-if` 要素の直後になければなりません。
+`v-else` と同様に、`v-else-if` 要素は `v-if` 要素または `v-else-if` 要素の直後になければなりません。
 
 ## `v-show`
 
