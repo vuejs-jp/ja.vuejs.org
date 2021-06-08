@@ -25,7 +25,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: basic" slug="xxGadPZ" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Event handling: basic" slug="xxGadPZ" tab="result" :preview="false" />
 
 ## メソッドイベントハンドラ
 
@@ -62,7 +62,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: with a method" slug="jOPvmaX" tab="js,result" :preview="false" />
+<common-codepen-snippet title="Event handling: with a method" slug="jOPvmaX" tab="result" :preview="false" />
 
 ## インラインメソッドハンドラ
 
@@ -87,7 +87,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: with an inline handler" slug="WNvgjda" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Event handling: with an inline handler" slug="WNvgjda" tab="result" :preview="false" />
 
 時には、インラインステートメントハンドラでオリジナルの DOM イベントを参照したいこともあるでしょう。特別な `$event` 変数を使うことでメソッドに DOM イベントを渡すことができます:
 
