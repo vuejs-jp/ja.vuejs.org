@@ -53,6 +53,7 @@ Vue.directive('highlight', {
 
 ```js
 const MyDirective = {
+  created() {}, // new
   beforeMount(el, binding, vnode, prevVnode) {},
   mounted() {},
   beforeUpdate() {}, // 追加
