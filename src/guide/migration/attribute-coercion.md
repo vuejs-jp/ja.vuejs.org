@@ -60,16 +60,16 @@ badges:
 
 | バインディング式    | `foo` <sup>通常の属性</sup> | `draggable` <sup>列挙された属性</sup> |
 | ------------------- | --------------------------- | ------------------------------------- |
-| `:attr="null"`      | /                           | / <sup>†</sup>                        |
+| `:attr="null"`      | /                           | / <sup>*</sup>                        |
 | `:attr="undefined"` | /                           | /                                     |
 | `:attr="true"`      | `foo="true"`                | `draggable="true"`                    |
-| `:attr="false"`     | `foo="false"` <sup>†</sup>  | `draggable="false"`                   |
-| `:attr="0"`         | `foo="0"`                   | `draggable="0"` <sup>†</sup>          |
-| `attr=""`           | `foo=""`                    | `draggable=""` <sup>†</sup>           |
-| `attr="foo"`        | `foo="foo"`                 | `draggable="foo"` <sup>†</sup>        |
-| `attr`              | `foo=""`                    | `draggable=""` <sup>†</sup>           |
+| `:attr="false"`     | `foo="false"` <sup>*</sup>  | `draggable="false"`                   |
+| `:attr="0"`         | `foo="0"`                   | `draggable="0"` <sup>*</sup>          |
+| `attr=""`           | `foo=""`                    | `draggable=""` <sup>*</sup>           |
+| `attr="foo"`        | `foo="foo"`                 | `draggable="foo"` <sup>*</sup>        |
+| `attr`              | `foo=""`                    | `draggable=""` <sup>*</sup>           |
 
-<small>†: 変更点</small>
+<small>*: 変更点</small>
 
 ブール属性への強制はそのままです。
 
