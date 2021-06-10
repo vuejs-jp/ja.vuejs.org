@@ -228,9 +228,9 @@ data() {
 <div :style="[baseStyles, overridingStyles]"></div>
 ```
 
-### 自動プリフィックス
+### 自動プレフィックス
 
-`:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に適切な接頭辞を検出し、適用されるスタイルに追加します。
+`:style` で [ベンダープレフィックス](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix) が必要な CSS プロパティを使用するとき、Vue は自動的に適切なプレフィックスを追加します。Vue は現在のブラウザでどのスタイルプロパティがサポートされているかを実行時に確認することでこれを行います。ブラウザが特定のプロパティをサポートしていない場合は、様々なプレフィックスのバリエーションがテストされて、サポートされているものを見つけようとします。
 
 ### 複数の値
 
