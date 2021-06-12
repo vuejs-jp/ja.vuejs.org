@@ -1,29 +1,29 @@
-# Debugging in VS Code
+# VS Code でのデバッグ
 
-Every application reaches a point where it's necessary to understand failures, small to large. In this recipe, we explore a few workflows for VS Code users who would like to debug their application in the browser.
+あらゆるアプリケーションは、小さなものから大きなものまでエラーを理解する必要がある段階に到達します。このレシピでは、 VS Code ユーザがブラウザでアプリケーションをデバッグするためのワークフローをいくつか紹介します。
 
-This recipe shows how to debug [Vue CLI](https://github.com/vuejs/vue-cli) applications in VS Code as they run in the browser.
+このレシピでは、 [Vue CLI](https://github.com/vuejs/vue-cli) アプリケーションをブラウザで実行しながら、 VS Code でデバッグする方法を紹介します。
 
-## Prerequisites
+## 必要なもの
 
-Make sure you have VS Code and the browser of your choice installed, and the latest version of the corresponding Debugger extension installed and enabled:
+VS Code と好みのブラウザがインストールされていて、対応するデバッガー拡張機能の最新バージョンがインストールされ、有効化されていることを確認してください:
 
 - [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
 - [Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug)
 
-Install and create a project with the [vue-cli](https://github.com/vuejs/vue-cli), following the instructions in the [Vue CLI Guide](https://cli.vuejs.org/). Change into the newly created application directory and open VS Code.
+[Vue CLI ガイド](https://cli.vuejs.org/) の説明にしたがって、 [vue-cli](https://github.com/vuejs/vue-cli) をインストールしてプロジェクトを作成します。新しく作成したアプリケーションのディレクトリに移動して、 VS Code を開きます。
 
-### Displaying Source Code in the Browser
+### ブラウザにソースコードを表示
 
-Before you can debug your Vue components from VS Code, you need to update the generated Webpack config to build sourcemaps. We do this so that our debugger has a way to map the code within a compressed file back to its position in the original file. This ensures that you can debug an application even after your assets have been optimized by Webpack.
+VS Code で Vue コンポーネントをデバッグできるようにする前に、生成された Webpack の設定を更新してソースマップをビルドする必要があります。これはデバッガが圧縮ファイルの中のコードを、元のファイルの位置に一致させる方法を持つためです。これにより、アセットが Webpack で最適化された後でも、アプリケーションのデバッグが可能になります。
 
-If you use Vue CLI 2, set or update the `devtool` property inside `config/index.js`:
+Vue CLI 2 を使っているならば、`config/index.js` 内の `devtool` プロパティを設定、または更新してください:
 
 ```json
 devtool: 'source-map',
 ```
 
-If you use Vue CLI 3, set or update the `devtool` property inside `vue.config.js`:
+使っているのが Vue CLI 3 ならば、`vue.config.js` 内の `devtool` プロパティを設定、または更新してください:
 
 ```js
 module.exports = {
@@ -33,13 +33,13 @@ module.exports = {
 }
 ```
 
-### Launching the Application from VS Code
+### VS Code からアプリケーションを起動
 
 ::: info
-We're assuming the port to be `8080` here. If it's not the case (for instance, if `8080` has been taken and Vue CLI automatically picks another port for you), just modify the configuration accordingly.
+ここではポートを `8080` と仮定します。そうでない場合（例えば `8080` が使われていて、Vue CLI が自動的に別のポートを選択したとき）は、適宜設定を変更してください。
 :::
 
-Click on the Debugging icon in the Activity Bar to bring up the Debug view, then click on the gear icon to configure a launch.json file, selecting **Chrome/Firefox: Launch** as the environment. Replace content of the generated launch.json with the corresponding configuration:
+アクティビティバーのデバッグアイコンをクリックして、デバッグ表示に切り替え、歯車アイコンをクリックして launch.json ファイルを設定したら、環境として **Chrome/Firefox: Launch** を選択します。生成された launch.json の内容を対応する設定に置き換えます:
 
 ![Add Chrome Configuration](/images/config_add.png)
 
@@ -70,37 +70,37 @@ Click on the Debugging icon in the Activity Bar to bring up the Debug view, then
 }
 ```
 
-## Setting a Breakpoint
+## ブレークポイントの設定
 
-1.  Set a breakpoint in **src/components/HelloWorld.vue** on `line 90` where the `data` function returns a string.
+1.  **src/components/HelloWorld.vue** の `line 90` にある `data` 関数が文字列を返す部分にブレークポイントを設定します。.
 
 ![Breakpoint Renderer](/images/breakpoint_set.png)
 
-2.  Open your favorite terminal at the root folder and serve the app using Vue CLI:
+2.  ルートフォルダでお気に入りのターミナルを開き、Vue CLI を使ってアプリケーションを配信します:
 
 ```
 npm run serve
 ```
 
-3.  Go to the Debug view, select the **'vuejs: chrome/firefox'** configuration, then press F5 or click the green play button.
+3.  デバッグ表示に移動して、**'vuejs: chrome/firefox'** の設定を選択したら、F5 キーを押すか、緑色の再生ボタンをクリックします。
 
-4.  Your breakpoint should now be hit as a new browser instance opens `http://localhost:8080`.
+4.  ブレークポイントに到達すると、新しいブラウザのインスタンスが `http://localhost:8080` を開きます。
 
 ![Breakpoint Hit](/images/breakpoint_hit.png)
 
-## Alternative Patterns
+## 代替パターン
 
-### Vue Devtools
+  ### Vue Devtools
 
-There are other methods of debugging, varying in complexity. The most popular and simple of which is to use the excellent Vue.js devtools [for Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) and [for Firefox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/). Some of the benefits of working with the devtools are that they enable you to live-edit data properties and see the changes reflected immediately. The other major benefit is the ability to do time travel debugging for Vuex.
+もっと複雑なデバッグの方法もあります。最も一般的で単純な方法は、優れた Vue.js devtools [Chrome 向け](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) と [Firefox 向け](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/) を使うことです。Devtools を使うことのいくつかの利点は、データのプロパティを Live Edit（ライブエディット）して、その変更がすぐに反映されることです。その他の主な利点は、Vuex のタイムトラベルデバッグが可能になることです。
 
 ![Devtools Timetravel Debugger](/images/devtools-timetravel.gif)
 
-Please note that if the page uses a production/minified build of Vue.js (such as the standard link from a CDN), devtools inspection is disabled by default so the Vue pane won't show up. If you switch to an unminified version, you may have to give the page a hard refresh to see them.
+Vue.js の本番向け・縮小化ビルド（CDN からの標準的なリンクなど）を使っているページでは、Devtools の検知がデフォルトで無効になっているため、Vue ペインが表示されないことに注意してください。縮小されていないバージョンに切り替えた場合は、それを表示するためにページのハード再読み込みが必要になるかもしれません。
 
-### Simple Debugger Statement
+### 単純な Debugger の記述
 
-The example above has a great workflow. However, there is an alternative option where you can use the [native debugger statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) directly in your code. If you choose to work this way, it's important that you remember to remove the statements when you're done.
+上記の例はすばらしいワークフローを持っています。しかし、[ネイティブの debugger 文](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/debugger) をコードの中で直接使うという別の方法もあります。この方法を選択した場合には、作業が終わったらこの debugger 文を削除することを忘れないようにするのが重要です。
 
 ```vue
 <script>
@@ -119,6 +119,6 @@ export default {
 </script>
 ```
 
-## Acknowledgements
+## 謝辞
 
-This recipe was based on a contribution from [Kenneth Auchenberg](https://twitter.com/auchenberg), [available here](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli).
+このレシピは、[Kenneth Auchenberg](https://twitter.com/auchenberg) 氏からの寄稿を元にしています。[元の記事](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli)。
