@@ -1,10 +1,11 @@
-# Automatic Global Registration of Base Components
+# ベースコンポーネントの自動グローバル登録
 
-## Base Example
+## 基本的な例
 
-Many of your components will be relatively generic, possibly only wrapping an element like an input or a button. We sometimes refer to these as [base components](../style-guide/#base-component-names-strongly-recommended) and they tend to be used very frequently across your components.
+多くのコンポーネントは割と一般的なもので、あるいは入力やボタンをラップするだけのものかもしれません。わたしたちは、このようなコンポーネントを [ベースコンポーネント](../style-guide/#base-component-names-strongly-recommended) と呼ぶことがあって、コンポーネント全体に渡ってとても頻繁に使われる傾向があります。
 
-The result is that many components may include long lists of base components:
+
+その結果、多くのコンポーネントはベースコンポーネントの長いリストに含まれていることがあります:
 
 ```js
 import BaseButton from './BaseButton.vue'
@@ -19,7 +20,7 @@ export default {
 }
 ```
 
-Just to support relatively little markup in a template:
+テンプレート内の比較的小さなマークアップをサポートするためだけのものです:
 
 ```html
 <BaseInput v-model="searchText" @keydown.enter="search" />
@@ -28,7 +29,7 @@ Just to support relatively little markup in a template:
 </BaseButton>
 ```
 
-Fortunately, if you're using webpack (or [Vue CLI](https://github.com/vuejs/vue-cli), which uses webpack internally), you can use `require.context` to globally register only these very common base components. Here's an example of the code you might use to globally import base components in your app's entry file (e.g. `src/main.js`):
+幸いなことに、webpack（または [Vue CLI](https://github.com/vuejs/vue-cli)、これは内部的に webpack を使っています）を使う場合、これらのとても汎用的なベースコンポーネントだけをグローバルに登録するのに `require.context` を使うことができます。このコード例は、アプリケーションのエントリファイル（例えば `src/main.js`）でベースコンポーネントをグローバルにインポートするのに使えるでしょう:
 
 ```js
 import { createApp } from 'vue'
@@ -39,22 +40,22 @@ import App from './App.vue'
 const app = createApp(App)
 
 const requireComponent = require.context(
-  // The relative path of the components folder
+  // コンポーネントフォルダの相対パス
   './components',
-  // Whether or not to look in subfolders
+  // サブフォルダ内を探すかどうか
   false,
-  // The regular expression used to match base component filenames
+  // ベースコンポーネントのファイル名とマッチさせるための正規表現
   /Base[A-Z]\w+\.(vue|js)$/
 )
 
 requireComponent.keys().forEach(fileName => {
-  // Get component config
+  // コンポーネント設定の取得
   const componentConfig = requireComponent(fileName)
 
-  // Get PascalCase name of component
+  // コンポーネントのパスカルケースでの名前を取得
   const componentName = upperFirst(
     camelCase(
-      // Gets the file name regardless of folder depth
+      // フォルダの深さに関わらずファイル名を取得
       fileName
         .split('/')
         .pop()
@@ -64,9 +65,9 @@ requireComponent.keys().forEach(fileName => {
 
   app.component(
     componentName,
-    // Look for the component options on `.default`, which will
-    // exist if the component was exported with `export default`,
-    // otherwise fall back to module's root.
+    // `.default` にあるコンポーネントのオプションを探す。
+    // コンポーネントが `export default` でエクスポートされていれば存在して、
+    // そうでなければモジュールのルートのフォールバックする。
     componentConfig.default || componentConfig
   )
 })
