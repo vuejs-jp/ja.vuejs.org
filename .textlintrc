@@ -5,5 +5,12 @@
         "strict": false
       }
     }
+  },
+  "filters": {
+    "allowlist": {
+      "allow": [
+        "->"
+      ]
+    }
   }
 }
