@@ -1,5 +1,9 @@
 {
   "rules": {
-    "preset-vuejs-jp": true
+    "preset-vuejs-jp": {
+      "no-mix-dearu-desumasu": {
+        "strict": false
+      }
+    }
   }
 }
