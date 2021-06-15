@@ -96,6 +96,8 @@ Vue では、ブラウザで普遍的に利用できるようになる前のネ�
     document.createElement('button', { is: 'plastic-button' })
     ```
 
+[移行ビルドのフラグ: `COMPILER_IS_ON_ELEMENT`](migration-build.html#compat-の設定)
+
 ## `v-is` は In-DOM テンプレートパースのための回避策
 
 > 注: このセクションは、Vue テンプレートがページの HTML に直接記述されている場合にのみ影響します。

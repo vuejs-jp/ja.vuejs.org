@@ -63,3 +63,5 @@ this.$slots.header()
 
 1. 3.x の `this.$scopedSlots` の出現箇所をすべて `this.$slots` に置き換えます。
 2. `this.$slots.mySlot` のすべての出現箇所を `this.$slots.mySlot()` に置き換えます。
+
+[移行ビルドのフラグ: `INSTANCE_SCOPED_SLOTS`](migration-build.html#compat-の設定)

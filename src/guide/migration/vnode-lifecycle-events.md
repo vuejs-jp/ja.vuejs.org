@@ -43,6 +43,8 @@ Vue 3 では、イベント名のプレフィックスに `vnode-` がついて�
 
 ほとんどの場合、プレフィックスの変更だけで済みます。ライフサイクルフックの `beforeDestroy` と `destroyed` は、それぞれ `beforeUnmount` と `unmounted` に名前が変更され、対応するイベント名も更新する必要があります。
 
+[移行ビルドのフラグ: `INSTANCE_EVENT_HOOKS`](migration-build.html#compat-の設定)
+
 ## 参照
 
 - [移行ガイド - イベント API](/guide/migration/events-api.html)

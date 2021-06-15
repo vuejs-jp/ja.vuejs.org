@@ -85,6 +85,7 @@ const app = createApp({})
 | Vue.mixin                  | app.mixin                                                                                        |
 | Vue.use                    | app.use ([以下を参照](#a-note-for-plugin-authors))                                               |
 | Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |
+| Vue.extend                 | _削除_ ([以下を参照](#vue-extend-replaced-by-definecomponent))                                   |
 
 グローバルに振る舞いを変更しないその他のグローバル API は [グローバル API の Treeshaking](./global-api-treeshaking.html) にあるように、名前付きエクスポートになりました。
 
@@ -93,6 +94,8 @@ const app = createApp({})
 Vue 3.x では "use production build" のヒントは、"dev + full build" (ランタイムコンパイラを含み、警告があるビルド) を使用しているときにのみ表示されます。
 
 ES Modules ビルドでは、モジュールバンドラーと一緒に使用されていることと、ほとんどの場合 CLI やボイラープレートで本番環境が適切に設定されているため、このヒントは表示されなくなりました。
+
+[移行ビルドのフラグ: `CONFIG_PRODUCTION_TIP`](migration-build.html#compat-の設定)
 
 ### `config.ignoredElements` は `config.isCustomElement` に変更
 
@@ -115,6 +118,8 @@ Vue 3 では、要素がコンポーネントであるかどうかのチェッ�
 - これは、Vue CLI 設定の新しいトップレベルのオプションになります。
 :::
 
+[移行ビルドのフラグ: `CONFIG_IGNORED_ELEMENTS`](migration-build.html#compat-の設定)
+
 ### `Vue.prototype` は `config.globalProperties` と置換
 
 Vue 2 では、すべてのコンポーネントでアクセス可能なプロパティを追加するために、 `Vue.prototype` がよく使われていました。
@@ -133,6 +138,8 @@ app.config.globalProperties.$http = () => {}
 ```
 
 また `globalProperties` の代わりに `provide` ([後述](#provide-inject)) を使うことも考えられます。
+
+[移行ビルドのフラグ: `GLOBAL_PROTOTYPE`](migration-build.html#compat-の設定)
 
 ### プラグイン作者へのノート
 
@@ -186,6 +193,8 @@ app.directive('focus', {
 // "focus" ディレクティブを持つようになりました。
 app.mount('#app')
 ```
+
+[移行ビルドのフラグ: `GLOBAL_MOUNT`](migration-build.html#compat-の設定)
 
 ## Provide / Inject
 

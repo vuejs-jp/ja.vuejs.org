@@ -79,3 +79,5 @@ export default {
 これは Vue 2 と同じような Event Emitter API を提供します。
 
 これらのメソッドは、Vue 3 の将来の互換ビルドでもサポートされる可能性があります。
+
+[移行ビルドのフラグ: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-の設定)

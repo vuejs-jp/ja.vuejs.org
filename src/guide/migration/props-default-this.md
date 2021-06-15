@@ -22,7 +22,7 @@ export default {
     theme: {
       default (props) {
         // `props` 引数はコンポーネントに渡される生の値で、
-        // 型やデフォルトの強制より前のものです。 
+        // 型やデフォルトの強制より前のものです。
         // また、`inject` を使用して注入されたプロパティにアクセスすることもできます。
         return inject('theme', 'default-theme')
       }
@@ -30,3 +30,7 @@ export default {
   }
 }
 ```
+
+## 移行の戦略
+
+[移行ビルドのフラグ: `PROPS_DEFAULT_THIS`](migration-build.html#compat-の設定)

@@ -125,7 +125,7 @@ badges:
       <td><code>"false"</code></td>
     </tr>
     <tr>
-      <td rowspan="2">その他の非ブール属性<br><small>例えば 
+      <td rowspan="2">その他の非ブール属性<br><small>例えば
       <code>aria-checked</code>、<code>tabindex</code>、<code>alt</code>など</small></td>
       <td><code>undefined</code>, <code>null</code>, <code>false</code></td>
       <td><code>undefined</code>, <code>null</code></td>
@@ -138,3 +138,8 @@ badges:
     </tr>
   </tbody>
 </table>
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `ATTR_FALSE_VALUE`
+- `ATTR_ENUMERATED_COERSION`
