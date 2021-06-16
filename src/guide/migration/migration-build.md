@@ -18,9 +18,9 @@
 
 - Vue 2 の内部 API または文書化されていない動作に頼った依存関係。最も一般的なケースは、 `VNodes` プライベートプロパティの使用です。[Vuetify](https://vuetifyjs.com/en/)、[Quasar](https://quasar.dev/)、[ElementUI](https://element.eleme.io/#/en-US)などのコンポーネントライブラリに依存している場合は、Vue 3 と互換性のあるバージョンを待つことをお勧めします。
 
-- Internet Explorer 11 のサポート。[Vue 3 は公式に IE11 サポートの計画を中止しました](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md)。まだ IE11 以下をサポートする必要がある場合は、Vue 2 のままにしておく必要があります。
+- Internet Explorer 11 のサポート: [Vue 3 は公式に IE11 サポートの計画を中止しました](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md)。まだ IE11 以下をサポートする必要がある場合は、Vue 2 のままにしておく必要があります。
 
-- サーバーサイドレンダリング。移行ビルドは SSR にも使用できますが、カスタム SSR セットアップの移行はもっと複雑です。一般的な対処法は、`vue-server-renderer` を[`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer)に置き換えることです。Vue 3 ではバンドルレンダラが提供されなくなったため、Vue 3 の SSR を[Vite](https://vitejs.dev/guide/ssr.html)で使用することが推奨されています。また、[Nuxt.js](https://nuxtjs.org/)を使用している場合は、Nuxt 3 を待ったほうがよいでしょう。
+- サーバーサイドレンダリング: 移行ビルドは SSR にも使用できますが、カスタム SSR セットアップの移行はもっと複雑です。一般的な対処法は、`vue-server-renderer` を[`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer)に置き換えることです。Vue 3 ではバンドルレンダラが提供されなくなったため、Vue 3 の SSR を[Vite](https://vitejs.dev/guide/ssr.html)で使用することが推奨されています。また、[Nuxt.js](https://nuxtjs.org/)を使用している場合は、Nuxt 3 を待ったほうがよいでしょう。
 
 ### 期待すること
 
@@ -44,7 +44,7 @@
 
 1. 必要に応じてツールをアップグレードします。
 
-   - カスタム webpack セットアップを使用している場合。`vue-loader` を `^16.0.0` にアップグレードします。
+   - カスタム webpack セットアップを使用している場合: `vue-loader` を `^16.0.0` にアップグレードします。
    - `vue-cli` を使用している場合: `vue upgrade` で最新の `@vue/cli-service` にアップグレードします。
    - (代替手段) [Vite](https://vitejs.dev/) + [veite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)に移行します。[[コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/565b948919eb58f22a32afca7e321b490cb3b074)]
 
