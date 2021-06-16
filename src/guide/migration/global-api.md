@@ -147,6 +147,7 @@ Vue 2.x では、`Vue.extend`を使って、コンポーネントのオプショ
 
 ```js
 // 以前 - Vue 2
+
 // コンストラクタの作成
 const Profile = Vue.extend({
   template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
@@ -174,6 +175,7 @@ const Profile = {
     }
   }
 }
+
 Vue.createApp(Profile).mount('#mount-point')
 ```
 
