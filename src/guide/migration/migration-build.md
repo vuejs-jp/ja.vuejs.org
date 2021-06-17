@@ -184,11 +184,11 @@
 
 9. [`vuex-router` を v4 にアップグレード](https://next.router.vuejs.org/guide/migration/index.html)します。 `vuex-router-sync` も使用している場合は、ストアゲッターで置き換えることができます。
 
-   アップグレード後、`<router-view>` で `<transition>` や `<keep-alive>` を使用するには、新しい [scoped-slot ベースのシンタックス](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition) を使用する必要があります。
+   アップグレード後、`<router-view>` で `<transition>` や `<keep-alive>` を使用するには、新しい [scoped-slot ベースの構文](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition) を使用する必要があります。
 
    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/758961e73ac4089890079d4ce14996741cf9344b)
 
-10. 個々の警告を狙い撃ちします。一部の機能は、Vue 2 と Vue 3 の間で矛盾した動作をすることに注意してください。例えば、レンダリング関数 API や、関数コンポーネントと非同期コンポーネントの変更などがあります。アプリケーションの他の部分に影響を与えずに Vue 3 の API に移行するには、[`compatConfig` オプション](#コンポーネントごとの設定)を使用して、コンポーネントごとに Vue 3 の動作をオプトインすることができます。
+10. 個々の警告を取り除きます。一部の機能は、Vue 2 と Vue 3 の間で矛盾した動作をすることに注意してください。例えば、Render 関数 API や、関数型コンポーネントと非同期コンポーネントの変更などがあります。アプリケーションの他の部分に影響を与えずに Vue 3 の API に移行するには、[`compatConfig` オプション](#コンポーネントごとの設定)を使用して、コンポーネントごとに Vue 3 の動作をオプトインすることができます。
 
     [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/d0c7d3ae789be71b8fd56ce79cb4cb1f921f893b)
 
@@ -200,7 +200,7 @@
 
 ### グローバル設定
 
-compat の機能は個別に無効にすることができます。
+compat の機能は個別に無効にすることができます:
 
 ```js
 import { configureCompat } from 'vue'
@@ -212,12 +212,13 @@ configureCompat({
 })
 ```
 
-また、アプリケーション全体をデフォルトで Vue 3 の動作にして、特定の compat 機能だけを有効にすることもできます。
+また、アプリケーション全体をデフォルトで Vue 3 の動作にして、特定の compat 機能だけを有効にすることもできます:
 
 ```js
 import { configureCompat } from 'vue'
 
-// すべてを Vue 3 の動作にデフォルトし、特定の機能のみ compat を有効にする
+// すべてを Vue 3 の動作にデフォルト化して、
+// 特定の機能のみ compat を有効にする
 configureCompat({
   MODE: 3,
   FEATURE_ID_A: true,
@@ -227,7 +228,7 @@ configureCompat({
 
 ### コンポーネントごとの設定
 
-コンポーネントは `compatConfig` オプションを使用することができます。このオプションには、グローバルの `configureCompat` メソッドと同じオプションが指定できます。
+コンポーネントは `compatConfig` オプションを使用することができます。このオプションには、グローバルの `configureCompat` メソッドと同じオプションが指定できます:
 
 ```js
 export default {
@@ -241,7 +242,7 @@ export default {
 
 ### コンパイラ固有の設定
 
-`COMPILER_` で始まる機能は、コンパイラ固有のものです。フルビルド(ブラウザ内コンパイラ付き)を使用している場合は、実行時に設定することができます。しかし、ビルドセットアップを使用している場合は、代わりにビルドコンフィグの `compilerOptions` で設定する必要があります(上記のコンフィグ例を参照)。
+`COMPILER_` で始まる機能は、コンパイラ固有のものです。完全なビルド(ブラウザ内コンパイラ付き)を使用している場合は、実行時に設定することができます。しかし、ビルドセットアップを使用している場合は、代わりにビルド設定の `compilerOptions` で設定する必要があります(上記の設定例を参照)。
 
 ## 機能リファレンス
 
@@ -297,7 +298,7 @@ export default {
 | CONFIG_WHITESPACE            | ✔    | Vue 3 では、ホワイトスペースのデフォルトは `"condense"` になりました                                   |                                                                                            |
 | INSTANCE_SET                 | ✔    | `vm.$set` は削除されました(不要になりました)                                                           |                                                                                            |
 | INSTANCE_DELETE              | ✔    | `vm.$delete` は削除されました(不要になりました)                                                        |                                                                                            |
-| INSTANCE_EVENT_EMITTER       | ✔    | `vm.$on`, `vm.$off`, `vm.$once` は削除されました                                                       | [link](/guide/migration/events-api.html)                                                   |
+| INSTANCE_EVENT_EMITTER       | ✔    | `vm.$on`、`vm.$off`、`vm.$once` は削除されました                                                       | [link](/guide/migration/events-api.html)                                                   |
 | INSTANCE_EVENT_HOOKS         | ✔    | インスタンスが `hook:x` イベントを発行しなくなりました。                                               | [link](/guide/migration/vnode-lifecycle-events.html)                                       |
 | INSTANCE_CHILDREN            | ✔    | `vm.$children` は削除されました                                                                        | [link](/guide/migration/children.html)                                                     |
 | INSTANCE_LISTENERS           | ✔    | `vm.$listeners` は削除されました                                                                       | [link](/guide/migration/listeners-removed.html)                                            |
@@ -312,17 +313,17 @@ export default {
 | V_ON_KEYCODE_MODIFIER        | ✔    | `v-on` が keyCode 修飾子をサポートしなくなりました                                                     | [link](/guide/migration/keycode-modifiers.html)                                            |
 | CUSTOM_DIR                   | ✔    | カスタムディレクティブのフック名が変更されました                                                       | [link](/guide/migration/custom-directives.html)                                            |
 | ATTR_FALSE_VALUE             | ✔    | バインディングの値が真偽値の `false` の場合、属性を削除しないようになりました                          | [link](/guide/migration/attribute-coercion.html)                                           |
-| ATTR_ENUMERATED_COERSION     | ✔    | 特殊なケースの列挙型属性は廃止されました                                                               | [link](/guide/migration/attribute-coercion.html)                                           |
+| ATTR_ENUMERATED_COERSION     | ✔    | 特殊なケースの列挙された属性は廃止されました                                                           | [link](/guide/migration/attribute-coercion.html)                                           |
 | TRANSITION_GROUP_ROOT        | ✔    | `<transition-group>` は、デフォルトでルート要素をレンダリングしなくなりました                          | [link](/guide/migration/transition-group.html)                                             |
 | COMPONENT_ASYNC              | ✔    | 非同期コンポーネントの API が変更されました(`defineAsyncComponent` が必要になりました)                 | [link](/guide/migration/async-components.html)                                             |
-| COMPONENT_FUNCTIONAL         | ✔    | 関数コンポーネントの API が変更されました(プレーンな関数であることが必須になりました)                  | [link](/guide/migration/functional-components.html)                                        |
+| COMPONENT_FUNCTIONAL         | ✔    | 関数型コンポーネントの API が変更されました(プレーンな関数であることが必須になりました)                | [link](/guide/migration/functional-components.html)                                        |
 | COMPONENT_V_MODEL            | ✔    | コンポーネントの v-model が再構築されました                                                            | [link](/guide/migration/v-model.html)                                                      |
-| RENDER_FUNCTION              | ✔    | レンダリング関数の API が変更されました                                                                | [link](/guide/migration/render-function-api.html)                                          |
-| FILTERS                      | ✔    | Filters は削除されました(このオプションは、ランタイムのフィルタ API にのみ影響します)                  | [link](/guide/migration/filters.html)                                                      |
+| RENDER_FUNCTION              | ✔    | Render 関数の API が変更されました                                                                     | [link](/guide/migration/render-function-api.html)                                          |
+| FILTERS                      | ✔    | フィルタは削除されました(このオプションは、ランタイムのフィルタ API にのみ影響します)                  | [link](/guide/migration/filters.html)                                                      |
 | COMPILER_IS_ON_ELEMENT       | ✔    | `is` の使用は `<component>` のみに制限されるようになりました                                           | [link](/guide/migration/custom-elements-interop.html)                                      |
 | COMPILER_V_BIND_SYNC         | ✔    | `v-bind.sync` は `v-model`に置き換えられ、引数を持つようになりました                                   | [link](/guide/migration/v-model.html)                                                      |
 | COMPILER_V_BIND_PROP         | ✔    | `v-bind.prop` 修飾子は削除されました                                                                   |                                                                                            |
-| COMPILER_V_BIND_OBJECT_ORDER | ✔    | `v-bind="object"` はオーダーセンシティブになりました                                                   | [link](/guide/migration/v-bind.html)                                                       |
+| COMPILER_V_BIND_OBJECT_ORDER | ✔    | `v-bind="object"` は順番に注意が必要になりました                                                       | [link](/guide/migration/v-bind.html)                                                       |
 | COMPILER_V_ON_NATIVE         | ✔    | `v-on.native` 修飾子は削除されました                                                                   | [link](/guide/migration/v-on-native-modifier-removed.html)                                 |
 | COMPILER_V_FOR_REF           | ✔    | `v-for` 内の `ref`(コンパイラサポート)                                                                 |                                                                                            |
 | COMPILER_NATIVE_TEMPLATE     | ✔    | 特別なディレクティブを持たない `<template>` がネイティブな要素としてレンダリングされるようになりました |                                                                                            |
