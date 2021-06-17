@@ -22,6 +22,9 @@
 | `errorCaptured`   | `onErrorCaptured`   |
 | `renderTracked`   | `onRenderTracked`   |
 | `renderTriggered` | `onRenderTriggered` |
+| `activated`       | `onActivated`       |
+| `deactivated`     | `onDeactivated`     |
+
 
 :::tip
 `setup` は `beforeCreate` と `created` のライフサイクルで実行されるため、これらのフックを明示的に定義する必要はありません。言い換えれば、これらのフック内のコードは、 `setup` 内に直接書くべきです。
