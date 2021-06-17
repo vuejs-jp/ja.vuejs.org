@@ -102,5 +102,5 @@ mounted(el, binding, vnode) {
 ```
 
 :::warning
-[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がログ出力されます。
+[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、カスタムディレクティブは無視され、警告がログ出力されます。
 :::
