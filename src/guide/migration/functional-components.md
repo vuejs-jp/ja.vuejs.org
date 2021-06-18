@@ -117,3 +117,4 @@ export default {
 
 - [移行: Render 関数](/guide/migration/render-function-api.html)
 - [ガイド: Render 関数](/guide/render-function.html)
+- [移行ビルドのフラグ: `COMPONENT_FUNCTIONAL`](migration-build.html#compat-の設定)

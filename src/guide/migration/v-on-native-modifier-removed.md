@@ -49,6 +49,8 @@ badges:
 - `.native` 修飾子のすべてのインスタンスを削除します。
 - すべてのコンポーネントが、 `emits` オプションでイベントを記録するようにします。
 
+[移行ビルドのフラグ: `COMPILER_V_ON_NATIVE`](migration-build.html#compat-の設定)
+
 ## 参照
 
 - [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md#v-on-listener-fallthrough)

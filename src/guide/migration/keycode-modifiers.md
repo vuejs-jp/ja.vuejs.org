@@ -54,3 +54,8 @@ Vue.config.keyCodes = {
 ## 移行の戦略
 
 キーコードを利用している場合は、ケバブケースでの命名に変更することを推奨します。
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `CONFIG_KEY_CODES`
+- `V_ON_KEYCODE_MODIFIER`
