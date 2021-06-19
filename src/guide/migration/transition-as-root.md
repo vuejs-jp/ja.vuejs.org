@@ -3,15 +3,15 @@ badges:
   - breaking
 ---
 
-# Transition as Root <MigrationBadges :badges="$frontmatter.badges" />
+# ルートしてのトランジション <MigrationBadges :badges="$frontmatter.badges" />
 
-## Overview
+## 概要
 
-Using a `<transition>` as a component's root will no longer trigger transitions when the component is toggled from the outside.
+コンポーネントのルートに `<transition>` を使うとき、外部からコンポーネントがトグルされても、トランジションをトリガーしなくなりました。
 
-## 2.x Behavior
+## 2.x での挙動
 
-In Vue 2, it was possible to trigger a transition from outside a component by using a `<transition>` as the component's root:
+Vue 2 では、コンポーネントのルートに `<transition>` を使うことで、コンポーネントの外部からトランジションをトリガーすることができました:
 
 ```html
 <!-- modal component -->
@@ -27,15 +27,15 @@ In Vue 2, it was possible to trigger a transition from outside a component by us
 <modal v-if="showModal">hello</modal>
 ```
 
-Toggling the value of `showModal` would trigger a transition inside the modal component.
+`showModal` の値をトグルすると、モーダルコンポーネントの内部でトランジションをトリガーしました。
 
-This worked by accident, not by design. A `<transition>` is supposed to be triggered by changes to its children, not by toggling the `<transition>` itself.
+これは設計にはなく、偶然に動きました。`<transition>` は `<transition>` 自身をトグルするのではなく、その子の変更によってトリガーされるようになっています。
 
-This quirk has now been removed.
+この癖は現在では取り除かれています。
 
-## Migration Strategy
+## 移行の戦略
 
-A similar effect can be achieved by passing a prop to the component instead:
+似たような効果は、代わりにコンポーネントにプロパティを渡すことでも得られます:
 
 ```vue
 <template>
@@ -55,7 +55,7 @@ export default {
 <modal :show="showModal">hello</modal>
 ```
 
-## See also
+## 参照
 
-- [Some transition classes got a rename](/guide/migration/transition.html)
-- [`<TransitionGroup>` now renders no wrapper element by default](/guide/migration/transition-group.html)
+- [トランジションクラスの変更](/guide/migration/transition.html)
+- [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
