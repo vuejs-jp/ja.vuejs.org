@@ -2,7 +2,7 @@
 
 ## 公式の Flux ライクな実装
 
-大規模なアプリケーションは、たくさんのコンポーネント上に複数の状態が散らばっていることや、それらのコンポーネント間の相互作用が原因となって、複雑になりがちです。この問題を解消するために、Vue は Elm に触発された状態管理ライブラリの [Vuex](https://next.vuex.vuejs.org/) を提供しています。これは [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
+大規模なアプリケーションは、たくさんのコンポーネント上に複数の状態が散らばっていることや、それらのコンポーネント間の相互作用が原因となって、複雑になりがちです。この問題を解消するために、Vue は Elm に触発された状態管理ライブラリの [Vuex](https://next.vuex.vuejs.org/) を提供しています。これは [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/legacy/media/demo.gif)を提供します。
 
 ### React 開発者向けの情報
 

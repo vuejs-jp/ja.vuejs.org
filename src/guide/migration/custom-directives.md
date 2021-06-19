@@ -37,7 +37,6 @@ Vue.directive('highlight', {
 
 ## 3.x での構文
 
-
 ただし、Vue 3 では、カスタムディレクティブ用のよりまとまりのある API を作成しました。Vue 2 では、似たようなイベントにフックしているにもかかわらず、コンポーネントのライフサイクルメソッドとは大きく異なります。これらを次のように統合しました。
 
 - **created** - 追加されました！これは、要素の属性やイベントリスナーが適用される前に呼び出されます。
@@ -53,7 +52,8 @@ Vue.directive('highlight', {
 
 ```js
 const MyDirective = {
-  beforeMount(el, binding, vnode, prevVnode) {},
+  created(el, binding, vnode, prevVnode) {}, // new
+  beforeMount() {},
   mounted() {},
   beforeUpdate() {}, // 追加
   updated() {},
@@ -101,5 +101,9 @@ mounted(el, binding, vnode) {
 ```
 
 :::warning
-[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がログ出力されます。
+[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、カスタムディレクティブは無視され、警告がログ出力されます。
 :::
+
+## 移行の戦略
+
+[移行ビルドのフラグ: `CUSTOM_DIR`](migration-build.html#compat-の設定)

@@ -88,6 +88,9 @@ app.mount('#app')
   </div>
 </body>
 ```
+## 移行の戦略
+
+[移行ビルドのフラグ: `GLOBAL_MOUNT_CONTAINER`](migration-build.html#compat-の設定)
 
 ## 参照
 

@@ -60,6 +60,8 @@ export default {
 
 `inheritAttrs: false` を使用しているコンポーネントでは、スタイルの適用が意図したとおりに動作することを確認してください。もし以前に `class` や `style` の特別な動作に依存していた場合、これらの属性が別の要素に適用されている可能性があるため、一部の見た目が崩れている可能性があります。
 
+[移行ビルドのフラグ: `INSTANCE_ATTRS_CLASS_STYLE`](migration-build.html#compat-の設定)
+
 ## 参照
 
 - [関連する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0031-attr-fallthrough.md)

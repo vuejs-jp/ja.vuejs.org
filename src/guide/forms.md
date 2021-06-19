@@ -1,5 +1,7 @@
 # フォーム入力バインディング
 
+<VideoLesson href="https://vueschool.io/lessons/user-inputs-vue-devtools-in-vue-3?friend=vuejs" title="Learn how to handle form inputs on Vue School">Learn how to work with form inputs with a free Vue School lesson</VideoLesson>
+
 ## 基本的な使い方
 
 form の input 要素や textarea 要素、 select 要素に双方向データバインディングを付与するためには、`v-model` を使用することができます。`v-model` は、要素を更新する適切な方法を入力の種類に基づき自動的に選択します。少し魔法のようですが、本来 `v-model` は糖衣構文(syntax sugar)であり、ユーザの入力イベントに応じてデータを更新し、さらにエッジケースに対する特別な配慮をしてくれます。
@@ -157,7 +159,7 @@ Vue.createApp({
 <span>Selected: {{ selected }}</span>
 ```
 
-<common-codepen-snippet title="Handling forms: select bound to array" slug="gOpBXPz" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Handling forms: select bound to array" slug="gOpBXPz" tab="result" :preview="false" />
 
 動的なオプションを `v-for` により描画:
 

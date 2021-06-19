@@ -2,6 +2,8 @@
 
 ## 算出プロパティ
 
+<VideoLesson href="https://vueschool.io/lessons/computed-properties-in-vue-3?friend=vuejs" title="Learn how computed properties work with Vue School">Learn how computed properties work with a free lesson on Vue School</VideoLesson>
+
 テンプレート内の式は非常に便利ですが、シンプルな操作のためのものです。テンプレートにたくさんロジックを入れすぎると、テンプレートが肥大化してメンテナンスしづらくなる可能性があります。たとえば、配列が入っているオブジェクトがあり:
 
 ```js

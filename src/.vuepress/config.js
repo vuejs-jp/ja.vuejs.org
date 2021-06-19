@@ -6,7 +6,8 @@ const sidebar = {
       children: [
         '/cookbook/',
         '/cookbook/editable-svg-icons',
-        // '/cookbook/debugging-in-vscode'
+        '/cookbook/debugging-in-vscode',
+        '/cookbook/automatic-global-registration-of-base-components'
       ]
     }
   ],
@@ -171,6 +172,7 @@ const sidebar = {
   ],
   migration: [
     '/guide/migration/introduction',
+    '/guide/migration/migration-build',
     {
       title: '詳細',
       collapsable: false,

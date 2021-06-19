@@ -28,6 +28,8 @@ Vue.js で最も一般的に使われているディレクティブの 2 つは 
 
 これをテンプレートレベルで管理するのではなく、これを実現する 1 つの方法は表示されている要素のリストを除外する算出プロパティを作成することです。
 
+[移行ビルドのフラグ: `COMPILER_V_IF_V_FOR_PRECEDENCE`](migration-build.html#compat-の設定)
+
 ## 参照
 
 - [リストレンダリング - フィルタ・ソート結果の表示](/guide/list.html#displaying-filtered-sorted-results)

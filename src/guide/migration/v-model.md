@@ -182,6 +182,11 @@ this.$emit('update:title', newValue)
   }
   ```
 
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `COMPONENT_V_MODEL`
+- `COMPILER_V_BIND_SYNC`
+
 ## 次のステップ
 
 新しい `v-model` 構文の詳細については、以下を参照してください。

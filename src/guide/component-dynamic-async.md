@@ -12,7 +12,7 @@
 
 しかし、コンポーネントを切り替える時、コンポーネントの状態を保持したり、パフォーマンスの理由から再レンダリングを避けたいときもあるでしょう。例えば、タブインターフェースを少し拡張した場合:
 
-<common-codepen-snippet title="Dynamic components: without keep-alive" slug="jOPjZOe" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Dynamic components: without keep-alive" slug="jOPjZOe" tab="html,result" />
 
 Posts タブの投稿を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた投稿が表示されないことに気づくでしょう。これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
 
@@ -27,7 +27,7 @@ Posts タブの投稿を選択し、 _Archive_ タブに切り替えてから _P
 
 以下の結果を確認してみてください:
 
-<common-codepen-snippet title="Dynamic components: with keep-alive" slug="VwLJQvP" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Dynamic components: with keep-alive" slug="VwLJQvP" tab="html,result" />
 
 このように _Posts_ タブがレンダリングされていなくても、自身の状態（選択された投稿）を保持するようになります。
 

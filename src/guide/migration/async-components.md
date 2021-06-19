@@ -95,3 +95,4 @@ const asyncComponent = defineAsyncComponent(
 非同期コンポーネントの使い方のさらなる情報は、以下を見てください:
 
 - [ガイド: 動的 & 非同期コンポーネント](/guide/component-dynamic-async.html#動的コンポーネントにおける-keep-alive-の利用)
+- [移行ビルドのフラグ: `COMPONENT_ASYNC`](migration-build.html#compat-の設定)

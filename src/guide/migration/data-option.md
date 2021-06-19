@@ -94,9 +94,9 @@ Vue 2.x での `$data` の結果は:
 
 ```json
 {
-  user: {
-    id: 2,
-    name: 'Jack'
+  "user": {
+    "id": 2,
+    "name": "Jack"
   }
 }
 ```
@@ -105,11 +105,13 @@ Vue 2.x での `$data` の結果は:
 
 ```json
 {
-  user: {
-    id: 2
+  "user": {
+    "id": 2
   }
 }
 ```
+
+[移行ビルドのフラグ: `OPTIONS_DATA_FN`](migration-build.html#compat-の設定)
 
 ## 移行の戦略
 
@@ -119,3 +121,8 @@ Vue 2.x での `$data` の結果は:
 - 共有データへの参照、新しい共有オブジェクトを指すようにを書き換える
 
 ミックスインのディープマージに依存しているユーザーには、そのような依存を完全に避けるためにコードをリファクタリングすることをお勧めします。ミックスインのディープマージは非常に暗黙的であり、コードロジックの理解やデバッグがより難しくなる可能性があります。
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `OPTIONS_DATA_FN`
+- `OPTIONS_DATA_MERGE`

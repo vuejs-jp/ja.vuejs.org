@@ -70,3 +70,10 @@ export default {
 - `itemRefs` は配列である必要はありません。 反復キーで参照できるオブジェクトでも構いません。
 
 - これにより、必要に応じて `itemRefs` をリアクティブにして監視することもできます。
+
+## 移行の戦略
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `V_FOR_REF`
+- `COMPILER_V_FOR_REF`

@@ -54,7 +54,7 @@ app.mount('#components-demo')
 </div>
 ```
 
-<common-codepen-snippet title="Component basics: reusing components" slug="rNVqYvM" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Component basics: reusing components" slug="rNVqYvM" tab="result" :preview="false" />
 
 ボタンをクリックすると、それぞれが独自の `count` を保持することに注意してください。 これはコンポーネントを使用する度に新しいコンポーネントの**インスタンス**が作成されるためです。
 
@@ -111,7 +111,7 @@ app.mount('#blog-post-demo')
 </div>
 ```
 
-<common-codepen-snippet title="Component basics: passing props" slug="PoqyOaX" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Component basics: passing props" slug="PoqyOaX" tab="result" :preview="false" />
 
 しかしながら、一般的なアプリケーションではおそらく `data` に投稿の配列を持っています:
 
@@ -227,7 +227,7 @@ app.component('blog-post', {
 
 `@enlarge-text="postFontSize += 0.1"` リスナによって、親コンポーネントはこのイベントを受け取り `postFontSize` の値を更新することができます。
 
-<common-codepen-snippet title="Component basics: emitting events" slug="KKpGyrp" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Component basics: emitting events" slug="KKpGyrp" tab="result" :preview="false" />
 
 コンポーネントの `emits` オプションにより発行されたイベントを一覧することができます:
 

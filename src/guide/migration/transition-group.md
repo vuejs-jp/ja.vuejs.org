@@ -35,6 +35,10 @@ Vue 3 では [Fragments](/guide/migration/fragments.html) があるので、コ�
 </transition-group>
 ```
 
+## 移行の戦略
+
+[移行ビルドのフラグ: `TRANSITION_GROUP_ROOT`](migration-build.html#compat-の設定)
+
 ## 参照
 
 - [トランジションクラスの変更](/guide/migration/transition.html)

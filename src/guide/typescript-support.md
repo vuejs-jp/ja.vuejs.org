@@ -345,7 +345,7 @@ const Component = defineComponent({
 
 ### `ref` を型定義する
 
-Ref は初期値から肩を推論します:
+Ref は初期値から型を推論します:
 
 ```ts
 import { defineComponent, ref } from 'vue'
