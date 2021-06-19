@@ -1,5 +1,7 @@
 # イベントハンドリング
 
+<VideoLesson href="https://vueschool.io/lessons/user-events-in-vue-3?friend=vuejs" title="Learn how to handle events on Vue School">Learn how to handle events in a free Vue School lesson</VideoLesson>
+
 ## イベントの購読
 
 `v-on` ディレクティブを使うことで、DOM イベントの購読、イベント発火時の JavaScript の実行が可能になります。これは通常 `@` に省略することができます。`v-on:click="methodName"` もしくは `@click="methodName"` と書いて使用します。
