@@ -94,9 +94,9 @@ Vue 2.x での `$data` の結果は:
 
 ```json
 {
-  user: {
-    id: 2,
-    name: 'Jack'
+  "user": {
+    "id": 2,
+    "name": "Jack"
   }
 }
 ```
@@ -105,8 +105,8 @@ Vue 2.x での `$data` の結果は:
 
 ```json
 {
-  user: {
-    id: 2
+  "user": {
+    "id": 2
   }
 }
 ```
