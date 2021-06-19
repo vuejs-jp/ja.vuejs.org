@@ -45,12 +45,24 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ## npm
 
-Vue による大規模アプリケーションを構築するときには、npm を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
+Vue による大規模アプリケーションを構築するときには、npm を利用したインストールを推奨します。[webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。
 
 ```bash
 # 最新安定版
 $ npm install vue@next
 ```
+
+Vue は [単一ファイルコンポーネント](../guide/single-file-component.html)（SFCs）を作成するための、付随するツールも提供しています。SFCs を使いたい場合は、`@vue/compiler-sfc` もインストールする必要があります:
+
+```bash
+$ npm install -D @vue/compiler-sfc
+```
+
+Vue 2 を使っている場合は、`@vue/compiler-sfc` が `vue-template-compiler` を置き換えることに注意してください。
+
+また、`@vue/compiler-sfc` に加えて、選択したバンドラに適した SFC ローダーやプラグインも必要です。詳しくは [SFC ドキュメント](../guide/single-file-component.html) を参照してください。
+
+ほとんどの場合、最小限の設定で webpack のビルドを作成するには、 Vue CLI を利用するのがよいでしょう。
 
 ## CLI
 
