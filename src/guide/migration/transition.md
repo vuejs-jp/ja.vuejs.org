@@ -63,4 +63,5 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 
 ## 参照
 
+- [`<Transition>` as a root can no longer be toggled from the outside](/guide/migration/transition-as-root.html)
 - [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)

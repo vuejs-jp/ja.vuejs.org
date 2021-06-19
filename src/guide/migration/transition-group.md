@@ -42,3 +42,4 @@ Vue 3 では [Fragments](/guide/migration/fragments.html) があるので、コ�
 ## 参照
 
 - [トランジションクラスの変更](/guide/migration/transition.html)
+- [`<Transition>` as a root can no longer be toggled from the outside](/guide/migration/transition-as-root.html)
