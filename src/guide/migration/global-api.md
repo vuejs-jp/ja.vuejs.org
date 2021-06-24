@@ -78,14 +78,14 @@ const app = createApp({})
 | 2.x グローバル API         | 3.x インスタンス API (`app`)                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------------------ |
 | Vue.config                 | app.config                                                                                       |
-| Vue.config.productionTip   | _削除_ ([以下を参照](#config-productiontip-removed))                                             |
-| Vue.config.ignoredElements | app.config.isCustomElement ([以下を参照](#config-ignoredelements-is-now-config-iscustomelement)) |
+| Vue.config.productionTip   | _削除_ ([以下を参照](#config-productiontip-の削除))                                             |
+| Vue.config.ignoredElements | app.config.compilerOptions.isCustomElement ([以下を参照](#config-ignoredelements-は-config-compileroptions-iscustomelement-に変更)) |
 | Vue.component              | app.component                                                                                    |
 | Vue.directive              | app.directive                                                                                    |
 | Vue.mixin                  | app.mixin                                                                                        |
-| Vue.use                    | app.use ([以下を参照](#a-note-for-plugin-authors))                                               |
-| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-replaced-by-config-globalproperties))   |
-| Vue.extend                 | _削除_ ([以下を参照](#vue-extend-replaced-by-definecomponent))                                   |
+| Vue.use                    | app.use ([以下を参照](#プラグイン作者向けの注意点))                                               |
+| Vue.prototype              | app.config.globalProperties ([以下を参照](#vue-prototype-は-config-globalproperties-と置換))   |
+| Vue.extend                 | _削除_ ([以下を参照](#vue-extend-の削除))                                   |
 
 グローバルに振る舞いを変更しないその他のグローバル API は [グローバル API の Treeshaking](./global-api-treeshaking.html) にあるように、名前付きエクスポートになりました。
 
@@ -97,7 +97,7 @@ ES Modules ビルドでは、モジュールバンドラーと一緒に使用さ
 
 [移行ビルドのフラグ: `CONFIG_PRODUCTION_TIP`](migration-build.html#compat-の設定)
 
-### `config.ignoredElements` は `config.isCustomElement` に変更
+### `config.ignoredElements` は `config.compilerOptions.isCustomElement` に変更
 
 この設定オプションはネイティブのカスタム要素をサポートする意図で導入されたため、それがわかるように名前に変更しました。新しいオプションでは、以前の 文字列 / RegExp の方法より、柔軟な方法を提供する関数を期待します。
 
@@ -107,14 +107,14 @@ Vue.config.ignoredElements = ['my-el', /^ion-/]
 
 // after
 const app = createApp({})
-app.config.isCustomElement = tag => tag.startsWith('ion-')
+app.config.compilerOptions.isCustomElement = tag => tag.startsWith('ion-')
 ```
 
 ::: tip 重要
 
 Vue 3 では、要素がコンポーネントであるかどうかのチェックはコンパイルフェーズに移されたため、この設定はランタイムコンパイラを使用しているときにのみ尊重されます。ランタイム限定のビルドを使用している場合は、代わりにビルド設定で `isCustomElement` を `@vue/compiler-dom` に渡す必要があります - 例えば [`compilerOptions` option in vue-loader](https://vue-loader.vuejs.org/options.html#compileroptions) で。
 
-- ランタイム限定ビルド使用時に、`config.isCustomElement` が代入された場合、ビルドの設定でこのオプションを設定するように警告が表示されます。
+- ランタイム限定ビルド使用時に、`config.compilerOptions.isCustomElement` が代入された場合、ビルドの設定でこのオプションを設定するように警告が表示されます。
 - これは、Vue CLI 設定の新しいトップレベルのオプションになります。
 :::
 
@@ -191,7 +191,7 @@ Vue 3 では継承やミックスインよりも、 [Composition API](/api/compo
 
 [移行ビルドのフラグ: `GLOBAL_EXTEND`](migration-build.html#compat-の設定)
 
-### プラグイン作者へのノート
+### プラグイン作者向けの注意点
 
 プラグイン作者の一般的なプラクティスとして、`Vue.use` を使ってプラグインを自動的に UMD ビルドにインストールさせるものがありました。例えば、公式の `vue-router` プラグインのブラウザ環境へのインストールは以下のようになっていました:
 
@@ -278,7 +278,7 @@ import Bar from './Bar.vue'
 
 const createMyApp = options => {
   const app = createApp(options)
-  app.directive('focus', /* ... */)
+  app.directive('focus' /* ... */)
 
   return app
 }

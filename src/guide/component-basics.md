@@ -406,6 +406,18 @@ app.component('alert-box', {
 
 ## DOM テンプレートパース時の警告
 
+If you are writing your Vue templates directly in the DOM, Vue will have to retrieve the template string from the DOM. This leads to some caveats due to browsers' native HTML parsing behavior.
+
+:::tip
+It should be noted that the limitations discussed below only apply if you are writing your templates directly in the DOM. They do NOT apply if you are using string templates from the following sources:
+
+- String templates (e.g. `template: '...'`)
+- [Single-file (`.vue`) components](single-file-component.html)
+- `<script type="text/x-template">`
+:::
+
+### Element Placement Restrictions
+
 `<ul>` 、 `<ol>` 、 `<table>` 、 `<select>` のようないくつかの HTML 属性にはその内側でどの要素が現れるかに制限があり、`<li>` 、 `<tr>` 、 `<option>` のようないくつかの属性は他の特定の要素の中にしか現れません。
 
 このような制限を持つ属性を含むコンポーネントを使用すると問題が発生することがあります。例えば:
@@ -416,28 +428,21 @@ app.component('alert-box', {
 </table>
 ```
 
-このカスタムコンポーネント `<blog-post-row>` は無効なコンテンツとして巻き取られ、最終的にレンダリングされた出力でエラーが発生します。回避策として特別な `v-is` ディレクティブを使うことができます:
+このカスタムコンポーネント `<blog-post-row>` は無効なコンテンツとして巻き取られ、最終的にレンダリングされた出力でエラーが発生します。回避策として特別な [`is` 属性](/api/special-attributes.html#is) を使うことができます:
 
 ```html
 <table>
-  <tr v-is="'blog-post-row'"></tr>
+  <tr is="vue:blog-post-row"></tr>
 </table>
 ```
 
-:::warning
-`v-is` の値は JavaScript の式として扱われるので、コンポーネント名を引用符で囲む必要があります:
-
-```html
-<!-- 間違い、何も出力されません-->
-<tr v-is="blog-post-row"></tr>
-
-<!-- 正解 -->
-<tr v-is="'blog-post-row'"></tr>
-```
-
+:::tip
+When used on native HTML elements, the value of `is` must be prefixed with `vue:` in order to be interpreted as a Vue component. This is required to avoid confusion with native [customized built-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example).
 :::
 
-また、 HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、 in-DOM テンプレートを使用している場合、キャメルケースのプロパティ名やイベントハンドラのパラメータはそれと同等のケバブケース（ハイフンで区切られた記法）を使用する必要があります:
+### 大文字小文字に無関心
+
+HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、 in-DOM テンプレートを使用している場合、キャメルケースのプロパティ名やイベントハンドラのパラメータはそれと同等のケバブケース（ハイフンで区切られた記法）を使用する必要があります:
 
 ```js
 // JavaScript ではキャメルケース
@@ -455,12 +460,6 @@ app.component('blog-post', {
 
 <blog-post post-title="hello!"></blog-post>
 ```
-
-**これらの制限は次のソースのいずれかの文字列テンプレートを使用している場合 _適用されない_ ことに**気をつけてください:
-
-- 文字列テンプレート (例: `template: '...'`)
-- [単一ファイル (`.vue`) コンポーネント](single-file-component.html)
-- `<script type="text/x-template">`
 
 とりあえず DOM テンプレートパース時の警告についてはこれで以上です。そして実は、Vue の _本質_ の最後となります。おめでとうございます! まだまだ学ぶべきことはありますが、まずは一休みして自分で Vue を実際に使って楽しいものを作ってみることをお勧めします。
 
