@@ -121,88 +121,88 @@ app.mixin({
 
 ## compilerOptions <Badge text="3.1+" />
 
-- **Type:** `Object`
+- **型:** `Object`
 
-Configure runtime compiler options. Values set on this object will be passed to the in-browser template compiler and affect every component in the configured app. Note you can also override these options on a per-component basis using the [`compilerOptions` option](/api/options-misc.html#compileroptions).
+ランタイムコンパイラのオプションを設定します。このオブジェクトに設定された値は、ブラウザ内テンプレートコンパイラに渡され、設定されたアプリケーションのすべてのコンポーネントに影響を与えます。また、[`compilerOptions` オプション](/api/options-misc.html#compileroptions) を使って、コンポーネントごとにオプションを上書きすることもできます。
 
 ::: tip Important
-This config option is only respected when using the full build (i.e. the standalone `vue.js` that can compile templates in the browser). If you are using the runtime-only build with a build setup, compiler options must be passed to `@vue/compiler-dom` via build tool configurations instead.
+この設定オプションはフルビルド（例えば、ブラウザでテンプレートをコンパイルできるスタンドアロンの `vue.js`）を使ったときにのみ尊重されます。ビルドの設定でランタイムのみのビルドを使っている場合、コンパイラのオプションは変わりにビルドツールの設定を介して `@vue/compiler-dom` に渡す必要があります。
 
-- For `vue-loader`: [pass via the `compilerOptions` loader option](https://vue-loader.vuejs.org/options.html#compileroptions). Also see [how to configure it in `vue-cli`](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
+- `vue-loader` 向け: [`compilerOptions` ローダーオプションを介して渡します](https://vue-loader.vuejs.org/options.html#compileroptions)。[`vue-cli` での設定方法](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) も参照してください。
 
-- For `vite`: [pass via `@vitejs/plugin-vue` options](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-passing-options-to-vuecompiler-dom).
+- `vite` 向け: [`@vitejs/plugin-vue` オプションを介して渡します](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-passing-options-to-vuecompiler-dom)。
 :::
 
 ### compilerOptions.isCustomElement
 
-- **Type:** `(tag: string) => boolean`
+- **型:** `(tag: string) => boolean`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
-// any element starting with 'ion-' will be recognized as a custom one
+// 'ion-' で始まる要素は、カスタム要素として認識されます
 app.config.compilerOptions.isCustomElement = tag => tag.startsWith('ion-')
 ```
 
-Specifies a method to recognize custom elements defined outside of Vue (e.g., using the Web Components APIs). If component matches this condition, it won't need local or global registration and Vue won't throw a warning about an `Unknown custom element`.
+Vue の外部で（例えば、Web Components API を使って）定義されたカスタム要素を認識する方法を指定します。コンポーネントがこの条件に一致した場合、ローカルまたはグローバルでの登録が必要なくなり、 Vue は `Unknown custom element` の警告を出しません。
 
-> Note that all native HTML and SVG tags don't need to be matched in this function - Vue parser performs this check automatically.
+> この関数では、すべてのネイティブ HTML と SVG のタグについて一致させる必要はありません。 Vue パーサはこの確認を自動的に行います。
 
 ### compilerOptions.whitespace
 
-- **Type:** `'condense' | 'preserve'`
+- **型:** `'condense' | 'preserve'`
 
-- **Default:** `'condense'`
+- **デフォルト:** `'condense'`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.compilerOptions.whitespace = 'preserve'
 ```
 
-By default, Vue removes/condenses whitespaces between template elements to produce more efficient compiled output:
+デフォルトで、Vue はより効率的なコンパイル出力を行うために、テンプレート要素間のホワイトスペースを削除・圧縮します:
 
-1. Leading / ending whitespaces inside an element are condensed into a single space
-2. Whitespaces between elements that contain newlines are removed
-3. Consecutive whitespaces in text nodes are condensed into a single space
+1. 要素内の先頭・末尾のホワイトスペースが 1 つのスペースに圧縮されます
+2. 改行を含む要素間のホワイトスペースが削除されます
+3. テキストノード内の連続したホワイトスペースが 1 つのスペースに圧縮されます
 
-Setting the value to `'preserve'` will disable (2) and (3).
+値を `'preserve'` に設定すると、 (2) と (3) が無効になります。
 
 ### compilerOptions.delimiters
 
-- **Type:** `Array<string>`
+- **型:** `Array<string>`
 
-- **Default:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}`
+- **デフォルト:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
-// Delimiters changed to ES6 template string style
+// デリミタを ES6 のテンプレートリテラルのスタイルに変更
 app.config.compilerOptions.delimiters = ['${', '}']    
 ```
 
-Sets the delimiters used for text interpolation within the template.
+テンプレート内のテキスト補間に利用されるデリミタを設定します。
 
-Typically this is used to avoid conflicting with server-side frameworks that also use mustache syntax.
+一般的には、 mustache 構文を利用しているサーバサイドフレームワークとの衝突を避けるために使われます。
 
 ### compilerOptions.comments
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `false`
+- **デフォルト:** `false`
 
-- **Usage:**
+- **使用方法:**
 
 ```js
 app.config.compilerOptions.comments = true
 ```
 
-By default, Vue will remove HTML comments inside templates in production. Setting this option to `true` will force Vue to preserve comments even in production. Comments are always preserved during development.
+デフォルトで、Vue は本番向けにテンプレート内の HTML コメントを削除します。このオプションを `true` に設定すると、本番向けでも Vue はコメントを残すようになります。開発中には常にコメントが残されます。
 
-This option is typically used when Vue is used with other libraries that rely on HTML comments.
+このオプションは一般的に、Vue が HTML コメントに依存する他のライブラリと一緒に利用される場合に使われます。
 
 ## isCustomElement <Badge text="deprecated" type="warning"/>
 
-Deprecated in 3.1.0. Use [`compilerOptions.isCustomElement`](#compileroptions-iscustomelement) instead.
+3.1.0 では非推奨です。代わりに [`compilerOptions.isCustomElement`](#compileroptions-iscustomelement) を使ってください。

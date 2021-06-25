@@ -404,21 +404,21 @@ app.component('alert-box', {
 
 とりあえず動的なコンポーネントについてはこれで以上ですが、このページを読み終えて十分に理解できたら、後から戻ってきて[動的 & 非同期コンポーネント](./component-dynamic-async.html)の完全なガイドを読むことをお勧めします。
 
-## DOM テンプレートパース時の警告
+## DOM テンプレートパース時の注意
 
-If you are writing your Vue templates directly in the DOM, Vue will have to retrieve the template string from the DOM. This leads to some caveats due to browsers' native HTML parsing behavior.
+Vue のテンプレートを DOM に直接書いている場合、Vue は DOM からテンプレート文字列を取得する必要があります。これはブラウザのネイティブな HTML 解析の動作に起因するいくつかの注意点につながります。
 
 :::tip
-It should be noted that the limitations discussed below only apply if you are writing your templates directly in the DOM. They do NOT apply if you are using string templates from the following sources:
+以下の制限は、DOM で直接テンプレートを書いている場合にのみ適用されることに注意してください。次のソースから文字列テンプレートを使っている場合には適用されません:
 
-- String templates (e.g. `template: '...'`)
-- [Single-file (`.vue`) components](single-file-component.html)
+- 文字列テンプレート（例: `template: '...'`）
+- [単一ファイルコンポーネント（`.vue`）](single-file-component.html)
 - `<script type="text/x-template">`
 :::
 
-### Element Placement Restrictions
+### 要素の配置制限
 
-`<ul>` 、 `<ol>` 、 `<table>` 、 `<select>` のようないくつかの HTML 属性にはその内側でどの要素が現れるかに制限があり、`<li>` 、 `<tr>` 、 `<option>` のようないくつかの属性は他の特定の要素の中にしか現れません。
+`<ul>`、`<ol>`、`<table>`、`<select>` のようないくつかの HTML 要素にはその内側でどの要素が現れるかに制限があり、`<li>`、`<tr>`、`<option>` のようないくつかの属性は他の特定の要素の中にしか現れません。
 
 このような制限を持つ属性を含むコンポーネントを使用すると問題が発生することがあります。例えば:
 
@@ -437,12 +437,12 @@ It should be noted that the limitations discussed below only apply if you are wr
 ```
 
 :::tip
-When used on native HTML elements, the value of `is` must be prefixed with `vue:` in order to be interpreted as a Vue component. This is required to avoid confusion with native [customized built-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example).
+ネイティブの HTML 要素で使われるとき、Vue コンポーネントとして解釈されるためには `is` の値の前に `vue:` を付ける必要があります。これはネイティブの [カスタマイズされた組み込み要素](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example) との混同を避けるために必要です。
 :::
 
-### 大文字小文字に無関心
+### 大文字小文字の違いを無視
 
-HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、 in-DOM テンプレートを使用している場合、キャメルケースのプロパティ名やイベントハンドラのパラメータはそれと同等のケバブケース（ハイフンで区切られた記法）を使用する必要があります:
+HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、DOM 内テンプレートを使用している場合、キャメルケースのプロパティ名やイベントハンドラのパラメータはそれと同等のケバブケース（ハイフンで区切られた記法）を使用する必要があります:
 
 ```js
 // JavaScript ではキャメルケース
