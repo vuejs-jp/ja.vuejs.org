@@ -110,7 +110,7 @@ export function render() {
 グローバルな tree-shaking によって、ユーザは実際に使う機能についてのみ "支払い" ます。更に良いことに、オプションな機能はそれらが使われていないアプリケーションのバンドルサイズを増加させないということは、将来的に追加される機能がどんなものであれ、フレームワークのサイズによる懸念はずっと小さくなります。
 
 ::: warning 重要
-上記は、tree-shaking が可能な [ES Modules ビルド](/guide/installation.html#explanation-of-different-builds) の利用についてのみ適用されます - 依然として、UMD ビルドはすべての機能を含み、すべてがグローバル Vue 変数上に公開されます(そして、コンパイラはインポートに代えて、グローバルの API を使用して適切な成果物を生成します。)
+上記は、tree-shaking が可能な [ES Modules ビルド](/guide/installation.html#explanation-of-different-builds) の利用についてのみ適用されます - 依然として、UMD ビルドはすべての機能を含み、すべてがグローバル Vue 変数上に公開されます(そして、コンパイラはインポートに代えて、グローバルの API を使用して適切な成果物を生成します)
 :::
 
 ## プラグインでの用途
@@ -155,7 +155,7 @@ module.exports = {
 
 これは、Vue モジュールを外部ライブラリとして扱い、バンドルしないように webpack に伝えます。
 
-もし選んだバンドラーがたまたま [Rollup](https://rollupjs.org/) であったなら、Rollup はデフォルトで絶対モジュール ID(この場合には`'vue'`)を外部依存として扱い、それらを最終成果物に含めないため、元から設定無しに同じ効果が得られます。バンドル中、 ["Treating vue as external dependency"](https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency) という注意が出ることがありますが、これは `external` オプションで抑制できます:
+もし選んだバンドラーがたまたま [Rollup](https://rollupjs.org/) であったなら、Rollup はデフォルトで絶対モジュール ID(この場合には `'vue'`)を外部依存として扱い、それらを最終成果物に含めないため、元から設定無しに同じ効果が得られます。バンドル中、 ["Treating vue as external dependency"](https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency) という注意が出ることがありますが、これは `external` オプションで抑制できます:
 
 ```js
 // rollup.config.js

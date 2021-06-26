@@ -16,13 +16,13 @@ badges:
 - 列挙された属性の内部概念を削除し、それらの属性を通常の非ブール属性と同じように扱う。
 - **破壊的変更**: 値がブール値 `false` の場合に属性を削除しないようになりました。代わりに attr="false" として設定されます。属性を削除するには、`null` か `undefined` を使ってください。
 
-詳しくは、以下をお読みください!
+詳しくは、以下をお読みください！
 
 ## 2.x での構文
 
 2.x では、`v-bind` の値を強制するために以下のような戦略がありました:
 
-- いくつかの属性/要素のペアでは、Vue は常に対応する IDL 属性（プロパティ）を使用します。: [`<input>`、`<select>`、`<progress>`における`value`など](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L11-L18)
+- いくつかの属性/要素のペアでは、Vue は常に対応する IDL 属性（プロパティ）を使用します。: [`<input>`、`<select>`、`<progress>` における `value` など](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L11-L18)
 
 - 「[ブール属性](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L33-L40)」と [xlinks](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L44-L46) については、Vue はそれらが "falsy" ([`undefined`、`null`、`false`](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/util/attrs.js#L52-L54)) の場合には削除し、それ以外の場合には追加します ([ここ](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L66-L77)や[こちら](https://github.com/vuejs/vue/blob/bad3c326a3f8b8e0d3bcf07917dc0adf97c32351/src/platforms/web/runtime/modules/attrs.js#L81-L85)を見てください)。
 

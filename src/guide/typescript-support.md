@@ -192,7 +192,7 @@ declare module '@vue/runtime-core' {
 この型宣言は同じファイル、またはプロジェクト全体の `*.d.ts` ファイル（例えば、 TypeScript で自動的に読み込まれる `src/typings` フォルダの中）に記述することができます。ライブラリやプラグインの作者は、このファイルを `package.json` の `types` プロパティで指定します。
 
 ::: warning 宣言ファイルが TypeScript モジュールであることを確認
-Module Augmentation を利用するためには、ファイルの中に少なくとも1つのトップレベルの `import` か `export` があることを確認する必要があります。それが単に `export {}` であってもです。
+Module Augmentation を利用するためには、ファイルの中に少なくとも 1 つのトップレベルの `import` か `export` があることを確認する必要があります。それが単に `export {}` であってもです。
 
 [TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html) では、トップレベルの `import` や `export` を含むファイルはすべて「モジュール」とみなされます。モジュールの外で型宣言が行われた場合、元の型を拡張するのではなく、上書きしてしまいます。
 :::
