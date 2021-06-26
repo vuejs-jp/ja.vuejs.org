@@ -24,18 +24,13 @@
 - 自動化ツール
   - [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
   - [WAVE](https://chrome.google.com/webstore/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh)
-
 - カラーツール
   - [WebAim Color Contrast](https://webaim.org/resources/contrastchecker/)
   - [WebAim Link Color Contrast](https://webaim.org/resources/linkcontrastchecker)
-
 - その他の便利なツール
   - [HeadingMap](https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi?hl=en…)
-
   - [Color Oracle](https://colororacle.org)
-
   - [Focus Indicator](https://chrome.google.com/webstore/detail/focus-indicator/heeoeadndnhebmfebjccbhmccmaoedlf?hl=en-US…)
-
   - [NerdeFocus](https://chrome.google.com/webstore/detail/nerdefocus/lpfiljldhgjecfepfljnbjnbjfhennpd?hl=en-US…)
 
 ## ユーザー
@@ -45,11 +40,8 @@
 障害の種類は多岐にわたりますが、大きく分けて4つのカテゴリーに分けられます:
 
 - _[視覚](https://webaim.org/articles/visual/)_ - このようなユーザーは、スクリーンリーダー、スクリーン拡大、スクリーンコントラストの制御、または点字表示を使用することで恩恵を受けることができます。
-
 - _[聴覚](https://webaim.org/articles/auditory/)_ - このようなユーザーは、キャプション、トランスクリプト、手話ビデオの恩恵を受けることができます。
-
 - _[肢体](https://webaim.org/articles/motor/)_ - このようなユーザーは、音声認識ソフトウェア、アイトラッキング、シングルスイッチアクセス、ヘッドワンド、プルアンドパフスイッチ、特大トラックボールマウス、アタプティブキーボード、その他の支援技術など、[運動障害のためのさまざまな支援技術](https://webaim.org/articles/motor/assistive)の恩恵を受けることができます。
-
 - _[認知](https://webaim.org/articles/cognitive/)_ - このようなユーザーは、補足的なメディア、構造的なコンテンツ、明確でシンプルな文章などの恩恵を受けることができます。
 
 WebAim の以下のリンクをチェックして、ユーザーからの理解を深めましょう:

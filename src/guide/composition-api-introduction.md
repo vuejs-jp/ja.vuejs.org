@@ -1,10 +1,12 @@
 # はじめに
 
-## なぜコンポジション API なのか？
+## なぜ Composition API なのか？
 
 ::: tip Note
 ドキュメントでここまで到達しているならば、[Vue の基本](introduction.md)と[コンポーネントの作成](component-basics.md)の両方にすでに精通しているはずです。
 :::
+
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/why-the-composition-api" title="Vue Mastery で Composition API の仕組みを深く学ぶ">Vue Mastery の Composition API に関する無料ビデオを視聴する</VideoLesson>
 
 Vue コンポーネントを作成するとその機能と結合されたインターフェースの繰り返し可能な部分を再利用可能なコードとして抽出することができます。これだけでも保守性と柔軟性の点でアプリケーションをかなり良くすることができます。しかし、蓄積された経験から、特にアプリケーションが非常に大規模な場合は、これだけでは不十分であることがわかっています。数百のコンポーネントがある場合を想像してみてください。そのような大規模なアプリケーションを扱う場合は、コードを共通化して再利用することが非常に重要になります。
 
@@ -16,7 +18,10 @@ Vue コンポーネントを作成するとその機能と結合されたイン�
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
@@ -52,27 +57,29 @@ export default {
 
 コンポーネントのオプション (`data`, `computed`, `methods`, `watch`) でまとめたロジックはたいていの場合は正しく動作します。しかし、コンポーネントがより大きくなれば、**論理的な関心事**のリストもまた大きくなります。これは、特に最初からコンポーネントを書いていない人々にとって、コンポーネントを読みづらく、理解しづらいものにするかもしれません。
 
-![Vue オプション API: オプションの種類によってグループ分けされたコード](https://user-images.githubusercontent.com/499550/62783021-7ce24400-ba89-11e9-9dd3-36f4f6b1fae2.png)
+![Vue オプション API: オプションの種類によってグループ分けされたコード](/images/options-api.png)
 
 **論理的な関心事** が色でグループ化されている大きなコンポーネントを示す例。
 
 このような分離は、複雑なコンポーネントを理解してメンテナンスすることを難しくします。このオプションの分離は背景にある論理的な関心事をわかりづらくします。さらに、単一の論理的な関心事に取り組む場合、関連するコードのオプションブロックを何度も "ジャンプ" する必要があります。
 
-同じ論理的な関心事に関連するコードを並べることができれば、より良くなるでしょう。そして、これはまさにコンポジション API が可能にします。
+同じ論理的な関心事に関連するコードを並べることができれば、より良くなるでしょう。そして、これはまさに Composition API が可能にします。
 
-## コンポジション API の基本
+## Composition API の基本
 
-これで**なぜこの方法**にたどり着くのかわかりました。コンポジション API の使用を開始するには、初めに実際に使用できる場所が必要です。Vue コンポーネントでは、この場所を `setup` と呼びます。
+これで**なぜこの方法**にたどり着くのかわかりました。 Composition API の使用を開始するには、初めに実際に使用できる場所が必要です。Vue コンポーネントでは、この場所を `setup` と呼びます。
 
 ### `setup` コンポーネントオプション
 
-新しい `setup` コンポーネントオプションは、コンポーネントが作成される前に `props` が解決されると実行され、コンポジション API のエントリポイントとして機能します。
+<VideoLesson href="https://www.vuemastery.com/courses/vue-3-essentials/setup-and-reactive-references" title="Vue Mastery で setup がどのように動作するのか学ぶ">Vue Mastery で setup に関する無料ビデオを視聴する</VideoLesson>
+
+新しい `setup` コンポーネントオプションは、コンポーネントが作成される前に `props` が解決されると実行され、 Composition API のエントリポイントとして機能します。
 
 ::: warning
-`setup` が実行されたときは、まだコンポーネントのインスタンスが作られないため、`setup` オプションの中では `this` を使用できません。これは `props` を除いて、コンポーネント内で宣言されているあらゆるプロパティ (**ローカルの state** や **computed プロパティ**、**methods**) にアクセスできないことを意味します。
+コンポーネントのインスタンスを参照しないため、`setup` の中で `this` を使うのは避けるべきです。`setup` は `data` プロパティ、`computed` プロパティ、`methods` が解決される前に呼び出されるため、`setup` の中では利用できません。
 :::
 
-`setup` オプションは `props` と[後で](composition-api-setup.html#arguments)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
+`setup` オプションは `props` と[後で](composition-api-setup.html#引数)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
 
 `setup` をコンポーネントに追加しましょう:
 
@@ -82,7 +89,10 @@ export default {
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     console.log(props) // { user: '' }
@@ -133,7 +143,7 @@ import { ref } from 'vue'
 const counter = ref(0)
 ```
 
-`ref` は引数を受け取って、それを `value` プロパティを持つにオブジェクトでラップして返します。これを利用して、リアクティブな変数の値にアクセスしたり、変更したりします。
+`ref` は引数を受け取って、それを `value` プロパティを持つオブジェクトでラップして返します。これを利用して、リアクティブな変数の値にアクセスしたり、変更したりします。
 
 ```js
 import { ref } from 'vue'
@@ -151,10 +161,10 @@ console.log(counter.value) // 1
 
 ![参照渡し vs 値渡し](https://blog.penjee.com/wp-content/uploads/2015/02/pass-by-reference-vs-pass-by-value-animation.gif)
 
-任意の値の周りにラッパーオブジェクトがあると、途中でリアクティブでなくなることがなく、アプリ全体に安全に渡すことができます。
+どんな値でもラッパーオブジェクトを持つことで、途中でリアクティブでなくなることがなく、アプリ全体に安全に渡すことができます。
 
 ::: tip Note
-言い換えれば、`ref` は値への**リアクティブな参照**を作成します。 **参照**を操作するという概念はコンポジション API 全体で頻繁に使用されます。
+言い換えれば、`ref` は値への**リアクティブな参照**を作成します。 **参照**を操作するという概念は Composition API 全体で頻繁に使用されます。
 :::
 
 例に戻って、リアクティブな `repositories` 変数を作成しましょう:
@@ -188,7 +198,10 @@ import { ref } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const repositories = ref([])
@@ -229,7 +242,7 @@ export default {
 
 ### ライフサイクルフックを `setup` の中に登録する
 
-オプション API に比べてコンポジション API の機能を完全にするには、ライフサイクルフックを `setup` の中に登録する必要があります。これは Vue から提供されるいくつかの新しい関数のおかげで可能になりました。コンポジション API におけるライフサイクルフックはオプション API と同様の名称ですが、`on` というプレフィックスが付いています。例: `mounted` は `onMounted` のようになっています。
+オプション API に比べて Composition API の機能を完全にするには、ライフサイクルフックを `setup` の中に登録する必要があります。これは Vue から提供されるいくつかの新しい関数のおかげで可能になりました。 Composition API におけるライフサイクルフックはオプション API と同様の名称ですが、`on` というプレフィックスが付いています。例: `mounted` は `onMounted` のようになっています。
 
 それらの関数はコンポーネントによってフックが呼び出されるときに実行されるコールバックを受け付けます。
 
@@ -296,7 +309,7 @@ export default {
 }
 ```
 
-`watch` についての詳細は、[詳細ガイド]() を参照してください。
+`watch` についての詳細は、[詳細ガイド](reactivity-computed-watchers.md#watch) を参照してください。
 
 **例に適用しましょう:**
 
@@ -388,7 +401,7 @@ setup (props) {
 }
 ```
 
-他の**論理的な関心事**にも同じことができますが、既に疑問があるかもしれません。- _これはコードを `setup` オプションに移動させて肥大させるだけではありませんか？_ そのため他の責務に移る前に、まず上記のコードをスタンドアロンな**コンポジション関数**に抽出します。 `useUserRepositories` の作成から始めましょう:
+他の**論理的な関心事**にも同じことができますが、既に疑問があるかもしれません。- _これはコードを `setup` オプションに移動させて肥大させるだけではありませんか？_ そのため他の責務に移る前に、まず上記のコードをスタンドアロンな**Composition 関数**に抽出します。 `useUserRepositories` の作成から始めましょう:
 
 ```js
 // src/composables/useUserRepositories.js
@@ -412,7 +425,7 @@ export default function useUserRepositories(user) {
 }
 ```
 
-And then the searching functionality:
+それから検索機能も:
 
 ```js
 // src/composables/useRepositoryNameSearch.js
@@ -445,7 +458,10 @@ import { toRefs } from 'vue'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const { user } = toRefs(props)
@@ -491,7 +507,10 @@ import useRepositoryFilters from '@/composables/useRepositoryFilters'
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
   props: {
-    user: { type: String }
+    user: {
+      type: String,
+      required: true
+    }
   },
   setup(props) {
     const { user } = toRefs(props)
@@ -524,4 +543,4 @@ export default {
 
 これで完了です！
 
-コンポジション API の表面とできることについてほんの少し触れただけであることを覚えておいてください。より詳しく知りたい場合は、詳細ガイドを参照してください。
+Composition API の表面とできることについてほんの少し触れただけであることを覚えておいてください。より詳しく知りたい場合は、詳細ガイドを参照してください。

@@ -1,10 +1,18 @@
 const sidebar = {
-  cookbook: [{
-    title: 'クックブック',
-    collapsable: false,
-    children: ['/cookbook/', '/cookbook/editable-svg-icons']
-  }],
-  guide: [{
+  cookbook: [
+    {
+      title: 'クックブック',
+      collapsable: false,
+      children: [
+        '/cookbook/',
+        '/cookbook/editable-svg-icons',
+        '/cookbook/debugging-in-vscode',
+        '/cookbook/automatic-global-registration-of-base-components'
+      ]
+    }
+  ],
+  guide: [
+    {
       title: '基本的な使い方',
       collapsable: false,
       children: [
@@ -12,6 +20,7 @@ const sidebar = {
         '/guide/introduction',
         '/guide/instance',
         '/guide/template-syntax',
+        '/guide/data-methods',
         '/guide/computed',
         '/guide/class-and-style',
         '/guide/conditional',
@@ -50,6 +59,16 @@ const sidebar = {
       title: '再利用と構成',
       collapsable: false,
       children: [
+        {
+          title: 'Composition API',
+          children: [
+            '/guide/composition-api-introduction',
+            '/guide/composition-api-setup',
+            '/guide/composition-api-lifecycle-hooks',
+            '/guide/composition-api-provide-inject',
+            '/guide/composition-api-template-refs'
+          ]
+        },
         '/guide/mixins',
         '/guide/custom-directive',
         '/guide/teleport',
@@ -60,22 +79,13 @@ const sidebar = {
     {
       title: '高度な使い方',
       collapsable: false,
-      children: [{
+      children: [
+        {
           title: 'リアクティビティ',
           children: [
             '/guide/reactivity',
             '/guide/reactivity-fundamentals',
             '/guide/reactivity-computed-watchers'
-          ]
-        },
-        {
-          title: 'Composition API',
-          children: [
-            '/guide/composition-api-introduction',
-            '/guide/composition-api-setup',
-            '/guide/composition-api-lifecycle-hooks',
-            '/guide/composition-api-provide-inject',
-            '/guide/composition-api-template-refs'
           ]
         },
         '/guide/optimizations',
@@ -88,7 +98,9 @@ const sidebar = {
       children: [
         '/guide/single-file-component',
         '/guide/testing',
-        '/guide/typescript-support'
+        '/guide/typescript-support',
+        '/guide/mobile',
+        '/guide/tooling/deployment'
       ]
     },
     {
@@ -106,43 +118,6 @@ const sidebar = {
         '/guide/a11y-resources'
       ]
     },
-    {
-      title: 'Vue 2 からのマイグレーション',
-      collapsable: true,
-      children: [
-        'migration/introduction',
-        'migration/array-refs',
-        'migration/async-components',
-        'migration/attribute-coercion',
-        'migration/custom-directives',
-        'migration/custom-elements-interop',
-        'migration/data-option',
-        'migration/events-api',
-        'migration/filters',
-        'migration/fragments',
-        'migration/functional-components',
-        'migration/global-api',
-        'migration/global-api-treeshaking',
-        'migration/inline-template-attribute',
-        'migration/keycode-modifiers',
-        'migration/props-default-this',
-        'migration/render-function-api',
-        'migration/slots-unification',
-        'migration/transition',
-        'migration/v-if-v-for',
-        'migration/v-model',
-        'migration/v-bind'
-      ]
-    },
-    {
-      title: 'ドキュメントへの貢献',
-      collapsable: true,
-      children: [
-        'contributing/writing-guide',
-        'contributing/doc-style-guide',
-        'contributing/translations'
-      ]
-    }
   ],
   api: [
     '/api/application-config',
@@ -150,6 +125,7 @@ const sidebar = {
     '/api/global-api',
     {
       title: 'オプション',
+      path: '/api/options-api',
       collapsable: false,
       children: [
         '/api/options-data',
@@ -167,6 +143,7 @@ const sidebar = {
     '/api/built-in-components.md',
     {
       title: 'リアクティビティ API',
+      path: '/api/reactivity-api',
       collapsable: false,
       children: [
         '/api/basic-reactivity',
@@ -176,21 +153,87 @@ const sidebar = {
     },
     '/api/composition-api'
   ],
-  examples: [{
-    title: '例',
-    collapsable: false,
-    children: [
-      '/examples/markdown',
-      '/examples/commits',
-      '/examples/grid-component',
-      '/examples/tree-view',
-      '/examples/svg',
-      '/examples/modal',
-      '/examples/elastic-header',
-      '/examples/select2',
-      '/examples/todomvc'
-    ]
-  }]
+  examples: [
+    {
+      title: '例',
+      collapsable: false,
+      children: [
+        '/examples/markdown',
+        '/examples/commits',
+        '/examples/grid-component',
+        '/examples/tree-view',
+        '/examples/svg',
+        '/examples/modal',
+        '/examples/elastic-header',
+        '/examples/select2',
+        '/examples/todomvc'
+      ]
+    }
+  ],
+  migration: [
+    '/guide/migration/introduction',
+    '/guide/migration/migration-build',
+    {
+      title: '詳細',
+      collapsable: false,
+      children: [
+        '/guide/migration/array-refs',
+        '/guide/migration/async-components',
+        '/guide/migration/attribute-coercion',
+        '/guide/migration/attrs-includes-class-style',
+        '/guide/migration/children',
+        '/guide/migration/custom-directives',
+        '/guide/migration/custom-elements-interop',
+        '/guide/migration/data-option',
+        '/guide/migration/emits-option',
+        '/guide/migration/events-api',
+        '/guide/migration/filters',
+        '/guide/migration/fragments',
+        '/guide/migration/functional-components',
+        '/guide/migration/global-api',
+        '/guide/migration/global-api-treeshaking',
+        '/guide/migration/inline-template-attribute',
+        '/guide/migration/key-attribute',
+        '/guide/migration/keycode-modifiers',
+        '/guide/migration/listeners-removed',
+        '/guide/migration/mount-changes',
+        '/guide/migration/props-data',
+        '/guide/migration/props-default-this',
+        '/guide/migration/render-function-api',
+        '/guide/migration/slots-unification',
+        '/guide/migration/suspense',
+        '/guide/migration/transition',
+        '/guide/migration/transition-group',
+        '/guide/migration/v-on-native-modifier-removed',
+        '/guide/migration/v-model',
+        '/guide/migration/v-if-v-for',
+        '/guide/migration/v-bind',
+        '/guide/migration/vnode-lifecycle-events',
+        '/guide/migration/watch'
+      ]
+    },
+  ],
+  ssr: [
+    ['/guide/ssr/introduction', 'Introduction'],
+    '/guide/ssr/getting-started',
+    '/guide/ssr/universal',
+    '/guide/ssr/structure',
+    '/guide/ssr/build-config',
+    '/guide/ssr/server',
+    '/guide/ssr/routing',
+    '/guide/ssr/hydration'
+  ],
+  contributing: [
+    {
+      title: 'ドキュメントへの貢献',
+      collapsable: false,
+      children: [
+        '/guide/contributing/writing-guide',
+        '/guide/contributing/doc-style-guide',
+        '/guide/contributing/translations'
+      ]
+    }
+  ]
 }
 
 module.exports = {
@@ -200,21 +243,48 @@ module.exports = {
     [
       'link',
       {
-        href: 'https://fonts.googleapis.com/css?family=Inter:300,400,500,600|Open+Sans:400,600;display=swap',
+        href:
+          'https://fonts.googleapis.com/css?family=Inter:300,400,500,600|Open+Sans:400,600;display=swap',
         rel: 'stylesheet'
       }
     ],
     [
       'link',
       {
-        href: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+        href:
+          'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
         rel: 'stylesheet'
       }
     ],
-    ['link', {
-      rel: 'icon',
-      href: '/logo.png'
-    }],
+    [
+      'link',
+      {
+        rel: 'icon',
+        href: '/logo.png'
+      }
+    ],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    [
+      'meta',
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
+    ],
+    [
+      'link',
+      {
+        rel: 'apple-touch-icon',
+        href: '/images/icons/apple-icon-152x152.png'
+      }
+    ],
+    [
+      'meta',
+      {
+        name: 'msapplication-TileImage',
+        content: '/images/icons/ms-icon-144x144.png'
+      }
+    ],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     [
       'script',
       {
@@ -231,10 +301,12 @@ module.exports = {
   ],
   themeConfig: {
     logo: '/logo.png',
-    nav: [{
+    nav: [
+      {
         text: 'ドキュメント',
         ariaLabel: 'Documentation Menu',
-        items: [{
+        items: [
+          {
             text: 'ガイド',
             link: '/guide/introduction'
           },
@@ -249,19 +321,29 @@ module.exports = {
           {
             text: '例',
             link: '/examples/markdown'
+          },
+          {
+            text: '貢献',
+            link: '/guide/contributing/writing-guide'
+          },
+          {
+            text: 'Vue 2 からの移行',
+            link: '/guide/migration/introduction'
           }
         ]
       },
       {
         text: 'API リファレンス',
-        link: '/api/application-config'
+        link: '/api/'
       },
       {
         text: 'エコシステム',
-        items: [{
+        items: [
+          {
             text: 'コミュニティ',
             ariaLabel: 'Community Menu',
-            items: [{
+            items: [
+              {
                 text: 'チーム',
                 link: '/community/team/'
               },
@@ -281,13 +363,14 @@ module.exports = {
           },
           {
             text: '公式プロジェクト',
-            items: [{
+            items: [
+              {
                 text: 'Vue Router',
-                link: 'https://router.vuejs.org/'
+                link: 'https://next.router.vuejs.org/'
               },
               {
                 text: 'Vuex',
-                link: 'https://vuex.vuejs.org/'
+                link: 'https://next.vuex.vuejs.org/'
               },
               {
                 text: 'Vue CLI',
@@ -295,7 +378,8 @@ module.exports = {
               },
               {
                 text: 'Vue Test Utils',
-                link: 'https://vue-test-utils.vuejs.org/'
+                link:
+                  'https://next.vue-test-utils.vuejs.org/guide/'
               },
               {
                 text: 'Devtools',
@@ -304,6 +388,10 @@ module.exports = {
               {
                 text: 'ウィークリーニュース',
                 link: 'https://news.vuejs.org/'
+              },
+              {
+                text: 'ブログ',
+                link: 'https://blog.vuejs.org/'
               }
             ]
           }
@@ -312,7 +400,8 @@ module.exports = {
       {
         text: 'Vue を支援する',
         link: '/support-vuejs/',
-        items: [{
+        items: [
+          {
             text: '1 回きりの支援',
             link: '/support-vuejs/#one-time-donations'
           },
@@ -325,9 +414,36 @@ module.exports = {
             link: 'https://vue.threadless.com/'
           }
         ]
+      },
+      {
+        text: '翻訳',
+        link: '#',
+        items: [
+          // Translation maintainers: Please include the link below to the English documentation
+          {
+            text: 'English',
+            link: 'https://v3.vuejs.org/'
+          },
+          {
+            text: '中文',
+            link: 'https://v3.cn.vuejs.org/'
+          },
+          {
+            text: '한국어',
+            link: 'https://v3.ko.vuejs.org/'
+          },
+          {
+            text: 'Русский',
+            link: 'https://v3.ru.vuejs.org/'
+          },
+          {
+            text: 'その他の翻訳',
+            link: '/guide/contributing/translations#community-translations'
+          }
+        ]
       }
     ],
-    repo: 'vuejs/docs-next',
+    repo: 'vuejs-jp/ja.vuejs.org',
     editLinks: false,
     editLinkText: 'GitHub でこのページを編集！',
     lastUpdated: '最終更新日',
@@ -335,6 +451,9 @@ module.exports = {
     sidebarDepth: 2,
     sidebar: {
       collapsable: false,
+      '/guide/migration/': sidebar.migration,
+      '/guide/contributing/': sidebar.contributing,
+      '/guide/ssr/': sidebar.ssr,
       '/guide/': sidebar.guide,
       '/community/': sidebar.guide,
       '/cookbook/': sidebar.cookbook,
@@ -344,10 +463,31 @@ module.exports = {
     smoothScroll: false,
     algolia: {
       indexName: 'vuejs-v3',
+      appId: 'BH4D9OD16A',
       apiKey: 'bc6e8acb44ed4179c30d0a45d6140d3f'
+    },
+    carbonAds: {
+      carbon: 'CEBDT27Y',
+      custom: 'CKYD62QM',
+      placement: 'vuejsorg'
     }
   },
   plugins: [
+    [
+      '@vuepress/last-updated',
+      {
+        transformer(timestamp) {
+          const date = new Date(timestamp)
+
+          const digits = [
+            date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(),
+            date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()
+          ].map(num => String(num).padStart(2, '0'))
+
+          return '{0}-{1}-{2}, {3}:{4}:{5} UTC'.replace(/{(\d)}/g, (_, num) => digits[num])
+        }
+      }
+    ],
     [
       '@vuepress/pwa',
       {

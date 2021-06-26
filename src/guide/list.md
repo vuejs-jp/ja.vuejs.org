@@ -1,5 +1,7 @@
 # リストレンダリング
 
+<VideoLesson href="https://vueschool.io/lessons/list-rendering-in-vue-3?friend=vuejs" title="Learn how to render lists on Vue School">Learn how to render list with a free Vue School lesson</VideoLesson>
+
 ## v-for で配列に要素をマッピングする
 
 配列に基づいて、アイテムのリストを描画するために、`v-for` ディレクティブを使用することができます。 `v-for` ディレクティブには、 `item in items` の形式の特別な構文が必要で、 `items` はソースデータの配列、 `item` は繰り返される配列要素の**エイリアス**です:
@@ -24,12 +26,7 @@ Vue.createApp({
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="VwLGbwa" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Array">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/VwLGbwa">
-  v-for with Array</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with Array" slug="VwLGbwa" tab="js,result" :preview="false" />
 
 `v-for` ブロック内では、親スコープのプロパティへの完全なアクセスを持っています。また `v-for` は現在のアイテムに対する配列のインデックスを、任意の2つ目の引数としてサポートしています。
 
@@ -54,12 +51,7 @@ Vue.createApp({
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="wvaEdBP" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Array and index">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/wvaEdBP">
-  v-for with Array and index</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with Array and index" slug="wvaEdBP" tab="js,result" :preview="false" />
 
 また、区切り文字として `in` の代わりに `of` を使用することができます。これは JavaScript のイテレータ構文に近いものです:
 
@@ -95,12 +87,7 @@ Vue.createApp({
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="NWqLjqy" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Object">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqLjqy">
-  v-for with Object</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with Object" slug="NWqLjqy" tab="js,result" :preview="false" />
 
 2 つ目の引数としてプロパティ名（すなわちキー）も提供できます:
 
@@ -110,12 +97,7 @@ Vue.createApp({
 </li>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="poJOPjx" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Object and key">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/poJOPjx">
-  v-for with Object and key</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with Object and key" slug="poJOPjx" tab="js,result" :preview="false" />
 
 index も提供できます:
 
@@ -125,12 +107,7 @@ index も提供できます:
 </li>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="abOaWdo" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with Object key and index">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abOaWdo">
-  v-for with Object key and index</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with Object key and index" slug="abOaWdo" tab="js,result" :preview="false" />
 
 :::tip Note
 オブジェクトを反復処理するとき、順序は `Object.keys()` の列挙順のキーに基づいており、全ての JavaScript エンジンの実装で一貫性が保証されて**いません**。
@@ -193,7 +170,7 @@ example1.items = example1.items.filter(item => item.message.match(/Foo/))
 例えば:
 
 ```html
-<li v-for="n in evenNumbers">{{ n }}</li>
+<li v-for="n in evenNumbers" :key="n">{{ n }}</li>
 ```
 
 ```js
@@ -213,7 +190,7 @@ computed: {
 
 ```html
 <ul v-for="numbers in sets">
-  <li v-for="n in even(numbers)">{{ n }}</li>
+  <li v-for="n in even(numbers)" :key="n">{{ n }}</li>
 </ul>
 ```
 
@@ -236,18 +213,13 @@ methods: {
 
 ```html
 <div id="range" class="demo">
-  <span v-for="n in 10">{{ n }} </span>
+  <span v-for="n in 10" :key="n">{{ n }} </span>
 </div>
 ```
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="NWqLjNY" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with a range">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/NWqLjNY">
-  v-for with a range</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with a range" slug="NWqLjNY" tab="html,result" />
 
 ## `<template>` での `v-for`
 
@@ -255,7 +227,7 @@ methods: {
 
 ```html
 <ul>
-  <template v-for="item in items">
+  <template v-for="item in items" :key="item.msg">
     <li>{{ item.msg }}</li>
     <li class="divider" role="presentation"></li>
   </template>
@@ -268,25 +240,24 @@ methods: {
 `v-if` と `v-for` を同時に利用することは**推奨されません**。 詳細については [スタイルガイド](../style-guide/#avoid-v-if-with-v-for-essential) を参照ください。
 :::
 
-それらが同じノードに存在するとき、 `v-for` は `v-if` よりも高い優先度を持ちます。これは `v-if` がループの各繰り返しで実行されることを意味します。以下のように、これはいくつかの項目のみのノードを描画する場合に便利です。
+それらが同じノードに存在するとき、 `v-if` は `v-for` よりも高い優先度を持ちます。つまり `v-if` の条件は、 `v-for` のスコープの変数にはアクセスできないということです:
 
 ```html
+<!-- インスタンスに "todo" プロパティが定義されていないため、エラーが発生します。 -->
+
 <li v-for="todo in todos" v-if="!todo.isComplete">
-  {{ todo }}
+  {{ todo.name }}
 </li>
 ```
 
-上記は、完了していない項目だけを描画します。
-
-代わりに、ループの実行を条件付きでスキップすることを目的にしている場合は、ラッパー要素 (または [`<template>`](conditional#conditional-groups-with-v-if-on-lt-template-gt))上に `v-if` を配置できます。例えば:
+これは `v-for` を `<template>` タグで囲み、移動させることで修正できます:
 
 ```html
-<ul v-if="todos.length">
-  <li v-for="todo in todos">
-    {{ todo }}
+<template v-for="todo in todos" :key="todo.name">
+  <li v-if="!todo.isComplete">
+    {{ todo.name }}
   </li>
-</ul>
-<p v-else>No todos left!</p>
+</template>
 ```
 
 ## コンポーネントと `v-for`
@@ -376,15 +347,11 @@ app.component('todo-item', {
       <button @click="$emit('remove')">Remove</button>
     </li>
   `,
-  props: ['title']
+  props: ['title'],
+  emits: ['remove']
 })
 
 app.mount('#todo-list-example')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="abOaWpz" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="v-for with components">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abOaWpz">
-  v-for with components</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="v-for with components" slug="abOaWpz" tab="js,result" :preview="false" />

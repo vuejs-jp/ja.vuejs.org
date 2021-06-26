@@ -30,11 +30,13 @@ Vue 2.x では子コンポーネントの内部のコンテンツを分散コン
 
 `inline-template` のユースケースの多くでは、すべてのテンプレートが HTML ページ内に直接書かれるようなビルドツールを使わないセットアップを想定しています。
 
+[移行ビルドのフラグ: `COMPILER_INLINE_TEMPLATE`](migration-build.html#compat-の設定)
+
 ### オプション #1: `<script>` タグを使う
 
 このような場合の最も簡単な回避策は、`<script>` を代替として使うことです:
 
-```js
+```html
 <script type="text/html" id="my-comp-template">
   <div>{{ hello }}</div>
 </script>

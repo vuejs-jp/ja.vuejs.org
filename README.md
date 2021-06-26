@@ -1,33 +1,31 @@
-# v3.vuejs.org
+# v3.ja.vuejs.org
 
-This site is built with [VuePress](https://vuepress.vuejs.org/). Site content is written in Markdown format located in `src`.
+このサイトは [VuePress](https://vuepress.vuejs.org/) で構築されています。サイトのコンテンツは `src` ディレクトリにあるマークダウンフォーマットで書かれています。
 
-## Writing
+## 執筆する
 
-See the [Vue Docs Writing Guide](https://v3.vuejs.org/guide/writing-guide.html) for our rules and recommendations on writing and maintaining documentation.
+ドキュメントの執筆とメンテナンスに関するルールや推奨事項について、 [Vue Docs Writing Guide](https://v3.ja.vuejs.org/guide/writing-guide.html) を参照してください。
 
-> The docs are in beta: The team is currently in the midst of changes and we are not ready for additional contributions yet. All content is subject to change. If you see a problem that you would like to bring to our attention, please [create an issue](https://github.com/vuejs/docs-next/issues/new) and we will get to it when we can. You may want to wait until the content is finalized, though.
+## 開発する
 
-## Developing
-
-1. Clone repository
+1. リポジトリをクローンします
 
 ```bash
 git clone git@github.com:vuejs/docs-next.git
 ```
 
-2. Install dependencies
+2. 依存ファイルをインストールします
 
 ```bash
 yarn # or npm install
 ```
 
-3. Start local development environment
+3. ローカル開発環境を起動します
 
 ```bash
 yarn serve # or npm run serve
 ```
 
-## Deploying
+## デプロイする
 
-The site is automatically deployed when commits land in `master`, via [Netlify](https://www.netlify.com/).
+サイトは `lang-ja` にコミットがあると [Netlify](https://www.netlify.com/) によって自動的にデプロイされます。

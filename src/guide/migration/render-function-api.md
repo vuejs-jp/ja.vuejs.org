@@ -103,8 +103,10 @@ export default {
 ```js
 // 2.x
 {
-  class: ['button', 'is-outlined'],
-  style: { color: '#34495E' },
+  staticClass: 'button',
+  class: {'is-outlined': isOutlined },
+  staticStyle: { color: '#34495E' },
+  style: { backgroundColor: buttonColor },
   attrs: { id: 'submit' },
   domProps: { innerHTML: '' },
   on: { click: submitForm },
@@ -114,14 +116,13 @@ export default {
 
 ### 3.x での構文
 
-In 3.x, the entire VNode props structure is flattened. Using the example from above, here is what it would look like now.
 3.x では、全ての VNode のプロパティ構造はフラットになりました。上記の例が下記のようになります。
 
 ```js
 // 3.x での構文
 {
-  class: ['button', 'is-outlined'],
-  style: { color: '#34495E' },
+  class: ['button', { 'is-outlined': isOutlined }],
+  style: [{ color: '#34495E' }, { backgroundColor: buttonColor }],
   id: 'submit',
   innerHTML: '',
   onClick: submitForm,
@@ -129,7 +130,53 @@ In 3.x, the entire VNode props structure is flattened. Using the example from ab
 }
 ```
 
+## 登録済みコンポーネント
+
+### 2.x での構文
+
+2.x では、コンポーネントが登録されていた場合、コンポーネントの名前を文字列として第1引数に渡すと、 Render 関数がうまく動作します:
+
+```js
+// 2.x
+Vue.component('button-counter', {
+  data() {
+    return {
+      count: 0
+    }
+  }
+  template: `
+    <button @click="count++">
+      Clicked {{ count }} times.
+    </button>
+  `
+})
+export default {
+  render(h) {
+    return h('button-counter')
+  }
+}
+```
+
+### 3.x での構文
+
+3.x では、 VNodes がコンテキストフリーになったため、登録されているコンポーネントを暗黙的に探すために、文字列 ID を使うことができなくなります。代わりに、 `resolveComponent` メソッドを使う必要があります:
+
+```js
+// 3.x
+import { h, resolveComponent } from 'vue'
+export default {
+  setup() {
+    const ButtonCounter = resolveComponent('button-counter')
+    return () => h(ButtonCounter)
+  }
+}
+```
+
+詳細については、 [Render 関数 API の変更に関する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0008-render-function-api-change.md#context-free-vnodes) を見てください。
+
 ## 移行の戦略
+
+[移行ビルドのフラグ: `RENDER_FUNCTION`](migration-build.html#compat-の設定)
 
 ### ライブラリの著者
 

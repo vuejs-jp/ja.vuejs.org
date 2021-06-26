@@ -1,12 +1,12 @@
 # セットアップ
 
-> このセクションではコード例に[単一ファイルコンポーネント](single-file-component.html)のシンタックスを使います。
+> このセクションではコード例に[単一ファイルコンポーネント](single-file-component.html)の構文を使います。
 
-> このガイドは[コンポジション API の導入](composition-api-introduction.html)と[リアクティブの基礎](reactivity-fundamentals.html)を既に読んでいることを想定しています。 コンポジション API に初めて触れる方は、まずそちらを読んでみてください。
+> このガイドは[Composition API の導入](composition-api-introduction.html)と[リアクティブの基礎](reactivity-fundamentals.html)を既に読んでいることを想定しています。 Composition API に初めて触れる方は、まずそちらを読んでみてください。
 
 ## 引数
 
-`setup` 関数を使う時、2 つの引数を取ります:
+`setup` 関数を使う時、2つの引数を取ります:
 
 1. `props`
 2. `context`
@@ -15,7 +15,7 @@
 
 ### プロパティ
 
-`setup` 関数の 第一引数は `props` 引数です。 標準コンポーネントで期待するように、`setup` 関数内の `props` はリアクティブで、新しい props が渡されたら更新されます。
+`setup` 関数の第1引数は `props` 引数です。 標準コンポーネントで期待するように、`setup` 関数内の `props` はリアクティブで、新しい props が渡されたら更新されます。
 
 ```js
 // MyBook.vue
@@ -31,10 +31,10 @@ export default {
 ```
 
 :::warning
-しかし、`props` はリアクティブなので、props のリアクティブを削除してしまうため、**ES6 の分割代入を使うことができません。**
+しかし、`props` はリアクティブなので、**ES6 の分割代入を使うことができません。** props のリアクティブを削除してしまうからです。
 :::
 
-もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#destructuring-reactive-state) を使うことによって安全に分割代入を行うことができます。
+もし、props を分割代入する必要がある場合は、`setup` 関数内で [toRefs](reactivity-fundamentals.html#リアクティブな状態の分割代入) を使うことによって分割代入を行うことができます:
 
 ```js
 // MyBook.vue
@@ -42,15 +42,29 @@ export default {
 import { toRefs } from 'vue'
 
 setup(props) {
-	const { title } = toRefs(props)
+  const { title } = toRefs(props)
 
-	console.log(title.value)
+  console.log(title.value)
+}
+```
+
+`title` が省略可能なプロパティである場合、 `props` から抜けている可能性があります。その場合、 `toRefs` では `title` の ref はつくられません。代わりに `toRef` を使う必要があります:
+
+```js
+// MyBook.vue
+
+import { toRef } from 'vue'
+
+setup(props) {
+  const title = toRef(props, 'title')
+
+  console.log(title.value)
 }
 ```
 
 ### コンテキスト
 
-`setup` 関数に渡される第二引数は `context` です。`context` は 3 つのコンポーネントプロパティを公開する一般的な JavaScript オブジェクトです。:
+`setup` 関数に渡される第2引数は `context` です。`context` は3つのコンポーネントプロパティを公開する一般的な JavaScript オブジェクトです。:
 
 ```js
 // MyBook.vue
@@ -69,7 +83,7 @@ export default {
 }
 ```
 
-`context` オブジェクトは一般的な JavaScript オブジェクトです。 すなわち、リアクティブではありません。これは `context` で ES6 分割代入を安全に使用できることを意味します。
+`context` オブジェクトは一般的な JavaScript オブジェクトです。すなわち、リアクティブではありません。これは `context` で ES6 分割代入を安全に使用できることを意味します。
 
 ```js
 // MyBook.vue
@@ -84,14 +98,14 @@ export default {
 
 ## コンポーネントプロパティへのアクセス
 
-`setup` が実行されるとき、 コンポーネントインスタンスはまだ作成されていません。そのため、以下のプロパティにのみアクセスすることができます。:
+`setup` が実行されるとき、 コンポーネントインスタンスはまだ作成されていません。そのため、以下のプロパティにのみアクセスすることができます:
 
 - `props`
 - `attrs`
 - `slots`
 - `emit`
 
-言い換えると、以下のコンポーネントオプションには**アクセスできません**。:
+言い換えると、以下のコンポーネントオプションには**アクセスできません**:
 
 - `data`
 - `computed`
@@ -99,19 +113,22 @@ export default {
 
 ## テンプレートでの使用
 
-`setup` がオブジェクトを返す場合、コンポーネントのテンプレート内でオブジェクトのプロパティにアクセスすることができます。:
+`setup` がオブジェクトを返す場合、コンポーネントのテンプレート内でオブジェクトのプロパティにアクセスすることができ、 `setup` に渡された `props` のプロパティも同じようにアクセスできます:
 
 ```vue-html
 <!-- MyBook.vue -->
 <template>
-  <div>{{ readersNumber }} {{ book.title }}</div>
+  <div>{{ collectionName }}: {{ readersNumber }} {{ book.title }}</div>
 </template>
 
 <script>
   import { ref, reactive } from 'vue'
 
   export default {
-    setup() {
+    props: {
+      collectionName: String
+    },
+    setup(props) {
       const readersNumber = ref(0)
       const book = reactive({ title: 'Vue 3 Guide' })
 
@@ -125,11 +142,11 @@ export default {
 </script>
 ```
 
-`setup` から返された [refs](../api/refs-api.html#ref) は、テンプレート内でアクセスされたときに[自動的にアンラップ](../api/refs-api.html#access-in-templates)されるので、テンプレート内で `.value` を使用すべきではないことに注意してください。
+`setup` から返された [refs](../api/refs-api.html#ref) は、テンプレート内でアクセスされたときに[自動的に浅いアンラップ](/guide/reactivity-fundamentals.html#ref-のアンラップ)されるので、テンプレート内で `.value` を使用すべきではないことに注意してください。
 
-## 描画関数での使用
+## レンダリング関数での使用
 
-`setup` は同じスコープで宣言されたリアクティブなステートを直接利用することができる描画関数を返すこともできます。:
+`setup` は同じスコープで宣言されたリアクティブなステートを直接利用することができるレンダリング関数を返すこともできます:
 
 ```js
 // MyBook.vue

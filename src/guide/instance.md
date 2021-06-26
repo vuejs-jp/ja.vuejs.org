@@ -1,27 +1,57 @@
-# アプリケーションインスタンス
+# アプリケーションとコンポーネントのインスタンス
 
-## インスタンスの作成
+## アプリケーションインスタンスの作成
 
 全ての Vue アプリケーションは `createApp` 関数で新しい **アプリケーションインスタンス (application instance)** を作成するところから始まります:
 
 ```js
-Vue.createApp(/* options */)
+const app = Vue.createApp({
+  /* options */
+})
 ```
 
-インスタンスが作成されたあと、コンテナを `mount` メソッドに渡すことで、これを _マウント_ できます。例えば、Vue アプリケーションを `<div id="app"></div>` にマウントしたいときは、`#app` を渡します:
+アプリケーションインスタンスは、そのアプリケーション内のコンポーネントが使えるグローバル（コンポーネント、ディレクティブ、プラグインなど）を登録するために使われます。詳しいことはガイドの後半で説明しますが、簡単な例をあげると:
 
 ```js
-Vue.createApp(/* options */).mount('#app')
+const app = Vue.createApp({})
+app.component('SearchInput', SearchInputComponent)
+app.directive('focus', FocusDirective)
+app.use(LocalePlugin)
 ```
 
-[MVVM パターン](https://ja.wikipedia.org/wiki/Model_View_ViewModel)に厳密に関連づけられているわけではないにもかかわらず、Vue の設計は部分的にその影響を受けています。慣例的に、私たちはインスタンスを参照するのに変数 `vm`（ViewModel の短縮形）を使用します。
+アプリケーションインスタンスが公開するほとんどのメソッドは、同じインスタンスを返すので、チェーンすることができます:
 
-インスタンスを作成する際には、 **オプションオブジェクト (options object)** を渡すことができます。このガイドの多くは、意図した挙動を作るためにこれらのオプションをどのように使うことができるかを解説します。全てのオプションのリストは [API リファレンス](../api/options-data.html)で読むこともできます。
+```js
+Vue.createApp({})
+  .component('SearchInput', SearchInputComponent)
+  .directive('focus', FocusDirective)
+  .use(LocalePlugin)
+```
 
-Vue アプリケーションは、`createApp` で作られたひとつの **ルートインスタンス (root instance)** と、入れ子になった再利用可能なコンポーネントのツリーから成ります。例えば、`todo` アプリケーションのコンポーネントツリーはこのようになるでしょう:
+すべてのアプリケーション API は [API リファレンス](../api/application-api.html) で閲覧できます。
+
+## ルートコンポーネント
+
+`createApp` に渡されたオプションは、**ルートコンポーネント** の設定に使われます。このコンポーネントは、アプリケーションを **マウント** する際に、レンダリングの起点として使われます。
+
+アプリケーションは DOM 要素にマウントする必要があります。例えば、 Vue アプリケーションを `<div id="app"></div>` にマウントしたい場合、 `#app` を渡す必要があります:
+
+```js
+const RootComponent = {
+  /* オプション */
+}
+const app = Vue.createApp(RootComponent)
+const vm = app.mount('#app')
+```
+
+ほとんどのアプリケーションメソッドとは異なり、 `mount` はアプリケーションを返しません。代わりにルートコンポーネントのインスタンスを返します。
+
+厳密には [MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel) とは関係ないですが、 Vue の設計はその影響を受けています。慣習として、コンポーネントのインスタンスを参照するのに `vm` (ViewModel の略) という変数を使うことがよくあります。
+
+このページのすべての例では1つのコンポーネントしか必要としていませんが、実際の多くのアプリケーションでは再利用可能なコンポーネントを入れ子にしたツリー状に構成されています。例えば、 Todo アプリケーションのコンポーネントツリーは次のようになります:
 
 ```
-Root Instance
+Root Component
 └─ TodoList
    ├─ TodoItem
    │  ├─ DeleteTodoButton
@@ -31,107 +61,44 @@ Root Instance
       └─ TodoListStatistics
 ```
 
-[コンポーネントシステム](component-basics.html)の詳細は後ほど扱います。いまは、全てのVue コンポーネントもまたインスタンスであり、同じようなオプションオブジェクトを受け入れることだけを知っておいてください。
+各コンポーネントは、独自のコンポーネントインスタンス `vm` を持ちます。 `TodoItem` のような一部のコンポーネントでは、一度に複数のインスタンスがレンダリングされる可能性があります。このアプリケーションのすべてのコンポーネントインスタンスは、同じアプリケーションインスタンスを共有します。
 
-## データとメソッド
+[コンポーネントシステム](component-basics.html) について詳しくは、後で説明します。とりあえず、 ルートコンポーネントは他のコンポーネントとはなにも違いはないことを認識しておいてください。設定オプションは同じで、対応するコンポーネントインスタンスの振る舞いも同じです。
 
-インスタンスは作成時に、`data` で見つけられる全てのプロパティを [Vue の **リアクティブシステム (reactive system)**](reactivity.html)に追加します。これらのプロパティの値が変わると、ビューは"反応 (react)"し、新しい値に追従します。
+## コンポーネントインスタンスのプロパティ
+
+このガイドの前半で `data` プロパティについて説明しました。 `data` で定義されたプロパティは、コンポーネントインスタンスを介して公開されます:
 
 ```js
-// データオブジェクト
-const data = { a: 1 }
-
-// オブジェクトがルートインスタンスに追加されます
-const vm = Vue.createApp({
+const app = Vue.createApp({
   data() {
-    return data
+    return { count: 4 }
   }
-}).mount('#app')
+})
 
-// インスタンス上のプロパティを取得すると、元のデータのプロパティが返されます
-vm.a === data.a // => true
+const vm = app.mount('#app')
 
-// インスタンス上のプロパティへの代入は、元のデータにも影響されます
-vm.a = 2
-data.a // => 2
+console.log(vm.count) // => 4
 ```
 
-このデータが変更されると、ビューが再レンダリングされます。`data` のプロパティは、インスタンスが作成時に存在した場合にのみ **リアクティブ (reactive)** です。次のように新しいプロパティを代入すると:
+他にもコンポーネントインスタンスにユーザ定義のプロパティを追加する様々なコンポーネントオプション、`methods`、 `props`、 `computed`、 `inject`、 `setup` などがあります。このガイドでは、それぞれについて後で詳しく説明します。コンポーネントインスタンスのすべてのプロパティは、それらがどのように定義されているかに関わらず、コンポーネントのテンプレートからアクセスできます。
 
-```js
-vm.b = 'hi'
-```
+Vue はコンポーネントインスタンスを介した `$attrs` や `$emit` などいくつかの組み込みプロパティも公開しています。これらのプロパティは、すべて `$` プレフィックスとなっており、ユーザ定義のプロパティ名と衝突を避けるようになっています。
 
-`b` への変更はビューへの更新を引き起こしません。あるプロパティがのちに必要であることがわかっているが、最初は空または存在しない場合は、なんらかの初期値を設定する必要があります。例:
+## ライフサイクルフック
 
-```js
-data() {
-  return {
-    newTodoText: '',
-    visitCount: 0,
-    hideCompletedTodos: false,
-    todos: [],
-    error: null
-  }
-}
-```
-
-これに対する唯一の例外は `Object.freeze()` を使用し既存のプロパティが変更されるのを防ぐことです。これはリアクティブシステムが変更を _追跡 (track)_ することができないことも意味します。
-
-```js
-const obj = {
-  foo: 'bar'
-}
-
-Object.freeze(obj)
-
-const vm = Vue.createApp({
-  data() {
-    return obj
-  }
-}).mount('#app')
-```
-
-```html
-<div id="app">
-  <p>{{ foo }}</p>
-  <!-- これでは `foo` は更新されません！ -->
-  <button v-on:click="foo = 'baz'">Change it</button>
-</div>
-```
-
-data プロパティに加えて、インスタンスはいくつかの便利なプロパティとメソッドを提供します。これらはユーザ定義のプロパティと区別するため、頭に `$` が付けられています。例:
-
-```js
-const vm = Vue.createApp({
-  data() {
-    return {
-      a: 1
-    }
-  }
-}).mount('#example')
-
-vm.$data.a // => 1
-```
-
-今後、全てのインスタンスプロパティとメソッドのリストを調べるには [API リファレンス](../api/instance-properties.html) を利用できます。
-
-## インスタンスライフサイクルフック
-
-それぞれのインスタンスは、作成時に一連の初期化の手順を踏みます。例えば、データの監視、テンプレートのコンパイル、インスタンスの DOM へのマウント、データ変更時の DOM の変更を準備する必要があります。この中でインスタンスは、特定の段階にコードを追加する機会をユーザに与えるために、**ライフサイクルフック (lifecycle hooks)** と呼ばれる関数を実行します。
+各コンポーネントインスタンスは、作られるときに一連の初期化ステップを通ります。例えば、データ監視の設定、テンプレートのコンパイル、DOM へのインスタンスのマウント、データ変更時の DOM 更新などが必要になります。また、ユーザが特定の段階で独自のコードを追加できるように **ライフサイクルフック** と呼ばれる関数の実行をします。
 
 例えば [created](../api/options-lifecycle-hooks.html#created) フックは、インスタンスの作成後にコードを実行するために使用できます:
 
 ```js
 Vue.createApp({
   data() {
-    return {
-      a: 1
-    }
+    return { count: 1 }
   },
   created() {
-    // `this` は vm インスタンスを指します
-    console.log('a is: ' + this.a) // => "a is: 1"
+    // `this` は vm インスタンスを指す
+    console.log('count is: ' + this.count) // => "count is: 1"
   }
 })
 ```
@@ -146,4 +113,4 @@ Vue.createApp({
 
 以下はインスタンスライフサイクルのダイアグラムです。これは今完全に理解する必要はありませんが、さらに学習し実践すれば、便利なリファレンスとなることでしょう。
 
-<img src="/images/lifecycle.png" width="840" height="auto" style="margin: 0px auto; display: block; max-width: 100%;" loading="lazy" alt="Instance lifecycle hooks">
+<img src="/images/lifecycle.svg" width="840" height="auto" style="margin: 0px auto; display: block; max-width: 100%;" loading="lazy" alt="Instance lifecycle hooks">

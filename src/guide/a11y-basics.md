@@ -12,7 +12,7 @@
 
 すべてのページで最初にフォーカス可能な要素になるため、通常これは `App.vue` の上部で使われます:
 
-``` html
+```html
 <ul class="skip-links">
   <li>
     <a href="#main" ref="skipLink">Skip to main content</a>
@@ -22,7 +22,7 @@
 
 フォーカスされていない時にリンクを非表示にするには、以下のスタイルを追加します:
 
-``` css
+```css
 .skipLink {
   white-space: nowrap;
   margin: 1em auto;
@@ -42,7 +42,7 @@
 
 ユーザがルートを変更したら、スキップリンクにフォーカスを戻します。これは以下のように `ref` にフォーカスを呼ぶことで実現できます:
 
-``` vue
+```vue
 <script>
 export default {
   watch: {
@@ -54,12 +54,7 @@ export default {
 </script>
 ```
 
-<p class="codepen" data-height="350" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="VwepxJa" style="height: 350px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Skip to Main">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/VwepxJa">
-  Skip to Main</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Skip to Main" slug="GRrvQJa" :height="350" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 [メインコンテンツへのスキップリンクについてのドキュメントを読む](https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html)
 
@@ -99,16 +94,17 @@ export default {
 
 ランドマークを使用すると、アプリケーション内のセクションへプログラムによるアクセスができます。支援技術に依存しているユーザは、アプリケーションの各セクションに移動し、コンテンツをスキップすることができます。これを実現するために、[ARIA ロール](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles)を使用することができます。
 
-| HTML            | ARIA ロール                                                         | ランドマークの目的                                                                       |
-| --------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| header          | role="banner"                                                     | 主な見出し：ページのタイトル                                                       |
-| nav             | role="navigation"                                                 | 文書や関連文書をナビゲートする際に使用するのに適したリンク集 |
-| main            | role="main"                                                       | 文書の主な内容または中心的な内容。                                           |
-| footer          | role="contentinfo"                                                | 親文書に関する情報:脚注/著作権/プライバシーポリシーへのリンク |
-| aside           | role="complementary"                                              | メインコンテンツをサポートしながらも、それ自身コンテンツとして分離され、意味のあるものになっています            |
-| _利用不可_ | role="search"                                                     | セクションに含まれるアプリケーションの検索機能                     |
-| form            | role="form"                                                       | フォーム関連の要素コレクション                                                 |
-| section         | role="region"  | 関連性があり、ユーザがナビゲートする可能性が高いコンテンツ。この要素にはラベルを指定する必要があります                |
+| HTML            | ARIA ロール           | ランドマークの目的                                                                       |
+| --------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| header          | role="banner"        | 主な見出し：ページのタイトル                                                               |
+| nav             | role="navigation"    | 文書や関連文書をナビゲートする際に使用するのに適したリンク集                                    |
+| main            | role="main"          | 文書の主な内容または中心的な内容。                                                          |
+| footer          | role="contentinfo"   | 親文書に関する情報:脚注/著作権/プライバシーポリシーへのリンク                                   |
+| aside           | role="complementary" | メインコンテンツをサポートしながらも、それ自身コンテンツとして分離され、意味のあるものになっています   |
+| _利用不可_        | role="search"        | セクションに含まれるアプリケーションの検索機能                                               |
+| form            | role="form"          | フォーム関連の要素コレクション                                                             |
+| section         | role="region"        | 関連性があり、ユーザがナビゲートする可能性が高いコンテンツ。この要素にはラベルを指定する必要があります |
+
 
 :::tip Tip:
 レガシーな [HTML5 のセマンティック要素をサポートしていないブラウザ](https://caniuse.com/#feat=html5semantic)との互換性を最大限に高めるために、冗長なランドマークロール属性を持つランドマーク HTML 要素を使用することをお勧めします。

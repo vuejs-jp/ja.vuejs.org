@@ -1,5 +1,7 @@
 # Teleport
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-teleport?friend=vuejs" title="Vue School で Teleport の使い方を学ぶ">Vue School の無料レッスンで Teleport の使い方を学ぶ</VideoLesson>
+
 Vue は私たちに、UI やそれに関連する挙動をコンポーネントにして、カプセル化することで UI を作り上げることを勧めています。私たちはそれらを互いに入れ子にして、アプリケーションを構成するツリーを作ることができます。
 
 しかしながら、コンポーネントのテンプレートの一部が、論理的にこのコンポーネントに属している場合もありますが、技術的な観点では、テンプレートのこの部分を Vue アプリの外や、DOM 内の別の場所に移動させることが望ましいこともあります。
@@ -53,7 +55,7 @@ app.component('modal-button', {
 
 Teleport は、グローバルステートに頼ったり、2つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
 
-`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**teleport (テレポート) **" させるよう、`modal-button` を変更しましょう。 
+`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**Teleport** (テレポート) " させるよう、`modal-button` を変更しましょう。 
 
 ```js
 app.component('modal-button', {
@@ -84,12 +86,7 @@ app.component('modal-button', {
 
 その結果、ボタンをクリックしてモーダルを開くと、Vue はモーダルのコンテンツを `body` タグの子として正しくレンダリングします。
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="gOPNvjR" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue 3 Teleport">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/gOPNvjR">
-  Vue 3 Teleport</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Vue 3 Teleport" slug="gOPNvjR" tab="js,result" />
 
 ## Vue コンポーネントと使う
 
@@ -124,7 +121,7 @@ app.component('child-component', {
 
 これは、親コンポーネントからの注入が期待通りに動作し、Vue Devtools 上では実際のコンテンツが移動した場所に配置されるのではなく、親コンポーネントの下に配置されることを意味します。
 
-## 複数の teleport のターゲットを同じにして使う
+## 複数の Teleport のターゲットを同じにして使う
 
 一般的なユースケースのシナリオは、再利用可能な `<Modal>` コンポーネントで、同時に複数のインスタンスがアクティブになっている状態かもしれません。このようなシナリオの場合、複数の `<teleport>` は、同じターゲット要素に対してそれぞれのコンテンツをマウントすることができます。
 

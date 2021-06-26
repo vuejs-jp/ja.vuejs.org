@@ -7,7 +7,7 @@ Vue は、DOM からアイテムが追加、更新、削除されたときにト
 - トランジションフックが実行されている間、JavaScript を使って直接 DOM 操作を行います。
 - サードパーティの JavaScript アニメーションライブラリと連携します。
 
-このページでは、entering/leaving とリストのトランジションについてのみ取り扱いますが、次の章では、[状態のトランジション](transitions-state.html) について扱います。
+このページでは、entering/leaving のトランジションについてのみ取り扱いますが、次の章では、[リストのトランジション](transitions-list.html) と [状態のトランジション](transitions-state.html) について扱います。
 
 ## 単一要素/コンポーネントのトランジション
 
@@ -56,12 +56,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="3466d06fb252a53c5bc0a0edb0f1588a" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Simple Transition Component">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/3466d06fb252a53c5bc0a0edb0f1588a">
-  Simple Transition Component</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Simple Transition Component" slug="3466d06fb252a53c5bc0a0edb0f1588a" tab="html,result" :editable="false" />
 
 `transition` コンポーネントにラップされた要素が挿入あるいは削除されるとき、次のことが行われます:
 
@@ -75,12 +70,17 @@ Vue.createApp(Demo).mount('#demo')
 
 以下は、enter/leave トランジションのために適用される 6 つのクラスです。
 
-1. `v-enter-from `: enter の開始状態。要素が挿入される前に適用され、要素が挿入された 1 フレーム後に削除されます。
-2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。要素が挿入される前に追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-3. `v-enter-to`: **バージョン 2.1.8 以降でのみ利用可能です。** enter の終了状態。要素が挿入された 1 フレーム後に追加され (同時に `v-enter` が削除されます)、トランジション/アニメーションが終了すると削除されます。
+1. `v-enter-from `: enter の開始状態。その要素が挿入される前に適用され、その要素が挿入された 1 フレーム後に削除されます。
+
+2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。その要素が挿入される前に追加され、そのトランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
+
+3. `v-enter-to`: enter の終了状態。その要素が挿入された 1 フレーム後に追加され (同時に `v-enter-from` が削除されます)、そのトランジション/アニメーションが終了すると削除されます。
+
 4. `v-leave-from`: leave の開始状態。トランジションの終了がトリガされるとき、直ちに追加され、1フレーム後に削除されます。
+
 5. `v-leave-active`: leave の活性状態。トランジションが終わるフェーズ中に適用されます。leave トランジションがトリガされるとき、直ちに追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの終了に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
-6. `v-leave-to`: **バージョン 2.1.8 以降でのみ利用可能です。** leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave` が削除されます)、トランジション/アニメーションが終了すると削除されます。
+
+6. `v-leave-to`: leave の終了状態。leave トランジションがトリガされた 1 フレーム後に追加され (同時に `v-leave-from` が削除されます)、トランジション/アニメーションが終了すると削除されます。
 
 ![Transition Diagram](/images/transitions.svg)
 
@@ -134,12 +134,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="css,result" data-user="Vue" data-slug-hash="0dfa7869450ef43d6f7bd99022bc53e2" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Different Enter and Leave Transitions">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/0dfa7869450ef43d6f7bd99022bc53e2">
-  Different Enter and Leave Transitions</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Different Enter and Leave Transitions" slug="0dfa7869450ef43d6f7bd99022bc53e2" tab="css,result" :editable="false" />
 
 ### CSS アニメーション
 
@@ -148,7 +143,7 @@ CSS アニメーションは、CSS トランジションと同じように適用
 これは簡潔にするために CSS ルールの接頭辞を除いた例です。
 
 ```html
-<div id="example-2">
+<div id="demo">
   <button @click="show = !show">Toggle show</button>
   <transition name="bounce">
     <p v-if="show">
@@ -184,7 +179,7 @@ Vue.createApp(Demo).mount('#demo')
     transform: scale(0);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.25);
   }
   100% {
     transform: scale(1);
@@ -192,12 +187,7 @@ Vue.createApp(Demo).mount('#demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="html,result" data-user="Vue" data-slug-hash="8627c50c5514752acd73d19f5e33a781" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS Animation Transition Example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/8627c50c5514752acd73d19f5e33a781">
-  CSS Animation Transition Example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="CSS Animation Transition Example" slug="8627c50c5514752acd73d19f5e33a781" tab="html,result" :editable="false" />
 
 ### カスタムトランジションクラス
 
@@ -205,10 +195,10 @@ Vue.createApp(Demo).mount('#demo')
 
 - `enter-from-class`
 - `enter-active-class`
-- `enter-to-class` (2.1.8+)
+- `enter-to-class`
 - `leave-from-class`
 - `leave-active-class`
-- `leave-to-class` (2.1.8+)
+- `leave-to-class`
 
 これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
@@ -256,9 +246,7 @@ Vue はトランジションが終了したことを把握するためのイベ�
 
 ### 明示的なトランジション期間の設定
 
-TODO: validate and provide an example
-
-> 2.2.0 から新規追加
+<!-- TODO: validate and provide an example -->
 
 ほとんどの場合、 Vue は、自動的にトランジションが終了したことを見つけ出すことは可能です。デフォルトでは、 Vue はルート要素の初めの `transitionend` もしくは `animationend` イベントを待ちます。しかし、これが常に望む形とは限りません。例えば、幾つかの入れ子となっている内部要素にてトランジションの遅延がある場合や、ルートのトランジション要素よりも非常に長いトランジション期間を設けている場合の、一連のトランジションのまとまりなどです。
 
@@ -304,7 +292,8 @@ methods: {
   beforeEnter(el) {
     // ...
   },
-  // CSS と組み合わせて使う時、done コールバックはオプションです
+  // CSS と組み合わせて使う時、
+  // done コールバックはオプションです
   enter(el, done) {
     // ...
     done()
@@ -323,7 +312,8 @@ methods: {
   beforeLeave(el) {
     // ...
   },
-  // CSS と組み合わせて使う時、done コールバックはオプションです
+  // CSS と組み合わせて使う時、
+  // done コールバックはオプションです
   leave(el, done) {
     // ...
     done()
@@ -340,7 +330,7 @@ methods: {
 
 これらのフックは、CSS トランジション/アニメーション、または別の何かと組み合わせて使うことができます。
 
-JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。呼ばない場合は、フックは同期的に呼ばれ、トランジションはただちに終了します。また、 `:css="false"` を追加することで、CSS の検出をスキップすることを Vue に伝えられます。これによってわずかにパフォーマンスが改善するほか、CSS のルールの誤ったトランジションへの干渉を防ぐことができます。
+JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。呼ばない場合は、フックは同期的に呼ばれ、トランジションはただちに終了します。また、 `:css="false"` を追加することで、CSS の検出をスキップすることも Vue に伝えられます。これによってわずかにパフォーマンスが改善するほか、CSS のルールの誤ったトランジションへの干渉を防ぐことができます。
 
 今から例をみていきましょう。これは [GreenSock](https://greensock.com/) を使ったシンプルな JavaScript トランジションの例です:
 
@@ -411,12 +401,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028"  data-preview="true" data-default-tab="js,result" data-user="Vue" data-slug-hash="68ce1b8c41d0a6e71ff58df80fd85ae5" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript Hooks Transition">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/68ce1b8c41d0a6e71ff58df80fd85ae5">
-  JavaScript Hooks Transition</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="JavaScript Hooks Transition" slug="68ce1b8c41d0a6e71ff58df80fd85ae5" tab="js,result" :editable="false" />
 
 ## 初期描画時のトランジション
 
@@ -441,19 +426,19 @@ Vue.createApp(Demo).mount('#demo')
 </transition>
 ```
 
-`v-if` を複数使ったり、ひとつの要素に対して動的プロパティでバインディングを行ういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
+`v-if`/`v-else-if`/`v-else` を使ったり、ひとつの要素に対して動的プロパティでバインディングを行ういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
 
-TODO: rewrite example and put in codepen example
+<!-- TODO: rewrite example and put in codepen example -->
 
 ```html
 <transition>
   <button v-if="docState === 'saved'" key="saved">
     Edit
   </button>
-  <button v-if="docState === 'edited'" key="edited">
+  <button v-else-if="docState === 'edited'" key="edited">
     Save
   </button>
-  <button v-if="docState === 'editing'" key="editing">
+  <button v-else-if="docState === 'editing'" key="editing">
     Cancel
   </button>
 </transition>
@@ -486,23 +471,13 @@ computed: {
 
 まだひとつ問題が残っています。以下のボタンをクリックしてください:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="Rwrqzpr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Button Problem">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/Rwrqzpr">
-  Transition Modes Button Problem</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition Modes Button Problem" slug="Rwrqzpr" :editable="false" />
 
 それは、"on" ボタンと "off" ボタン間でトランジションを行うとき、片方のボタンがトランジションアウトして、別の片方がトランジションインするとき、両方のボタンが描画されてしまうことです。これは、`<transition>` のデフォルトの振る舞いです - entering と leaving は同時に起きます。
 
 時には、これで問題なく、うまく動作する場合があります。例えば、位置が絶対位置で指定されているアイテムのトランジションを行うような場合です:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="abdQgLr" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Button Problem- positioning">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abdQgLr">
-  Transition Modes Button Problem- positioning</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition Modes Button Problem- positioning" slug="abdQgLr" :editable="false" />
 
 ただ、そうするわけにはいかない場合や、より複雑な in と out の動きの扱いについてコーディネートする必要がある場合に、Vue は非常に便利な **トランジションモード** というユーティリティを提供しています。
 
@@ -521,41 +496,34 @@ computed: {
 </transition>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="ZEQmdvq" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Button Problem- solved">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/ZEQmdvq">
-  Transition Modes Button Problem- solved</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition Modes Button Problem- solved" slug="ZEQmdvq" :editable="false" />
 
 特別なスタイルの追加無しで、ひとつのシンプルな属性を追加するだけでオリジナルのトランジションを修正できました。
 
 これを利用することによって、以下のようなより表現力のある動きをコーディネートすることができます。二つの要素がお互いの間でトランジションしていますが、そのお互いの大きさが同じであり、水平方向の 0 の位置で重なるため、一つの要素の動きの流れに見えます。このような細かな調整は、よりリアルなマイクロインタラクションの表現で役立ちます:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="76e344bf057bd58b5936bba260b787a8" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition Modes Flip Cards">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/76e344bf057bd58b5936bba260b787a8">
-  Transition Modes Flip Cards</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition Modes Flip Cards" slug="76e344bf057bd58b5936bba260b787a8" :editable="false" />
 
 ## コンポーネント間のトランジション
 
 コンポーネント間のトランジションは、 `key` 属性が必要ではないのでさらに単純です。代わりに、ただ [動的コンポーネント](components.html#動的コンポーネント) でラップするだけです:
 
-TODO: update to Vue 3
-
 ```html
-<transition name="component-fade" mode="out-in">
-  <component :is="view"></component>
-</transition>
+<div id="demo">
+  <input v-model="view" type="radio" value="v-a" id="a"><label for="a">A</label>
+  <input v-model="view" type="radio" value="v-b" id="b"><label for="b">B</label>
+  <transition name="component-fade" mode="out-in">
+    <component :is="view"></component>
+  </transition>
+</div>
 ```
 
 ```js
-new Vue({
-  el: '#transition-components-demo',
-  data: {
-    view: 'v-a'
+const Demo = {
+  data() {
+    return {
+      view: 'v-a'
+    }
   },
   components: {
     'v-a': {
@@ -565,7 +533,9 @@ new Vue({
       template: '<div>Component B</div>'
     }
   }
-})
+}
+
+Vue.createApp(Demo).mount('#demo')
 ```
 
 ```css
@@ -573,10 +543,11 @@ new Vue({
 .component-fade-leave-active {
   transition: opacity 0.3s ease;
 }
-.component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active below version 2.1.8 */ {
+
+.component-fade-enter-from,
+.component-fade-leave-to {
   opacity: 0;
 }
 ```
 
-TODO: example
+<common-codepen-snippet title="Transitioning between components" slug="WNwVxZw" tab="html,result" theme="39028" />

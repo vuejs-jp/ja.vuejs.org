@@ -3,6 +3,7 @@
 データバインディングに一般に求められることの 1 つは、要素のクラスリストとインラインスタイルを操作することです。それらはどちらも属性であるため、`v-bind` を使って扱うことができます。最終的な文字列を式で計算するだけです。しかしながら、文字列の連結に手を出すのは煩わしく、エラーのもとです。そのため、Vue は `v-bind` が `class` と `style` と一緒に使われるとき、特別な拡張機能を提供します。文字列だけではなく、式はオブジェクトまたは配列を返すことができます。
 
 ## HTML クラスのバインディング
+<VideoLesson href="https://vueschool.io/lessons/dynamic-css-classes-with-vue-3?friend=vuejs" title="Free Vue.js Dynamic Classes Lesson">Watch a free video lesson on Vue School</VideoLesson>
 
 ### オブジェクト構文
 
@@ -228,9 +229,9 @@ data() {
 <div :style="[baseStyles, overridingStyles]"></div>
 ```
 
-### 自動プリフィックス
+### 自動プレフィックス
 
-`:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に適切な接頭辞を検出し、適用されるスタイルに追加します。
+`:style` で [ベンダープレフィックス](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix) が必要な CSS プロパティを使用するとき、Vue は自動的に適切なプレフィックスを追加します。Vue は現在のブラウザでどのスタイルプロパティがサポートされているかを実行時に確認することでこれを行います。ブラウザが特定のプロパティをサポートしていない場合は、様々なプレフィックスのバリエーションがテストされて、サポートされているものを見つけようとします。
 
 ### 複数の値
 

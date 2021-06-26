@@ -1,6 +1,6 @@
 # テンプレート構文
 
-Vue.js では HTML ベースのテンプレート構文を使っているので、Vue インスタンスのデータと描画された DOM を宣言的に対応させることができます。全ての Vue.js テンプレートは、仕様に準拠しているブラウザや HTML パーサによってパースできる有効な HTML です。
+Vue.js では HTML ベースのテンプレート構文を使っているので、コンポーネントインスタンスのデータと描画された DOM を宣言的に対応させることができます。全ての Vue.js テンプレートは、仕様に準拠しているブラウザや HTML パーサによってパースできる有効な HTML です。
 
 内部では、Vue はテンプレートを仮想 (Virtual) DOM の描画 (render) 関数にコンパイルします。リアクティブシステムと組み合わせて、Vue は再描画に必要なコンポーネントをインテリジェントに把握でき、アプリケーションの状態が変わった時に最低限の DOM 操作を適用します
 
@@ -16,7 +16,7 @@ Vue.js では HTML ベースのテンプレート構文を使っているので�
 <span>Message: {{ msg }}</span>
 ```
 
-mustache タグは、対応するオブジェクトの `msg` プロパティの値に置き換えられます。また、`msg` プロパティが変更される時、それに応じて更新されます。
+mustache タグは、対応するコンポーネントインスタンスから `msg` プロパティの値に置き換えられます。また、`msg` プロパティが変更される時、それに応じて更新されます。
 
 [v-once ディレクティブ](../api/directives.html#v-once)を使用することで、データ変更時の更新はおこなわず、一度だけ展開することができます。ただし、同じノードのあらゆる他のバインディングが影響を受けることに注意してください:
 
@@ -33,12 +33,7 @@ mustache タグは、対応するオブジェクトの `msg` プロパティの�
 <p>Using v-html directive: <span v-html="rawHtml"></span></p>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="yLNEJJM" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Rendering v-html">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/yLNEJJM">
-  Rendering v-html</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Rendering v-html" slug="yLNEJJM" :preview="false" />
 
 この `span` のコンテンツは `rawHtml` プロパティの値に置き換えられ、プレーンな HTML として解釈されます。Vue は、文字列ベースのテンプレートエンジンではないので、`v-html` をテンプレート部品を構成して使用できないことに注意しましょう。代わりに、UI の再利用や組み合わせのための基礎として、コンポーネントを利用することが好ましいです。
 
@@ -48,32 +43,37 @@ mustache タグは、対応するオブジェクトの `msg` プロパティの�
 
 ### 属性
 
-Mustache は、HTML 属性の内部で使用することはできません。代わりに、[`v-bind` ディレクティブ](../api/#v-bind)を使用してください:
+Mustache は、HTML 属性の内部で使用することはできません。代わりに、[`v-bind` ディレクティブ](../api/directives.html#v-bind)を使用してください:
 
 ```html
 <div v-bind:id="dynamicId"></div>
 ```
 
-属性が単に存在していることを `true` と示すといった真偽値属性の場合、`v-bind` は少し異なった働きをします。この例では:
+バインドされた値が `null` や `undefined` の場合、その属性はレンダリングされた要素には含まれません。
+
+属性が単に存在していることを `true` と示すといった真偽値属性の場合、`v-bind` は少し異なった働きをします。例えば:
 
 ```html
 <button v-bind:disabled="isButtonDisabled">Button</button>
 ```
 
-`isButtonDisabled` が `null` または `undefined` の場合、`disabled` 属性は描画された `<button>` 要素に含められません。
+`isButtonDisabled` が真の値をもつ場合、 `disabled` 属性は含められます。また、 `<button disabled="">` との整合性を保つために、値が空文字である場合も含まれます。その他の偽の値の場合、この属性は省略されます。
 
 ### JavaScript 式の使用
 
 これまで、テンプレートに単純なキーをバインディングしてきました。実際には Vue.js は全てのデータバインディング内部で JavaScript 式を完全にサポートします:
 
 ```html
-{{ number + 1 }} {{ ok ? 'YES' : 'NO' }} {{ message.split('').reverse().join('')
-}}
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
 
 <div v-bind:id="'list-' + id"></div>
 ```
 
-これらの式は、Vue インスタンスが所有するデータスコープ内で JavaScript として評価されます。制限として、それぞれのバインディングは、**単一の式**だけ含むことができるというものです。なので、以下は動作**しません**:
+これらの式は、現在のアクティブなインスタンスのデータスコープ内で JavaScript として評価されます。制限として、それぞれのバインディングは、**単一の式**だけ含むことができるというものです。なので、以下は動作**しません**:
 
 ```html
 <!-- これは文であり、式ではありません: -->
@@ -122,7 +122,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <a v-bind:[attributeName]="url"> ... </a>
 ```
 
-ここで `attributeName` は JavaScript 式として動的に評価され、その評価結果が引数の最終的な値として使われます。例えば、Vue インスタンスが `"href"` という値の `attributeName` という data プロパティをもつ場合、このバインディングは `v-bind:href` と等しくなります。
+ここで `attributeName` は JavaScript 式として動的に評価され、その評価結果が引数の最終的な値として使われます。例えば、コンポーネントインスタンスが `"href"` という値の `attributeName` という data プロパティをもつ場合、このバインディングは `v-bind:href` と等しくなります。
 
 同様に、動的なイベント名にハンドラをバインドするために動的引数を使うこともできます:
 
@@ -206,4 +206,4 @@ in-DOM テンプレートの中では、v-bind:[someattr] に変換されます�
 
 #### JavaScript 式 の制約
 
-テンプレート式はサンドボックスで、`Math` や `Date` といった [ホワイトリストにあるグローバルオブジェクト](https://github.com/vuejs/vue-next/blob/master/packages/shared/src/globalsWhitelist.ts#L3)だけにアクセスできます。テンプレート式内でユーザーが定義したグローバルオブジェクトにアクセスしようとしてはいけません。
+テンプレート式はサンドボックス化されていて、 `Math` や `Date` といった [グローバルオブジェクトの制限リスト](https://github.com/vuejs/vue-next/blob/master/packages/shared/src/globalsWhitelist.ts#L3) にだけアクセスできます。テンプレート式内でユーザーが定義したグローバルオブジェクトにアクセスしようとしてはいけません。

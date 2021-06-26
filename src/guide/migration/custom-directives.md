@@ -7,13 +7,9 @@ badges:
 
 ## 概要
 
-変更点の概要は次のとおりです。
+コンポーネントのライフサイクルに合わせて、ディレクティブのフック関数の名称が変更されました。
 
-- API は、コンポーネントのライフサイクルとの整合性を高めるために名前が変更されました
-
-詳細については、以下をお読みください。
-
-## 2.x の文法
+## 2.x での構文
 
 Vue 2 では、以下のフックを使用して要素のライフサイクルをターゲットにしたカスタムディレクティブが作成していました。これらはすべてオプションです。
 
@@ -39,11 +35,11 @@ Vue.directive('highlight', {
 
 この要素の初期設定では、ディレクティブは値を渡してスタイルをバインドします。値は、アプリケーションにてさまざまな値に更新できます。
 
-## 3.x の文法
-
+## 3.x での構文
 
 ただし、Vue 3 では、カスタムディレクティブ用のよりまとまりのある API を作成しました。Vue 2 では、似たようなイベントにフックしているにもかかわらず、コンポーネントのライフサイクルメソッドとは大きく異なります。これらを次のように統合しました。
 
+- **created** - 追加されました! これは、要素の属性やイベントリスナーが適用される前に呼び出されます。
 - bind → **beforeMount**
 - inserted → **mounted**
 - **beforeUpdate**: 追加されました! これは、コンポーネントのライフサイクルフックのように、要素自体が更新される前に呼び出されます。
@@ -56,9 +52,10 @@ Vue.directive('highlight', {
 
 ```js
 const MyDirective = {
-  beforeMount(el, binding, vnode, prevVnode) {},
+  created(el, binding, vnode, prevVnode) {}, // new
+  beforeMount() {},
   mounted() {},
-  beforeUpdate() {},
+  beforeUpdate() {}, // 追加
   updated() {},
   beforeUnmount() {}, // 追加
   unmounted() {}
@@ -89,7 +86,7 @@ app.directive('highlight', {
 
 Vue 2 では、コンポーネントインスタンスは `vnode` 引数を使ってアクセスする必要がありました。
 
-```javascript
+```js
 bind(el, binding, vnode) {
   const vm = vnode.context
 }
@@ -97,12 +94,16 @@ bind(el, binding, vnode) {
 
 Vue 3 では、インスタンスは `binding` の一部になりました。
 
-```javascript
+```js
 mounted(el, binding, vnode) {
   const vm = binding.instance
 }
 ```
 
 :::warning
-[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がスローされます。
+[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、カスタムディレクティブは無視され、警告がログ出力されます。
 :::
+
+## 移行の戦略
+
+[移行ビルドのフラグ: `CUSTOM_DIR`](migration-build.html#compat-の設定)

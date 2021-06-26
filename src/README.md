@@ -11,7 +11,7 @@ actionButtons:
   - text: はじめる
     link: /guide/introduction
   - text: GitHub
-    link: https://github.com/vuejs/vue
+    link: https://github.com/vuejs/vue-next
     extraClass: github grey
     icon: fa fa-github
     target: _blank
@@ -27,10 +27,10 @@ features:
       最小限の努力で最適化が可能
 footer: |
   Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a><br>
-  Copyright © 2014-2020 Evan You
+  Copyright © 2014-2021 Evan You
 socialIcons:
   - type: GitHub
-    link: https://github.com/vuejs/vue
+    link: https://github.com/vuejs/vue-next
   - type: Twitter
     link: https://twitter.com/vuejs
   - type: Medium

@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "node-sass": "^4.13.1",
+    "@vuepress/plugin-pwa": "^1.5.4",
+    "sass": "^1.32.0",
     "sass-loader": "^8.0.2",
     "shelljs": "^0.8.4",
     "textlint": "^11.7.6",
@@ -11,6 +12,7 @@
     "vuepress": "^1.5.4"
   },
   "scripts": {
+    "dev": "yarn serve",
     "serve": "vuepress dev src",
     "build": "vuepress build src",
     "test": "npm run lint",

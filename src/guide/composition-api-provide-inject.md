@@ -1,12 +1,12 @@
 # Provide / Inject
 
-> このページは、すでに [Provide / Inject](component-provide-inject.html)、[コンポジション API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
+> このページは、すでに [Provide / Inject](component-provide-inject.html)、[Composition API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
 
-[provide / inject](component-provide-inject.html) は コンポジション API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
+[provide / inject](component-provide-inject.html) は Composition API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
 
 ## シナリオの背景
 
-これから、コンポジション API を使用して、以下のコードを書き直そうとしているとしましょう。以下のコードでは、`MyMap` コンポーネントが `MyMaker` コンポーネントにユーザの位置情報を提供しています。
+これから、Composition API を使用して、以下のコードを書き直そうとしているとしましょう。以下のコードでは、`MyMap` コンポーネントが `MyMarker` コンポーネントにユーザの位置情報を提供しています。
 
 ```vue
 <!-- src/components/MyMap.vue -->
@@ -36,7 +36,7 @@ export default {
 <!-- src/components/MyMarker.vue -->
 <script>
 export default {
-  inject: ['location', 'longitude', 'latitude']
+  inject: ['location', 'geolocation']
 }
 </script>
 ```
@@ -60,7 +60,7 @@ export default {
 
 <script>
 import { provide } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -86,7 +86,7 @@ export default {
 1. 注入されるプロパティ名
 2. デフォルト値 (**任意**)
 
-`MyMaker` コンポーネントは、以下のようにリファクタリングすることができます:
+`MyMarker` コンポーネントは、以下のようにリファクタリングすることができます:
 
 ```vue{3,6-14}
 <!-- src/components/MyMarker.vue -->
@@ -111,7 +111,7 @@ export default {
 
 ### リアクティブの追加
 
-提供された値と注入された値をリアクティブにするには、値を提供する際に [ref](reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs) または [reactive](reactivity-fundamentals.html#declaring-reactive-state) を使います。
+提供された値と注入された値をリアクティブにするには、値を提供する際に [ref](reactivity-fundamentals.html#独立したリアクティブな値を-参照-として作成する) または [reactive](reactivity-fundamentals.html#リアクティブな状態の宣言) を使います。
 
 `MyMap` コンポーネントは、以下のように変更できます:
 
@@ -123,7 +123,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -143,7 +143,7 @@ export default {
 </script>
 ```
 
-これで、どちらかのプロパティに何か変更があった場合、`MyMaker` コンポーネントも自動的に更新されるようになります。
+これで、どちらかのプロパティに何か変更があった場合、`MyMarker` コンポーネントも自動的に更新されるようになります。
 
 ### リアクティブプロパティの変更
 
@@ -159,7 +159,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -198,7 +198,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -254,7 +254,7 @@ export default {
 
 <script>
 import { provide, reactive, readonly, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {

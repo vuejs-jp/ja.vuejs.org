@@ -27,7 +27,7 @@ Vue 2 では、関数型コンポーネントには 2 つの主要なユース�
 
 その結果、関数型コンポーネントに残った唯一のユースケースは、動的な見出しを作成するためのコンポーネントのようなシンプルなものだけです。それ以外の場合は、通常どおりステートフルコンポーネントを使用することをお勧めします。
 
-## 2.x のシンタックス
+## 2.x での構文
 
 `<dynamic-heading>` コンポーネントを使うと、適切な見出し（つまり `h1`, `h2`, `h3` など）のレンダリングを担当するコンポーネントは 2.x では単一ファイルコンポーネントとして次のように記述できました:
 
@@ -44,8 +44,8 @@ export default {
 
 または、単一ファイルコンポーネントの `<template>` を好む人向けに:
 
-```js
-// Vue 2 での <template> を使用した関数型コンポーネントの例
+```vue
+<!-- Vue 2 での <template> を使用した関数型コンポーネントの例 -->
 <template functional>
   <component
     :is="`h${props.level}`"
@@ -61,7 +61,7 @@ export default {
 </script>
 ```
 
-## 3.x のシンタックス
+## 3.x での構文
 
 ### 関数で作られるコンポーネント
 
@@ -87,14 +87,14 @@ export default DynamicHeading
 
 ### 単一ファイルコンポーネント (SFC)
 
-3.x では、ステートフルコンポーネントと関数型コンポーネントのパフォーマンスの差は大幅に減少し、ほとんどのユースケースでは重要ではないでしょう。その結果、単一ファイルコンポーネントで `functional` を使用している開発者の移行方法は、その属性を削除することです。 追加の作業は必要ありません。
+3.x では、ステートフルコンポーネントと関数型コンポーネントのパフォーマンスの差は大幅に減少し、ほとんどのユースケースでは重要ではないでしょう。その結果、単一ファイルコンポーネントで `functional` を使用している開発者の移行方法は、この属性を削除して、 `props` を `$props` に、 `attrs` を `$attrs` にすべての参照を変更することになります。
 
 先ほどの `<dynamic-heading>` の例を使うと、次のようになります。
 
-```js{1}
+```vue{1,3,4}
 <template>
   <component
-    v-bind:is="`h${props.level}`"
+    v-bind:is="`h${$props.level}`"
     v-bind="$attrs"
   />
 </template>
@@ -117,3 +117,4 @@ export default {
 
 - [移行: Render 関数](/guide/migration/render-function-api.html)
 - [ガイド: Render 関数](/guide/render-function.html)
+- [移行ビルドのフラグ: `COMPONENT_FUNCTIONAL`](migration-build.html#compat-の設定)

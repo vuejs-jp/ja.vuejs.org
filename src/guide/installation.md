@@ -1,16 +1,25 @@
 # インストール
 
+Vue.js は、段階的に導入できるように設計されています。これは要件に応じて、複数の方法でプロジェクトに組み込むことができることを意味します。
+
+Vue.js をプロジェクトに追加するには主に4つの方法があります:
+
+1. ページ上で [CDN パッケージ](#cdn) として取り込む
+2. JavaScript ファイルをダウンロードして、 [自分でホストする](#自分でホストする)
+3. [npm](#npm) を使ってインストールする
+4. 公式の [CLI](#cli) を使ってプロジェクトの基礎を作る。これはモダンなフロントエンドのワークフローのためのバッテリー同梱のようなビルドセットアップを提供します (例えば、ホットリロード、保存時に Lint など)
+
 ## リリースノート
 
-最新のベータバージョン: 3.0.0-rc.5
+最新のバージョン: ![npm](https://img.shields.io/npm/v/vue/next.svg)
 
-各バージョンの詳細なリリースノートは、 [GitHub](https://github.com/vuejs/vue-next/releases) で入手できます。
+各バージョンの詳細なリリースノートは、 [GitHub](https://github.com/vuejs/vue-next/blob/master/CHANGELOG.md) で入手できます。
 
 ## Vue Devtools
 
-> 現在、ベータ版です。
+> 現在ベータ版 - Vuex と Router の統合は WIP です
 
-> Vue 3 向けの Vue Devtools の利用には、`vue@^3.0.0-rc.1` 以上が必要です。
+<VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Learn how to install Vue Devtools on Vue School">Learn how to install and use Vue Devtools in a free Vue School lesson</VideoLesson>
 
 Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
@@ -30,9 +39,15 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします。
 
-## NPM
+## 自分でホストする
 
-Vue による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Browserify](http://browserify.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
+ビルドツールの使用を避けたいが、本番環境で CDN を使用できない場合は、関連する `.js` ファイルをダウンロードして、自分のウェブサーバを使ってホストすることができます。CDN の場合と同じように `<script>` タグを使って導入することができます。
+
+ファイルは [unpkg](https://unpkg.com/browse/vue@next/dist/) や [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/) などの CDN から閲覧、ダウンロードすることができます。様々な異なるファイルは [後で説明しますが](#さまざまなビルドについて) 、通常は開発用のビルドと本番用のビルドの両方をダウンロードすることになります。
+
+## npm
+
+Vue による大規模アプリケーションを構築するときには、npm を利用したインストールを推奨します。[Webpack](https://webpack.js.org/) または [Rollup](https://rollupjs.org/) のようなモジュールバンドラーとうまく組み合わせることができます。Vue は[単一ファイルコンポーネント](../guide/single-file-component.html)を作成するための、付随するツールも提供しています。
 
 ```bash
 # 最新安定版
@@ -44,15 +59,15 @@ $ npm install vue@next
 大規模なシングルページアプリケーション開発の足場を素早く組むために、Vue は [公式 CLI](https://github.com/vuejs/vue-cli) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、本番リリースのビルドができるようになるまでには、ほんの数分しかかかりません。より詳細は [Vue CLI ドキュメント](https://cli.vuejs.org) を参照してください。
 
 ::: tip
-CLI は Node.js と関連するビルドツールに関する予備知識を前提としています。もし、Vue またはフロントエンドビルドツールを初めて使用する場合は、CLI を使用する前に、ビルドツールなしで<a href="./">ガイド</a>を参照することを強くお勧めします。
+CLI は Node.js と関連するビルドツールに関する予備知識を前提としています。もし、Vue またはフロントエンドビルドツールを初めて使用する場合は、CLI を使用する前に、ビルドツールなしで [ガイド](./introduction.html) を参照することを強くお勧めします。
 :::
 
-`npm` 上で `@vue/cli@next` として、Vue 3 向けの Vue CLI v4.5 が利用可能です。以前のバージョンからアップグレードする場合は、以下のように `@vue/cli` をグローバルに再インストールしてください:
+`npm` 上で `@vue/cli` として、Vue 3 向けの Vue CLI v4.5 が利用可能です。以前のバージョンからアップグレードする場合は、以下のように `@vue/cli` をグローバルに再インストールしてください:
 
 ```bash
-yarn global add @vue/cli@next
+yarn global add @vue/cli
 # または
-npm install -g @vue/cli@next
+npm install -g @vue/cli
 ```
 
 その後、Vue プロジェクト内で以下を実行します
@@ -67,10 +82,10 @@ vue upgrade --next
 
 次のコマンドをターミナルで実行すると Vite ですぐに Vue プロジェクトをセットアップできます。
 
-NPM の場合:
+npm の場合:
 
 ```bash
-$ npm init vite-app <プロジェクト名>
+$ npm init @vitejs/app <プロジェクト名>
 $ cd <プロジェクト名>
 $ npm install
 $ npm run dev
@@ -79,15 +94,21 @@ $ npm run dev
 または Yarn の場合:
 
 ```bash
-$ yarn create vite-app <project-name>
-$ cd <project-name>
+$ yarn create @vitejs/app <プロジェクト名>
+$ cd <プロジェクト名>
 $ yarn
 $ yarn dev
 ```
 
+ユーザ名に「Mike Baker」のように空白が入っていると、 Vite が成功しないことがあります。次を試してみてください。
+
+```bash
+$ create-vite-app <プロジェクト名>
+```
+
 ## さまざまなビルドについて
 
-[NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue@3.0.0-rc.1/dist/) には、Vue.js の多くのさまざまなビルドが見つかります。利用用途ごとに `dist` ファイルの使い分けの概要を説明します。
+[npm パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/) には、Vue.js の多くのさまざまなビルドが見つかります。利用用途ごとに `dist` ファイルの使い分けの概要を説明します。
 
 ### CDN を利用、またはバンドラーを使用しない場合
 

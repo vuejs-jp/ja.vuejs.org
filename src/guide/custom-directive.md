@@ -4,14 +4,9 @@
 
 Vue.js 本体で提供されているデフォルトのディレクティブ (`v-model` や `v-show`) に加えて、独自のカスタムディレクティブ (custom directives) を登録することも可能です。Vue ではコードの再利用や抽象化の基本形はコンポーネントです。しかしながら、単純な要素への低レベルな DOM のアクセスが必要なケースがあるかもしれません。こういったケースにカスタムディレクティブが役に立つことでしょう。以下のような input 要素へのフォーカスが１つの例として挙げられます:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="JjdxaJW" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Custom directives: basic example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/JjdxaJW">
-  Custom directives: basic example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Custom directives: basic example" slug="JjdxaJW" :preview="false" />
 
-ページを読み込むと、この要素にフォーカスが当たります (注意：`autofucus` はモバイルの Safari で動きません)。実際、このページに訪れてから他に何もクリックしなければ、上記の input 要素にフォーカスが当たります。また、`Rerun` ボタンをクリックしても、input 要素はフォーカスされます。
+ページを読み込むと、この要素にフォーカスが当たります (注意：`autofocus` はモバイルの Safari で動きません)。実際、このページに訪れてから他に何もクリックしなければ、上記の input 要素にフォーカスが当たります。また、`Rerun` ボタンをクリックしても、input 要素はフォーカスされます。
 
 ここからこれを実現するディレクティブを実装しましょう:
 
@@ -50,14 +45,16 @@ directives: {
 
 ディレクティブの定義オブジェクトは、いくつかのフック関数を提供しています (全てオプション):
 
-- `beforeMount`: ディレクティブが初めて要素に束縛された時、そして親コンポーネントがマウントされる前に呼ばれます。ここは1度だけ実行するセットアップ処理を行える場所です。
+- `created`: 束縛された要素の属性や、イベントリスナが適用される前に呼ばれます。これは通常の `v-on` イベントリスナの前に呼ばれなければならないイベントリスナをつける必要がある場合に便利です。
+
+- `beforeMount`: ディレクティブが最初に要素に束縛されたとき、親コンポーネントがマウントされる前に呼ばれます。
 
 - `mounted`: 束縛された要素の親コンポーネントがマウントされた時に呼ばれます。
 
 - `beforeUpdate`: 束縛された要素を含むコンポーネントの VNode が更新される前に呼ばれます。
 
 :::tip Note
-VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱います。描画関数を説明する時です。
+VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱います。Render 関数を説明する時です。
 :::
 
 - `updated`: 束縛された要素を含むコンポーネントの VNode **とその子コンポーネントの VNode** が更新された後に呼ばれます。
@@ -127,12 +124,7 @@ app.mount('#dynamic-arguments-example')
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="YzXgGmv" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Custom directives: dynamic arguments">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/YzXgGmv">
-  Custom directives: dynamic arguments</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Custom directives: dynamic arguments" slug="YzXgGmv" :preview="false" />
 
 このカスタムディレクティブは、いくつかの違うユースケースをサポートできるほど柔軟になりました。さらに動的にするには、束縛した値を修正できるようにすれば良いでしょう。`pinPadding` という追加のプロパティを作成して、`<input type="range">` に束縛してみましょう。
 
@@ -140,7 +132,7 @@ app.mount('#dynamic-arguments-example')
 <div id="dynamicexample">
   <h2>Scroll down the page</h2>
   <input type="range" min="0" max="500" v-model="pinPadding">
-  <p v-pin:[direction]="pinPadding">Stick me 200px from the {{ direction }} of the page</p>
+  <p v-pin:[direction]="pinPadding">Stick me {{ pinPadding + 'px' }} from the {{ direction || 'top' }} of the page</p>
 </div>
 ```
 
@@ -173,16 +165,11 @@ app.directive('pin', {
 
 結果:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="rNOaZpj" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Custom directives: dynamic arguments + dynamic binding">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/rNOaZpj">
-  Custom directives: dynamic arguments + dynamic binding</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Custom directives: dynamic arguments + dynamic binding" slug="rNOaZpj" :preview="false" />
 
 ## 関数による省略記法
 
-前回の例では、`mounted` と `updated` に同じ振る舞いを欲しかったでしょう。しかし、その他のフック関数を気にしてはいけません。ディレクティブにコールバックを渡すことで実現できます:
+前の例では、`mounted` と `updated` に同じ振る舞いをさせたいが、その他のフックは気にしない、という場合があります。そのような場合は、ディレクティブにコールバックを渡すことで実現できます:
 
 ```js
 app.directive('pin', (el, binding) => {
@@ -207,42 +194,24 @@ app.directive('demo', (el, binding) => {
 })
 ```
 
-## コンポーネントにおける使用法
+## コンポーネントでの使い方
 
-3.0 ではフラグメントがサポートされているため、コンポーネントは潜在的に１つ以上のルートノードを持つことができます。これは複数のルートノードを持つ１つのコンポーネントにカスタムディレクティブが使用された時に、問題を引き起こします。
-
-3.0 のコンポーネント上でどのようにカスタムディレクティブが動作するかを詳細に説明するために、3.0 においてカスタムディレクティブがどのようにコンパイルされるのかをまずは理解する必要があります。以下のようなディレクティブは:
+コンポーネントに使われた場合、カスタムディレクティブは [プロパティでない属性](component-attrs.html) と同じように、常にコンポーネントのルートノードに適用されます
 
 ```vue-html
-<div v-demo="test"></div>
+<my-component v-demo="test"></my-component>
 ```
-
-おおよそ以下のようにコンパイルされます:
 
 ```js
-const vDemo = resolveDirective('demo')
-
-return withDirectives(h('div'), [[vDemo, test]])
+app.component('my-component', {
+  template: `
+    <div> // v-demo ディレクティブはここで適用される
+      <span>My component content</span>
+    </div>
+  `
+})
 ```
 
-ここで `vDemo` はユーザによって記述されたディレクティブオブジェクトで、それは `mounted` や `updated` のフック関数を含みます。
+属性とは異なり、ディレクティブは `v-bind="$attrs"` で別の要素に渡すことはできません。
 
-`withDirectives` は複製した VNode を返します。複製された VNode は VNode のライフサイクルフック (詳細は[描画関数](render-function.html)を参照) としてラップ、注入されたユーザのフック関数を持ちます:
-
-```js
-{
-  onVnodeMounted(vnode) {
-    // vDemo.mounted(...) を呼びます
-  }
-}
-```
-
-**結果として、VNode のデータの一部としてカスタムディレクティブは全て含まれます。カスタムディレクティブがコンポーネントで利用される場合、これらの `onVnodeXXX` フック関数は無関係な props としてコンポーネントに渡され、最終的に `this.$attrs` になります。**
-
-これは以下のようなテンプレートのように、要素のライフサイクルに直接フックできることを意味しています。これはカスタムディレクティブが複雑すぎる場合に便利です:
-
-```vue-html
-<div @vnodeMounted="myHook" />
-```
-
-これは [属性のフォールスロー](component-attrs.html) と一貫性があります。つまり、コンポーネントにおけるカスタムディレクティブのルールは、その他の異質な属性と同じです: それをどこにまた適用するかどうかを決めるのは、子コンポーネント次第です。子コンポーネントが内部の要素に `v-bind="$attrs"` を利用している場合、あらゆるカスタムディレクティブもその要素に適用されます。
+[Fragments](/guide/migration/fragments.html#overview) のサポートによって、コンポーネントは複数のルートノードを持つことができます。マルチルートコンポーネントに適用された場合、ディレクティブは無視され、警告が投げられます。

@@ -4,35 +4,31 @@
 
 ## イベント名
 
-コンポーネントやプロパティとは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり発火されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
+コンポーネントやプロパティと同じように、イベント名は大文字と小文字を自動的に変換します。子コンポーネントからキャメルケースでイベントを発行すると、親コンポーネントではケバブケースのリスナを追加できるようになります:
 
 ```js
 this.$emit('myEvent')
 ```
 
-ケバブケース(kebab-case)でリスナ名を作っても何も起こりません:
-
 ```html
-<!-- Won't work -->
 <my-component @my-event="doSomething"></my-component>
 ```
 
-イベント名は JavaScript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)またはパスカルケース(PascalCase)を使用する理由はありません。 さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます ( HTML が大文字と小文字を判別しないため)。このため `@myEvent` は `@myevent` になり `myEvent` にリスナが反応することができなくなります。
-
-こういった理由から **いつもケバブケース(kebab-case)を使うこと** をお薦めします。
+[プロパティの形式](/guide/component-props.html#プロパティの形式-キャメルケース-vs-ケバブケース) と同じように、DOM 内テンプレートを使っている場合は、ケバブケースのイベントリスナを使うことをお勧めします。文字列テンプレートを使っている場合は、この制約は適用されません。
 
 ## カスタムイベントの定義
+
+<VideoLesson href="https://vueschool.io/lessons/defining-custom-events-emits?friend=vuejs" title="Vue School でコンポーネントが発行できるイベントを定義する方法を学ぶ">Vue School でカスタムイベントの定義についての無料ビデオを視聴する</VideoLesson>
 
 発行されたイベントは、 `emits` オプションを介して、コンポーネントで定義することが出来ます。
 
 ```js
 app.component('custom-form', {
-  emits: ['in-focus', 'submit']
+  emits: ['inFocus', 'submit']
 })
 ```
 
-
-ネイティブイベント（例、 `click` など）が `emits` オプションで定義されている場合、ネイティブリスナーとして扱われるのではなく、コンポーネントのイベントによって上書きされます。
+ネイティブイベント（例、 `click` など）が `emits` オプションで定義されている場合、ネイティブイベントリスナの **代わりに** コンポーネントのイベントが使われます。
 
 ::: tip
 コンポーネントの動作を実証するために、全ての発行されたイベントを定義することをお勧めします。
@@ -61,7 +57,7 @@ app.component('custom-form', {
     }
   },
   methods: {
-    submitForm() {
+    submitForm(email, password) {
       this.$emit('submit', { email, password })
     }
   }
@@ -73,28 +69,28 @@ app.component('custom-form', {
 デフォルトでは、コンポーネントの `v-model` はプロパティとして `modelValue` を使用し、イベントとして `update:modelValue` を使用します。`v-model` 引数を渡してこれらの名前の変更が出来ます。
 
 ```html
-<my-component v-model:foo="bar"></my-component>
+<my-component v-model:title="bookTitle"></my-component>
 ```
-この場合、子コンポーネントは `foo` プロパティを期待し、同期するために `update:foo` イベントを発行します。
+
+この場合、子コンポーネントは `title` プロパティを期待し、同期するために `update:title` イベントを発行します。
 
 ```js
-const app = Vue.createApp({})
-
 app.component('my-component', {
   props: {
-    foo: String
+    title: String
   },
+  emits: ['update:title'],
   template: `
     <input
       type="text"
-      :value="foo"
-      @input="$emit('update:foo', $event.target.value)">
+      :value="title"
+      @input="$emit('update:title', $event.target.value)">
   `
 })
 ```
 
 ```html
-<my-component v-model:foo="bar"></my-component>
+<my-component v-model:title="bookTitle"></my-component>
 ```
 
 ## 複数の `v-model` のバインディング
@@ -111,13 +107,12 @@ app.component('my-component', {
 ```
 
 ```js
-const app = Vue.createApp({})
-
 app.component('user-name', {
   props: {
     firstName: String,
     lastName: String
   },
+  emits: ['update:firstName', 'update:lastName'],
   template: `
     <input
       type="text"
@@ -132,27 +127,20 @@ app.component('user-name', {
 })
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="GRoPPrM" data-preview="true" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Multiple v-models">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/GRoPPrM">
-  Multiple v-models</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Multiple v-models" slug="GRoPPrM" tab="html,result" />
 
 ## `v-model` 修飾子の処理
 
-When we were learning about form input bindings, we saw that `v-model` has [built-in modifiers](/guide/forms.html#modifiers) - `.trim`, `.number` and `.lazy`. In some cases, however, you might also want to add your own custom modifiers.
+フォーム入力バインディングについて学習していたときに、 `v-model` に [組み込み修飾子](/guide/forms.html#modifiers) - `.trim`、`.number`、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
 
-フォーム入力バインディングについて学習していたときに、 `v-model`に [組み込み修飾子](/guide/forms.html#modifiers) -`.trim` 、 `.number` 、および `.lazy` があることがわかりました。ただし、場合によっては、独自のカスタム修飾子を追加することもできます。
-
-`v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize`を作成してみましょう。
+`v-model` バインディングによって提供される文字列の最初の文字を大文字にするカスタム修飾子の例、`capitalize` を作成してみましょう。
 
 コンポーネント `v-model` に追加された修飾子は、`modelModifiers` プロパティを介してコンポーネントに提供されます。以下の例では、デフォルトで空のオブジェクトになる `modelModifiers` プロパティを含むコンポーネントを作成しました。
 
-コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は`true` になります。これは、 `v-model` バインディングに `v-model.capitalize = "var"` が設定されているためです。
+コンポーネントの `created` ライフサイクルフックがトリガーされると、`modelModifiers` プロパティには `capitalize` が含まれ、その値は `true` になります。これは、 `v-model` バインディングに `v-model.capitalize="myText"` が設定されているためです。
 
 ```html
-<my-component v-model.capitalize="bar"></my-component>
+<my-component v-model.capitalize="myText"></my-component>
 ```
 
 ```js
@@ -163,6 +151,7 @@ app.component('my-component', {
       default: () => ({})
     }
   },
+  emits: ['update:modelValue'],
   template: `
     <input type="text"
       :value="modelValue"
@@ -199,6 +188,7 @@ app.component('my-component', {
       default: () => ({})
     }
   },
+  emits: ['update:modelValue'],
   methods: {
     emitValue(e) {
       let value = e.target.value
@@ -220,19 +210,20 @@ app.mount('#app')
 引数を持つ `v-model` バインディングの場合、生成されるプロパティ名は `arg + "Modifiers"` になります。
 
 ```html
-<my-component v-model:foo.capitalize="bar"></my-component>
+<my-component v-model:description.capitalize="myText"></my-component>
 ```
 
 ```js
 app.component('my-component', {
-  props: ['foo', 'fooModifiers'],
+  props: ['description', 'descriptionModifiers'],
+  emits: ['update:description'],
   template: `
     <input type="text"
-      :value="foo"
-      @input="$emit('update:foo', $event.target.value)">
+      :value="description"
+      @input="$emit('update:description', $event.target.value)">
   `,
   created() {
-    console.log(this.fooModifiers) // { capitalize: true }
+    console.log(this.descriptionModifiers) // { capitalize: true }
   }
 })
 ```

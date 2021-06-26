@@ -5,14 +5,14 @@
 - 個別のノード
 - 一度だけレンダリングされる複数のノード
 
-その上で、例えば `v-for` のように、全てをまとめてレンダーしたいリスト全体がある場合はどうしましょうか？このような場合では、 `<transition-group>` コンポーネントを利用します。ですが具体的な例を見る前に、コンポーネントについていくつかの重要なことを知っておく必要があります:
+その上で、例えば `v-for` のように、全てをまとめてレンダリングしたいリスト全体がある場合はどうしましょうか？このような場合では、 `<transition-group>` コンポーネントを利用します。ですが具体的な例を見る前に、コンポーネントについていくつかの重要なことを知っておく必要があります:
 
-- `<transition>` とは異なり、デフォルトで実際の `<span>` 要素をレンダリングします。レンダリングされる要素は、 `tag` 属性によって変更できます。
-- 2つの排他の要素が切り替わっているわけではないため、[Transition モード](/guide/transitions-enterleave#transition-modes) は利用できません。
+- デフォルトでは、ラッパー要素はレンダリングされませんが、 `tag` 属性でレンダリングする要素を指定することができます。
+- 2つの排他の要素が切り替わっているわけではないため、[トランジションモード](/guide/transitions-enterleave#トランジションモード) は利用できません。
 - 要素の内部では、 **常に** 固有の `key` 属性を **持つ必要** があります。
 - CSS トランジションクラスは内部の要素に適用され、グループやコンテナには適用されません。
 
-### リストの Enter/Leave トランジション
+## リストの Enter/Leave トランジション
 
 早速例に飛び込んでみましょう。以前利用したものと同じ CSS クラスを利用して、 enter/leave を行います:
 
@@ -68,16 +68,11 @@ Vue.createApp(Demo).mount('#list-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="e1cea580e91d6952eb0ae17bfb7c379d" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition List">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/e1cea580e91d6952eb0ae17bfb7c379d">
-  Transition List</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition List" slug="e1cea580e91d6952eb0ae17bfb7c379d" tab="js,result" :editable="false" :preview="false" />
 
 この例には一つの問題があります。item を追加や削除を行うと、その item の周りのものがスムーズに遷移せず、すぐに移動してしまいます。これは後で修正します。
 
-### List Move Transitions
+## List Move Transitions
 
 `<transition-group>` コンポーネントはもう一つの機能を持っています。それは、 enter/leave にだけでなく、位置の変更もアニメーションできることです。この機能を利用するための概念として、要素が位置を変更するときに **`v-move` クラス** が追加されることを知る必要があります。これはその他のクラスと同様、接頭辞はトランジションの `name` 属性と一致しているほか、 `move-class` 属性で手動でクラスを指定できます。
 
@@ -119,12 +114,7 @@ Vue.createApp(Demo).mount('#flip-list-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="049211673d3c185fde6b6eceb8baebec" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition-group example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/049211673d3c185fde6b6eceb8baebec">
-  Transition-group example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition-group example" slug="049211673d3c185fde6b6eceb8baebec" tab="html,result" :editable="false" :preview="false" />
 
 これは魔法のように見えますが、Vue は [FLIP](https://aerotwist.com/blog/flip-your-animations/) と呼ばれるアニメーションのテクニックによって、transform を利用した要素の位置をスムーズに遷移させています。
 
@@ -190,12 +180,7 @@ Vue.createApp(Demo).mount('#list-complete-demo')
 }
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="373b4429eb5769ae2e6d097fd954fd08" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transition-group example">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/373b4429eb5769ae2e6d097fd954fd08">
-  Transition-group example</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transition-group example" slug="373b4429eb5769ae2e6d097fd954fd08" tab="js,result" :editable="false" :preview="false" />
 
 ::: tip
 重大な注意点として、これらの FLIP トランジションは、 `display: inline` が設定された要素では動作しません。代わりに、 `display: inline-block` を利用するか、または flex コンテキスト内に要素を配置することとなります。
@@ -205,7 +190,7 @@ Vue.createApp(Demo).mount('#list-complete-demo')
 
 TODO: example
 
-### 時間差でのリストトランジション
+## 時間差でのリストトランジション
 
 data 属性によって JavaScript によるトランジションと通信することで、時間差でのリストトランジションが可能となります:
 
@@ -282,12 +267,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="c2fc5107bd3025ceadea049b3ee44ec0" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Staggered Lists">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/c2fc5107bd3025ceadea049b3ee44ec0">
-  Staggered Lists</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Staggered Lists" slug="c2fc5107bd3025ceadea049b3ee44ec0" tab="js,result" :editable="false" :preview="false" />
 
 ## 再利用可能なトランジション
 

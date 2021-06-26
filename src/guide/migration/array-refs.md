@@ -25,7 +25,9 @@ export default {
   },
   methods: {
     setItemRef(el) {
-      this.itemRefs.push(el)
+      if (el) {
+        this.itemRefs.push(el)
+      }
     }
   },
   beforeUpdate() {
@@ -40,13 +42,15 @@ export default {
 コンポジション API を使う場合
 
 ```js
-import { ref, onBeforeUpdate, onUpdated } from 'vue'
+import { onBeforeUpdate, onUpdated } from 'vue'
 
 export default {
   setup() {
     let itemRefs = []
     const setItemRef = el => {
-      itemRefs.push(el)
+      if (el) {
+        itemRefs.push(el)
+      }
     }
     onBeforeUpdate(() => {
       itemRefs = []
@@ -55,7 +59,6 @@ export default {
       console.log(itemRefs)
     })
     return {
-      itemRefs,
       setItemRef
     }
   }
@@ -67,3 +70,10 @@ export default {
 - `itemRefs` は配列である必要はありません。 反復キーで参照できるオブジェクトでも構いません。
 
 - これにより、必要に応じて `itemRefs` をリアクティブにして監視することもできます。
+
+## 移行の戦略
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `V_FOR_REF`
+- `COMPILER_V_FOR_REF`

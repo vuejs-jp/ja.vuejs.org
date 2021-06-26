@@ -45,12 +45,7 @@ const Demo = {
 Vue.createApp(Demo).mount('#animated-number-demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="22903bc3b53eb5b7817378ecb985ce96" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Transitioning State 1">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/22903bc3b53eb5b7817378ecb985ce96">
-  Transitioning State 1</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Transitioning State 1" slug="22903bc3b53eb5b7817378ecb985ce96" tab="js,result" :editable="false" :preview="false" />
 
 数値を更新すると、その変更が入力の下でアニメーションします。
 
@@ -58,12 +53,7 @@ Vue.createApp(Demo).mount('#animated-number-demo')
 
 Vue のトランジションコンポーネントを使う場合と同様に、状態のトランジションの背後にあるデータはリタルタイムに更新でき、これは特にプロトタイピングにおいて便利です！単純な SVG のポリゴンに使用して、変数で少し遊ぶだけで、それまで思い付くのが難しかった多くの効果を得られます。
 
-<p class="codepen" data-height="500" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="a8e00648d4df6baa1b19fb6c31c8d17e" data-preview="true" style="height: 493px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Updating SVG">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/a8e00648d4df6baa1b19fb6c31c8d17e">
-  Updating SVG</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Updating SVG" slug="a8e00648d4df6baa1b19fb6c31c8d17e" :height="500" tab="js,result" :editable="false" />
 
 ## コンポーネント内のトランジションの整理
 
@@ -138,14 +128,9 @@ app.component('animated-integer', {
 app.mount('#app')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="e9ef8ac7e32e0d0337e03d20949b4d17" data-preview="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="State Transition Components">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/e9ef8ac7e32e0d0337e03d20949b4d17">
-  State Transition Components</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="State Transition Components" slug="e9ef8ac7e32e0d0337e03d20949b4d17" tab="js,result" :editable="false" />
 
-これらの子コンポーネントを使用した複数の状態を構成することができるようになりました。Vue の [組み込みのトランジションシステム](transitions.html) によるものと同時に、このページで取り扱ったあらゆるトランジション戦略の組み合わせを利用できます。同時に、達成できることにはごくわずかの制限があります。
+これらの子コンポーネントを使用した複数の状態を構成することができるようになりました。Vue の [組み込みのトランジションシステム](transitions-enterleave.html) によるものと同時に、このページで取り扱ったあらゆるトランジション戦略の組み合わせを利用できます。同時に、達成できることにはごくわずかの制限があります。
 
 データの可視化、物理効果、キャラクターのアニメーションやインタラクションにどのように使用できるのかが分かるでしょう。可能性は無限大です。
 
@@ -157,5 +142,4 @@ Vue はそれを手助けできます。 SVG は単なるデータなので、�
 
 Sarah Drasner は以下のデモでタイマーとインタラクティブ駆動での状態変更の組合せを用いてこれを示しています:
 
-<p data-height="400" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Vue-controlled Wall-E" slug="YZBGNp" :height="400" :team="false" user="sdras" name="Sarah Drasner" :editable="false" :preview="false" version="2" theme="light" />

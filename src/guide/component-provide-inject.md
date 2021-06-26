@@ -4,8 +4,7 @@
 
 通常、親コンポーネントから子コンポーネントにデータを渡すとき、[props](component-props.md) を使います。深くネストされたいくつかのコンポーネントがあり、深い階層にあるコンポーネントが浅い階層にあるコンポーネントの何かしらのデータのみを必要としている構造を想像してください。この場合でも、鎖のように繋ったコンポーネント全体にプロパティを渡す必要がありますが、時にそれは面倒になります。
 
-そのような場合は、`provide` と `inject` のペアを利用できます。コンポーネント階層の深さに関係なく、親コンポーネントは、そのすべての子階層へ依存関係を提供するプロバイダとして機能することができます。この機能は2つの機能からなります:
-親コンポーネントは、データを提供するためのオプション `provide` を持ち、子コンポーネントはそのデータを利用するためのオプション `inject` を持っています。
+そのような場合は、`provide` と `inject` のペアを利用できます。コンポーネント階層の深さに関係なく、親コンポーネントは、そのすべての子階層へ依存関係を提供するプロバイダとして機能することができます。この機能は2つの機能からなります: 親コンポーネントは、データを提供するためのオプション `provide` を持ち、子コンポーネントはそのデータを利用するためのオプション `inject` を持っています。
 
 ![Provide/inject scheme](/images/components_provide.png)
 
@@ -60,7 +59,7 @@ app.component('todo-list', {
     }
   },
   provide: {
-    todoLength: this.todos.length // this will result in error 'Cannot read property 'length' of undefined`
+    todoLength: this.todos.length // this will result in error `Cannot read property 'length' of undefined`
   },
   template: `
     ...
@@ -97,7 +96,7 @@ app.component('todo-list', {
 
 ## リアクティブと連携する
 
-前述の例では、リスト `todos` を変更しても、その変更は注入された `todoLength` には反映されません。これは、`provide/inject` の束縛（ binding ）がデフォルトでリアクティブ _でない_ ことが原因です。`ref` で定義されたプロパティや `reactive` で作成されたオブジェクトを `provide` に渡すことにより、この振る舞いを変更することができます。この場合、祖先コンポーネントをリアクティブにするためには、コンポジション API の `computed` で定義したプロパティを `todoLength` を割り当てる必要があります。
+前述の例では、リスト `todos` を変更しても、その変更は注入された `todoLength` には反映されません。これは、`provide/inject` の束縛（ binding ）がデフォルトでリアクティブ _でない_ ことが原因です。`ref` で定義されたプロパティや `reactive` で作成されたオブジェクトを `provide` に渡すことにより、この振る舞いを変更することができます。この場合、祖先コンポーネントをリアクティブにするためには、Composition API の `computed` で定義したプロパティを `todoLength` を割り当てる必要があります。
 
 ```js
 app.component('todo-list', {
@@ -108,6 +107,13 @@ app.component('todo-list', {
     }
   }
 })
+
+app.component('todo-list-statistics', {
+  inject: ['todoLength'],
+  created() {
+    console.log(`Injected property: ${this.todoLength.value}`) // > Injected property: 5
+  }
+})
 ```
 
-こうすると、`todos.length`へのあらゆる変更が、`todoLength` が注入されたコンポーネントに正しく反映されます。`reactive` の provide/inject の詳細については、[コンポジション API セクション](composition-api-provide-inject.html#injection-reactivity) をご覧ください。
+こうすると、`todos.length` へのあらゆる変更は、`todoLength` が注入されたコンポーネントに正しく反映されます。`computed` については、 [算出プロパティとウォッチのセクション](reactivity-computed-watchers.html#算出プロパティ) を、そして `reactive` の provide/inject の詳細については、[Composition API のセクション](composition-api-provide-inject.html#リアクティブ) をご覧ください。

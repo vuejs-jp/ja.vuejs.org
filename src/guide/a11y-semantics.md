@@ -21,12 +21,7 @@
 </form>
 ```
 
-<p class="codepen" data-height="368" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="YzwpPYZ" style="height: 368px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Simple Form">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/YzwpPYZ">
-  Simple Form</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Simple Form" slug="dyNzzWZ" :height="368" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 どのように `autocomplete='on'` をフォーム要素上に含むことができるかに注目してください。そしてそれはフォーム内の全ての入力欄に適用されます。また各入力欄の [autocomplete 属性に対して異なる値](https://developer.mozilla.org/ja/docs/Web/HTML/Attributes/autocomplete)をセットすることもできます。
 
@@ -39,12 +34,7 @@
 <input type="text" name="name" id="name" v-model="name" />
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="wvMrGqz" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Label">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/wvMrGqz">
-  Form Label</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form Label" slug="XWpaaaj" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 chrome デベロッパツールでこの要素を検証し、Elements タブ内の Accessibility タブを開くと、どのように入力欄がその名前をラベルから取得するかを確認できます:
 
@@ -78,12 +68,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 />
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="jOWGqgz" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA label">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/jOWGqgz">
-  Form ARIA label</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form ARIA label" slug="NWdvvYQ" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 この要素を Chrome DevTools で自由に検証し、どのようにアクセス可能な名前が変更されたか確認してください:
 
@@ -91,7 +76,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 
 #### aria-labelledby
 
-[`aria-labelledby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) は `aria-label` に類似しており、ラベルテキストが画面に表示されている場合に使用されることを期待します。これは `id` によって他の要素とペアになっており、複数の `id` を関連付けることができます:
+[`aria-labelledby`](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute) の使用法は、ラベルテキストが画面に表示されている場合に使用されることを除けば、`aria-label` に似ています。これは `id` によって他の要素とペアになっており、複数の `id` を関連付けることができます:
 
 ```html
 <form
@@ -115,18 +100,13 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="ZEQXOLP" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA labelledby">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/ZEQXOLP">
-  Form ARIA labelledby</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form ARIA labelledby" slug="MWJvvBe" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ![aria-labelledby からアクセス可能な入力欄の名前を表示する Chrome デベロッパツール](/images/AccessibleARIAlabelledbyDevTools.png)
 
 #### aria-describedby
 
-[aria-describedby](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) は `aria-labelledby` と同じ方法で使用され、ユーザが必要とする可能性のある追加情報と説明を提供します。これは任意の入力欄の基準を説明するために使用することができます:
+[aria-describedby](https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute) は、ユーザが必要とする可能性のある追加情報と説明を提供することを除けば、 `aria-labelledby` と同じ方法で使用されます。これは任意の入力欄の基準を説明するために使用することができます:
 
 ```html
 <form
@@ -152,12 +132,7 @@ chrome デベロッパツールでこの要素を検証し、Elements タブ内�
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="JjGrKyY" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form ARIA describedby">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/JjGrKyY">
-  Form ARIA describedby</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form ARIA describedby" slug="gOgxxQE" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 Chrome DevTools で検出することで Description を確認することができます:
 
@@ -169,12 +144,7 @@ Chrome DevTools で検出することで Description を確認することがで
 
 プレースホルダによる問題の１つは初期状態で [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) を満たしていないことです。色のコントラストを修正するとプレースホルダが入力欄に事前入力されたデータのように見えます。以下の例を見ると、color contrast criteria を満たしている Last Name プレースホルダが事前入力されたデータのように見えることが確認できます:
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="PoZJzeQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Placeholder">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/PoZJzeQ">
-  Form Placeholder</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form Placeholder" slug="ExZvvMw" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ユーザがフォームを入力するために必要とするすべての情報を入力欄の外側で提供するのが最善です。
 
@@ -208,12 +178,7 @@ Chrome DevTools で検出することで Description を確認することがで
 </fieldset>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="GRoMqYy" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Instructions">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/GRoMqYy">
-  Form Instructions</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form Instructions" slug="WNREEqv" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 ### コンテンツの非表示
 
@@ -247,12 +212,7 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 }
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="qBbpQwB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Search">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/qBbpQwB">
-  Form Search</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form Search" slug="QWdMqWy" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 #### aria-hidden="true"
 
@@ -280,12 +240,7 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 </form>
 ```
 
-<p class="codepen" data-height="467" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="PoZEXoj" style="height: 467px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Form Buttons">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/PoZEXoj">
-  Form Buttons</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Form Buttons" slug="JjEyrYZ" :height="467" tab="js,result" theme="light" :preview="false" :editable="false" />
 
 #### 機能的な画像
 
@@ -321,9 +276,4 @@ CSS を使用して要素を視覚的に非表示にすることができます�
 </form>
 ```
 
-<p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="mlama007" data-slug-hash="NWxXeqY" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Functional Images">
-  <span>See the Pen <a href="https://codepen.io/mlama007/pen/NWxXeqY">
-  Functional Images</a> by Maria (<a href="https://codepen.io/mlama007">@mlama007</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Functional Images" slug="jOyLGqM" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />

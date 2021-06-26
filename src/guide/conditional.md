@@ -1,5 +1,7 @@
 # 条件付きレンダリング
 
+<VideoLesson href="https://vueschool.io/lessons/conditional-rendering-in-vue-3?friend=vuejs" title="Learn how conditional rendering works with Vue School">Learn how conditional rendering works with a free lesson on Vue School</VideoLesson>
+
 ## `v-if`
 
 `v-if` ディレクティブは、ブロックを条件に応じて描画したい場合に使用されます。ブロックは、ディレクティブの式が真を返す場合のみ描画されます。
@@ -91,4 +93,4 @@
 `v-if` と `v-for` を同時に利用することは **推奨されません**。 詳細については [スタイルガイド](../style-guide/#avoid-v-if-with-v-for-essential) を参照ください。
 :::
 
-`v-if` と一緒に使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については [リストレンダリングのガイド](list#v-for-with-v-if) を参照してください。
+`v-if` と `v-for` が同じ要素に両方つかわれる場合、 `v-if` が先に評価されます。詳細については [リストレンダリングのガイド](list#v-for-with-v-if) を参照してください。

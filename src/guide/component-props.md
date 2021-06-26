@@ -102,7 +102,6 @@ props: {
 
 オブジェクトのすべてのプロパティをコンポーネントのプロパティ(props)として渡したい場合は、引数なしで `v-bind` を使うことができます (`:prop-name` の代わりに `v-bind`を使用)。例えば、`post` オブジェクトが与えられたとします。
 
-
 ```js
 post: {
   id: 1,
@@ -146,7 +145,7 @@ data() {
 ```js
 props: ['size'],
 computed: {
-  normalizedSize: function () {
+  normalizedSize() {
     return this.size.trim().toLowerCase()
   }
 }
@@ -184,23 +183,22 @@ app.component('my-component', {
       type: Object,
       // オブジェクトもしくは配列のデフォルト値は
       // 必ずファクトリ関数（それを生み出すための関数）を返す必要があります。
-      default: function() {
+      default() {
         return { message: 'hello' }
       }
     },
     // カスタムバリデーション関数
     propF: {
-      validator: function(value) {
+      validator(value) {
         // プロパティの値は、必ずいずれかの文字列でなければならない
-        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+        return ['success', 'warning', 'danger'].includes(value)
       }
     },
     // デフォルト値つきの関数型
     propG: {
       type: Function,
-      // オブジェクトや配列のデフォルトとは異なり、これはファクトリ関数ではありません。
-      // これは、デフォルト値としての関数を取り扱います。
-      default: function() {
+      // オブジェクトや配列のデフォルトとは異なり、これはファクトリ関数ではありません。これは、デフォルト値としての関数を取り扱います。
+      default() {
         return 'Default function'
       }
     }
@@ -251,7 +249,6 @@ app.component('blog-post', {
 ## プロパティの形式 (キャメルケース vs ケバブケース)
 
 HTML の属性名は大文字小文字を区別しないので、ブラウザは全ての大文字を小文字として解釈します。つまり、 DOM(HTML) テンプレート内においては、キャメルケースのプロパティ名はケバブケース(ハイフンで区切ったもの)を使う必要があります。
-
 
 ```js
 const app = Vue.createApp({})

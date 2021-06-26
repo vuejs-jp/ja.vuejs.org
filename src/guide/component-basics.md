@@ -38,14 +38,9 @@ app.component('button-counter', {
 app.mount('#components-demo')
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="js,result" data-user="Vue" data-slug-hash="abORVEJ" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/abORVEJ">
-  Component basics</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics" slug="abORVEJ" tab="js,result" :preview="false" />
 
-コンポーネントは再利用可能なインスタンスなので、`data`、 `computed`、 `watch`、 `methods`、そしてライフサイクルフックのようなルートインスタンスと同様のオプションが利用可能です。唯一の例外は `el` のようなルート固有のオプションです。
+コンポーネントは再利用可能なインスタンスなので、`data`、 `computed`、 `watch`、 `methods`、そしてライフサイクルフックのようなルートインスタンスと同様のオプションが利用可能です。
 
 ## コンポーネントの再利用
 
@@ -59,12 +54,7 @@ app.mount('#components-demo')
 </div>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="rNVqYvM" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics: reusing components">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/rNVqYvM">
-  Component basics: reusing components</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics: reusing components" slug="rNVqYvM" tab="result" :preview="false" />
 
 ボタンをクリックすると、それぞれが独自の `count` を保持することに注意してください。 これはコンポーネントを使用する度に新しいコンポーネントの**インスタンス**が作成されるためです。
 
@@ -76,7 +66,7 @@ app.mount('#components-demo')
 
 例えば、 ヘッダー、サイドバー、コンテンツエリアなどのコンポーネントがあり、それぞれには一般的にナビゲーションリンクやブログ投稿などのコンポーネントが含まれています。
 
-これらのコンポーネントをテンプレートで使用するためには、 Vue がそれらを認識できるように登録する必要があります。 コンポーネントの登録には**グローバル**と**ローカル**の 2 種類があります。これまでは、アプリケーションの `component` メソッドを利用してグローバルに登録してきただけです:
+これらのコンポーネントをテンプレートで使用するためには、 Vue がそれらを認識できるように登録する必要があります。コンポーネントの登録には**グローバル**と**ローカル**の 2 種類があります。これまでは、アプリケーションの `component` メソッドを利用してグローバルに登録してきただけです:
 
 ```js
 const app = Vue.createApp({})
@@ -86,15 +76,15 @@ app.component('my-component-name', {
 })
 ```
 
-グローバルに登録されたコンポーネントはその後作成された `app` インスタンスのテンプレートで使用することができます。さらに、ルートインスタンスのコンポーネントツリーの全てのサブコンポーネント内でも使用することが出来ます。
+グローバルに登録されたコンポーネントは、アプリケーション内のどのコンポーネントのテンプレートでも使うことができます。
 
 とりあえずコンポーネント登録についてはこれで以上ですが、このページを読み終えて十分に理解できたら、後から戻ってきて[コンポーネント登録](component-registration.md)の完全なガイドを読むことをお勧めします。
 
 ## プロパティを用いた子コンポーネントへのデータの受け渡し
 
-先ほど、 ブログ投稿用のコンポーネントの作成について触れました。問題は、 表示する特定の投稿のタイトルや内容のようなデータを作成したコンポーネントに渡せなければそのコンポーネントは役に立たないということです。プロパティはここで役立ちます。
+先ほど、ブログ投稿用のコンポーネントの作成について触れました。問題は、表示する特定の投稿のタイトルや内容のようなデータを作成したコンポーネントに渡せなければそのコンポーネントは役に立たないということです。プロパティはここで役立ちます。
 
-プロパティはコンポーネントに登録できるカスタム属性です。値がプロパティ属性に渡されると、そのコンポーネントインスタンスのプロパティになります。先ほどのブログ投稿用のコンポーネントにタイトルを渡すためには、`props`オプションを用いてこのコンポーネントが受け取るプロパティのリストの中に含めることができます:
+プロパティはコンポーネントに登録できるカスタム属性です。値がプロパティ属性に渡されると、そのコンポーネントインスタンスのプロパティになります。先ほどのブログ投稿用のコンポーネントにタイトルを渡すためには、`props` オプションを用いてこのコンポーネントが受け取るプロパティのリストの中に含めることができます:
 
 ```js
 const app = Vue.createApp({})
@@ -107,9 +97,11 @@ app.component('blog-post', {
 app.mount('#blog-post-demo')
 ```
 
-コンポーネントは必要に応じて多くのプロパティを持つことができ、デフォルトでは任意のプロパティに任意の値を渡すことができます。上記のテンプレートでは、`data` と同様に、コンポーネントインスタンスでこの値にアクセスできることが分かります。
+プロパティ属性に値が渡されると、渡されたそのコンポーネントインスタンスのプロパティになります。そのプロパティの値は、他のコンポーネントのプロパティと同じように、テンプレート内でアクセスができます。
 
-プロパティが登録されたら、 次のようにカスタム属性としてデータをプロパティに渡すことができます:
+コンポーネントは必要に応じて多くのプロパティを持つことができ、デフォルトでは任意のプロパティに任意の値を渡すことができます。
+
+プロパティが登録されたら、次のようにカスタム属性としてデータをプロパティに渡すことができます:
 
 ```html
 <div id="blog-post-demo" class="demo">
@@ -119,12 +111,7 @@ app.mount('#blog-post-demo')
 </div>
 ```
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="PoqyOaX" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics: passing props">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/PoqyOaX">
-  Component basics: passing props</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics: passing props" slug="PoqyOaX" tab="result" :preview="false" />
 
 しかしながら、一般的なアプリケーションではおそらく `data` に投稿の配列を持っています:
 
@@ -169,7 +156,7 @@ app.mount('#blog-posts-demo')
 
 ## 子コンポーネントのイベントを購読する
 
-`<blog-post>` コンポーネントを開発する中で、いくつかの機能で親コンポーネントとの通信が必要になるかもしれません。例えば、残りの部分の大きさはそのままで、ブログ記事の文字の文字を拡大するアクセシビリティ機能を実装することを決めるかもしれません。
+`<blog-post>` コンポーネントを開発する中で、いくつかの機能で親コンポーネントとの通信が必要になるかもしれません。例えば、ページの他の部分の大きさはそのままで、ブログ記事のテキストを拡大するアクセシビリティ機能を実装することを決めるかもしれません。
 
 親コンポーネントでは、`postFontSize` データプロパティを追加することでこの機能をサポートすることができます:
 
@@ -186,12 +173,16 @@ const App = {
 }
 ```
 
-すべてのブログ投稿のフォントサイズを制御するためにテンプレート内で使用できます:
+これはすべてのブログ投稿のフォントサイズを制御するためにテンプレート内で使用できます:
 
 ```html
 <div id="blog-posts-events-demo">
-  <div v-bind:style="{ fontSize: postFontSize + 'em' }">
-    <blog-post v-for="post in posts" :key="post.id" :title="title"></blog-post>
+  <div :style="{ fontSize: postFontSize + 'em' }">
+    <blog-post
+      v-for="post in posts"
+      :key="post.id"
+      :title="post.title"
+    ></blog-post>
   </div>
 </div>
 ```
@@ -220,46 +211,41 @@ app.component('blog-post', {
 </button>
 ```
 
-ボタンをクリックすると、全ての投稿のテキストを拡大する必要があることを親に伝える必要があります。親は、ネイティブ DOM イベントでの場合と同様に、 `v-on` や `@` を用いて子コンポーネントのインスタンスでのイベントを購読することができます:
+ボタンをクリックすると、全ての投稿のテキストを拡大する必要があることを親に伝える必要があります。この問題を解決するために、コンポーネントインスタンスはカスタムイベントの仕組みを提供しています。親は、ネイティブ DOM イベントでの場合と同様に、 `v-on` や `@` を用いて子コンポーネントのインスタンスでのイベントを購読することができます:
 
 ```html
 <blog-post ... @enlarge-text="postFontSize += 0.1"></blog-post>
 ```
 
-そして子コンポーネントはビルトインの [**`$emit`** メソッド](../api/instance-methods.html#emit)にイベントの名前を渡して呼び出すことで、イベントを送出することができます:
+そして子コンポーネントはビルトインの [**`$emit`** メソッド](../api/instance-methods.html#emit)にイベントの名前を渡して呼び出すことで、イベントを発行することができます:
 
 ```html
-<button @click="$emit('enlarge-text')">
+<button @click="$emit('enlargeText')">
   Enlarge text
 </button>
 ```
 
-親コンポーネントは `v-on:enlarge-text="postFontSize += 0.1"` リスナーによって、このイベントを受け取り `postFontSize` を更新することができます。
+`@enlarge-text="postFontSize += 0.1"` リスナによって、親コンポーネントはこのイベントを受け取り `postFontSize` の値を更新することができます。
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="html,result" data-user="Vue" data-slug-hash="KKpGyrp" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics: emitting events">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/KKpGyrp">
-  Component basics: emitting events</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics: emitting events" slug="KKpGyrp" tab="result" :preview="false" />
 
-コンポーネントの `emits` オプションにより排出されたイベントをリストアップすることができます。
+コンポーネントの `emits` オプションにより発行されたイベントを一覧することができます:
 
 ```js
 app.component('blog-post', {
   props: ['title'],
-  emits: ['enlarge-text']
+  emits: ['enlargeText']
 })
 ```
 
 これにより、コンポーネントが排出する全てのイベントをチェックし、オプションでそれらを[検証する](component-custom-events.html#validate-emitted-events)ことができます。
 
-### イベントと値を送出する
+### イベントと値を発行する
 
-イベントを特定の値と一緒に送出すると便利な場合があります。例えば、テキストをどれだけ大きく表示するかを `<blog-post>` コンポーネントの責務とさせたいかもしれません。そのような場合、 `$emit` の第二引数を使ってこの値を渡すことができます:
+イベントを特定の値と一緒に発行すると便利な場合があります。例えば、テキストをどれだけ大きく表示するかを `<blog-post>` コンポーネントの責務とさせたいかもしれません。そのような場合、 `$emit` の第二引数を使ってこの値を渡すことができます:
 
 ```html
-<button @click="$emit('enlarge-text', 0.1)">
+<button @click="$emit('enlargeText', 0.1)">
   Enlarge text
 </button>
 ```
@@ -316,13 +302,14 @@ methods: {
 これが実際に機能するためには、テンプレート内の `<input>` は以下でなければなりません:
 
 - `value` 属性を `modelValue` プロパティにバインドする
-- `input` では、 `update:modelValue` イベントを新しい値と共に送出する
+- `input` では、 `update:modelValue` イベントを新しい値と共に発行する
 
 以下のようになります:
 
 ```js
 app.component('custom-input', {
   props: ['modelValue'],
+  emits: ['update:modelValue'],
   template: `
     <input
       :value="modelValue"
@@ -338,15 +325,12 @@ app.component('custom-input', {
 <custom-input v-model="searchText"></custom-input>
 ```
 
-カスタムコンポーネント内で `v-model` を使うもう一つの方法は `computed` プロパティを利用してゲッターとセッターを定義することです。
-
-以下の例では、computed プロパティを用いて `custom-input` コンポーネントをリファクタリングします。
-
-注意して欲しいのは、 `get` メソッドは `modelValue` 属性を返し、バインディングに使用しているプロパティがどれであるかに関わらず、 `set` メソッドはそのプロパティに対応する `$emit` を送出しなければならないということです。
+このコンポーネント内で `v-model` を実装するもう一つの方法は `computed` プロパティの機能を使ってゲッターとセッターを定義することです。 `get` メソッドは `modelValue` プロパティを返して、 `set` メソッドは対応するイベントを発行する必要があります。
 
 ```js
 app.component('custom-input', {
   props: ['modelValue'],
+  emits: ['update:modelValue'],
   template: `
     <input v-model="value">
   `,
@@ -377,14 +361,9 @@ HTML 要素のように、コンポーネントに要素を渡すことができ
 
 これは以下のように描画されるでしょう。:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="jOPeaob" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics: slots">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/jOPeaob">
-  Component basics: slots</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics: slots" slug="jOPeaob" :preview="false" />
 
-幸いにも、この作業は Vue のカスタム `<slot>` 要素により非常に簡単になります:
+これは、 Vue のカスタム `<slot>` 要素で達成できます:
 
 ```js
 app.component('alert-box', {
@@ -397,7 +376,7 @@ app.component('alert-box', {
 })
 ```
 
-上で見た通り、ただ渡したいところにスロットを追加するだけです。それだけです。終わりです！
+上で見た通り、コンテンツを配置したいところにプレースホルダとして `<slot>` を使います。それだけです。終わりです！
 
 とりあえずスロットについてはこれで以上ですが、このページを読み終えて十分に理解できたら、後から戻ってきて[スロット](component-slots.md)の完全なガイドを読むことをお勧めします。
 
@@ -405,14 +384,9 @@ app.component('alert-box', {
 
 タブ付きのインターフェースのように、コンポーネント間を動的に切り替えると便利なことがあります:
 
-<p class="codepen" data-height="300" data-theme-id="39028" data-default-tab="result" data-user="Vue" data-slug-hash="oNXaoKy" data-editable="true" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Component basics: dynamic components">
-  <span>See the Pen <a href="https://codepen.io/team/Vue/pen/oNXaoKy">
-  Component basics: dynamic components</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<common-codepen-snippet title="Component basics: dynamic components" slug="oNXaoKy" :preview="false" />
 
-上記は Vue の `<component>` 属性に特別な属性である `is` を持たせることで実現しています:
+上記は Vue の `<component>` 要素に特別な `is` 属性を持たせることで実現しています:
 
 ```html
 <!-- コンポーネントは currentTabComponent に変更があったときに変更されます -->
@@ -426,7 +400,7 @@ app.component('alert-box', {
 
 完全なコードを試すには [この例](https://codepen.io/team/Vue/pen/oNXaoKy)、登録された名前ではなくコンポーネントのオプションオブジェクトをバインドしている例は[こちらのバージョン](https://codepen.io/team/Vue/pen/oNXapXM)を参照してください。
 
-この属性は通常の HTML 要素で使用することができますが、それらはコンポーネントとして扱われ、すべての属性は **DOM 属性としてバインドされる**ことを覚えておいてください。 `value` のようないくつかのプロパティが期待通りに動作するためには、 [`.prop` 修飾子](../api/directives.html#v-bind)を用いてバインドする必要があります。
+また、 `is` 属性を使って通常の HTML 要素を作ることもできます。
 
 とりあえず動的なコンポーネントについてはこれで以上ですが、このページを読み終えて十分に理解できたら、後から戻ってきて[動的 & 非同期コンポーネント](./component-dynamic-async.html)の完全なガイドを読むことをお勧めします。
 
@@ -442,7 +416,7 @@ app.component('alert-box', {
 </table>
 ```
 
-このカスタムコンポート `<blog-post-row>` は無効なコンテンツとして摘み出され、最終的に描画された内容にエラーが発生します。幸い、これを回避するために `v-is` という特殊なディレクティブを使用することができます:
+このカスタムコンポーネント `<blog-post-row>` は無効なコンテンツとして巻き取られ、最終的にレンダリングされた出力でエラーが発生します。回避策として特別な `v-is` ディレクティブを使うことができます:
 
 ```html
 <table>
@@ -451,7 +425,7 @@ app.component('alert-box', {
 ```
 
 :::warning
-`v-is` の値は JavaScript の文字列リテラルである必要があります:
+`v-is` の値は JavaScript の式として扱われるので、コンポーネント名を引用符で囲む必要があります:
 
 ```html
 <!-- 間違い、何も出力されません-->
