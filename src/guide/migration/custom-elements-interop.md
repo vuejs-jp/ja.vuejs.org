@@ -52,7 +52,7 @@ Vue.config.ignoredElements = ['plastic-button']
   ]
   ```
 
-- 直接テンプレートをコンパイルする場合は、`app.config.isCustomElement`で設定します。
+- 直接テンプレートをコンパイルする場合は、`app.config.isCustomElement` で設定します。
 
   ```js
   const app = Vue.createApp({})
@@ -63,15 +63,15 @@ Vue.config.ignoredElements = ['plastic-button']
 
 ## カスタマイズされたビルトイン要素
 
-カスタム要素の仕様では、ビルトイン要素に`is`属性を追加するとこで、カスタム要素を[カスタマイズされたビルトイン要素](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example)として利用する方法を提供しています。
+カスタム要素の仕様では、ビルトイン要素に `is` 属性を追加するとこで、カスタム要素を[カスタマイズされたビルトイン要素](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example)として利用する方法を提供しています。
 
 ```html
 <button is="plastic-button">Click Me!</button>
 ```
 
-Vue では、ブラウザで普遍的に利用できるようになる前のネイティブ属性の動作をシミュレートするために、特別なプロパティ `is` を使用していました。しかし、2.x では、`plastic-button`という名前の Vue コンポーネントをレンダリングしていると解釈されていました。これにより、上記のカスタマイズされたビルトイン要素のネイティブな使用がブロックされます。
+Vue では、ブラウザで普遍的に利用できるようになる前のネイティブ属性の動作をシミュレートするために、特別なプロパティ `is` を使用していました。しかし、2.x では、`plastic-button` という名前の Vue コンポーネントをレンダリングしていると解釈されていました。これにより、上記のカスタマイズされたビルトイン要素のネイティブな使用がブロックされます。
 
-3.0では、Vue の `is` プロパティの特別な扱いを `<component>` タグのみに制限しています。
+3.0 では、Vue の `is` プロパティの特別な扱いを `<component>` タグのみに制限しています。
 
 - 予約済みの `<component>` タグで使用された場合、2.x と全く同じ動作をします。
 - 通常のコンポーネントに使用すると、通常のプロパティのように動作します。
@@ -125,6 +125,6 @@ Vue 2 では、ネイティブタグに `is` プロパティを使用してこ�
 
 ## 移行の戦略
 
-- `config.ignorededElements` を `vue-loader` の `compilerOptions` (ビルドステップ) または `app.config.isCustomElement` (直接テンプレートコンパイル) のいずれかで置き換えます。
+- `config.ignorededElements` を `vue-loader` の `compilerOptions`（ビルドステップ）または `app.config.isCustomElement`（直接テンプレートコンパイル）のいずれかで置き換えます。
 
-- `<component>`以外のタグで `is` を使用しているものはすべて `<component is="...">` (SFC テンプレートの場合) または `vue:` プレフィックス (DOM 内テンプレートの場合) に変更します。
+- `<component>` 以外のタグで `is` を使用しているものはすべて `<component is="...">`（SFC テンプレートの場合）または `vue:` プレフィックス（DOM 内テンプレートの場合）に変更します。

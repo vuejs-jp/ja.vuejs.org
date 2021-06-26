@@ -316,7 +316,7 @@ app.mount('#todo-list-app')
 
 Vue のコンポーネントが [Web Components 仕様](https://www.w3.org/wiki/WebComponents/) の一部である **カスタム要素 (Custom Elements)** によく似ていることに気付いたかもしれません。これは Vue のコンポーネント構文はその仕様を手本にしているためです。例えば、Vue コンポーネントは [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) と `is` という特別な属性を実装しています。しかしながら、いくつか重要な違いがあります:
 
-1. Web Components の仕様は確定しましたが、全てのブラウザにネイティブ実装されているわけではありません。Safari 10.1 以上、Chrome 54 以上、Firefox 63 以上が Web Components をネイティブでサポートしています。一方、Vue コンポーネントは、サポートされる全てのブラウザ（Internet Explorer 11を除く - 詳細は [こちら](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md) を確認してください）で同じ動作をします。必要があれば、Vue コンポーネントはネイティブなカスタム要素内に含めることもできます。
+1. Web Components の仕様は確定しましたが、全てのブラウザにネイティブ実装されているわけではありません。Safari 10.1 以上、Chrome 54 以上、Firefox 63 以上が Web Components をネイティブでサポートしています。一方、Vue コンポーネントは、サポートされる全てのブラウザ（Internet Explorer 11 を除く - 詳細は [こちら](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md) を確認してください）で同じ動作をします。必要があれば、Vue コンポーネントはネイティブなカスタム要素内に含めることもできます。
 
 [//]: # 'TODO: link to compatibility build'
 
