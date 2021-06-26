@@ -2,13 +2,13 @@
 
 ## 概要
 
-`@vue/compat` （別名「移行ビルド」）は、Vue 2 と互換性のある動作を設定できる Vue 3 のビルドです。
+`@vue/compat`（別名「移行ビルド」）は、Vue 2 と互換性のある動作を設定できる Vue 3 のビルドです。
 
 移行ビルドは、デフォルトで Vue 2 モードで動作します。ほとんどのパブリック API は、ほんの少しの例外を除いて Vue 2 とまったく同じように動作します。Vue 3 で変更されたり、非推奨となった機能を使用すると実行時に警告が表示されます。機能の互換性は、コンポーネントごとに有効/無効を設定することもできます。
 
 ### 想定される使用例
 
-- （[制限事項](#既知の制限事項)ありでの） Vue 2 アプリケーションの Vue 3 へのアップグレード
+- （[制限事項](#既知の制限事項)ありでの）Vue 2 アプリケーションの Vue 3 へのアップグレード
 - ライブラリを Vue 3 に対応させるための移行作業
 - また、Vue 3 をまだ試していない Vue 2 の経験豊富な開発者は、移行ビルドを Vue 3 の代わりに使用してバージョン間の違いを学ぶことができます。
 
@@ -46,9 +46,9 @@
 
    - カスタム webpack セットアップを使用している場合: `vue-loader` を `^16.0.0` にアップグレードします。
    - `vue-cli` を使用している場合: `vue upgrade` で最新の `@vue/cli-service` にアップグレードします。
-   - （代替手段） [Vite](https://vitejs.dev/) + [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)に移行します。[[コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/565b948919eb58f22a32afca7e321b490cb3b074)]
+   - （代替手段）[Vite](https://vitejs.dev/) + [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)に移行します。[[コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/565b948919eb58f22a32afca7e321b490cb3b074)]
 
-2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールます。また `vue-template-compiler` （もしあれば）を `@vue/compiler-sfc` に置き換えます。
+2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールます。また `vue-template-compiler`（もしあれば）を `@vue/compiler-sfc` に置き換えます。
 
    ```diff
    "dependencies": {
@@ -290,7 +290,7 @@ export default {
 | ID                           | 分類 | 説明                                                                                                   | ドキュメント                                                                               |
 | ---------------------------- | ---- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | GLOBAL_MOUNT                 | ✔    | new Vue() -> createApp                                                                                 | [link](/guide/migration/global-api.html#アプリケーションインスタンスのマウント)                             |
-| GLOBAL_EXTEND                | ✔    | Vue.extend は削除されました（`defineComponent`または`extends`オプションを使用してください）              | [link](/guide/migration/global-api.html#vue-extend-の削除)            |
+| GLOBAL_EXTEND                | ✔    | Vue.extend は削除されました（`defineComponent` または `extends` オプションを使用してください）              | [link](/guide/migration/global-api.html#vue-extend-の削除)            |
 | GLOBAL_PROTOTYPE             | ✔    | `Vue.prototype` -> `app.config.globalProperties`                                                       | [link](/guide/migration/global-api.html#vue-prototype-は-config-globalproperties-と置換) |
 | GLOBAL_SET                   | ✔    | `Vue.set` は削除されました（不要になりました）                                                           |                                                                                            |
 | GLOBAL_DELETE                | ✔    | `Vue.delete` は削除されました（不要になりました）                                                        |                                                                                            |
