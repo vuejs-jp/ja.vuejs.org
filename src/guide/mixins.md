@@ -77,7 +77,7 @@ const app = Vue.createApp({
 // => "component hook called"
 ```
 
-オブジェクトの値を期待するオプション、例えば、`methods`、`components`、そして`directives` では同じオブジェクトにマージされます。これらのオブジェクトでキーのコンフリクトがあるときは、コンポーネントオプションが優先されます:
+オブジェクトの値を期待するオプション、例えば、`methods`、`components`、そして `directives` では同じオブジェクトにマージされます。これらのオブジェクトでキーのコンフリクトがあるときは、コンポーネントオプションが優先されます:
 
 ```js
 const myMixin = {

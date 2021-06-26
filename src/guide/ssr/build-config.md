@@ -93,7 +93,7 @@ module.exports = {
 
 `externals` オプションでは、 CSS ファイルを許可リスト化していることに気づいてください。これは依存関係にあるファイルからインポートされた CSS は、 webpack によって処理されるべきだからです。もし webpack に依存する他の種類のファイル（`*.vue` や `*.sass` など）をインポートしているなら、同じように許可リストへ追加する必要があります。
 
-`runInNewContext: 'once'` や `runInNewContext: true` を使っている場合、 `global` を変更する Polyfill、例えば `babel-polyfill` を許可リストに登録する必要があります。これは New Context モードを使っている場合に **サーバ用のバンドル内のコードは独自の `global` オブジェクト** を持っているからです。サーバ上ではまったく必要ないため、 実際はクライアントのエントリでインポートするほうが簡単です。
+`runInNewContext: 'once'` や `runInNewContext: true` を使っている場合、 `global` を変更する Polyfill、例えば `babel-polyfill` を許可リストに登録する必要があります。これは New Context モードを使っている場合に **サーバ用のバンドル内のコードは独自の `global` オブジェクト** を持っているからです。サーバ上ではまったく必要ないため、 実際はクライアントのエントリでインポートするほうが簡単です。
 
 ## `clientManifest` の生成
 
