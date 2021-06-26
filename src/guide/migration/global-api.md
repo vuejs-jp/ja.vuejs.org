@@ -143,7 +143,7 @@ app.config.globalProperties.$http = () => {}
 
 ### `Vue.extend` の削除
 
-Vue 2.x では、`Vue.extend`を使って、コンポーネントのオプションを含むオブジェクトを引数に、Vue のベースコンストラクタの「サブクラス」を作成していました。Vue 3.x では、コンポーネントコンストラクタの概念はもうありません。コンポーネントのマウントには、常に `createApp` グローバル API を使用する必要があります。
+Vue 2.x では、`Vue.extend` を使って、コンポーネントのオプションを含むオブジェクトを引数に、Vue のベースコンストラクタの「サブクラス」を作成していました。Vue 3.x では、コンポーネントコンストラクタの概念はもうありません。コンポーネントのマウントには、常に `createApp` グローバル API を使用する必要があります。
 
 ```js
 // 以前 - Vue 2
@@ -181,9 +181,9 @@ Vue.createApp(Profile).mount('#mount-point')
 
 #### 型推論
 
-Vue 2 では、`Vue.extend`は、コンポーネントのオプションに TypeScript の型推論を提供するためにも使われていました。Vue 3 では、同じ目的のために、`defineComponent`グローバル API を`Vue.extend`の代わりに使用することができます。
+Vue 2 では、`Vue.extend` は、コンポーネントのオプションに TypeScript の型推論を提供するためにも使われていました。Vue 3 では、同じ目的のために、`defineComponent` グローバル API を `Vue.extend` の代わりに使用することができます。
 
-なお、`defineComponent`の戻り値の型はコンストラクタのような型ですが、これは TSX の推論にのみ使用されます。実行時には、`defineComponent`はほとんど何もせず、オプションオブジェクトをそのまま返します。
+なお、`defineComponent` の戻り値の型はコンストラクタのような型ですが、これは TSX の推論にのみ使用されます。実行時には、`defineComponent` はほとんど何もせず、オプションオブジェクトをそのまま返します。
 
 #### コンポーネントの継承
 
