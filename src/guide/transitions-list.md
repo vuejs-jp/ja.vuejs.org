@@ -8,7 +8,7 @@
 その上で、例えば `v-for` のように、全てをまとめてレンダリングしたいリスト全体がある場合はどうしましょうか？このような場合では、 `<transition-group>` コンポーネントを利用します。ですが具体的な例を見る前に、コンポーネントについていくつかの重要なことを知っておく必要があります:
 
 - デフォルトでは、ラッパー要素はレンダリングされませんが、 `tag` 属性でレンダリングする要素を指定することができます。
-- 2つの排他の要素が切り替わっているわけではないため、[トランジションモード](/guide/transitions-enterleave#トランジションモード) は利用できません。
+- 2 つの排他の要素が切り替わっているわけではないため、[トランジションモード](/guide/transitions-enterleave#トランジションモード) は利用できません。
 - 要素の内部では、 **常に** 固有の `key` 属性を **持つ必要** があります。
 - CSS トランジションクラスは内部の要素に適用され、グループやコンテナには適用されません。
 
@@ -70,11 +70,11 @@ Vue.createApp(Demo).mount('#list-demo')
 
 <common-codepen-snippet title="Transition List" slug="e1cea580e91d6952eb0ae17bfb7c379d" tab="js,result" :editable="false" :preview="false" />
 
-この例には一つの問題があります。item を追加や削除を行うと、その item の周りのものがスムーズに遷移せず、すぐに移動してしまいます。これは後で修正します。
+この例には 1 つの問題があります。item を追加や削除を行うと、その item の周りのものがスムーズに遷移せず、すぐに移動してしまいます。これは後で修正します。
 
 ## List Move Transitions
 
-`<transition-group>` コンポーネントはもう一つの機能を持っています。それは、 enter/leave にだけでなく、位置の変更もアニメーションできることです。この機能を利用するための概念として、要素が位置を変更するときに **`v-move` クラス** が追加されることを知る必要があります。これはその他のクラスと同様、接頭辞はトランジションの `name` 属性と一致しているほか、 `move-class` 属性で手動でクラスを指定できます。
+`<transition-group>` コンポーネントはもう 1 つの機能を持っています。それは、 enter/leave にだけでなく、位置の変更もアニメーションできることです。この機能を利用するための概念として、要素が位置を変更するときに **`v-move` クラス** が追加されることを知る必要があります。これはその他のクラスと同様、接頭辞はトランジションの `name` 属性と一致しているほか、 `move-class` 属性で手動でクラスを指定できます。
 
 このクラスは、後述のようにトランジションのタイミングや easing カーブを設定する際に便利です。
 
@@ -186,7 +186,7 @@ Vue.createApp(Demo).mount('#list-complete-demo')
 重大な注意点として、これらの FLIP トランジションは、 `display: inline` が設定された要素では動作しません。代わりに、 `display: inline-block` を利用するか、または flex コンテキスト内に要素を配置することとなります。
 :::
 
-これらの FLIP アニメーションは、一つの軸の動作に限定されません。多次元のグリッドに対しても、[同様に](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-list-move-transitions)操作できます:
+これらの FLIP アニメーションは、1 つの軸の動作に限定されません。多次元のグリッドに対しても、[同様に](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-list-move-transitions)操作できます:
 
 TODO: example
 

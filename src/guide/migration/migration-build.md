@@ -322,7 +322,7 @@ export default {
 | RENDER_FUNCTION              | ✔    | Render 関数の API が変更されました                                                                     | [link](/guide/migration/render-function-api.html)                                          |
 | FILTERS                      | ✔    | フィルタは削除されました（このオプションは、ランタイムのフィルタ API にのみ影響します）                  | [link](/guide/migration/filters.html)                                                      |
 | COMPILER_IS_ON_ELEMENT       | ✔    | `is` の使用は `<component>` のみに制限されるようになりました                                           | [link](/guide/migration/custom-elements-interop.html)                                      |
-| COMPILER_V_BIND_SYNC         | ✔    | `v-bind.sync` は `v-model`に置き換えられ、引数を持つようになりました                                   | [link](/guide/migration/v-model.html)                                                      |
+| COMPILER_V_BIND_SYNC         | ✔    | `v-bind.sync` は `v-model` に置き換えられ、引数を持つようになりました                                   | [link](/guide/migration/v-model.html)                                                      |
 | COMPILER_V_BIND_PROP         | ✔    | `v-bind.prop` 修飾子は削除されました                                                                   |                                                                                            |
 | COMPILER_V_BIND_OBJECT_ORDER | ✔    | `v-bind="object"` は順番に注意が必要になりました                                                       | [link](/guide/migration/v-bind.html)                                                       |
 | COMPILER_V_ON_NATIVE         | ✔    | `v-on.native` 修飾子は削除されました                                                                   | [link](/guide/migration/v-on-native-modifier-removed.html)                                 |

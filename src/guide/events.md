@@ -181,7 +181,7 @@ methods: {
 
 他の修飾子とは違って、ネイティブ DOM イベント専用ではありますが、`.once` 修飾子を[コンポーネントイベント](component-custom-events.html)でも使用することができます。まだコンポーネントについて読んでいないなら、今は気にする必要はありません。
 
-Vue は [`addEventListener`の `passive` オプション](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
+Vue は [`addEventListener` の `passive` オプション](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
 
 ```html
 <!-- `onScroll` が `event.preventDefault()` を含んでいたとしても -->
@@ -193,7 +193,7 @@ Vue は [`addEventListener`の `passive` オプション](https://developer.mozi
 `.passive` 修飾子は特にモバイルでのパフォーマンスを改善するのに有用です。
 
 ::: tip
-`.passive` と `.prevent` を一緒に使わないでください。`.prevent `は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げないことをブラウザに伝達することを思い出してください。
+`.passive` と `.prevent` を一緒に使わないでください。`.prevent ` は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げないことをブラウザに伝達することを思い出してください。
 :::
 
 ## キー修飾子
@@ -211,7 +211,7 @@ Vue は [`addEventListener`の `passive` オプション](https://developer.mozi
 <input @keyup.page-down="onPageDown" />
 ```
 
-上の例では、ハンドラは `$event.key `が `'PageDown'` に等しい場合だけ呼ばれます。
+上の例では、ハンドラは `$event.key ` が `'PageDown'` に等しい場合だけ呼ばれます。
 
 ### キーコード
 

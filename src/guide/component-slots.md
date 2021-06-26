@@ -222,7 +222,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </div>
 ```
 
-**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き） `<template>` にしか指定できないことに注意してください。
+**`v-slot` は（[一つの例外](#デフォルトスロットしかない場合の省略記法) を除き）`<template>` にしか指定できないことに注意してください。
 
 ## スコープ付きスロット
 
