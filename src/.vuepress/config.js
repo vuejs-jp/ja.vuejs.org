@@ -203,6 +203,7 @@ const sidebar = {
         '/guide/migration/slots-unification',
         '/guide/migration/suspense',
         '/guide/migration/transition',
+        '/guide/migration/transition-as-root',
         '/guide/migration/transition-group',
         '/guide/migration/v-on-native-modifier-removed',
         '/guide/migration/v-model',

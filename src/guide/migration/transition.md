@@ -63,4 +63,5 @@ v2.1.8 では `v-enter-to` トランジションクラスを導入して、 ente
 
 ## 参照
 
+- [ルートの `<Transition>` は外部からトグルできなくなりました](/guide/migration/transition-as-root.html)
 - [`<TransitionGroup>` はデフォルトでラッパー要素をレンダリングしなくなりました](/guide/migration/transition-group.html)
