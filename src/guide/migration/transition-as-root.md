@@ -3,7 +3,7 @@ badges:
   - breaking
 ---
 
-# ルートしてのトランジション <MigrationBadges :badges="$frontmatter.badges" />
+# ルートとしてのトランジション <MigrationBadges :badges="$frontmatter.badges" />
 
 ## 概要
 
