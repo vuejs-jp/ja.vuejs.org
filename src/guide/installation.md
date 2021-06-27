@@ -60,7 +60,7 @@ $ npm install -D @vue/compiler-sfc
 
 Vue 2 を使っている場合は、`@vue/compiler-sfc` が `vue-template-compiler` を置き換えることに注意してください。
 
-また、`@vue/compiler-sfc` に加えて、選択したバンドラに適した SFC ローダーやプラグインも必要です。詳しくは [SFC ドキュメント](../guide/single-file-component.html) を参照してください。
+また、`@vue/compiler-sfc` に加えて、選択したバンドラに適した単一ファイルコンポーネントローダーやプラグインも必要です。詳しくは [単一ファイルコンポーネントドキュメント](../guide/single-file-component.html) を参照してください。
 
 ほとんどの場合、最小限の設定で webpack のビルドを作成するには、 Vue CLI を利用するのがよいでしょう。
 
