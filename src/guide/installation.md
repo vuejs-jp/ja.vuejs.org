@@ -52,7 +52,7 @@ Vue による大規模アプリケーションを構築するときには、npm 
 $ npm install vue@next
 ```
 
-Vue は [単一ファイルコンポーネント](../guide/single-file-component.html)（SFCs）を作成するための、付随するツールも提供しています。SFCs を使いたい場合は、`@vue/compiler-sfc` もインストールする必要があります:
+Vue は [単一ファイルコンポーネント](../guide/single-file-component.html)（SFCs）を作成するための、付随するツールも提供しています。単一ファイルコンポーネントを使いたい場合は、`@vue/compiler-sfc` もインストールする必要があります:
 
 ```bash
 $ npm install -D @vue/compiler-sfc
