@@ -980,7 +980,7 @@ components/
 
 ### プロパティ名の型式 <sup data-p="b">強く推奨</sup>
 
-**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#JSX) ではケバブケース(kebab-case)にするべきです。**
+**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#jsx) ではケバブケース(kebab-case)にするべきです。**
 
 私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然で、HTML の中ではケバブケースが自然です。
 
@@ -1016,7 +1016,7 @@ props: {
 
 **複数の属性をもつ要素は、1 行に 1 要素ずつ、複数の行にわたって書くべきです。**
 
-JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#JSX) も同じように考えることがふさわしいです。
+JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#jsx) も同じように考えることがふさわしいです。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
