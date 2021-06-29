@@ -38,7 +38,7 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 
 **ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との[衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との [衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
@@ -82,7 +82,7 @@ export default {
 コミットされたコードでは、prop の定義は常に可能な限り詳細にすべきで、少なくともタイプの指定をする必要があります。
 
 ::: details 詳細な説明
-詳細な[プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
+詳細な [プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
 
 - コンポーネントの API が明文化されるため、そのコンポーネントの使用方法が簡単に確認できます。
 - 開発中、コンポーネントに対して誤った形式のプロパティが提供されると Vue は警告を通知するため、潜在的なエラー原因の検知に役立ちます。
@@ -130,7 +130,7 @@ props: {
 
 **`v-for` に対しては常に `key` を使用してください。**
 
-サブツリーの内部コンポーネントの状態を維持するために、コンポーネントでの `v-for` には _常に_ `key` を付ける必要があります。ただし要素の場合であっても、アニメーションでの[オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/)のように、予測可能な振る舞いを維持することをお勧めします。
+サブツリーの内部コンポーネントの状態を維持するために、コンポーネントでの `v-for` には _常に_ `key` を付ける必要があります。ただし要素の場合であっても、アニメーションでの [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のように、予測可能な振る舞いを維持することをお勧めします。
 
 ::: details 詳細な説明
 TODO リストを持っているとしましょう:
@@ -293,7 +293,7 @@ computed: {
 
 **アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネントのスタイルはグローバルである可能性がありますが、他のすべてのコンポーネントは常にスコープ化されているべきです。**
 
-これは、[単一ファイルコンポーネント](../guide/single-file-component.html)のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他のライブラリ/慣例を介して行うことができます。
+これは、[単一ファイルコンポーネント](../guide/single-file-component.html) のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html) の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他のライブラリ/慣例を介して行うことができます。
 
 **ただしコンポーネントライブラリでは、 `scoped` 属性を使用するのではなく、クラスに基づいた戦略を優先すべきです**
 
@@ -514,7 +514,7 @@ components/
 
 ### 単一ファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
 
-**[単一ファイルコンポーネント](../guide/single-file-component.html)のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
+**[単一ファイルコンポーネント](../guide/single-file-component.html) のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
 
 パスカルケースは、JS(X) やテンプレートの中でコンポーネントを参照する方法と一致しているので、コードエディタ上でオートコンプリートが可能な場合はとてもうまく働きます。しかし、大文字と小文字が混ざったファイル名は、大文字と小文字を区別しないファイルシステム上で時々問題を起こす可能性があります。そのため、ケバブケースもまた完全に受け入れられています。
 
@@ -1016,7 +1016,7 @@ props: {
 
 **複数の属性をもつ要素は、1 行に 1 要素ずつ、複数の行にわたって書くべきです。**
 
-JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#JSX)  も同じように考えることがふさわしいです。
+JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#JSX) も同じように考えることがふさわしいです。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
@@ -1427,7 +1427,7 @@ computed: {
 
 ### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[単一ファイルコンポーネント](../guide/single-file-components.html)では、 `<script>` 、 `<template>` 、 `<style>` タグを一貫した順序にし、 `<style>` は他の2つのうち少なくとも1つで常に必要となるため、順序を最後にするべきです。**
+**[単一ファイルコンポーネント](../guide/single-file-component.html) では、`<script>`、`<template>`、`<style>` タグを一貫した順序にし、 `<style>` は他の2つのうち少なくとも1つで常に必要となるため、順序を最後にするべきです。**
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
