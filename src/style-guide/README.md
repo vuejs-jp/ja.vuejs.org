@@ -38,7 +38,7 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 
 **ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との [衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との [衝突を防止することができます](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name)。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
