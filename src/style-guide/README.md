@@ -22,11 +22,11 @@ sidebar: auto
 
 ### 優先度 C: 推奨
 
-同じくらい良いオプションが複数ある場合､一貫性を確保するために任意の選択をすることができます｡これらのルールでは､それぞれ許容可能なオプションを説明し､既定の選択を提案します｡つまり､一貫性があり､正当な理由を持ち続ける限り､独自のコードベースで自由に異なる選択肢を作ることができます｡ですが､正当な理由を必ず持つようにしてください！コミュニティの標準に合わせることで､あなたは:
+同じくらい良いオプションが複数ある場合、一貫性を確保するために任意の選択をすることができます。これらのルールでは、それぞれ許容可能なオプションを説明し、既定の選択を提案します。つまり、一貫性があり、正当な理由を持ち続ける限り、独自のコードベースで自由に異なる選択肢を作ることができます。ですが、正当な理由を必ず持つようにしてください！コミュニティの標準に合わせることで、あなたは:
 
-1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます｡
-2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます｡
-3. 少なくとも Vue に関しては､ほとんどの場合､新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます｡
+1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます。
+2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます。
+3. 少なくとも Vue に関しては、ほとんどの場合、新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます。
 
 ### 優先度 D: 使用注意
 
@@ -38,36 +38,35 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 
 **ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との[衝突を防止することができます](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+全ての HTML 要素は 1 単語なので、このルールを守ることで既に存在する HTML 要素や将来定義される HTML 要素との [衝突を防止することができます](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name)。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('todo', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'Todo',
   // ...
 }
 ```
-
 </div>
 
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 app.component('todo-item', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'TodoItem',
   // ...
@@ -82,7 +81,7 @@ export default {
 コミットされたコードでは、prop の定義は常に可能な限り詳細にすべきで、少なくともタイプの指定をする必要があります。
 
 ::: details 詳細な説明
-詳細な[プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
+詳細な [プロパティの定義](/guide/component-props.html#プロパティのバリデーション) には 2 つの利点があります:
 
 - コンポーネントの API が明文化されるため、そのコンポーネントの使用方法が簡単に確認できます。
 - 開発中、コンポーネントに対して誤った形式のプロパティが提供されると Vue は警告を通知するため、潜在的なエラー原因の検知に役立ちます。
@@ -91,7 +90,7 @@ export default {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 // プロトタイピングの時に限り OK
 props: ['status']
 ```
@@ -100,13 +99,13 @@ props: ['status']
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   status: String
 }
 ```
 
-``` js
+```js
 // さらに良いです!
 props: {
   status: {
@@ -130,12 +129,12 @@ props: {
 
 **`v-for` に対しては常に `key` を使用してください。**
 
-サブツリーの内部コンポーネントの状態を維持するために、コンポーネントでの `v-for` には _常に_ `key` を付ける必要があります。ただし要素の場合であっても、アニメーションでの[オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/)のように、予測可能な振る舞いを維持することをお勧めします。
+サブツリーの内部コンポーネントの状態を維持するために、コンポーネントでの `v-for` には _常に_ `key` を付ける必要があります。ただし要素の場合であっても、アニメーションでの [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のように、予測可能な振る舞いを維持することをお勧めします。
 
 ::: details 詳細な説明
 TODO リストを持っているとしましょう:
 
-``` js
+```js
 data() {
   return {
     todos: [
@@ -162,7 +161,7 @@ data() {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <ul>
   <li v-for="todo in todos">
     {{ todo.text }}
@@ -174,7 +173,7 @@ data() {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="todo in todos"
@@ -199,7 +198,7 @@ data() {
 ::: details 詳細な説明
 Vue がディレクティブを処理する場合、`v-if` は `v-for` よりも優先度が高いため、次のようなテンプレートは:
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -215,7 +214,7 @@ Vue がディレクティブを処理する場合、`v-if` は `v-for` よりも
 
 これは、代わりに算出プロパティを元に反復処理をすることで修正できます。次のようになります:
 
-``` js
+```js
 computed: {
   activeUsers() {
     return this.users.filter(user => user.isActive)
@@ -223,7 +222,7 @@ computed: {
 }
 ```
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -236,7 +235,7 @@ computed: {
 
 または、 `v-for` と一緒に `<template>` タグを使用して、 `<li>` 要素をラップすることもできます:
 
-``` html
+```html
 <ul>
   <template v-for="user in users" :key="user.id">
     <li v-if="user.isActive">
@@ -251,7 +250,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -267,7 +266,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -278,7 +277,7 @@ computed: {
 </ul>
 ```
 
-``` html
+```html
 <ul>
   <template v-for="user in users" :key="user.id">
     <li v-if="user.isActive">
@@ -293,7 +292,7 @@ computed: {
 
 **アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネントのスタイルはグローバルである可能性がありますが、他のすべてのコンポーネントは常にスコープ化されているべきです。**
 
-これは、[単一ファイルコンポーネント](../guide/single-file-component.html)のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他のライブラリ/慣例を介して行うことができます。
+これは、[単一ファイルコンポーネント](../guide/single-file-component.html) のみに関連します。[`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html) の使用は必須_ではありません_。 スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) や [BEM](http://getbem.com/) のようなクラスに基づいた戦略、または他のライブラリ/慣例を介して行うことができます。
 
 **ただしコンポーネントライブラリでは、 `scoped` 属性を使用するのではなく、クラスに基づいた戦略を優先すべきです**
 
@@ -308,7 +307,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -324,7 +323,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <template>
   <button class="button button-close">×</button>
 </template>
@@ -342,7 +341,7 @@ computed: {
 </style>
 ```
 
-``` html
+```html
 <template>
   <button :class="[$style.button, $style.buttonClose]">×</button>
 </template>
@@ -360,7 +359,7 @@ computed: {
 </style>
 ```
 
-``` html
+```html
 <template>
   <button class="c-Button c-Button--close">×</button>
 </template>
@@ -394,7 +393,7 @@ Vue は `_` のプレフィックスを使用して独自のプライベート�
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -405,7 +404,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -416,7 +415,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -427,7 +426,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -443,7 +442,7 @@ const myGreatMixin = {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -454,7 +453,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 // さらに良いです!
 const myGreatMixin = {
   // ...
@@ -485,7 +484,7 @@ export default myGreatMixin
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('TodoList', {
   // ...
 })
@@ -514,7 +513,7 @@ components/
 
 ### 単一ファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
 
-**[単一ファイルコンポーネント](../guide/single-file-component.html)のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
+**[単一ファイルコンポーネント](../guide/single-file-component.html) のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
 
 パスカルケースは、JS(X) やテンプレートの中でコンポーネントを参照する方法と一致しているので、コードエディタ上でオートコンプリートが可能な場合はとてもうまく働きます。しかし、大文字と小文字が混ざったファイル名は、大文字と小文字を区別しないファイルシステム上で時々問題を起こす可能性があります。そのため、ケバブケースもまた完全に受け入れられています。
 
@@ -569,7 +568,7 @@ components/
 
 - これらのコンポーネントはとても頻繁に使われるので、あらゆる場所で import するよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスを利用して、それを Webpack でできるようになります。
 
-  ``` js
+  ```js
   const requireComponent = require.context("./src", true, /Base[A-Z]\w+\.(vue|js)$/)
   requireComponent.keys().forEach(function (fileName) {
     let baseComponentConfig = requireComponent(fileName)
@@ -734,7 +733,6 @@ components/
 
 また、 **何を「最高レベル」として尊重するかがアプリケーションの文脈になる** ことに注意してください。例えば、検索フォームを持ったアプリケーションを想像してください。こんなコンポーネントがあるかもしれません:
 
-
 ```
 components/
 |- ClearSearchButton.vue
@@ -805,12 +803,12 @@ components/
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent></MyComponent>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component/>
 ```
@@ -819,12 +817,12 @@ components/
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
@@ -847,17 +845,17 @@ components/
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <mycomponent/>
 ```
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <myComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <MyComponent></MyComponent>
 ```
@@ -866,19 +864,19 @@ components/
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 
 または
 
-``` html
+```html
 <!-- どこでも -->
 <my-component></my-component>
 ```
@@ -900,24 +898,24 @@ JavaScript では、クラスやプロトタイプのコンストラクタは - 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('myComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 import myComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'myComponent',
   // ...
 }
 ```
 
-``` js
+```js
 export default {
   name: 'my-component',
   // ...
@@ -928,23 +926,23 @@ export default {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 app.component('MyComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 app.component('my-component', {
   // ...
 })
 ```
 
-``` js
+```js
 import MyComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'MyComponent',
   // ...
@@ -980,20 +978,20 @@ components/
 
 ### プロパティ名の型式 <sup data-p="b">強く推奨</sup>
 
-**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#JSX) ではケバブケース(kebab-case)にするべきです。**
+**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#jsx) ではケバブケース(kebab-case)にするべきです。**
 
 私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然で、HTML の中ではケバブケースが自然です。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 props: {
   'greeting-text': String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greetingText="hi"/>
 ```
 </div>
@@ -1001,13 +999,13 @@ props: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   greetingText: String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greeting-text="hi"/>
 ```
 </div>
@@ -1016,16 +1014,16 @@ props: {
 
 **複数の属性をもつ要素は、1 行に 1 要素ずつ、複数の行にわたって書くべきです。**
 
-JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#JSX)  も同じように考えることがふさわしいです。
+JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。Vue のテンプレートや [JSX](../guide/render-function.html#jsx) も同じように考えることがふさわしいです。
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
 ```
 
-``` html
+```html
 <MyComponent foo="a" bar="b" baz="c"/>
 ```
 </div>
@@ -1033,14 +1031,14 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <img
   src="https://vuejs.org/images/logo.png"
   alt="Vue Logo"
 >
 ```
 
-``` html
+```html
 <MyComponent
   foo="a"
   bar="b"
@@ -1058,7 +1056,7 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 {{
   fullName.split(' ').map((word) => {
     return word[0].toUpperCase() + word.slice(1)
@@ -1070,12 +1068,12 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- テンプレート内 -->
 {{ normalizedFullName }}
 ```
 
-``` js
+```js
 // 複雑な式を算出プロパティに移動
 computed: {
   normalizedFullName() {
@@ -1112,7 +1110,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 computed: {
   price() {
     const basePrice = this.manufactureCost / (1 - this.profitMargin)
@@ -1128,7 +1126,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 computed: {
   basePrice() {
     return this.manufactureCost / (1 - this.profitMargin)
@@ -1154,11 +1152,11 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <input type=text>
 ```
 
-``` html
+```html
 <AppSidebar :style={width:sidebarWidth+'px'}>
 ```
 </div>
@@ -1166,11 +1164,11 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <input type="text">
 ```
 
-``` html
+```html
 <AppSidebar :style="{ width: sidebarWidth + 'px' }">
 ```
 </div>
@@ -1182,21 +1180,21 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1210,35 +1208,35 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <input
   :value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   v-bind:placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   @input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   v-on:focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1248,7 +1246,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 </template>
 ```
 
-``` html
+```html
 <template #header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1259,42 +1257,42 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 ```
 </div>
 
-
-## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
-
-## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
+## 優先度 C のルール: 推奨 <span class="hide-from-sidebar">(任意の選択肢と認知上のオーバーヘッドの最小化)</span>
 
 ### コンポーネント/インスタンス オプション順序 <sup data-p="c">推奨</sup>
 
-**コンポーネント/インスタンス オプションは､一貫した順序になるべきです｡**
+**コンポーネント/インスタンス オプションは、一貫した順序になるべきです。**
 
-これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､プラグインからどこに新たなプロパティを追加するか知ることができます｡
+これは推奨するコンポーネントオプションの既定の順序です。それらは種類分けされており、プラグインからどこに新たなプロパティを追加するか知ることができます。
 
 1. **グローバルな認識** (コンポーネントを超えた知識が必要)
     - `name`
 
-2. **テンプレートの依存関係** (テンプレートで使用されるアセット)
+2. **テンプレートのコンパイラオプション** (テンプレートのコンパイル方法の変更)
+    - `compilerOptions`
+
+3. **テンプレートの依存関係** (テンプレートで使用されるアセット)
     - `components`
     - `directives`
 
-3. **合成** (プロパティをオプションにマージ)
+4. **合成** (プロパティをオプションにマージ)
     - `extends`
     - `mixins`
     - `provide`/`inject`
 
-4. **インタフェース** (コンポーネントへのインタフェース)
+5. **インタフェース** (コンポーネントへのインタフェース)
     - `inheritAttrs`
     - `props`
     - `emits`
 
-5. **コンポジション API** (コンポジション API を使用するためのエントリポイント)
+6. **コンポジション API** (コンポジション API を使用するためのエントリポイント)
     - `setup`
 
-6. **ローカルの状態** (ローカル リアクティブ プロパティ)
+7. **ローカルの状態** (ローカル リアクティブ プロパティ)
     - `data`
     - `computed`
 
-7. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
+8. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
     - `watch`
     - ライフサイクルイベント (呼び出される順)
         - `beforeCreate`
@@ -1311,51 +1309,48 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
         - `renderTracked`
         - `renderTriggered`
 
-8.  **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
+9. **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
     - `methods`
 
-9. **レンダリング** (コンポーネント出力の宣言的な記述)
+10. **レンダリング** (コンポーネント出力の宣言的な記述)
     - `template`/`render`
 
 ### 要素の属性の順序 <sup data-p="c">推奨</sup>
 
-**要素の属性 (コンポーネントを含む) は､一貫した順序になるべきです｡**
+**要素の属性 (コンポーネントを含む) は、一貫した順序になるべきです。**
 
-これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､カスタム属性とディレクティブをどこに追加するか知ることができます｡
+これは推奨するコンポーネントオプションの既定の順序です。それらは種類分けされており、カスタム属性とディレクティブをどこに追加するか知ることができます。
 
 1. **定義** (コンポーネントオプションを提供)
     - `is`
 
-2. **テンプレートの修飾子** (テンプレートのコンパイル方法を変更)
-  - `delimiters`
-  
-3. **リスト描画** (同じ要素の複数のバリエーションを作成する)
+2. **リスト描画** (同じ要素の複数のバリエーションを作成する)
     - `v-for`
 
-4. **条件** (要素が描画/表示されているかどうか)
+3. **条件** (要素が描画/表示されているかどうか)
     - `v-if`
     - `v-else-if`
     - `v-else`
     - `v-show`
     - `v-cloak`
 
-5. **描画修飾子** (要素の描画方法を変更)
+4. **描画修飾子** (要素の描画方法を変更)
     - `v-pre`
     - `v-once`
 
-6. **グローバルな認識** (コンポーネントを超えた知識が必要)
+5. **グローバルな認識** (コンポーネントを超えた知識が必要)
     - `id`
 
-7. **一意の属性** (一意の値を必要とする属性)
+6. **一意の属性** (一意の値を必要とする属性)
     - `ref`
     - `key`
 
-8. **双方向バインディング** (バインディングとイベントの結合)
+7. **双方向バインディング** (バインディングとイベントの結合)
     - `v-model`
 
-9. **その他の属性** (すべての指定されていないバインドされた属性とバインドされていない属性)
+8. **その他の属性** (すべての指定されていないバインドされた属性とバインドされていない属性)
 
-10. **イベント** (コンポーネントのイベントリスナ)
+9. **イベント** (コンポーネントのイベントリスナ)
     - `v-on`
 
 10. **コンテンツ** (要素のコンテンツを上書きする)
@@ -1364,14 +1359,14 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ### コンポーネント/インスタンス オプションの空行 <sup data-p="c">推奨</sup>
 
-**特にオプションがスクロールなしでは画面に収まらなくなった場合､複数行に渡るプロパティの間に空行を追加してみてください｡**
+**特にオプションがスクロールなしでは画面に収まらなくなった場合、複数行に渡るプロパティの間に空行を追加してみてください。**
 
-コンポーネントに窮屈さや読みづらさを感じたら､複数行に渡るプロパティの間に空行を追加する事でそれらを簡単に読み流すことができるようになります｡ Vim など､一部のエディタでは、このような書式を使用するとキーボードで簡単に移動することができます。
+コンポーネントに窮屈さや読みづらさを感じたら、複数行に渡るプロパティの間に空行を追加する事でそれらを簡単に読み流すことができるようになります。Vim など、一部のエディタでは、このような書式を使用するとキーボードで簡単に移動することができます。
 
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   value: {
     type: String,
@@ -1398,29 +1393,25 @@ computed: {
 }
 ```
 
-``` js
+```js
 // コンポーネントの読み取りや移動が容易であれば、
-// 空行がなくても大丈夫です｡
+// 空行がなくても大丈夫です。
 props: {
   value: {
     type: String,
     required: true
   },
-
   focused: {
     type: Boolean,
     default: false
   },
-
   label: String,
   icon: String
 },
-
 computed: {
   formattedValue() {
     // ...
   },
-
   inputClasses() {
     // ...
   }
@@ -1430,18 +1421,18 @@ computed: {
 
 ### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `<script>` ､ `<template>` ､ `<style>` タグを一貫した順序にし、 `<style>` は他の2つのうち少なくとも1つで常に必要となるため、順序を最後にするべきです。**
+**[単一ファイルコンポーネント](../guide/single-file-component.html) では、`<script>`、`<template>`、`<style>` タグを一貫した順序にし、 `<style>` は他の2つのうち少なくとも1つで常に必要となるため、順序を最後にするべきです。**
 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <style>/* ... */</style>
 <script>/* ... */</script>
 <template>...</template>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1457,7 +1448,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1469,7 +1460,7 @@ computed: {
 <style>/* ... */</style>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <template>...</template>
 <script>/* ... */</script>
@@ -1499,7 +1490,7 @@ The problem is that large numbers of [element-attribute selectors](http://steves
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <template>
   <button>×</button>
 </template>
@@ -1515,7 +1506,7 @@ button {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -1539,7 +1530,7 @@ The problem is, there are also many _simple_ cases where these patterns may offe
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1552,7 +1543,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1582,7 +1573,7 @@ app.component('TodoItem', {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1600,7 +1591,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1623,16 +1614,16 @@ app.component('TodoItem', {
 
 ### Non-flux state management <sup data-p="d">use with caution</sup>
 
-**[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
+**[Vuex](https://next.vuex.vuejs.org/) should be preferred for global state management, instead of `this.$root` or a global event bus.**
 
-Managing state on `this.$root` and/or using a [global event bus](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) can be convenient for very simple cases, but it is not appropriate for most applications.
+Managing state on `this.$root` and/or using a global event bus can be convenient for very simple cases, but it is not appropriate for most applications.
 
-Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) support).
+Vuex is the [official flux-like implementation](/guide/state-management.html#official-flux-like-implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](/guide/installation.html#vue-devtools) support).
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 // main.js
 import { createApp } from 'vue'
 import mitt from 'mitt'
@@ -1661,7 +1652,7 @@ const app = createApp({
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 // store/modules/todos.js
 export default {
   state: {
@@ -1682,7 +1673,7 @@ export default {
 }
 ```
 
-``` html
+```html
 <!-- TodoItem.vue -->
 <template>
   <span>
