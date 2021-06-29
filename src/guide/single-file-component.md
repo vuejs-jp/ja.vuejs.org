@@ -144,6 +144,7 @@ export default {
 `umd` と `cjs` モジュールを一緒にビルドするには、`rollup.config.js` と `package.json` に数行の設定を追加するだけです。
 
 ##### rollup.config.js
+
 ```js
 output: [
   ...
@@ -163,7 +164,9 @@ output: [
     },
 ]
 ```
+
 ##### package.json
+
 ```json
 "module": "dist/my-library-name.esm.js",
 "main": "dist/my-library-name.cjs.js",
