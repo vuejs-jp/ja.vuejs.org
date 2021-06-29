@@ -15,7 +15,7 @@
 
 こちらが `Hello.vue` と呼ばれたファイルの例です:
 
-<a href="https://codepen.io/team/Vue/pen/3de13b5cd0133df4ecf307b6cf2c5f94" target="_blank" rel="noopener noreferrer"><img src="/images/sfc.png" width="403" alt="Single-file component example (click for code as text)" style="display: block; margin: 15px auto; max-width: 100%"></a>
+<div style="padding: 10px 0 30px"><a href="https://codepen.io/team/Vue/pen/3de13b5cd0133df4ecf307b6cf2c5f94" target="_blank" rel="noopener noreferrer" title="Click for code as text"><img src="/images/sfc.png" width="292" alt="Single-file component example (click for code as text)" style="border-radius: 5px; box-shadow: 0 13px 20px rgb(0 0 0 / 50%); margin: 0 auto; display: block;"></a></div>
 
 さて次にこちらに入ります:
 
@@ -25,7 +25,7 @@
 
 約束した通り、Pug、Babel (ES2015 モジュールと一緒に) や Stylus など綺麗で機能が豊富なコンポーネントもプリプロセッサとして利用することができます。
 
-<a href="https://codesandbox.io/s/vue-single-file-component-with-pre-processors-mr3ik?file=/src/App.vue" target="_blank" rel="noopener noreferrer"><img src="/images/sfc-with-preprocessors.png" width="563" alt="Single-file component with pre-processors example (click for code as text)" style="display: block; margin: 15px auto; max-width: 100%"></a>
+<div style="padding: 10px 0 30px"><a href="https://codesandbox.io/s/vue-single-file-component-with-pre-processors-mr3ik?file=/src/App.vue" target="_blank" rel="noopener noreferrer" title="Click for code as text"><img src="/images/sfc-with-preprocessors.png" width="452" alt="Single-file component with pre-processors example (click for code as text)" style="border-radius: 5px; box-shadow: 0 13px 20px rgb(0 0 0 / 50%); margin: 0 auto; display: block;"></a></div>
 
 これらの特定の言語は単なる一例です。TypeScript、SCSS、PostCSS などの生産的なプリプロセッサも簡単に使うことができます。もし `vue-loader` で Webpack を使用しているならば、CSS Modules 向けに素晴らしいサポートがあります。
 
