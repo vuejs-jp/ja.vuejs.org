@@ -43,13 +43,13 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('todo', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'Todo',
   // ...
@@ -60,13 +60,13 @@ export default {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 app.component('todo-item', {
   // ...
 })
 ```
 
-``` js
+```js
 export default {
   name: 'TodoItem',
   // ...
@@ -90,7 +90,7 @@ export default {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 // プロトタイピングの時に限り OK
 props: ['status']
 ```
@@ -99,13 +99,13 @@ props: ['status']
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   status: String
 }
 ```
 
-``` js
+```js
 // さらに良いです!
 props: {
   status: {
@@ -134,7 +134,7 @@ props: {
 ::: details 詳細な説明
 TODO リストを持っているとしましょう:
 
-``` js
+```js
 data() {
   return {
     todos: [
@@ -161,7 +161,7 @@ data() {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <ul>
   <li v-for="todo in todos">
     {{ todo.text }}
@@ -173,7 +173,7 @@ data() {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="todo in todos"
@@ -198,7 +198,7 @@ data() {
 ::: details 詳細な説明
 Vue がディレクティブを処理する場合、`v-if` は `v-for` よりも優先度が高いため、次のようなテンプレートは:
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -214,7 +214,7 @@ Vue がディレクティブを処理する場合、`v-if` は `v-for` よりも
 
 これは、代わりに算出プロパティを元に反復処理をすることで修正できます。次のようになります:
 
-``` js
+```js
 computed: {
   activeUsers() {
     return this.users.filter(user => user.isActive)
@@ -222,7 +222,7 @@ computed: {
 }
 ```
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -235,7 +235,7 @@ computed: {
 
 または、 `v-for` と一緒に `<template>` タグを使用して、 `<li>` 要素をラップすることもできます:
 
-``` html
+```html
 <ul>
   <template v-for="user in users" :key="user.id">
     <li v-if="user.isActive">
@@ -250,7 +250,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in users"
@@ -266,7 +266,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <ul>
   <li
     v-for="user in activeUsers"
@@ -277,7 +277,7 @@ computed: {
 </ul>
 ```
 
-``` html
+```html
 <ul>
   <template v-for="user in users" :key="user.id">
     <li v-if="user.isActive">
@@ -307,7 +307,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -323,7 +323,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <template>
   <button class="button button-close">×</button>
 </template>
@@ -341,7 +341,7 @@ computed: {
 </style>
 ```
 
-``` html
+```html
 <template>
   <button :class="[$style.button, $style.buttonClose]">×</button>
 </template>
@@ -359,7 +359,7 @@ computed: {
 </style>
 ```
 
-``` html
+```html
 <template>
   <button class="c-Button c-Button--close">×</button>
 </template>
@@ -393,7 +393,7 @@ Vue は `_` のプレフィックスを使用して独自のプライベート�
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -404,7 +404,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -415,7 +415,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -426,7 +426,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -442,7 +442,7 @@ const myGreatMixin = {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 const myGreatMixin = {
   // ...
   methods: {
@@ -453,7 +453,7 @@ const myGreatMixin = {
 }
 ```
 
-``` js
+```js
 // さらに良いです!
 const myGreatMixin = {
   // ...
@@ -484,7 +484,7 @@ export default myGreatMixin
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('TodoList', {
   // ...
 })
@@ -568,7 +568,7 @@ components/
 
 - これらのコンポーネントはとても頻繁に使われるので、あらゆる場所で import するよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスを利用して、それを Webpack でできるようになります。
 
-  ``` js
+  ```js
   const requireComponent = require.context("./src", true, /Base[A-Z]\w+\.(vue|js)$/)
   requireComponent.keys().forEach(function (fileName) {
     let baseComponentConfig = requireComponent(fileName)
@@ -803,12 +803,12 @@ components/
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent></MyComponent>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component/>
 ```
@@ -817,12 +817,12 @@ components/
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
@@ -845,17 +845,17 @@ components/
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <mycomponent/>
 ```
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <myComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <MyComponent></MyComponent>
 ```
@@ -864,19 +864,19 @@ components/
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <MyComponent/>
 ```
 
-``` html
+```html
 <!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 
 または
 
-``` html
+```html
 <!-- どこでも -->
 <my-component></my-component>
 ```
@@ -898,24 +898,24 @@ JavaScript では、クラスやプロトタイプのコンストラクタは - 
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 app.component('myComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 import myComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'myComponent',
   // ...
 }
 ```
 
-``` js
+```js
 export default {
   name: 'my-component',
   // ...
@@ -926,23 +926,23 @@ export default {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 app.component('MyComponent', {
   // ...
 })
 ```
 
-``` js
+```js
 app.component('my-component', {
   // ...
 })
 ```
 
-``` js
+```js
 import MyComponent from './MyComponent.vue'
 ```
 
-``` js
+```js
 export default {
   name: 'MyComponent',
   // ...
@@ -985,13 +985,13 @@ components/
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 props: {
   'greeting-text': String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greetingText="hi"/>
 ```
 </div>
@@ -999,13 +999,13 @@ props: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   greetingText: String
 }
 ```
 
-``` html
+```html
 <WelcomeMessage greeting-text="hi"/>
 ```
 </div>
@@ -1019,11 +1019,11 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
 ```
 
-``` html
+```html
 <MyComponent foo="a" bar="b" baz="c"/>
 ```
 </div>
@@ -1031,14 +1031,14 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <img
   src="https://vuejs.org/images/logo.png"
   alt="Vue Logo"
 >
 ```
 
-``` html
+```html
 <MyComponent
   foo="a"
   bar="b"
@@ -1056,7 +1056,7 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 {{
   fullName.split(' ').map((word) => {
     return word[0].toUpperCase() + word.slice(1)
@@ -1068,12 +1068,12 @@ JavaScript では、複数のプロパティをもつ要素を複数の行に分
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- テンプレート内 -->
 {{ normalizedFullName }}
 ```
 
-``` js
+```js
 // 複雑な式を算出プロパティに移動
 computed: {
   normalizedFullName() {
@@ -1110,7 +1110,7 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` js
+```js
 computed: {
   price() {
     const basePrice = this.manufactureCost / (1 - this.profitMargin)
@@ -1126,7 +1126,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 computed: {
   basePrice() {
     return this.manufactureCost / (1 - this.profitMargin)
@@ -1152,11 +1152,11 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <input type=text>
 ```
 
-``` html
+```html
 <AppSidebar :style={width:sidebarWidth+'px'}>
 ```
 </div>
@@ -1164,11 +1164,11 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <input type="text">
 ```
 
-``` html
+```html
 <AppSidebar :style="{ width: sidebarWidth + 'px' }">
 ```
 </div>
@@ -1180,21 +1180,21 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1208,35 +1208,35 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <input
   :value="newTodoText"
   :placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   v-bind:value="newTodoText"
   v-bind:placeholder="newTodoInstructions"
 >
 ```
 
-``` html
+```html
 <input
   @input="onInput"
   @focus="onFocus"
 >
 ```
 
-``` html
+```html
 <input
   v-on:input="onInput"
   v-on:focus="onFocus"
 >
 ```
 
-``` html
+```html
 <template v-slot:header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1246,7 +1246,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 </template>
 ```
 
-``` html
+```html
 <template #header>
   <h1>Here might be a page title</h1>
 </template>
@@ -1367,7 +1367,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` js
+```js
 props: {
   value: {
     type: String,
@@ -1394,7 +1394,7 @@ computed: {
 }
 ```
 
-``` js
+```js
 // コンポーネントの読み取りや移動が容易であれば、
 // 空行がなくても大丈夫です。
 props: {
@@ -1427,13 +1427,13 @@ computed: {
 <div class="style-example style-example-bad">
 <h4>悪い例</h4>
 
-``` html
+```html
 <style>/* ... */</style>
 <script>/* ... */</script>
 <template>...</template>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1449,7 +1449,7 @@ computed: {
 <div class="style-example style-example-good">
 <h4>良い例</h4>
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <script>/* ... */</script>
 <template>...</template>
@@ -1461,7 +1461,7 @@ computed: {
 <style>/* ... */</style>
 ```
 
-``` html
+```html
 <!-- ComponentA.vue -->
 <template>...</template>
 <script>/* ... */</script>
@@ -1491,7 +1491,7 @@ The problem is that large numbers of [element-attribute selectors](http://steves
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` html
+```html
 <template>
   <button>×</button>
 </template>
@@ -1507,7 +1507,7 @@ button {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` html
+```html
 <template>
   <button class="btn btn-close">×</button>
 </template>
@@ -1531,7 +1531,7 @@ The problem is, there are also many _simple_ cases where these patterns may offe
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1544,7 +1544,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1574,7 +1574,7 @@ app.component('TodoItem', {
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1592,7 +1592,7 @@ app.component('TodoItem', {
 })
 ```
 
-``` js
+```js
 app.component('TodoItem', {
   props: {
     todo: {
@@ -1624,7 +1624,7 @@ Vuex is the [official flux-like implementation](/guide/state-management.html#off
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
 
-``` js
+```js
 // main.js
 import { createApp } from 'vue'
 import mitt from 'mitt'
@@ -1653,7 +1653,7 @@ const app = createApp({
 <div class="style-example style-example-good">
 <h4>Good</h4>
 
-``` js
+```js
 // store/modules/todos.js
 export default {
   state: {
@@ -1674,7 +1674,7 @@ export default {
 }
 ```
 
-``` html
+```html
 <!-- TodoItem.vue -->
 <template>
   <span>
