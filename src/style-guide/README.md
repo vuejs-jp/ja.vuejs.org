@@ -81,7 +81,7 @@ export default {
 コミットされたコードでは、prop の定義は常に可能な限り詳細にすべきで、少なくともタイプの指定をする必要があります。
 
 ::: details 詳細な説明
-詳細な [プロパティの定義](/guide/component-props.html#prop-validation) には 2 つの利点があります:
+詳細な [プロパティの定義](/guide/component-props.html#プロパティのバリデーション) には 2 つの利点があります:
 
 - コンポーネントの API が明文化されるため、そのコンポーネントの使用方法が簡単に確認できます。
 - 開発中、コンポーネントに対して誤った形式のプロパティが提供されると Vue は警告を通知するため、潜在的なエラー原因の検知に役立ちます。
@@ -1617,9 +1617,9 @@ app.component('TodoItem', {
 
 **[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
 
-Managing state on `this.$root` and/or using a [global event bus](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) can be convenient for very simple cases, but it is not appropriate for most applications.
+Managing state on `this.$root` and/or using a global event bus can be convenient for very simple cases, but it is not appropriate for most applications.
 
-Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) support).
+Vuex is the [official flux-like implementation](/guide/state-management.html#official-flux-like-implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](/guide/installation.html#vue-devtools) support).
 
 <div class="style-example style-example-bad">
 <h4>Bad</h4>
