@@ -1260,44 +1260,43 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 </div>
 
 
-## Priority C Rules: Recommended <span class="hide-from-sidebar">(Minimizing Arbitrary Choices and Cognitive Overhead)</span>
+## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
 
-### Component/instance options order <sup data-p="c">recommended</sup>
+## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
 
-**Component/instance options should be ordered consistently.**
+### コンポーネント/インスタンス オプション順序 <sup data-p="c">推奨</sup>
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add new properties from plugins.
+**コンポーネント/インスタンス オプションは､一貫した順序になるべきです｡**
 
-1. **Global Awareness** (requires knowledge beyond the component)
+これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､プラグインからどこに新たなプロパティを追加するか知ることができます｡
+
+1. **グローバルな認識** (コンポーネントを超えた知識が必要)
     - `name`
 
-2. **Template Compiler Options** (changes the way templates are compiled)
-    - `compilerOptions`
-
-3. **Template Dependencies** (assets used in the template)
+2. **テンプレートの依存関係** (テンプレートで使用されるアセット)
     - `components`
     - `directives`
 
-4. **Composition** (merges properties into the options)
+3. **合成** (プロパティをオプションにマージ)
     - `extends`
     - `mixins`
     - `provide`/`inject`
 
-5. **Interface** (the interface to the component)
+4. **インタフェース** (コンポーネントへのインタフェース)
     - `inheritAttrs`
     - `props`
     - `emits`
 
-6. **Composition API** (the entry point for using the Composition API)
+5. **コンポジション API** (コンポジション API を使用するためのエントリポイント)
     - `setup`
 
-7. **Local State** (local reactive properties)
+6. **ローカルの状態** (ローカル リアクティブ プロパティ)
     - `data`
     - `computed`
 
-8. **Events** (callbacks triggered by reactive events)
+7. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
     - `watch`
-    - Lifecycle Events (in the order they are called)
+    - ライフサイクルイベント (呼び出される順)
         - `beforeCreate`
         - `created`
         - `beforeMount`
@@ -1312,62 +1311,65 @@ This is the default order we recommend for component options. They're split into
         - `renderTracked`
         - `renderTriggered`
 
-9.  **Non-Reactive Properties** (instance properties independent of the reactivity system)
+8.  **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
     - `methods`
 
-10. **Rendering** (the declarative description of the component output)
+9. **レンダリング** (コンポーネント出力の宣言的な記述)
     - `template`/`render`
 
-### Element attribute order <sup data-p="c">recommended</sup>
+### 要素の属性の順序 <sup data-p="c">推奨</sup>
 
-**The attributes of elements (including components) should be ordered consistently.**
+**要素の属性 (コンポーネントを含む) は､一貫した順序になるべきです｡**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add custom attributes and directives.
+これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､カスタム属性とディレクティブをどこに追加するか知ることができます｡
 
-1. **Definition** (provides the component options)
+1. **定義** (コンポーネントオプションを提供)
     - `is`
 
-2. **List Rendering** (creates multiple variations of the same element)
+2. **テンプレートの修飾子** (テンプレートのコンパイル方法を変更)
+  - `delimiters`
+  
+3. **リスト描画** (同じ要素の複数のバリエーションを作成する)
     - `v-for`
 
-3. **Conditionals** (whether the element is rendered/shown)
+4. **条件** (要素が描画/表示されているかどうか)
     - `v-if`
     - `v-else-if`
     - `v-else`
     - `v-show`
     - `v-cloak`
 
-4. **Render Modifiers** (changes the way the element renders)
+5. **描画修飾子** (要素の描画方法を変更)
     - `v-pre`
     - `v-once`
 
-5. **Global Awareness** (requires knowledge beyond the component)
+6. **グローバルな認識** (コンポーネントを超えた知識が必要)
     - `id`
 
-6. **Unique Attributes** (attributes that require unique values)
+7. **一意の属性** (一意の値を必要とする属性)
     - `ref`
     - `key`
 
-7. **Two-Way Binding** (combining binding and events)
+8. **双方向バインディング** (バインディングとイベントの結合)
     - `v-model`
 
-8. **Other Attributes** (all unspecified bound & unbound attributes)
+9. **その他の属性** (すべての指定されていないバインドされた属性とバインドされていない属性)
 
-9. **Events** (component event listeners)
+10. **イベント** (コンポーネントのイベントリスナ)
     - `v-on`
 
-10. **Content** (overrides the content of the element)
+10. **コンテンツ** (要素のコンテンツを上書きする)
     - `v-html`
     - `v-text`
 
-### Empty lines in component/instance options <sup data-p="c">recommended</sup>
+### コンポーネント/インスタンス オプションの空行 <sup data-p="c">推奨</sup>
 
-**You may want to add one empty line between multi-line properties, particularly if the options can no longer fit on your screen without scrolling.**
+**特にオプションがスクロールなしでは画面に収まらなくなった場合､複数行に渡るプロパティの間に空行を追加してみてください｡**
 
-When components begin to feel cramped or difficult to read, adding spaces between multi-line properties can make them easier to skim again. In some editors, such as Vim, formatting options like this can also make them easier to navigate with the keyboard.
+コンポーネントに窮屈さや読みづらさを感じたら､複数行に渡るプロパティの間に空行を追加する事でそれらを簡単に読み流すことができるようになります｡ Vim など､一部のエディタでは、このような書式を使用するとキーボードで簡単に移動することができます。
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` js
 props: {
@@ -1397,8 +1399,8 @@ computed: {
 ```
 
 ``` js
-// No spaces are also fine, as long as the component
-// is still easy to read and navigate.
+// コンポーネントの読み取りや移動が容易であれば、
+// 空行がなくても大丈夫です｡
 props: {
   value: {
     type: String,
@@ -1426,12 +1428,12 @@ computed: {
 ```
 </div>
 
-### Single-file component top-level element order <sup data-p="c">recommended</sup>
+### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[Single-file components](../guide/single-file-component.html) should always order `<script>`, `<template>`, and `<style>` tags consistently, with `<style>` last, because at least one of the other two is always necessary.**
+**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `<script>` ､ `<template>` ､ `<style>` タグを一貫した順序にし、 `<style>` は他の2つのうち少なくとも1つで常に必要となるため、順序を最後にするべきです。**
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ``` html
 <style>/* ... */</style>
@@ -1453,7 +1455,7 @@ computed: {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ``` html
 <!-- ComponentA.vue -->
@@ -1479,6 +1481,8 @@ computed: {
 <style>/* ... */</style>
 ```
 </div>
+
+## Priority D Rules: Use with Caution <span class="hide-from-sidebar">(Potentially Dangerous Patterns)</span>
 
 ### Element selectors with `scoped` <sup data-p="d">use with caution</sup>
 
