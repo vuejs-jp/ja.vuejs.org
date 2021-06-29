@@ -38,7 +38,7 @@ export default {
 <my-component id="my-id" class="my-class"></my-component>
 ```
 
-...以下の HTML が生成されます:
+…以下の HTML が生成されます:
 
 ```html
 <label class="my-class">

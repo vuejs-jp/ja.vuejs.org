@@ -61,7 +61,7 @@ const asyncModalWithOptions = defineAsyncComponent({
 Vue Router は *遅延読み込み* と呼ばれるルートコンポーネントを非同期に読み込む似たような仕組みをサポートしています。似てはいますが、この機能は Vue の非同期コンポーネントのサポートとは異なります。 Vue Router でルートコンポーネントを構成するときは、 `defineAsyncComponent` を **使用しない** 必要があります。これについては、 Vue Router のドキュメントの [ルートの遅延読み込み](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) で詳しく説明されています。
 :::
 
-2.x からなされたもう一つの変更は、直接コンポーネント定義を提供できないことを正確に伝えるために `component` オプションの名前が `loader` に替わったことです。
+2.x からなされたもう 1 つの変更は、直接コンポーネント定義を提供できないことを正確に伝えるために `component` オプションの名前が `loader` に替わったことです。
 
 ```js{4}
 import { defineAsyncComponent } from 'vue'

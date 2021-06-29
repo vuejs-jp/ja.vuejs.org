@@ -44,7 +44,7 @@ app.component('modal-button', {
     </div>
   `,
   data() {
-    return { 
+    return {
       modalOpen: false
     }
   }
@@ -53,9 +53,9 @@ app.component('modal-button', {
 
 このコンポーネントを最初の HTML 構造の中で使うときに、問題が見えてきます。モーダルは深く入れ子になった `div` の中にレンダリングされており、モーダルの `position: absolute` は、相対的に位置する親の `div` を参照として使用します。
 
-Teleport は、グローバルステートに頼ったり、2つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
+Teleport は、グローバルステートに頼ったり、2 つのコンポーネントに分割しなくても、HTML の一部を DOM のどの親の下でレンダリングするかを制御するための、きれいな方法を提供します。
 
-`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**Teleport** (テレポート) " させるよう、`modal-button` を変更しましょう。 
+`<teleport>` を使って、Vue にこの HTML を "**body**" タグに "**Teleport** (テレポート) " させるよう、`modal-button` を変更しましょう。
 
 ```js
 app.component('modal-button', {
@@ -77,7 +77,7 @@ app.component('modal-button', {
     </teleport>
   `,
   data() {
-    return { 
+    return {
       modalOpen: false
     }
   }
@@ -90,7 +90,7 @@ app.component('modal-button', {
 
 ## Vue コンポーネントと使う
 
-もし `<teleport>` が Vue コンポーネントを含む場合、それは`<teleport>` の親の、論理的な子コンポーネントのままになります。
+もし `<teleport>` が Vue コンポーネントを含む場合、それは `<teleport>` の親の、論理的な子コンポーネントのままになります。
 
 ```js
 const app = Vue.createApp({

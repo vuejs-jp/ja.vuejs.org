@@ -290,7 +290,7 @@ watch(counter, (newValue, oldValue) => {
 })
 ```
 
-`counter.value = 5` のように`counter` が更新されたときは、ウォッチはコールバック (第 2 引数) をトリガーして実行します。この場合は、コンソールに `'The new counter value is: 5'` を出力します。
+`counter.value = 5` のように `counter` が更新されたときは、ウォッチはコールバック (第 2 引数) をトリガーして実行します。この場合は、コンソールに `'The new counter value is: 5'` を出力します。
 
 **以下はオプション API と同様です:**
 

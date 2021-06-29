@@ -1,14 +1,30 @@
 # 組み込みコンポーネント
 
+Built-in components can be used directly in templates without needing to be registered.
+
+The `<keep-alive>`, `<transition>`, `<transition-group>`, and `<teleport>` components can all be tree-shaken by bundlers, so that they are only included in the build if they're used. They can also be imported explicitly if you need direct access to the component itself:
+
+```js
+// CDN build of Vue
+const { KeepAlive, Teleport, Transition, TransitionGroup } = Vue
+```
+
+```js
+// ESM build of Vue
+import { KeepAlive, Teleport, Transition, TransitionGroup } from 'vue'
+```
+
+`<component>` and `<slot>` are component-like features of template syntax. They are not true components and they can't be imported like the components shown above.
+
 ## component
 
 - **Props:**
 
-  - `is` - `string | ComponentDefinition | ComponentConstructor`
+  - `is` - `string | Component`
 
 - **Usage:**
 
-  A "meta component" for rendering dynamic components. The actual component to render is determined by the `is` prop:
+  A "meta component" for rendering dynamic components. The actual component to render is determined by the `is` prop. An `is` prop as a string could be either an HTML tag name or a Component name.
 
   ```html
   <!-- a dynamic component controlled by -->
@@ -17,7 +33,34 @@
 
   <!-- can also render registered component or component passed as prop -->
   <component :is="$options.components.child"></component>
+
+  <!-- can reference components by string -->
+  <component :is="condition ? 'FooComponent' : 'BarComponent'"></component>
+
+  <!-- can be used to render native HTML elements -->
+  <component :is="href ? 'a' : 'span'"></component>
   ```
+
+  The built-in components `KeepAlive`, `Transition`, `TransitionGroup`, and `Teleport` can all be passed to `is`, but you must register them if you want to pass them by name. For example:
+
+  ```js
+  const { Transition, TransitionGroup } = Vue
+
+  const Component = {
+    components: {
+      Transition,
+      TransitionGroup
+    },
+
+    template: `
+      <component :is="isGroup ? 'TransitionGroup' : 'Transition'">
+        ...
+      </component>
+    `
+  }
+  ```
+
+  Registration is not required if you pass the component itself to `is` rather than its name.
 
 - **See also:** [Dynamic Components](../guide/component-dynamic-async.html)
 
@@ -31,7 +74,7 @@
   - `css` - `boolean`. Whether to apply CSS transition classes. Defaults to `true`. If set to `false`, will only trigger JavaScript hooks registered via component events.
   - `type` - `string`. Specifies the type of transition events to wait for to determine transition end timing. Available values are `"transition"` and `"animation"`. By default, it will automatically detect the type that has a longer duration.
   - `mode` - `string` Controls the timing sequence of leaving/entering transitions. Available modes are `"out-in"` and `"in-out"`; defaults to simultaneous.
-  - `duration` - `number | {`enter`: number,`leave`: number }`. Specifies the duration of transition. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element.
+  - `duration` - `number | { enter: number, leave: number }`. Specifies the duration of transition. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element.
   - `enter-from-class` - `string`
   - `leave-from-class` - `string`
   - `appear-class` - `string`
@@ -80,7 +123,7 @@
   ```
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     ...
     methods: {
       transitionComplete (el) {
@@ -99,7 +142,7 @@
 
 - **Props:**
 
-  - `tag` - `string`, defaults to `span`.
+  - `tag` - `string`, if not defined, renders without a root element.
   - `move-class` - overwrite CSS class applied during moving transition.
   - exposes the same props as `<transition>` except `mode`.
 
@@ -109,7 +152,7 @@
 
 - **Usage:**
 
-  `<transition-group>` serve as transition effects for **multiple** elements/components. The `<transition-group>` renders a real DOM element. By default it renders a `<span>`, and you can configure what element it should render via the `tag` attribute.
+  `<transition-group>` provides transition effects for **multiple** elements/components. By default it doesn't render a wrapper DOM element, but one can be defined via the `tag` attribute.
 
   Note that every child in a `<transition-group>` must be [**uniquely keyed**](./special-attributes.html#key) for the animations to work properly.
 
@@ -137,7 +180,7 @@
 
   When wrapped around a dynamic component, `<keep-alive>` caches the inactive component instances without destroying them. Similar to `<transition>`, `<keep-alive>` is an abstract component: it doesn't render a DOM element itself, and doesn't show up in the component parent chain.
 
-  When a component is toggled inside `<keep-alive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly.
+  When a component is toggled inside `<keep-alive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly, providing an alternative to `mounted` and `unmounted`, which are not called. (This applies to the direct child of `<keep-alive>` as well as to all of its descendants.)
 
   Primarily used to preserve component state or avoid re-rendering.
 
@@ -165,7 +208,7 @@
 
 - **`include` and `exclude`**
 
-  The `include` and `exclude` props allow components to be conditionally cached. Both props can be a comma-delimited string, a RegExp or an Array:
+  The `include` and `exclude` props allow components to be conditionally cached. Both props can be a comma-delimited string, a RegExp or an array:
 
   ```html
   <!-- comma-delimited string -->
