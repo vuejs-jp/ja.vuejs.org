@@ -28,6 +28,8 @@
 
   The root DOM element that the component instance is managing.
 
+  For components using [fragments](../guide/migration/fragments), `$el` will be the placeholder DOM node that Vue uses to keep track of the component's position in the DOM. It is recommended to use [template refs](../guide/component-template-refs.html) for direct access to DOM elements instead of relying on `$el`.
+
 ## $options
 
 - **Type:** `Object`
@@ -39,7 +41,7 @@
   The instantiation options used for the current component instance. This is useful when you want to include custom properties in the options:
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     customOption: 'foo',
     created() {
       console.log(this.$options.customOption) // => 'foo'
@@ -100,14 +102,15 @@
   ```
 
   ```js
-  const app = Vue.createApp({})
+  const { createApp, h } = Vue
+  const app = createApp({})
 
   app.component('blog-post', {
     render() {
-      return Vue.h('div', [
-        Vue.h('header', this.$slots.header()),
-        Vue.h('main', this.$slots.default()),
-        Vue.h('footer', this.$slots.footer())
+      return h('div', [
+        h('header', this.$slots.header()),
+        h('main', this.$slots.default()),
+        h('footer', this.$slots.footer())
       ])
     }
   })
@@ -144,3 +147,4 @@ Contains parent-scope attribute bindings and events that are not recognized (and
 
 - **See also:**
   - [Non-Prop Attributes](../guide/component-attrs.html)
+  - [Options / Misc - inheritAttrs](./options-misc.html#inheritattrs)
