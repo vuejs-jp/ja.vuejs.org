@@ -64,7 +64,7 @@ export default {
 
 ### 3.x での構文
 
-3.x では、 `render` 関数がなんの引数も受け取らなくなるので、主に `setup()` 関数の中で利用されます。この変更は`setup()` 関数に渡された引数だけでなく、スコープの中で宣言されたリアクティブな状態や関数にアクセスできるという追加の利点があります。
+3.x では、 `render` 関数がなんの引数も受け取らなくなるので、主に `setup()` 関数の中で利用されます。この変更は `setup()` 関数に渡された引数だけでなく、スコープの中で宣言されたリアクティブな状態や関数にアクセスできるという追加の利点があります。
 
 ```js
 import { h, reactive } from 'vue'
@@ -134,7 +134,7 @@ export default {
 
 ### 2.x での構文
 
-2.x では、コンポーネントが登録されていた場合、コンポーネントの名前を文字列として第1引数に渡すと、 Render 関数がうまく動作します:
+2.x では、コンポーネントが登録されていた場合、コンポーネントの名前を文字列として第 1 引数に渡すと、 Render 関数がうまく動作します:
 
 ```js
 // 2.x
@@ -175,6 +175,8 @@ export default {
 詳細については、 [Render 関数 API の変更に関する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0008-render-function-api-change.md#context-free-vnodes) を見てください。
 
 ## 移行の戦略
+
+[移行ビルドのフラグ: `RENDER_FUNCTION`](migration-build.html#compat-の設定)
 
 ### ライブラリの著者
 

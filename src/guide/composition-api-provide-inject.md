@@ -45,7 +45,7 @@ export default {
 
 `provide` を `setup()` 内で使う場合、始めに `vue` から明示的に `provide` をインポートします。これにより、 各プロパティについて `provide` の呼び出しで定義することができるようになります。
 
-`provide` 関数は2つの引数によってプロパティを定義できます:
+`provide` 関数は 2 つの引数によってプロパティを定義できます:
 
 1. プロパティの名前 (`<String>` 型)
 2. プロパティの値
@@ -60,7 +60,7 @@ export default {
 
 <script>
 import { provide } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -81,7 +81,7 @@ export default {
 
 `inject` を `setup()` 内で使う場合も、`vue` から明示的に `inject` をインポートする必要があります。そうしておけば、これを呼び出すことで、注入された値をコンポーネントに公開する方法を定義することができるようになります。
 
-`inject` 関数は2つの引数をとります:
+`inject` 関数は 2 つの引数をとります:
 
 1. 注入されるプロパティ名
 2. デフォルト値 (**任意**)
@@ -123,7 +123,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -159,7 +159,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -198,7 +198,7 @@ export default {
 
 <script>
 import { provide, reactive, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {
@@ -254,7 +254,7 @@ export default {
 
 <script>
 import { provide, reactive, readonly, ref } from 'vue'
-import MyMarker from './MyMarker.vue
+import MyMarker from './MyMarker.vue'
 
 export default {
   components: {

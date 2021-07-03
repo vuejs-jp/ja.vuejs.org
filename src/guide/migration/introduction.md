@@ -7,7 +7,8 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
 このガイドは主に、Vue 3 の新機能と変更点について学びたい Vue 2 の経験があるユーザーを対象としています。 **Vue 3 を試す前にこのガイドを上から下まで読む必要はありません。** 多くの変更があったように見えますが、Vue についてあなたが知っていて愛していることの多くは同じままです。 しかし、私たちは可能な限り徹底し、文書化されたすべての変更について詳細な説明と例を提供したいと考えました。
 
 - [クイックスタート](#クイックスタート)
-- [注目すべき新機能](#注目すべき新機能)
+- [移行ビルド](#移行ビルド)
+- [注目すべき新機能](#注目すべき新機能)
 - [破壊的変更](#破壊的変更)
 - [サポートライブラリ](#サポートライブラリ)
 
@@ -19,6 +20,8 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
 [Vue Mastery](https://www.vuemastery.com/courses-path/vue3) で Vue 3 を学び始める。
 
 ## クイックスタート
+
+新しいプロジェクトで Vue 3 をすぐに試してみたい場合:
 
 - CDN 経由: `<script src="https://unpkg.com/vue@next"></script>`
 - [Codepen](https://codepen.io/yyx990803/pen/OJNoaZL) 上のブラウザ内プレイグラウンド
@@ -37,6 +40,10 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
   # select vue 3 preset
   ```
 
+## 移行ビルド
+
+既存の Vue 2 プロジェクトやライブラリを Vue 3 にアップグレードする場合は、Vue 2 と互換性のある API を提供する Vue 3 のビルドを提供しています。詳しくは[移行ビルド](./migration-build.html)のページをご覧ください。
+
 ## 注目すべき新機能
 
 Vue 3 で注目すべきいくつかの新機能の次のとおりです。
@@ -46,16 +53,12 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - [Fragments](/guide/migration/fragments.html)
 - [Emits Component Option](/guide/component-custom-events.html)
 - カスタムレンダラを作るための [`@vue/runtime-core` の `createRenderer` API](https://github.com/vuejs/vue-next/tree/master/packages/runtime-core)
-- [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-script-setup.md) <Badge text="experimental" type="warning" />
+- [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md) <Badge text="experimental" type="warning" />
 - [SFC でのステートドリブンな CSS Variables (`<style>` の `v-bind`)](https://github.com/vuejs/rfcs/blob/style-vars-2/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
 - [SFC での `<style scoped>` は、グローバルルールまたはスロットされたコンテンツのみを対象とするルールを含めることができるようになった](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md)
 - [Suspense](/guide/migration/suspense.html) <Badge text="experimental" type="warning" />
 
 ## 破壊的変更
-
-::: info INFO
-Vue 2 と互換性のある動作と、互換性のない使用法に対する実行時警告を備えた Vue 3 の移行専用ビルドの開発に取り組んでいます。 重要な Vue 2 アプリの移行を計画している場合は、よりスムーズな体験のために移行ビルドを待つことを強くお勧めします。
-:::
 
 以下は、2.x からの破壊的変更の一覧です。:
 

@@ -11,7 +11,7 @@
 - **CSS サポート無し**だと HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されること
 - **ビルド処理がない**と Pug(前 Jade)と Babel のようなプリプロセッサよりむしろ、HTML や ES5 JavaScript を制限されること
 
-これらは全ては Webpack や Browserify のビルドツールにより実現された `.vue`拡張子の**単一ファイルコンポーネント**によって解決されます。
+これらは全ては Webpack や Browserify のビルドツールにより実現された `.vue` 拡張子の**単一ファイルコンポーネント**によって解決されます。
 
 こちらが `Hello.vue` と呼ばれたファイルの例です:
 
@@ -144,6 +144,7 @@ export default {
 `umd` と `cjs` モジュールを一緒にビルドするには、`rollup.config.js` と `package.json` に数行の設定を追加するだけです。
 
 ##### rollup.config.js
+
 ```js
 output: [
   ...
@@ -163,7 +164,9 @@ output: [
     },
 ]
 ```
+
 ##### package.json
+
 ```json
 "module": "dist/my-library-name.esm.js",
 "main": "dist/my-library-name.cjs.js",

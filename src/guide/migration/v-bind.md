@@ -44,3 +44,5 @@ Vue 3.x では、要素に `v-bind="object"` 構文と同一の個別のプロ�
 ## 移行の戦略
 
 もしこの上書きの機能を `v-bind` のために利用しているとしたら、`v-bind` 属性が個別のプロパティより前に定義されているか確認することを推奨します。
+
+[移行ビルドのフラグ: `COMPILER_V_BIND_OBJECT_ORDER`](migration-build.html#compat-の設定)

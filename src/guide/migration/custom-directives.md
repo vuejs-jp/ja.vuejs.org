@@ -37,23 +37,23 @@ Vue.directive('highlight', {
 
 ## 3.x での構文
 
-
 ただし、Vue 3 では、カスタムディレクティブ用のよりまとまりのある API を作成しました。Vue 2 では、似たようなイベントにフックしているにもかかわらず、コンポーネントのライフサイクルメソッドとは大きく異なります。これらを次のように統合しました。
 
-- **created** - 追加されました! これは、要素の属性やイベントリスナーが適用される前に呼び出されます。
+- **created** - 追加されました！これは、要素の属性やイベントリスナーが適用される前に呼び出されます。
 - bind → **beforeMount**
 - inserted → **mounted**
-- **beforeUpdate**: 追加されました! これは、コンポーネントのライフサイクルフックのように、要素自体が更新される前に呼び出されます。
-- update → 削除されました! updated と似たようなものが多すぎて冗長です。代わりに updated を使ってください。
+- **beforeUpdate**: 追加されました！これは、コンポーネントのライフサイクルフックのように、要素自体が更新される前に呼び出されます。
+- update → 削除されました！updated と似たようなものが多すぎて冗長です。代わりに updated を使ってください。
 - componentUpdated → **updated**
-- **beforeUnmount**: 追加されました! コンポーネントのライフサイクルフックと同様に、要素がマウント解除される直前に呼び出されます。
+- **beforeUnmount**: 追加されました！コンポーネントのライフサイクルフックと同様に、要素がマウント解除される直前に呼び出されます。
 - unbind -> **unmounted**
 
 最終的な API は次のとおりです。
 
 ```js
 const MyDirective = {
-  beforeMount(el, binding, vnode, prevVnode) {},
+  created(el, binding, vnode, prevVnode) {}, // new
+  beforeMount() {},
   mounted() {},
   beforeUpdate() {}, // 追加
   updated() {},
@@ -86,7 +86,7 @@ app.directive('highlight', {
 
 Vue 2 では、コンポーネントインスタンスは `vnode` 引数を使ってアクセスする必要がありました。
 
-```javascript
+```js
 bind(el, binding, vnode) {
   const vm = vnode.context
 }
@@ -94,12 +94,16 @@ bind(el, binding, vnode) {
 
 Vue 3 では、インスタンスは `binding` の一部になりました。
 
-```javascript
+```js
 mounted(el, binding, vnode) {
   const vm = binding.instance
 }
 ```
 
 :::warning
-[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、ディレクティブは無視され、警告がログ出力されます。
+[fragments](/guide/migration/fragments.html#overview) のサポートにより、コンポーネントは複数のルートノードを持つ可能性があります。マルチルートコンポーネントに適用すると、カスタムディレクティブは無視され、警告がログ出力されます。
 :::
+
+## 移行の戦略
+
+[移行ビルドのフラグ: `CUSTOM_DIR`](migration-build.html#compat-の設定)

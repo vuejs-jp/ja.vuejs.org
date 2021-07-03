@@ -2,7 +2,7 @@
 
 ## 基本
 
-Vue.js 本体で提供されているデフォルトのディレクティブ (`v-model` や `v-show`) に加えて、独自のカスタムディレクティブ (custom directives) を登録することも可能です。Vue ではコードの再利用や抽象化の基本形はコンポーネントです。しかしながら、単純な要素への低レベルな DOM のアクセスが必要なケースがあるかもしれません。こういったケースにカスタムディレクティブが役に立つことでしょう。以下のような input 要素へのフォーカスが１つの例として挙げられます:
+Vue.js 本体で提供されているデフォルトのディレクティブ (`v-model` や `v-show`) に加えて、独自のカスタムディレクティブ (custom directives) を登録することも可能です。Vue ではコードの再利用や抽象化の基本形はコンポーネントです。しかしながら、単純な要素への低レベルな DOM のアクセスが必要なケースがあるかもしれません。こういったケースにカスタムディレクティブが役に立つことでしょう。以下のような input 要素へのフォーカスが 1 つの例として挙げられます:
 
 <common-codepen-snippet title="Custom directives: basic example" slug="JjdxaJW" :preview="false" />
 
@@ -61,13 +61,13 @@ VNodes は[後で](render-function.html#the-virtual-dom-tree)詳細に扱いま�
 
 - `beforeUnmount`: 束縛された要素の親コンポーネントがアンマウントされる前に呼ばれます。
 
-- `unmounted`: ディレクティブが要素から束縛を解かれた時、また親コンポーネントがアンマウントされた時に1度だけ呼ばれます。
+- `unmounted`: ディレクティブが要素から束縛を解かれた時、また親コンポーネントがアンマウントされた時に 1 度だけ呼ばれます。
 
 これらのフック関数に渡される引数 (すなわち、`el`, `binding`, `vnode`, `prevVnode`) は、[カスタムディレクティブ API](../api/application-api.html#directive) にて確認できます。
 
 ### 動的なディレクティブ引数
 
-ディレクティブの引数は動的にできます。例えば、`v-mydirective:[argument]="value"` において、`argument` はコンポーネントインスタンスの data プロパティに基づいて更新されます! これにより、私たちのアプリケーション全体を通した利用に対して、カスタムディレクティブは柔軟になります。
+ディレクティブの引数は動的にできます。例えば、`v-mydirective:[argument]="value"` において、`argument` はコンポーネントインスタンスの data プロパティに基づいて更新されます！これにより、私たちのアプリケーション全体を通した利用に対して、カスタムディレクティブは柔軟になります。
 
 ページの固定位置に要素をピン留めするカスタムディレクティブを考えてみましょう。引数の値が縦方向のピクセル位置を更新するカスタムディレクティブを以下のように作成することができます:
 
@@ -132,7 +132,7 @@ app.mount('#dynamic-arguments-example')
 <div id="dynamicexample">
   <h2>Scroll down the page</h2>
   <input type="range" min="0" max="500" v-model="pinPadding">
-  <p v-pin:[direction]="pinPadding">Stick me {{ pinPadding + 'px' }} from the {{ direction }} of the page</p>
+  <p v-pin:[direction]="pinPadding">Stick me {{ pinPadding + 'px' }} from the {{ direction || 'top' }} of the page</p>
 </div>
 ```
 

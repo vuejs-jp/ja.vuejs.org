@@ -2,6 +2,8 @@
 
 ## データプロパティ
 
+<VideoLesson href="https://vueschool.io/lessons/methods-in-vue-3?friend=vuejs" title="Learn how to use methods on Vue School">Learn how to work with data and methods with a free Vue School lesson</VideoLesson>
+
 コンポーネントの `data` オプションは関数です。Vue は新しいコンポーネントのインスタンスを作成する際に、この関数を呼び出します。これはオブジェクトを返すもので、 Vue はオブジェクトをそのリアクティブシステムでラップして、コンポーネントのインスタンスに `$data` として格納します。便宜上、そのオブジェクトのトップレベルのプロパティは、コンポーネントのインスタンスを介して直接公開されます:
 
 ```js

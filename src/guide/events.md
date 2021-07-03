@@ -1,5 +1,7 @@
 # イベントハンドリング
 
+<VideoLesson href="https://vueschool.io/lessons/user-events-in-vue-3?friend=vuejs" title="Learn how to handle events on Vue School">Learn how to handle events in a free Vue School lesson</VideoLesson>
+
 ## イベントの購読
 
 `v-on` ディレクティブを使うことで、DOM イベントの購読、イベント発火時の JavaScript の実行が可能になります。これは通常 `@` に省略することができます。`v-on:click="methodName"` もしくは `@click="methodName"` と書いて使用します。
@@ -25,7 +27,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: basic" slug="xxGadPZ" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Event handling: basic" slug="xxGadPZ" tab="result" :preview="false" />
 
 ## メソッドイベントハンドラ
 
@@ -62,7 +64,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: with a method" slug="jOPvmaX" tab="js,result" :preview="false" />
+<common-codepen-snippet title="Event handling: with a method" slug="jOPvmaX" tab="result" :preview="false" />
 
 ## インラインメソッドハンドラ
 
@@ -87,7 +89,7 @@ Vue.createApp({
 
 結果:
 
-<common-codepen-snippet title="Event handling: with an inline handler" slug="WNvgjda" tab="html,result" :preview="false" />
+<common-codepen-snippet title="Event handling: with an inline handler" slug="WNvgjda" tab="result" :preview="false" />
 
 時には、インラインステートメントハンドラでオリジナルの DOM イベントを参照したいこともあるでしょう。特別な `$event` 変数を使うことでメソッドに DOM イベントを渡すことができます:
 
@@ -179,7 +181,7 @@ methods: {
 
 他の修飾子とは違って、ネイティブ DOM イベント専用ではありますが、`.once` 修飾子を[コンポーネントイベント](component-custom-events.html)でも使用することができます。まだコンポーネントについて読んでいないなら、今は気にする必要はありません。
 
-Vue は [`addEventListener`の `passive` オプション](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
+Vue は [`addEventListener` の `passive` オプション](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
 
 ```html
 <!-- `onScroll` が `event.preventDefault()` を含んでいたとしても -->
@@ -191,7 +193,7 @@ Vue は [`addEventListener`の `passive` オプション](https://developer.mozi
 `.passive` 修飾子は特にモバイルでのパフォーマンスを改善するのに有用です。
 
 ::: tip
-`.passive` と `.prevent` を一緒に使わないでください。`.prevent `は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げないことをブラウザに伝達することを思い出してください。
+`.passive` と `.prevent` を一緒に使わないでください。`.prevent ` は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げないことをブラウザに伝達することを思い出してください。
 :::
 
 ## キー修飾子
@@ -209,7 +211,7 @@ Vue は [`addEventListener`の `passive` オプション](https://developer.mozi
 <input @keyup.page-down="onPageDown" />
 ```
 
-上の例では、ハンドラは `$event.key `が `'PageDown'` に等しい場合だけ呼ばれます。
+上の例では、ハンドラは `$event.key ` が `'PageDown'` に等しい場合だけ呼ばれます。
 
 ### キーコード
 

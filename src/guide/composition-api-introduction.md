@@ -76,7 +76,7 @@ export default {
 新しい `setup` コンポーネントオプションは、コンポーネントが作成される前に `props` が解決されると実行され、 Composition API のエントリポイントとして機能します。
 
 ::: warning
-`setup` が実行されたときは、まだコンポーネントのインスタンスが作られないため、`setup` オプションの中では `this` を使用できません。これは `props` を除いて、コンポーネント内で宣言されているあらゆるプロパティ (**ローカルの state** や **computed プロパティ**、**methods**) にアクセスできないことを意味します。
+コンポーネントのインスタンスを参照しないため、`setup` の中で `this` を使うのは避けるべきです。`setup` は `data` プロパティ、`computed` プロパティ、`methods` が解決される前に呼び出されるため、`setup` の中では利用できません。
 :::
 
 `setup` オプションは `props` と[後で](composition-api-setup.html#引数)紹介する `context` を受け付ける関数であるべきです。さらに、`setup` から返される全てのものは、コンポーネントの残りの要素 (computed プロパティ、methods、ライフサイクルフックなど) およびコンポーネントの template に公開されます。
@@ -143,7 +143,7 @@ import { ref } from 'vue'
 const counter = ref(0)
 ```
 
-`ref` は引数を受け取って、それを `value` プロパティを持つにオブジェクトでラップして返します。これを利用して、リアクティブな変数の値にアクセスしたり、変更したりします。
+`ref` は引数を受け取って、それを `value` プロパティを持つオブジェクトでラップして返します。これを利用して、リアクティブな変数の値にアクセスしたり、変更したりします。
 
 ```js
 import { ref } from 'vue'
@@ -290,7 +290,7 @@ watch(counter, (newValue, oldValue) => {
 })
 ```
 
-`counter.value = 5` のように`counter` が更新されたときは、ウォッチはコールバック (第 2 引数) をトリガーして実行します。この場合は、コンソールに `'The new counter value is: 5'` を出力します。
+`counter.value = 5` のように `counter` が更新されたときは、ウォッチはコールバック (第 2 引数) をトリガーして実行します。この場合は、コンソールに `'The new counter value is: 5'` を出力します。
 
 **以下はオプション API と同様です:**
 

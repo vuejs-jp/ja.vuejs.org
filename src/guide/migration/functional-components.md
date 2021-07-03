@@ -67,7 +67,7 @@ export default {
 
 Vue 3 では、すべての関数型コンポーネントはプレーンな関数で作成されます。つまり、`{ function: true }` のコンポーネントオプションを定義する必要はありません。
 
-これらの関数は `props`と` context` の 2 つの引数を受け取ります。`context` 引数は、コンポーネントの `attrs`, `slot`, `emit` プロパティを含むオブジェクトです。
+これらの関数は `props` と ` context` の 2 つの引数を受け取ります。`context` 引数は、コンポーネントの `attrs`, `slot`, `emit` プロパティを含むオブジェクトです。
 
 さらに、`render` 関数内で暗黙的に `h` を提供するのではなく、`h` をグローバルにインポートするようになりました。
 
@@ -117,3 +117,4 @@ export default {
 
 - [移行: Render 関数](/guide/migration/render-function-api.html)
 - [ガイド: Render 関数](/guide/render-function.html)
+- [移行ビルドのフラグ: `COMPONENT_FUNCTIONAL`](migration-build.html#compat-の設定)

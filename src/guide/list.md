@@ -1,5 +1,7 @@
 # リストレンダリング
 
+<VideoLesson href="https://vueschool.io/lessons/list-rendering-in-vue-3?friend=vuejs" title="Learn how to render lists on Vue School">Learn how to render list with a free Vue School lesson</VideoLesson>
+
 ## v-for で配列に要素をマッピングする
 
 配列に基づいて、アイテムのリストを描画するために、`v-for` ディレクティブを使用することができます。 `v-for` ディレクティブには、 `item in items` の形式の特別な構文が必要で、 `items` はソースデータの配列、 `item` は繰り返される配列要素の**エイリアス**です:
@@ -26,7 +28,7 @@ Vue.createApp({
 
 <common-codepen-snippet title="v-for with Array" slug="VwLGbwa" tab="js,result" :preview="false" />
 
-`v-for` ブロック内では、親スコープのプロパティへの完全なアクセスを持っています。また `v-for` は現在のアイテムに対する配列のインデックスを、任意の2つ目の引数としてサポートしています。
+`v-for` ブロック内では、親スコープのプロパティへの完全なアクセスを持っています。また `v-for` は現在のアイテムに対する配列のインデックスを、任意の 2 つ目の引数としてサポートしています。
 
 ```html
 <ul id="array-with-index">
@@ -217,7 +219,7 @@ methods: {
 
 結果:
 
-<common-codepen-snippet title="v-for with a range" slug="NWqLjNY" tab="html,result" :preview="false" />
+<common-codepen-snippet title="v-for with a range" slug="NWqLjNY" tab="html,result" />
 
 ## `<template>` での `v-for`
 

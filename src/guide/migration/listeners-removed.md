@@ -10,7 +10,7 @@ badges:
 
 `$listeners` オブジェクトは Vue 3 で削除されました。イベントリスナは `$attrs` の一部になりました。
 
-```javascript
+```js
 {
   text: 'this is an attribute',
   onClose: () => console.log('close Event triggered')
@@ -54,7 +54,7 @@ export default {
 
 もしこのコンポーネントが `id` 属性と `v-on:close` リスナを受け取った場合、 `$attrs` オブジェクトは次のようになります:
 
-```javascript
+```js
 {
   id: 'my-input',
   onClose: () => console.log('close Event triggered')
@@ -64,6 +64,8 @@ export default {
 ## 移行の戦略
 
 `$listeners` の使用をすべて削除します。
+
+[移行ビルドのフラグ: `INSTANCE_LISTENERS`](migration-build.html#compat-の設定)
 
 ## 参照
 

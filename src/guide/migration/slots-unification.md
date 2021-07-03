@@ -14,7 +14,7 @@ badges:
 - `this.$slots` はスロットを関数として公開するようになりました
 - **破壊的変更**: `this.$scopedSlots` が削除されました
 
-詳細については、以下をお読みください!
+詳細については、以下をお読みください！
 
 ## 2.x での構文
 
@@ -59,7 +59,9 @@ this.$slots.header()
 
 ## 移行の戦略
 
-変更の大部分はすでに 2.6 で行われています。その結果、移行は1つのステップで実行できます:
+変更の大部分はすでに 2.6 で行われています。その結果、移行は 1 つのステップで実行できます:
 
 1. 3.x の `this.$scopedSlots` の出現箇所をすべて `this.$slots` に置き換えます。
 2. `this.$slots.mySlot` のすべての出現箇所を `this.$slots.mySlot()` に置き換えます。
+
+[移行ビルドのフラグ: `INSTANCE_SCOPED_SLOTS`](migration-build.html#compat-の設定)

@@ -2,34 +2,35 @@
 
 ## template
 
-- **Type:** `string`
+- **型:** `string`
 
-- **Details:**
+- **詳細:**
 
-  A string template to be used as the markup for the component instance. The template will **replace** the mounted element. Any existing markup inside the mounted element will be ignored, unless content distribution slots are present in the template.
+  コンポーネントインスタンスのマークアップとして使われる文字列のテンプレートです。そのテンプレートはマウントされた要素の `innerHTML` を **置換** します。マウントされた要素内の既存マークアップは、テンプレート内にコンテンツ配信スロットが存在しない限り、どれも無視されます。
 
-  If the string starts with `#` it will be used as a `querySelector` and use the selected element's innerHTML as the template string. This allows the use of the common `<script type="x-template">` trick to include templates.
+  文字列が `#` から始まる場合は、`querySelector` として扱われ、テンプレート文字列として選択された要素の innerHTML を使います。これは一般的な `<script type="x-template">` の方法を使って、テンプレートを含むことができます。
 
   :::tip Note
-  From a security perspective, you should only use Vue templates that you can trust. Never use user-generated content as your template.
+  セキュリティの観点からは、あなたが信頼できる Vue テンプレートだけを使うべきです。ユーザが作成したコンテンツをテンプレートとして使ってはいけません。
   :::
 
   :::tip Note
-  If render function is present in the Vue option, the template will be ignored.:::
+  Render 関数が Vue オプションに存在する場合、テンプレートは無視されます。
+  :::
 
-- **See also:**
-  - [Lifecycle Diagram](../guide/instance.html#lifecycle-diagram)
-  - [Content Distribution with Slots](../guide/component-basics.html#content-distribution-with-slots)
+- **参照:**
+  - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
+  - [スロットによるコンテンツ配信](../guide/component-basics.html#スロットによるコンテンツ配信)
 
 ## render
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  An alternative to string templates allowing you to leverage the full programmatic power of JavaScript.
+  文字列テンプレートの代わりに、JavaScript のプログラム能力をフル活用することができます。
 
-- **Usage:**
+- **使用方法:**
 
   ```html
   <div id="app" class="demo">
@@ -38,11 +39,12 @@
   ```
 
   ```js
-  const app = Vue.createApp({})
+  const { createApp, h } = Vue
+  const app = createApp({})
 
   app.component('my-title', {
     render() {
-      return Vue.h(
+      return h(
         'h1', // tag name,
         this.blogTitle // tag content
       )
@@ -59,7 +61,7 @@
   ```
 
   :::tip Note
-  The `render` function has priority over the render function compiled from `template` option or in-DOM HTML template of the mounting element
+  `render` 関数は、`template` オプションや、マウントした要素の DOM 内 HTML テンプレートからコンパイルされたレンダリング関数よりも高い優先度を持ちます。
   :::
 
-- **See also:** [Render Functions](../guide/render-function.html)
+- **参照:** [Render 関数](../guide/render-function.html)

@@ -14,7 +14,7 @@ yarn add @vue/server-renderer
 
 #### 注意点
 
-- Node.js のバージョンは 10 以上を推奨します。
+- Node.js のバージョンは 12 以上を推奨します。
 - `@vue/server-renderer` と `vue` のバージョンが一致する必要があります。
 - `@vue/server-renderer` はいくつかの Node.js ネイティブモジュールに依存しているため、 Node.js でのみ使用できます。将来的には他の JavaScript ランタイムで実行できるよりシンプルなビルドを提供するかもしれません。
 

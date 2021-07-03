@@ -1,5 +1,7 @@
 # 条件付きレンダリング
 
+<VideoLesson href="https://vueschool.io/lessons/conditional-rendering-in-vue-3?friend=vuejs" title="Learn how conditional rendering works with Vue School">Learn how conditional rendering works with a free lesson on Vue School</VideoLesson>
+
 ## `v-if`
 
 `v-if` ディレクティブは、ブロックを条件に応じて描画したい場合に使用されます。ブロックは、ディレクティブの式が真を返す場合のみ描画されます。
@@ -61,7 +63,7 @@
 </div>
 ```
 
-`v-else` と同様に、`v-else-if` 要素は `v-if` 要素または`v-else-if` 要素の直後になければなりません。
+`v-else` と同様に、`v-else-if` 要素は `v-if` 要素または `v-else-if` 要素の直後になければなりません。
 
 ## `v-show`
 

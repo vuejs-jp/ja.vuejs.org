@@ -77,7 +77,7 @@ const app = Vue.createApp({
 // => "component hook called"
 ```
 
-オブジェクトの値を期待するオプション、例えば、`methods`、`components`、そして`directives` では同じオブジェクトにマージされます。これらのオブジェクトでキーのコンフリクトがあるときは、コンポーネントオプションが優先されます:
+オブジェクトの値を期待するオプション、例えば、`methods`、`components`、そして `directives` では同じオブジェクトにマージされます。これらのオブジェクトでキーのコンフリクトがあるときは、コンポーネントオプションが優先されます:
 
 ```js
 const myMixin = {
@@ -223,4 +223,4 @@ Vue 2 では、ミックスインはコンポーネントロジックの一部�
 
 - 再利用性は制限されている: ロジックを変更するためのパラメータをミックスインに渡せないことは、抽象化ロジックに関する柔軟性を低下させます。
 
-これらの問題に対処するため、論理的な関心事によってコードを整理する新しい方法を追加しました: [Composition] API](composition-api-introduction.html)
+これらの問題に対処するため、論理的な関心事によってコードを整理する新しい方法を追加しました: [Composition API](composition-api-introduction.html)

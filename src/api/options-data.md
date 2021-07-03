@@ -2,26 +2,26 @@
 
 ## data
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  The function that returns a data object for the component instance. In `data`, we don't recommend to observe objects with their own stateful behavior like browser API objects and prototype properties. A good idea would be to have here just a plain object that represents component data.
+  コンポーネントインスタンスのデータオブジェクトを返す関数です。 `data` では、ブラウザの API オブジェクトや prototype プロパティのような独自のステートフルな振る舞いをするオブジェクトを監視することはお勧めしません。よい考え方としては、コンポーネントのデータを表すただのプレーンオブジェクトをここで持つべきです。
 
-  Once observed, you can no longer add reactive properties to the root data object. It is therefore recommended to declare all root-level reactive properties upfront, before creating the instance.
+  一度監視されると、ルートのデータオブジェクトにリアクティブなプロパティを追加することはできなくなります。そのため、インスタンスを作成する前に、すべてのルートレベルのリアクティブプロパティを前もって宣言しておくことをお勧めします。
 
-  After the instance is created, the original data object can be accessed as `vm.$data`. The component instance also proxies all the properties found on the data object, so `vm.a` will be equivalent to `vm.$data.a`.
+  インスタンスが作成された後に、`vm.$data` として元のデータオブジェクトアクセスできます。コンポーネントインスタンスは、データオブジェクトのすべてのプロパティをプロキシするため、`vm.a` は `vm.$data.a` と同じになります。
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `vm.$data._property`.
+  Vue の内部プロパティや API メソッドと競合する可能性があるため、`_` や `$` からはじまるプロパティはコンポーネントインスタンスで **プロキシされません**。これらは `vm.$data._property` としてアクセスする必要があります。
 
-- **Example:**
+- **例:**
 
   ```js
-  // direct instance creation
+  // 直接インスタンスを生成
   const data = { a: 1 }
 
-  // The object is added to a component instance
-  const vm = Vue.createApp({
+  // コンポーネントインスタンスにオブジェクトを追加
+  const vm = createApp({
     data() {
       return data
     }
@@ -30,48 +30,48 @@
   console.log(vm.a) // => 1
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  `data` プロパティでアロー関数を使う場合、`this` はコンポーネントのインスタンスになりませんが、関数の第 1 引数としてそのインスタンスにアクセスできるということは忘れないでください。
 
   ```js
   data: vm => ({ a: vm.myProp })
   ```
 
-- **See also:** [Reactivity in Depth](../guide/reactivity.html)
+- **参照:** [リアクティビティの探求](../guide/reactivity.html)
 
 ## props
 
-- **Type:** `Array<string> | Object`
+- **型:** `Array<string> | Object`
 
-- **Details:**
+- **詳細:**
 
-  A list/hash of attributes that are exposed to accept data from the parent component. It has an Array-based simple syntax and an alternative Object-based syntax that allows advanced configurations such as type checking, custom validation and default values.
+  親コンポーネントからデータを受け取るために公開されている属性のリストかハッシュです。配列ベースの単純な構文と、型チェックやカスタムバリデーション、デフォルト値などの高度な設定ができるオブジェクトベースの構文があります。
 
-  With Object-based syntax, you can use following options:
+  オブジェクトベースの構文では、以下のオプションを使用できます:
 
-  - `type`: can be one of the following native constructors: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, any custom constructor function or an array of those. Will check if a prop has a given type, and will throw a warning if it doesn't. [More information](../guide/component-props.html#prop-types) on prop types.
+  - `type`: 次のネイティブコンストラクタのいずれかになります: `String`、`Number`、`Boolean`、`Array`、`Object`、`Date`、`Function`、`Symbol`、任意のカスタムコンストラクタ関数、またはそれらの配列。プロパティが与えられた型を持っているか確認して、そうでない場合には警告を出します。プロパティの型について [詳細な情報](../guide/component-props.html#プロパティの型) を参照してください。
   - `default`: `any`
-    Specifies a default value for the prop. If the prop is not passed, this value will be used instead. Object or array defaults must be returned from a factory function.
+    プロパティのデフォルト値を指定します。プロパティが渡されない場合、この値が変わりに使用されます。オブジェクト、または配列のデフォルト値はファクトリ関数から返さなければなりません。
   - `required`: `Boolean`
-    Defines if the prop is required. In a non-production environment, a console warning will be thrown if this value is truthy and the prop is not passed.
+    プロパティが必須かどうかを定義します。非本番環境では、この値が true ならプロパティが渡されない場合、コンソールに警告を出します。
   - `validator`: `Function`
-    Custom validator function that takes the prop value as the sole argument. In a non-production environment, a console warning will be thrown if this function returns a falsy value (i.e. the validation fails). You can read more about prop validation [here](../guide/component-props.html#prop-validation).
+    プロパティの値を唯一の引数として受け取るカスタムバリデータ関数です。非本番環境では、この関数が false を返す場合（例えばバリデーションが失敗した場合）、コンソールに警告を出します。プロパティのバリデーションについて、詳しくは [こちら](../guide/component-props.html#プロパティのバリデーション) を参照してください。
 
-- **Example:**
+- **例:**
 
   ```js
-  const app = Vue.createApp({})
+  const app = createApp({})
 
-  // simple syntax
+  // 単純な構文
   app.component('props-demo-simple', {
     props: ['size', 'myMessage']
   })
 
-  // object syntax with validation
+  // バリデーションありのオブジェクト構文
   app.component('props-demo-advanced', {
     props: {
-      // type check
+      // 型チェック
       height: Number,
-      // type check plus other validations
+      // 型チェックと追加のバリデーション
       age: {
         type: Number,
         default: 0,
@@ -84,17 +84,17 @@
   })
   ```
 
-- **See also:** [Props](../guide/component-props.html)
+- **参照:** [プロパティ](../guide/component-props.html)
 
 ## computed
 
-- **Type:** `{ [key: string]: Function | { get: Function, set: Function } }`
+- **型:** `{ [key: string]: Function | { get: Function, set: Function } }`
 
-- **Details:**
+- **詳細:**
 
-  Computed properties to be mixed into the Vcomponent instance. All getters and setters have their `this` context automatically bound to the component instance.
+  コンポーネントのインスタンスに混入される算出プロパティです。すべてのゲッターとセッターは、そのコンポーネントのインスタンスへ自動的に束縛される `this` コンテキストを持っています。
 
-  Note that if you use an arrow function with a computed property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  算出プロパティでアロー関数を使う場合、`this` はコンポーネントのインスタンスになりませんが、関数の第 1 引数としてそのインスタンスにアクセスできるということは忘れないでください。:
 
   ```js
   computed: {
@@ -102,21 +102,21 @@
   }
   ```
 
-  Computed properties are cached, and only re-computed on reactive dependency changes. Note that if a certain dependency is out of the instance's scope (i.e. not reactive), the computed property will **not** be updated.
+  算出プロパティはキャッシュされ、リアクティブな依存の変更でのみ再計算されます。ある依存がインスタンスのスコープ外にある場合（例えばリアクティブでない場合）、算出プロパティは **更新されない** ことに注意してください。
 
-- **Example:**
+- **例:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return { a: 1 }
     },
     computed: {
-      // get only
+      // 取得のみ
       aDouble() {
         return this.a * 2
       },
-      // both get and set
+      // 取得と値の設定の両方
       aPlus: {
         get() {
           return this.a + 1
@@ -135,24 +135,24 @@
   console.log(vm.aDouble) // => 4
   ```
 
-- **See also:** [Computed Properties](../guide/computed.html)
+- **参照:** [算出プロパティ](../guide/computed.html)
 
 ## methods
 
-- **Type:** `{ [key: string]: Function }`
+- **型:** `{ [key: string]: Function }`
 
-- **Details:**
+- **詳細:**
 
-  Methods to be mixed into the component instance. You can access these methods directly on the VM instance, or use them in directive expressions. All methods will have their `this` context automatically bound to the component instance.
+  コンポーネントのインスタンスに混入されるメソッドです。これらのメソッドは、VM インスタンスで直接アクセスすることも、ディレクティブ式で使うこともできます。すべてのメソッドは、コンポーネントインスタンスに自動的に束縛された `this` コンテキストを持ちます。
 
   :::tip Note
-  Note that **you should not use an arrow function to define a method** (e.g. `plus: () => this.a++`). The reason is arrow functions bind the parent context, so `this` will not be the component instance as you expect and `this.a` will be undefined.
+  **メソッドの定義にアロー関数を使ってはいけない** ということに注意してください（例: `plus: () => this.a++`）。その理由は、アロー関数が親のコンテキストを束縛するため、`this` が期待したとおりのコンポーネントインスタンスにならないのと、`this.a` が未定義になるからです。
   :::
 
-- **Example:**
+- **例:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return { a: 1 }
     },
@@ -169,20 +169,20 @@
   console.log(vm.a) // => 2
   ```
 
-- **See also:** [Event Handling](../guide/events.html)
+- **参照:** [イベントハンドリング](../guide/events.html)
 
 ## watch
 
-- **Type:** `{ [key: string]: string | Function | Object | Array}`
+- **型:** `{ [key: string]: string | Function | Object | Array}`
 
-- **Details:**
+- **詳細:**
 
-  An object where keys are expressions to watch and values are the corresponding callbacks. The value can also be a string of a method name, or an Object that contains additional options. The component instance will call `$watch()` for each entry in the object at instantiation.
+  キーが監視するリアクティブなプロパティで、例えば [data](/api/options-data.html#data-2) または [computed](/api/options-data.html#computed) プロパティを含み、値が対応するコールバックとなるオブジェクトです。値はメソッド名の文字列や、追加のオプションを含むオブジェクトを指定することもできます。コンポーネントインスタンスはインスタンス化の際に、オブジェクトの各エントリに対して `$watch()` を呼び出します。`deep`、`immediate`、または `flush` オプションの詳細については [$watch](instance-methods.html#watch) を参照してください。
 
-- **Example:**
+- **例:**
 
   ```js
-  const app = Vue.createApp({
+  const app = createApp({
     data() {
       return {
         a: 1,
@@ -190,31 +190,36 @@
         c: {
           d: 4
         },
-        e: 'test',
-        f: 5
+        e: 5,
+        f: 6
       }
     },
     watch: {
+      // トップレベルのプロパティを監視
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
-      // string method name
+      // メソッド名の文字列
       b: 'someMethod',
-      // the callback will be called whenever any of the watched object properties change regardless of their nested depth
+      // 監視しているオブジェクトのプロパティが変更されると入れ子の深さに関わらずコールバックが呼び出されます
       c: {
         handler(val, oldVal) {
           console.log('c changed')
         },
         deep: true
       },
-      // the callback will be called immediately after the start of the observation
+      // 入れ子になった 1 つのプロパティを監視
+      'c.d': function (val, oldVal) {
+        // do something
+      },
+      // 監視が開始した直後にコールバックが呼び出されます
       e: {
         handler(val, oldVal) {
           console.log('e changed')
         },
         immediate: true
       },
-      // you can pass array of callbacks, they will be called one-by-one
+      // コールバックの配列を渡せて、それらは 1 つずつ呼び出されます
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -244,27 +249,28 @@
   ```
 
   ::: tip Note
-  Note that _you should not use an arrow function to define a watcher_ (e.g. `searchQuery: newValue => this.updateAutocomplete(newValue)`). The reason is arrow functions bind the parent context, so `this` will not be the component instance as you expect and `this.updateAutocomplete` will be undefined.
+  _ウォッチャの定義にアロー関数を使ってはいけない_ ということに注意してください（例: `searchQuery: newValue => this.updateAutocomplete(newValue)`）。その理由は、アロー関数が親のコンテキストを束縛するため、`this` は期待したとおりのコンポーネントインスタンスにはならないのと、`this.updateAutocomplete` が未定義になるからです。
   :::
 
-- **See also:** [Watchers](../guide/computed.html#watchers)
+
+- **参照:** [ウォッチャ](../guide/computed.html#ウォッチャ)
 
 ## emits
 
-- **Type:** `Array<string> | Object`
+- **型:** `Array<string> | Object`
 
-- **Details:**
+- **詳細:**
 
-  A list/hash of custom events that can be emitted from the component. It has an Array-based simple syntax and an alternative Object-based syntax that allows to configure an event validation.
+  コンポーネントから発行されるカスタムイベントのリストやハッシュです。配列ベースの単純な構文と、イベントのバリデーションを設定できるオブジェクトベースの構文があります。
 
-  In Object-based syntax, the value of each property can either be `null` or a validator function. The validation function will receive the additional arguments passed to the `$emit` call. For example, if `this.$emit('foo', 1)` is called, the corresponding validator for `foo` will receive the argument `1`. The validator function should return a boolean to indicate whether the event arguments are valid.
+  オブジェクトベースの構文では、各プロパティの値は `null` か、バリデーション関数のどちらかです。バリデーション関数は `$emit` の呼び出しに渡された追加の引数を受け取ります。例えば、`this.$emit('foo', 1)` が呼び出された場合、`foo` に対応するバリデータは、引数 `1` を受け取ります。バリデーション関数は、イベントの引数が妥当かどうかを示すブール値を返す必要があります。
 
-- **Usage:**
+- **使用方法:**
 
   ```js
-  const app = Vue.createApp({})
+  const app = createApp({})
 
-  // Array syntax
+  // 配列の構文
   app.component('todo-item', {
     emits: ['check'],
     created() {
@@ -272,13 +278,13 @@
     }
   })
 
-  // Object syntax
+  // オブジェクトの構文
   app.component('reply-form', {
     emits: {
-      // no validation
+      // バリデーションなし
       click: null,
 
-      // with validation
+      // バリデーションあり
       submit: payload => {
         if (payload.email && payload.password) {
           return true
@@ -292,7 +298,7 @@
   ```
 
   ::: tip Note
-  Events listed in the `emits` option **will not** be inherited by the root element of the component and also will be excluded from the `$attrs` property.
+  `emits` オプションにリスト化されたイベントは、コンポーネントのルート要素には **継承されません**。また、`$attrs` プロパティからも除外されます。
   :::
 
-* **See also:** [Attribute Inheritance](../guide/component-attrs.html#attribute-inheritance)
+* **参照:** [属性の継承](../guide/component-attrs.html#属性の継承)

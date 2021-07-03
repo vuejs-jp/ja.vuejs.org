@@ -142,7 +142,7 @@ Chrome DevTools で検出することで Description を確認することがで
 
 多くのユーザが混乱する可能性があるため、プレースホルダの使用は避けてください。
 
-プレースホルダによる問題の１つは初期状態で [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) を満たしていないことです。色のコントラストを修正するとプレースホルダが入力欄に事前入力されたデータのように見えます。以下の例を見ると、color contrast criteria を満たしている Last Name プレースホルダが事前入力されたデータのように見えることが確認できます:
+プレースホルダによる問題の 1 つは初期状態で [color contrast criteria](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) を満たしていないことです。色のコントラストを修正するとプレースホルダが入力欄に事前入力されたデータのように見えます。以下の例を見ると、color contrast criteria を満たしている Last Name プレースホルダが事前入力されたデータのように見えることが確認できます:
 
 <common-codepen-snippet title="Form Placeholder" slug="ExZvvMw" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" />
 

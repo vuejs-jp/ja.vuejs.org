@@ -20,14 +20,14 @@ badges:
 以前、非同期コンポーネントは Promise を返す関数としてコンポーネントを定義することで、このように簡単に作成されました:
 
 ```js
-const asyncPage = () => import('./NextPage.vue')
+const asyncModal = () => import('./Modal.vue')
 ```
 
 または、オプション付きのさらに高度なコンポーネント構文として:
 
 ```js
-const asyncPage = {
-  component: () => import('./NextPage.vue'),
+const asyncModal = {
+  component: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
   error: ErrorComponent,
@@ -45,11 +45,11 @@ import ErrorComponent from './components/ErrorComponent.vue'
 import LoadingComponent from './components/LoadingComponent.vue'
 
 // オプションなしの非同期コンポーネント
-const asyncPage = defineAsyncComponent(() => import('./NextPage.vue'))
+const asyncModal = defineAsyncComponent(() => import('./Modal.vue'))
 
 // オプション付きの非同期コンポーネント
-const asyncPageWithOptions = defineAsyncComponent({
-  loader: () => import('./NextPage.vue'),
+const asyncModalWithOptions = defineAsyncComponent({
+  loader: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
   errorComponent: ErrorComponent,
@@ -57,13 +57,17 @@ const asyncPageWithOptions = defineAsyncComponent({
 })
 ```
 
-2.x からなされたもう一つの変更は、直接コンポーネント定義を提供できないことを正確に伝えるために `component` オプションの名前が `loader` に替わったことです。
+::: tip NOTE
+Vue Router は *遅延読み込み* と呼ばれるルートコンポーネントを非同期に読み込む似たような仕組みをサポートしています。似てはいますが、この機能は Vue の非同期コンポーネントのサポートとは異なります。 Vue Router でルートコンポーネントを構成するときは、 `defineAsyncComponent` を **使用しない** 必要があります。これについては、 Vue Router のドキュメントの [ルートの遅延読み込み](https://next.router.vuejs.org/guide/advanced/lazy-loading.html) で詳しく説明されています。
+:::
+
+2.x からなされたもう 1 つの変更は、直接コンポーネント定義を提供できないことを正確に伝えるために `component` オプションの名前が `loader` に替わったことです。
 
 ```js{4}
 import { defineAsyncComponent } from 'vue'
 
-const asyncPageWithOptions = defineAsyncComponent({
-  loader: () => import('./NextPage.vue'),
+const asyncModalWithOptions = defineAsyncComponent({
+  loader: () => import('./Modal.vue'),
   delay: 200,
   timeout: 3000,
   errorComponent: ErrorComponent,
@@ -91,3 +95,4 @@ const asyncComponent = defineAsyncComponent(
 非同期コンポーネントの使い方のさらなる情報は、以下を見てください:
 
 - [ガイド: 動的 & 非同期コンポーネント](/guide/component-dynamic-async.html#動的コンポーネントにおける-keep-alive-の利用)
+- [移行ビルドのフラグ: `COMPONENT_ASYNC`](migration-build.html#compat-の設定)

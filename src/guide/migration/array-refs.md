@@ -1,14 +1,14 @@
 ---
 title:  v-forのref配列
 badges:
-- breaking
+  - breaking
 ---
 
 # {{ $frontmatter.title }} <MigrationBadges :badges="$frontmatter.badges" />
 
 Vue 2 では、`v-for` の中で `ref` 属性を記述すると、対応する `$refs` プロパティに参照の配列を入れます。この動作は、入れ子になった `v-for` がある場合、曖昧で非効率的になります。
 
-Vue 3 では、この記述では `$refs` に配列が作成されなくなりました。１つのバインディングから複数の参照を取得するには、関数に `ref` をバインドします (これは新機能です)。
+Vue 3 では、この記述では `$refs` に配列が作成されなくなりました。1 つのバインディングから複数の参照を取得するには、関数に `ref` をバインドします (これは新機能です)。
 
 ```html
 <div v-for="item in list" :ref="setItemRef"></div>
@@ -70,3 +70,10 @@ export default {
 - `itemRefs` は配列である必要はありません。 反復キーで参照できるオブジェクトでも構いません。
 
 - これにより、必要に応じて `itemRefs` をリアクティブにして監視することもできます。
+
+## 移行の戦略
+
+[移行ビルドのフラグ:](migration-build.html#compat-の設定)
+
+- `V_FOR_REF`
+- `COMPILER_V_FOR_REF`
