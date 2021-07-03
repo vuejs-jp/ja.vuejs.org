@@ -11,7 +11,7 @@
 1. リポジトリをクローンします
 
 ```bash
-git clone git@github.com:vuejs/docs-next.git
+git clone git@github.com:vuejs/docs.git
 ```
 
 2. 依存ファイルをインストールします

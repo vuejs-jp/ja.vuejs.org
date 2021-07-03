@@ -41,7 +41,7 @@ module.exports = {
 
 アクティビティバーのデバッグアイコンをクリックして、デバッグ表示に切り替え、歯車アイコンをクリックして launch.json ファイルを設定したら、環境として **Chrome/Firefox: Launch** を選択します。生成された launch.json の内容を対応する設定に置き換えます:
 
-![Add Chrome Configuration](/images/config_add.png)
+<div style="padding: 10px 25px 30px"><img src="/images/config_add.png" alt="Add Chrome Configuration" style="width: 690px; border-radius: 3px; box-shadow: 0 10px 15px rgb(0 0 0 / 50%)"></div>
 
 ```json
 {
@@ -74,7 +74,8 @@ module.exports = {
 
 1.  **src/components/HelloWorld.vue** の `line 90` にある `data` 関数が文字列を返す部分にブレークポイントを設定します。.
 
-![Breakpoint Renderer](/images/breakpoint_set.png)
+<div style="padding: 10px 25px 30px"><img src="/images/breakpoint_set.png" alt="Breakpoint Renderer" style="width: 690px; border-radius: 3px; box-shadow: 0 10px 15px rgb(0 0 0 / 50%)"></div>
+
 
 2.  ルートフォルダでお気に入りのターミナルを開き、Vue CLI を使ってアプリケーションを配信します:
 
@@ -86,7 +87,7 @@ npm run serve
 
 4.  ブレークポイントに到達すると、新しいブラウザのインスタンスが `http://localhost:8080` を開きます。
 
-![Breakpoint Hit](/images/breakpoint_hit.png)
+<div style="padding: 10px 25px 30px"><img src="/images/breakpoint_hit.png" alt="Breakpoint Hit" style="width: 690px; border-radius: 3px; box-shadow: 0 10px 15px rgb(0 0 0 / 50%)"></div>
 
 ## 代替パターン
 
