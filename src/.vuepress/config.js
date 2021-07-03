@@ -433,6 +433,10 @@ module.exports = {
             text: '한국어',
             link: 'https://v3.ko.vuejs.org/'
           },
+          // {
+          //  text: '日本語',
+          //  link: 'https://v3.ja.vuejs.org/'
+          // },
           {
             text: 'Русский',
             link: 'https://v3.ru.vuejs.org/'
@@ -471,7 +475,8 @@ module.exports = {
       carbon: 'CEBDT27Y',
       custom: 'CKYD62QM',
       placement: 'vuejsorg'
-    }
+    },
+    topBanner: false
   },
   plugins: [
     [
