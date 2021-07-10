@@ -95,8 +95,7 @@ watchEffect(async (onInvalidate) => {
 
 Vue のリアクティブシステムは、無効になった変更をバッファリングし、非同期に処理することによって、おなじ "tick" の中での複数の状態の変化に対して、不要な重複の呼び出しを避けることができています。内部的には、コンポーネントの `update` 関数も、監視されている作用の 1 つです。ユーザーによる作用がキューに入っている場合、デフォルトではすべてのコンポーネントの更新の **前に** 呼び出されます:
 
-```html
-
+```vue
 <template>
   <div>{{ count }}</div>
 </template>
@@ -201,15 +200,15 @@ watch(count, (count, prevCount) => {
 ウォッチャは、配列を利用することで、複数のデータソースを同時に監視できます:
 
 ```js
-const firstName = ref('');
-const lastName = ref('');
+const firstName = ref('')
+const lastName = ref('')
 
 watch([firstName, lastName], (newValues, prevValues) => {
-  console.log(newValues, prevValues);
+  console.log(newValues, prevValues)
 })
 
-firstName.value = "John"; // logs: ["John",""] ["", ""]
-lastName.value = "Smith"; // logs: ["John", "Smith"] ["John", ""]
+firstName.value = 'John' // logs: ["John", ""] ["", ""]
+lastName.value = 'Smith' // logs: ["John", "Smith"] ["John", ""]
 ```
 
 ### リアクティブなオブジェクトの監視
@@ -222,8 +221,9 @@ const numbers = reactive([1, 2, 3, 4])
 watch(
   () => [...numbers],
   (numbers, prevNumbers) => {
-    console.log(numbers, prevNumbers);
-  })
+    console.log(numbers, prevNumbers)
+  }
+)
 
 numbers.push(5) // logs: [1,2,3,4,5] [1,2,3,4]
 ```
@@ -234,47 +234,47 @@ numbers.push(5) // logs: [1,2,3,4,5] [1,2,3,4]
 const state = reactive({
   id: 1,
   attributes: {
-    name: "",
-  },
-});
-
-watch(
-  () => state,
-  (state, prevState) => {
-    console.log(
-      "not deep ",
-      state.attributes.name,
-      prevState.attributes.name
-    );
+    name: ''
   }
-);
+})
 
 watch(
   () => state,
   (state, prevState) => {
     console.log(
-      "deep ",
+      'not deep',
       state.attributes.name,
       prevState.attributes.name
-    );
+    )
+  }
+)
+
+watch(
+  () => state,
+  (state, prevState) => {
+    console.log(
+      'deep',
+      state.attributes.name,
+      prevState.attributes.name
+    )
   },
   { deep: true }
-);
+)
 
-state.attributes.name = "Alex"; // Logs: "deep " "Alex" "Alex"
+state.attributes.name = 'Alex' // Logs: "deep" "Alex" "Alex"
 ```
 
 しかし、リアクティブなオブジェクトや配列を監視すると、そのオブジェクトの状態の現在値と前回値の両方について参照が常に返されます。深くネストされたオブジェクトや配列を完全に監視するためには、値のディープコピーが必要な場合があります。これは [lodash.cloneDeep](https://lodash.com/docs/4.17.15#cloneDeep) のようなユーティリティで実現できます。
 
 ```js
-import _ from 'lodash';
+import _ from 'lodash'
 
 const state = reactive({
   id: 1,
   attributes: {
-    name: "",
-  },
-});
+    name: ''
+  }
+})
 
 watch(
   () => _.cloneDeep(state),
@@ -282,11 +282,11 @@ watch(
     console.log(
       state.attributes.name,
       prevState.attributes.name
-    );
+    )
   }
-);
+)
 
-state.attributes.name = "Alex"; // Logs: "Alex" ""
+state.attributes.name = 'Alex'; // Logs: "Alex" ""
 ```
 
 ### `watchEffect` との振る舞いの共有
