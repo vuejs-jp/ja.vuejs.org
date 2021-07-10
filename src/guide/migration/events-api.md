@@ -58,17 +58,17 @@ export default {
 
 ## 移行の戦略
 
-[Migration build flag: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-configuration)
+[移行ビルドのフラグ: `INSTANCE_EVENT_EMITTER`](migration-build.html#compat-の設定)
 
 Vue 3 では、これらの API を使用して、コンポーネント内からコンポーネント自身が発行したイベントを購読することはできなくなりました。そのユースケースのための移行パスはありません。
 
-### Root Component Events
+### ルートコンポーネントのイベント
 
-Static event listeners can be added to the root component by passing them as props to `createApp`:
+静的なイベントリスナは `createApp` にプロパティとして渡すことで、ルートコンポーネントに追加することができます:
 
 ```js
 createApp(App, {
-  // Listen for the 'expand' event
+  // 'expand' イベントを待機する
   onExpand() {
     console.log('expand')
   }
@@ -77,7 +77,7 @@ createApp(App, {
 
 ### Event Bus
 
-EventBus (イベントバス) パターンは、Event Emitter (イベントエミッタ) インタフェースを実装した外部ライブラリを使用することで置き換えることができます。例えば、[mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) などです。
+Event Bus (イベントバス) パターンは、Event Emitter (イベントエミッタ) インタフェースを実装した外部ライブラリを使用することで置き換えることができます。例えば、[mitt](https://github.com/developit/mitt) や [tiny-emitter](https://github.com/scottcorgan/tiny-emitter) などです。
 
 例:
 
@@ -95,10 +95,10 @@ export default {
 
 これは Vue 2 と同じような Event Emitter API を提供します。
 
-In most circumstances, using a global event bus for communicating between components is discouraged. While it is often the simplest solution in the short term, it almost invariably proves to be a maintenance headache in the long term. Depending on the circumstances, there are various alternatives to using an event bus:
+ほとんどの場合、コンポーネント同士の通信にグローバル Event Bus を使うことには反対します。短期的にはもっとも単純な解決策であることが多いですが、長期的にはいつもメンテナンスの頭痛の種になることが証明されています。状況に応じて、Event Bus を使う以外のいろいろな方法があります。:
 
-* [Props](/guide/component-basics.html#passing-data-to-child-components-with-props) and [events](/guide/component-basics.html#listening-to-child-components-events) should be your first choice for parent-child communication. Siblings can communicate via their parent.
-* [Provide and inject](/guide/component-provide-inject.html) allow a component to communicate with its slot contents. This is useful for tightly-coupled components that are always used together.
-* `provide`/`inject` can also be used for long-distance communication between components. It can help to avoid 'prop drilling', where props need to be passed down through many levels of components that don't need those props themselves.
-* Prop drilling can also be avoided by refactoring to use slots. If an interim component doesn't need the props then it might indicate a problem with separation of concerns. Introducing a slot in that component allows the parent to create the content directly, so that props can be passed without the interim component needing to get involved.
-* [Global state management](/guide/state-management.html), such as [Vuex](https://next.vuex.vuejs.org/).
+* [プロパティ](/guide/component-basics.html#プロパティを用いた子コンポーネントへのデータの受け渡し) と [イベント](/guide/component-basics.html#子コンポーネントのイベントを購読する) は、親子間の通信をする最初の選択肢です。兄弟は親を介して通信できます。
+* [Provide と Inject](/guide/component-provide-inject.html) はコンポーネントと、そのスロットのコンテンツとの通信を可能にします。これはいつも一緒に使われる緊密に結合されたコンポーネントに有効です。
+* `provide`/`inject` はコンポーネント間の距離が離れている通信にも使えます。プロパティを必要としないコンポーネントを何階層にもわたって、プロパティを渡す必要のある「Prop Drilling（プロパティのバケツリレーのこと）」を回避するのに役立ちます。
+* Prop Drilling はスロットを使うようにリファクタリングして回避することもできます。中間のコンポーネントがプロパティを必要としない場合、それは関心の分離に問題があることを示しているかもしれません。そのコンポーネントにスロットを導入することで、親はコンテンツを直接作成することができて、中間のコンポーネントが関与することなくプロパティを渡すことができます。
+* [Vuex](https://next.vuex.vuejs.org/) のような [グローバルな状態管理](/guide/state-management.html) もあります。
