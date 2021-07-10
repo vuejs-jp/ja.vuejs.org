@@ -46,7 +46,10 @@ Vue.config.keyCodes = {
 
 ```html
 <!-- Vue 3 の v-on でキー修飾子を利用する場合 -->
-<input v-on:keyup.delete="confirmDelete" />
+<input v-on:keyup.page-down="nextPage">
+
+<!-- Matches both q and Q -->
+<input v-on:keypress.q="quit">
 ```
 
 `config.keyCodes` の利用も同様の理由で非推奨となり、サポートされなくなりました。
@@ -54,6 +57,14 @@ Vue.config.keyCodes = {
 ## 移行の戦略
 
 キーコードを利用している場合は、ケバブケースでの命名に変更することを推奨します。
+
+The keys for some punctuation marks can just be included literally. e.g. For the `,` key:
+
+```html
+<input v-on:keypress.,="commaPress">
+```
+
+Limitations of the syntax prevent certain characters from being matched, such as `"`, `'`, `/`, `=`, `>`, and `.`. For those characters you should check `event.key` inside the listener instead.
 
 [移行ビルドのフラグ:](migration-build.html#compat-の設定)
 
