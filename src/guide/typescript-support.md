@@ -491,9 +491,9 @@ export default defineComponent({
 })
 ```
 
-### Typing Event Handlers
+### イベントハンドラを型定義する
 
-When dealing with native DOM events, it might be useful to type the argument we pass to the handler correctly. Let's take a look at this example:
+ネイティブの DOM イベントを扱うとき、ハンドラに渡す引数を正しく型定義することが有効な場合があります。この例を見てみましょう:
 
 ```vue
 <template>
@@ -505,9 +505,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-    // `evt` will be of type `any`
+    // `evt` は `any` 型になります
     const handleChange = evt => {
-      console.log(evt.target.value) // TS will throw an error here
+      console.log(evt.target.value) // TS ではここでエラーになります
     }
 
     return { handleChange }
@@ -516,7 +516,7 @@ export default defineComponent({
 </script>
 ```
 
-As you can see, without annotating the `evt` argument correctly, TypeScript will throw an error when we try to access the value of the `<input>` element. The solution is to cast the event target with a correct type:
+ご覧のように、`evt` 引数に正しくアノテーションをつけないと、その `<input>` 要素の値にアクセスしようとしたときに、TypeScript はエラーを出してしまいます。解決策はイベントターゲットを正しい型にキャストすることです:
 
 ```ts
 const handleChange = (evt: Event) => {
