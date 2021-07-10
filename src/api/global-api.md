@@ -63,7 +63,7 @@ const app = createApp(
 </div>
 ```
 
-The root props are raw props, much like those passed to [`h`](#h) to create a VNode. In addition to component props, they can also include attributes and event listeners to be applied to the root component.
+ルートプロパティは VNode を作成するとき [`h`](#h) に渡されるのと同じように、未加工のプロパティです。コンポーネントプロパティに加えて、ルートコンポーネントに適用される属性やイベントリスナも含めることができます。
 
 ### 型定義
 
