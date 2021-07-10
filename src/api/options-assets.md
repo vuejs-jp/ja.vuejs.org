@@ -1,14 +1,14 @@
-# Assets
+# アセット
 
 ## directives
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  A hash of directives to be made available to the component instance.
+  そのコンポーネントインスタンスで利用可能なディレクティブのハッシュです。
 
-- **Usage:**
+- **使用方法:**
 
   ```js
   const app = createApp({})
@@ -21,21 +21,24 @@
         }
       }
     },
+
     template: `<input v-focus>`
   })
   ```
 
-- **See also:** [Custom Directives](../guide/custom-directive.html)
+- **参照:** [カスタムディレクティブ](../guide/custom-directive.html)
 
 ## components
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  A hash of components to be made available to the component instance.
+  そのコンポーネントインスタンスで利用可能なコンポーネントのハッシュです
 
-- **Usage:**
+
+
+- **使用方法:**
 
   ```js
   const Foo = {
@@ -50,4 +53,4 @@
   })
   ```
 
-- **See also:** [Components](../guide/component-basics.html)
+- **参照:** [コンポーネント](../guide/component-basics.html)
