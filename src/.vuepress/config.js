@@ -106,7 +106,7 @@ const sidebar = {
     {
       title: 'スケールアップ',
       collapsable: false,
-      children: ['/guide/routing', '/guide/state-management', '/guide/ssr']
+      children: ['/guide/routing', '/guide/state-management', '/guide/ssr', '/guide/security']
     },
     {
       title: 'アクセシビリティ',
