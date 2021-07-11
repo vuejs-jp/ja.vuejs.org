@@ -1,26 +1,26 @@
-# Misc
+# その他
 
 ## name
 
-- **Type:** `string`
+- **型:** `string`
 
-- **Details:**
+- **詳細:**
 
-  Allow the component to recursively invoke itself in its template. Note that when a component is registered globally with [`app.component`](/api/application-api.html#component), the global ID is automatically set as its name.
+  コンポーネントがテンプレートの中で自分自身を再帰的に呼び出すことを許可します。コンポーネントが [`app.component`](/api/application-api.html#component) でグローバルに登録されているとき、グローバル ID が自動的にその名前として設定されることに注意してください。
 
-  Another benefit of specifying a `name` option is debugging. Named components result in more helpful warning messages. Also, when inspecting an app in the [vue-devtools](https://github.com/vuejs/vue-devtools), unnamed components will show up as `<AnonymousComponent>`, which isn't very informative. By providing the `name` option, you will get a much more informative component tree.
+  `name` オプションを指定する他の利点はデバッグです。名前付きのコンポーネントは、警告メッセージでより助けになります。また、[vue-devtools](https://github.com/vuejs/vue-devtools) でアプリケーションを調査するとき、名前のないコンポーネントは `<AnonymousComponent>` として表示されてしまい、あまり情報量が多くありません。`name` オプションを提供することで、より情報量の多いコンポーネントツリーを得ることができます。
 
 ## inheritAttrs
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `true`
+- **デフォルト:** `true`
 
-- **Details:**
+- **詳細:**
 
-  By default, parent scope attribute bindings that are not recognized as props will "fallthrough". This means that when we have a single-root component, these bindings will be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property and can be explicitly bound to a non-root element using `v-bind`.
+  デフォルトでは、プロパティとして認識されていない親スコープの属性バインディグは「通り抜けて落ちる」ようにされます。つまり、単一のルートコンポーネントがある場合、属性バインディングは通常の HTML 属性として子コンポーネントのルート要素に適用されます。ターゲット要素や他のコンポーネントをラップするコンポーネントを作成する場合、これは必ずしも望んだ動作ではないかもしれません。`inheritAttrs` を `false` に設定することで、このデフォルトの動作を無効にすることができます。属性は `$attrs` インスタンスプロパティで利用でき、`v-bind` を使ってルートでない要素に明示的にバインドすることができます。
 
-- **Usage:**
+- **使用方法:**
 
   ```js
   app.component('base-input', {
@@ -40,17 +40,17 @@
   })
   ```
 
-- **See also:** [Disabling Attribute Inheritance](../guide/component-attrs.html#disabling-attribute-inheritance)
+- **参照:** [属性の継承の無効化](../guide/component-attrs.html#属性の継承の無効化)
 
 ## compilerOptions <Badge text="3.1+" />
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  This is the component-level equivalent of the [app-level `compilerOptions` config](/api/application-config.html#compileroptions).
+  これは [アプリケーションの `compilerOptions` 設定](/api/application-config.html#compileroptions) に相当するコンポーネントレベルの設定です。
 
-- **Usage:**
+- **使用方法:**
 
   ```js
   const Foo = {
@@ -63,9 +63,9 @@
   ```
 
   ::: tip Important
-  Similar to the app-level `compilerOptions` config, this option is only respected when using the full build with in-browser template compilation.
+  アプリケーションレベルの `compilerOptions` 設定と同じように、このオプションはブラウザ内でテンプレートのコンパイルをするフルビルドを使ったときにのみ尊重されます。
   :::
 
 ## delimiters <Badge text="deprecated" type="warning" />
 
-Deprecated in 3.1.0. Use `compilerOptions.delimiters` instead.
+3.1.0 では非推奨です。代わりに `compilerOptions.delimiters` を使ってください。
