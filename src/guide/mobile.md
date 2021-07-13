@@ -20,4 +20,4 @@ Vue.js は、ネイティブにはモバイルアプリの開発をサポート�
 
 **リソース**
 
-- [NativeScript + Vue.js ガイド](https://nativescript.org/vue/)
+- [NativeScript + Vue.js ガイド](https://nativescript-vue.org/)
