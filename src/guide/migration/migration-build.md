@@ -314,7 +314,7 @@ export default {
 | V_ON_KEYCODE_MODIFIER        | ✔    | `v-on` が keyCode 修飾子をサポートしなくなりました                                                     | [link](/guide/migration/keycode-modifiers.html)                                            |
 | CUSTOM_DIR                   | ✔    | カスタムディレクティブのフック名が変更されました                                                       | [link](/guide/migration/custom-directives.html)                                            |
 | ATTR_FALSE_VALUE             | ✔    | バインディングの値が真偽値の `false` の場合、属性を削除しないようになりました                          | [link](/guide/migration/attribute-coercion.html)                                           |
-| ATTR_ENUMERATED_COERSION     | ✔    | 特殊なケースの列挙された属性は廃止されました                                                           | [link](/guide/migration/attribute-coercion.html)                                           |
+| ATTR_ENUMERATED_COERCION     | ✔    | 特殊なケースの列挙された属性は廃止されました                                                           | [link](/guide/migration/attribute-coercion.html)                                           |
 | TRANSITION_GROUP_ROOT        | ✔    | `<transition-group>` は、デフォルトでルート要素をレンダリングしなくなりました                          | [link](/guide/migration/transition-group.html)                                             |
 | COMPONENT_ASYNC              | ✔    | 非同期コンポーネントの API が変更されました（`defineAsyncComponent` が必要になりました）                 | [link](/guide/migration/async-components.html)                                             |
 | COMPONENT_FUNCTIONAL         | ✔    | 関数型コンポーネントの API が変更されました（プレーンな関数であることが必須になりました）                | [link](/guide/migration/functional-components.html)                                        |
