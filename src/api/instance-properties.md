@@ -2,43 +2,43 @@
 
 ## $data
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  The data object that the component instance is observing. The component instance proxies access to the properties on its data object.
+  コンポーネントインスタンスが監視しているデータオブジェクトです。コンポーネントインスタンスは、この data オブジェクトのプロパティへのアクセスをプロキシします。
 
-- **See also:** [Options / Data - data](./options-data.html#data-2)
+- **参照:** [オプション / Data - data](./options-data.html#data-2)
 
 ## $props
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  An object representing the current props a component has received. The component instance proxies access to the properties on its props object.
+  コンポーネントが受け取った現在のプロパティを表すオブジェクトです。コンポーネントインスタンスは、この props オブジェクトのプロパティへのアクセスをプロキシします。
 
 ## $el
 
-- **Type:** `any`
+- **型:** `any`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The root DOM element that the component instance is managing.
+  コンポーネントインスタンスが管理しているルート DOM 要素です。
 
-  For components using [fragments](../guide/migration/fragments), `$el` will be the placeholder DOM node that Vue uses to keep track of the component's position in the DOM. It is recommended to use [template refs](../guide/component-template-refs.html) for direct access to DOM elements instead of relying on `$el`.
+  [Fragments](../guide/migration/fragments) を使っているコンポーネントでは、`$el` は DOM 内で Vue がコンポーネントの位置を追跡するために使う DOM ノードのプレースホルダになります。DOM 要素に直接アクセスするためには、`$el` に頼る代わりに [テンプレート参照](../guide/component-template-refs.html) を使うことをお勧めします。
 
 ## $options
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The instantiation options used for the current component instance. This is useful when you want to include custom properties in the options:
+  現在のコンポーネントインスタンスに使われるインスタンス化オプションです。これはオプションにカスタムプロパティを含めたいときに便利です:
 
   ```js
   const app = createApp({
@@ -51,37 +51,37 @@
 
 ## $parent
 
-- **Type:** `Component instance`
+- **型:** `Component instance`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The parent instance, if the current instance has one.
+  現在のインスタンスに親インスタンスがある場合は、その親インスタンスです。
 
 ## $root
 
-- **Type:** `Component instance`
+- **型:** `Component instance`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The root component instance of the current component tree. If the current instance has no parents this value will be itself.
+  現在のコンポーネントツリーのルートコンポーネントインスタンスです。現在のインスタンスが親を持たない場合、この値は自分自身になります。
 
 ## $slots
 
-- **Type:** `{ [name: string]: (...args: any[]) => Array<VNode> | undefined }`
+- **型:** `{ [name: string]: (...args: any[]) => Array<VNode> | undefined }`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  Used to programmatically access content [distributed by slots](../guide/component-basics.html#content-distribution-with-slots). Each [named slot](../guide/component-slots.html#named-slots) has its own corresponding property (e.g. the contents of `v-slot:foo` will be found at `this.$slots.foo()`). The `default` property contains either nodes not included in a named slot or contents of `v-slot:default`.
+  [スロットにより配信された](../guide/component-basics.html#スロットによるコンテンツ配信) コンテンツにプログラム的にアクセスするために使われます。それぞれの [名前付きスロット](../guide/component-slots.html#名前付きスロット) は自身に対応するプロパティを持ちます（例えば、`v-slot:foo` のコンテンツは `this.$slots.foo()` にあります）。`default` プロパティは、名前付きスロットに含まれないノードか、`v-slot:default` のコンテンツを含みます。
 
-  Accessing `this.$slots` is most useful when writing a component with a [render function](../guide/render-function.html).
+  `this.$slots` へのアクセスは、[render function](../guide/render-function.html) でコンポーネントを書くときにもっとも便利です。
 
-- **Example:**
+- **例:**
 
   ```html
   <blog-post>
@@ -116,35 +116,35 @@
   })
   ```
 
-- **See also:**
-  - [`<slot>` Component](built-in-components.html#slot)
-  - [Content Distribution with Slots](../guide/component-basics.html#content-distribution-with-slots)
-  - [Render Functions - Slots](../guide/render-function.html#slots)
+- **参照:**
+  - [`<slot>` コンポーネント](built-in-components.html#slot)
+  - [スロットによるコンテンツ配信](../guide/component-basics.html#スロットによるコンテンツ配信)
+  - [Render 関数 - スロット](../guide/render-function.html#スロット)
 
 ## $refs
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-An object of DOM elements and component instances, registered with [`ref` attributes](../guide/component-template-refs.html).
+  [`ref` 属性](../guide/component-template-refs.html) で登録された DOM 要素のオブジェクトとコンポーネントインスタンスです。
 
-- **See also:**
-  - [Template refs](../guide/component-template-refs.html)
-  - [Special Attributes - ref](./special-attributes.md#ref)
+- **参照:**
+  - [テンプレート参照](../guide/component-template-refs.html)
+  - [特別な属性 - ref](./special-attributes.md#ref)
 
 ## $attrs
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-Contains parent-scope attribute bindings and events that are not recognized (and extracted) as component [props](./options-data.html#props) or [custom events](./options-data.html#emits). When a component doesn't have any declared props or custom events, this essentially contains all parent-scope bindings, and can be passed down to an inner component via `v-bind="$attrs"` - useful when creating higher-order components.
+  コンポーネントの [プロパティ](./options-data.html#props) や [カスタムイベント](./options-data.html#emits) として認識されない（抽出されない）親スコープの属性バインディングやイベントを含みます。コンポーネントが宣言されたプロパティやカスタムイベントを持たない場合、これは基本的にすべての親スコープのバインディングを含み、`v-bind="$attrs"` を介して内部のコンポーネントに渡すことができます。これは高階（higher-order）コンポーネントを作成するときに便利です。
 
-- **See also:**
-  - [Non-Prop Attributes](../guide/component-attrs.html)
-  - [Options / Misc - inheritAttrs](./options-misc.html#inheritattrs)
+- **参照:**
+  - [プロパティでない属性](../guide/component-attrs.html)
+  - [オプション / その他 - inheritAttrs](./options-misc.html#inheritattrs)
