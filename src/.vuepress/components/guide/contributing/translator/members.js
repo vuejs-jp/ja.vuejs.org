@@ -250,6 +250,26 @@ const members = [
     {
       name: 'nesso',
       github: 'nesso-pfl',
+    },
+    {
+      name: 'seiyamiyaoka',
+      github: 'seiyamiyaoka',
+    },
+    {
+      name: 'oppara',
+      github: 'oppara',
+    },
+    {
+      name: 'ktr1204',
+      github: 'ktr1204',
+    },
+    {
+      name: 'Hideaki Matsunami',
+      github: 'mahaker',
+    },
+    {
+      name: 'kohei ikeda',
+      github: 'kikd',
     }
   ])
 )
