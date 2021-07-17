@@ -247,6 +247,7 @@ interface Book {
 const Component = defineComponent({
   props: {
     name: String,
+    id: [Number, String],
     success: { type: String },
     callback: {
       type: Function as PropType<() => void>
@@ -254,6 +255,9 @@ const Component = defineComponent({
     book: {
       type: Object as PropType<Book>,
       required: true
+    },
+    metadata: {
+      type: null // metadata is typed as any
     }
   }
 })
@@ -485,4 +489,37 @@ export default defineComponent({
     const result = doubleCount.value.split('') // Property 'split' does not exist on type 'number'
   }
 })
+```
+
+### イベントハンドラを型定義する
+
+ネイティブの DOM イベントを扱うとき、ハンドラに渡す引数を正しく型定義することが有効な場合があります。この例を見てみましょう:
+
+```vue
+<template>
+  <input type="text" @change="handleChange" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    // `evt` は `any` 型になります
+    const handleChange = evt => {
+      console.log(evt.target.value) // TS ではここでエラーになります
+    }
+
+    return { handleChange }
+  }
+})
+</script>
+```
+
+ご覧のように、`evt` 引数に正しくアノテーションをつけないと、その `<input>` 要素の値にアクセスしようとしたときに、TypeScript はエラーを出してしまいます。解決策はイベントターゲットを正しい型にキャストすることです:
+
+```ts
+const handleChange = (evt: Event) => {
+  console.log((evt.target as HTMLInputElement).value)
+}
 ```

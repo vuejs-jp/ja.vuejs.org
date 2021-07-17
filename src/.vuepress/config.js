@@ -106,7 +106,7 @@ const sidebar = {
     {
       title: 'スケールアップ',
       collapsable: false,
-      children: ['/guide/routing', '/guide/state-management', '/guide/ssr']
+      children: ['/guide/routing', '/guide/state-management', '/guide/ssr', '/guide/security']
     },
     {
       title: 'アクセシビリティ',
@@ -385,7 +385,7 @@ module.exports = {
               },
               {
                 text: 'Devtools',
-                link: 'https://github.com/vuejs/vue-devtools'
+                link: 'https://devtools.vuejs.org'
               },
               {
                 text: 'ウィークリーニュース',
@@ -424,19 +424,28 @@ module.exports = {
           // Translation maintainers: Please include the link below to the English documentation
           {
             text: 'English',
-            link: 'https://v3.vuejs.org/'
+            link: 'https://v3.vuejs.org/',
+            isTranslation: true
           },
           {
             text: '中文',
-            link: 'https://v3.cn.vuejs.org/'
+            link: 'https://v3.cn.vuejs.org/',
+            isTranslation: true
           },
           {
             text: '한국어',
-            link: 'https://v3.ko.vuejs.org/'
+            link: 'https://v3.ko.vuejs.org/',
+            isTranslation: true
           },
+          // {
+          //   text: '日本語',
+          //   link: 'https://v3.ja.vuejs.org/',
+          //   isTranslation: true
+          // },
           {
             text: 'Русский',
-            link: 'https://v3.ru.vuejs.org/'
+            link: 'https://v3.ru.vuejs.org/ru/',
+            isTranslation: true
           },
           {
             text: 'その他の翻訳',
@@ -472,7 +481,8 @@ module.exports = {
       carbon: 'CEBDT27Y',
       custom: 'CKYD62QM',
       placement: 'vuejsorg'
-    }
+    },
+    topBanner: false
   },
   plugins: [
     [

@@ -133,7 +133,7 @@ Composition API のテンプレート参照を `v-for` 内部で使う場合、�
       const root = ref(null)
 
       watchEffect(() => {
-        console.log(root.value) // => <div></div>
+        console.log(root.value) // => <div>This is a root element</div>
       }, 
       {
         flush: 'post'
