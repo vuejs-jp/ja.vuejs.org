@@ -2,15 +2,15 @@
 
 ## mixins
 
-- **Type:** `Array<Object>`
+- **型:** `Array<Object>`
 
-- **Details:**
+- **詳細:**
 
-  The `mixins` option accepts an array of mixin objects. These mixin objects can contain instance options like normal instance objects, and they will be merged against the eventual options using the certain option merging logic. For example, if your mixin contains a `created` hook and the component itself also has one, both functions will be called.
+  `mixins` オプションは、ミックスインオブジェクトの配列を受け入れます。これらのミックスインオブジェクトは、通常のインスタンスオブジェクトと同じようにインスタンスオプションを含めることができ、それらは一定のオプションをマージするロジックを使って、最終的なオプションに対してマージされます。例えば、あなたのミックスインが `created` フックを含み、コンポーネントそれ自身にも `created` フックがある場合、両方の関数が呼び出されます。
 
-  Mixin hooks are called in the order they are provided, and called before the component's own hooks.
+  ミックスインフックは提供された順番に呼び出され、コンポーネント自身のフックよりも前に呼び出されます。
 
-- **Example:**
+- **例:**
 
   ```js
   const mixin = {
@@ -30,24 +30,24 @@
   // => 2
   ```
 
-- **See also:** [Mixins](../guide/mixins.html)
+- **参照:** [ミックスイン](../guide/mixins.html)
 
 ## extends
 
-- **Type:** `Object | Function`
+- **型:** `Object | Function`
 
-- **Details:**
+- **詳細:**
 
-  Allows declaratively extending another component (could be either a plain options object or a constructor). This is primarily intended to make it easier to extend between single file components.
+  別のコンポーネントを宣言的に拡張できます（純粋なオプションオブジェクトまたはコンストラクタのどちらでも）。これは主に単一ファイルコンポーネント間の拡張を簡単にすることを目的としています。
 
-  This is similar to `mixins`.
+  これは `mixins` に似ています。
 
-- **Example:**
+- **例:**
 
   ```js
   const CompA = { ... }
 
-  // extend CompA without having to call `Vue.extend` on either
+  // CompA を `Vue.extend` の呼び出しなしで拡張します
   const CompB = {
     extends: CompA,
     ...
@@ -56,32 +56,32 @@
 
 ## provide / inject
 
-- **Type:**
+- **型:**
 
   - **provide:** `Object | () => Object`
   - **inject:** `Array<string> | { [key: string]: string | Symbol | Object }`
 
-- **Details:**
+- **詳細:**
 
-  This pair of options are used together to allow an ancestor component to serve as a dependency injector for all its descendants, regardless of how deep the component hierarchy is, as long as they are in the same parent chain. If you are familiar with React, this is very similar to React's `context` feature.
+  この一組のオプションを一緒に使うことで、コンポーネント階層の深さに関わらず、それらが同じ親チェーンにある限り、祖先のコンポーネントがその子孫コンポーネントすべての依存オブジェクトの注入役として機能することができます。React に慣れている方には、これは React の `context` の機能と非常によく似ています。
 
-  The `provide` option should be an object or a function that returns an object. This object contains the properties that are available for injection into its descendants. You can use ES2015 Symbols as keys in this object, but only in environments that natively support `Symbol` and `Reflect.ownKeys`.
+  `provide` オプションは、オブジェクトまたはオブジェクトを返す関数でなければなりません。このオブジェクトは、その子孫に注入可能なプロパティを含みます。このオブジェクトのキーには ES2015 の Symbol を使うことができますが、ネイティブで `Symbol` と `Reflect.ownKeys` をサポートしている環境でのみ有効です。
 
-  The `inject` option should be either:
+  `inject` オプションは、次のいずれかでなければなりません:
 
-  - an array of strings, or
-  - an object where the keys are the local binding name and the value is either:
-    - the key (string or Symbol) to search for in available injections, or
-    - an object where:
-      - the `from` property is the key (string or Symbol) to search for in available injections, and
-      - the `default` property is used as fallback value
+  - 文字列の配列、もしくは
+  - キーがローカルのバインディング名で、値が次のいずれかであるオブジェクト:
+    - 利用可能な注入オブジェクトを検索するためのキー（文字列または Symbol）、または
+    - オブジェクトが:
+      - `from` プロパティは利用可能な注入オブジェクトを検索するためのキー（文字列または Symbol）、そして
+      - `default` プロパティはフォールバック値として使われます
 
-  > Note: the `provide` and `inject` bindings are NOT reactive. This is intentional. However, if you pass down a reactive object, properties on that object do remain reactive.
+  > 注意: `provide` と `inject` のバインディングはリアクティブではありません。これは意図的なものです。ただし、あなたがリアクティブなオブジェクトを渡した場合、そのオブジェクトのプロパティはリアクティブなままです。
 
-- **Example:**
+- **例:**
 
   ```js
-  // parent component providing 'foo'
+  // 'foo' を提供している親コンポーネント
   const Provider = {
     provide: {
       foo: 'bar'
@@ -89,7 +89,7 @@
     // ...
   }
 
-  // child component injecting 'foo'
+  // 'foo' を注入している子コンポーネント
   const Child = {
     inject: ['foo'],
     created() {
@@ -99,7 +99,7 @@
   }
   ```
 
-  With ES2015 Symbols, function `provide` and object `inject`:
+  ES2015 の Symbol で、`provide` 関数と `inject` オブジェクトを使います:
 
   ```js
   const s = Symbol()
@@ -118,7 +118,7 @@
   }
   ```
 
-  Using an injected value as the default for a prop:
+  注入された値をプロパティのデフォルトとして使います:
 
   ```js
   const Child = {
@@ -133,7 +133,7 @@
   }
   ```
 
-  Using an injected value as data entry:
+  注入された値をデータプロパティの登録に使います:
 
   ```js
   const Child = {
@@ -146,7 +146,7 @@
   }
   ```
 
-  Injections can be optional with default value:
+  注入はデフォルト値で任意にできます:
 
   ```js
   const Child = {
@@ -156,7 +156,7 @@
   }
   ```
 
-  If it needs to be injected from a property with a different name, use `from` to denote the source property:
+  別の名前のプロパティから注入する必要がある場合は、`from` を使って元のプロパティを指定します:
 
   ```js
   const Child = {
@@ -169,7 +169,7 @@
   }
   ```
 
-  Similar to prop defaults, you need to use a factory function for non-primitive values:
+  プロパティのデフォルトと同じように、プリミティブ値以外はファクトリ関数を使う必要があります:
 
   ```js
   const Child = {
@@ -182,21 +182,21 @@
   }
   ```
 
-- **See also:** [Provide / Inject](../guide/component-provide-inject.html)
+- **参照:** [Provide / Inject](../guide/component-provide-inject.html)
 
 ## setup
 
-- **Type:** `Function`
+- **型:** `Function`
 
-The `setup` function is a new component option. It serves as the entry point for using the Composition API inside components.
+`setup` 関数は、新しいコンポーネントオプションです。この関数は、コンポーネント内で Composition API を使うためのエントリポイントになります。
 
-- **Invocation Timing**
+- **呼び出しのタイミング**
 
-  `setup` is called right after the initial props resolution when a component instance is created. Lifecycle-wise, it is called before the [beforeCreate](./options-lifecycle-hooks.html#beforecreate) hook.
+  `setup` は、コンポーネントインスタンスが作成されたとき、初期プロパティの解決の直後に呼び出されます。ライフサイクル的には、[beforeCreate](./options-lifecycle-hooks.html#beforecreate) フックの前に呼び出されます。
 
-- **Usage with Templates**
+- **テンプレートでの利用**
 
-  If `setup` returns an object, the properties on the object will be merged on to the render context for the component's template:
+  `setup` がオブジェクトを返す場合、そのオブジェクトのプロパティはコンポーネントのテンプレートのレンダリングコンテキストにマージされます:
 
   ```html
   <template>
@@ -221,11 +221,11 @@ The `setup` function is a new component option. It serves as the entry point for
   </script>
   ```
 
-  Note that [refs](refs-api.html#ref) returned from `setup` are automatically unwrapped when accessed in the template so there's no need for `.value` in templates.
+  `setup` から返された [refs](refs-api.html#ref) は、テンプレート内でアクセスする時に自動的にアンラップされるので、テンプレートで `.value` を使う必要はありません。
 
-- **Usage with Render Functions / JSX**
+- **Render 関数 / JSX での利用**
 
-  `setup` can also return a render function, which can directly make use of reactive state declared in the same scope:
+  `setup` は、同じスコープで宣言されたリアクティブな状態を直接使える Render 関数を返すこともできます:
 
   ```js
   import { h, ref, reactive } from 'vue'
@@ -240,9 +240,9 @@ The `setup` function is a new component option. It serves as the entry point for
   }
   ```
 
-- **Arguments**
+- **引数**
 
-  The function receives the resolved props as its first argument:
+  この関数は、その第 1 引数として解決されたプロパティを受け取ります:
 
   ```js
   export default {
@@ -255,7 +255,7 @@ The `setup` function is a new component option. It serves as the entry point for
   }
   ```
 
-  Note this `props` object is reactive - i.e. it is updated when new props are passed in, and can be observed and reacted upon using `watchEffect` or `watch`:
+  この `props` オブジェクトはリアクティブです。つまり、新しいプロパティが渡されると更新され、`watchEffect` や `watch` を使って監視と反応をすることができます:
 
   ```js
   export default {
@@ -270,7 +270,7 @@ The `setup` function is a new component option. It serves as the entry point for
   }
   ```
 
-  However, do NOT destructure the `props` object, as it will lose reactivity:
+  しかし、`props` オブジェクトのリアクティビティが失われるため、そのオブジェクトを分割してはいけません:
 
   ```js
   export default {
@@ -285,9 +285,9 @@ The `setup` function is a new component option. It serves as the entry point for
   }
   ```
 
-  The `props` object is immutable for userland code during development (will emit warning if user code attempts to mutate it).
+  `props` オブジェクトは、開発中のユーザランドのコードにとってはイミュータブルです（ユーザのコードがそれを変更しようとすると警告を表示します）。
 
-  The second argument provides a context object which exposes a selective list of properties that were previously exposed on `this`:
+  第 2 引数は、`this` で以前に公開されていたプロパティの選択的な一覧を公開するコンテキストオブジェクトを提供します:
 
   ```js
   const MyComponent = {
@@ -299,23 +299,23 @@ The `setup` function is a new component option. It serves as the entry point for
   }
   ```
 
-  `attrs` and `slots` are proxies to the corresponding values on the internal component instance. This ensures they always expose the latest values even after updates so that we can destructure them without worrying about accessing a stale reference:
+  `attrs` と `slots` は内部コンポーネントインスタンスの対応する値へのプロキシです。これは更新後も常に最新の値が公開されることを保証するので、古くなった参照へのアクセスを心配することなく、構造を変更することができます:
 
   ```js
   const MyComponent = {
     setup(props, { attrs }) {
-      // a function that may get called at a later stage
+      // 後の段階で呼び出されるはずの関数
       function onClick() {
-        console.log(attrs.foo) // guaranteed to be the latest reference
+        console.log(attrs.foo) // 最新の参照が保証されている
       }
     }
   }
   ```
 
-  There are a number of reasons for placing `props` as a separate first argument instead of including it in the context:
+  `props` がコンテキストに含まれる代わりに、別の第 1 引数として置かれている理由はいくつかあります:
 
-  - It's much more common for a component to use `props` than the other properties, and very often a component uses only `props`.
+  - コンポーネントが `props` を使うことが、他のプロパティよりもずっと一般的であること、そしてコンポーネントが `props` のみを扱うことがとても頻繁にあることです。
 
-  - Having `props` as a separate argument makes it easier to type it individually without messing up the types of other properties on the context. It also makes it possible to keep a consistent signature across `setup`, `render` and plain functional components with TSX support.
+  - `props` を別の引数として持つことで、コンテキストの他のプロパティの型を混乱させることなく、個別に入力することが楽になります。また TSX のサポートで `setup`、`render`、単純な関数コンポーネントを通して、一貫した定義を守ることができます。
 
-- **See also:** [Composition API](composition-api.html)
+- **参照:** [Composition API](composition-api.html)
