@@ -10,11 +10,15 @@
 
   ミックスインフックは提供された順番に呼び出され、コンポーネント自身のフックよりも前に呼び出されます。
 
+  :::info
+  In Vue 2, mixins were the primary mechanism for creating reusable chunks of component logic. While mixins continue to be supported in Vue 3, the [Composition API](/guide/composition-api-introduction.html) is now the preferred approach for code reuse between components.
+  :::
+
 - **例:**
 
   ```js
   const mixin = {
-    created: function() {
+    created() {
       console.log(1)
     }
   }
@@ -34,20 +38,23 @@
 
 ## extends
 
-- **型:** `Object | Function`
+- **型:** `Object`
 
 - **詳細:**
 
-  別のコンポーネントを宣言的に拡張できます（純粋なオプションオブジェクトまたはコンストラクタのどちらでも）。これは主に単一ファイルコンポーネント間の拡張を簡単にすることを目的としています。
+  Allows one component to extend another, inheriting its component options.
 
-  これは `mixins` に似ています。
+  From an implementation perspective, `extends` is almost identical to `mixins`. The component specified by `extends` will be treated as though it were the first mixin.
+
+  However, `extends` and `mixins` express different intents. The `mixins` option is primarily used to compose chunks of functionality, whereas `extends` is primarily concerned with inheritance.
+
+  As with `mixins`, any options will be merged using the relevant merge strategy.
 
 - **例:**
 
   ```js
   const CompA = { ... }
 
-  // CompA を `Vue.extend` の呼び出しなしで拡張します
   const CompB = {
     extends: CompA,
     ...
