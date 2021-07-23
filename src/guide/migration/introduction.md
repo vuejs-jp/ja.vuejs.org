@@ -100,7 +100,7 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - `destroyed` ライフサイクルオプションの名前が `unmounted` に変更されました
 - `beforeDestroy` ライフサイクルオプションの名前が `beforeUnmount` に変更されました
 - [Props の `default` ファクトリ関数は `this` コンテキストにアクセスできなくなりました](/guide/migration/props-default-this.html)
-- [コンポーネントライフサイクルに合わせてカスタムディレクティブ API が変更されました](/guide/migration/custom-directives.html)
+- [コンポーネントライフサイクルに合わせてカスタムディレクティブ API が変更され、`binding.expression` が削除されました](/guide/migration/custom-directives.html)
 - [`data` オプションは常に関数として宣言されることが必要になりました](/guide/migration/data-option.html)
 - [ミックスインの `data` オプションは浅くマージされるようになりました](/guide/migration/data-option.html#mixin-merge-behavior-change)
 - [属性強制の戦略が変更されました](/guide/migration/attribute-coercion.html)
