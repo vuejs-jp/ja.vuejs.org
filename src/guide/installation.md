@@ -97,7 +97,7 @@ vue upgrade --next
 npm の場合:
 
 ```bash
-$ npm init @vitejs/app <プロジェクト名>
+$ npm init vite <プロジェクト名> -- --template vue
 $ cd <プロジェクト名>
 $ npm install
 $ npm run dev
@@ -106,16 +106,10 @@ $ npm run dev
 または Yarn の場合:
 
 ```bash
-$ yarn create @vitejs/app <プロジェクト名>
+$ yarn create vite <プロジェクト名> --template vue
 $ cd <プロジェクト名>
 $ yarn
 $ yarn dev
-```
-
-ユーザ名に「Mike Baker」のように空白が入っていると、 Vite が成功しないことがあります。次を試してみてください。
-
-```bash
-$ create-vite-app <プロジェクト名>
 ```
 
 ## さまざまなビルドについて

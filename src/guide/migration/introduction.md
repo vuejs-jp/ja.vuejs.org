@@ -29,7 +29,7 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
 - [Vite](https://github.com/vitejs/vite) を使った Scaffold:
 
   ```bash
-  npm init @vitejs/app hello-vue3 # OR yarn create @vitejs/app hello-vue3
+  npm init vite hello-vue3 -- --template vue # OR yarn create vite hello-vue3 --template vue
   ```
 
 - [vue-cli](https://cli.vuejs.org/) を使った Scaffold:
