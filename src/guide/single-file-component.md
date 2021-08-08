@@ -92,7 +92,7 @@ touch rollup.config.js
 
 ```js
 // サードパーティのプラグインをインポート
-import commonjs from 'rollup-plugin-commonjs'
+import commonjs from '@rollup/plugin-commonjs'
 import VuePlugin from 'rollup-plugin-vue'
 import pkg from './package.json' // 名前を再利用するために package.json ファイルをインポート
 
