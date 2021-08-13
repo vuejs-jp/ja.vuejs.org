@@ -482,7 +482,7 @@ module.exports = {
       }
     ],
     repo: 'vuejs-jp/ja.vuejs.org',
-    editLinks: false,
+    editLinks: true,
     editLinkText: 'GitHub でこのページを編集！',
     lastUpdated: '最終更新日',
     docsDir: 'src',
