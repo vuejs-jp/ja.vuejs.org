@@ -67,9 +67,9 @@ Most other editors have community-created syntax highlighting support for Vue, b
 
 Custom blocks are compiled into imports to the same Vue file with different request queries. It is up to the underlying build tool to handle these import requests.
 
-- If using Vite, a custom Vite plugin should be used to transform matched custom blocks into executable JavaScript. [[Example](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)]
+- If using Vite, a custom Vite plugin should be used to transform matched custom blocks into executable JavaScript.[[Example](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)]
 
-- If using Vue CLI or plain webpack, a webpack loader should be configured to transform the matched blocks. [[Example](https://vue-loader.vuejs.org/guide/custom-blocks.html#custom-blocks)]
+- If using Vue CLI or plain webpack, a webpack loader should be configured to transform the matched blocks.[[Example](https://vue-loader.vuejs.org/guide/custom-blocks.html#custom-blocks)]
 
 ## Lower-Level Tools
 
