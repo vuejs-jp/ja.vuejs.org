@@ -9,7 +9,8 @@
   "filters": {
     "allowlist": {
       "allow": [
-        "->"
+        "->",
+        ">="
       ]
     }
   }
