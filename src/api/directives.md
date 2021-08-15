@@ -299,14 +299,14 @@
   <svg><a :xlink:special="foo"></a></svg>
   ```
 
-  When setting a binding on an element, Vue by default checks whether the element has the key defined as a property using an `in` operator check. If the property is defined, Vue will set the value as a DOM property instead of an attribute. This should work in most cases, but you can override this behavior by explicitly using `.prop` or `.attr` modifiers. This is sometimes necessary, especially when [working with custom elements](/guide/web-components.html#passing-dom-properties).
+  要素にバインディングを設定する際、Vue はデフォルトで、`in` オペレータチェックを使って、要素にプロパティとして定義されたキーがあるかどうかをチェックします。プロパティが定義されている場合、Vue はその値を属性としてではなく DOM プロパティとして設定します。これはほとんどのケースで動作しますが、`.prop` や `.attr` 修飾子を明示的に使うことで、この振る舞いを上書きすることができます。これは特に [カスタム要素を使っている場合](/guide/web-components.html#passing-dom-properties) に必要なときがあります。
 
-  The `.prop` modifier also has a dedicated shorthand, `.`:
+  この `.prop` 修飾子には `.` という省略記法もあります:
 
   ```html
   <div :someProperty.prop="someObject"></div>
 
-  <!-- equivalent to -->
+  <!-- 次と同じです -->
   <div .someProperty="someObject"></div>
   ```
 
@@ -464,7 +464,7 @@
   </ul>
   ```
 
-  Since 3.2, you can also memoize part of the template with invalidation conditions using [`v-memo`](#v-memo).
+  3.2 以降では、[`v-memo`](#v-memo) を使って無効な条件のテンプレートの一部をメモ化することもできます。
 
 - **参照:**
   - [データバインディング構文 - 展開](../guide/template-syntax.html#テキスト)
@@ -472,11 +472,11 @@
 
 ## v-memo <Badge text="3.2+" />
 
-- **Expects:** `Array`
+- **受け入れ型:** `Array`
 
-- **Details:**
+- **詳細:**
 
-  Memoize a sub-tree of the template. Can be used on both elements and components. The directive expects a fixed-length array of dependency values to compare for the memoization. If every value in the array was the same as last render, then updates for the entire sub-tree will be skipped. For example:
+  テンプレートのサブツリーをメモ化します。要素とコンポーネントのどちらでも使えます。このディレクティブは、メモ化のために比較する依存関係にある値の固定長配列を受け取ります。配列のすべての値が最後のレンダリングと同じならば、サブツリー全体の更新は省略されます。例えば:
 
   ```html
   <div v-memo="[valueA, valueB]">
@@ -484,13 +484,13 @@
   </div>
   ```
 
-  When the component re-renders, if both `valueA` and `valueB` remain the same, all updates for this `<div>` and its children will be skipped. In fact, even the Virtual DOM VNode creation will also be skipped since the memoized copy of the sub-tree can be reused.
+  コンポーネントが再レンダリングされるとき、`valueA` と `valueB` の両方が同じであれば、この `<div>` とその子のすべての更新は省略されます。実際には、サブツリーのメモ化されたコピーを再利用できるため、仮想 DOM の VNode の作成も省略されます。
 
-  It is important to specify the memoization array correctly, otherwise we may skip updates that should indeed be applied. `v-memo` with an empty dependency array (`v-memo="[]"`) would be functionally equivalent to `v-once`.
+  メモ化した配列を正しく指定することは重要で、そうでなければ実際に適用する必要がある更新を省略してしまう可能性があります。空の依存配列を持つ `v-memo` つまり (`v-memo="[]"`) は、機能的に `v-once` と同じです。
 
-  **Usage with `v-for`**
+  **`v-for` との使用方法**
 
-  `v-memo` is provided solely for micro optimizations in performance-critical scenarios and should be rarely needed. The most common case where this may prove helpful is when rendering large `v-for` lists (where `length > 1000`):
+  `v-memo` は、パフォーマンスが重要視される場面での極々小さな最適化のためだけに提供されていて、ほとんど必要とされないはずです。これが役立つ最も一般的なケースは、巨大な `v-for` リスト（`length > 1000` の場合）をレンダリングするときです:
 
   ```html
   <div v-for="item in list" :key="item.id" v-memo="[item.id === selected]">
@@ -499,15 +499,15 @@
   </div>
   ```
 
-  When the component's `selected` state changes, a large amount of VNodes will be created even though most of the items remained exactly the same. The `v-memo` usage here is essentially saying "only update this item if it went from non-selected to selected, or the other way around". This allows every unaffected item to reuse its previous VNode and skip diffing entirely. Note we don't need to include `item.id` in the memo dependency array here since Vue automatically infers it from the item's `:key`.
+  このコンポーネントの `selected` 状態が変更されると、ほとんどのアイテムが完全に同じにも関わらず、大量の VNode が作成されます。ここでの `v-memo` の使い方は、基本的に「このアイテムが非選択状態から選択状態になった場合、またはその逆の場合にのみ更新する」というものです。これは影響を受けていないすべてのアイテムが以前の VNode を再利用し、差分を完全に省略することができます。Vue はアイテムの `:key` から自動的に推測するため、メモ化の依存配列に `item.id` を含める必要はありません。
 
   :::warning
-  When using `v-memo` with `v-for`, make sure they are used on the same element. **`v-memo` does not work inside `v-for`.**
+  `v-memo` を `v-for` と一緒に使うとき、同じ要素に使われていることを確認してください。 **`v-memo` は `v-for` の中では動作しません。**
   :::
 
-  `v-memo` can also be used on components to manually prevent unwanted updates in certain edge cases where the child component update check has been de-optimized. But again, it is the developer's responsibility to specify correct dependency arrays to avoid skipping necessary updates.
+  `v-memo` はコンポーネントに使って、その子コンポーネントの更新チェックが最適化されていないような特定のエッジケースで、不要な更新を手動で防ぐこともできます。しかし繰り返しますが、正しい依存配列を指定して、必要な更新を省略しないようにすることは、開発者の責任です。
 
-- **See also:**
+- **参照:**
   - [v-once](#v-once)
 
 ## v-is <Badge text="deprecated" type="warning" />
