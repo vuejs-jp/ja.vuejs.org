@@ -2,13 +2,13 @@
 
 ## key
 
-- **Expects:** `number | string`
+- **受け入れ型:** `number | string`
 
-  The `key` special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify VNodes when diffing the new list of nodes against the old list. Without keys, Vue uses an algorithm that minimizes element movement and tries to patch/reuse elements of the same type in-place as much as possible. With keys, it will reorder elements based on the order change of keys, and elements with keys that are no longer present will always be removed/destroyed.
+  特別な属性 `key` は、Vue の仮想 DOM アルゴリズムのため、ノードの新しいリストを古いリストに対して差分を取るときに、VNodes を識別するヒントとして主に使われます。キーがない場合、Vue は要素の移動を最小限にするアルゴリズムを使い、できる限り同じ種類の要素をその場でパッチや再利用しようとします。キーがある場合、キーの変更順序に基づいて要素の順番を変更して、存在しなくなった キーを持つ要素は常に削除や破棄されます。
 
-  Children of the same common parent must have **unique keys**. Duplicate keys will cause render errors.
+  同じ共通の親を持つ子どもは、**ユニークなキー** をもつ必要があります。重複したキーはレンダリングエラーを発生します。
 
-  The most common use case is combined with `v-for`:
+  最も一般的な使用例は、`v-for` との組み合わせです:
 
   ```html
   <ul>
@@ -16,12 +16,12 @@
   </ul>
   ```
 
-  It can also be used to force replacement of an element/component instead of reusing it. This can be useful when you want to:
+  これは要素やコンポーネントを再利用するのではなく、強制的に置換するときにも使えます。これは次のようなことをしたいときに便利です:
 
-  - Properly trigger lifecycle hooks of a component
-  - Trigger transitions
+  - コンポーネントのライフサイクルフックを適切に引き起こす
+  - トランジションを引き起こす
 
-  For example:
+  例えば:
 
   ```html
   <transition>
@@ -29,47 +29,47 @@
   </transition>
   ```
 
-  When `text` changes, the `<span>` will always be replaced instead of patched, so a transition will be triggered.
+  `text` が変更されたとき、`<span>` は常にパッチではなく置換され、トランジションが引き起こされます。
 
 ## ref
 
-- **Expects:** `string | Function`
+- **受け入れ型:** `string | Function`
 
-  `ref` is used to register a reference to an element or a child component. The reference will be registered under the parent component's `$refs` object. If used on a plain DOM element, the reference will be that element; if used on a child component, the reference will be component instance:
+  `ref` は要素や子コンポーネントの参照を登録するのに使います。参照は親コンポーネントの `$refs` オブジェクトの下に登録されます。単純に DOM 要素で使った場合、参照はその要素になります。子コンポーネントで使った場合、参照はコンポーネントインスタンスになります:
 
   ```html
-  <!-- vm.$refs.p will be the DOM node -->
+  <!-- vm.$refs.p は DOM ノードになります -->
   <p ref="p">hello</p>
 
-  <!-- vm.$refs.child will be the child component instance -->
+  <!-- vm.$refs.child はコンポーネントインスタンスになります -->
   <child-component ref="child"></child-component>
 
-  <!-- When bound dynamically, we can define ref as a callback function, passing the element or component instance explicitly -->
+  <!-- 動的にバインドした場合、コールバック関数として ref を定義でき、要素やコンポーネントインスタンスを明示的に渡すことができます -->
   <child-component :ref="(el) => child = el"></child-component>
   ```
 
-  An important note about the ref registration timing: because the refs themselves are created as a result of the render function, you cannot access them on the initial render - they don't exist yet! `$refs` is also non-reactive, therefore you should not attempt to use it in templates for data-binding.
+  ref 登録のタイミングについての重要な注意点は、ref 自体が Render 関数の結果として作成されるため、初期レンダリングではアクセスできません。まだ存在しないからです。また `$refs` はリアクティブではないため、データバインディング用のテンプレートでは使おうとしないでください。
 
-- **See also:** [Child Component Refs](../guide/component-template-refs.html)
+- **参照:** [子コンポーネントの参照](../guide/component-template-refs.html)
 
 ## is
 
-- **Expects:** `string | Object (component’s options object)`
+- **受け入れ型:** `string | Object （コンポーネントのオプションオブジェクト）`
 
-  Used for [dynamic components](../guide/component-dynamic-async.html).
+  [動的コンポーネント](../guide/component-dynamic-async.html) に使います。
 
-  For example:
+  例えば:
 
   ```html
-  <!-- component changes when currentView changes -->
+  <!-- currentView が変わるとコンポーネントが変わります -->
   <component :is="currentView"></component>
   ```
 
-- **Usage on native elements** <Badge text="3.1+" />
+- **ネイティブ要素での使用方法** <Badge text="3.1+" />
 
-  When the `is` attribute is used on a native HTML element, it will be interpreted as a [Customized built-in element](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example), which is a native web platform feature.
+  ネイティブ HTML 要素に `is` 属性が使われると、それはウェブプラットフォームのネイティブ機能の [カスタマイズされた組み込み要素の作成](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-customized-builtin-example) として解釈されます。
 
-  There is, however, a use case where you may need Vue to replace a native element with a Vue component, as explained in [DOM Template Parsing Caveats](/guide/component-basics.html#dom-template-parsing-caveats). You can prefix the value of the `is` attribute with `vue:` so that Vue will render the element as a Vue component instead:
+  しかし、[DOM テンプレートパース時の注意](/guide/component-basics.html#dom-テンプレートパース時の注意) で説明されているように、Vue がネイティブ要素を Vue コンポーネントに置き換える必要があるユースケースもあります。`is` 属性の値の前に `vue:` を付けることで、Vue がその要素を Vue コンポーネントとしてレンダリングします:
 
   ```html
   <table>
@@ -77,6 +77,6 @@
   </table>
   ```
 
-- **See also:**
-  - [Dynamic Components](../guide/component-dynamic-async.html)
-  - [RFC explaining the change from Vue 2](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md#customized-built-in-elements)
+- **参照:**
+  - [動的コンポーネント](../guide/component-dynamic-async.html)
+  - [Vue 2 からの変更点を説明する RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0027-custom-elements-interop.md#customized-built-in-elements)
