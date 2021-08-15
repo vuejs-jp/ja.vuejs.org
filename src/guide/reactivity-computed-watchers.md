@@ -172,7 +172,7 @@ watchEffect(
 
 `flush` オプションは `'sync'` も指定できます。これは作用をいつも同期的に発火することを強制します。しかし、これは非効率的であって、ほとんど必要ないでしょう。
 
-In Vue >= 3.2.0, `watchPostEffect` and `watchSyncEffect` aliases can also be used to make the code intention more obvious.
+Vue >= 3.2.0 では、`watchPostEffect` と `watchSyncEffect` のエイリアスを使って、コードの意図をより明確にすることもできます。
 
 ### Watcher のデバッグ
 
