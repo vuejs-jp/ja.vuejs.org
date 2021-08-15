@@ -2,7 +2,7 @@
 
 ## $watch
 
-- **Arguments:**
+- **引数:**
 
   - `{string | Function} source`
   - `{Function | Object} callback`
@@ -11,13 +11,13 @@
     - `{boolean} immediate`
     - `{string} flush`
 
-- **Returns:** `{Function} unwatch`
+- **返り値:** `{Function} unwatch`
 
-- **Usage:**
+- **使用方法:**
 
-  Watch a reactive property or a computed function on the component instance for changes. The callback gets called with the new value and the old value for the given property. We can only pass top-level `data`, `props`, or `computed` property name as a string. For more complex expressions or nested properties, use a function instead.
+  コンポーネントインスタンスのリアクティブプロパティまたは算出関数（computed function）の変更を監視します。コールバックは指定されたプロパティの新しい値と古い値とともに呼び出されます。トップレベルの `data`、`props`、`computed` プロパティ名は文字列でしか渡すことができません。より複雑な式や、入れ子になったプロパティの場合は、代わりに関数を使います。
 
-- **Example:**
+- **例:**
 
   ```js
   const app = createApp({
@@ -32,34 +32,34 @@
       }
     },
     created() {
-      // top-level property name
+      // トップレベルのプロパティ名
       this.$watch('a', (newVal, oldVal) => {
-        // do something
+        // 何らかの処理
       })
 
-      // function for watching a single nested property
+      // 1 つ入れ子になったプロパティを監視する関数
       this.$watch(
         () => this.c.d,
         (newVal, oldVal) => {
-          // do something
+          // 何らかの処理
         }
       )
 
-      // function for watching a complex expression
+      // 複雑な式を監視する関数
       this.$watch(
-        // every time the expression `this.a + this.b` yields a different result,
-        // the handler will be called. It's as if we were watching a computed
-        // property without defining the computed property itself
+        // `this.a + this.b` という式が異なる結果を返すたびに、
+        // ハンドラが呼び出されます。これはあたかも算出プロパティを定義することなしに
+        // 算出プロパティを監視しているかのようです
         () => this.a + this.b,
         (newVal, oldVal) => {
-          // do something
+          // 何らかの処理
         }
       )
     }
   })
   ```
 
-  When watched value is an object or array, any changes to its properties or elements won't trigger the watcher because they reference the same object/array:
+  監視されている値がオブジェクトや配列の場合、それは同じオブジェクトや配列を参照しているため、どんな変更がそのプロパティや要素にあってもウォッチャは実行しません:
 
   ```js
   const app = createApp({
@@ -81,8 +81,8 @@
       })
     },
     methods: {
-      // These methods won't trigger a watcher because we changed only a property of object/array,
-      // not the object/array itself
+      // これらのメソッドはオブジェクトや配列のプロパティを変更しただけで、
+      // オブジェクトやプロパティ自体は変更していないため、ウォッチャを実行しません
       changeArticleText() {
         this.article.text = 'Vue 3 is awesome'
       },
@@ -90,7 +90,7 @@
         this.comments.push('New comment')
       },
 
-      // These methods will trigger a watcher because we replaced object/array completely
+      // これらのメソッドはオブジェクトや配列を完全に置き換えたため、ウォッチャを実行します
       changeWholeArticle() {
         this.article = { text: 'Vue 3 is awesome' }
       },
@@ -101,7 +101,7 @@
   })
   ```
 
-  `$watch` returns an unwatch function that stops firing the callback:
+  `$watch` はコールバックの実行を停止するアンウォッチ関数を返します:
 
   ```js
   const app = createApp({
@@ -115,39 +115,39 @@
   const vm = app.mount('#app')
 
   const unwatch = vm.$watch('a', cb)
-  // later, teardown the watcher
+  // あとでウォッチャを解体
   unwatch()
   ```
 
-- **Option: deep**
+- **オプション: deep**
 
-  To also detect nested value changes inside Objects, you need to pass in `deep: true` in the options argument. This option also can be used to watch array mutations.
+  オブジェクト内の入れ子になった値の変更も検出するには、オプション引数に `deep: true` を渡す必要があります。このオプションは配列のミューテートを監視するのにも使えます。
 
-  > Note: when mutating (rather than replacing) an Object or an Array and watch with deep option, the old value will be the same as new value because they reference the same Object/Array. Vue doesn't keep a copy of the pre-mutate value.
+  > Note: オブジェクトや配列を（置き換えるのではなく）ミューテートさせて、deep オプションで監視した場合、古い値と新しい値は同じオブジェクトや配列を参照しているため、同じになります。Vue はミューテート前の値のコピーを保持しません。
 
   ```js
   vm.$watch('someObject', callback, {
     deep: true
   })
   vm.someObject.nestedValue = 123
-  // callback is fired
+  // コールバックを実行
   ```
 
-- **Option: immediate**
+- **オプション: immediate**
 
-  Passing in `immediate: true` in the option will trigger the callback immediately with the current value of the expression:
+  オプションに `immediate: true` を渡すと、式の現在の値ですぐにコールバックを実行します:
 
   ```js
   vm.$watch('a', callback, {
     immediate: true
   })
-  // `callback` is fired immediately with current value of `a`
+  // `a` の現在の値ですぐに `callback` を実行
   ```
 
-  Note that with `immediate` option you won't be able to unwatch the given property on the first callback call.
+  `immediate` オプションをつけると、最初のコールバックの呼び出しでは与えられたプロパティをアンウォッチできないことに注意してください。
 
   ```js
-  // This will cause an error
+  // これはエラーが発生
   const unwatch = vm.$watch(
     'value',
     function() {
@@ -158,7 +158,7 @@
   )
   ```
 
-  If you still want to call an unwatch function inside the callback, you should check its availability first:
+  それでもコールバック内でアンウォッチ関数を呼び出したい場合、まずはその有効性を確認する必要があります:
 
   ```js
   let unwatch = null
@@ -175,38 +175,38 @@
   )
   ```
 
-- **Option: flush**
+- **オプション: flush**
 
-  The `flush` option allows for greater control over the timing of the callback. It can be set to `'pre'`, `'post'` or `'sync'`.
+  `flush` オプションではコールバックのタイミングをより細かく制御することができます。これには `'pre'`、`'post'`、`'sync'` のいずれかを設定できます。
 
-  The default value is `'pre'`, which specifies that the callback should be invoked before rendering. This allows the callback to update other values before the template runs.
+  デフォルト値は `'pre'` で、これはコールバックがレンダリングの前に呼び出されることを指定しています。これによりテンプレートの実行前にコールバックが他の値を更新することができます。
 
-  The value `'post'` can be used to defer the callback until after rendering. This should be used if the callback needs access to the updated DOM or child components via `$refs`.
+  `'post'` の値はレンダリング後までコールバックを遅延させることができます。これはコールバックが更新された DOM や、`$refs` 経由で子コンポーネントにアクセスする必要がある場合に使います。
 
-  If `flush` is set to `'sync'`, the callback will be called synchronously, as soon as the value changes.
+  `flush` が `'sync'` に設定された場合、コールバックは値が変更されるとすぐ非同期に呼び出されます。
 
-  For both `'pre'` and `'post'`, the callback is buffered using a queue. The callback will only be added to the queue once, even if the watched value changes multiple times. The interim values will be skipped and won't be passed to the callback.
+  `'pre'` と `'post'` のどちらもコールバックは、キューを使ってバッファリングされます。監視されている値が複数回変更されても、コールバックはキューに一度だけ追加されます。中間の値はスキップされて、コールバックには渡されません。
 
-  Buffering the callback not only improves performance but also helps to ensure data consistency. The watchers won't be triggered until the code performing the data updates has finished.
+  コールバックのバッファリングはパフォーマンスの向上だけではなく、データの一貫性を確保するのにも役立ちます。ウォッチはデータの更新をするコードが完了するまで起動されません。
 
-  `'sync'` watchers should be used sparingly, as they don't have these benefits.
+  `'sync'` ウォッチャは、これらの利点を持たないため、控えめに使う必要があります。
 
-  For more information about `flush` see [Effect Flush Timing](../guide/reactivity-computed-watchers.html#effect-flush-timing).
+  `flush` についての詳細な情報は [作用フラッシュのタイミング](../guide/reactivity-computed-watchers.html#作用フラッシュのタイミング) を参照してください。
 
-- **See also:** [Watchers](../guide/computed.html#watchers)
+- **参照:** [ウォッチャ](../guide/computed.html#ウォッチャ)
 
 ## $emit
 
-- **Arguments:**
+- **引数:**
 
   - `{string} eventName`
   - `...args (optional)`
 
-  Trigger an event on the current instance. Any additional arguments will be passed into the listener's callback function.
+  現在のインスタンスでイベントを発動します。追加の引数はリスナーのコールバック関数に渡されます。
 
-- **Examples:**
+- **例:**
 
-  Using `$emit` with only an event name:
+  イベント名のみで `$emit` を使う:
 
   ```html
   <div id="emit-example-simple">
@@ -235,7 +235,7 @@
   app.mount('#emit-example-simple')
   ```
 
-  Using `$emit` with additional arguments:
+  追加の引数と `$emit` を使う:
 
   ```html
   <div id="emit-example-argument">
@@ -272,27 +272,27 @@
   app.mount('#emit-example-argument')
   ```
 
-- **See also:**
-  - [`emits` option](./options-data.html#emits)
-  - [Emitting a Value With an Event](../guide/component-basics.html#emitting-a-value-with-an-event)
+- **参照:**
+  - [`emits` オプション](./options-data.html#emits)
+  - [イベントと値を発行する](../guide/component-basics.html#イベントと値を発行する)
 
 ## $forceUpdate
 
-- **Usage:**
+- **使用方法:**
 
-  Force the component instance to re-render. Note it does not affect all child components, only the instance itself and child components with inserted slot content.
+  コンポーネントインスタンスの再レンダリングを強制します。これはすべての子コンポーネントには影響を与えず、インスタンスそれ自体とスロットのコンテンツが挿入された子コンポーネントにだけ影響します。
 
 ## $nextTick
 
-- **Arguments:**
+- **引数:**
 
   - `{Function} callback (optional)`
 
-- **Usage:**
+- **使用方法:**
 
-  Defer the callback to be executed after the next DOM update cycle. Use it immediately after you've changed some data to wait for the DOM update. This is the same as the global `nextTick`, except that the callback's `this` context is automatically bound to the instance calling this method.
+  次の DOM 更新サイクルの後に実行されるようコールバックを遅延します。なにかデータを変更したすぐ後に使って、DOM の更新を待ちます。これはコールバックの `this` コンテキストがこのメソッドを呼び出したインスタンスに自動的に束縛されることを除いて、グローバルの `nextTick` と同じです。
 
-- **Example:**
+- **例:**
 
   ```js
   createApp({
@@ -300,12 +300,12 @@
     methods: {
       // ...
       example() {
-        // modify data
+        // データの変更
         this.message = 'changed'
-        // DOM is not updated yet
+        // DOM はまだ更新されていない
         this.$nextTick(function() {
-          // DOM is now updated
-          // `this` is bound to the current instance
+          // DOM が更新される
+          // `this` は現在のインスタンスに束縛される
           this.doSomethingElse()
         })
       }
@@ -313,4 +313,4 @@
   })
   ```
 
-- **See also:** [nextTick](global-api.html#nexttick)
+- **参照:** [nextTick](global-api.html#nexttick)

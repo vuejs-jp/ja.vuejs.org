@@ -202,7 +202,7 @@ import { defineAsyncComponent } from 'vue'
 
 const AsyncComp = defineAsyncComponent({
   // ファクトリ関数
-  loader: () => import('./Foo.vue')
+  loader: () => import('./Foo.vue'),
   // 非同期コンポーネントが読み込み中に使うコンポーネント
   loadingComponent: LoadingComponent,
   // 読み込みが失敗したときに使うコンポーネント
@@ -235,6 +235,44 @@ const AsyncComp = defineAsyncComponent({
 ```
 
 **参照**: [動的 & 非同期コンポーネント](../guide/component-dynamic-async.html)
+
+## defineCustomElement <Badge text="3.2+" />
+
+This method accepts the same argument as [`defineComponent`](#definecomponent), but instead returns a native [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) that can be used within any framework, or with no frameworks at all.
+
+Usage example:
+
+```html
+<my-vue-element></my-vue-element>
+```
+
+```js
+import { defineCustomElement } from 'vue'
+
+const MyVueElement = defineCustomElement({
+  // normal Vue component options here
+  props: {},
+  emits: {},
+  template: `...`,
+
+  // defineCustomElement only: CSS to be injected into shadow root
+  styles: [`/* inlined css */`]
+})
+
+// Register the custom element.
+// After registration, all `<my-vue-element>` tags on the page will be upgraded.
+customElements.define('my-vue-element', MyVueElement)
+
+// You can also programmatically instantiate the element:
+// (can only be done after registration)
+document.body.appendChild(
+  new MyVueElement({
+    // initial props (optional)
+  })
+)
+```
+
+For more details on building Web Components with Vue, especially with Single File Components, see [Vue and Web Components](/guide/web-components.html#building-custom-elements-with-vue).
 
 ## resolveComponent
 
@@ -481,10 +519,13 @@ export default {
   inheritAttrs: false,
 
   render() {
-    const props = mergeProps({
-      // class は $attrs の class とマージされます
-      class: 'active'
-    }, this.$attrs)
+    const props = mergeProps(
+      {
+        // class は $attrs の class とマージされます
+        class: 'active'
+      },
+      this.$attrs
+    )
 
     return h('div', props)
   }
@@ -504,12 +545,17 @@ export default {
 import { h, useCssModule } from 'vue'
 
 export default {
-  setup () {
+  setup() {
     const style = useCssModule()
 
-    return () => h('div', {
-      class: style.success
-    }, 'Task complete!')
+    return () =>
+      h(
+        'div',
+        {
+          class: style.success
+        },
+        'Task complete!'
+      )
   }
 }
 </script>
@@ -521,7 +567,7 @@ export default {
 </style>
 ```
 
-CSS モジュールの使い方について詳しくは、 [Vue Loader - CSS Modules](https://vue-loader.vuejs.org/guide/css-modules.html) を参照してください。
+CSS モジュールの使い方について詳しくは、[SFC Style Features: `<style module>`](/api/sfc-style.html#style-module) を参照してください。
 
 ### 引数
 

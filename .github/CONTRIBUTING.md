@@ -15,16 +15,10 @@
 5. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
 6. 変更をコミットします: `git commit -am 'Fix some files'`
 7. lint で引っかかる場合は再度修正を行いコミットします
-8. 翻訳した `.md` の `updated` 属性を修正した日に変更してコミットします: `git commit -am 'Update date'`
-9. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
-10. 問題がなければ、プルリクエストを `vuejs-jp/ja.vuejs.org` の `lang-ja` ブランチに送ります
-11. レビュー :eyes: で指摘事項があったら修正し、再度 Push します :pencil:
-12. レビュー :eyes: で OK :ok_woman: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
-
-<!--
-TODO: 作成する
-13. ドキュメント反映後、[貢献者一覧](https://jp.vuejs.org/contribution/)に**貢献者**としてあなたの GitHub アカウントが登録されます！ :tada:
--->
+8. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
+9. 問題がなければ、プルリクエストを `vuejs-jp/ja.vuejs.org` の `lang-ja` ブランチに送ります
+10. レビュー :eyes: で指摘事項があったら修正し、再度 Push します :pencil:
+11. レビュー :eyes: で OK :ok_woman: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
 
 #### Tips: より円滑な Pull Request のコメント記載方法
 

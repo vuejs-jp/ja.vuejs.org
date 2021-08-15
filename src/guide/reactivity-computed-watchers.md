@@ -30,6 +30,36 @@ plusOne.value = 1
 console.log(count.value) // 0
 ```
 
+### Computed Debugging <Badge text="3.2+" />
+
+`computed` accepts a second argument with `onTrack` and `onTrigger` options:
+
+- `onTrack` will be called when a reactive property or ref is tracked as a dependency.
+- `onTrigger` will be called when the watcher callback is triggered by the mutation of a dependency.
+
+Both callbacks will receive a debugger event which contains information on the dependency in question. It is recommended to place a `debugger` statement in these callbacks to interactively inspect the dependency:
+
+```js
+const plusOne = computed(() => count.value + 1, {
+  onTrack(e) {
+    // triggered when count.value is tracked as a dependency
+    debugger
+  },
+  onTrigger(e) {
+    // triggered when count.value is mutated
+    debugger
+  }
+})
+
+// access plusOne, should trigger onTrack
+console.log(plusOne.value)
+
+// mutate count.value, should trigger onTrigger
+count.value++
+```
+
+`onTrack` and `onTrigger` only work in development mode.
+
 ## `watchEffect`
 
 リアクティブの状態に応じて、作用を *自動的に適用しなおす* ために、`watchEffect` を利用できます。これは依存関係をリアクティブにトラッキングし、変更されるたびに即座に関数を再実行します。
@@ -83,8 +113,10 @@ watchEffect(onInvalidate => {
 
 ```js
 const data = ref(null)
-watchEffect(async (onInvalidate) => {
-  onInvalidate(() => {/* ... */}) // Promise の解決前にクリーンアップする関数を登録
+watchEffect(async onInvalidate => {
+  onInvalidate(() => {
+    /* ... */
+  }) // Promise の解決前にクリーンアップする関数を登録
   data.value = await fetchData(props.id)
 })
 ```
@@ -101,19 +133,19 @@ Vue のリアクティブシステムは、無効になった変更をバッフ�
 </template>
 
 <script>
-  export default {
-    setup() {
-      const count = ref(0)
+export default {
+  setup() {
+    const count = ref(0)
 
-      watchEffect(() => {
-        console.log(count.value)
-      })
+    watchEffect(() => {
+      console.log(count.value)
+    })
 
-      return {
-        count
-      }
+    return {
+      count
     }
   }
+}
 </script>
 ```
 
@@ -139,6 +171,8 @@ watchEffect(
 ```
 
 `flush` オプションは `'sync'` も指定できます。これは作用をいつも同期的に発火することを強制します。しかし、これは非効率的であって、ほとんど必要ないでしょう。
+
+Vue >= 3.2.0 では、`watchPostEffect` と `watchSyncEffect` のエイリアスを使って、コードの意図をより明確にすることもできます。
 
 ### Watcher のデバッグ
 
@@ -211,6 +245,39 @@ firstName.value = 'John' // logs: ["John", ""] ["", ""]
 lastName.value = 'Smith' // logs: ["John", "Smith"] ["John", ""]
 ```
 
+However, if you are changing both watched sources simultaneously in the same method, the watcher will be executed only once:
+
+```js{9-13}
+setup() {
+  const firstName = ref('')
+  const lastName = ref('')
+
+  watch([firstName, lastName], (newValues, prevValues) => {
+    console.log(newValues, prevValues)
+  })
+
+  const changeValues = () => {
+    firstName.value = 'John'
+    lastName.value = 'Smith'
+    // logs: ["John", "Smith"] ["", ""]
+  }
+
+  return { changeValues }
+}
+```
+
+Note that multiple synchronous changes will only trigger the watcher once.
+
+It is possible to force the watcher to trigger after every change by using the setting `flush: 'sync'`, though that isn't usually recommended. Alternatively, [nextTick](/api/global-api.html#nexttick) can be used to wait for the watcher to run before making further changes. e.g.:
+
+```js
+const changeValues = async () => {
+  firstName.value = 'John' // logs: ["John", ""] ["", ""]
+  await nextTick()
+  lastName.value = 'Smith' // logs: ["John", "Smith"] ["John", ""]
+}
+```
+
 ### リアクティブなオブジェクトの監視
 
 ウォッチャを使って、リアクティブな配列やオブジェクトの値を比較するには、値だけのコピーを作っておく必要があります。
@@ -241,22 +308,14 @@ const state = reactive({
 watch(
   () => state,
   (state, prevState) => {
-    console.log(
-      'not deep',
-      state.attributes.name,
-      prevState.attributes.name
-    )
+    console.log('not deep', state.attributes.name, prevState.attributes.name)
   }
 )
 
 watch(
   () => state,
   (state, prevState) => {
-    console.log(
-      'deep',
-      state.attributes.name,
-      prevState.attributes.name
-    )
+    console.log('deep', state.attributes.name, prevState.attributes.name)
   },
   { deep: true }
 )
@@ -279,10 +338,7 @@ const state = reactive({
 watch(
   () => _.cloneDeep(state),
   (state, prevState) => {
-    console.log(
-      state.attributes.name,
-      prevState.attributes.name
-    )
+    console.log(state.attributes.name, prevState.attributes.name)
   }
 )
 

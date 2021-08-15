@@ -29,7 +29,7 @@ Vue.js を使うのは初めてですか？ [エッセンシャルガイド](/gu
 - [Vite](https://github.com/vitejs/vite) を使った Scaffold:
 
   ```bash
-  npm init @vitejs/app hello-vue3 # OR yarn create @vitejs/app hello-vue3
+  npm init vite hello-vue3 -- --template vue # OR yarn create vite hello-vue3 --template vue
   ```
 
 - [vue-cli](https://cli.vuejs.org/) を使った Scaffold:
@@ -54,7 +54,7 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - [Emits Component Option](/guide/component-custom-events.html)
 - カスタムレンダラを作るための [`@vue/runtime-core` の `createRenderer` API](https://github.com/vuejs/vue-next/tree/master/packages/runtime-core)
 - [SFC での Composition API の Syntax Sugar (`<script setup>`)](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md) <Badge text="experimental" type="warning" />
-- [SFC でのステートドリブンな CSS Variables (`<style>` の `v-bind`)](https://github.com/vuejs/rfcs/blob/style-vars-2/active-rfcs/0000-sfc-style-variables.md) <Badge text="experimental" type="warning" />
+- [SFC でのステートドリブンな CSS Variables (`<style>` の `v-bind`)](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0043-sfc-style-variables.md) <Badge text="experimental" type="warning" />
 - [SFC での `<style scoped>` は、グローバルルールまたはスロットされたコンテンツのみを対象とするルールを含めることができるようになった](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md)
 - [Suspense](/guide/migration/suspense.html) <Badge text="experimental" type="warning" />
 
@@ -100,7 +100,7 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 - `destroyed` ライフサイクルオプションの名前が `unmounted` に変更されました
 - `beforeDestroy` ライフサイクルオプションの名前が `beforeUnmount` に変更されました
 - [Props の `default` ファクトリ関数は `this` コンテキストにアクセスできなくなりました](/guide/migration/props-default-this.html)
-- [コンポーネントライフサイクルに合わせてカスタムディレクティブ API が変更されました](/guide/migration/custom-directives.html)
+- [コンポーネントライフサイクルに合わせてカスタムディレクティブ API が変更され、`binding.expression` が削除されました](/guide/migration/custom-directives.html)
 - [`data` オプションは常に関数として宣言されることが必要になりました](/guide/migration/data-option.html)
 - [ミックスインの `data` オプションは浅くマージされるようになりました](/guide/migration/data-option.html#mixin-merge-behavior-change)
 - [属性強制の戦略が変更されました](/guide/migration/attribute-coercion.html)

@@ -6,7 +6,7 @@
 
 1. グローバルメソッドまたはグローパルプロパティの追加　例）[vue-custom-element](https://github.com/karol-f/vue-custom-element).
 
-2. ディレクティブ / フィルタ / トランジションのような 1 つ以上のグローバルアセットの追加　例) [vue-touch](https://github.com/vuejs/vue-touch).
+2. ディレクティブやトランジションのような 1 つ以上のグローバルアセットの追加　例) [vue-touch](https://github.com/vuejs/vue-touch).
 
 3. グローバル mixin によるコンポーネントオプションの追加　例) [vue-router](https://github.com/vuejs/vue-router).
 
