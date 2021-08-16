@@ -238,9 +238,9 @@ const AsyncComp = defineAsyncComponent({
 
 ## defineCustomElement <Badge text="3.2+" />
 
-This method accepts the same argument as [`defineComponent`](#definecomponent), but instead returns a native [Custom Element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) that can be used within any framework, or with no frameworks at all.
+このメソッドは [`defineComponent`](#definecomponent) と同じ引数を受け取りますが、代わりにどのフレームワークでも使える、またはフレームワークなしでも使えるネイティブ [カスタム要素](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) を返します。
 
-Usage example:
+使用例です:
 
 ```html
 <my-vue-element></my-vue-element>
@@ -250,29 +250,29 @@ Usage example:
 import { defineCustomElement } from 'vue'
 
 const MyVueElement = defineCustomElement({
-  // normal Vue component options here
+  // 通常の Vue コンポーネントオプションはこちら
   props: {},
   emits: {},
   template: `...`,
 
-  // defineCustomElement only: CSS to be injected into shadow root
+  // defineCustomElement のみ: Shadow root に注入される CSS 
   styles: [`/* inlined css */`]
 })
 
-// Register the custom element.
-// After registration, all `<my-vue-element>` tags on the page will be upgraded.
+// カスタム要素を登録。
+// 登録後、ページ上すべての `<my-vue-element>` タグがアップグレードされます。
 customElements.define('my-vue-element', MyVueElement)
 
-// You can also programmatically instantiate the element:
-// (can only be done after registration)
+// プログラムコードで要素をインスタンス化することもできます:
+// （登録後にのみ可能です）
 document.body.appendChild(
   new MyVueElement({
-    // initial props (optional)
+    // 初期 props （省略可能）
   })
 )
 ```
 
-For more details on building Web Components with Vue, especially with Single File Components, see [Vue and Web Components](/guide/web-components.html#building-custom-elements-with-vue).
+Vue による Web コンポーネントのビルドについて、特に単一ファイルコンポーネントについて、詳しくは [Vue と Web コンポーネント](/guide/web-components.html#vue-によるカスタム要素のビルド) を参照してください。
 
 ## resolveComponent
 
