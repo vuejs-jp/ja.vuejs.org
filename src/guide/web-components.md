@@ -1,6 +1,6 @@
 # Vue と Web コンポーネント
 
-[Web コンポーネント (Web Components)](https://developer.mozilla.org/en-US/docs/Web/Web_Components) は開発者が再利用可能なカスタム要素 (custom elements) を作成するための一連の Web ネイティブ API の包括的な用語です。 Web Components (opening new window)は、開発者が再利用可能なカスタムエレメントを作成するための一連の Web ネイティブ API 向けの包括的な用語です。
+[Web コンポーネント (Web Components)](https://developer.mozilla.org/en-US/docs/Web/Web_Components) は開発者が再利用可能なカスタム要素 (custom elements) を作成するための一連の Web ネイティブ API の包括的な用語です。
 
 私たちは Vue と Web コンポーネントを主に補完的な技術とみなすことができます。Vue はカスタム要素の作成と使うこと両方に対して優れたサポートを提供します。既にある Vue アプリケーションにカスタム要素を統合する場合や、Vue を使ってビルドしそしてカスタム要素を配布する場合においても、あなたには良き友です。
 
