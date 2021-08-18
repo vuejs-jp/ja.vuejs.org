@@ -4,7 +4,7 @@
 
 ## 算出プロパティ
 
-開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの [算出プロパティ](computed.html#算出プロパティ) として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./reactivity-fundamentals.html#独立したリアクティブな値を-ref-として作成する) オブジェクトを返却する `computed` メソッドを利用します。
+開発中に、他の状態に依存した状態が必要となることがあります。Vue では、これをコンポーネントの [算出プロパティ](computed.html#算出プロパティ) として処理します。算出プロパティの作成には、getter 関数を受け取り、関数の返り値に対して、イミュータブルでリアクティブな [ref](./reactivity-fundamentals.html#独立したリアクティブな値を-ref-として作成する) オブジェクトを返却する `computed` 関数を利用します。
 
 ```js
 const count = ref(1)
@@ -62,7 +62,7 @@ count.value++
 
 ## `watchEffect`
 
-リアクティブの状態に応じて、作用を *自動的に適用しなおす* ために、`watchEffect` を利用できます。これは依存関係をリアクティブにトラッキングし、変更されるたびに即座に関数を再実行します。
+リアクティブの状態に応じて、作用を *自動的に適用しなおす* ために、`watchEffect` 関数を利用できます。これは依存関係をリアクティブにトラッキングし、変更されるたびに即座に関数を再実行します。
 
 ```js
 const count = ref(0)
@@ -245,7 +245,7 @@ firstName.value = 'John' // logs: ["John", ""] ["", ""]
 lastName.value = 'Smith' // logs: ["John", "Smith"] ["John", ""]
 ```
 
-However, if you are changing both watched sources simultaneously in the same method, the watcher will be executed only once:
+ただし、同じ関数内で監視しているソースの両方を同時に変更している場合には、ウォッチャは一度だけ実行されます:
 
 ```js{9-13}
 setup() {
@@ -266,9 +266,9 @@ setup() {
 }
 ```
 
-Note that multiple synchronous changes will only trigger the watcher once.
+複数の同期的な変更は、ウォッチャを一度しか実行しないことには気をつけてください。
 
-It is possible to force the watcher to trigger after every change by using the setting `flush: 'sync'`, though that isn't usually recommended. Alternatively, [nextTick](/api/global-api.html#nexttick) can be used to wait for the watcher to run before making further changes. e.g.:
+`flush: 'sync'` 設定を使うことで、変更後に毎回実行するようウォッチャを強制することはできますが、通常はおすすめできません。代わりに、[nextTick](/api/global-api.html#nexttick) を使って、それ以上の変更をする前にウォッチャの実行を待つこともできます。例えば:
 
 ```js
 const changeValues = async () => {
