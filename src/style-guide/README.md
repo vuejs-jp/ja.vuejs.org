@@ -28,7 +28,7 @@ sidebar: auto
 2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます。
 3. 少なくとも Vue に関しては、ほとんどの場合、新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます。
 
-### 優先度 D: 使用注意
+### 優先度 D: 注意して使用
 
 Vue のいくつかの機能は、レアケースまたは従来のコードベースからスムーズな移行に対応するために存在します。しかしながらこれを使いすぎると、コードを保守することが難しくなり、またバグの原因になることさえあります。これらのルールは潜在的な危険な機能を照らし、いつ、なぜ避けなかればならないのかを説明しています。
 
@@ -1473,22 +1473,22 @@ computed: {
 ```
 </div>
 
-## Priority D Rules: Use with Caution <span class="hide-from-sidebar">(Potentially Dangerous Patterns)</span>
+## 優先度 D のルール: 注意して使用 <span class="hide-from-sidebar">(潜在的に危険なパターン)</span>
 
-### Element selectors with `scoped` <sup data-p="d">use with caution</sup>
+### `scoped` 付きの要素セレクタ <sup data-p="d">注意して使用</sup>
 
-**Element selectors should be avoided with `scoped`.**
+**`scoped` 付きの要素セレクタは避けるべきです。**
 
-Prefer class selectors over element selectors in `scoped` styles, because large numbers of element selectors are slow.
+たくさんの要素セレクタは低速になるため、 `scoped` スタイルでは要素セレクターよりもクラスセレクターを優先してください。
 
-::: details Detailed Explanation
-To scope styles, Vue adds a unique attribute to component elements, such as `data-v-f3f3eg9`. Then selectors are modified so that only matching elements with this attribute are selected (e.g. `button[data-v-f3f3eg9]`).
+::: details 詳細な説明
+スタイルの範囲を決めるために、 Vue は `data-v-f3f3eg9` のような一意の属性をコンポーネントの要素に追加します。  
 
-The problem is that large numbers of [element-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `button[data-v-f3f3eg9]`) will be considerably slower than [class-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `.btn-close[data-v-f3f3eg9]`), so class selectors should be preferred whenever possible.
+問題は、 たくさんの[要素-属性セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (例： `button[data-v-f3f3eg9]`) が [クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (例： `.btn-close[data-v-f3f3eg9]`) よりもかなり遅くなるため、 可能な限りクラスセレクタを優先すべきだということです。
 :::
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```html
 <template>
@@ -1504,7 +1504,7 @@ button {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>よい例</h4>
 
 ```html
 <template>
@@ -1519,16 +1519,17 @@ button {
 ```
 </div>
 
-### Implicit parent-child communication <sup data-p="d">use with caution</sup>
+### 暗黙的な親子間のやりとり <sup data-p="d">注意して使用</sup>
 
-**Props and events should be preferred for parent-child component communication, instead of `this.$parent` or mutating props.**
+**親子コンポーネントのやり取りには、 `this.$parent` や プロパティの変更ではなく プロパティとイベントを優先するべきです。**
 
-An ideal Vue application is props down, events up. Sticking to this convention makes your components much easier to understand. However, there are edge cases where prop mutation or `this.$parent` can simplify two components that are already deeply coupled.
+理想的な Vue アプリケーションは props down, events up です。 この規則に従うことで、コンポーネントはより理解しやすくなります。しかし、プロパティの変更と `this.$parent` が、すでに深く結合している2つのコンポーネントを単純化できるエッジケースも存在します。
 
-The problem is, there are also many _simple_ cases where these patterns may offer convenience. Beware: do not be seduced into trading simplicity (being able to understand the flow of your state) for short-term convenience (writing less code).
+問題は、これらのパターンが利便性をもたらす _シンプルな_ ケースも多くあるということです。
+注意：シンプルさ（状態の流れを理解できること）と短期的な利便性（より少ないコードを書くこと）の交換に誘惑されないようにしましょう。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```js
 app.component('TodoItem', {
@@ -1571,7 +1572,7 @@ app.component('TodoItem', {
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```js
 app.component('TodoItem', {
@@ -1612,16 +1613,16 @@ app.component('TodoItem', {
 ```
 </div>
 
-### Non-flux state management <sup data-p="d">use with caution</sup>
+### Flux以外の状態管理 <sup data-p="d">注意して使用</sup>
 
-**[Vuex](https://next.vuex.vuejs.org/) should be preferred for global state management, instead of `this.$root` or a global event bus.**
+**グローバルな状態管理には、 `this.$root` やグローバルイベントバスではなく [Vuex](https://next.vuex.vuejs.org/) を優先するべきです。**
 
-Managing state on `this.$root` and/or using a global event bus can be convenient for very simple cases, but it is not appropriate for most applications.
+`this.$root` での状態管理やグローバルイベントバスは非常に単純なケースでは便利ですが、ほとんどのアプリケーションには適していません。
 
-Vuex is the [official flux-like implementation](/guide/state-management.html#official-flux-like-implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](/guide/installation.html#vue-devtools) support).
+Vuex は Vue [公式の Flux ライクな実装](/guide/state-management.html#公式の-flux-ライクな実装) で、 状態を管理するための中心的な場所の提供だけでなく、状態の変更を整理、追跡、およびデバッグするためのツールも提供します。Vuexは、Vueのエコシステムにうまく統合されています ([Vue DevTools](/guide/installation.html#vue-devtools) の完全なサポートも含みます)。
 
 <div class="style-example style-example-bad">
-<h4>Bad</h4>
+<h4>悪い例</h4>
 
 ```js
 // main.js
@@ -1650,7 +1651,7 @@ const app = createApp({
 </div>
 
 <div class="style-example style-example-good">
-<h4>Good</h4>
+<h4>良い例</h4>
 
 ```js
 // store/modules/todos.js
