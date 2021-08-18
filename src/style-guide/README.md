@@ -1504,7 +1504,7 @@ button {
 </div>
 
 <div class="style-example style-example-good">
-<h4>よい例</h4>
+<h4>良い例</h4>
 
 ```html
 <template>
