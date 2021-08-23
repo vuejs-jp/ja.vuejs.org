@@ -97,7 +97,12 @@ vue upgrade --next
 npm の場合:
 
 ```bash
-$ npm init vite <プロジェクト名> -- --template vue
+# npm 6.x
+$ npm init vite@latest <プロジェクト名> --template vue
+
+# npm 7+, extra double-dash is needed:
+$ npm init vite@latest <プロジェクト名> -- --template vue
+
 $ cd <プロジェクト名>
 $ npm install
 $ npm run dev
