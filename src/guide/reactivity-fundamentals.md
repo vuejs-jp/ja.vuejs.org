@@ -74,7 +74,7 @@ ref がレンダーコンテキスト(render contenxt - [setup()](composition-ap
 ```
 
 :::tip
-実際のオブジェクトインスタンスにアクセスする必要がない場合は、 `reactive` でラップできます:
+実際のオブジェクトインスタンスにアクセスしたくない場合は、`reactive` でラップできます:
 
 ```js
 nested: reactive({
