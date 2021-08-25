@@ -85,7 +85,7 @@ badges:
 | `draggable`          | `draggable` &rarr; `false`           |
 | `spellcheck`         | `spellcheck` &rarr; `true`           |
 
-これまでの振る舞いを維持するために、また、`false` を `'false'` に強制するために、3.x Vue の開発者は `contenteditable` と `spellcheck` に対して `v-bind` 式を `false` または `'false'` に解決する必要があります。
+3.x では「列挙されたプロパティ」のために `null` を `'false'` に強制しなくなったため、`contenteditable` や `spellcheck` のような場合、2.x と同じ振る舞いを維持するために、開発者は `null` に解決していた `v-bind` 式を `false` に解決するか、`'false'` に変更する必要があります。
 
 2.x では、列挙された属性に対して無効な値を `'true'` に強制的に設定していました。これは通常意図していなかったもので、大規模に利用される可能性は低いと思われます。3.x では、`true` または `'true'` を明示的に指定する必要があります。
 
@@ -107,7 +107,7 @@ badges:
   <tbody>
     <tr>
       <td rowspan="3">2.x “列挙された属性”<br><small>つまり<code>contenteditable</code>、<code>draggable</code>、<code>spellcheck</code></small></td>
-      <td><code>undefined</code>, <code>false</code></td>
+      <td><code>undefined</code></td>
       <td><code>undefined</code>, <code>null</code></td>
       <td><i>削除されます</i></td>
     </tr>
@@ -120,7 +120,7 @@ badges:
       <td><code>"true"</code></td>
     </tr>
     <tr>
-      <td><code>null</code>, <code>'false'</code></td>
+      <td><code>null</code>, <code>false</code>, <code>'false'</code></td>
       <td><code>false</code>, <code>'false'</code></td>
       <td><code>"false"</code></td>
     </tr>
