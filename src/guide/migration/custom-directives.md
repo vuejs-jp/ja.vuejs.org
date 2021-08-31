@@ -45,7 +45,7 @@ Vue.directive('highlight', {
 - bind → **beforeMount**
 - inserted → **mounted**
 - **beforeUpdate**: 追加されました！これは、コンポーネントのライフサイクルフックのように、要素自体が更新される前に呼び出されます。
-- update → 削除されました！updated と似たようなものが多すぎて冗長です。代わりに updated を使ってください。
+- update → 削除されました！ `updated` と似たようなものが多すぎて冗長です。代わりに `updated` を使ってください。
 - componentUpdated → **updated**
 - **beforeUnmount**: 追加されました！コンポーネントのライフサイクルフックと同様に、要素がマウント解除される直前に呼び出されます。
 - unbind -> **unmounted**
