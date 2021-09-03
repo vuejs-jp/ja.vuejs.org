@@ -1,25 +1,25 @@
-# Effect Scope API <Badge text="3.2+" />
+# エフェクトスコープ API <Badge text="3.2+" />
 
 :::info
-Effect scope is an advanced API primarily intended for library authors. For details on how to leverage this API, please consult its corresponding [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md).
+エフェクトスコープは、主にライブラリの作成者を対象とした高度な API です。この API を活用する方法の詳細は、対応する [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md) を参照してください。
 :::
 
 ## `effectScope`
 
-Creates an effect scope object which can capture the reactive effects (e.g. computed and watchers) created within it so that these effects can be disposed together.
+エフェクトスコープのオブジェクトを生成します。このオブジェクト内で生成されたリアクティブなエフェクト（例：computed や watcher）を補足して、これらのエフェクトを一緒に処理できるようにします。
 
-**Typing:**
+**タイピング:**
 
 ```ts
 function effectScope(detached?: boolean): EffectScope
 
 interface EffectScope {
-  run<T>(fn: () => T): T | undefined // undefined if scope is inactive
+  run<T>(fn: () => T): T | undefined // スコープが非アクティブの場合は undefined
   stop(): void
 }
 ```
 
-**Example:**
+**例:**
 
 ```js
 const scope = effectScope()
@@ -32,15 +32,15 @@ scope.run(() => {
   watchEffect(() => console.log('Count: ', doubled.value))
 })
 
-// to dispose all effects in the scope
+//　スコープ内のすべてのエフェクトを破棄する
 scope.stop()
 ```
 
 ## `getCurrentScope`
 
-Returns the current active [effect scope](#effectscope) if there is one.
+現在アクティブな[エフェクトスコープ](#effectscope)を返します。
 
-**Typing:**
+**タイピング:**
 
 ```ts
 function getCurrentScope(): EffectScope | undefined
@@ -48,11 +48,11 @@ function getCurrentScope(): EffectScope | undefined
 
 ## `onScopeDispose`
 
-Registers a dispose callback on the current active [effect scope](#effectscope). The callback will be invoked when the associated effect scope is stopped.
+現在アクティブな[エフェクトスコープ](#effectscope)を破棄するコールバックを登録します。コールバックは関連するエフェクトスコープが停止したときに呼び出されます。
 
-This method can be used as a non-component-coupled replacement of `onUnmounted` in reusable composition functions, since each Vue component's `setup()` function is also invoked in an effect scope.
+このメソッドは、各 Vue コンポーネントの `setup()` 関数もエフェクトスコープで呼び出すため、再利用可能に構成された関数の `onUnmounted` の非結合コンポーネントの代替として使用できます。
 
-**Typing:**
+**タイピング:**
 
 ```ts
 function onScopeDispose(fn: () => void): void
