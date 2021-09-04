@@ -44,7 +44,7 @@ module.exports = {
       .rule('vue')
       .use('vue-loader')
       .tap(options => ({
-        ...options
+        ...options,
         compilerOptions: {
           // ion- で始まるタグはすべてカスタム要素として扱う
           isCustomElement: tag => tag.startsWith('ion-')
@@ -200,7 +200,7 @@ Vue でカスタム要素をビルドする場合、要素は Vue のランタ�
 ```js
 import { defineCustomElement } from 'vue'
 import Foo from './MyFoo.ce.vue'
-import Bar from './MyBar.ce.bar'
+import Bar from './MyBar.ce.vue'
 
 const MyFoo = defineCustomElement(Foo)
 const MyBar = defineCustomElement(Bar)
