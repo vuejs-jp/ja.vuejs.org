@@ -1,37 +1,37 @@
-# Vue Docs Writing Guide
+# Vue ドキュメントライティングガイド
 
-Writing documentation is an exercise in empathy. We're not describing an objective reality - the source code already does that. Our job is to help shape the relationship between users and the Vue ecosystem. This ever-evolving guide provides some rules and recommendations on how to do that consistently within the Vue ecosystem.
+ドキュメントを書くことは共感の練習です。私たちは客観的な現実を記述しているわけではありません - それは既にソースコードがやってくれています、私たちの仕事は、ユーザと Vue エコシステムとの関係を形成するための手助けをすることです、この進化し続けるガイドでは、Vue エコシステム内で一貫してドキュメントを作成する方法について、いくつかのルールと推奨事項を紹介しています、
 
-## Principles
+## 原則
 
-- **A feature doesn't exist until it's well documented.**
-- **Respect users' cognitive capacity (i.e. brain power).** When a user starts reading, they begin with a certain amount of limited brain power and when they run out, they stop learning.
-  - Cognitive capacity is **depleted faster** by complex sentences, having to learn more than one concept at a time, and abstract examples that don't directly relate to a user's work.
-  - Cognitive capacity is **depleted more slowly** when we help them feel consistently smart, powerful, and curious. Breaking things down into digestible pieces and minding the flow of the document can help keep them in this state.
-- **Always try to see from the user's perspective.** When we understand something thoroughly, it becomes obvious to us. This is called _the curse of knowledge_. In order to write good documentation, try to remember what you first needed to know when learning this concept. What jargon did you need to learn? What did you misunderstand? What took a long time to really grasp? Good documentation meets users where they are. It can be helpful to practice explaining the concept to people in person before
-- **Describe the _problem_ first, then the solution.** Before showing how a feature works, it's important to explain why it exists. Otherwise, users won't have the context to know if this information is important to them (is it a problem they experience?) or what prior knowledge/experience to connect it to.
-- **While writing, don't be afraid to ask questions**, _especially_ if you're afraid they might be "dumb". Being vulnerable is hard, but it's the only way for us to more fully understand what we need to explain.
-- **Be involved in feature discussions.** The best APIs come from documentation-driven development, where we build features that are easy to explain, rather than trying to figure out how to explain them later. Asking questions (especially "dumb" questions) earlier often helps reveal confusions, inconsistencies, and problematic behavior before a breaking change would be required to fix them.
+- **機能は十分に文書化されていないと存在しません。**
+- **ユーザの認知能力（例えば、頭脳）を尊重する。**ユーザが読書を始めるときには、ある程度の限られた頭脳で始めます、そして彼らがそれを使い果たした時、学ぶのをやめます、
+  - 認知能力は、複雑な文章、一度に複数の概念を学ばなければならないこと、そしてユーザの仕事に直接関係のない抽象的な例によって、**より早く枯渇します**。
+  - 認知能力は、ユーザが一貫して賢く、力強く、好奇心旺盛であると感じさせるように支援すると、**よりゆっくりと枯渇していきます**。物事を消化しやすい断片に分解し、文書の流れに注意を払うことは、この状態を維持するのに役立ちます。
+- **常にユーザの立場に立って見ることを心がけましょう。**私たちは何かを徹底的に理解すると、それが当たり前になってきます。これは _知識の呪い_（_the curse of knowledge_）と呼ばれています。良いドキュメントを書くためには、「この概念を学ぶときに最初に何を知る必要があったか？」を思い出すよう努力しましょう。どんな専門用語を学ぶ必要がありましたか？何を誤解していたでしょうか？理解するのに時間がかかったものは何ですか？優れたドキュメントは、ユーザが読んでいる部分で概念を理解することができます。事前にその概念を実際に人に説明する練習をしておくと良いでしょう、
+- **最初に _問題_ を説明し、次に解決策を説明します。**機能がどのように動作するかを示す前に、なぜその機能が存在するのかを説明することが重要です。そうしないと、その情報がユーザにとって重要なものなのか（自分が経験した問題なのか）、あるいは、それをどのような予備知識、経験と結びつけるのかを知るためのコンテキストを把握することができません。
+- **書いている間は、質問することを恐れないようにしましょう。**相手が "間抜け" であるかもしれないと怖がっている場合は特に、弱みがあるのは辛いことですが、質問することが説明する必要があることを完璧に理解するための唯一方法です、
+- **機能の議論に参加しましょう。**最高の API は、後で説明する方法を考えようとするのではなく、説明しやすい機能を構築するという、ドキュメントドリブンの開発から生まれます。質問（特に、「間抜けな」質問）を早い段階ですることで、互換性のない修正を行う必要が出てくる前に、混乱や矛盾、問題のある動作を明らかにすることができます。
 
-## Organization
+## ドキュメントの構成
 
-- **Installation/Integration**: Provide a thorough overview of how to integrate the software into as many different kinds of projects as necessary.
-- **Introduction/Getting Started**:
-  - Provide a less than 10 minute overview of the problems the project solves and why it exists.
-  - Provide a less than 30 minute overview of the problems the project solves and how, including when and why to use the project and some simple code examples. At the end, link to both to Installation page and the beginning of the Essentials Guide.
-- **Guide**: Make users feel smart, powerful, and curious, then maintain this state so that users maintain the motivation and cognitive capacity to keep learning more. Guide pages are meant to be read sequentially, so should generally be ordered from the highest to lowest power/effort ratio.
-  - **Essentials**: It should take no longer than 5 hours to read the Essentials, though shorter is better. Its goal is to provide the 20% of knowledge that will help users handle 80% of use cases. Essentials can link to more advanced guides and the API, though, in most cases, you should avoid such links. When they are provided, you need also provide a context so users are aware if they should follow this link on their first reading. Otherwise, many users end up exhausting their cognitive capacity link-hopping, trying to fully learn every aspect of a feature before moving on, and as a result, never finish that first read-through of the Essentials. Remember that a smooth read is more important than being thorough. We want to give people the information they need to avoid a frustrating experience, but they can always come back and read further, or Google a less common problem when they encounter it.
-  - **Advanced**: While the Essentials helps people handle ~80% of use cases, subsequent guides help get users to 95% of use cases, plus more detailed information on non-essential features (e.g. transitions, animations), more complex convenience features (e.g. mixins, custom directives), and dev experience improvements (e.g. JSX, plugins). The final 5% of use cases that are more niche, complex, and/or prone to abuse will be left to the cookbook and API reference, which can be linked to from these advanced guides.
-- **Reference/API**: Provide a complete list of features, including type information, descriptions of the problem each solves, examples of every combination of options, and links to guides, cookbook recipes, and other internal resources providing more detail. Unlike other pages, this one is not meant to be read top-to-bottom, so plenty of detail can be provided. These references must also be more easily skimmable than the guides, so the format should be closer to dictionary entries than the story-telling format of the guides.
-- **Migrations**:
-  - **Versions**: When important changes are made, it's useful to include a full list of changes, including a detailed explanation of why the change was made and how to migrate their projects.
-  - **From other projects**: How does this software compare to similar software? This is important to help users understand what additional problems we might solve or create for them, and to what extent they can transfer knowledge they already have.
-- **Style Guide**: There are necessarily some key pieces in development that need a decision, but are not core to the API. The style guide provides educated, opinionated recommendations to help guide these decisions. They shouldn't be followed blindly, but can help teams save time by being aligned on smaller details.
-- **Cookbook**: Recipes in the cookbook are written with some assumption of familiarity with Vue and its ecosystem. Each is a highly structured document that walks through some common implementation details that a Vue dev might encounter.
+- **インストール / 統合**：必要な分だけ異なる種類のプロジェクトにソフトウェアを統合する方法の完全な概要を提供します。
+- **イントロダクション / Getting Started**：
+  - プロジェクトが解決する問題と存在理由について、概要を 10 分以内に説明してください。
+  - プロジェクトが解決する問題とその方法について、いつ、なぜプロジェクトを使用するのか、簡単なコード例を含めて、概要を 30 分以内に説明してください。最後に、"Installation" と "Essentials Guide" の冒頭の両方にリンクしてください。
+- **ガイド**：ユーザに賢く、力強く、好奇心を感じさせ、その状態を維持することで、ユーザがさらに学び続けるためのモチベーションと認知能力を維持できるようにします。ガイドページは順番に読まれることを意図しているため、一般的には、必要な労力の比率が高いものから低いものへと順番に進むように並べられるべきです。
+  - **Essentials**："Essentials" を読むのに 5 時間はかかりませんが、より短い方が良いでしょう。目標は、ユーザが 80 % のユースケースを処理するのに役立つ 20%の知識を提供することです。Essentials では、より高度なガイドや API にリンクすることはできますが、ほとんどの場合、そのようなリンクは避けるべきです。リンクが提供されている場合、ユーザが初めてドキュメントを読む際にこのリンクに従うべきかを認識できるよう、コンテキストを提供する必要があります。そうしないと、多くのユーザは、リンクを次から次へと飛び、先に進む前に機能のあらゆる側面を完璧に学ぼうとして、認知能力を疲れ果てさせ、結果的に Essentials の最初の一読を終えることができなくなってしまいます。徹底していることよりも、スムーズに読めることが重要であることを忘れないでください。ユーザがイライラするような経験を避けるため、彼らが必要としてる情報を提供したいと考えていますが、ユーザはいつでも戻ってきてさらに読み進めることができますし、一般的ではない問題に遭遇したときにはグーグルで検索することもできます。
+  - **Advanced**："Essentials" では全体の 80% までのユースケースに対応できるようになっていますが、その後のガイドでは 95% のユースケースに対応できるようになり、さらに非必須機能（例：トランジション、アニメーション）、より複雑な便利機能（例：mixin、カスタムディレクティブ）、開発者のエクスペリエンス向上（例：JSX、プラグイン）に関するより詳細な情報を提供します。ニッチで複雑なユースケースや濫用されやすいユースケースの最後の 5%は、クックブックと API リファレンスに委ねられます。これらは、Advanced ガイドからリンクされています。
+- **リファレンス / API**：Vue の機能の完全なリストを提供します。リストは型情報、それぞれが解決する問題の説明、オプションのすべての組み合わせの例、ガイド、クックブックのレシピ、より詳細な情報を提供する他の内部リソースへのリンクですが含まれます。他のページとは異なり、このページは上から下へ読むことを目的としていないので、多くの詳細情報を提供することができます。また、これらの参考文献は、ガイドよりも簡単に必要な情報をすぐ取得できなければならないので、ガイドのストーリーテリング形式よりも辞書の項目に近い形式になっているはずです。
+- **移行**：
+  - **バージョン**：重要な変更が行われた場合は、変更の完全なリストを含めると便利です。変更が行われた理由やプロジェクトの移行方法についての詳細な説明を含みます。
+  - **他のプロジェクトから**：このソフトウェアは、類似のソフトウェアと比較してどうでしょうか？これは、ユーザが、我々がどのような問題を解決したり作成したりする可能性があるのか、また、すでに持っている知識をどの程度まで移行できるのかを理解するために重要です。
+- **スタイルガイド**：開発には、決定を必要とするいくつかの重要な部分がありますが、API のコアではありません。スタイルガイドでは、これらの決定の指針となるよう、教育的で強固な推奨事項を提供しています。やみくもに従うべきではありませんが、細かな部分の調整を行うことで、チームの時間を節約できます。
+- **クックブック**：クックブックのレシピは、Vue とそのエコシステムに精通していることを前提に書かれています。それぞれのレシピは、Vue の開発者が遭遇する可能性のある共通の実装の詳細を説明するための、高度に構造化されたドキュメントです。
 
-## Writing & Grammar
+## ライティング & 文法
 
-### Style
+### スタイル
 
 - **Headings should describe problems**, not solutions. For example, a less effective heading might be "Using props", because it describes a solution. A better heading might be "Passing Data to Child Components with Props", because it provides the context of the problem props solve. Users won't really start paying attention to the explanation of a feature until they have some idea of why/when they'd use it.
 - **When you assume knowledge, declare it** at the beginning and link to resources for less common knowledge that you're expecting.
@@ -53,7 +53,7 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
   - "function that returns a function" instead of "higher order function"
 - **Avoid language that invalidate struggle**, such as "easy", "just", "obviously", etc. For reference, see [Words To Avoid in Educational Writing](https://css-tricks.com/words-avoid-educational-writing/).
 
-### Grammar
+### 文法
 
 - **Avoid abbreviations** in writing and code examples (e.g. `attribute` is better than `attr`, `message` is better than `msg`), unless you are specifically referencing an abbreviation in an API (e.g. `$attrs`). Abbreviation symbols included on standard keyboards (e.g. `@`, `#`, `&`) are OK.
 - **When referencing a directly following example, use a colon (`:`) to end a sentence**, rather than a period (`.`).
@@ -63,7 +63,7 @@ Writing documentation is an exercise in empathy. We're not describing an objecti
 - **Use Title Case for headings** - at least for now, since it's what we use through the rest of the docs. There's research suggesting that sentence case (only first word of the heading starts with a capital) is actually superior for legibility and also reduces the cognitive overhead for documentation writers, since they don't have to try to remember whether to capitalize words like "and", "with", and "about".
 - **Don't use emojis (except in discussions).** Emojis are cute and friendly, but they can be a distraction in documentation and some emoji even convey different meanings in different cultures.
 
-## Iteration & Communication
+## イテレーション & コミュニケーション
 
 - **Excellence comes from iteration.** First drafts are always bad, but writing them is a vital part of the process. It's extremely difficult to avoid the slow progression of Bad -> OK -> Good -> Great -> Inspiring -> Transcendent.
 - **Only wait until something is "Good" before publishing.** The community will help you push it further down the chain.
@@ -91,19 +91,19 @@ There is a certain temptation to abuse these styles, as one can simply add a cha
 
 Under no circumstances should 2 alerts be used next to one another, it's a sign that we're not able to explain context well enough.
 
-### Contributing
+### コントリビュート
 
 We appreciate small, focused PRs. If you'd like to make an extremely large change, please communicate with team members prior to a pull request. Here's a [writeup that details why this is so critical](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/) for us to work well on this team. Please understand that though we always appreciate contributions, ultimately we have to prioritize what works best for the project as a whole.
 
-## Resources
+## リソース
 
-### Software
+### ソフトウェア
 
-- [Grammarly](https://www.grammarly.com/): Desktop app and browser extension for checking spelling and grammar (though grammar checking doesn't catch everything and occasionally shows a false positive).
-- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): An extension for VS Code to help you check spelling within markdown and code examples.
+- [Grammarly](https://www.grammarly.com/): スペルと文法をチェックするためのデスクトップアプリとブラウザ拡張機能（ただし、文法チェックは全てをキャッチできるわけではなく、たまに誤検出が出ることがあります）。
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker): マークダウンやサンプルコードのスペルチェックに役立つ VS Code の拡張機能。
 
-### Books
+### 本
 
-- [On Writing Well](https://www.amazon.com/Writing-Well-30th-Anniversary-Nonfiction-ebook/dp/B0090RVGW0) (see [popular quotes](https://www.goodreads.com/work/quotes/1139032-on-writing-well-the-classic-guide-to-writing-nonfiction))
-- [Bird by Bird](https://www.amazon.com/Bird-Some-Instructions-Writing-Life/dp/0385480016) (see [popular quotes](https://www.goodreads.com/work/quotes/841198-bird-by-bird-some-instructions-on-writing-and-life))
+- [On Writing Well](https://www.amazon.com/Writing-Well-30th-Anniversary-Nonfiction-ebook/dp/B0090RVGW0)（[人気の名言](https://www.goodreads.com/work/quotes/1139032-on-writing-well-the-classic-guide-to-writing-nonfiction)を見る）
+- [Bird by Bird](https://www.amazon.com/Bird-Some-Instructions-Writing-Life/dp/0385480016)（[人気の名言](https://www.goodreads.com/work/quotes/841198-bird-by-bird-some-instructions-on-writing-and-life)見る）
 - [Cognitive Load Theory](https://www.amazon.com/Cognitive-Explorations-Instructional-Performance-Technologies/dp/144198125X/)
