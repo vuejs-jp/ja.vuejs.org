@@ -166,7 +166,7 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 
 ### IDE のサポート
 
-[VSCode](https://code.visualstudio.com/) を公式の拡張機能である [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), とともに使用することをお勧めします。それにより Vue3 の包括的な IDE のサポートを得ることができます。
+[VSCode](https://code.visualstudio.com/) を公式の拡張機能である [Volar](https://github.com/johnsoncodehk/volar) とともに使用することをお勧めします。それにより Vue3 の包括的な IDE のサポートを得ることができます。
 
 ## その他のプロジェクト
 
