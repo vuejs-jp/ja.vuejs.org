@@ -48,7 +48,7 @@
    - `vue-cli` を使用している場合: `vue upgrade` で最新の `@vue/cli-service` にアップグレードします。
    - （代替手段）[Vite](https://vitejs.dev/) + [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)に移行します。[[コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/565b948919eb58f22a32afca7e321b490cb3b074)]
 
-2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールます。また `vue-template-compiler`（もしあれば）を `@vue/compiler-sfc` に置き換えます。
+2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールします。また（もしあれば） `vue-template-compiler`を `@vue/compiler-sfc` に置き換えます。
 
    ```diff
    "dependencies": {
@@ -155,11 +155,22 @@
 
    </details>
 
-4. この時点で、あなたのアプリケーションは、いくつかのコンパイル時のエラーや警告に遭遇するかもしれません（例：フィルターの使用）。まずはそれらを修正してください。コンパイラの警告がすべて消えた場合は、コンパイラを Vue 3 モードに設定することもできます。
+4. TypeScript を使用している場合は、`*.d.ts` ファイルを以下のように追加して、デフォルトのエクスポート（Vue 3 ではなくなりました）を公開するように `vue` の型付けを修正する必要もあります:
+
+   ```ts
+   declare module 'vue' {
+     import { CompatVue } from '@vue/runtime-dom'
+     const Vue: CompatVue
+     export default Vue
+     export * from '@vue/runtime-dom'
+   }
+   ```
+
+5. この時点で、あなたのアプリケーションは、いくつかのコンパイル時のエラーや警告に遭遇するかもしれません（例：フィルターの使用）。まずはそれらを修正してください。コンパイラの警告がすべて消えた場合は、コンパイラを Vue 3 モードに設定することもできます。
 
    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/b05d9555f6e115dea7016d7e5a1a80e8f825be52)
 
-5. エラーを修正した後、前述の[制限事項](#既知の制限事項)の対象になっていなければアプリを実行できるはずです。
+6. エラーを修正した後、前述の[制限事項](#既知の制限事項)の対象になっていなければアプリを実行できるはずです。
 
    コマンドラインとブラウザのコンソールの両方に、たくさんの警告が表示されると思います。ここでは一般的なヒントをご紹介します。
 
@@ -171,29 +182,29 @@
 
    - `vue-router` を使用している場合は、`vue-router` v4 にアップグレードするまで、`<transition>` と `<keep-alive>` は `<router-view>` で動作しないことに注意してください。
 
-6. [`<transition>` のクラス名](/guide/migration/transition.html) を更新します。これは、実行時の警告が出ない唯一の機能です。プロジェクト全体で `.*-enter` と `.*-leave` の CSS クラス名を検索することができます。
+7. [`<transition>` のクラス名](/guide/migration/transition.html) を更新します。これは、実行時の警告が出ない唯一の機能です。プロジェクト全体で `.*-enter` と `.*-leave` の CSS クラス名を検索することができます。
 
    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/d300103ba622ae26ac26a82cd688e0f70b6c1d8f)
 
-7. [新しいグローバルマウント API](/guide/migration/global-api.html#新しいグローバル-api-createapp)を使用するようにアプリのエントリを更新します。
+8. [新しいグローバルマウント API](/guide/migration/global-api.html#新しいグローバル-api-createapp)を使用するようにアプリのエントリを更新します。
 
    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/a6e0c9ac7b1f4131908a4b1e43641f608593f714)
 
-8. [`vuex` を v4 にアップグレード](https://next.vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html)します。
+9. [`vuex` を v4 にアップグレード](https://next.vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html)します。
 
    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/5bfd4c61ee50f358cd5daebaa584f2c3f91e0205)
 
-9. [`vuex-router` を v4 にアップグレード](https://next.router.vuejs.org/guide/migration/index.html)します。 `vuex-router-sync` も使用している場合は、ストアゲッターで置き換えることができます。
+10. [`vuex-router` を v4 にアップグレード](https://next.router.vuejs.org/guide/migration/index.html)します。 `vuex-router-sync` も使用している場合は、ストアゲッターで置き換えることができます。
 
-   アップグレード後、`<router-view>` で `<transition>` や `<keep-alive>` を使用するには、新しい [scoped-slot ベースの構文](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition) を使用する必要があります。
+    アップグレード後、`<router-view>` で `<transition>` や `<keep-alive>` を使用するには、新しい [scoped-slot ベースの構文](https://next.router.vuejs.org/guide/migration/index.html#router-view-keep-alive-and-transition) を使用する必要があります。
 
-   [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/758961e73ac4089890079d4ce14996741cf9344b)
+    [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/758961e73ac4089890079d4ce14996741cf9344b)
 
-10. 個々の警告を取り除きます。一部の機能は、Vue 2 と Vue 3 の間で矛盾した動作をすることに注意してください。例えば、Render 関数 API や、関数型コンポーネントと非同期コンポーネントの変更などがあります。アプリケーションの他の部分に影響を与えずに Vue 3 の API に移行するには、[`compatConfig` オプション](#コンポーネントごとの設定)を使用して、コンポーネントごとに Vue 3 の動作をオプトインすることができます。
+11. 個々の警告を取り除きます。一部の機能は、Vue 2 と Vue 3 の間で矛盾した動作をすることに注意してください。例えば、Render 関数 API や、関数型コンポーネントと非同期コンポーネントの変更などがあります。アプリケーションの他の部分に影響を与えずに Vue 3 の API に移行するには、[`compatConfig` オプション](#コンポーネントごとの設定)を使用して、コンポーネントごとに Vue 3 の動作をオプトインすることができます。
 
     [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/d0c7d3ae789be71b8fd56ce79cb4cb1f921f893b)
 
-11. すべての警告が修正されたら、移行ビルドを削除して Vue 3 に正しく切り替えることができます。ただし、Vue 2 の動作に頼った依存関係が残っている場合は、切り替えできないことがあります。
+12. すべての警告が修正されたら、移行ビルドを削除して Vue 3 に正しく切り替えることができます。ただし、Vue 2 の動作に頼った依存関係が残っている場合は、切り替えできないことがあります。
 
     [コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/9beb45490bc5f938c9e87b4ac1357cfb799565bd)
 
