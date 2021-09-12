@@ -89,9 +89,6 @@ app.component('my-component', {
 })
 ```
 
-```html
-<my-component v-model:title="bookTitle"></my-component>
-```
 
 ## 複数の `v-model` のバインディング
 
