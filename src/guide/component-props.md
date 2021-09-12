@@ -61,6 +61,7 @@ props: {
 
 ```html
 <!-- 値のないプロパティは、 `true` を意味します。 -->
+<!-- プロパティで is-published の型に Boolean を設定してない場合、値は "true" ではなく空文字列になります。 -->
 <blog-post is-published></blog-post>
 
 <!-- `false` は静的な値ですが、これが文字列ではなく JavaScript の式だと -->
