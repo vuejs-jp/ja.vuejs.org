@@ -93,7 +93,7 @@ Vue 3 で注目すべきいくつかの新機能の次のとおりです。
 ### カスタム要素
 
 - [テンプレートのコンパイル中にカスタム要素のチェックが実行されるようになりました](/guide/migration/custom-elements-interop.html)
-- [特別な `is` prop の使用は、予約済みの `<component>` タグのみに制限されるようになりました](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
+- [特別な `is` 属性 の使用は、予約済みの `<component>` タグのみに制限されるようになりました](/guide/migration/custom-elements-interop.html#customized-built-in-elements)
 
 ### その他の細かな変更
 
