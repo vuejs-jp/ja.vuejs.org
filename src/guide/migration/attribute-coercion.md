@@ -142,4 +142,4 @@ badges:
 [移行ビルドのフラグ:](migration-build.html#compat-の設定)
 
 - `ATTR_FALSE_VALUE`
-- `ATTR_ENUMERATED_COERSION`
+- `ATTR_ENUMERATED_COERCION`
