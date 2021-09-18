@@ -48,7 +48,7 @@
    - `vue-cli` を使用している場合: `vue upgrade` で最新の `@vue/cli-service` にアップグレードします。
    - （代替手段）[Vite](https://vitejs.dev/) + [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)に移行します。[[コミット例](https://github.com/vuejs/vue-hackernews-2.0/commit/565b948919eb58f22a32afca7e321b490cb3b074)]
 
-2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールします。また（もしあれば） `vue-template-compiler`を `@vue/compiler-sfc` に置き換えます。
+2. `package.json` で `vue` を 3.1 にアップデートし、同じバージョンの `@vue/compat` をインストールします。また（もしあれば）`vue-template-compiler` を `@vue/compiler-sfc` に置き換えます。
 
    ```diff
    "dependencies": {
