@@ -252,7 +252,6 @@
   _ウォッチャの定義にアロー関数を使ってはいけない_ ということに注意してください（例: `searchQuery: newValue => this.updateAutocomplete(newValue)`）。その理由は、アロー関数が親のコンテキストを束縛するため、`this` は期待したとおりのコンポーネントインスタンスにはならないのと、`this.updateAutocomplete` が未定義になるからです。
   :::
 
-
 - **参照:** [ウォッチャ](../guide/computed.html#ウォッチャ)
 
 ## emits
@@ -302,3 +301,39 @@
   :::
 
 * **参照:** [属性の継承](../guide/component-attrs.html#属性の継承)
+
+## expose <Badge text="3.2+" />
+
+- **型:** `Array<string>`
+
+- **詳細:**
+
+  パブリックなコンポーネントインスタンスで公開するプロパティのリストです。
+
+  デフォルトでは、[`$refs`](/api/instance-properties.html#refs) や [`$parent`](/api/instance-properties.html#parent) や [`$root`](/api/instance-properties.html#root) からアクセスされるパブリックなインスタンスは、テンプレートで使われる内部コンポーネントのインスタンスと同じです。`expose` オプションは、パブリックなインスタンスからアクセス可能なプロパティを制限します。
+
+  Vue 自身が定義した `$el` や `$parent` などのプロパティは、常にパブリックなインスタンスで利用可能で、このリストに加える必要はありません。
+
+- **使用方法:**
+
+  ```js
+  export default {
+    // increment は公開されますが、
+    // count は内部的にしかアクセスできません
+    expose: ['increment'],
+
+    data() {
+      return {
+        count: 0
+      }
+    },
+
+    methods: {
+      increment() {
+        this.count++
+      }
+    }
+  }
+  ```
+
+- **参照:** [defineExpose](/api/sfc-script-setup.html#defineexpose)

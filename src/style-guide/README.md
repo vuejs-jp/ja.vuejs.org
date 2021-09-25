@@ -1284,6 +1284,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
     - `inheritAttrs`
     - `props`
     - `emits`
+    - `expose`
 
 6. **コンポジション API** (コンポジション API を使用するためのエントリポイント)
     - `setup`

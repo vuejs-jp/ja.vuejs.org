@@ -286,7 +286,7 @@
     },
     setup({ name }) {
       watchEffect(() => {
-        console.log(`name is: ` + name) // Will not be reactive!
+        console.log(`name is: ` + name) // リアクティブではないでしょう！
       })
     }
   }
@@ -294,7 +294,7 @@
 
   `props` オブジェクトは、開発中のユーザランドのコードにとってはイミュータブルです（ユーザのコードがそれを変更しようとすると警告を表示します）。
 
-  第 2 引数は、`this` で以前に公開されていたプロパティの選択的な一覧を公開するコンテキストオブジェクトを提供します:
+  第 2 引数は、`setup` で便利だと思われる様々なオブジェクトや関数を公開するコンテキストオブジェクトを提供します:
 
   ```js
   const MyComponent = {
@@ -302,9 +302,12 @@
       context.attrs
       context.slots
       context.emit
+      context.expose
     }
   }
   ```
+
+  `attrs` と `slots` と `emit` はそれぞれ、インスタンスプロパティの [`$attrs`](/api/instance-properties.html#attrs) と [`$slots`](/api/instance-properties.html#slots) と [`$emit`](/api/instance-methods.html#emit) と同じです。
 
   `attrs` と `slots` は内部コンポーネントインスタンスの対応する値へのプロキシです。これは更新後も常に最新の値が公開されることを保証するので、古くなった参照へのアクセスを心配することなく、構造を変更することができます:
 
@@ -315,6 +318,26 @@
       function onClick() {
         console.log(attrs.foo) // 最新の参照が保証されている
       }
+    }
+  }
+  ```
+
+  Vue 3.2 で追加された `expose` は、特定のプロパティをパブリックなコンポーネントインスタンスを介して公開することができる関数です。デフォルトでは、refs や `$parent` や `$root` を使って取得したパブリックなインスタンスは、テンプレートが使う内部インスタンスと同じです。`expose` を呼び出すと、指定したプロパティを持つ別のパブリックなインスタンスが作成されます:
+
+  ```js
+  const MyComponent = {
+    setup(props, { expose }) {
+      const count = ref(0)
+      const reset = () => count.value = 0
+      const increment = () => count.value++
+
+      // reset だけが、例えば $refs を介して、外部から利用できるようになります
+      expose({
+        reset
+      })
+
+      // 内部的には、テンプレートは count と increment にアクセスできます
+      return { count, increment }
     }
   }
   ```
