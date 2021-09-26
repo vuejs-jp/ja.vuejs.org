@@ -86,7 +86,7 @@ this.$emit('update:title', newValue)
 <ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
 ```
 
-便宜上、このパターンには '.sync' 修飾子による省略記法がありました。
+便宜上、このパターンには `.sync` 修飾子による省略記法がありました。
 
 ```html
 <ChildComponent :title.sync="pageTitle" />
