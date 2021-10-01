@@ -115,6 +115,7 @@ export default {
 - `data`
 - `computed`
 - `methods`
+- `refs` (template refs)
 
 ## テンプレートでの使用
 
