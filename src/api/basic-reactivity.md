@@ -1,39 +1,39 @@
-# Basic Reactivity APIs
+# 基本のリアクティビティ API
 
-> This section uses [single-file component](../guide/single-file-component.html) syntax for code examples
+> このセクションでは、コード例に[シングルファイルコンポーネント](../guide/single-file-component.html)構文を使用します
 
 ## `reactive`
 
-Returns a reactive copy of the object.
+オブジェクトのリアクティブなコピーを返します。
 
 ```js
 const obj = reactive({ count: 0 })
 ```
 
-The reactive conversion is "deep"—it affects all nested properties. In the [ES2015 Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) based implementation, the returned proxy is **not** equal to the original object. It is recommended to work exclusively with the reactive proxy and avoid relying on the original object.
+リアクティブの変換は「ディープ」で、ネストされたすべてのプロパティに影響します。[ES2015 Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy) ベースの実装では、返されたプロキシは元のオブジェクトとは等しく**ありません**。元のオブジェクトに依存せず、リアクティブプロキシのみで作業することをお勧めします。
 
-**Typing:**
+**型:**
 
 ```ts
 function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 ```
 
 ::: tip Note
-`reactive` will unwrap all the deep [refs](./refs-api.html#ref), while maintaining the ref reactivity
+`reactive` は、ref のリアクティビティを維持しながら、全ての深さの [ref](./refs-api.html#ref) をアンラップします
 
 ```ts
 const count = ref(1)
 const obj = reactive({ count })
 
-// ref will be unwrapped
+// ref はアンラップされる
 console.log(obj.count === count.value) // true
 
-// it will update `obj.count`
+// `obj.count` が更新される
 count.value++
 console.log(count.value) // 2
 console.log(obj.count) // 2
 
-// it will also update `count` ref
+// `count` の ref も更新される
 obj.count++
 console.log(obj.count) // 3
 console.log(count.value) // 3
@@ -42,7 +42,7 @@ console.log(count.value) // 3
 :::
 
 ::: warning Important
-When assigning a [ref](./refs-api.html#ref) to a `reactive` property, that ref will be automatically unwrapped.
+`reactive` のプロパティに [ref](./refs-api.html#ref) を代入すると、その ref は自動的にアンラップされます。
 
 ```ts
 const count = ref(1)
@@ -58,7 +58,7 @@ console.log(obj.count === count.value) // true
 
 ## `readonly`
 
-Takes an object (reactive or plain) or a [ref](./refs-api.html#ref) and returns a readonly proxy to the original. A readonly proxy is deep: any nested property accessed will be readonly as well.
+（リアクティブもしくはプレーンな）オブジェクトや [ref](./refs-api.html#ref) を受け取り、オリジナルへの読み取り専用プロキシを返します。読み取り専用プロキシはディープで、つまりネストされたプロパティへのアクセスも同様に読み取り専用となります。
 
 ```js
 const original = reactive({ count: 0 })
@@ -66,18 +66,18 @@ const original = reactive({ count: 0 })
 const copy = readonly(original)
 
 watchEffect(() => {
-  // works for reactivity tracking
+  // リアクティビティの追跡に機能する
   console.log(copy.count)
 })
 
-// mutating original will trigger watchers relying on the copy
+// original を変更すると、copy に依存しているウォッチャがトリガされます
 original.count++
 
-// mutating the copy will fail and result in a warning
+// copy の変更は失敗し、警告が表示されます
 copy.count++ // warning!
 ```
 
-As with [`reactive`](#reactive), if any property uses a `ref` it will be automatically unwrapped when it is accessed via the proxy:
+[`reactive`](#reactive) と同様に、プロパティが `ref` を使用している場合、プロキシ経由でアクセスされると自動的にアンラップされます:
 
 ```js
 const raw = {
@@ -92,11 +92,11 @@ console.log(copy.count) // 123
 
 ## `isProxy`
 
-Checks if an object is a proxy created by [`reactive`](#reactive) or [`readonly`](#readonly).
+オブジェクトが [`reactive`](#reactive) または [`readonly`](#readonly) で作成されたプロキシかどうかをチェックします。
 
 ## `isReactive`
 
-Checks if an object is a reactive proxy created by [`reactive`](#reactive).
+オブジェクトが [`reactive`](#reactive) で作成されたリアクティブプロキシかどうかをチェックします。
 
 ```js
 import { reactive, isReactive } from 'vue'
@@ -110,7 +110,7 @@ export default {
 }
 ```
 
-It also returns `true` if the proxy is created by [`readonly`](#readonly), but is wrapping another proxy created by [`reactive`](#reactive).
+また、[`readonly`](#readonly) で作成されたプロキシが、[`reactive`](#reactive) で作成された別のプロキシをラップしている場合も `true` を返します。
 
 ```js{7-15}
 import { reactive, isReactive, readonly } from 'vue'
@@ -119,13 +119,13 @@ export default {
     const state = reactive({
       name: 'John'
     })
-    // readonly proxy created from plain object
+    // プレーンオブジェクトから作成された読み取り専用プロキシ
     const plain = readonly({
       name: 'Mary'
     })
     console.log(isReactive(plain)) // -> false
 
-    // readonly proxy created from reactive proxy
+    // リアクティブプロキシから作成された読み取り専用プロキシ
     const stateCopy = readonly(state)
     console.log(isReactive(stateCopy)) // -> true
   }
@@ -134,11 +134,11 @@ export default {
 
 ## `isReadonly`
 
-Checks if an object is a readonly proxy created by [`readonly`](#readonly).
+オブジェクトが [`readonly`](#readonly) で作成された読み取り専用プロキシかどうかをチェックします。
 
 ## `toRaw`
 
-Returns the raw, original object of a [`reactive`](#reactive) or [`readonly`](#readonly) proxy. This is an escape hatch that can be used to temporarily read without incurring proxy access/tracking overhead or write without triggering changes. It is **not** recommended to hold a persistent reference to the original object. Use with caution.
+[`reactive`](#reactive) や [`readonly`](#readonly) プロキシの元のオブジェクトを返します。これは、プロキシのアクセス/トラッキングのオーバヘッドを発生させずに一時的に読み込んだり、変更をトリガせずに書き込んだりするために使えるエスケープハッチです。元のオブジェクトへの永続的な参照を保持することは推奨**されません**。注意して使用してください。
 
 ```js
 const foo = {}
@@ -149,25 +149,25 @@ console.log(toRaw(reactiveFoo) === foo) // true
 
 ## `markRaw`
 
-Marks an object so that it will never be converted to a proxy. Returns the object itself.
+プロキシに変換されないようにオブジェクトに印をつけます。オブジェクト自体を返します。
 
 ```js
 const foo = markRaw({})
 console.log(isReactive(reactive(foo))) // false
 
-// also works when nested inside other reactive objects
+// 他のリアクティブオブジェクト内にネストされている場合にも機能します
 const bar = reactive({ foo })
 console.log(isReactive(bar.foo)) // false
 ```
 
 ::: warning
-`markRaw` and the shallowXXX APIs below allow you to selectively opt-out of the default deep reactive/readonly conversion and embed raw, non-proxied objects in your state graph. They can be used for various reasons:
+`markRaw` や下記の shallowXXX API を使用すると、デフォルトのディープな reactive/readonly 変換を選択的にオプトアウトして、プロキシされていない生のオブジェクトを状態グラフに埋め込むことができます。これらは様々な理由で使用できます:
 
-- Some values simply should not be made reactive, for example a complex 3rd party class instance, or a Vue component object.
+- 例えば、複雑なサードパーティのクラス・インスタンスや Vue のコンポーネント・オブジェクトなど、単純にリアクティブにすべきではない値もあります。
 
-- Skipping proxy conversion can provide performance improvements when rendering large lists with immutable data sources.
+- プロキシの変換をスキップすることで、イミュータブルなデータソースで大きなリストをレンダリングする際のパフォーマンスを向上させることができます。
 
-They are considered advanced because the raw opt-out is only at the root level, so if you set a nested, non-marked raw object into a reactive object and then access it again, you get the proxied version back. This can lead to **identity hazards** - i.e. performing an operation that relies on object identity but using both the raw and the proxied version of the same object:
+生のオプトアウトがルートレベルでのみ行われ、ネストされた、マークされていない生のオブジェクトをリアクティブオブジェクトにセットし、再びそれにアクセスすると、プロキシされたバージョンが戻ってくるので、これらは高度と考えられます。これにより、オブジェクトの同一性に依存する操作を実行するのに、同じオブジェクトの生のバージョンとプロキシされたバージョンの両方を使用するという、**同一性の危険**が生じる可能性があります:
 
 ```js
 const foo = markRaw({
@@ -175,19 +175,19 @@ const foo = markRaw({
 })
 
 const bar = reactive({
-  // although `foo` is marked as raw, foo.nested is not.
+  // `foo` は raw として印をつけらているが、foo.nested はそうではない。
   nested: foo.nested
 })
 
 console.log(foo.nested === bar.nested) // false
 ```
 
-Identity hazards are in general rare. However, to properly utilize these APIs while safely avoiding identity hazards requires a solid understanding of how the reactivity system works.
+同一性の危険は一般的にまれです。しかし、同一性の危険を安全に回避しながらこれらの API を適切に利用するには、リアクティブの仕組みをしっかりと理解する必要があります。
 :::
 
 ## `shallowReactive`
 
-Creates a reactive proxy that tracks reactivity of its own properties but does not perform deep reactive conversion of nested objects (exposes raw values).
+自身のプロパティのリアクティビティを追跡するリアクティブプロキシを作成しますが、ネストされたオブジェクトのディープなリアクティブ変換は行いません（生の値を公開します）。
 
 ```js
 const state = shallowReactive({
@@ -197,18 +197,18 @@ const state = shallowReactive({
   }
 })
 
-// mutating state's own properties is reactive
+// state 自身のプロパティを変更するのはリアクティブ
 state.foo++
-// ...but does not convert nested objects
+// ...しかしネストされたオブジェクトは変換されない
 isReactive(state.nested) // false
-state.nested.bar++ // non-reactive
+state.nested.bar++ // リアクティブではない
 ```
 
-Unlike [`reactive`](#reactive), any property that uses a [`ref`](/api/refs-api.html#ref) will **not** be automatically unwrapped by the proxy.
+[`reactive`](#reactive) と違って、[`ref`](/api/refs-api.html#ref) を使用しているプロパティはプロキシによって自動的にアンラップ**されません**。
 
 ## `shallowReadonly`
 
-Creates a proxy that makes its own properties readonly, but does not perform deep readonly conversion of nested objects (exposes raw values).
+自身のプロパティを読み取り専用にするプロキシを作成しますが、ネストされたオブジェクトのディープな読み取り専用の変換は行いません（生の値を公開します）。
 
 ```js
 const state = shallowReadonly({
@@ -218,11 +218,11 @@ const state = shallowReadonly({
   }
 })
 
-// mutating state's own properties will fail
+// state 自身のプロパティを変更するのは失敗する
 state.foo++
-// ...but works on nested objects
+// ...しかしネストされたオブジェクトでは動作する
 isReadonly(state.nested) // false
-state.nested.bar++ // works
+state.nested.bar++ // 動作する
 ```
 
-Unlike [`readonly`](#readonly), any property that uses a [`ref`](/api/refs-api.html#ref) will **not** be automatically unwrapped by the proxy.
+[`readonly`](#readonly) と違って、[`ref`](/api/refs-api.html#ref) を使用しているプロパティはプロキシによって自動的にアンラップ**されません**。
