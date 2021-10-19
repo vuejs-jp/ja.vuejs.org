@@ -1,5 +1,7 @@
 # Provide / Inject
 
+> このセクションでは、コード例に [単一ファイルコンポーネント](../guide/single-file-component.html) 構文を使用します
+
 > このページは、すでに [Provide / Inject](component-provide-inject.html)、[Composition API 導入](composition-api-introduction.html)、[リアクティブの基礎](reactivity-fundamentals.html)を読み終えていることを想定しています。
 
 [provide / inject](component-provide-inject.html) は Composition API でも使うことができます。どちらも現在アクティブなインスタンスの [`setup()`](composition-api-setup.html) 中にのみ呼び出すことが可能です。
