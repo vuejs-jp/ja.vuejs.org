@@ -1,6 +1,6 @@
 # computed と watch
 
-> このセクションでは、コード例に[シングルファイルコンポーネント](../guide/single-file-component.html)構文を使用します
+> このセクションでは、コード例に [単一ファイルコンポーネント](../guide/single-file-component.html) 構文を使用します
 
 ## `computed`
 
