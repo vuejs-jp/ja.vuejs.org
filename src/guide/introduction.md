@@ -223,15 +223,19 @@ Vue.createApp(ListRendering).mount('#list-rendering')
 Vue において、コンポーネントは本質的にはあらかじめ定義されたオプションを持つインスタンスです。Vue を使ってコンポーネントを登録するのはいたって簡単で、`App` オブジェクトと同様にコンポーネントオブジェクトを作成し、親の `components` オプションで定義します:
 
 ```js
-// Vue アプリケーションを生成する
-const app = Vue.createApp(...)
-
-// todo-item という名前の新しいコンポーネントを定義する
-app.component('todo-item', {
+const TodoItem = {
   template: `<li>This is a todo</li>`
+}
+
+// Vue アプリケーションを生成する
+const app = Vue.createApp({
+  components: {
+    TodoItem // 新しいコンポーネントを登録する
+  },
+  ... // その他のコンポーネントのプロパティ
 })
 
-// Vue application をマウントする
+// Vue アプリケーションをマウントする
 app.mount(...)
 ```
 
