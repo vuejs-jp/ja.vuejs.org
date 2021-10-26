@@ -2,13 +2,14 @@
 
 [コードの構造](./structure.html) と [webpack の設定](./build-config.html) でも説明したとおり、 Express サーバのコードにもいくつかの変更を必要とします。
 
-- バンドル結果のビルドした `app.js` を使ってアプリケーションを作成する必要があります。ファイルパスは、webpack マニフェストを使って見つけられます:
+- バンドル結果からビルドした `entry-server.js` を使ってアプリケーションを作成する必要があります。ファイルパスは、webpack マニフェストを使って見つけられます:
 
   ```js
   // server.js
   const path = require('path')
   const manifest = require('./dist/server/ssr-manifest.json')
 
+  // 'app.js' という名前は、エントリポイント名に `.js` を接尾へ追加したものです
   const appPath = path.join(__dirname, './dist', 'server', manifest['app.js'])
   const createApp = require(appPath).default
   ```
@@ -78,7 +79,7 @@ server.use(
 )
 
 server.get('*', async (req, res) => {
-  const { app } = await createApp()
+  const { app } = createApp()
 
   const appContent = await renderToString(app)
 

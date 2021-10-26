@@ -4,11 +4,15 @@
 
 クライアントのみのコードを書くとき、コードは毎回新しいコンテキストで評価されると考えることができます。しかし、 Node.js サーバは長時間実行されるプロセスです。コードがプロセスにはじめて要求されるとき、コードは一度評価されメモリ内にとどまります。つまり、シングルトンのオブジェクトを作成すると、すべての受信リクエストの間で共有されることになり、リクエスト間での状態の汚染リスクがあるということです。
 
-よって、 **リクエストごとに新しいルート Vue インスタンスを作成する** 必要があります。そのためには、リクエストごとに新しいアプリケーションのインスタンスを作成する、繰り返し実行可能なファクトリ関数を書く必要があります:
+よって、 **リクエストごとに新しいルート Vue インスタンスを作成する** 必要があります。そのためには、リクエストごとに新しいアプリケーションのインスタンスを作成する、繰り返し実行可能なファクトリ関数を書く必要があります。したがって、サーバコードは次のようになります:
 
 ```js
-// app.js
+// server.js
 const { createSSRApp } = require('vue')
+const { renderToString } = require('@vue/server-renderer')
+const express = require('express')
+
+const server = express()
 
 function createApp() {
   return createSSRApp({
@@ -20,15 +24,6 @@ function createApp() {
     template: `<div>Current user is: {{ user }}</div>`
   })
 }
-```
-
-そして、サーバコードはこのようになります:
-
-```js
-// server.js
-const { renderToString } = require('@vue/server-renderer')
-const server = require('express')()
-const { createApp } = require('src/app.js')
 
 server.get('*', async (req, res) => {
   const app = createApp()
@@ -49,7 +44,7 @@ server.get('*', async (req, res) => {
 server.listen(8080)
 ```
 
-同じルールが他のインスタンス（ルータやストアなど）にも当てはまります。ルータやストアをモジュールから直接エクスポートしてアプリケーション全体にインポートするのではなく、 `createApp` で新しいインスタンスを作成して、ルート Vue インスタンスから注入する必要があります。
+同じルールが他のインスタンス（ルータやストアなど）にも当てはまります。ルータやストアをモジュールから直接エクスポートしてアプリケーション全体にインポートするのではなく、新しいリクエストがくるたびに `createApp` で新しいインスタンスを作成して、ルートの Vue インスタンスから注入する必要があります。
 
 ## ビルド手順の導入
 
@@ -76,42 +71,43 @@ src
 ├── components
 │   ├── MyUser.vue
 │   └── MyTable.vue
-├── App.vue
-├── app.js # 共通のエントリ
+├── App.vue # アプリケーションのルート
 ├── entry-client.js # ブラウザでのみ実行
 └── entry-server.js # サーバでのみ実行
 ```
 
-### `app.js`
+### `App.vue`
 
-`app.js` は、アプリケーションの共通のエントリです。クライアント専用のアプリケーションでは、このファイルの中で Vue アプリケーションのインスタンスを作成して、 DOM に直接マウントします。しかし SSR では、その責務はクライアント専用のエントリファイルに移されます。代わりに `app.js` でアプリケーションのインスタンスを作成して、エクスポートします:
+お気づきかもしれませんが、`src` フォルダのルートに `App.vue` というファイルがあります。このファイルにはアプリケーションのルートコンポーネントが格納されています。これでアプリケーションコードを安全に `server.js` から `App.vue` ファイルに移動することができます:
+
+```vue
+<template>
+  <div>Current user is: {{ user }}</div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      user: 'John Doe'
+    }
+  }
+}
+</script>
+```
+
+### `entry-client.js`
+
+クライアント用のエントリは、`App.vue` コンポーネントを使ってアプリケーションを作成し、それを DOM にマウントします:
 
 ```js
 import { createSSRApp } from 'vue'
 import App from './App.vue'
 
-// ルートコンポーネントを作成するためのファクトリ関数をエクスポート
-export default function(args) {
-  const app = createSSRApp(App)
-
-  return {
-    app
-  }
-}
-```
-
-### `entry-client.js`
-
-クライアント用のエントリは、ルートコンポーネントのファクトリを使ってアプリケーションを作成し、 DOM にマウントします:
-
-```js
-import createApp from './app'
-
 // クライアント固有の初回起動ロジック
 
-const { app } = createApp({
-  // ここでアプリケーションのファクトリに追加の引数を渡すことが可能
-})
+const app = createSSRApp(App)
 
 // これは App.vue テンプレートのルート要素に `id="app"` が前提
 app.mount('#app')
@@ -122,12 +118,11 @@ app.mount('#app')
 サーバ用のエントリは、レンダリングごとに繰り返し呼び出される関数を default でエクスポートします。いまのところは、アプリケーションのインスタンスを返す以外の機能はありませんが、あとでサーバサイドのルートマッチングやデータのプリフェッチのロジックをここに加えます。
 
 ```js
-import createApp from './app'
+import { createSSRApp } from 'vue'
+import App from './App.vue'
 
-export default function() {
-  const { app } = createApp({
-    /*...*/
-  })
+export default function () {
+  const app = createSSRApp(Vue)
 
   return {
     app

@@ -8,34 +8,50 @@
 
 ```js
 // router.js
-import { createRouter, createMemoryHistory, createWebHistory } from 'vue-router'
+import { createRouter } from 'vue-router'
 import MyUser from './components/MyUser.vue'
-
-const isServer = typeof window === 'undefined'
-
-const createHistory = isServer ? createMemoryHistory : createWebHistory
 
 const routes = [{ path: '/user', component: MyUser }]
 
-export default function() {
+export default function (history) {
   return createRouter({
-    history: createHistory(),
+    history,
     routes
   })
 }
 ```
 
-そして `app.js` と、クライアントとサーバのエントリを更新します:
+そしてクライアントとサーバのエントリを更新します:
 
 ```js
-// app.js
-import { createSSRApp } from 'vue'
+// entry-client.js
+import { createApp } from 'vue'
+import { createWebHistory } from 'vue-router'
+import createRouter from './router.js'
 import App from './App.vue'
-import createRouter from './router'
 
-export default function(args) {
-  const app = createSSRApp(App)
-  const router = createRouter()
+// ...
+
+const app = createApp(App)
+
+const router = createRouter(createWebHistory())
+
+app.use(router)
+
+// ...
+```
+
+```js
+// entry-server.js
+import { createSSRApp } from 'vue'
+// サーバルータはクライアントルータとは異なる履歴を使います
+import { createMemoryHistory } from 'vue-router'
+import createRouter from './router.js'
+import App from './App.vue'
+
+export default function () {
+  const app = createSSRApp(Vue)
+  const router = createRouter(createMemoryHistory())
 
   app.use(router)
 
@@ -44,20 +60,6 @@ export default function(args) {
     router
   }
 }
-```
-
-```js
-// entry-client.js
-const { app, router } = createApp({
-  /*...*/
-})
-```
-
-```js
-// entry-server.js
-const { app, router } = createApp({
-  /*...*/
-})
 ```
 
 ## コード分割
@@ -81,11 +83,16 @@ const routes = [
 
 ```js
 // entry-client.js
-import createApp from './app'
+import { createApp } from 'vue'
+import { createWebHistory } from 'vue-router'
+import createRouter from './router.js'
+import App from './App.vue'
 
-const { app, router } = createApp({
-  /* ... */
-})
+const app = createApp(App)
+
+const router = createRouter(createWebHistory())
+
+app.use(router)
 
 router.isReady().then(() => {
   app.mount('#app')
