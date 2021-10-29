@@ -6,10 +6,7 @@
 
 ## 必要なもの
 
-VS Code と好みのブラウザがインストールされていて、対応するデバッガー拡張機能の最新バージョンがインストールされ、有効化されていることを確認してください:
-
-- [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
-- [Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug)
+VS Code と好みのブラウザがインストールされていることを確認してください。
 
 [Vue CLI ガイド](https://cli.vuejs.org/) の説明にしたがって、 [vue-cli](https://github.com/vuejs/vue-cli) をインストールしてプロジェクトを作成します。新しく作成したアプリケーションのディレクトリに移動して、 VS Code を開きます。
 
