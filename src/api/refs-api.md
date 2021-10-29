@@ -1,12 +1,12 @@
-# Refs
+# ref 関連
 
-> This section uses [single-file component](../guide/single-file-component.html) syntax for code examples
+> このセクションでは、コード例に [単一ファイルコンポーネント](../guide/single-file-component.html) 構文を使用します
 
 ## `ref`
 
-Takes an inner value and returns a reactive and mutable ref object. The ref object has a single property `.value` that points to the inner value.
+内部の値を受け取り、リアクティブでミュータブルな ref オブジェクトを返します。ref オブジェクトには、内部の値を指す単一のプロパティ `.value` があります。
 
-**Example:**
+**例:**
 
 ```js
 const count = ref(0)
@@ -16,9 +16,9 @@ count.value++
 console.log(count.value) // 1
 ```
 
-If an object is assigned as a ref's value, the object is made deeply reactive by the [reactive](./basic-reactivity.html#reactive) function.
+ref の値としてオブジェクトが割り当てられている場合、そのオブジェクトは [reactive](./basic-reactivity.html#reactive) 関数によってディープなリアクティブになります。
 
-**Typing:**
+**型:**
 
 ```ts
 interface Ref<T> {
@@ -28,15 +28,15 @@ interface Ref<T> {
 function ref<T>(value: T): Ref<T>
 ```
 
-Sometimes we may need to specify complex types for a ref's inner value. We can do that succinctly by passing a generics argument when calling `ref` to override the default inference:
+場合によっては、ref の内部値に複合の型を指定する必要があります。そのような場合には、`ref` を呼び出す際にジェネリクス引数を渡して、デフォルトの推論をオーバーライドすることで、簡潔に指定できます。
 
 ```ts
-const foo = ref<string | number>('foo') // foo's type: Ref<string | number>
+const foo = ref<string | number>('foo') // foo の型: Ref<string | number>
 
 foo.value = 123 // ok!
 ```
 
-If the type of the generic is unknown, it's recommended to cast `ref` to `Ref<T>`:
+ジェネリックの型が不明な場合は、`ref` を `Ref<T>` にキャストすることをお勧めします:
 
 ```ts
 function useState<State extends string>(initial: State) {
@@ -47,17 +47,17 @@ function useState<State extends string>(initial: State) {
 
 ## `unref`
 
-Returns the inner value if the argument is a [`ref`](#ref), otherwise return the argument itself. This is a sugar function for `val = isRef(val) ? val.value : val`.
+引数が [`ref`](#ref) の場合はその内部の値を、そうでない場合は引数そのものを返します。これは、`val = isRef(val) ? val.value : val` のシュガー（簡易）関数です。
 
 ```ts
 function useFoo(x: number | Ref<number>) {
-  const unwrapped = unref(x) // unwrapped is guaranteed to be number now
+  const unwrapped = unref(x) // unwrapped は number であることが保証されます
 }
 ```
 
 ## `toRef`
 
-Can be used to create a [`ref`](#ref) for a property on a source reactive object. The ref can then be passed around, retaining the reactive connection to its source property.
+ソースとなるリアクティブオブジェクトのプロパティに対する [`ref`](#ref) を作成するために使用できます。この ref は、ソースのプロパティへのリアクティブな接続を維持したまま、引き渡すことができます。
 
 ```js
 const state = reactive({
@@ -74,7 +74,7 @@ state.foo++
 console.log(fooRef.value) // 3
 ```
 
-`toRef` is useful when you want to pass the ref of a prop to a composition function:
+`toRef` は、prop の ref を composition 関数に渡したいときに便利です:
 
 ```js
 export default {
@@ -84,11 +84,11 @@ export default {
 }
 ```
 
-`toRef` will return a usable ref even if the source property doesn't currently exist. This makes it especially useful when working with optional props, which wouldn't be picked up by [`toRefs`](#torefs).
+`toRef` は、ソースとなるプロパティが現在存在しない場合でも、使用可能な ref を返します。これは、[toRefs`](#torefs) で取得されない省略可能な props を扱うときに特に便利です。
 
 ## `toRefs`
 
-Converts a reactive object to a plain object where each property of the resulting object is a [`ref`](#ref) pointing to the corresponding property of the original object.
+リアクティブなオブジェクトをプレーンオブジェクトに変換します。変換後のオブジェクトの各プロパティは、元のオブジェクトの対応するプロパティを指す [`ref`](#ref) となります。
 
 ```js
 const state = reactive({
@@ -98,7 +98,7 @@ const state = reactive({
 
 const stateAsRefs = toRefs(state)
 /*
-Type of stateAsRefs:
+stateAsRefs の型:
 
 {
   foo: Ref<number>,
@@ -106,7 +106,7 @@ Type of stateAsRefs:
 }
 */
 
-// The ref and the original property is "linked"
+// ref と元のプロパティは「リンク」している
 state.foo++
 console.log(stateAsRefs.foo.value) // 2
 
@@ -114,7 +114,7 @@ stateAsRefs.foo.value++
 console.log(state.foo) // 3
 ```
 
-`toRefs` is useful when returning a reactive object from a composition function so that the consuming component can destructure/spread the returned object without losing reactivity:
+`toRefs` は、composition 関数からリアクティブなオブジェクトを返すときに便利で、利用する側のコンポーネントはリアクティビティを失うことなく、返されたオブジェクトを分割代入できます:
 
 ```js
 function useFeatureX() {
@@ -123,15 +123,15 @@ function useFeatureX() {
     bar: 2
   })
 
-  // logic operating on state
+  // 状態で動作するロジック
 
-  // convert to refs when returning
+  // 返すときに ref に変換する
   return toRefs(state)
 }
 
 export default {
   setup() {
-    // can destructure without losing reactivity
+    // リアクティビティを失うことなく分割代入できる
     const { foo, bar } = useFeatureX()
 
     return {
@@ -142,17 +142,17 @@ export default {
 }
 ```
 
-`toRefs` will only generate refs for properties that are included in the source object. To create a ref for a specific property use [`toRef`](#toref) instead.
+`toRefs` はソースオブジェクトに含まれるプロパティの ref を生成するだけです。特定のプロパティのリファレンスを作成するには、代わりに [`toRef`](#toref) を使用してください。
 
 ## `isRef`
 
-Checks if a value is a ref object.
+値が ref オブジェクトであるかどうかをチェックします。
 
 ## `customRef`
 
-Creates a customized ref with explicit control over its dependency tracking and updates triggering. It expects a factory function, which receives `track` and `trigger` functions as arguments and should return an object with `get` and `set`.
+依存関係の追跡と更新のトリガを明示的に制御する、カスタマイズされた ref を作成します。`track` と `trigger` 関数を引数として受け取り、`get` と `set` を持つオブジェクトを返すファクトリ関数が必要です。
 
-- Example using a custom ref to implement debounce with `v-model`:
+- `v-model` でデバウンスを実装するためにカスタム ref を使用した例:
 
   ```html
   <input v-model="text" />
@@ -187,7 +187,7 @@ Creates a customized ref with explicit control over its dependency tracking and 
   }
   ```
 
-**Typing:**
+**型:**
 
 ```ts
 function customRef<T>(factory: CustomRefFactory<T>): Ref<T>
@@ -203,37 +203,37 @@ type CustomRefFactory<T> = (
 
 ## `shallowRef`
 
-Creates a ref that tracks its own `.value` mutation but doesn't make its value reactive.
+自分自身の `.value` の変更を追跡するが、その値をリアクティブにはしない ref を作成します。
 
 ```js
 const foo = shallowRef({})
-// mutating the ref's value is reactive
+// ref の値を変更するのはリアクティブ
 foo.value = {}
-// but the value will not be converted.
+// ただし、値は変換されない
 isReactive(foo.value) // false
 ```
 
-**See also**: [Creating Standalone Reactive Values as `refs`](../guide/reactivity-fundamentals.html#creating-standalone-reactive-values-as-refs)
+**参照**: [独立したリアクティブな値を `ref` として作成する](../guide/reactivity-fundamentals.html#独立したリアクティブな値を-ref-として作成する)
 
 ## `triggerRef`
 
-Execute any effects tied to a [`shallowRef`](#shallowref) manually.
+[`shallowRef`](#shallowref) に関連付けられている副作用を手動で実行します。
 
 ```js
 const shallow = shallowRef({
   greet: 'Hello, world'
 })
 
-// Logs "Hello, world" once for the first run-through
+// 初回実行時に "Hello, world" と出力される
 watchEffect(() => {
   console.log(shallow.value.greet)
 })
 
-// This won't trigger the effect because the ref is shallow
+// shallowRef なので、これでは副作用をトリガしません
 shallow.value.greet = 'Hello, universe'
 
-// Logs "Hello, universe"
+// "Hello, universe" と出力
 triggerRef(shallow)
 ```
 
-**See also:** [Computed and Watch - watchEffect](./computed-watch-api.html#watcheffect)
+**参照:** [computed と watch - watchEffect](./computed-watch-api.html#watcheffect)
