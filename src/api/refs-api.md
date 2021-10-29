@@ -47,7 +47,7 @@ function useState<State extends string>(initial: State) {
 
 ## `unref`
 
-引数が [`ref`](#ref) の場合はその内部の値を、そうでない場合は引数そのものを返します。これは、`val = isRef(val) ? val.value : val` のシュガー関数です。
+引数が [`ref`](#ref) の場合はその内部の値を、そうでない場合は引数そのものを返します。これは、`val = isRef(val) ? val.value : val` のシュガー（簡易）関数です。
 
 ```ts
 function useFoo(x: number | Ref<number>) {
@@ -74,7 +74,7 @@ state.foo++
 console.log(fooRef.value) // 3
 ```
 
-`toRef` は、prop の ref をコンポジション関数に渡したいときに便利です:
+`toRef` は、prop の ref を composition 関数に渡したいときに便利です:
 
 ```js
 export default {
@@ -114,7 +114,7 @@ stateAsRefs.foo.value++
 console.log(state.foo) // 3
 ```
 
-`toRefs` は、コンポジション関数からリアクティブなオブジェクトを返すときに便利で、利用する側のコンポーネントはリアクティビティを失うことなく、返されたオブジェクトを分割代入できます:
+`toRefs` は、composition 関数からリアクティブなオブジェクトを返すときに便利で、利用する側のコンポーネントはリアクティビティを失うことなく、返されたオブジェクトを分割代入できます:
 
 ```js
 function useFeatureX() {
