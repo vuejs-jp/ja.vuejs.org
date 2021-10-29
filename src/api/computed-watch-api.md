@@ -1,10 +1,10 @@
-# Computed and watch
+# computed と watch
 
-> This section uses [single-file component](../guide/single-file-component.html) syntax for code examples
+> このセクションでは、コード例に [単一ファイルコンポーネント](../guide/single-file-component.html) 構文を使用します
 
 ## `computed`
 
-Takes a getter function and returns an immutable reactive [ref](./refs-api.html#ref) object for the returned value from the getter.
+ゲッタ関数を受け取り、ゲッタからの戻り値に対してイミュータブルでリアクティブな [ref](./refs-api.html#ref) オブジェクトを返します。
 
 ```js
 const count = ref(1)
@@ -12,10 +12,10 @@ const plusOne = computed(() => count.value + 1)
 
 console.log(plusOne.value) // 2
 
-plusOne.value++ // error
+plusOne.value++ // エラー
 ```
 
-Alternatively, it can take an object with `get` and `set` functions to create a writable ref object.
+または、`get` と `set` 関数のオブジェクトを受け取り、書き込み可能な ref オブジェクトを作成することもできます。
 
 ```js
 const count = ref(1)
@@ -30,16 +30,16 @@ plusOne.value = 1
 console.log(count.value) // 0
 ```
 
-**Typing:**
+**型:**
 
 ```ts
-// read-only
+// 読み取り専用
 function computed<T>(
   getter: () => T,
   debuggerOptions?: DebuggerOptions
 ): Readonly<Ref<Readonly<T>>>
 
-// writable
+// 書き込み可能
 function computed<T>(
   options: {
     get: () => T
@@ -63,21 +63,21 @@ interface DebuggerEvent {
 
 ## `watchEffect`
 
-Runs a function immediately while reactively tracking its dependencies and re-runs it whenever the dependencies are changed.
+依存関係をリアクティブに追跡しながら関数を即時実行し、依存関係が変更されるたびに関数を再実行します。
 
 ```js
 const count = ref(0)
 
 watchEffect(() => console.log(count.value))
-// -> logs 0
+// -> 0 がログに出力される
 
 setTimeout(() => {
   count.value++
-  // -> logs 1
+  // -> 1 がログに出力される
 }, 100)
 ```
 
-**Typing:**
+**型:**
 
 ```ts
 function watchEffect(
@@ -86,7 +86,7 @@ function watchEffect(
 ): StopHandle
 
 interface WatchEffectOptions {
-  flush?: 'pre' | 'post' | 'sync' // default: 'pre'
+  flush?: 'pre' | 'post' | 'sync' // デフォルト: 'pre'
   onTrack?: (event: DebuggerEvent) => void
   onTrigger?: (event: DebuggerEvent) => void
 }
@@ -103,32 +103,32 @@ type InvalidateCbRegistrator = (invalidate: () => void) => void
 type StopHandle = () => void
 ```
 
-**See also**: [`watchEffect` guide](../guide/reactivity-computed-watchers.html#watcheffect)
+**参照**: [`watchEffect` ガイド](../guide/reactivity-computed-watchers.html#watcheffect)
 
 ## `watchPostEffect` <Badge text="3.2+" />
 
-Alias of `watchEffect` with `flush: 'post'` option.
+`flush: 'post'` オプションがついた `watchEffect` のエイリアスです。
 
 ## `watchSyncEffect` <Badge text="3.2+" />
 
-Alias of `watchEffect` with `flush: 'sync'` option.
+`flush: 'sync'` オプションがついた `watchEffect` のエイリアスです。
 
 ## `watch`
 
-The `watch` API is the exact equivalent of the Options API [this.\$watch](./instance-methods.html#watch) (and the corresponding [watch](./options-data.html#watch) option). `watch` requires watching a specific data source and applies side effects in a separate callback function. It also is lazy by default - i.e. the callback is only called when the watched source has changed.
+`watch` API は Options API の [this.\$watch](./instance-methods.html#watch)（および対応する [watch](./options-data.html#watch) オプション）とまったく同等です。`watch` は特定のデータソースを監視する必要があり、別のコールバック関数で副作用を適用します。また、デフォルトでは遅延処理となります。つまり、監視対象のソースが変更されたときにのみコールバックが呼び出されます。
 
-- Compared to [watchEffect](#watcheffect), `watch` allows us to:
+- [watchEffect](#watcheffect) と比較すると、`watch` では以下のことが可能です:
 
-  - Perform the side effect lazily;
-  - Be more specific about what state should trigger the watcher to re-run;
-  - Access both the previous and current value of the watched state.
+  - 副作用を遅延実行できる。
+  - どの状態がウォッチャの再実行をトリガすべきか、より具体的に指定できる。
+  - 監視している状態の、以前の値と現在の値の両方にアクセスできる。
 
-### Watching a Single Source
+### 単一のソースを監視する
 
-A watcher data source can either be a getter function that returns a value, or directly a [ref](./refs-api.html#ref):
+ウォッチャのデータソースは、値を返すゲッタ関数か、直接 [ref](./refs-api.html#ref) を指定できます:
 
 ```js
-// watching a getter
+// ゲッタを監視
 const state = reactive({ count: 0 })
 watch(
   () => state.count,
@@ -137,16 +137,16 @@ watch(
   }
 )
 
-// directly watching a ref
+// ref を直接監視
 const count = ref(0)
 watch(count, (count, prevCount) => {
   /* ... */
 })
 ```
 
-### Watching Multiple Sources
+### 複数のソースを監視する
 
-A watcher can also watch multiple sources at the same time using an array:
+ウォッチャは配列を使って複数のソースを同時に監視することもできます:
 
 ```js
 watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
@@ -154,14 +154,14 @@ watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
 })
 ```
 
-### Shared Behavior with `watchEffect`
+### `watchEffect` との共有動作
 
-`watch` shares behavior with [`watchEffect`](#watcheffect) in terms of [manual stoppage](../guide/reactivity-computed-watchers.html#stopping-the-watcher), [side effect invalidation](../guide/reactivity-computed-watchers.html#side-effect-invalidation) (with `onInvalidate` passed to the callback as the 3rd argument instead), [flush timing](../guide/reactivity-computed-watchers.html#effect-flush-timing) and [debugging](../guide/reactivity-computed-watchers.html#watcher-debugging).
+`watch` は[手動停止](../guide/reactivity-computed-watchers.html#監視の停止)、[副作用の無効化](../guide/reactivity-computed-watchers.html#副作用の無効化)（`onInvalidate` を第 3 引数としてコールバックに渡す）、[フラッシュのタイミング](../guide/reactivity-computed-watchers.html#作用フラッシュのタイミング)、[デバッグ](../guide/reactivity-computed-watchers.html#watcher-のデバッグ)に関して、[`watchEffect`](#watcheffect) と動作を共有しています。
 
-**Typing:**
+**型:**
 
 ```ts
-// watching single source
+// 単一のソースを監視する
 function watch<T>(
   source: WatcherSource<T>,
   callback: (
@@ -172,7 +172,7 @@ function watch<T>(
   options?: WatchOptions
 ): StopHandle
 
-// watching multiple sources
+// 複数のソースを監視する
 function watch<T extends WatcherSource<unknown>[]>(
   sources: T
   callback: (
@@ -189,11 +189,11 @@ type MapSources<T> = {
   [K in keyof T]: T[K] extends WatcherSource<infer V> ? V : never
 }
 
-// see `watchEffect` typing for shared options
+// 共有オプションについては `watchEffect` の型を参照
 interface WatchOptions extends WatchEffectOptions {
-  immediate?: boolean // default: false
+  immediate?: boolean // デフォルト: false
   deep?: boolean
 }
 ```
 
-**See also**: [`watch` guide](../guide/reactivity-computed-watchers.html#watch)
+**参照**: [`watch` ガイド](../guide/reactivity-computed-watchers.html#watch)
