@@ -52,11 +52,11 @@ Vue.config.ignoredElements = ['plastic-button']
   ]
   ```
 
-- 直接テンプレートをコンパイルする場合は、`app.config.isCustomElement` で設定します。
+- 直接テンプレートをコンパイルする場合は、`app.config.compilerOptions.isCustomElement` で設定します。
 
   ```js
   const app = Vue.createApp({})
-  app.config.isCustomElement = tag => tag === 'plastic-button'
+  app.config.compilerOptions.isCustomElement = tag => tag === 'plastic-button'
   ```
 
   ランタイム設定はランタイムテンプレートのコンパイルにしか影響しないことに注意してください - コンパイル済みのテンプレートには影響しません。
@@ -125,6 +125,6 @@ Vue 2 では、ネイティブタグに `is` 属性を使用してこれらの�
 
 ## 移行の戦略
 
-- `config.ignorededElements` を `vue-loader` の `compilerOptions`（ビルドステップ）または `app.config.isCustomElement`（直接テンプレートコンパイル）のいずれかで置き換えます。
+- `config.ignorededElements` を `vue-loader` の `compilerOptions`（ビルドステップ）または `app.config.compilerOptions.isCustomElement`（直接テンプレートコンパイル）のいずれかで置き換えます。
 
 - `<component>` 以外のタグで `is` を使用しているものはすべて `<component is="...">`（SFC テンプレートの場合）または `vue:` プレフィックス（DOM 内テンプレートの場合）に変更します。
