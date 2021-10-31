@@ -164,11 +164,11 @@ const sidebar = {
       collapsable: false,
       children: [
         {
-          title: 'Spec',
+          title: '仕様',
           path: '/api/sfc-spec'
         },
         {
-          title: 'Tooling',
+          title: 'ツール',
           path: '/api/sfc-tooling'
         },
         {
@@ -176,7 +176,7 @@ const sidebar = {
           path: '/api/sfc-script-setup'
         },
         {
-          title: '<style> Features',
+          title: '<style> 機能',
           path: '/api/sfc-style'
         }
       ]
