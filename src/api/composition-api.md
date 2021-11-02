@@ -13,7 +13,7 @@
 
   オプション API を使うときの `this.$props` と同様に、`props` オブジェクトには明示的に宣言されたプロパティのみが含まれます。また、すべての宣言されたプロパティのキーは、親コンポーネントから渡されたかどうかに関わらず `props` オブジェクトに存在します。宣言されていない省略可能なプロパティは `undefined` という値になります。
 
-  If you need to check the absence of an optional prop, you can give it a Symbol as its default value:
+  省略可能なプロパティが、ないことを確認する必要があるなら、デフォルト値として Symbol を指定できます:
 
   ```js
   const isAbsent = Symbol()
@@ -24,7 +24,7 @@
     },
     setup(props) {
       if (props.foo === isAbsent) {
-        // foo was not provided.
+        // foo は提供されませんでした
       }
     }
   }
@@ -48,12 +48,12 @@
   ```
 
   ::: tip
-  To get type inference for the arguments passed to `setup()`, the use of [defineComponent](global-api.html#definecomponent) is needed.
+  `setup()` に渡された引数の型推論を得るためには、[defineComponent](global-api.html#definecomponent) を使用する必要があります。
   :::
 
 - **例**
 
-  With the template:
+  テンプレートを使用する場合:
 
   ```vue-html
   <!-- MyBook.vue -->
@@ -69,7 +69,7 @@
         const readersNumber = ref(0)
         const book = reactive({ title: 'Vue 3 Guide' })
 
-        // expose to template
+        // テンプレートに公開する
         return {
           readersNumber,
           book
@@ -79,7 +79,7 @@
   </script>
   ```
 
-  With render function:
+  Render 関数を使用する場合:
 
   ```js
   // MyBook.vue
@@ -90,13 +90,13 @@
     setup() {
       const readersNumber = ref(0)
       const book = reactive({ title: 'Vue 3 Guide' })
-      // Please note that we need to explicitly use ref value here
+      // ここでは明示的に ref 値を使う必要があることに注意してください
       return () => h('div', [readersNumber.value, book.title])
     }
   }
   ```
 
-  If you return a render function then you can't return any other properties. If you need to expose properties so that they can be accessed externally, e.g. via a `ref` in the parent, you can use `expose`:
+  Render 関数を返す場合は、他のプロパティを返すことはできません。プロパティを公開して、外部からアクセスする必要がある場合、例えば親の `ref` を介してなど、`expose` を使用できます:
 
   ```js
   // MyBook.vue
@@ -106,12 +106,12 @@
   export default {
     setup(props, { expose }) {
       const reset = () => {
-        // Some reset logic
+        // いくつかのリセットロジック
       }
 
-      // Expose can only be called once.
-      // If you need to expose multiple properties, they must all
-      // be included in the object passed to expose. 
+      // expose は一度しか呼べません。
+      // 複数のプロパティを公開する必要があるなら、
+      // expose に渡されたオブジェクトにすべてのプロパティを含める必要があります。
       expose({
         reset
       })
@@ -125,7 +125,7 @@
 
 ## ライフサイクルフック
 
-Lifecycle hooks can be registered with directly-imported `onX` functions:
+ライフサイクルフックは、直接インポートされた `onX` 関数に登録できます:
 
 ```js
 import { onMounted, onUpdated, onUnmounted } from 'vue'
@@ -145,9 +145,9 @@ const MyComponent = {
 }
 ```
 
-These lifecycle hook registration functions can only be used synchronously during [`setup()`](#setup), since they rely on internal global state to locate the current active instance (the component instance whose `setup()` is being called right now). Calling them without a current active instance will result in an error.
+これらのライフサイクルフック登録関数は、[`setup()`](#setup) の間にのみ、同期的に使用できます。これらの関数は、現在アクティブなインスタンス（今まさに `setup()` が呼び出されているコンポーネントインスタンス）を見つけるために内部のグローバル状態に依存しています。現在アクティブなインスタンスがない状態でそれらを呼び出すと、エラーになります。
 
-The component instance context is also set during the synchronous execution of lifecycle hooks. As a result, watchers and computed properties created synchronously inside of lifecycle hooks are also automatically tore down when the component unmounts.
+コンポーネントのインスタンスコンテキストは、ライフサイクルフックの同期的な実行中にも設定されます。その結果、ライフサイクルフック内で同期的に作成されたウォッチャと算出プロパティも、コンポーネントがアンマウントされるとき自動的に破棄されます。
 
 - **オプション API のライフサイクルオプションと Composition API のマッピング**
 
@@ -170,7 +170,7 @@ The component instance context is also set during the synchronous execution of l
 
 ## Provide / Inject
 
-`provide` and `inject` enables dependency injection. Both can only be called during [`setup()`](#setup) with a current active instance.
+`provide` と `inject` は依存性の注入を可能にします。 どちらも現在アクティブなインスタンスの [`setup()`](#setup) でのみ呼び出すことができます。
 
 - **型**:
 
@@ -179,11 +179,11 @@ The component instance context is also set during the synchronous execution of l
 
   function provide<T>(key: InjectionKey<T> | string, value: T): void
 
-  // without default value
+  // デフォルト値なし
   function inject<T>(key: InjectionKey<T> | string): T | undefined
-  // with default value
+  // デフォルト値あり
   function inject<T>(key: InjectionKey<T> | string, defaultValue: T): T
-  // with factory
+  // ファクトリあり
   function inject<T>(
     key: InjectionKey<T> | string,
     defaultValue: () => T,
@@ -191,19 +191,19 @@ The component instance context is also set during the synchronous execution of l
   ): T
   ```
 
-  Vue provides an `InjectionKey` interface which is a generic type that extends `Symbol`. It can be used to sync the type of the injected value between the provider and the consumer:
+  Vue は `Symbol` を拡張したジェネリック型の `InjectionKey` インターフェイスを提供しています。これはプロバイダとコンシューマの間で注入された値の型を同期するために使用できます:
 
   ```ts
   import { InjectionKey, provide, inject } from 'vue'
 
   const key: InjectionKey<string> = Symbol()
 
-  provide(key, 'foo') // providing non-string value will result in error
+  provide(key, 'foo') // string 以外の値を指定するとエラーになります
 
-  const foo = inject(key) // type of foo: string | undefined
+  const foo = inject(key) // foo の型: string | undefined
   ```
 
-  If using string keys or non-typed symbols, the type of the injected value will need to be explicitly declared:
+  文字列キーや型指定のない Symbol を使用する場合、注入される値の型を明示的に宣言する必要があります:
 
   ```ts
   const foo = inject<string>('foo') // string | undefined
@@ -215,10 +215,10 @@ The component instance context is also set during the synchronous execution of l
 
 ## `getCurrentInstance`
 
-`getCurrentInstance` enables access to an internal component instance.
+`getCurrentInstance` は内部コンポーネントのインスタンスへのアクセスを可能にします。
 
 :::warning
-`getCurrentInstance` is only exposed for advanced use cases, typically in libraries. Usage of `getCurrentInstance` is strongly discouraged in application code. Do **NOT** use it as an escape hatch to get the equivalent of `this` in Composition API.
+`getCurrentInstance` は高度なユースケースのみ、通常はライブラリに公開されます。アプリケーションコードで `getCurrentInstance` の使用は強くおすすめしません。Composition API の `this` に相当するものを取得するための避難用ハッチとして **使用しない** でください。
 :::
 
 ```ts
@@ -228,31 +228,31 @@ const MyComponent = {
   setup() {
     const internalInstance = getCurrentInstance()
 
-    internalInstance.appContext.config.globalProperties // access to globalProperties
+    internalInstance.appContext.config.globalProperties // globalProperties へのアクセス
   }
 }
 ```
 
-`getCurrentInstance` **only** works during [setup](#setup) or [Lifecycle Hooks](#lifecycle-hooks)
+`getCurrentInstance` は [setup](#setup) または [ライフサイクルフック](#ライフサイクルフック) 中で **のみ** 動作します。
 
-> When using outside of [setup](#setup) or [Lifecycle Hooks](#lifecycle-hooks), please call `getCurrentInstance()` on `setup` and use the instance instead.
+> [setup](#setup) や [ライフサイクルフック](#ライフサイクルフック) の外で使用する場合は、`setup` で `getCurrentInstance()` を呼び出し、代わりにインスタンスを使用してください。
 
 ```ts
 const MyComponent = {
   setup() {
-    const internalInstance = getCurrentInstance() // works
+    const internalInstance = getCurrentInstance() // 動作します
 
-    const id = useComponentId() // works
+    const id = useComponentId() // 動作します
 
     const handleClick = () => {
-      getCurrentInstance() // doesn't work
-      useComponentId() // doesn't work
+      getCurrentInstance() // 動作しません
+      useComponentId() // 動作しません
 
-      internalInstance // works
+      internalInstance // 動作します
     }
 
     onMounted(() => {
-      getCurrentInstance() // works
+      getCurrentInstance() // 動作します
     })
 
     return () =>
@@ -266,7 +266,7 @@ const MyComponent = {
   }
 }
 
-// also works if called on a composable
+// composable で呼び出された場合も動作します
 function useComponentId() {
   return getCurrentInstance().uid
 }
