@@ -1,17 +1,17 @@
 # Composition API
 
-> This section uses [single-file component](../guide/single-file-component.html) syntax for code examples
+> このセクションでは、コード例に [単一ファイルコンポーネント](../guide/single-file-component.html) 構文を使用します
 
 ## `setup`
 
-A component option that is executed **before** the component is created, once the `props` are resolved. It serves as the entry point for composition APIs.
+コンポーネントオプションは、コンポーネントが作成される **前に**、`props` が解決されると実行されます。これは Composition API のエントリポイントとなります。
 
-- **Arguments:**
+- **引数:**
 
   - `{Data} props`
   - `{SetupContext} context`
 
-  Similar to `this.$props` when using Options API, the `props` object will only contain explicitly declared props. Also, all declared prop keys will be present on the `props` object, regardless of whether it was passed by the parent component or not. Absent optional props will have a value of `undefined`.
+  オプション API を使うときの `this.$props` と同様に、`props` オブジェクトには明示的に宣言されたプロパティのみが含まれます。また、すべての宣言されたプロパティのキーは、親コンポーネントから渡されたかどうかに関わらず `props` オブジェクトに存在します。宣言されていない省略可能なプロパティは `undefined` という値になります。
 
   If you need to check the absence of an optional prop, you can give it a Symbol as its default value:
 
@@ -30,7 +30,7 @@ A component option that is executed **before** the component is created, once th
   }
   ```
 
-- **Typing**:
+- **型**:
 
   ```ts
   interface Data {
@@ -51,7 +51,7 @@ A component option that is executed **before** the component is created, once th
   To get type inference for the arguments passed to `setup()`, the use of [defineComponent](global-api.html#definecomponent) is needed.
   :::
 
-- **Example**
+- **例**
 
   With the template:
 
@@ -121,9 +121,9 @@ A component option that is executed **before** the component is created, once th
   }
   ```
 
-- **See also**: [Composition API `setup`](../guide/composition-api-setup.html)
+- **参照**: [Composition API `setup`](../guide/composition-api-setup.html)
 
-## Lifecycle Hooks
+## ライフサイクルフック
 
 Lifecycle hooks can be registered with directly-imported `onX` functions:
 
@@ -149,10 +149,10 @@ These lifecycle hook registration functions can only be used synchronously durin
 
 The component instance context is also set during the synchronous execution of lifecycle hooks. As a result, watchers and computed properties created synchronously inside of lifecycle hooks are also automatically tore down when the component unmounts.
 
-- **Mapping between Options API Lifecycle Options and Composition API**
+- **オプション API のライフサイクルオプションと Composition API のマッピング**
 
-  - ~~`beforeCreate`~~ -> use `setup()`
-  - ~~`created`~~ -> use `setup()`
+  - ~~`beforeCreate`~~ -> `setup()` を使用
+  - ~~`created`~~ -> `setup()` を使用
   - `beforeMount` -> `onBeforeMount`
   - `mounted` -> `onMounted`
   - `beforeUpdate` -> `onBeforeUpdate`
@@ -166,13 +166,13 @@ The component instance context is also set during the synchronous execution of l
   - `deactivated` -> `onDeactivated`
 
 
-- **See also**: [Composition API lifecycle hooks](../guide/composition-api-lifecycle-hooks.html)
+- **参照**: [Composition API ライフサイクルフック](../guide/composition-api-lifecycle-hooks.html)
 
 ## Provide / Inject
 
 `provide` and `inject` enables dependency injection. Both can only be called during [`setup()`](#setup) with a current active instance.
 
-- **Typing**:
+- **型**:
 
   ```ts
   interface InjectionKey<T> extends Symbol {}
@@ -209,7 +209,7 @@ The component instance context is also set during the synchronous execution of l
   const foo = inject<string>('foo') // string | undefined
   ```
 
-- **See also**:
+- **参照**:
   - [Provide / Inject](../guide/component-provide-inject.html)
   - [Composition API Provide / Inject](../guide/composition-api-provide-inject.html)
 
