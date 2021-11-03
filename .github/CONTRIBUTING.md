@@ -3,14 +3,13 @@
 ようこそ、Vue.js 公式サイト日本語翻訳レポジトリへ！
 翻訳プロジェクトに貢献したい方は、以下の内容を一読の上、お願いします。
 
-
 ## 貢献方法
 
 ### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
 
-1. [GitHub Issues](https://github.com/vuejs-jp/ja.vuejs.org/issues)から、[このクエリ](https://github.com/vuejs-jp/ja.vuejs.org/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation+sort%3Acreated-asc) でソート&フィルタして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
+1. [GitHub Issues](https://github.com/vuejs-jp/ja.vuejs.org/issues) から、[このクエリ](https://github.com/vuejs-jp/ja.vuejs.org/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc) でソート & フィルタして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
 2. 選択した issue で、「翻訳やります！」的なコメントで宣言します :raising_hand: (`vuejs-jp/ja.vuejs.org`のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
-3. このレポジトリ`vuejs-jp/ja.vuejs.org`のメンテナから同 issue でコメントで承認されたら、正式に自分が選んだ issue の翻訳担当者としてアサインされたことになります
+3. このレポジトリ `vuejs-jp/ja.vuejs.org` のメンテナから同 issue でコメントで承認されたら、正式に自分が選んだ issue の翻訳担当者としてアサインされたことになります
 4. このレポジトリをフォークします!
 5. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
 6. 変更をコミットします: `git commit -am 'Fix some files'`
@@ -29,16 +28,17 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 
 手順は上記の `4.`以降と同じです。
 
-
 ## 翻訳スタイル
 
-- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) に準拠
-- JTF日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールはVue.js 公式サイト向けに[一部カスタマイズ](.textlintrc)
-
+- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide) - 基本的な翻訳スタイル。
+- [Microsoft ローカリゼーション スタイル ガイド](https://www.microsoft.com/ja-jp/language/styleguides) - 技術文書におけるスタイル。
+- [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) - JTF 日本語標準スタイルガイド（翻訳用）の textlint のルールセット。
+- [textlint-rule-preset-vuejs-jp](https://github.com/vuejs-jp/textlint-rule-preset-vuejs-jp) - Vue.js 日本ユーザグループで一部カスタマイズした textlint のルールセット。
 
 ## 翻訳のゆらぎ & トーン
 
 ### 文体
+
 「だである」ではなく「ですます」調
 
 > Vue.js is a library for building modern web interfaces.
@@ -88,7 +88,10 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 - 和訳にして分かりづらい場合は、翻訳と英語(どちらかに括弧付け)でも OK
   - 例: Two way -> Two way (双方向)
 
+詳細は [用字、用語](https://github.com/vuejs-jp/ja.vuejs.org/wiki/%E7%94%A8%E5%AD%97%E3%80%81%E7%94%A8%E8%AA%9E) を参照してください。
+
 ### 長音訳のついて
+
 原則、**長音なし**で翻訳する。
 
 - NG: コンピューター
@@ -102,6 +105,7 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 - OK: プルリクエストフロー
 
 #### 長音訳例外リスト
+
 > NOTE: 以下のリストは随時追加していく
 
 - error: エラー
