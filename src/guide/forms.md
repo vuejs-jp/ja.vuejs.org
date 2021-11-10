@@ -268,10 +268,10 @@ vm.selected.number // => 123
 ユーザ入力を自動的に number へ型キャストさせたい場合は、`v-model` で管理している input に `number` 修飾子を加えることができます。
 
 ```html
-<input v-model.number="age" type="number" />
+<input v-model.number="age" type="text" />
 ```
 
-これはしばしば有用です。なぜなら `type="number"` が書いてあったとしても HTML の input 要素は常に文字列を返すためです。値が `parseFloat()` でパースできない場合は、元々の値が返却されます。
+これは入力タイプが `text` の場合によく使われます。入力タイプが `number` の場合、Vue は生の文字列値を自動的に数値へ変換できるため、`v-model` に `.number` を追加する必要はありません。値が `parseFloat()` で解析できない場合は、元の値が返されます。
 
 ### `.trim`
 
