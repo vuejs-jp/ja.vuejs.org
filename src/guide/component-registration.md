@@ -1,5 +1,7 @@
 # コンポーネントの登録
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-global-vs-local-vue-components?friend=vuejs" title="Free Vue.js Component Registration lesson">Learn how component registration works with a free lesson on Vue School</VideoLesson>
+
 > このページは [コンポーネントの基本](component-basics.md) を読み終えている事を想定しています。もし読み終えていなければ先にそちらをお読みください。
 
 ## コンポーネント名

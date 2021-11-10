@@ -2,6 +2,8 @@
 
 > このページは、すでに[コンポーネントの基本](component-basics.md)を読んだことを前提としています。コンポーネントに慣れていない場合は、まずはそちらをお読みください。
 
+<VideoLesson href="https://vueschool.io/lessons/vue-3-reusable-components-with-props?friend=vuejs" title="Free Vue.js Component Props Lesson">Learn how component props work with a free lesson on Vue School</VideoLesson>
+
 ## プロパティの型
 
 ここまでは、プロパティを文字列の配列として列挙してきました。

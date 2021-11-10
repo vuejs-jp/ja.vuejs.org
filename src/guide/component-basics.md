@@ -1,5 +1,7 @@
 # コンポーネントの基本
 
+<VideoLesson href="https://vueschool.io/courses/vue-js-3-components-fundamentals?friend=vuejs" title="Free Vue.js Components Fundamentals Course">Learn component basics with a free video course on Vue School</VideoLesson>
+
 ## 基本例
 
 Vue コンポーネントの例を次に示します:
