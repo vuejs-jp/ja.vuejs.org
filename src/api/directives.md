@@ -35,7 +35,7 @@
 - **例:**
 
   ```html
-<div v-html="'<h1>Hello World</h1>'"></div>
+  <div v-html="'<h1>Hello World</h1>'"></div>
   ```
 
 - **参照:** [データバインディング構文 - 展開](../guide/template-syntax.html#生の-html)
