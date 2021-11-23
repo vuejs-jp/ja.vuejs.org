@@ -25,7 +25,7 @@ app.component('my-component-name', {
 
 こうする事で、既に存在するそして将来的に定義される HTML 要素とのコンフリクトを回避する助けになります。
 
-その他のコンポーネント名の推奨項目は [スタイルガイド](../style-guide/#base-component-names-strongly-recommended) で確認することができます。
+その他のコンポーネント名の推奨項目は [スタイルガイド](../style-guide/#基底コンポーネントの名前-強く推奨) で確認することができます。
 
 ### 命名のケース (Name Casing)
 
