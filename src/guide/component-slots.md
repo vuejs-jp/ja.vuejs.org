@@ -92,8 +92,8 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
   Clicking here will {{ action }} an item
   <!--
   `action` は undefined になります。なぜなら、このコンテンツは
-  <todo-button> コンポーネント _の中で_ 定義されるのではなく、
-  <todo-button> コンポーネント _に_ 渡されるからです
+  <todo-button> コンポーネントの中で定義されるのではなく、
+  <todo-button> コンポーネントに渡されるからです
   -->
 </todo-button>
 ```
