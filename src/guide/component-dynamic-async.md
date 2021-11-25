@@ -89,4 +89,4 @@ createApp({
 
 非同期コンポーネントのオプションに `suspensible: false` を指定することで、 `Suspense` の制御から外すことができ、常にコンポーネントが自身の読み込み状態を制御することができます。
 
-[API リファレンス](../api/global-api.html#arguments-4) で利用可能なオプションのリストを確認できます。
+[API リファレンス](../api/global-api.html#引数-4) で利用可能なオプションのリストを確認できます。
