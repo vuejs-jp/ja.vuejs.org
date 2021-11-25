@@ -1,10 +1,10 @@
-# SFC Tooling
+# SFC ツール
 
-## Online Playgrounds
+## オンラインプレイグラウンド
 
-You don't need to install anything on your machine to try out Vue SFCs - there are many online playgrounds that allow you to do so right in the browser:
+Vue SFC を試すため、あなたのコンピュータに何かをインストールする必要はありません。ブラウザ上で操作できるオンラインプレイグラウンドがたくさんあります:
 
-- [Vue SFC Playground](https://sfc.vuejs.org) (official, deployed from latest commit)
+- [Vue SFC Playground](https://sfc.vuejs.org)（公式、最新のコミットからデプロイ）
 - [VueUse Playground](https://play.vueuse.org)
 - [Vue on CodeSandbox](https://codesandbox.io/s/vue-3)
 - [Vue on Repl.it](https://replit.com/@templates/VueJS-with-Vite)
@@ -13,84 +13,84 @@ You don't need to install anything on your machine to try out Vue SFCs - there a
 - [Vue on Components.studio](https://components.studio/create/vue3)
 - [Vue on WebComponents.dev](https://webcomponents.dev/create/cevue)
 
-It is also recommended to use these online playgrounds to provide reproductions when reporting bugs.
+また、バグを報告する際には、これらのオンラインプレイグラウンドを使って、再現したものを提供することをおすすめします。
 
-## Project Scaffolding
+## プロジェクトの足場
 
 ### Vite
 
-[Vite](https://vitejs.dev/) is a lightweight and fast build tool with first-class Vue SFC support. It is created by Evan You, who is also the author of Vue itself! To get started with Vite + Vue, simply run:
+[Vite](https://vitejs.dev/) はファーストクラスの Vue SFC サポートをする軽量で高速なビルドツールです。Vue 自体の作成者でもある Evan You によって作成されました！　Vite + Vue を使い始めるには、単に次のコマンドを実行するだけです:
 
 ```sh
 npm init vite@latest
 ```
 
-Then select the Vue template and follow the instructions.
+その後、Vue テンプレートを選択して、指示に従います。
 
-- To learn more about Vite, check out the [Vite docs](https://vitejs.dev/guide/).
-- To configure Vue-specific behavior in a Vite project, for example passing options to the Vue compiler, check out the docs for [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#readme).
+- Vite についての詳細は [Vite ドキュメント（日本語）](https://ja.vitejs.dev/guide/) を確認してください
+- 例えば Vue コンパイラにオプションを渡すなど、Vite プロジェクトに Vue 固有の動作を設定するには、[@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#readme) のドキュメントを確認してください。
 
-The [SFC Playground](https://sfc.vuejs.org/) also supports downloading the files as a Vite project.
+[SFC Playground](https://sfc.vuejs.org/) は Vite プロジェクトとしてファイルダウンロードすることもサポートします。
 
 ### Vue CLI
 
-[Vue CLI](https://cli.vuejs.org/) is the official webpack-based build tool for Vue projects. To get started with Vue CLI:
+[Vue CLI](https://cli.vuejs.org/) は Vue プロジェクト用の webpack をベースとした公式のビルドツールです。Vue CLI ではじめるには:
 
 ```sh
 npm install -g @vue/cli
 vue create hello-vue
 ```
 
-- To learn more about Vue CLI, check out [Vue CLI docs](https://cli.vuejs.org/guide/installation.html).
+- Vue CLI についての詳細は [Vue CLI ドキュメント](https://cli.vuejs.org/guide/installation.html) を確認してください。
 
-### Vite or Vue CLI?
+### Vite それとも Vue CLI？
 
-We recommend starting new projects with Vite as it offers significantly better development experience in terms of dev server startup and HMR update performance ([details](https://vitejs.dev/guide/why.html)). Only go with Vue CLI if you rely on specific webpack features (e.g. Module Federation).
+開発サーバの起動や HMR の更新パフォーマンスの点で、開発体験が大幅に向上するため、Vite で新しいプロジェクトを開始することをおすすめします（[詳細](https://vitejs.dev/guide/why.html)）。特定の webpack の機能（Module Federation など）に依存する場合にのみ、Vue CLI を使用してください。
 
-If you are a [Rollup](https://rollupjs.org/) user, you can safely adopt Vite as it uses Rollup for production builds and supports a Rollup-compatible plugin system. [Even Rollup's maintainer recommends Vite as THE web development wrapper for Rollup](https://twitter.com/lukastaegert/status/1412119729431584774).
+[Rollup](https://rollupjs.org/) のユーザならば、本番向けビルドに Rollup を使用して、Rollup 互換のプラグインシステムをサポートしているため、Vite を安全に採用できます。[Rollup のメンテナでさえ、Vite を Rollup のウェブ開発用のラッパーとして推奨しています](https://twitter.com/lukastaegert/status/1412119729431584774)。
 
-## IDE Support
+## IDE サポート
 
-The recommended IDE setup is [VSCode](https://code.visualstudio.com/) + the [Volar](https://github.com/johnsoncodehk/volar) extension. Volar provides syntax highlighting and advanced IntelliSense for template expressions, component props and even slots validation. We strongly recommend this setup if you want to get the best possible experience with Vue SFCs, especially if you are also using TypeScript.
+推奨される IDE のセットアップは [VSCode](https://code.visualstudio.com/) と [Volar](https://github.com/johnsoncodehk/volar) 拡張機能です。Volar は、テンプレート式、コンポーネントの props、スロットの検証のために、シンタックスハイライトと高度なインテリセンスを提供します。Vue SFC を可能な限り最高に活用したい場合、特に TypeScript も利用している場合、このセットアップを強くおすすめします。
 
-[WebStorm](https://www.jetbrains.com/webstorm/) also provides decent support for Vue SFCs. However, do note as of now its support for `<script setup>` is still [in progress](https://youtrack.jetbrains.com/issue/WEB-49000).
+[WebStorm](https://www.jetbrains.com/webstorm/) も Vue SFC に適切なサポートを提供しています。ただし現時点では `<script setup>` のサポートが [進行中](https://youtrack.jetbrains.com/issue/WEB-49000) であることには注意してください。
 
-Most other editors have community-created syntax highlighting support for Vue, but lack the same level of code IntelliSense. In the long run, we do hope we can extend the range of editor support by leveraging the [Language Service Protocol](https://microsoft.github.io/language-server-protocol/) as Volar's core logic is implemented as a standard language server.
+他のほとんどのエディタには、コミュニティが作成した Vue のシンタックスハイライトのサポートがありますが、同じレベルのコードインテリセンスはありません。長期的には、Volar のコアロジックが標準言語サーバとして実装されているため、[Language Service Protocol](https://microsoft.github.io/language-server-protocol/) を活用することでエディタのサポート範囲を広げることができればと考えています。
 
-## Testing Support
+## テストサポート
 
-- If using Vite, we recommend [Cypress](https://www.cypress.io/) as the test runner for both unit and e2e tests. Unit tests for Vue SFCs can be done with the [Cypress Component Test Runner](https://www.cypress.io/blog/2021/04/06/introducing-the-cypress-component-test-runner/).
+- Vite を使用する場合は、[Cypress](https://www.cypress.io/) をユニットテストと E2E テストの両方のテストランナーとしておすすめします。Vue SFC のユニットテストは [Cypress Component Test Runner](https://www.cypress.io/blog/2021/04/06/introducing-the-cypress-component-test-runner/) で実行できます。
 
-- Vue CLI comes with [Jest](https://jestjs.io/) and [Mocha](https://mochajs.org/) integrations.
+- Vue CLI には、[Jest](https://jestjs.io/) と [Mocha](https://mochajs.org/) のインテグレーションが付属しています。
 
-- If you are manually configuring Jest to work with Vue SFCs, check out [vue-jest](https://github.com/vuejs/vue-jest) which is the official Jest transform for Vue SFCs.
+- Vue SFC で動作するように Jest を手動で設定する場合は、Vue SFC 向け公式 Jest トランスフォームの [vue-jest](https://github.com/vuejs/vue-jest) を確認してください。
 
-## Custom Blocks Integration
+## カスタムブロックの統合
 
-Custom blocks are compiled into imports to the same Vue file with different request queries. It is up to the underlying build tool to handle these import requests.
+カスタムブロックは、異なるリクエストクエリを同じ Vue ファイルへのインポートにコンパイルされます。これらのインポートリクエストを処理するのは、基盤となるビルドツールに任されています。
 
-- If using Vite, a custom Vite plugin should be used to transform matched custom blocks into executable JavaScript.[[Example](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)]
+- Vite を使用する場合、カスタム Vite プラグインを使用して、一致したカスタムブロックを実行可能な JavaScript に変換する必要があります。[[例](https://github.com/vitejs/vite/tree/main/packages/plugin-vue#example-for-transforming-custom-blocks)]
 
-- If using Vue CLI or plain webpack, a webpack loader should be configured to transform the matched blocks.[[Example](https://vue-loader.vuejs.org/guide/custom-blocks.html#custom-blocks)]
+- Vue CLI やプレーンな Webpack を使用する場合、一致したブロックを変換するように Webpack loader を構成する必要があります。[[例](https://vue-loader.vuejs.org/guide/custom-blocks.html#custom-blocks)]
 
-## Lower-Level Tools
+## 下位レベルのツール
 
 ### `@vue/compiler-sfc`
 
-- [Docs](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc)
+- [ドキュメント](https://github.com/vuejs/vue-next/tree/master/packages/compiler-sfc)
 
-This package is part of the Vue core monorepo and is always published with the same version as the main `vue` package. Typically, it will be listed as a peer dependency of `vue` in a project. To ensure correct behavior, its version should always be kept in-sync with `vue` - i.e. whenever you upgrade the version of `vue`, you should also upgrade `@vue/compiler-sfc` to match it.
+このパッケージは Vue コアのモノレポの一部で、メインの `vue` パッケージと常に同じバージョンで公開されます。通常、プロジェクト内で `vue` の Peer Dependency としてリストアップされます。正しい動作を保証するため、そのバージョンは常に `vue` と同期している必要があります。つまり、`vue` のバージョンをアップグレードするときはいつも、それに合わせて `@vue/compiler-sfc` もアップグレードする必要があります。
 
-The package itself provides lower-level utilities for processing Vue SFCs and is only meant for tooling authors that need to support Vue SFCs in custom tools.
+このパッケージ自体は、Vue SFC を処理するための低レベルなユーティリティを提供して、カスタムツールで Vue SFC をサポートする必要があるツールの作成者のためのものです。
 
 ### `@vitejs/plugin-vue`
 
-- [Docs](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
+- [ドキュメント](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 
-Official plugin that provides Vue SFC support in Vite.
+Vite で Vue SFC サポートを提供する公式プラグインです。
 
 ### `vue-loader`
 
-- [Docs](https://vue-loader.vuejs.org/)
+- [ドキュメント](https://vue-loader.vuejs.org/)
 
-The official loader that provides Vue SFC support in webpack. If you are using Vue CLI, also see [docs on modifying `vue-loader` options in Vue CLI](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
+Webpack で Vue SFC のサポートを提供する公式の Loader です。Vue CLI を使用している場合は、[`vue-loader` オプション変更についての Vue CLI ドキュメント](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader) も参照してください。
