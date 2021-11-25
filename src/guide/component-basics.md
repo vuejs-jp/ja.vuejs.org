@@ -240,7 +240,7 @@ app.component('blog-post', {
 })
 ```
 
-これにより、コンポーネントが排出する全てのイベントをチェックし、オプションでそれらを[検証する](component-custom-events.html#validate-emitted-events)ことができます。
+これにより、コンポーネントが排出する全てのイベントをチェックし、オプションでそれらを[検証する](component-custom-events.html#発行されたイベントを検証する)ことができます。
 
 ### イベントと値を発行する
 
