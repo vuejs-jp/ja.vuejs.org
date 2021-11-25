@@ -25,7 +25,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </button>
 ```
 
-コンポーネントを描画する時、 `<slot></slot>` は「Add Todo」に置換されるでしょう:
+コンポーネントを描画する時、 `<slot></slot>` は「Add todo」に置換されるでしょう:
 
 ```html
 <!-- 描画された HTML -->
