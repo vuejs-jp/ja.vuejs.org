@@ -300,7 +300,7 @@ Vue.component('my-special-transition', {
 })
 ```
 
-そして[関数型コンポーネント](render-function.html#Functional-Components)は、このようなタスクに時に適しています:
+そして[関数型コンポーネント](render-function.html#関数型コンポーネント)は、このようなタスクに時に適しています:
 
 ```js
 Vue.component('my-special-transition', {
