@@ -43,7 +43,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ビルドツールの使用を避けたいが、本番環境で CDN を使用できない場合は、関連する `.js` ファイルをダウンロードして、自分のウェブサーバを使ってホストすることができます。CDN の場合と同じように `<script>` タグを使って導入することができます。
 
-ファイルは [unpkg](https://unpkg.com/browse/vue@next/dist/) や [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/) などの CDN から閲覧、ダウンロードすることができます。様々な異なるファイルは [後で説明しますが](#さまざまなビルドについて) 、通常は開発用のビルドと本番用のビルドの両方をダウンロードすることになります。
+ファイルは [unpkg](https://unpkg.com/browse/vue@next/dist/) や [jsDelivr](https://cdn.jsdelivr.net/npm/vue@next/dist/) などの CDN から閲覧、ダウンロードすることができます。様々な異なるファイルは [後で説明しますが](#さまざまなビルドについて) 、通常は開発用のビルドと本番用のビルドの両方をダウンロードすることになります。
 
 ## npm
 
