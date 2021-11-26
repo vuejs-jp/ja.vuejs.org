@@ -1,10 +1,10 @@
-# オプション API
+# Options API
 
-オプション API には、次のようなセクションがあります:
+Options API には、次のようなセクションがあります:
 
 - [Data](/api/options-data.html)
 - [DOM](/api/options-dom.html)
-- [Lifecycle Hooks](/api/options-lifecycle-hooks.html)
-- [Assets](/api/options-assets.html)
+- [ライフサイクルフック](/api/options-lifecycle-hooks.html)
+- [アセット](/api/options-assets.html)
 - [Composition](/api/options-composition.html)
-- [Miscellaneous](/api/options-misc.html)
+- [その他](/api/options-misc.html)
