@@ -116,4 +116,4 @@ app.component('todo-list-statistics', {
 })
 ```
 
-こうすると、`todos.length` へのあらゆる変更は、`todoLength` が注入されたコンポーネントに正しく反映されます。`computed` については、 [算出プロパティとウォッチのセクション](reactivity-computed-watchers.html#算出プロパティ) を、そして `reactive` の provide/inject の詳細については、[Composition API のセクション](composition-api-provide-inject.html#リアクティブ) をご覧ください。
+こうすると、`todos.length` へのあらゆる変更は、`todoLength` が注入されたコンポーネントに正しく反映されます。`computed` については、 [算出プロパティとウォッチのセクション](reactivity-computed-watchers.html#算出プロパティ) を、そして `reactive` の provide/inject の詳細については、[Composition API のセクション](composition-api-provide-inject.html#リアクティブ) をご覧ください。

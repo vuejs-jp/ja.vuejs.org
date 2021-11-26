@@ -354,7 +354,7 @@ function (slotProps) {
 }
 ```
 
-これは、`v-slot` の値が関数定義の引数部分で有効な任意の JavaScript 式を受け付けることを意味します。そのため、特定のスロットプロパティを取得するために [ES2015 の分割代入](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を使うこともできます:
+これは、`v-slot` の値が関数定義の引数部分で有効な任意の JavaScript 式を受け付けることを意味します。そのため、特定のスロットプロパティを取得するために [ES2015 の分割代入](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#オブジェクトの分割代入) を使うこともできます:
 
 ```html
 <todo-list v-slot="{ item }">
