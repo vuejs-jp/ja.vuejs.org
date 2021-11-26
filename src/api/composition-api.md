@@ -191,7 +191,7 @@ const MyComponent = {
   ): T
   ```
 
-  Vue は `Symbol` を拡張したジェネリック型の `InjectionKey` インターフェイスを提供しています。これはプロバイダとコンシューマの間で注入された値の型を同期するために使用できます:
+  Vue は `Symbol` を拡張したジェネリック型の `InjectionKey` インターフェイスを提供しています。これは Provider（プロバイダ）と Consumer（コンシューマ）の間で注入された値の型を同期するために使用できます:
 
   ```ts
   import { InjectionKey, provide, inject } from 'vue'
