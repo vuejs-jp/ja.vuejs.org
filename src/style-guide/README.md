@@ -1485,7 +1485,7 @@ computed: {
 ::: details 詳細な説明
 スタイルの範囲を決めるために、 Vue は `data-v-f3f3eg9` のような一意の属性をコンポーネントの要素に追加します。  
 
-問題は、 たくさんの[要素-属性セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (例： `button[data-v-f3f3eg9]`) が [クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (例： `.btn-close[data-v-f3f3eg9]`) よりもかなり遅くなるため、 可能な限りクラスセレクタを優先すべきだということです。
+問題は、たくさんの要素属性セレクタ（例： `button[data-v-f3f3eg9]`）がクラス属性セレクタ（例： `.btn-close[data-v-f3f3eg9]`）よりもかなり遅くなるため、可能な限りクラスセレクタを優先すべきだということです。
 :::
 
 <div class="style-example style-example-bad">

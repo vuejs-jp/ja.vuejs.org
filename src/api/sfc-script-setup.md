@@ -149,7 +149,6 @@ const vMyDirective = {
   <h1 v-my-directive>This is a Heading</h1>
 </template>
 ```
-
 ```html
 <script setup>
   // インポートも可能で、必要な命名スキーマに合わせてリネームすることができます
@@ -243,6 +242,10 @@ export default {
 // executed in setup() scope (for each instance)
 </script>
 ```
+
+:::warning
+`render` function is not supported in this scenario. Please use one normal `<script>` with `setup` option instead.
+:::
 
 ## トップレベルの `await`
 
