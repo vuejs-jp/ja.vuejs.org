@@ -10,8 +10,7 @@
 
 [setup()](composition-api-setup.html) 内で、ライフサイクルフックを呼び出す方法は、次の表の通りです:
 
-
-| オプション API      | `setup` 内のフック   |
+| Options API      | `setup` 内のフック   |
 | ----------------- | ------------------- |
 | `beforeCreate`    | 不要\*               |
 | `created`         | 不要\*               |

@@ -14,7 +14,7 @@ Vue 3 では、この記述では `$refs` に配列が作成されなくなり�
 <div v-for="item in list" :ref="setItemRef"></div>
 ```
 
-オプション API を使う場合
+Options API を使う場合
 
 ```js
 export default {
