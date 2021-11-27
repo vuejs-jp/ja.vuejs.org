@@ -35,7 +35,7 @@ data() {
 }
 ```
 
-このように描画されます:
+このようにレンダリングされます:
 
 ```html
 <div class="static active"></div>
@@ -60,7 +60,7 @@ data() {
 }
 ```
 
-これは同じ結果を描画します。オブジェクトを返す[算出プロパティ](computed.md)に束縛することもできます。これは一般的で強力なパターンです:
+これは同じ結果をレンダリングします。オブジェクトを返す [算出プロパティ](computed.md) に束縛することもできます。これは一般的で強力なパターンです:
 
 ```html
 <div :class="classObject"></div>
@@ -100,7 +100,7 @@ data() {
 }
 ```
 
-これは次のように描画されます:
+これは次のようにレンダリングされます:
 
 ```html
 <div class="active text-danger"></div>
@@ -144,7 +144,7 @@ app.component('my-component', {
 </div>
 ```
 
-以下の HTML が描画されます:
+以下の HTML がレンダリングされます:
 
 ```html
 <p class="foo bar baz boo">Hi</p>
@@ -156,7 +156,7 @@ app.component('my-component', {
 <my-component :class="{ active: isActive }"></my-component>
 ```
 
-`isActive` が真と評価されるときは、以下の HTML が描画されます:
+`isActive` が真と評価されるときは、以下の HTML がレンダリングされます:
 
 ```html
 <p class="foo bar active">Hi</p>
@@ -241,4 +241,4 @@ style プロパティに複数の (接頭辞付き) 値の配列を設定でき�
 <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 ```
 
-これは、配列内でブラウザがサポートしている最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは `display: flex` を描画します。
+これは、配列内でブラウザがサポートしている最後の値だけをレンダリングします。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは `display: flex` をレンダリングします。

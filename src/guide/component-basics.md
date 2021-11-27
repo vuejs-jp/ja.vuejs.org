@@ -140,7 +140,7 @@ app.component('blog-post', {
 app.mount('#blog-posts-demo')
 ```
 
-そしてコンポーネントをそれぞれ描画します:
+そしてコンポーネントをそれぞれレンダリングします:
 
 ```html
 <div id="blog-posts-demo">
@@ -152,7 +152,7 @@ app.mount('#blog-posts-demo')
 </div>
 ```
 
-上記では、 `v-bind` を用いて動的にプロパティを渡すことができると分かります。これは描画する内容が事前に分からない場合に特に便利です。
+上記では、 `v-bind` を用いて動的にプロパティを渡すことができると分かります。これはレンダリングする内容が事前に分からない場合に特に便利です。
 
 とりあえずプロパティについてはこれで以上ですが、 このページを読み終えて十分に理解できたら、後から戻ってきて[プロパティ](component-props.html)の完全なガイドを読むことをお勧めします。
 
@@ -361,7 +361,7 @@ HTML 要素のように、コンポーネントに要素を渡すことができ
 </alert-box>
 ```
 
-これは以下のように描画されるでしょう。:
+これは以下のようにレンダリングされるでしょう。:
 
 <common-codepen-snippet title="Component basics: slots" slug="jOPeaob" :preview="false" />
 

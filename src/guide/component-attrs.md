@@ -21,10 +21,10 @@ app.component('date-picker', {
 `data-status` 属性を用いて date-picker コンポーネントの状態を定義するような場合には、この属性はルート要素 (すなわち `div.date-picker`) に適用されます。
 
 ```html
-<!-- プロパティでない属性 とともに用いられる Date-picker コンポーネント -->
+<!-- プロパティでない属性とともに用いられる Date-picker コンポーネント -->
 <date-picker data-status="activated"></date-picker>
 
-<!-- 実際には以下のような形で描画されます -->
+<!-- 実際には以下のような形でレンダリングされます -->
 <div class="date-picker" data-status="activated">
   <input type="datetime-local" />
 </div>
@@ -100,10 +100,10 @@ app.component('date-picker', {
 このように記述することで、`data-status` 属性は、 `input` 要素に適用されるようになります。
 
 ```html
-<!-- Date-picker component with a non-prop attribute -->
+<!-- プロパティでない属性とともに用いられる Date-picker コンポーネント -->
 <date-picker data-status="activated"></date-picker>
 
-<!-- Rendered date-picker component -->
+<!-- 実際には以下のような形でレンダリングされます -->
 <div class="date-picker">
   <input type="datetime-local" data-status="activated" />
 </div>

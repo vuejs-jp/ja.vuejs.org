@@ -25,10 +25,10 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </button>
 ```
 
-コンポーネントを描画する時、 `<slot></slot>` は「Add todo」に置換されるでしょう:
+コンポーネントをレンダリングする時、 `<slot></slot>` は「Add todo」に置換されるでしょう:
 
 ```html
-<!-- 描画された HTML -->
+<!-- レンダリングされた HTML -->
 <button class="btn-primary">
   Add todo
 </button>
@@ -66,12 +66,12 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 ```html
 <todo-button>
-  <!-- 次の行のテキストは描画されません -->
+  <!-- 次の行のテキストはレンダリングされません -->
   Add todo
 </todo-button>
 ```
 
-## 描画スコープ
+## レンダリングスコープ
 
 スロットの中でデータを扱いたい場合はこうします:
 
@@ -104,7 +104,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 ## フォールバックコンテンツ
 
-スロットに対して、コンテンツがない場合にだけ描画されるフォールバック (つまり、デフォルトの) コンテンツを指定すると便利な場合があります。例えば、`<submit-button>` コンポーネントにおいて:
+スロットに対して、コンテンツがない場合にだけレンダリングされるフォールバック (つまり、デフォルトの) コンテンツを指定すると便利な場合があります。例えば、`<submit-button>` コンポーネントにおいて:
 
 ```html
 <button type="submit">
@@ -112,7 +112,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </button>
 ```
 
-ほとんどの場合には `<button>` の中に「Submit」という文字を描画したいかもしれません。「Submit」をフォールバックコンテンツにするには、 `<slot>` タグの中に記述します。
+ほとんどの場合には `<button>` の中に「Submit」という文字をレンダリングしたいかもしれません。「Submit」をフォールバックコンテンツにするには、 `<slot>` タグの中に記述します。
 
 ```html
 <button type="submit">
@@ -126,7 +126,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 <submit-button></submit-button>
 ```
 
-フォールバックコンテンツの「Submit」が描画されます:
+フォールバックコンテンツの「Submit」がレンダリングされます:
 
 ```html
 <button type="submit">
@@ -142,7 +142,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </submit-button>
 ```
 
-指定されたコンテンツが代わりに描画されます:
+指定されたコンテンツが代わりにレンダリングされます:
 
 ```html
 <button type="submit">
@@ -168,7 +168,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 </div>
 ```
 
-こういった場合のために、 `<slot>` 要素は `name` という特別な属性を持っていて、それぞれのスロットにユニークな ID を割り当てることによってコンテンツがどこに描画されるべきかを決定することができます:
+こういった場合のために、 `<slot>` 要素は `name` という特別な属性を持っていて、それぞれのスロットにユニークな ID を割り当てることによってコンテンツがどこにレンダリングされるべきかを決定することができます:
 
 ```html
 <div class="container">
@@ -207,7 +207,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 これにより、`<template>` 要素の中身はすべて対応するスロットに渡されます。
 
-描画される HTML は以下のようになります:
+レンダリングされる HTML は以下のようになります:
 
 ```html
 <div class="container">
@@ -228,7 +228,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 ## スコープ付きスロット
 
-スロットコンテンツから、子コンポーネントの中だけで利用可能なデータにアクセスできると便利なことがあります。コンポーネントがアイテムの配列を描画するためにつかわれていて、レンダリングされた各アイテムをカスタマイズできるようにしたい、などは典型的な例です。
+スロットコンテンツから、子コンポーネントの中だけで利用可能なデータにアクセスできると便利なことがあります。コンポーネントがアイテムの配列をレンダリングするためにつかわれていて、レンダリングされた各アイテムをカスタマイズできるようにしたい、などは典型的な例です。
 
 例えば、以下のようなコンポーネントがあり、 todo アイテムのリストを内部に持ってます。
 
@@ -258,7 +258,7 @@ app.component('todo-list', {
 </todo-list>
 ```
 
-しかし、これは動作しません。というのも、 `item` にアクセスすることができるのは `<todo-list>` コンポーネントだけですが、ここで指定しているコンテンツは親コンポーネントで描画されるからです。
+しかし、これは動作しません。というのも、 `item` にアクセスすることができるのは `<todo-list>` コンポーネントだけですが、スロットのコンテンツはその親コンポーネントから提供されているためです。
 
 親コンポーネント内でスロットコンテンツとして `item` を使えるようにするためには、これを `<slot>` 要素の属性として束縛します:
 

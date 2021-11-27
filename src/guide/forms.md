@@ -144,7 +144,7 @@ Vue.createApp({
 <common-codepen-snippet title="Handling forms: select" slug="KKpGydL" :preview="false" />
 
 :::tip Note
-`v-model` の式の初期値がいずれのオプションとも一致しない場合、`<select>` 要素は *未選択* の状態で描画されます。これにより iOS では最初のアイテムが選択できなくなります。なぜなら iOS はこのような場合に `change` イベントを発火させないためです。したがって、上記の例で示したように、`value` を持たない `disabled` なオプションを追加しておくことをおすすめします。
+`v-model` の式の初期値がいずれのオプションとも一致しない場合、`<select>` 要素は *未選択* の状態でレンダリングされます。これにより iOS では最初のアイテムが選択できなくなります。なぜなら iOS はこのような場合に `change` イベントを発火させないためです。したがって、上記の例で示したように、`value` を持たない `disabled` なオプションを追加しておくことをおすすめします。
 :::
 
 複数個のセレクト（配列にバインド）:
@@ -161,7 +161,7 @@ Vue.createApp({
 
 <common-codepen-snippet title="Handling forms: select bound to array" slug="gOpBXPz" tab="result" :preview="false" />
 
-動的なオプションを `v-for` により描画:
+動的なオプションを `v-for` によりレンダリング:
 
 ```html
 <div id="v-model-select-dynamic" class="demo">

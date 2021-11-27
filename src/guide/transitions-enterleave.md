@@ -13,7 +13,7 @@ Vue は、DOM からアイテムが追加、更新、削除されたときにト
 
 Vue は、`transition` ラッパーコンポーネントを提供しています。このコンポーネントは、次のコンテキストにある要素やコンポーネントに entering/leaving トランジションを追加することを可能にします:
 
-- 条件付きの描画 (`v-if` を使用)
+- 条件付きレンダリング (`v-if` を使用)
 - 条件付きの表示 (`v-show` を利用)
 - 動的コンポーネント
 - コンポーネントルートノード (Component root nodes)
@@ -403,9 +403,9 @@ Vue.createApp(Demo).mount('#demo')
 
 <common-codepen-snippet title="JavaScript Hooks Transition" slug="68ce1b8c41d0a6e71ff58df80fd85ae5" tab="js,result" :editable="false" />
 
-## 初期描画時のトランジション
+## 初期レンダリング時のトランジション
 
-ノードの初期描画時にトランジションを適用したい場合は、`appear` 属性を追加することができます:
+ノードの初期レンダリング時にトランジションを適用したい場合は、`appear` 属性を追加することができます:
 
 ```html
 <transition appear>
@@ -473,7 +473,7 @@ computed: {
 
 <common-codepen-snippet title="Transition Modes Button Problem" slug="Rwrqzpr" :editable="false" />
 
-それは、"on" ボタンと "off" ボタン間でトランジションを行うとき、片方のボタンがトランジションアウトして、別の片方がトランジションインするとき、両方のボタンが描画されてしまうことです。これは、`<transition>` のデフォルトの振る舞いです - entering と leaving は同時に起きます。
+それは、"on" ボタンと "off" ボタン間でトランジションを行うとき、片方のボタンがトランジションアウトして、別の片方がトランジションインするとき、両方のボタンがレンダリングされてしまうことです。これは、`<transition>` のデフォルトの振る舞いです - entering と leaving は同時に起きます。
 
 時には、これで問題なく、うまく動作する場合があります。例えば、位置が絶対位置で指定されているアイテムのトランジションを行うような場合です:
 

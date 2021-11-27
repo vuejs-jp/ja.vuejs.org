@@ -19,7 +19,7 @@ Composition API を使うとき、 [リアクティブ参照](reactivity-fundame
       const root = ref(null)
 
       onMounted(() => {
-        // DOM 要素は初期描画の後に ref に代入されます
+        // DOM 要素は初回レンダリングの後に ref に代入されます
         console.log(root.value) // <div>This is a root element</div>
       })
 
