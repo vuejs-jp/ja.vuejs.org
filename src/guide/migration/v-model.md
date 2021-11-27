@@ -80,7 +80,7 @@ export default {
 this.$emit('update:title', newValue)
 ```
 
-そうすると、親はそのイベントをリッスンしてローカルのデータプロパティを更新できました。例えば、以下のようになります。
+そうすると、親はそのイベントを購読してローカルのデータプロパティを更新できました。例えば、以下のようになります。
 
 ```html
 <ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
