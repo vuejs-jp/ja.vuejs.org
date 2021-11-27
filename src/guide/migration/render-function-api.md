@@ -92,7 +92,7 @@ export default {
 }
 ```
 
-`setup()` がどう動作するかについての詳しい情報は、[コンポジション API ガイド](/guide/composition-api-introduction.html)を参照してください。
+`setup()` がどう動作するかについての詳しい情報は、[Composition API ガイド](/guide/composition-api-introduction.html)を参照してください。
 
 ## VNode のプロパティの形式
 

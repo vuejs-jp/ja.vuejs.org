@@ -42,4 +42,4 @@ this.$refs.usernameInput.focusInput()
 `$refs` は、コンポーネントがレンダリングされた後にのみ生成されます。これは、子要素を直接操作するための脱出ハッチとしてのみ意図されています。テンプレートや `computed` プロパティから `$refs` にアクセスするべきではありません。
 :::
 
-**こちらも参照してください**: [コンポジション API でテンプレート参照を使用する](/guide/composition-api-template-refs.html#template-refs)
+**こちらも参照してください**: [Composition API でテンプレート参照を使用する](/guide/composition-api-template-refs.html#template-refs)

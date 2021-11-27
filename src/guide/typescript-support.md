@@ -325,7 +325,7 @@ const Component = defineComponent({
 })
 ```
 
-## コンポジション API とともに使用する
+## Composition API とともに使用する
 
 `setup()` 関数においては、`props` 引数に型をつける必要はありません。`setup()` 関数は　`props` コンポーネントオプションから型を推論するからです。
 

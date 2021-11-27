@@ -187,7 +187,7 @@ Vue 2 では、`Vue.extend` は、コンポーネントのオプションに Typ
 
 #### コンポーネントの継承
 
-Vue 3 では継承やミックスインよりも、 [Composition API](/api/composition-api.html) によるコンポジションを強く推奨しています。 何らかの理由でコンポーネントの継承が必要な場合は、`Vue.extend` の代わりに [`extends` オプション](/api/options-composition.html#extends) を使用することができます。
+Vue 3 では継承やミックスインよりも、 [Composition API](/api/composition-api.html) による Composition を強く推奨しています。 何らかの理由でコンポーネントの継承が必要な場合は、`Vue.extend` の代わりに [`extends` オプション](/api/options-composition.html#extends) を使用することができます。
 
 [移行ビルドのフラグ: `GLOBAL_EXTEND`](migration-build.html#compat-の設定)
 

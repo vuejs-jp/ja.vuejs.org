@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-コンポジション API を使う場合
+Composition API を使う場合
 
 ```js
 import { onBeforeUpdate, onUpdated } from 'vue'
