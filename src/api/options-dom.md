@@ -61,7 +61,7 @@
   ```
 
   :::tip Note
-  `render` 関数は、`template` オプションや、マウントした要素の DOM 内 HTML テンプレートからコンパイルされたレンダリング関数よりも高い優先度を持ちます。
+  `render` 関数は、`template` オプションや、マウントした要素の DOM 内 HTML テンプレートからコンパイルされた Render 関数よりも高い優先度を持ちます。
   :::
 
 - **参照:** [Render 関数](../guide/render-function.html)

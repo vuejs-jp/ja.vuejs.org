@@ -1,6 +1,6 @@
 # テンプレート参照
 
-> この節ではコード例で [単一ファイルコンポーネント](single-file-component.html)の文法を使用しています。
+> このセクションではコード例で [単一ファイルコンポーネント](single-file-component.html)の文法を使用しています。
 
 > このガイドはすでに [Composition API 導入](composition-api-introduction.html) を読んでいることを前提に書かれています。もしまだ読んでいないのなら、先に読みましょう。
 
