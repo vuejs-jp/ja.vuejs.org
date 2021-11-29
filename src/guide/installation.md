@@ -21,7 +21,7 @@ Vue.js をプロジェクトに追加するには主に 4 つの方法があり�
 
 <VideoLesson href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3?friend=vuejs" title="Learn how to install Vue Devtools on Vue School">Learn how to install and use Vue Devtools in a free Vue School lesson</VideoLesson>
 
-Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
+Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをおすすめします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
 [Chrome 拡張版を入手](https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg)
 
@@ -37,7 +37,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 <script src="https://unpkg.com/vue@next"></script>
 ```
 
-本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします。
+本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをおすすめします。
 
 ## 自分でホストする
 
@@ -71,7 +71,7 @@ Vue 2 を使っている場合は、`@vue/compiler-sfc` が `vue-template-compil
 大規模なシングルページアプリケーション開発の足場を素早く組むために、Vue は [公式 CLI](https://cli.vuejs.org/) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、本番リリースのビルドができるようになるまでには、ほんの数分しかかかりません。
 
 ::: tip
-CLI は Node.js と関連するビルドツールに関する予備知識を前提としています。もし、Vue またはフロントエンドビルドツールを初めて使用する場合は、CLI を使用する前に、ビルドツールなしで [ガイド](./introduction.html) を参照することを強くお勧めします。
+CLI は Node.js と関連するビルドツールに関する予備知識を前提としています。もし、Vue またはフロントエンドビルドツールを初めて使用する場合は、CLI を使用する前に、ビルドツールなしで [ガイド](./introduction.html) を参照することを強くおすすめします。
 :::
 
 `npm` 上で `@vue/cli` として、Vue 3 向けの Vue CLI v4.5 が利用可能です。以前のバージョンからアップグレードする場合は、以下のように `@vue/cli` をグローバルに再インストールしてください:

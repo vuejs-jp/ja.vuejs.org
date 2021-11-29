@@ -10,7 +10,7 @@
 const obj = reactive({ count: 0 })
 ```
 
-リアクティブの変換は「ディープ」で、ネストされたすべてのプロパティに影響します。[ES2015 Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy) ベースの実装では、返されたプロキシは元のオブジェクトとは等しく**ありません**。元のオブジェクトに依存せず、リアクティブプロキシのみで作業することをお勧めします。
+リアクティブの変換は「ディープ」で、ネストされたすべてのプロパティに影響します。[ES2015 Proxy](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Proxy) ベースの実装では、返されたプロキシは元のオブジェクトとは等しく**ありません**。元のオブジェクトに依存せず、リアクティブプロキシのみで作業することをおすすめします。
 
 **型:**
 

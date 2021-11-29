@@ -107,7 +107,7 @@ export default {
 
 
 :::tip Tip:
-レガシーな [HTML5 のセマンティック要素をサポートしていないブラウザ](https://caniuse.com/#feat=html5semantic)との互換性を最大限に高めるために、冗長なランドマークロール属性を持つランドマーク HTML 要素を使用することをお勧めします。
+レガシーな [HTML5 のセマンティック要素をサポートしていないブラウザ](https://caniuse.com/#feat=html5semantic)との互換性を最大限に高めるために、冗長なランドマークロール属性を持つランドマーク HTML 要素を使用することをおすすめします。
 :::
 
 [ランドマークについてもっと読む](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)

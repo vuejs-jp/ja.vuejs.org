@@ -28,7 +28,7 @@
 
   コンポーネントインスタンスが管理しているルート DOM 要素です。
 
-  [Fragments](../guide/migration/fragments) を使っているコンポーネントでは、`$el` は DOM 内で Vue がコンポーネントの位置を追跡するために使う DOM ノードのプレースホルダになります。DOM 要素に直接アクセスするためには、`$el` に頼る代わりに [テンプレート参照](../guide/component-template-refs.html) を使うことをお勧めします。
+  [Fragments](../guide/migration/fragments) を使っているコンポーネントでは、`$el` は DOM 内で Vue がコンポーネントの位置を追跡するために使う DOM ノードのプレースホルダになります。DOM 要素に直接アクセスするためには、`$el` に頼る代わりに [テンプレート参照](../guide/component-template-refs.html) を使うことをおすすめします。
 
 ## $options
 

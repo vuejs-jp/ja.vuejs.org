@@ -36,7 +36,7 @@ const foo = ref<string | number>('foo') // foo の型: Ref<string | number>
 foo.value = 123 // ok!
 ```
 
-ジェネリックの型が不明な場合は、`ref` を `Ref<T>` にキャストすることをお勧めします:
+ジェネリックの型が不明な場合は、`ref` を `Ref<T>` にキャストすることをおすすめします:
 
 ```ts
 function useState<State extends string>(initial: State) {

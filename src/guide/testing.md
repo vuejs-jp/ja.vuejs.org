@@ -86,7 +86,7 @@ Vue Testing Library は、実装の詳細に依存せずにコンポーネント
 
 #### Vue Test Utils
 
-Vue Test Utils は、ユーザーが Vue 固有の API へのアクセスを提供するために書かれた公式の低レベルコンポーネントテストライブラリです。Vue アプリケーションのテストを初めて行う場合は、Vue Test Utils を抽象化した Vue Testing Library を使用することをお勧めします。
+Vue Test Utils は、ユーザーが Vue 固有の API へのアクセスを提供するために書かれた公式の低レベルコンポーネントテストライブラリです。Vue アプリケーションのテストを初めて行う場合は、Vue Test Utils を抽象化した Vue Testing Library を使用することをおすすめします。
 
 **リソース:**
 
