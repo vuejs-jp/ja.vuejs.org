@@ -37,7 +37,7 @@ export default {
 
 ## 3.x の更新
 
-3.x では、 `$children` プロパティが削除され、サポートされなくなりました。代わりに、もし子コンポーネントのインスタンスにアクセスする必要がある場合は、 [$refs](/guide/component-template-refs.html#template-refs) を使用することをお勧めします。
+3.x では、 `$children` プロパティが削除され、サポートされなくなりました。代わりに、もし子コンポーネントのインスタンスにアクセスする必要がある場合は、 [$refs](/guide/component-template-refs.html#template-refs) を使用することをおすすめします。
 
 ## 移行の戦略
 
