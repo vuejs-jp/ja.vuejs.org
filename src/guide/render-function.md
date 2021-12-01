@@ -192,7 +192,7 @@ function getChildrenTextContent(children) {
 
 app.component('anchored-heading', {
   render() {
-    // 子供のテキストからケバブケース(kebab-case)のIDを作成する
+    // 子供のテキストからケバブケース（kebab-case）のIDを作成する
     const headingId = getChildrenTextContent(this.$slots.default())
       .toLowerCase()
       .replace(/\W+/g, '-') // 英数字とアンダースコア以外の文字を-に置換する
@@ -350,7 +350,7 @@ render() {
 
 #### イベント修飾子
 
-`.passive`、`.capture`、 `.once` イベント修飾子は、キャメルケースを使ってイベント名の後につなげます。
+`.passive`、`.capture`、 `.once` イベント修飾子は、キャメルケース（camelCase）を使ってイベント名の後につなげます。
 
 例えば:
 
@@ -657,7 +657,7 @@ FunctionalComponent.props = ['value']
 FunctionalComponent.emits = ['click']
 ```
 
-`props` オプションが指定されていない場合、この関数に渡される `props` オブジェクトは `attrs` と同じく、すべての属性が含まれます。 `props` オプションが指定されていない場合、プロパティ名はキャメルケースに正規化されません。
+`props` オプションが指定されていない場合、この関数に渡される `props` オブジェクトは `attrs` と同じく、すべての属性が含まれます。 `props` オプションが指定されていない場合、プロパティ名はキャメルケース（camelCase）に正規化されません。
 
 関数型コンポーネントは、通常のコンポーネントと同様に登録したり、実行したりすることができます。関数を `h` の第 1 引数として渡すと、その関数は関数型コンポーネントとして扱われます。
 

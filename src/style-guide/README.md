@@ -978,7 +978,7 @@ components/
 
 ### プロパティ名の型式 <sup data-p="b">強く推奨</sup>
 
-**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#jsx) ではケバブケース(kebab-case)にするべきです。**
+**プロパティ名は、定義の時は常にキャメルケース（camelCase）にするべきですが、テンプレートや [JSX](../guide/render-function.html#jsx) ではケバブケース（kebab-case）にするべきです。**
 
 私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然で、HTML の中ではケバブケースが自然です。
 
