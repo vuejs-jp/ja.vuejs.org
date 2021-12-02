@@ -320,7 +320,7 @@ import { ref, onMounted, watch, toRefs } from 'vue'
 
 // コンポーネント内部
 setup (props) {
-  // props の `user` プロパティへのリアクティブな参照を作成するために `toRefs` を使用します
+  // `props` の `user` プロパティへのリアクティブな参照を作成するために `toRefs` を使用します
   const { user } = toRefs(props)
 
   const repositories = ref([])
