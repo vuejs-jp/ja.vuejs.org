@@ -32,7 +32,7 @@ console.log(count.value) // 0
 
 ### 算出プロパティのデバッグ <Badge text="3.2+" />
 
-`computed` は2つ目の引数及び `onTrack` と `onTrigger` オプションにアクセスする:
+`computed` は 2 つ目の引数及び `onTrack` と `onTrigger` オプションにアクセスする:
 
 - `onTrack` はリアクティブプロパティまたリンクが依存関係として追跡する時にコールされる。
 - `onTrigger` はウォッチのコールバックが依存関係の変更上でトリガーされた時にコールされる。
@@ -42,19 +42,19 @@ console.log(count.value) // 0
 ```js
 const plusOne = computed(() => count.value + 1, {
   onTrack(e) {
-    // count.valueを依存関係として追跡する場合にトリガーする
+    // count.value を依存関係として追跡する場合にトリガーする
     debugger
   },
   onTrigger(e) {
-    // count.valueを変更される場合にトリガーする
+    // count.value を変更される場合にトリガーする
     debugger
   }
 })
 
-// plusOneにアクセスされる場合にonTrackがトリガーする
+// plusOne にアクセスされる場合に onTrack がトリガーする
 console.log(plusOne.value)
 
-// count.valueを変更される場合にonTriggerがトリガーする
+// count.value を変更される場合に onTrigger がトリガーする
 count.value++
 ```
 
