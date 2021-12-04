@@ -501,9 +501,9 @@ module.exports = {
     },
     smoothScroll: false,
     algolia: {
-      indexName: 'vuejs-v3',
+      indexName: 'vuejs_ja',
       appId: 'BH4D9OD16A',
-      apiKey: 'bc6e8acb44ed4179c30d0a45d6140d3f'
+      apiKey: '57a871e008024e665c33542b31676ae9'
     },
     carbonAds: {
       carbon: 'CEBDT27Y',
