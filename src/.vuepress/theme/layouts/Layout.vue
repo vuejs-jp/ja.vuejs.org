@@ -125,16 +125,9 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
-
-    this.showTopBanner = !localStorage.getItem('VS_BF21_BANNER_CLOSED')
   },
 
   methods: {
-    closeBannerTop () {
-      this.showTopBanner = false
-      localStorage.setItem('VS_BF21_BANNER_CLOSED', 1)
-    },
-
     toggleSidebar(to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
       this.$emit('toggle-sidebar', this.isSidebarOpen)
