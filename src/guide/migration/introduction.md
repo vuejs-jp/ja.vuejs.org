@@ -162,7 +162,7 @@ Vuex 4.0 は、3.x と大部分は同じ API で Vue3 のサポートを提供�
 
   - 注：ベータチャネルは devtools の安定バージョンと競合する可能性があるため、ベータチャネルが正しく機能するには、安定バージョンを一時的に無効にする必要があるかもしれません。
 
-- Firefox の場合: [署名された拡張機能をダウンロード](https://github.com/vuejs/vue-devtools/releases/tag/v6.0.0-beta.2) (Assets の下の `.xpi` ファイル)
+- Firefox の場合: [署名された拡張機能をダウンロード](https://github.com/vuejs/vue-devtools/releases/tag/v6.0.0-beta.20) (Assets の下の `.xpi` ファイル)
 
 ### IDE のサポート
 
