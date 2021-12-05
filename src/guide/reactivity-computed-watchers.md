@@ -30,35 +30,35 @@ plusOne.value = 1
 console.log(count.value) // 0
 ```
 
-### Computed Debugging <Badge text="3.2+" />
+### 算出プロパティのデバッグ <Badge text="3.2+" />
 
-`computed` accepts a second argument with `onTrack` and `onTrigger` options:
+`computed` は 2 つ目の引数及び `onTrack` と `onTrigger` オプションにアクセスする:
 
-- `onTrack` will be called when a reactive property or ref is tracked as a dependency.
-- `onTrigger` will be called when the watcher callback is triggered by the mutation of a dependency.
+- `onTrack` はリアクティブプロパティまた ref が依存関係として追跡する時に呼び出される。
+- `onTrigger` はウォッチャのコールバックが依存関係の変更上でトリガーされた時に呼び出される。
 
-Both callbacks will receive a debugger event which contains information on the dependency in question. It is recommended to place a `debugger` statement in these callbacks to interactively inspect the dependency:
+両方のコールバックは依存情報を持つデバッグイベントを受け取ります。このコールバックにはインタラクティブに依存を確認ため `debugger` と言う表現を使う推奨します:
 
 ```js
 const plusOne = computed(() => count.value + 1, {
   onTrack(e) {
-    // triggered when count.value is tracked as a dependency
+    // count.value を依存関係として追跡する場合にトリガーする
     debugger
   },
   onTrigger(e) {
-    // triggered when count.value is mutated
+    // count.value を変更される場合にトリガーする
     debugger
   }
 })
 
-// access plusOne, should trigger onTrack
+// plusOne にアクセスされる場合に onTrack がトリガーする
 console.log(plusOne.value)
 
-// mutate count.value, should trigger onTrigger
+// count.value を変更される場合に onTrigger がトリガーする
 count.value++
 ```
 
-`onTrack` and `onTrigger` only work in development mode.
+`onTrack` と `onTrigger` は開発モードのみに動作します。
 
 ## `watchEffect`
 
