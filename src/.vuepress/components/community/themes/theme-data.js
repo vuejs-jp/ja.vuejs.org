@@ -127,7 +127,7 @@ export default [
   },
   {
     name: 'PrimeVue',
-    description: `オープンソースの UI コンポーネントライブラリ [PrimeVue](https://www.primefaces.org/primevue/#/?af_id=4218) は、アプリケーションを開発するための 80 を超えるフレキシブルなコンポーネントを提供しています。その中には様々なコンポーネントテーマと、 Vue CLI のアプリケーションテンプレートが用意されており、あなたがベストだと考えるルック&フィールのものを利用できます。`,
+    description: `オープンソースの UI コンポーネントライブラリ [PrimeVue](https://www.primefaces.org/primevue/#/?af_id=4218) は、アプリケーションを開発するための 80 を超えるフレキシブルなコンポーネントを提供しています。その中には様々なコンポーネントテーマと、 Vue CLI のアプリケーションテンプレートが用意されており、あなたがベストだと考えるルック・アンド・フィールのものを利用できます。`,
     seeMoreUrl: 'https://www.primefaces.org/primevue/#/?af_id=4218',
     products: [
       {
