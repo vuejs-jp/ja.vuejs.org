@@ -2,11 +2,11 @@
 sidebarDepth: 1
 ---
 
-# SFC Style Features
+# SFC スタイルの機能
 
 ## `<style scoped>`
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+`<style>` タグが `scoped` 属性を持つとき、その CSS は現在のコンポーネントの要素にだけ適用されます。これは Shadow DOM に見られるスタイルのカプセル化に似ています。いくつかの注意点がありますが、ポリフィルは必要ありません。これは PostCSS を使った次のような変換で実現しています:
 
 ```vue
 <style scoped>
@@ -20,7 +20,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+次のようになります:
 
 ```vue
 <style>
@@ -34,13 +34,13 @@ Into the following:
 </template>
 ```
 
-### Child Component Root Elements
+### 子コンポーネントのルート要素
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
+`scoped` を使うと、親コンポーネントのスタイルは子コンポーネントに漏れません。しかし、子コンポーネントのルートノードは、親スコープの CSS と子スコープの CSS の両方が影響を受けます。これは親コンポーネントがレイアウトの目的で子コンポーネントのルート要素をスタイルできるようにするという設計のためです。
 
-### Deep Selectors
+### ディープセレクタ
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `:deep()` pseudo-class:
+`scoped` スタイルのセレクタを「深く」したい場合、例えば子コンポーネントに影響を与えたい場合は、`:deep()` 擬似クラスを使用できます:
 
 ```vue
 <style scoped>
@@ -50,7 +50,7 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+上記は次のようにコンパイルされます:
 
 ```css
 .a[data-v-f3f3eg9] .b {
@@ -59,12 +59,12 @@ The above will be compiled into:
 ```
 
 :::tip
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+`v-html` で作られた DOM コンテンツは、スコープ付きスタイルの影響を受けませんが、ディープセレクタを使ってスタイルすることができます。
 :::
 
-### Slotted Selectors
+### スロットセレクタ
 
-By default, scoped styles do not affect contents rendered by `<slot/>`, as they are considered to be owned by the parent component passing them in. To explicitly target slot content, use the `:slotted` pseudo-class:
+デフォルトでスコープ付きスタイルは、親コンポーネントが所有しているコンテンツとみなして、`<slot/>` でレンダリングされたコンテンツに影響を与えません。スロットのコンテンツを明示的に対象にするには、`:slotted` 擬似クラスを使用できます:
 
 ```vue
 <style scoped>
@@ -74,9 +74,9 @@ By default, scoped styles do not affect contents rendered by `<slot/>`, as they 
 </style>
 ```
 
-### Global Selectors
+### グローバルセレクタ
 
-If you want just one rule to apply globally, you can use the `:global` pseudo-class rather than creating another `<style>` (see below):
+グローバルに 1 つのルールだけを適用したい場合、別の `<style>` を作るのではなく、`:global` 擬似クラスを使用できます（後述）:
 
 ```vue
 <style scoped>
@@ -86,29 +86,29 @@ If you want just one rule to apply globally, you can use the `:global` pseudo-cl
 </style>
 ```
 
-### Mixing Local and Global Styles
+### ローカルとグローバルのスタイル併用
 
-You can also include both scoped and non-scoped styles in the same component:
+スコープ付きとスコープなしのスタイルの両方を同じコンポーネントに含めることもできます:
 
 ```vue
 <style>
-/* global styles */
+/* グローバルスタイル */
 </style>
 
 <style scoped>
-/* local styles */
+/* ローカルスタイル */
 </style>
 ```
 
-### Scoped Style Tips
+### スコープ付きスタイルのヒント
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit.
+- **スコープ付きスタイルでもクラスが不要になるわけではないです**。ブラウザがさまざまな CSS セレクタをレンダリングする方法のため、`p { color: red }` はスコープ付きの場合（例えば属性セレクタと合わせた場合）に何杯も遅くなります。`.example { color: red }` のようにクラスや ID を代わりに使えば、このパフォーマンスへの影響をほぼ解消することができます。
 
-- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+- **再帰的コンポーネントの子孫セレクタには注意が必要です！** `.a .b` セレクタを使った CSS ルールでは、`.a` に一致する要素に再帰的な子コンポーネントが含まれている場合、その子コンポーネントに含まれるすべての `.b` がルールに一致してしまいます。
 
 ## `<style module>`
 
-A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modules/css-modules) and exposes the resulting CSS classes to the component as an object under the key of `$style`:
+`<style module>` タグは [CSS Modules](https://github.com/css-modules/css-modules) としてコンパイルされ、結果として得られる CSS クラスを `$style` というキーの下にオブジェクトとしてコンポーネントに公開します:
 
 ```vue
 <template>
@@ -124,13 +124,13 @@ A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modul
 </style>
 ```
 
-The resulting classes are hashed to avoid collision, achieving the same effect of scoping the CSS to the current component only.
+この結果として得られるクラスは、衝突を避けるためにハッシュ化され、CSS を現在のコンポーネントだけにスコープするのと同じ効果を実現します。
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for more details such as [global exceptions](https://github.com/css-modules/css-modules#exceptions) and [composition](https://github.com/css-modules/css-modules#composition).
+[Global exceptions](https://github.com/css-modules/css-modules#exceptions) や [Composition](https://github.com/css-modules/css-modules#composition) などの詳細については [CSS Modules の仕様](https://github.com/css-modules/css-modules) を参照してください。
 
-### Custom Inject Name
+### カスタム注入名
 
-You can customize the property key of the injected classes object by giving the `module` attribute a value:
+`module` 属性に値を指定することで、注入されたクラスオブジェクトのプロパティキーをカスタマイズできます:
 
 ```vue
 <template>
@@ -144,21 +144,21 @@ You can customize the property key of the injected classes object by giving the 
 </style>
 ```
 
-### Usage with Composition API
+### Composition API での使用
 
-The injected classes can be accessed in `setup()` and `<script setup>` via the [`useCssModule`](/api/global-api.html#usecssmodule) API. For `<style module>` blocks with custom injection names, `useCssModule` accepts the matching `module` attribute value as the first argument:
+注入されたクラスは、[`useCssModule`](/api/global-api.html#usecssmodule) API を介して `setup()` や `<script setup>` からアクセスできます。カスタム注入名のある `<style module>` ブロックは `useCssModule` が一致する `module` 属性の値を最初の引数として受け取ります:
 
 ```js
-// default, returns classes for <style module>
+// デフォルトでは <style module> を返します
 useCssModule()
 
-// named, returns classes for <style module="classes">
+// 名前付きでは <style module="classes"> のクラスを返します
 useCssModule('classes')
 ```
 
-## State-Driven Dynamic CSS
+## 状態ドリブンな動的 CSS
 
-SFC `<style>` tags support linking CSS values to dynamic component state using the `v-bind` CSS function:
+SFC の `<style>` タグは `v-bind` CSS 関数を使って、CSS の値を動的コンポーネントの状態にリンクすることをサポートしています:
 
 ```vue
 <template>
@@ -182,7 +182,7 @@ export default {
 </style>
 ```
 
-The syntax works with [`<script setup>`](./sfc-script-setup), and supports JavaScript expressions (must be wrapped in quotes):
+この構文は [`<script setup>`](./sfc-script-setup) で動作して、JavaScript 式（引用符で囲む必要があります）をサポートしています:
 
 ```vue
 <script setup>
@@ -202,4 +202,4 @@ p {
 </style>
 ```
 
-The actual value will be compiled into a hashed CSS custom property, so the CSS is still static. The custom property will be applied to the component's root element via inline styles and reactively updated if the source value changes.
+実際の値はハッシュ化された CSS カスタムプロパティにコンパイルされるため、CSS は静的なままです。このカスタムプロパティは、インラインスタイルを介してコンポーネントのルート要素に適用され、ソースの値が変更されるとリアクティブに更新されます。
