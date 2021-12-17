@@ -20,7 +20,7 @@
 
 - Internet Explorer 11 のサポート: [Vue 3 は公式に IE11 サポートの計画を中止しました](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0038-vue3-ie11-support.md)。まだ IE11 以下をサポートする必要がある場合は、Vue 2 のままにしておく必要があります。
 
-- サーバーサイドレンダリング: 移行ビルドは SSR にも使用できますが、カスタム SSR セットアップの移行はもっと複雑です。一般的な対処法は、`vue-server-renderer` を[`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer)に置き換えることです。Vue 3 ではバンドルレンダラが提供されなくなったため、Vue 3 の SSR を[Vite](https://vitejs.dev/guide/ssr.html)で使用することが推奨されています。また、[Nuxt.js](https://nuxtjs.org/)を使用している場合は、Nuxt 3 を待ったほうがよいでしょう。
+- サーバーサイドレンダリング: 移行ビルドは SSR にも使用できますが、カスタム SSR セットアップの移行はもっと複雑です。一般的な対処法は、`vue-server-renderer` を[`@vue/server-renderer`](https://github.com/vuejs/vue-next/tree/master/packages/server-renderer)に置き換えることです。Vue 3 ではバンドルレンダラが提供されなくなったため、Vue 3 の SSR を[Vite](https://vitejs.dev/guide/ssr.html)で使用することが推奨されています。また、[Nuxt.js](https://nuxtjs.org/)を使用している場合は [Nuxt.js 2 と 3 の互換レイヤーである Nuxt Bridge](https://v3.nuxtjs.org/getting-started/bridge/) を試してみてください。複雑なプロダクションプロジェクトでは、[Nuxt 3（現在ベータ版）](https://v3.nuxtjs.org/getting-started/introduction) を待つのがベストでしょう。
 
 ### 期待すること
 
