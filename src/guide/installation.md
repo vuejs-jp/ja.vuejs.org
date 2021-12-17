@@ -117,6 +117,15 @@ $ yarn
 $ yarn dev
 ```
 
+または pnpm の場合:
+
+```bash
+$ pnpm create vite <project-name> -- --template vue
+$ cd <project-name>
+$ pnpm install
+$ pnpm dev
+```
+
 ## さまざまなビルドについて
 
 [npm パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/) には、Vue.js の多くのさまざまなビルドが見つかります。利用用途ごとに `dist` ファイルの使い分けの概要を説明します。
