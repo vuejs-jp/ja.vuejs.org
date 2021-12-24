@@ -220,7 +220,7 @@ Vue.createApp(ListRendering).mount('#list-rendering')
 
 ![コンポーネントツリー](/images/components.png)
 
-Vue において、コンポーネントは本質的にはあらかじめ定義されたオプションを持つインスタンスです。Vue を使ってコンポーネントを登録するのはいたって簡単で、`App` オブジェクトと同様にコンポーネントオブジェクトを作成し、親の `components` オプションで定義します:
+Vue において、コンポーネントは本質的にはあらかじめ定義されたオプションを持つインスタンスです。Vue を使ってコンポーネントを登録するのはいたって簡単で、`app` オブジェクトと同様にコンポーネントオブジェクトを作成し、親の `components` オプションで定義します:
 
 ```js
 const TodoItem = {
@@ -251,10 +251,10 @@ app.mount(...)
 しかし、これでは全ての todo で同じ文字列がレンダリングされてしまうだけで、あまり面白くありません。親のスコープから子コンポーネントへとデータを渡せるようにすべきです。[プロパティ](component-basics.html#プロパティを用いた子コンポーネントへのデータの受け渡し)を受け取れるようにコンポーネントの定義を変えてみましょう:
 
 ```js
-app.component('todo-item', {
+const TodoItem = {
   props: ['todo'],
   template: `<li>{{ todo.text }}</li>`
-})
+}
 ```
 
 こうすることで、繰り返されるコンポーネントそれぞれに `v-bind` を使って todo を渡すことができます:
@@ -278,6 +278,11 @@ app.component('todo-item', {
 ```
 
 ```js
+const TodoItem = {
+  props: ['todo'],
+  template: `<li>{{ todo.text }}</li>`
+}
+
 const TodoList = {
   data() {
     return {
@@ -287,15 +292,13 @@ const TodoList = {
         { id: 2, text: 'Whatever else humans are supposed to eat' }
       ]
     }
+  },
+  components: {
+    TodoItem
   }
 }
 
 const app = Vue.createApp(TodoList)
-
-app.component('todo-item', {
-  props: ['todo'],
-  template: `<li>{{ todo.text }}</li>`
-})
 
 app.mount('#todo-list-app')
 ```
