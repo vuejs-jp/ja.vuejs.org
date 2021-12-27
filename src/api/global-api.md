@@ -193,9 +193,7 @@ createApp({
 })
 ```
 
-上級者向けには、 `defineAsyncComponent` にオブジェクトを受け取ることもできます:
-
-`defineAsyncComponent` メソッドは、次のような形式のオブジェクトを返すこともできます:
+上級者向けには、 `defineAsyncComponent` で次のようなフォーマットのオブジェクトを受け取ることもできます:
 
 ```js
 import { defineAsyncComponent } from 'vue'
