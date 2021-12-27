@@ -26,7 +26,7 @@ app.config.errorHandler = (err, vm, info) => {
 }
 ```
 
-コンポーネントの Render 関数とウォッチャに捕捉されなかったエラーのハンドラを割り当てます。ハンドラには、アプリケーションのインスタンスとエラーが渡されて呼び出されます。
+コンポーネントの Render 関数とウォッチャに捕捉されなかったエラーのハンドラを割り当てます。ハンドラは、エラーと対応するアプリケーションのインスタンスが渡されて呼び出されます。
 
 > エラートラッキングサービスの [Sentry](https://sentry.io/for/vue/) ならびに [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) は公式に連携のためのオプションを用意しています。
 
