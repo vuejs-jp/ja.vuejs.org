@@ -11,7 +11,7 @@
 1. リポジトリをクローンします
 
 ```bash
-git clone git@github.com:vuejs-jp/ja.vuejs.org.git
+git clone https://github.com/vuejs-jp/ja.vuejs.org.git
 ```
 
 2. 依存ファイルをインストールします
