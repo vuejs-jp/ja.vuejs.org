@@ -55,7 +55,7 @@ module.exports = {
 
 ### プロジェクトの作成
 
-[Vue CLI](https://github.com/vuejs/vue-cli) は、TypeSript を使った新しいプロジェクトを作成できます。はじめるためには:
+[Vue CLI](https://github.com/vuejs/vue-cli) は、TypeScript を使った新しいプロジェクトを作成できます。はじめるためには:
 
 ```bash
 # 1. Vue CLI をまだインストールしていなければ、インストールします
