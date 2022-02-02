@@ -47,7 +47,7 @@ console.log(count.value) // 1
 
 ### ref のアンラップ
 
-ref がレンダーコンテキスト(render contenxt - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値に浅くアンラップ(ref でラップされた値を取り出す)されます。入れ子になった ref だけが、テンプレート内で `.value` が必要です:
+ref がレンダーコンテキスト(render context - [setup()](composition-api-setup.html) によって返されるオブジェクト)のプロパティとして返されていてテンプレート内でアクセスされる場合、自動的に内部の値に浅くアンラップ(ref でラップされた値を取り出す)されます。入れ子になった ref だけが、テンプレート内で `.value` が必要です:
 
 ```vue-html
 <template>
