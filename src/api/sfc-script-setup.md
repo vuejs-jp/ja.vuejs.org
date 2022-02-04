@@ -223,7 +223,7 @@ const attrs = useAttrs()
 `<script setup>` は、通常の `<script>` と一緒に使うことができます。次のことが必要な場合は、通常の `<script>` が必要になることがあります:
 
 - `inheritAttrs` や、プラグインで有効になるカスタムオプションなど、`<script setup>` では表現できないオプションを宣言する
-- 名前付きのエクスポートを宣言する
+- 名前付きのエクスポートを宣言する (TypeScript の型を含む)
 - 副作用を実行したり、一度しか実行してはいけないオブジェクトを作成する
 
 ```vue
@@ -264,6 +264,23 @@ const post = await fetch(`/api/post/1`).then(r => r.json())
 :::
 
 ## TypeScript のみの機能
+
+### 追加タイプのエクスポート
+
+上記のように、SFC から追加タイプをエクスポートするには、それらを `<script setup>` ブロックの隣の追加 `<script>` ブロックに移動する必要があります。
+
+例:
+```vue
+<script lang="ts">
+export type SizeOptions = 'small' | 'medium' | 'large';
+</script>
+
+<script lang="ts" setup>
+defineProps({
+  size: { type: String as PropType<SizeOptions> },
+})
+</script>
+```
 
 ### 型のみの props/emit 宣言
 
