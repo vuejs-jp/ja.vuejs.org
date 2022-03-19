@@ -199,7 +199,7 @@ Vue.createApp({
 <!-- チェックされているとき`picked` は文字列"a"になります -->
 <input type="radio" v-model="picked" value="a" />
 
-<!-- toggle` は true または false のどちらかです -->
+<!-- `toggle` は true または false のどちらかです -->
 <input type="checkbox" v-model="toggle" />
 
 <!-- 最初のオプションが選択されているとき`selected` は文字列"abc"です -->
