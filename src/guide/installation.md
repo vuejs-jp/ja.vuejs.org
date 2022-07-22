@@ -23,11 +23,11 @@ Vue.js をプロジェクトに追加するには主に 4 つの方法があり�
 
 Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをおすすめします。これにより、Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
-[Chrome 拡張版を入手](https://chrome.google.com/webstore/detail/vuejs-devtools/ljjemllljcmogpfapbkkighbhhppjdbg)
+[Chrome 拡張版を入手](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
 
 [Firefox アドオン版を入手](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
 
-[スタンドアロンの Electron アプリケーション版を入手](https://github.com/vuejs/vue-devtools/blob/dev/packages/shell-electron/README.md)
+[スタンドアロンの Electron アプリケーション版を入手](https://devtools.vuejs.org/guide/installation.html#standalone)
 
 ## CDN
 
